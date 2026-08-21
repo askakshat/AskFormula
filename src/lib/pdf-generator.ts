@@ -14,11 +14,18 @@ export async function generatePDF(
   formulas: FormulaItem[],
   subject: string,
 ): Promise<void> {
+  // Wait a tick to ensure KaTeX fonts are fully loaded if running in browser
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
   // Create a hidden container for rendering html2canvas
   const container = document.createElement("div");
-  container.style.position = "absolute";
-  container.style.top = "-9999px";
-  container.style.left = "-9999px";
+  // We avoid absolute negative positioning so that the browser actually
+  // allocates layout correctly for complex fonts, but we use fixed and opacity 0
+  // or extremely high z-index to hide it.
+  container.style.position = "fixed";
+  container.style.top = "0";
+  container.style.left = "0";
+  container.style.zIndex = "-9999";
   container.style.width = "794px"; // A4 width at 96 DPI
   container.style.backgroundColor = "white";
   container.style.padding = "40px";
@@ -40,8 +47,26 @@ export async function generatePDF(
     chapters.get(key)!.push(f);
   }
 
+  // Find all existing styles on the page to ensure KaTeX css is copied
+  let stylesHtml = "";
+  for (const styleSheet of document.styleSheets) {
+    try {
+      if (styleSheet.href) {
+        stylesHtml += `<link rel="stylesheet" href="${styleSheet.href}" crossorigin="anonymous">`;
+      } else {
+        const rules = Array.from(styleSheet.cssRules)
+          .map((rule) => rule.cssText)
+          .join("\n");
+        stylesHtml += `<style>${rules}</style>`;
+      }
+    } catch (e) {
+      // Ignore cross-origin stylesheet errors
+    }
+  }
+
   // Generate HTML content
   let htmlContent = `
+    ${stylesHtml}
     <div style="margin-bottom: 30px;">
       <h1 style="margin: 0; font-size: 32px; color: #0f172a;">AskFormula</h1>
       <h2 style="margin: 5px 0 0 0; font-size: 18px; color: #64748b; font-weight: 400;">${subject} Formula Sheet</h2>
@@ -76,7 +101,7 @@ export async function generatePDF(
             <div style="width: 4px; height: 4px; background-color: #64748b; border-radius: 50%;"></div>
             <h3 style="margin: 0; font-size: 14px; color: #334155;">${formula.name}</h3>
           </div>
-          <div style="padding-left: 12px; font-size: 16px; color: #1e293b; overflow-x: auto;">
+          <div style="padding-left: 12px; font-size: 16px; color: #1e293b; display: block; width: 100%;">
             ${renderedMath}
           </div>
         </div>

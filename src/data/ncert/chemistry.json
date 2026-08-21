@@ -8,27 +8,75 @@
       "name": "Some Basic Concepts of Chemistry",
       "formulas": [
         {
-          "id": "c1",
+          "id": "c1_1",
+          "name": "Density",
+          "latex": "\\text{Density} = \\frac{\\text{Mass}}{\\text{Volume}}",
+          "tags": ["density", "basic"]
+        },
+        {
+          "id": "c1_2",
+          "name": "Celsius to Fahrenheit",
+          "latex": "^\\circ\\text{F} = \\frac{9}{5}(^\\circ\\text{C}) + 32",
+          "tags": ["temperature", "conversion"]
+        },
+        {
+          "id": "c1_3",
+          "name": "Celsius to Kelvin",
+          "latex": "\\text{K} = ^\\circ\\text{C} + 273.15",
+          "tags": ["temperature", "conversion"]
+        },
+        {
+          "id": "c1_4",
+          "name": "Atomic Mass Unit (amu)",
+          "latex": "1 \\text{ amu} = 1.66056 \\times 10^{-24} \\text{ g}",
+          "tags": ["amu", "mass"]
+        },
+        {
+          "id": "c1_5",
+          "name": "Molarity (M)",
+          "latex": "M = \\frac{\\text{Moles of solute}}{\\text{Volume of solution in L}}",
+          "tags": ["molarity", "concentration"]
+        },
+        {
+          "id": "c1_6",
+          "name": "Dilution Formula",
+          "latex": "M_1V_1 = M_2V_2",
+          "tags": ["dilution", "concentration"]
+        },
+        {
+          "id": "c1_7",
+          "name": "Number of molecules in n moles",
+          "latex": "N = n \\times N_A",
+          "tags": ["moles", "molecules", "avogadro"]
+        },
+        {
+          "id": "c1_8",
           "name": "Mass Percentage",
           "latex": "\\text{Mass \\%} = \\left( \\frac{\\text{Mass of solute}}{\\text{Mass of solution}} \\right) \\times 100",
           "tags": ["concentration", "mass percent"]
         },
         {
-          "id": "c2",
+          "id": "c1_9",
+          "name": "Avogadro's Number",
+          "latex": "N_A = 6.022 \\times 10^{23} \\text{ mol}^{-1}",
+          "tags": ["avogadro", "constant"]
+        },
+        {
+          "id": "c1_10",
+          "name": "Molecular mass",
+          "latex": "\\text{Molecular mass} = 2 \\times \\text{Vapour density}",
+          "tags": ["molecular mass", "vapour density"]
+        },
+        {
+          "id": "c1_11",
           "name": "Mole Fraction",
           "latex": "x_A = \\frac{n_A}{n_A + n_B}",
           "tags": ["mole fraction", "concentration"]
         },
         {
-          "id": "c3",
-          "name": "Molarity",
-          "latex": "M = \\frac{\\text{Moles of solute (mol)}}{\\text{Volume of solution (L)}}",
-          "tags": ["molarity", "concentration"]
-        },
-        {
-          "id": "c4",
-          "name": "Molality",
-          "latex": "m = \\frac{\\text{Moles of solute (mol)}}{\\text{Mass of solvent (kg)}}",
+          "id": "c1_12",
+          "name": "Molality (m)",
+          "latex": "m = \\frac{\\text{Moles of solute}}{\\text{Mass of solvent in kg}}",
           "tags": ["molality", "concentration"]
         }
       ]
@@ -39,31 +87,73 @@
       "name": "Structure of Atom",
       "formulas": [
         {
-          "id": "c5",
-          "name": "Energy of a Photon (Planck's Equation)",
+          "id": "c2_1",
+          "name": "Atomic Number (Z)",
+          "latex": "Z = \\text{Number of protons} = \\text{Number of electrons (neutral atom)}",
+          "tags": ["atomic number", "protons"]
+        },
+        {
+          "id": "c2_2",
+          "name": "Mass Number (A)",
+          "latex": "A = Z + n",
+          "tags": ["mass number", "neutrons"]
+        },
+        {
+          "id": "c2_3",
+          "name": "Frequency, Wavelength, Velocity",
+          "latex": "c = \\nu \\lambda",
+          "tags": ["light", "wave"]
+        },
+        {
+          "id": "c2_4",
+          "name": "Energy of a Quantum",
           "latex": "E = h\\nu = \\frac{hc}{\\lambda}",
           "tags": ["energy", "photon", "planck"]
         },
         {
-          "id": "c6",
-          "name": "Bohr Radius",
-          "latex": "r_n = 52.9 \\frac{n^2}{Z} \\text{ pm}",
-          "tags": ["bohr", "radius", "atomic structure"]
+          "id": "c2_5",
+          "name": "Kinetic Energy of Ejected Electron",
+          "latex": "K.E. = h\\nu - h\\nu_0 = h\\nu - W",
+          "tags": ["photoelectric", "kinetic energy"]
         },
         {
-          "id": "c7",
-          "name": "Energy of Electron in nth orbit",
-          "latex": "E_n = -2.18 \\times 10^{-18} \\left( \\frac{Z^2}{n^2} \\right) \\text{ J}",
+          "id": "c2_6",
+          "name": "Rydberg's Formula",
+          "latex": "\\bar{\\nu} = \\frac{1}{\\lambda} = R_H \\left( \\frac{1}{n_1^2} - \\frac{1}{n_2^2} \\right)",
+          "tags": ["rydberg", "spectrum"]
+        },
+        {
+          "id": "c2_7",
+          "name": "Energy difference during transition",
+          "latex": "\\Delta E = E_2 - E_1 = h\\nu",
+          "tags": ["energy transition", "bohr"]
+        },
+        {
+          "id": "c2_8",
+          "name": "Angular momentum of electron",
+          "latex": "mvr = \\frac{nh}{2\\pi}",
+          "tags": ["angular momentum", "bohr"]
+        },
+        {
+          "id": "c2_9",
+          "name": "Radii of stationary states",
+          "latex": "r_n = n^2 a_0",
+          "tags": ["bohr", "radius"]
+        },
+        {
+          "id": "c2_10",
+          "name": "Energy of stationary state",
+          "latex": "E_n = -R_H \\left( \\frac{1}{n^2} \\right)",
           "tags": ["energy", "bohr", "electron"]
         },
         {
-          "id": "c8",
-          "name": "de Broglie Wavelength",
+          "id": "c2_11",
+          "name": "de Broglie's Wavelength",
           "latex": "\\lambda = \\frac{h}{p} = \\frac{h}{mv}",
           "tags": ["de broglie", "wavelength", "quantum"]
         },
         {
-          "id": "c9",
+          "id": "c2_12",
           "name": "Heisenberg's Uncertainty Principle",
           "latex": "\\Delta x \\cdot \\Delta p \\ge \\frac{h}{4\\pi}",
           "tags": ["heisenberg", "uncertainty", "momentum"]
@@ -73,59 +163,138 @@
     {
       "id": "c_ch3",
       "class": "11",
-      "name": "States of Matter",
+      "name": "Chemical Bonding",
       "formulas": [
         {
-          "id": "c10",
-          "name": "Ideal Gas Equation",
-          "latex": "PV = nRT",
-          "tags": ["ideal gas", "thermodynamics"]
+          "id": "c3_1",
+          "name": "Formal Charge",
+          "latex": "FC = V - N - \\frac{B}{2}",
+          "tags": ["formal charge", "bonding"]
         },
         {
-          "id": "c11",
-          "name": "van der Waals Equation",
-          "latex": "\\left( P + \\frac{an^2}{V^2} \\right)(V - nb) = nRT",
-          "tags": ["van der waals", "real gas"]
-        },
-        {
-          "id": "c12",
-          "name": "Graham's Law of Diffusion",
-          "latex": "\\frac{r_1}{r_2} = \\sqrt{\\frac{M_2}{M_1}} = \\sqrt{\\frac{d_2}{d_1}}",
-          "tags": ["diffusion", "graham", "gas"]
-        },
-        {
-          "id": "c13",
-          "name": "Root Mean Square Velocity",
-          "latex": "v_{rms} = \\sqrt{\\frac{3RT}{M}}",
-          "tags": ["rms velocity", "kinetic theory"]
+          "id": "c3_2",
+          "name": "Dipole Moment",
+          "latex": "\\mu = Q \\times r",
+          "tags": ["dipole moment", "bonding"]
         }
       ]
     },
     {
       "id": "c_ch4",
       "class": "11",
+      "name": "States Of Matter",
+      "formulas": [
+        {
+          "id": "c4_1",
+          "name": "Boyle's Law",
+          "latex": "P_1V_1 = P_2V_2 \\quad (T \\text{ constant})",
+          "tags": ["boyle", "gas law"]
+        },
+        {
+          "id": "c4_2",
+          "name": "Charles' Law",
+          "latex": "\\frac{V_1}{T_1} = \\frac{V_2}{T_2} \\quad (P \\text{ constant})",
+          "tags": ["charles", "gas law"]
+        },
+        {
+          "id": "c4_3",
+          "name": "Gay Lussac's Law",
+          "latex": "\\frac{P_1}{T_1} = \\frac{P_2}{T_2} \\quad (V \\text{ constant})",
+          "tags": ["gay lussac", "gas law"]
+        },
+        {
+          "id": "c4_4",
+          "name": "Avogadro Law",
+          "latex": "V \\propto n \\quad (P, T \\text{ constant})",
+          "tags": ["avogadro", "gas law"]
+        },
+        {
+          "id": "c4_5",
+          "name": "Ideal Gas Equation",
+          "latex": "PV = nRT",
+          "tags": ["ideal gas", "thermodynamics"]
+        },
+        {
+          "id": "c4_6",
+          "name": "Density and Molar Mass",
+          "latex": "d = \\frac{PM}{RT}",
+          "tags": ["density", "molar mass", "gas"]
+        },
+        {
+          "id": "c4_7",
+          "name": "Dalton's Law of Partial Pressure",
+          "latex": "P_{total} = P_1 + P_2 + P_3 + \\dots",
+          "tags": ["dalton", "partial pressure"]
+        },
+        {
+          "id": "c4_8",
+          "name": "Partial pressure in terms of mole fraction",
+          "latex": "P_i = x_i \\cdot P_{total}",
+          "tags": ["partial pressure", "mole fraction"]
+        },
+        {
+          "id": "c4_9",
+          "name": "Vander Waals Equation",
+          "latex": "\\left( P + \\frac{an^2}{V^2} \\right)(V - nb) = nRT",
+          "tags": ["van der waals", "real gas"]
+        }
+      ]
+    },
+    {
+      "id": "c_ch5",
+      "class": "11",
       "name": "Thermodynamics",
       "formulas": [
         {
-          "id": "c14",
+          "id": "c5_1",
           "name": "First Law of Thermodynamics",
           "latex": "\\Delta U = q + w",
           "tags": ["first law", "internal energy"]
         },
         {
-          "id": "c15",
+          "id": "c5_2",
+          "name": "Work Done",
+          "latex": "W = -P\\Delta V",
+          "tags": ["work", "thermodynamics"]
+        },
+        {
+          "id": "c5_3",
+          "name": "Work Done (Variable Pressure)",
+          "latex": "W = -\\int_{V_1}^{V_2} P_{ext} dV",
+          "tags": ["work", "integration"]
+        },
+        {
+          "id": "c5_4",
+          "name": "Work Done (Isothermal Reversible)",
+          "latex": "W_{rev} = -2.303 nRT \\log \\left( \\frac{V_2}{V_1} \\right)",
+          "tags": ["work", "reversible", "isothermal"]
+        },
+        {
+          "id": "c5_5",
           "name": "Enthalpy Change",
           "latex": "\\Delta H = \\Delta U + P\\Delta V",
           "tags": ["enthalpy", "thermodynamics"]
         },
         {
-          "id": "c16",
+          "id": "c5_6",
+          "name": "Heat Capacity Relation",
+          "latex": "C_p - C_v = R",
+          "tags": ["heat capacity", "gas constant"]
+        },
+        {
+          "id": "c5_7",
           "name": "Entropy Change",
           "latex": "\\Delta S = \\frac{q_{rev}}{T}",
           "tags": ["entropy", "reversible"]
         },
         {
-          "id": "c17",
+          "id": "c5_8",
+          "name": "Total Entropy Change",
+          "latex": "\\Delta S_{total} = \\Delta S_{system} + \\Delta S_{surr} > 0",
+          "tags": ["entropy", "spontaneous"]
+        },
+        {
+          "id": "c5_9",
           "name": "Gibbs Free Energy",
           "latex": "\\Delta G = \\Delta H - T\\Delta S",
           "tags": ["gibbs", "free energy", "spontaneity"]
@@ -133,58 +302,45 @@
       ]
     },
     {
-      "id": "c_ch5",
-      "class": "12",
-      "name": "Chemical Kinetics",
-      "formulas": [
-        {
-          "id": "c18",
-          "name": "Rate of Reaction",
-          "latex": "r = k[A]^x[B]^y",
-          "tags": ["rate", "kinetics"]
-        },
-        {
-          "id": "c19",
-          "name": "First Order Reaction",
-          "latex": "k = \\frac{2.303}{t} \\log \\left( \\frac{[A]_0}{[A]} \\right)",
-          "tags": ["first order", "kinetics"]
-        },
-        {
-          "id": "c20",
-          "name": "Half Life (First Order)",
-          "latex": "t_{1/2} = \\frac{0.693}{k}",
-          "tags": ["half life", "first order"]
-        },
-        {
-          "id": "c21",
-          "name": "Arrhenius Equation",
-          "latex": "k = A e^{-E_a/RT}",
-          "tags": ["arrhenius", "activation energy"]
-        }
-      ]
-    },
-    {
       "id": "c_ch6",
-      "class": "12",
-      "name": "Electrochemistry",
+      "class": "11",
+      "name": "Equilibrium",
       "formulas": [
         {
-          "id": "c22",
-          "name": "Nernst Equation",
-          "latex": "E_{cell} = E^\\circ_{cell} - \\frac{0.0591}{n} \\log Q",
-          "tags": ["nernst", "cell potential"]
+          "id": "c6_1",
+          "name": "Equilibrium Constant (Kc)",
+          "latex": "K_c = \\frac{[C]^c [D]^d}{[A]^a [B]^b}",
+          "tags": ["equilibrium", "constant"]
         },
         {
-          "id": "c23",
-          "name": "Kohlrausch's Law",
-          "latex": "\\Lambda^\\circ_m = \\nu_+ \\lambda^\\circ_+ + \\nu_- \\lambda^\\circ_-",
-          "tags": ["kohlrausch", "molar conductivity"]
+          "id": "c6_2",
+          "name": "Equilibrium Constant (Kp)",
+          "latex": "K_p = K_c (RT)^{\\Delta n_g}",
+          "tags": ["equilibrium", "kp", "kc"]
         },
         {
-          "id": "c24",
-          "name": "Faraday's First Law",
-          "latex": "w = ZIt",
-          "tags": ["faraday", "electrolysis"]
+          "id": "c6_3",
+          "name": "pH Value",
+          "latex": "\\text{pH} = -\\log[H^+]",
+          "tags": ["ph", "acid"]
+        },
+        {
+          "id": "c6_4",
+          "name": "pOH Value",
+          "latex": "\\text{pOH} = -\\log[OH^-]",
+          "tags": ["poh", "base"]
+        },
+        {
+          "id": "c6_5",
+          "name": "Ionic Product of Water",
+          "latex": "K_w = [H^+][OH^-] = 10^{-14} \\quad (\\text{at 298 K})",
+          "tags": ["ionic product", "water"]
+        },
+        {
+          "id": "c6_6",
+          "name": "Gibbs Energy and Equilibrium",
+          "latex": "\\Delta G = -RT \\ln K",
+          "tags": ["gibbs", "equilibrium constant"]
         }
       ]
     }
