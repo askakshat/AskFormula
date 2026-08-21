@@ -8,43 +8,32 @@ export interface FormulaItem {
   chapter?: string;
 }
 
-// ── LaTeX tokeniser / renderer that draws directly on jsPDF ──
-//
-// We walk the LaTeX string character by character, resolve commands
-// (Greek, fractions, scripts, etc.) and emit jsPDF draw calls.
-// No canvas, no DOM, no html2canvas — works everywhere.
-
-const GREEK: Record<string, string> = {
-  alpha: "\u03B1", beta: "\u03B2", gamma: "\u03B3", delta: "\u03B4",
-  epsilon: "\u03B5", zeta: "\u03B6", eta: "\u03B7", theta: "\u03B8",
-  iota: "\u03B9", kappa: "\u03BA", lambda: "\u03BB", mu: "\u03BC",
-  nu: "\u03BD", xi: "\u03BE", pi: "\u03C0", rho: "\u03C1",
-  sigma: "\u03C3", tau: "\u03C4", phi: "\u03C6", chi: "\u03C7",
-  psi: "\u03C8", omega: "\u03C9",
-  Alpha: "\u0391", Beta: "\u0392", Gamma: "\u0393", Delta: "\u0394",
-  Epsilon: "\u0395", Zeta: "\u0396", Eta: "\u0397", Theta: "\u0398",
-  Iota: "\u0399", Kappa: "\u039A", Lambda: "\u039B", Mu: "\u039C",
-  Nu: "\u039D", Xi: "\u039E", Pi: "\u03A0", Rho: "\u03A1",
-  Sigma: "\u03A3", Tau: "\u03A4", Phi: "\u03A6", Chi: "\u03A7",
-  Psi: "\u03A8", Omega: "\u03A9",
+// ── Symbol-font mapping for Greek letters (PDF Symbol encoding) ──
+// When pdf.setFont("Symbol") is active, these ASCII codes produce Greek letters.
+const GREEK_SYMBOL: Record<string, string> = {
+  alpha: "a", beta: "b", gamma: "g", delta: "d", epsilon: "e",
+  zeta: "z", eta: "h", theta: "q", iota: "i", kappa: "k",
+  lambda: "l", mu: "m", nu: "n", xi: "x", pi: "p",
+  rho: "r", sigma: "s", tau: "t", phi: "f", chi: "c",
+  psi: "y", omega: "w",
+  Alpha: "A", Beta: "B", Gamma: "G", Delta: "D", Epsilon: "E",
+  Zeta: "Z", Eta: "H", Theta: "Q", Iota: "I", Kappa: "K",
+  Lambda: "L", Mu: "M", Nu: "N", Xi: "X", Pi: "P",
+  Rho: "R", Sigma: "S", Tau: "T", Phi: "F", Chi: "C",
+  Psi: "Y", Omega: "W",
 };
 
-const SYMBOLS: Record<string, string> = {
+const TEXT_SYMBOLS: Record<string, string> = {
   times: "\u00D7", cdot: "\u00B7", pm: "\u00B1", mp: "\u2213",
   leq: "\u2264", geq: "\u2265", neq: "\u2260", approx: "\u2248",
   equiv: "\u2261", infty: "\u221E", partial: "\u2202", nabla: "\u2207",
-  rightarrow: "\u2192", leftarrow: "\u2190", leftrightarrow: "\u2194",
-  prime: "\u2032", forall: "\u2200", exists: "\u2203",
-  int: "\u222B", oint: "\u222E", sum: "\u03A3", prod: "\u03A0",
-  sqrt: "\u221A", overline: null as unknown as string, // handled specially
-  vec: null as unknown as string, hat: null as unknown as string,
-  dot: null as unknown as string, bar: null as unknown as string,
-  text: null as unknown as string, mathbf: null as unknown as string,
-  mathrm: null as unknown as string, frac: null as unknown as string,
+  rightarrow: "\u2192", leftarrow: "\u2190", prime: "\u2032",
+  forall: "\u2200", exists: "\u2203",
+  int: "\u222B", oint: "\u222E", sqrt: "\u221A",
 };
 
-// ── Helper: extract brace group starting at pos (after the opening {) ──
-function braceGroup(src: string, start: number): [content: string, end: number] {
+// ── Brace-group extractor ──
+function braceGroup(src: string, start: number): [string, number] {
   let depth = 1;
   let i = start;
   while (i < src.length && depth > 0) {
@@ -55,212 +44,129 @@ function braceGroup(src: string, start: number): [content: string, end: number] 
   return [src.slice(start, i - 1), i];
 }
 
-// ── Collect "atoms" from a LaTeX string ──────────────────────
-// An atom is one of:
-//   { text: "A", type: "normal" | "greek" | "symbol" | "space" }
-//   { type: "frac", num: Atom[], den: Atom[] }
-//   { type: "sup", items: Atom[] }
-//   { type: "sub", items: Atom[] }
-//   { type: "group", items: Atom[] }   // brace group
-
+// ── Atom types ──
 type Atom =
-  | { type: "text"; text: string; kind: "normal" | "greek" | "symbol" | "space" }
+  | { type: "text"; text: string; font: "normal" | "symbol" }
   | { type: "frac"; num: Atom[]; den: Atom[] }
   | { type: "sup"; items: Atom[] }
   | { type: "sub"; items: Atom[] }
   | { type: "group"; items: Atom[] };
 
+// ── Tokeniser ──
 function tokenize(src: string): Atom[] {
   const atoms: Atom[] = [];
   let i = 0;
-
   while (i < src.length) {
     const ch = src[i];
 
-    // ── Backslash command ──
     if (ch === "\\") {
       i++;
-      // Read command name
       let cmd = "";
-      while (i < src.length && /[a-zA-Z]/.test(src[i])) {
-        cmd += src[i];
-        i++;
-      }
-      // Special single-char commands
-      if (cmd === "" && i < src.length) {
-        cmd = src[i];
-        i++;
-      }
+      while (i < src.length && /[a-zA-Z]/.test(src[i])) { cmd += src[i]; i++; }
+      if (cmd === "" && i < src.length) { cmd = src[i]; i++; }
 
       if (cmd === "frac") {
-        // \frac{num}{den}
         while (i < src.length && src[i] === " ") i++;
         let num: Atom[] = [];
         let den: Atom[] = [];
-        if (i < src.length && src[i] === "{") {
-          const [content, end] = braceGroup(src, i + 1);
-          num = tokenize(content);
-          i = end;
-        }
+        if (i < src.length && src[i] === "{") { const [c, e] = braceGroup(src, i + 1); num = tokenize(c); i = e; }
         while (i < src.length && src[i] === " ") i++;
-        if (i < src.length && src[i] === "{") {
-          const [content, end] = braceGroup(src, i + 1);
-          den = tokenize(content);
-          i = end;
-        }
+        if (i < src.length && src[i] === "{") { const [c, e] = braceGroup(src, i + 1); den = tokenize(c); i = e; }
         atoms.push({ type: "frac", num, den });
-      } else if (cmd === "text" || cmd === "mathrm" || cmd === "mathbf" || cmd === "textbf") {
+      } else if (cmd === "text" || cmd === "mathrm" || cmd === "mathbf") {
         while (i < src.length && src[i] === " ") i++;
-        if (i < src.length && src[i] === "{") {
-          const [content, end] = braceGroup(src, i + 1);
-          atoms.push({ type: "text", text: content, kind: "normal" });
-          i = end;
-        }
+        if (i < src.length && src[i] === "{") { const [c, e] = braceGroup(src, i + 1); atoms.push({ type: "text", text: c, font: "normal" }); i = e; }
       } else if (cmd === "sqrt") {
         while (i < src.length && src[i] === " ") i++;
         if (i < src.length && src[i] === "{") {
-          const [content, end] = braceGroup(src, i + 1);
-          atoms.push({ type: "text", text: "\u221A", kind: "symbol" });
-          atoms.push({ type: "group", items: tokenize(content) });
-          i = end;
-        } else {
-          atoms.push({ type: "text", text: "\u221A", kind: "symbol" });
+          const [c, e] = braceGroup(src, i + 1);
+          atoms.push({ type: "text", text: "\u221A", font: "normal" });
+          atoms.push({ type: "group", items: tokenize(c) });
+          i = e;
         }
       } else if (cmd === "vec") {
         while (i < src.length && src[i] === " ") i++;
         if (i < src.length && src[i] === "{") {
-          const [content, end] = braceGroup(src, i + 1);
-          const items = tokenize(content);
-          atoms.push(...items);
-          atoms.push({ type: "text", text: "\u20D7", kind: "symbol" });
-          i = end;
-        }
-      } else if (cmd === "hat") {
-        while (i < src.length && src[i] === " ") i++;
-        if (i < src.length && src[i] === "{") {
-          const [content, end] = braceGroup(src, i + 1);
-          const items = tokenize(content);
-          atoms.push(...items);
-          atoms.push({ type: "text", text: "\u0302", kind: "symbol" });
-          i = end;
+          const [c, e] = braceGroup(src, i + 1);
+          atoms.push(...tokenize(c));
+          i = e;
         }
       } else if (cmd === "overline") {
         while (i < src.length && src[i] === " ") i++;
         if (i < src.length && src[i] === "{") {
-          const [content, end] = braceGroup(src, i + 1);
-          atoms.push({ type: "group", items: tokenize(content) });
-          atoms.push({ type: "text", text: "\u0305", kind: "symbol" });
-          i = end;
+          const [c, e] = braceGroup(src, i + 1);
+          atoms.push({ type: "group", items: tokenize(c) });
+          i = e;
         }
-      } else if (GREEK[cmd]) {
-        atoms.push({ type: "text", text: GREEK[cmd], kind: "greek" });
-      } else if (SYMBOLS[cmd] !== undefined && SYMBOLS[cmd] !== null) {
-        atoms.push({ type: "text", text: SYMBOLS[cmd], kind: "symbol" });
+      } else if (GREEK_SYMBOL[cmd]) {
+        atoms.push({ type: "text", text: GREEK_SYMBOL[cmd], font: "symbol" });
+      } else if (TEXT_SYMBOLS[cmd] !== undefined) {
+        atoms.push({ type: "text", text: TEXT_SYMBOLS[cmd], font: "normal" });
       }
-      // Unknown commands are silently dropped
       continue;
     }
 
-    // ── Superscript ──
     if (ch === "^") {
       i++;
-      if (i < src.length && src[i] === "{") {
-        const [content, end] = braceGroup(src, i + 1);
-        atoms.push({ type: "sup", items: tokenize(content) });
-        i = end;
-      } else if (i < src.length) {
-        atoms.push({ type: "sup", items: [{ type: "text", text: src[i], kind: "normal" }] });
-        i++;
-      }
+      if (i < src.length && src[i] === "{") { const [c, e] = braceGroup(src, i + 1); atoms.push({ type: "sup", items: tokenize(c) }); i = e; }
+      else if (i < src.length) { atoms.push({ type: "sup", items: [{ type: "text", text: src[i], font: "normal" }] }); i++; }
       continue;
     }
 
-    // ── Subscript ──
     if (ch === "_") {
       i++;
-      if (i < src.length && src[i] === "{") {
-        const [content, end] = braceGroup(src, i + 1);
-        atoms.push({ type: "sub", items: tokenize(content) });
-        i = end;
-      } else if (i < src.length) {
-        atoms.push({ type: "sub", items: [{ type: "text", text: src[i], kind: "normal" }] });
-        i++;
-      }
+      if (i < src.length && src[i] === "{") { const [c, e] = braceGroup(src, i + 1); atoms.push({ type: "sub", items: tokenize(c) }); i = e; }
+      else if (i < src.length) { atoms.push({ type: "sub", items: [{ type: "text", text: src[i], font: "normal" }] }); i++; }
       continue;
     }
 
-    // ── Brace group ──
-    if (ch === "{") {
-      const [content, end] = braceGroup(src, i + 1);
-      atoms.push({ type: "group", items: tokenize(content) });
-      i = end;
-      continue;
-    }
+    if (ch === "{") { const [c, e] = braceGroup(src, i + 1); atoms.push({ type: "group", items: tokenize(c) }); i = e; continue; }
+    if (ch === "}") { i++; continue; }
+    if (ch === " " || ch === "~") { i++; while (i < src.length && src[i] === " ") i++; continue; }
 
-    // ── Closing brace (should not happen at this level) ──
-    if (ch === "}") {
-      i++;
-      continue;
-    }
-
-    // ── Spaces ──
-    if (ch === " " || ch === "~") {
-      atoms.push({ type: "text", text: " ", kind: "space" });
-      i++;
-      while (i < src.length && src[i] === " ") i++;
-      continue;
-    }
-
-    // ── Plain text ──
-    atoms.push({ type: "text", text: ch, kind: "normal" });
+    atoms.push({ type: "text", text: ch, font: "normal" });
     i++;
   }
-
   return atoms;
 }
 
-// ── Flatten atoms to a single text string (for width estimation) ──
-function flattenAtoms(atoms: Atom[]): string {
-  let result = "";
+// ── Flatten atoms to plain text (for width estimation) ──
+function flatten(atoms: Atom[]): string {
+  let r = "";
   for (const a of atoms) {
-    switch (a.type) {
-      case "text":
-        result += a.text;
-        break;
-      case "group":
-        result += flattenAtoms(a.items);
-        break;
-      case "frac":
-        result += flattenAtoms(a.num) + "/" + flattenAtoms(a.den);
-        break;
-      case "sup":
-        result += flattenAtoms(a.items);
-        break;
-      case "sub":
-        result += flattenAtoms(a.items);
-        break;
-    }
+    if (a.type === "text") r += a.text;
+    else if (a.type === "group") r += flatten(a.items);
+    else if (a.type === "frac") r += flatten(a.num) + "/" + flatten(a.den);
+    else if (a.type === "sup") r += flatten(a.items);
+    else if (a.type === "sub") r += flatten(a.items);
   }
-  return result;
+  return r;
 }
 
-// ── Render atoms onto a jsPDF page ───────────────────────────
-//
-// Returns the y position after rendering.
+// ── Helper: measure text width (sets font temporarily) ──
+function measureText(pdf: jsPDF, text: string, size: number, font: "normal" | "symbol"): number {
+  if (font === "symbol") {
+    pdf.setFont("Symbol", "normal");
+  } else {
+    pdf.setFont("helvetica", "normal");
+  }
+  pdf.setFontSize(size);
+  return pdf.getTextWidth(text);
+}
+
+// ── Render atoms onto the PDF ──
 function renderAtoms(
   pdf: jsPDF,
   atoms: Atom[],
   x: number,
   y: number,
-  fontSize: number,
+  size: number,
   color: [number, number, number],
-  maxRight: number
+  maxRight: number,
 ): number {
-  const BASE = fontSize;
-  const SCRIPT = fontSize * 0.7;
-  const FRAC_GAP = 1.2; // mm gap between num and den
-  const LINE_PAD = 0.5;
-
+  const SCRIPT = size * 0.72;
+  const FRAC_LINE_GAP = 0.8;
+  const LINE_PAD = 0.4;
   let cx = x;
 
   for (const atom of atoms) {
@@ -268,12 +174,12 @@ function renderAtoms(
 
     switch (atom.type) {
       case "text": {
-        if (atom.kind === "space") {
-          cx += BASE * 0.25;
-          break;
+        if (atom.font === "symbol") {
+          pdf.setFont("Symbol", "normal");
+        } else {
+          pdf.setFont("helvetica", "normal");
         }
-        pdf.setFont("helvetica", atom.kind === "normal" ? "normal" : "normal");
-        pdf.setFontSize(BASE);
+        pdf.setFontSize(size);
         pdf.setTextColor(color[0], color[1], color[2]);
         pdf.text(atom.text, cx, y);
         cx += pdf.getTextWidth(atom.text);
@@ -281,59 +187,50 @@ function renderAtoms(
       }
 
       case "group": {
-        const subY = renderAtoms(pdf, atom.items, cx, y, BASE, color, maxRight);
-        cx += pdf.getTextWidth(flattenAtoms(atom.items));
-        if (subY !== y) {
-          // Multi-line group (from frac inside) — handled by frac
-          return subY;
-        }
+        cx = renderAtoms(pdf, atom.items, cx, y, size, color, maxRight);
         break;
       }
 
       case "sup": {
-        const saved = pdf.getFontSize();
+        const txt = flatten(atom.items);
+        const w = measureText(pdf, txt, SCRIPT, "normal");
+        pdf.setFont("helvetica", "normal");
         pdf.setFontSize(SCRIPT);
         pdf.setTextColor(color[0], color[1], color[2]);
-        const txt = flattenAtoms(atom.items);
-        pdf.text(txt, cx, y - BASE * 0.35);
-        cx += pdf.getTextWidth(txt);
-        pdf.setFontSize(saved);
+        pdf.text(txt, cx, y - size * 0.28);
+        cx += w;
         break;
       }
 
       case "sub": {
-        const saved = pdf.getFontSize();
+        const txt = flatten(atom.items);
+        const w = measureText(pdf, txt, SCRIPT, "normal");
+        pdf.setFont("helvetica", "normal");
         pdf.setFontSize(SCRIPT);
         pdf.setTextColor(color[0], color[1], color[2]);
-        const txt = flattenAtoms(atom.items);
-        pdf.text(txt, cx, y + BASE * 0.12);
-        cx += pdf.getTextWidth(txt);
-        pdf.setFontSize(saved);
+        pdf.text(txt, cx, y + size * 0.15);
+        cx += w;
         break;
       }
 
       case "frac": {
-        const numText = flattenAtoms(atom.num);
-        const denText = flattenAtoms(atom.den);
-
-        pdf.setFontSize(SCRIPT);
-        const numW = pdf.getTextWidth(numText);
-        const denW = pdf.getTextWidth(denText);
+        const numText = flatten(atom.num);
+        const denText = flatten(atom.den);
+        const numW = measureText(pdf, numText, SCRIPT, "normal");
+        const denW = measureText(pdf, denText, SCRIPT, "normal");
         const lineW = Math.max(numW, denW) + 2 * LINE_PAD;
-        const lineY = y + BASE * 0.05;
+        const lineY = y + size * 0.05;
 
-        // Draw numerator
-        const numX = cx + (lineW - numW) / 2;
-        renderAtoms(pdf, atom.num, numX, lineY - FRAC_GAP, SCRIPT, color, maxRight);
+        // Numerator
+        renderAtoms(pdf, atom.num, cx + (lineW - numW) / 2, lineY - FRAC_LINE_GAP, SCRIPT, color, maxRight);
 
-        // Draw fraction line
+        // Fraction line
         pdf.setDrawColor(color[0], color[1], color[2]);
-        pdf.setLineWidth(0.15);
-        pdf.line(cx + LINE_PAD, lineY, cx + lineW - LINE_PAD, lineY);
+        pdf.setLineWidth(0.12);
+        pdf.line(cx + LINE_PAD * 0.5, lineY, cx + lineW - LINE_PAD * 0.5, lineY);
 
-        // Draw denominator
-        const denX = cx + (lineW - denW) / 2;
-        renderAtoms(pdf, atom.den, denX, lineY + SCRIPT * 0.4 + FRAC_GAP, SCRIPT, color, maxRight);
+        // Denominator
+        renderAtoms(pdf, atom.den, cx + (lineW - denW) / 2, lineY + SCRIPT * 0.35 + FRAC_LINE_GAP, SCRIPT, color, maxRight);
 
         cx += lineW;
         break;
@@ -341,10 +238,10 @@ function renderAtoms(
     }
   }
 
-  return y;
+  return cx;
 }
 
-// ── Render a full formula (name + LaTeX) onto the page ───────
+// ── Render one formula (name + expression) ──
 function renderFormulaOnPDF(
   pdf: jsPDF,
   formula: FormulaItem,
@@ -352,30 +249,31 @@ function renderFormulaOnPDF(
   y: number,
   maxRight: number,
   pageH: number,
-  mx: number
+  mx: number,
 ): number {
   const NAME_SIZE = 9;
-  const FORMULA_SIZE = 11;
+  const FORMULA_SIZE = 12;
   const NAME_COLOR: [number, number, number] = [51, 65, 85];
   const FORMULA_COLOR: [number, number, number] = [30, 41, 59];
 
-  // Check page break for name + formula estimate
-  if (y + 16 > pageH - mx) {
+  if (y + 14 > pageH - mx) {
     pdf.addPage();
     y = mx;
   }
 
-  // Formula name
+  // Name
   pdf.setFont("helvetica", "bold");
   pdf.setFontSize(NAME_SIZE);
   pdf.setTextColor(NAME_COLOR[0], NAME_COLOR[1], NAME_COLOR[2]);
   pdf.text(formula.name, x, y);
-  y += NAME_SIZE * 0.35;
+  y += NAME_SIZE * 0.32;
 
-  // Parse and render formula
+  // Formula
   const atoms = tokenize(formula.latex);
-  y = renderAtoms(pdf, atoms, x, y + FORMULA_SIZE * 0.35, FORMULA_SIZE, FORMULA_COLOR, maxRight);
-  y += FORMULA_SIZE * 0.35;
+  const startX = x + 2;
+  const endX = renderAtoms(pdf, atoms, startX, y + FORMULA_SIZE * 0.32, FORMULA_SIZE, FORMULA_COLOR, maxRight);
+  void endX;
+  y += FORMULA_SIZE * 0.32 + FORMULA_SIZE * 0.28;
 
   return y;
 }
@@ -384,7 +282,7 @@ function renderFormulaOnPDF(
 
 export async function generatePDF(
   formulas: FormulaItem[],
-  subject: string
+  subject: string,
 ): Promise<void> {
   const pdf = new jsPDF("p", "mm", "a4");
   const pageW = 210;
@@ -416,7 +314,6 @@ export async function generatePDF(
   pdf.text(`Generated on ${dateStr}`, mx, y);
   y += 3;
 
-  // Decorative header line
   pdf.setDrawColor(59, 130, 246);
   pdf.setLineWidth(0.6);
   pdf.line(mx, y, mx + 40, y);
@@ -433,33 +330,30 @@ export async function generatePDF(
     chapters.get(key)!.push(f);
   }
 
-  // ── Render each chapter ───────────────────────────────
+  // ── Render chapters ──────────────────────────────────
   for (const [chapterName, items] of chapters) {
-    // Chapter heading
     if (y > pageH - 30) {
       pdf.addPage();
       y = mx;
     }
 
     // Chapter pill
-    pdf.setFillColor(59, 130, 246);
     pdf.setFont("helvetica", "bold");
     pdf.setFontSize(10);
     const chW = pdf.getTextWidth(chapterName) + 8;
+    pdf.setFillColor(59, 130, 246);
     pdf.roundedRect(mx, y - 3.5, chW, 6, 1.5, 1.5, "F");
     pdf.setTextColor(255, 255, 255);
     pdf.text(chapterName, mx + 4, y);
     y += 8;
 
-    // Formulas
     for (const formula of items) {
       y = renderFormulaOnPDF(pdf, formula, mx, y, pageW - mx, pageH, mx);
 
-      // Subtle divider
       pdf.setDrawColor(226, 232, 240);
       pdf.setLineWidth(0.1);
       pdf.line(mx + 2, y, pageW - mx - 2, y);
-      y += 4;
+      y += 3;
     }
 
     y += 4;
@@ -476,7 +370,7 @@ export async function generatePDF(
       `AskFormula  ·  ${formulas.length} formulas  ·  Page ${i} of ${totalPages}`,
       pageW / 2,
       pageH - 10,
-      { align: "center" }
+      { align: "center" },
     );
   }
 
