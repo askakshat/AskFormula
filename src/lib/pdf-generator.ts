@@ -255,8 +255,9 @@ function renderFormulaOnPDF(
   const FORMULA_SIZE = 12;
   const NAME_COLOR: [number, number, number] = [51, 65, 85];
   const FORMULA_COLOR: [number, number, number] = [30, 41, 59];
+  const ACCENT: [number, number, number] = [100, 116, 139];
 
-  if (y + 14 > pageH - mx) {
+  if (y + 18 > pageH - mx) {
     pdf.addPage();
     y = mx;
   }
@@ -266,14 +267,18 @@ function renderFormulaOnPDF(
   pdf.setFontSize(NAME_SIZE);
   pdf.setTextColor(NAME_COLOR[0], NAME_COLOR[1], NAME_COLOR[2]);
   pdf.text(formula.name, x, y);
-  y += NAME_SIZE * 0.32;
+  y += NAME_SIZE * 0.38;
+
+  // Small dot accent before formula
+  pdf.setFillColor(ACCENT[0], ACCENT[1], ACCENT[2]);
+  pdf.circle(x + 1.2, y + 1.5, 0.4, "F");
 
   // Formula
   const atoms = tokenize(formula.latex);
-  const startX = x + 2;
-  const endX = renderAtoms(pdf, atoms, startX, y + FORMULA_SIZE * 0.32, FORMULA_SIZE, FORMULA_COLOR, maxRight);
+  const startX = x + 3;
+  const endX = renderAtoms(pdf, atoms, startX, y + FORMULA_SIZE * 0.35, FORMULA_SIZE, FORMULA_COLOR, maxRight);
   void endX;
-  y += FORMULA_SIZE * 0.32 + FORMULA_SIZE * 0.28;
+  y += FORMULA_SIZE * 0.35 + FORMULA_SIZE * 0.32;
 
   return y;
 }
@@ -350,13 +355,13 @@ export async function generatePDF(
     for (const formula of items) {
       y = renderFormulaOnPDF(pdf, formula, mx, y, pageW - mx, pageH, mx);
 
-      pdf.setDrawColor(226, 232, 240);
-      pdf.setLineWidth(0.1);
-      pdf.line(mx + 2, y, pageW - mx - 2, y);
-      y += 3;
+      pdf.setDrawColor(230, 235, 243);
+      pdf.setLineWidth(0.12);
+      pdf.line(mx + 3, y, pageW - mx - 3, y);
+      y += 5;
     }
 
-    y += 4;
+    y += 6;
   }
 
   // ── Page footers ──────────────────────────────────────
