@@ -1,5 +1,4 @@
-import { jsPDF } from "jspdf";
-import html2canvas from "html2canvas";
+import html2pdf from "html2pdf.js";
 import katex from "katex";
 
 export interface FormulaItem {
@@ -14,25 +13,12 @@ export async function generatePDF(
   formulas: FormulaItem[],
   subject: string,
 ): Promise<void> {
-  // Wait a tick to ensure KaTeX fonts are fully loaded if running in browser
-  await new Promise((resolve) => setTimeout(resolve, 100));
-
-  // Create a hidden container for rendering html2canvas
   const container = document.createElement("div");
-  // We avoid absolute negative positioning so that the browser actually
-  // allocates layout correctly for complex fonts, but we use fixed and opacity 0
-  // or extremely high z-index to hide it.
-  container.style.position = "fixed";
-  container.style.top = "0";
-  container.style.left = "0";
-  container.style.zIndex = "-9999";
-  container.style.width = "794px"; // A4 width at 96 DPI
-  // Add a soft, abstract gradient background for the glassmorphism base
+  container.style.width = "794px";
   container.style.background = "linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)";
   container.style.padding = "40px";
   container.style.fontFamily = "system-ui, -apple-system, sans-serif";
   container.style.color = "#0f172a";
-  document.body.appendChild(container);
 
   const dateStr = new Date().toLocaleDateString("en-IN", {
     year: "numeric",
@@ -40,7 +26,6 @@ export async function generatePDF(
     day: "numeric",
   });
 
-  // Group by chapter
   const chapters = new Map<string, FormulaItem[]>();
   for (const f of formulas) {
     const key = f.chapter ?? "General";
@@ -50,22 +35,28 @@ export async function generatePDF(
 
   // Find all existing styles on the page to ensure KaTeX css is copied
   let stylesHtml = "";
-  for (const styleSheet of document.styleSheets) {
-    try {
-      if (styleSheet.href) {
-        stylesHtml += `<link rel="stylesheet" href="${styleSheet.href}" crossorigin="anonymous">`;
-      } else {
-        const rules = Array.from(styleSheet.cssRules)
-          .map((rule) => rule.cssText)
-          .join("\n");
-        stylesHtml += `<style>${rules}</style>`;
+  try {
+    for (const styleSheet of document.styleSheets) {
+      try {
+        if (styleSheet.href) {
+          stylesHtml += `<link rel="stylesheet" href="${styleSheet.href}" crossorigin="anonymous">`;
+        } else {
+          const rules = Array.from(styleSheet.cssRules)
+            .map((rule) => rule.cssText)
+            .join("\n");
+          stylesHtml += `<style>${rules}</style>`;
+        }
+      } catch (e) {
+        // Ignore cross-origin stylesheet errors
       }
-    } catch (e) {
-      // Ignore cross-origin stylesheet errors
     }
+  } catch (err) {
+    console.warn("Could not read stylesheets natively");
   }
 
-  // Generate HTML content
+  // Fallback for CORS environments: directly fetch the KaTeX CDN stylesheet.
+  stylesHtml += `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" crossorigin="anonymous">`;
+
   let htmlContent = `
     ${stylesHtml}
     <div style="margin-bottom: 30px;">
@@ -93,7 +84,7 @@ export async function generatePDF(
           displayMode: true,
           throwOnError: false,
         });
-      } catch (e) {
+      } catch {
         renderedMath = `<span style="color: red;">Error rendering formula</span>`;
       }
 
@@ -122,51 +113,17 @@ export async function generatePDF(
 
   container.innerHTML = htmlContent;
 
-  // Render to canvas
-  const canvas = await html2canvas(container, {
-    scale: 2, // Higher resolution
-    useCORS: true,
-    logging: false,
-  });
-
-  document.body.removeChild(container);
-
-  // Generate PDF
-  const imgData = canvas.toDataURL("image/png");
-  const pdf = new jsPDF("p", "mm", "a4");
-  const pdfWidth = pdf.internal.pageSize.getWidth();
-  const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-
-  let heightLeft = pdfHeight;
-  let position = 0;
-
-  // Handle multi-page
-  pdf.addImage(imgData, "PNG", 0, position, pdfWidth, pdfHeight);
-  heightLeft -= pdf.internal.pageSize.getHeight();
-
-  while (heightLeft >= 0) {
-    position = heightLeft - pdfHeight;
-    pdf.addPage();
-    pdf.addImage(imgData, "PNG", 0, position, pdfWidth, pdfHeight);
-    heightLeft -= pdf.internal.pageSize.getHeight();
-  }
-
-  // Add footers
-  const totalPages = pdf.getNumberOfPages();
-  for (let i = 1; i <= totalPages; i++) {
-    pdf.setPage(i);
-    pdf.setFont("helvetica", "normal");
-    pdf.setFontSize(7);
-    pdf.setTextColor(180, 190, 200);
-    pdf.text(
-      `AskFormula  ·  ${formulas.length} formulas  ·  Page ${i} of ${totalPages}`,
-      pdfWidth / 2,
-      pdf.internal.pageSize.getHeight() - 10,
-      { align: "center" },
-    );
-  }
-
   const slug = subject.toLowerCase().replace(/\s+/g, "-");
   const date = new Date().toISOString().split("T")[0];
-  pdf.save(`askformula-${slug}-${date}.pdf`);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const opt: any = {
+    margin: 10,
+    filename: `askformula-${slug}-${date}.pdf`,
+    image: { type: 'jpeg', quality: 1 },
+    html2canvas: { scale: 2, useCORS: true },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  };
+
+  await html2pdf().set(opt).from(container).save();
 }
