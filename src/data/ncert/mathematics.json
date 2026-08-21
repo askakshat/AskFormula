@@ -5,6 +5,7 @@
   "chapters": [
     {
       "id": "ch1",
+      "class": "11",
       "name": "Sets",
       "formulas": [
         { "id": "m1_1", "name": "Union Cardinality", "latex": "n(A \\cup B) = n(A) + n(B) - n(A \\cap B)", "tags": ["sets", "cardinality"] },
@@ -16,15 +17,16 @@
     },
     {
       "id": "ch2",
+      "class": "11",
       "name": "Relations and Functions",
       "formulas": [
         { "id": "m2_1", "name": "Total Relations", "latex": "2^{pq}", "tags": ["relations", "counting"] },
-        { "id": "m2_2", "name": "Function Composition", "latex": "(f \\circ g)(x) = f(g(x))", "tags": ["functions", "composition"] },
-        { "id": "m2_3", "name": "Inverse Function", "latex": "f(f^{-1}(x)) = x", "tags": ["functions", "inverse"] }
+        { "id": "m2_2", "name": "Function Composition", "latex": "(f \\circ g)(x) = f(g(x))", "tags": ["functions", "composition"] }
       ]
     },
     {
       "id": "ch3",
+      "class": "11",
       "name": "Trigonometric Functions",
       "formulas": [
         { "id": "m3_1", "name": "Radian-Degree Conversion", "latex": "\\text{Radian} = \\frac{\\pi}{180} \\times \\text{Degree}", "tags": ["trigo", "angles"] },
@@ -32,171 +34,140 @@
         { "id": "m3_3", "name": "sin(x+y)", "latex": "\\sin(x+y) = \\sin x \\cos y + \\cos x \\sin y", "tags": ["trigo", "sum"] },
         { "id": "m3_4", "name": "cos(x+y)", "latex": "\\cos(x+y) = \\cos x \\cos y - \\sin x \\sin y", "tags": ["trigo", "sum"] },
         { "id": "m3_5", "name": "sin(2x)", "latex": "\\sin 2x = 2\\sin x \\cos x", "tags": ["trigo", "double"] },
-        { "id": "m3_6", "name": "cos(2x)", "latex": "\\cos 2x = \\cos^2 x - \\sin^2 x = 2\\cos^2 x - 1 = 1 - 2\\sin^2 x", "tags": ["trigo", "double"] },
-        { "id": "m3_7", "name": "Pythagorean Identity", "latex": "\\sin^2 x + \\cos^2 x = 1", "tags": ["trigo", "identity"] },
-        { "id": "m3_8", "name": "1 + tan²x", "latex": "1 + \\tan^2 x = \\sec^2 x", "tags": ["trigo", "identity"] },
-        { "id": "m3_9", "name": "1 + cot²x", "latex": "1 + \\cot^2 x = \\csc^2 x", "tags": ["trigo", "identity"] }
+        { "id": "m3_6", "name": "cos(2x)", "latex": "\\cos 2x = \\cos^2 x - \\sin^2 x", "tags": ["trigo", "double"] },
+        { "id": "m3_7", "name": "Pythagorean Identity", "latex": "\\sin^2 x + \\cos^2 x = 1", "tags": ["trigo", "identity"] }
       ]
     },
     {
       "id": "ch4",
+      "class": "11",
       "name": "Principle of Mathematical Induction",
       "formulas": [
         { "id": "m4_1", "name": "Induction Steps", "latex": "P(1) \\text{ true} \\land P(k) \\Rightarrow P(k+1) \\Rightarrow P(n) \\forall n", "tags": ["induction", "proof"] },
-        { "id": "m4_2", "name": "Sum: 1+2+...+n", "latex": "\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}", "tags": ["induction", "sums"] },
-        { "id": "m4_3", "name": "Sum: 1²+2²+...+n²", "latex": "\\sum_{i=1}^{n} i^2 = \\frac{n(n+1)(2n+1)}{6}", "tags": ["induction", "sums"] },
-        { "id": "m4_4", "name": "Sum: 1³+2³+...+n³", "latex": "\\sum_{i=1}^{n} i^3 = \\left[\\frac{n(n+1)}{2}\\right]^2", "tags": ["induction", "sums"] }
+        { "id": "m4_2", "name": "Sum of first n natural numbers", "latex": "\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}", "tags": ["induction", "series"] }
       ]
     },
     {
       "id": "ch5",
+      "class": "11",
       "name": "Complex Numbers and Quadratic Equations",
       "formulas": [
-        { "id": "m5_1", "name": "Imaginary Unit", "latex": "i^2 = -1", "tags": ["complex", "basics"] },
+        { "id": "m5_1", "name": "Imaginary Unit", "latex": "i^2 = -1", "tags": ["complex", "imaginary"] },
         { "id": "m5_2", "name": "Modulus", "latex": "|z| = \\sqrt{a^2 + b^2}", "tags": ["complex", "modulus"] },
-        { "id": "m5_3", "name": "Argument", "latex": "\\arg(z) = \\tan^{-1}\\left(\\frac{b}{a}\\right)", "tags": ["complex", "argument"] },
-        { "id": "m5_4", "name": "Polar Form", "latex": "z = r(\\cos\\theta + i\\sin\\theta)", "tags": ["complex", "polar"] },
-        { "id": "m5_5", "name": "Conjugate", "latex": "\\overline{z} = a - bi", "tags": ["complex", "conjugate"] },
-        { "id": "m5_6", "name": "Quadratic Formula", "latex": "x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}", "tags": ["quadratic", "roots"] },
-        { "id": "m5_7", "name": "Sum of Roots", "latex": "\\alpha + \\beta = -\\frac{b}{a}", "tags": ["quadratic", "roots"] },
-        { "id": "m5_8", "name": "Product of Roots", "latex": "\\alpha \\beta = \\frac{c}{a}", "tags": ["quadratic", "roots"] },
-        { "id": "m5_9", "name": "Discriminant", "latex": "D = b^2 - 4ac", "tags": ["quadratic", "discriminant"] }
+        { "id": "m5_3", "name": "Conjugate", "latex": "\\bar{z} = a - ib", "tags": ["complex", "conjugate"] },
+        { "id": "m5_4", "name": "Quadratic Formula", "latex": "x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}", "tags": ["quadratic", "roots"] }
       ]
     },
     {
       "id": "ch6",
+      "class": "11",
       "name": "Linear Inequalities",
       "formulas": [
-        { "id": "m6_1", "name": "Triangle Inequality", "latex": "|a+b| \\leq |a| + |b|", "tags": ["inequality", "modulus"] },
-        { "id": "m6_2", "name": "Reverse Triangle Inequality", "latex": "|a-b| \\geq ||a| - |b||", "tags": ["inequality", "modulus"] }
+        { "id": "m6_1", "name": "Triangle Inequality", "latex": "|a + b| \\le |a| + |b|", "tags": ["inequalities", "modulus"] }
       ]
     },
     {
       "id": "ch7",
+      "class": "11",
       "name": "Permutations and Combinations",
       "formulas": [
-        { "id": "m7_1", "name": "Permutation", "latex": "{}^nP_r = \\frac{n!}{(n-r)!}", "tags": ["pnc", "arrangement"] },
-        { "id": "m7_2", "name": "Combination", "latex": "{}^nC_r = \\frac{n!}{r!(n-r)!}", "tags": ["pnc", "selection"] },
-        { "id": "m7_3", "name": "Pascal's Identity", "latex": "{}^nC_r + {}^nC_{r-1} = {}^{n+1}C_r", "tags": ["pnc", "property"] },
-        { "id": "m7_4", "name": "Circular Permutation", "latex": "(n-1)!", "tags": ["pnc", "circular"] },
-        { "id": "m7_5", "name": "Repeated Permutation", "latex": "\\frac{n!}{p_1! p_2! ... p_k!}", "tags": ["pnc", "repetition"] }
+        { "id": "m7_1", "name": "Factorial", "latex": "n! = n \\times (n-1) \\times ... \\times 1", "tags": ["pnc", "factorial"] },
+        { "id": "m7_2", "name": "Permutation (nPr)", "latex": "^nP_r = \\frac{n!}{(n-r)!}", "tags": ["pnc", "permutation"] },
+        { "id": "m7_3", "name": "Combination (nCr)", "latex": "^nC_r = \\frac{n!}{r!(n-r)!}", "tags": ["pnc", "combination"] }
       ]
     },
     {
       "id": "ch8",
+      "class": "11",
       "name": "Binomial Theorem",
       "formulas": [
-        { "id": "m8_1", "name": "Binomial Expansion", "latex": "(a+b)^n = \\sum_{k=0}^{n} {}^nC_k a^{n-k} b^k", "tags": ["binomial", "expansion"] },
-        { "id": "m8_2", "name": "General Term", "latex": "T_{r+1} = {}^nC_r a^{n-r} b^r", "tags": ["binomial", "general"] },
-        { "id": "m8_3", "name": "Middle Term (even n)", "latex": "T_{\\frac{n}{2}+1}", "tags": ["binomial", "middle"] },
-        { "id": "m8_4", "name": "Middle Term (odd n)", "latex": "T_{\\frac{n+1}{2}} \\text{ and } T_{\\frac{n+3}{2}}", "tags": ["binomial", "middle"] },
-        { "id": "m8_5", "name": "Binomial Coefficients Sum", "latex": "\\sum_{r=0}^{n} {}^nC_r = 2^n", "tags": ["binomial", "property"] }
+        { "id": "m8_1", "name": "Binomial Expansion", "latex": "(a+b)^n = \\sum_{k=0}^{n} ^nC_k a^{n-k} b^k", "tags": ["binomial", "expansion"] },
+        { "id": "m8_2", "name": "General Term", "latex": "T_{r+1} = ^nC_r a^{n-r} b^r", "tags": ["binomial", "general"] }
       ]
     },
     {
       "id": "ch9",
+      "class": "11",
       "name": "Sequences and Series",
       "formulas": [
-        { "id": "m9_1", "name": "AP General Term", "latex": "a_n = a + (n-1)d", "tags": ["series", "ap"] },
-        { "id": "m9_2", "name": "AP Sum", "latex": "S_n = \\frac{n}{2}[2a + (n-1)d] = \\frac{n}{2}(a + l)", "tags": ["series", "ap"] },
-        { "id": "m9_3", "name": "GP General Term", "latex": "a_n = a r^{n-1}", "tags": ["series", "gp"] },
-        { "id": "m9_4", "name": "GP Finite Sum", "latex": "S_n = \\frac{a(r^n - 1)}{r - 1}, r \\neq 1", "tags": ["series", "gp"] },
-        { "id": "m9_5", "name": "GP Infinite Sum", "latex": "S_\\infty = \\frac{a}{1-r}, |r| < 1", "tags": ["series", "gp"] },
-        { "id": "m9_6", "name": "AM-GM Inequality", "latex": "\\frac{a+b}{2} \\geq \\sqrt{ab}", "tags": ["series", "means"] },
-        { "id": "m9_7", "name": "AM-HM Relation", "latex": "AM \\geq GM \\geq HM", "tags": ["series", "means"] }
+        { "id": "m9_1", "name": "nth term of AP", "latex": "a_n = a + (n-1)d", "tags": ["sequence", "ap"] },
+        { "id": "m9_2", "name": "Sum of n terms AP", "latex": "S_n = \\frac{n}{2}[2a + (n-1)d]", "tags": ["series", "ap"] },
+        { "id": "m9_3", "name": "nth term of GP", "latex": "a_n = a r^{n-1}", "tags": ["sequence", "gp"] },
+        { "id": "m9_4", "name": "Sum of n terms GP", "latex": "S_n = \\frac{a(r^n - 1)}{r - 1}", "tags": ["series", "gp"] },
+        { "id": "m9_5", "name": "Sum of infinite GP", "latex": "S_\\infty = \\frac{a}{1 - r}", "tags": ["series", "gp", "infinite"] }
       ]
     },
     {
       "id": "ch10",
+      "class": "11",
       "name": "Straight Lines",
       "formulas": [
-        { "id": "m10_1", "name": "Distance Formula", "latex": "d = \\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}", "tags": ["lines", "distance"] },
-        { "id": "m10_2", "name": "Section Formula", "latex": "\\left(\\frac{mx_2+nx_1}{m+n}, \\frac{my_2+ny_1}{m+n}\\right)", "tags": ["lines", "section"] },
-        { "id": "m10_3", "name": "Slope", "latex": "m = \\tan\\theta = \\frac{y_2-y_1}{x_2-x_1}", "tags": ["lines", "slope"] },
-        { "id": "m10_4", "name": "Point-Slope Form", "latex": "y - y_1 = m(x - x_1)", "tags": ["lines", "equation"] },
-        { "id": "m10_5", "name": "Two-Point Form", "latex": "y - y_1 = \\frac{y_2-y_1}{x_2-x_1}(x - x_1)", "tags": ["lines", "equation"] },
-        { "id": "m10_6", "name": "Slope-Intercept Form", "latex": "y = mx + c", "tags": ["lines", "equation"] },
-        { "id": "m10_7", "name": "Intercept Form", "latex": "\\frac{x}{a} + \\frac{y}{b} = 1", "tags": ["lines", "equation"] },
-        { "id": "m10_8", "name": "General Form", "latex": "Ax + By + C = 0", "tags": ["lines", "equation"] },
-        { "id": "m10_9", "name": "Point-Line Distance", "latex": "d = \\frac{|Ax_1 + By_1 + C|}{\\sqrt{A^2 + B^2}}", "tags": ["lines", "distance"] },
-        { "id": "m10_10", "name": "Parallel Lines Distance", "latex": "d = \\frac{|C_1 - C_2|}{\\sqrt{A^2 + B^2}}", "tags": ["lines", "parallel"] },
-        { "id": "m10_11", "name": "Angle Between Lines", "latex": "\\tan\\theta = \\left|\\frac{m_1-m_2}{1+m_1m_2}\\right|", "tags": ["lines", "angle"] }
+        { "id": "m10_1", "name": "Distance Formula", "latex": "d = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}", "tags": ["lines", "distance"] },
+        { "id": "m10_2", "name": "Slope", "latex": "m = \\frac{y_2 - y_1}{x_2 - x_1} = \\tan \\theta", "tags": ["lines", "slope"] },
+        { "id": "m10_3", "name": "Point-Slope Form", "latex": "y - y_1 = m(x - x_1)", "tags": ["lines", "equation"] },
+        { "id": "m10_4", "name": "Distance of point from line", "latex": "d = \\frac{|Ax_1 + By_1 + C|}{\\sqrt{A^2 + B^2}}", "tags": ["lines", "distance"] }
       ]
     },
     {
       "id": "ch11",
+      "class": "11",
       "name": "Conic Sections",
       "formulas": [
-        { "id": "m11_1", "name": "Circle (Center-Radius)", "latex": "(x-h)^2 + (y-k)^2 = r^2", "tags": ["conics", "circle"] },
-        { "id": "m11_2", "name": "Circle General", "latex": "x^2 + y^2 + 2gx + 2fy + c = 0", "tags": ["conics", "circle"] },
-        { "id": "m11_3", "name": "Circle Radius", "latex": "r = \\sqrt{g^2 + f^2 - c}", "tags": ["conics", "circle"] },
-        { "id": "m11_4", "name": "Parabola Standard", "latex": "y^2 = 4ax", "tags": ["conics", "parabola"] },
-        { "id": "m11_5", "name": "Parabola Focus", "latex": "(a, 0) \\text{ for } y^2=4ax", "tags": ["conics", "parabola"] },
-        { "id": "m11_6", "name": "Ellipse Standard", "latex": "\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1", "tags": ["conics", "ellipse"] },
-        { "id": "m11_7", "name": "Ellipse Eccentricity", "latex": "e = \\frac{c}{a}, c^2 = a^2 - b^2", "tags": ["conics", "ellipse"] },
-        { "id": "m11_8", "name": "Hyperbola Standard", "latex": "\\frac{x^2}{a^2} - \\frac{y^2}{b^2} = 1", "tags": ["conics", "hyperbola"] },
-        { "id": "m11_9", "name": "Hyperbola Eccentricity", "latex": "e = \\frac{c}{a}, c^2 = a^2 + b^2", "tags": ["conics", "hyperbola"] },
-        { "id": "m11_10", "name": "Rectangular Hyperbola", "latex": "xy = c^2", "tags": ["conics", "hyperbola"] }
+        { "id": "m11_1", "name": "Circle Equation", "latex": "(x - h)^2 + (y - k)^2 = r^2", "tags": ["conics", "circle"] },
+        { "id": "m11_2", "name": "Parabola (Standard)", "latex": "y^2 = 4ax", "tags": ["conics", "parabola"] },
+        { "id": "m11_3", "name": "Ellipse (Standard)", "latex": "\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1", "tags": ["conics", "ellipse"] },
+        { "id": "m11_4", "name": "Hyperbola (Standard)", "latex": "\\frac{x^2}{a^2} - \\frac{y^2}{b^2} = 1", "tags": ["conics", "hyperbola"] }
       ]
     },
     {
       "id": "ch12",
-      "name": "Introduction to 3D Geometry",
+      "class": "11",
+      "name": "Introduction to Three Dimensional Geometry",
       "formulas": [
-        { "id": "m12_1", "name": "3D Distance Formula", "latex": "d = \\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2 + (z_2-z_1)^2}", "tags": ["3d", "distance"] },
-        { "id": "m12_2", "name": "Section Formula", "latex": "\\left(\\frac{mx_2+nx_1}{m+n}, \\frac{my_2+ny_1}{m+n}, \\frac{mz_2+nz_1}{m+n}\\right)", "tags": ["3d", "section"] },
-        { "id": "m12_3", "name": "Midpoint Formula", "latex": "\\left(\\frac{x_1+x_2}{2}, \\frac{y_1+y_2}{2}, \\frac{z_1+z_2}{2}\\right)", "tags": ["3d", "midpoint"] },
-        { "id": "m12_4", "name": "Centroid of Triangle", "latex": "\\left(\\frac{x_1+x_2+x_3}{3}, \\frac{y_1+y_2+y_3}{3}, \\frac{z_1+z_2+z_3}{3}\\right)", "tags": ["3d", "centroid"] }
+        { "id": "m12_1", "name": "3D Distance Formula", "latex": "d = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2}", "tags": ["3d", "distance"] },
+        { "id": "m12_2", "name": "Section Formula", "latex": "x = \\frac{mx_2 + nx_1}{m+n}", "tags": ["3d", "section"] }
       ]
     },
     {
       "id": "ch13",
+      "class": "11",
       "name": "Limits and Derivatives",
       "formulas": [
-        { "id": "m13_1", "name": "Algebraic Limit", "latex": "\\lim_{x \\to a} \\frac{x^n - a^n}{x - a} = na^{n-1}", "tags": ["calculus", "limits"] },
-        { "id": "m13_2", "name": "sin(x)/x Limit", "latex": "\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1", "tags": ["calculus", "limits"] },
-        { "id": "m13_3", "name": "(1+x)^1/x Limit", "latex": "\\lim_{x \\to 0} (1+x)^{1/x} = e", "tags": ["calculus", "limits"] },
-        { "id": "m13_4", "name": "Power Rule", "latex": "\\frac{d}{dx}(x^n) = nx^{n-1}", "tags": ["calculus", "derivatives"] },
-        { "id": "m13_5", "name": "Sum Rule", "latex": "(f+g)' = f' + g'", "tags": ["calculus", "derivatives"] },
-        { "id": "m13_6", "name": "Product Rule", "latex": "(fg)' = f'g + fg'", "tags": ["calculus", "derivatives"] },
-        { "id": "m13_7", "name": "Quotient Rule", "latex": "\\left(\\frac{f}{g}\\right)' = \\frac{f'g - fg'}{g^2}", "tags": ["calculus", "derivatives"] },
-        { "id": "m13_8", "name": "Chain Rule", "latex": "\\frac{d}{dx}(f(g(x))) = f'(g(x)) \\cdot g'(x)", "tags": ["calculus", "chain"] },
-        { "id": "m13_9", "name": "sin x Derivative", "latex": "\\frac{d}{dx}(\\sin x) = \\cos x", "tags": ["calculus", "trigo"] },
-        { "id": "m13_10", "name": "cos x Derivative", "latex": "\\frac{d}{dx}(\\cos x) = -\\sin x", "tags": ["calculus", "trigo"] },
-        { "id": "m13_11", "name": "e^x Derivative", "latex": "\\frac{d}{dx}(e^x) = e^x", "tags": ["calculus", "exponential"] },
-        { "id": "m13_12", "name": "ln x Derivative", "latex": "\\frac{d}{dx}(\\ln x) = \\frac{1}{x}", "tags": ["calculus", "logarithmic"] }
+        { "id": "m13_1", "name": "Standard Limit (Algebraic)", "latex": "\\lim_{x \\to a} \\frac{x^n - a^n}{x - a} = n a^{n-1}", "tags": ["limits", "algebraic"] },
+        { "id": "m13_2", "name": "Standard Limit (Trigo)", "latex": "\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1", "tags": ["limits", "trigo"] },
+        { "id": "m13_3", "name": "First Principle of Derivative", "latex": "f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}", "tags": ["derivatives", "first-principle"] },
+        { "id": "m13_4", "name": "Product Rule", "latex": "(uv)' = u'v + uv'", "tags": ["derivatives", "rules"] },
+        { "id": "m13_5", "name": "Quotient Rule", "latex": "\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}", "tags": ["derivatives", "rules"] }
       ]
     },
     {
       "id": "ch14",
+      "class": "11",
       "name": "Mathematical Reasoning",
       "formulas": [
-        { "id": "m14_1", "name": "Contrapositive", "latex": "p \\Rightarrow q \\equiv \\neg q \\Rightarrow \\neg p", "tags": ["logic", "contrapositive"] },
-        { "id": "m14_2", "name": "De Morgan (Logic)", "latex": "\\neg(p \\land q) \\equiv \\neg p \\lor \\neg q", "tags": ["logic", "demorgan"] },
-        { "id": "m14_3", "name": "Tautology", "latex": "p \\lor \\neg p \\equiv T", "tags": ["logic", "tautology"] }
+        { "id": "m14_1", "name": "Contrapositive", "latex": "p \\Rightarrow q \\equiv \\sim q \\Rightarrow \\sim p", "tags": ["reasoning", "logic"] },
+        { "id": "m14_2", "name": "Converse", "latex": "p \\Rightarrow q \\text{ has converse } q \\Rightarrow p", "tags": ["reasoning", "logic"] }
       ]
     },
     {
       "id": "ch15",
+      "class": "11",
       "name": "Statistics",
       "formulas": [
-        { "id": "m15_1", "name": "Mean", "latex": "\\bar{x} = \\frac{\\sum_{i=1}^{n} x_i}{n}", "tags": ["stats", "mean"] },
-        { "id": "m15_2", "name": "Variance", "latex": "\\sigma^2 = \\frac{\\sum_{i=1}^{n} (x_i - \\bar{x})^2}{n}", "tags": ["stats", "variance"] },
-        { "id": "m15_3", "name": "Standard Deviation", "latex": "\\sigma = \\sqrt{\\text{Variance}}", "tags": ["stats", "sd"] },
-        { "id": "m15_4", "name": "Variance (Alternate)", "latex": "\\sigma^2 = \\frac{\\sum x_i^2}{n} - \\bar{x}^2", "tags": ["stats", "variance"] },
-        { "id": "m15_5", "name": "Coefficient of Variation", "latex": "CV = \\frac{\\sigma}{\\bar{x}} \\times 100\\%", "tags": ["stats", "cv"] }
+        { "id": "m15_1", "name": "Mean", "latex": "\\bar{x} = \\frac{1}{n} \\sum_{i=1}^{n} x_i", "tags": ["stats", "mean"] },
+        { "id": "m15_2", "name": "Variance", "latex": "\\sigma^2 = \\frac{1}{n} \\sum_{i=1}^{n} (x_i - \\bar{x})^2", "tags": ["stats", "variance"] },
+        { "id": "m15_3", "name": "Standard Deviation", "latex": "\\sigma = \\sqrt{\\frac{1}{n} \\sum_{i=1}^{n} (x_i - \\bar{x})^2}", "tags": ["stats", "deviation"] },
+        { "id": "m15_4", "name": "Coefficient of Variation", "latex": "CV = \\frac{\\sigma}{\\bar{x}} \\times 100", "tags": ["stats", "cv"] }
       ]
     },
     {
       "id": "ch16",
+      "class": "11",
       "name": "Probability",
       "formulas": [
-        { "id": "m16_1", "name": "Basic Probability", "latex": "P(E) = \\frac{n(E)}{n(S)}", "tags": ["prob", "basic"] },
-        { "id": "m16_2", "name": "Addition Theorem", "latex": "P(A \\cup B) = P(A) + P(B) - P(A \\cap B)", "tags": ["prob", "addition"] },
-        { "id": "m16_3", "name": "Complementary Event", "latex": "P(A') = 1 - P(A)", "tags": ["prob", "complement"] },
-        { "id": "m16_4", "name": "Mutually Exclusive", "latex": "P(A \\cup B) = P(A) + P(B)", "tags": ["prob", "exclusive"] },
-        { "id": "m16_5", "name": "Conditional Probability", "latex": "P(A|B) = \\frac{P(A \\cap B)}{P(B)}", "tags": ["prob", "conditional"] },
-        { "id": "m16_6", "name": "Independent Events", "latex": "P(A \\cap B) = P(A) \\times P(B)", "tags": ["prob", "independent"] }
+        { "id": "m16_1", "name": "Probability of Event", "latex": "P(E) = \\frac{n(E)}{n(S)}", "tags": ["probability", "event"] },
+        { "id": "m16_2", "name": "Addition Theorem", "latex": "P(A \\cup B) = P(A) + P(B) - P(A \\cap B)", "tags": ["probability", "addition"] },
+        { "id": "m16_3", "name": "Mutually Exclusive Events", "latex": "P(A \\cup B) = P(A) + P(B)", "tags": ["probability", "exclusive"] }
       ]
     }
   ]
