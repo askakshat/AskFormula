@@ -165,8 +165,8 @@ function renderAtoms(
   maxRight: number,
 ): number {
   const SCRIPT = size * 0.72;
-  const FRAC_LINE_GAP = 0.8;
-  const LINE_PAD = 0.4;
+  const FRAC_LINE_GAP = 1.2;
+  const LINE_PAD = 0.5;
   let cx = x;
 
   for (const atom of atoms) {
@@ -197,7 +197,7 @@ function renderAtoms(
         pdf.setFont("helvetica", "normal");
         pdf.setFontSize(SCRIPT);
         pdf.setTextColor(color[0], color[1], color[2]);
-        pdf.text(txt, cx, y - size * 0.28);
+        pdf.text(txt, cx, y - size * 0.32);
         cx += w;
         break;
       }
@@ -208,7 +208,7 @@ function renderAtoms(
         pdf.setFont("helvetica", "normal");
         pdf.setFontSize(SCRIPT);
         pdf.setTextColor(color[0], color[1], color[2]);
-        pdf.text(txt, cx, y + size * 0.15);
+        pdf.text(txt, cx, y + size * 0.18);
         cx += w;
         break;
       }
@@ -260,25 +260,22 @@ function renderFormulaOnPDF(
   if (y + 18 > pageH - mx) {
     pdf.addPage();
     y = mx;
-  }
-
-  // Name
+  }  // Name
   pdf.setFont("helvetica", "bold");
   pdf.setFontSize(NAME_SIZE);
   pdf.setTextColor(NAME_COLOR[0], NAME_COLOR[1], NAME_COLOR[2]);
   pdf.text(formula.name, x, y);
-  y += NAME_SIZE * 0.38;
+  y += NAME_SIZE * 0.42;
 
   // Small dot accent before formula
   pdf.setFillColor(ACCENT[0], ACCENT[1], ACCENT[2]);
-  pdf.circle(x + 1.2, y + 1.5, 0.4, "F");
+  pdf.circle(x + 1.2, y + 1.8, 0.35, "F");
 
   // Formula
   const atoms = tokenize(formula.latex);
   const startX = x + 3;
-  const endX = renderAtoms(pdf, atoms, startX, y + FORMULA_SIZE * 0.35, FORMULA_SIZE, FORMULA_COLOR, maxRight);
-  void endX;
-  y += FORMULA_SIZE * 0.35 + FORMULA_SIZE * 0.32;
+  renderAtoms(pdf, atoms, startX, y + FORMULA_SIZE * 0.38, FORMULA_SIZE, FORMULA_COLOR, maxRight);
+  y += FORMULA_SIZE * 0.38 + FORMULA_SIZE * 0.42;
 
   return y;
 }
@@ -358,7 +355,7 @@ export async function generatePDF(
       pdf.setDrawColor(230, 235, 243);
       pdf.setLineWidth(0.12);
       pdf.line(mx + 3, y, pageW - mx - 3, y);
-      y += 5;
+      y += 6;
     }
 
     y += 6;
