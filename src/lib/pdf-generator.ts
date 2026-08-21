@@ -33,29 +33,8 @@ export async function generatePDF(
     chapters.get(key)!.push(f);
   }
 
-  // Find all existing styles on the page to ensure KaTeX css is copied
-  let stylesHtml = "";
-  try {
-    for (const styleSheet of document.styleSheets) {
-      try {
-        if (styleSheet.href) {
-          stylesHtml += `<link rel="stylesheet" href="${styleSheet.href}" crossorigin="anonymous">`;
-        } else {
-          const rules = Array.from(styleSheet.cssRules)
-            .map((rule) => rule.cssText)
-            .join("\n");
-          stylesHtml += `<style>${rules}</style>`;
-        }
-      } catch (e) {
-        // Ignore cross-origin stylesheet errors
-      }
-    }
-  } catch (err) {
-    console.warn("Could not read stylesheets natively");
-  }
-
-  // Fallback for CORS environments: directly fetch the KaTeX CDN stylesheet.
-  stylesHtml += `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" crossorigin="anonymous">`;
+  // Directly fetch the KaTeX CDN stylesheet.
+  let stylesHtml = `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" crossorigin="anonymous">`;
 
   let htmlContent = `
     ${stylesHtml}
