@@ -41,7 +41,7 @@ export default function SubjectSelector({ onSelect, selected, exam }: SubjectSel
       className="space-y-4"
     >
       <h2 className="text-xl font-semibold text-white tracking-[-0.02em]">
-        <span className="text-blue-400/70 mr-2 text-base font-medium">02</span>
+        <span className="text-blue-400/70 mr-2 text-base font-medium">03</span>
         Pick a subject
       </h2>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
