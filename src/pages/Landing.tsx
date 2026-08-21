@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Hero from "@/components/askformula/Hero";
 import ExamSelector from "@/components/askformula/ExamSelector";
+import ClassSelector from "@/components/askformula/ClassSelector";
 import SubjectSelector from "@/components/askformula/SubjectSelector";
 import ChapterSelector from "@/components/askformula/ChapterSelector";
 import FormulaGrid from "@/components/askformula/FormulaGrid";
@@ -11,13 +12,14 @@ import { getChaptersBySubject, filterFormulas } from "@/lib/formulas";
 
 export default function Landing() {
   const [exam, setExam] = useState<"school" | "jee" | "neet" | null>(null);
+  const [selectedClass, setSelectedClass] = useState<string | null>(null);
   const [subject, setSubject] = useState<string | null>(null);
   const [selectedChapters, setSelectedChapters] = useState<string[]>([]);
 
   const chapters = useMemo(() => {
-    if (!subject) return [];
-    return getChaptersBySubject(subject);
-  }, [subject]);
+    if (!subject || !selectedClass) return [];
+    return getChaptersBySubject(subject).filter((ch) => ch.class === selectedClass);
+  }, [subject, selectedClass]);
 
   const formulas = useMemo(() => {
     if (!subject || selectedChapters.length === 0) return [];
@@ -31,12 +33,20 @@ export default function Landing() {
 
   const handleExamSelect = (e: "school" | "jee" | "neet") => {
     setExam(e);
+    setSelectedClass(null);
+    setSubject(null);
+    setSelectedChapters([]);
+  };
+
+  const handleClassSelect = (cls: string) => {
+    setSelectedClass(cls);
     setSubject(null);
     setSelectedChapters([]);
   };
 
   const steps = [
     { label: "Exam", done: !!exam },
+    { label: "Class", done: !!selectedClass },
     { label: "Subject", done: !!subject },
     { label: "Chapters", done: selectedChapters.length > 0 },
     { label: "Formulas", done: formulas.length > 0 },
@@ -105,7 +115,7 @@ export default function Landing() {
             <ExamSelector onSelect={handleExamSelect} selected={exam} />
           </motion.div>
 
-          {/* Step 2: Subject Selector */}
+          {/* Step 2: Class Selector */}
           <AnimatePresence>
             {exam && (
               <motion.div
@@ -115,14 +125,29 @@ export default function Landing() {
                 transition={{ duration: 0.3 }}
                 className="mb-10 overflow-hidden"
               >
-                <SubjectSelector onSelect={handleSubjectSelect} selected={subject} />
+                <ClassSelector onSelect={handleClassSelect} selected={selectedClass} />
               </motion.div>
             )}
           </AnimatePresence>
 
-          {/* Step 3: Chapter Selector */}
+          {/* Step 3: Subject Selector */}
           <AnimatePresence>
-            {subject && chapters.length > 0 && (
+            {selectedClass && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3 }}
+                className="mb-10 overflow-hidden"
+              >
+                <SubjectSelector onSelect={handleSubjectSelect} selected={subject} exam={exam!} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Step 4: Chapter Selector */}
+          <AnimatePresence>
+            {subject && chapters.length > 0 && selectedClass && (
               <motion.div
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
@@ -139,7 +164,7 @@ export default function Landing() {
             )}
           </AnimatePresence>
 
-          {/* Step 4: Formula Grid */}
+          {/* Step 5: Formula Grid */}
           <AnimatePresence>
             {formulas.length > 0 && (
               <motion.div

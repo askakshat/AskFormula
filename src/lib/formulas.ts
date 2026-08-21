@@ -21,8 +21,16 @@ export interface SubjectData {
 
 // All subjects data
 import physicsData from "@/data/ncert/physics.json";
+import chemistryData from "@/data/ncert/chemistry.json";
+import mathematicsData from "@/data/ncert/mathematics.json";
+import biologyData from "@/data/ncert/biology.json";
 
-export const allSubjects: SubjectData[] = [physicsData];
+export const allSubjects: SubjectData[] = [
+  physicsData,
+  chemistryData,
+  mathematicsData,
+  biologyData
+];
 
 // Get all chapters for a subject
 export function getChaptersBySubject(subject: string): Chapter[] {
