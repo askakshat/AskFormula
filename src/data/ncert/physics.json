@@ -1,0 +1,911 @@
+{
+  "subject": "Physics",
+  "audience": ["school", "jee", "neet"],
+  "chapters": [
+    {
+      "id": "ch1",
+      "class": "11",
+      "name": "Units and Measurements",
+      "formulas": [
+        {
+          "id": "um1",
+          "name": "Absolute Error",
+          "latex": "\\Delta a = a_m - a_i",
+          "tags": ["errors", "measurement"]
+        },
+        {
+          "id": "um2",
+          "name": "Mean Absolute Error",
+          "latex": "\\overline{\\Delta a} = \\frac{1}{n} \\sum_{i=1}^{n} |\\Delta a_i|",
+          "tags": ["errors", "measurement"]
+        },
+        {
+          "id": "um3",
+          "name": "Relative Error",
+          "latex": "\\frac{\\overline{\\Delta a}}{a_m}",
+          "tags": ["errors", "measurement"]
+        },
+        {
+          "id": "um4",
+          "name": "Percentage Error",
+          "latex": "\\frac{\\overline{\\Delta a}}{a_m} \\times 100\\%",
+          "tags": ["errors", "measurement"]
+        },
+        {
+          "id": "um5",
+          "name": "Dimensional Formula",
+          "latex": "[M^a L^b T^c]",
+          "tags": ["dimensions"]
+        },
+        {
+          "id": "um6",
+          "name": "Speed of Light",
+          "latex": "c = 3 \\times 10^8 \\text{ m/s}",
+          "tags": ["constants"]
+        },
+        {
+          "id": "um7",
+          "name": "Parallax Formula",
+          "latex": "d = \\frac{D}{\\theta}",
+          "tags": ["measurement", "distance"]
+        }
+      ]
+    },
+    {
+      "id": "ch2",
+      "class": "11",
+      "name": "Motion in a Straight Line",
+      "formulas": [
+        {
+          "id": "ms1",
+          "name": "Average Velocity",
+          "latex": "v_{avg} = \\frac{\\Delta x}{\\Delta t} = \\frac{x_f - x_i}{t_f - t_i}",
+          "tags": ["velocity", "kinematics"]
+        },
+        {
+          "id": "ms2",
+          "name": "Average Acceleration",
+          "latex": "a_{avg} = \\frac{\\Delta v}{\\Delta t} = \\frac{v_f - v_i}{t_f - t_i}",
+          "tags": ["acceleration", "kinematics"]
+        },
+        {
+          "id": "ms3",
+          "name": "First Equation of Motion",
+          "latex": "v = u + at",
+          "tags": ["equations of motion", "kinematics"]
+        },
+        {
+          "id": "ms4",
+          "name": "Second Equation of Motion",
+          "latex": "s = ut + \\frac{1}{2}at^2",
+          "tags": ["equations of motion", "kinematics"]
+        },
+        {
+          "id": "ms5",
+          "name": "Third Equation of Motion",
+          "latex": "v^2 = u^2 + 2as",
+          "tags": ["equations of motion", "kinematics"]
+        },
+        {
+          "id": "ms6",
+          "name": "Displacement in nth Second",
+          "latex": "s_n = u + \\frac{a}{2}(2n - 1)",
+          "tags": ["equations of motion", "kinematics"]
+        },
+        {
+          "id": "ms7",
+          "name": "Free Fall",
+          "latex": "h = \\frac{1}{2}gt^2",
+          "tags": ["free fall", "gravity"]
+        },
+        {
+          "id": "ms8",
+          "name": "Distance vs Displacement",
+          "latex": "|\\vec{d}| \\leq s",
+          "tags": ["distance", "displacement"]
+        }
+      ]
+    },
+    {
+      "id": "ch3",
+      "class": "11",
+      "name": "Motion in a Plane",
+      "formulas": [
+        {
+          "id": "mp1",
+          "name": "Vector Addition",
+          "latex": "\\vec{R} = \\vec{A} + \\vec{B}",
+          "tags": ["vectors", "addition"]
+        },
+        {
+          "id": "mp2",
+          "name": "Magnitude of Resultant",
+          "latex": "R = \\sqrt{A^2 + B^2 + 2AB\\cos\\theta}",
+          "tags": ["vectors", "resultant"]
+        },
+        {
+          "id": "mp3",
+          "name": "Direction of Resultant",
+          "latex": "\\alpha = \\tan^{-1}\\left(\\frac{B\\sin\\theta}{A + B\\cos\\theta}\\right)",
+          "tags": ["vectors", "direction"]
+        },
+        {
+          "id": "mp4",
+          "name": "Projectile Range",
+          "latex": "R = \\frac{u^2 \\sin 2\\theta}{g}",
+          "tags": ["projectile", "range"]
+        },
+        {
+          "id": "mp5",
+          "name": "Maximum Height",
+          "latex": "H = \\frac{u^2 \\sin^2\\theta}{2g}",
+          "tags": ["projectile", "height"]
+        },
+        {
+          "id": "mp6",
+          "name": "Time of Flight",
+          "latex": "T = \\frac{2u\\sin\\theta}{g}",
+          "tags": ["projectile", "time"]
+        },
+        {
+          "id": "mp7",
+          "name": "Cross Product",
+          "latex": "\\vec{A} \\times \\vec{B} = AB\\sin\\theta\\,\\hat{n}",
+          "tags": ["vectors", "cross product"]
+        },
+        {
+          "id": "mp8",
+          "name": "Dot Product",
+          "latex": "\\vec{A} \\cdot \\vec{B} = AB\\cos\\theta",
+          "tags": ["vectors", "dot product"]
+        }
+      ]
+    },
+    {
+      "id": "ch4",
+      "class": "11",
+      "name": "Laws of Motion",
+      "formulas": [
+        {
+          "id": "lm1",
+          "name": "Newton's Second Law",
+          "latex": "\\vec{F} = m\\vec{a}",
+          "tags": ["newton", "force"]
+        },
+        {
+          "id": "lm2",
+          "name": "Momentum",
+          "latex": "\\vec{p} = m\\vec{v}",
+          "tags": ["momentum"]
+        },
+        {
+          "id": "lm3",
+          "name": "Impulse",
+          "latex": "\\vec{J} = \\vec{F}\\Delta t = \\Delta\\vec{p}",
+          "tags": ["impulse", "momentum"]
+        },
+        {
+          "id": "lm4",
+          "name": "Friction Force",
+          "latex": "f = \\mu N",
+          "tags": ["friction"]
+        },
+        {
+          "id": "lm5",
+          "name": "Centripetal Force",
+          "latex": "F_c = \\frac{mv^2}{r}",
+          "tags": ["circular motion", "centripetal"]
+        },
+        {
+          "id": "lm6",
+          "name": "Banking of Roads",
+          "latex": "\\tan\\theta = \\frac{v^2}{rg}",
+          "tags": ["circular motion", "banking"]
+        },
+        {
+          "id": "lm7",
+          "name": "Newton's Third Law",
+          "latex": "\\vec{F}_{12} = -\\vec{F}_{21}",
+          "tags": ["newton", "action-reaction"]
+        },
+        {
+          "id": "lm8",
+          "name": "Weight",
+          "latex": "W = mg",
+          "tags": ["weight", "gravity"]
+        }
+      ]
+    },
+    {
+      "id": "ch5",
+      "class": "11",
+      "name": "Work, Energy and Power",
+      "formulas": [
+        {
+          "id": "wep1",
+          "name": "Work Done",
+          "latex": "W = \\vec{F} \\cdot \\vec{d} = Fd\\cos\\theta",
+          "tags": ["work", "energy"]
+        },
+        {
+          "id": "wep2",
+          "name": "Kinetic Energy",
+          "latex": "KE = \\frac{1}{2}mv^2",
+          "tags": ["kinetic energy"]
+        },
+        {
+          "id": "wep3",
+          "name": "Potential Energy",
+          "latex": "PE = mgh",
+          "tags": ["potential energy", "gravity"]
+        },
+        {
+          "id": "wep4",
+          "name": "Work-Energy Theorem",
+          "latex": "W_{net} = \\Delta KE = KE_f - KE_i",
+          "tags": ["work", "kinetic energy"]
+        },
+        {
+          "id": "wep5",
+          "name": "Conservation of Energy",
+          "latex": "KE_i + PE_i = KE_f + PE_f",
+          "tags": ["conservation", "energy"]
+        },
+        {
+          "id": "wep6",
+          "name": "Power",
+          "latex": "P = \\frac{W}{t} = Fv",
+          "tags": ["power"]
+        },
+        {
+          "id": "wep7",
+          "name": "Elastic Potential Energy",
+          "latex": "PE = \\frac{1}{2}kx^2",
+          "tags": ["potential energy", "spring"]
+        },
+        {
+          "id": "wep8",
+          "name": "Coefficient of Restitution",
+          "latex": "e = \\frac{v_2 - v_1}{u_1 - u_2}",
+          "tags": ["collision", "restitution"]
+        }
+      ]
+    },
+    {
+      "id": "ch6",
+      "class": "11",
+      "name": "System of Particles and Rotational Motion",
+      "formulas": [
+        {
+          "id": "spr1",
+          "name": "Center of Mass",
+          "latex": "\\vec{r}_{cm} = \\frac{\\sum m_i \\vec{r}_i}{\\sum m_i}",
+          "tags": ["center of mass"]
+        },
+        {
+          "id": "spr2",
+          "name": "Moment of Inertia",
+          "latex": "I = \\sum m_i r_i^2",
+          "tags": ["moment of inertia"]
+        },
+        {
+          "id": "spr3",
+          "name": "Torque",
+          "latex": "\\vec{\\tau} = \\vec{r} \\times \\vec{F} = I\\vec{\\alpha}",
+          "tags": ["torque"]
+        },
+        {
+          "id": "spr4",
+          "name": "Angular Momentum",
+          "latex": "\\vec{L} = I\\vec{\\omega} = \\vec{r} \\times \\vec{p}",
+          "tags": ["angular momentum"]
+        },
+        {
+          "id": "spr5",
+          "name": "Rolling Motion",
+          "latex": "v = r\\omega",
+          "tags": ["rolling"]
+        },
+        {
+          "id": "spr6",
+          "name": "Kinetic Energy of Rotation",
+          "latex": "KE_{rot} = \\frac{1}{2}I\\omega^2",
+          "tags": ["rotational energy"]
+        },
+        {
+          "id": "spr7",
+          "name": "Parallel Axis Theorem",
+          "latex": "I = I_{cm} + md^2",
+          "tags": ["moment of inertia", "theorem"]
+        },
+        {
+          "id": "spr8",
+          "name": "Perpendicular Axis Theorem",
+          "latex": "I_z = I_x + I_y",
+          "tags": ["moment of inertia", "theorem"]
+        }
+      ]
+    },
+    {
+      "id": "ch7",
+      "class": "11",
+      "name": "Gravitation",
+      "formulas": [
+        {
+          "id": "g1",
+          "name": "Universal Law of Gravitation",
+          "latex": "F = \\frac{Gm_1m_2}{r^2}",
+          "tags": ["gravitation", "force"]
+        },
+        {
+          "id": "g2",
+          "name": "Gravitational Potential Energy",
+          "latex": "PE = -\\frac{Gm_1m_2}{r}",
+          "tags": ["gravitation", "potential energy"]
+        },
+        {
+          "id": "g3",
+          "name": "Escape Velocity",
+          "latex": "v_e = \\sqrt{\\frac{2GM}{R}}",
+          "tags": ["gravitation", "escape velocity"]
+        },
+        {
+          "id": "g4",
+          "name": "Orbital Velocity",
+          "latex": "v_o = \\sqrt{\\frac{GM}{r}}",
+          "tags": ["gravitation", "orbital velocity"]
+        },
+        {
+          "id": "g5",
+          "name": "Time Period of Satellite",
+          "latex": "T = 2\\pi\\sqrt{\\frac{r^3}{GM}}",
+          "tags": ["gravitation", "satellite"]
+        },
+        {
+          "id": "g6",
+          "name": "Kepler's Third Law",
+          "latex": "T^2 \\propto a^3",
+          "tags": ["kepler", "gravitation"]
+        },
+        {
+          "id": "g7",
+          "name": "Acceleration due to Gravity",
+          "latex": "g = \\frac{GM}{R^2}",
+          "tags": ["gravitation", "gravity"]
+        },
+        {
+          "id": "g8",
+          "name": "Gravitational Field",
+          "latex": "\\vec{E} = -\\frac{GM}{r^2}\\hat{r}",
+          "tags": ["gravitation", "field"]
+        }
+      ]
+    },
+    {
+      "id": "ch8",
+      "class": "11",
+      "name": "Mechanical Properties of Solids",
+      "formulas": [
+        {
+          "id": "mps1",
+          "name": "Young's Modulus",
+          "latex": "Y = \\frac{\\text{Stress}}{\\text{Strain}} = \\frac{F/A}{\\Delta L/L}",
+          "tags": ["elasticity", "modulus"]
+        },
+        {
+          "id": "mps2",
+          "name": "Stress",
+          "latex": "\\text{Stress} = \\frac{F}{A}",
+          "tags": ["elasticity", "stress"]
+        },
+        {
+          "id": "mps3",
+          "name": "Strain",
+          "latex": "\\text{Strain} = \\frac{\\Delta L}{L}",
+          "tags": ["elasticity", "strain"]
+        },
+        {
+          "id": "mps4",
+          "name": "Bulk Modulus",
+          "latex": "B = -V\\frac{\\Delta P}{\\Delta V}",
+          "tags": ["elasticity", "bulk modulus"]
+        },
+        {
+          "id": "mps5",
+          "name": "Shear Modulus",
+          "latex": "G = \\frac{\\text{Shear Stress}}{\\text{Shear Strain}}",
+          "tags": ["elasticity", "shear modulus"]
+        },
+        {
+          "id": "mps6",
+          "name": "Poisson's Ratio",
+          "latex": "\\sigma = -\\frac{\\text{Lateral Strain}}{\\text{Longitudinal Strain}}",
+          "tags": ["elasticity", "poisson"]
+        }
+      ]
+    },
+    {
+      "id": "ch9",
+      "class": "12",
+      "name": "Electric Charges and Fields",
+      "formulas": [
+        {
+          "id": "ecf1",
+          "name": "Coulomb's Law",
+          "latex": "F = \\frac{1}{4\\pi\\varepsilon_0}\\frac{q_1 q_2}{r^2}",
+          "tags": ["coulomb", "force"]
+        },
+        {
+          "id": "ecf2",
+          "name": "Electric Field",
+          "latex": "\\vec{E} = \\frac{\\vec{F}}{q} = \\frac{1}{4\\pi\\varepsilon_0}\\frac{q}{r^2}\\hat{r}",
+          "tags": ["electric field"]
+        },
+        {
+          "id": "ecf3",
+          "name": "Electric Flux",
+          "latex": "\\Phi_E = \\vec{E} \\cdot \\vec{A} = EA\\cos\\theta",
+          "tags": ["electric flux"]
+        },
+        {
+          "id": "ecf4",
+          "name": "Gauss's Law",
+          "latex": "\\oint \\vec{E} \\cdot d\\vec{A} = \\frac{q_{enc}}{\\varepsilon_0}",
+          "tags": ["gauss", "electric flux"]
+        },
+        {
+          "id": "ecf5",
+          "name": "Electric Field due to Point Charge",
+          "latex": "E = \\frac{kq}{r^2}",
+          "tags": ["electric field", "point charge"]
+        },
+        {
+          "id": "ecf6",
+          "name": "Force on Charge in Electric Field",
+          "latex": "\\vec{F} = q\\vec{E}",
+          "tags": ["force", "electric field"]
+        },
+        {
+          "id": "ecf7",
+          "name": "Dipole Moment",
+          "latex": "\\vec{p} = q\\vec{d}",
+          "tags": ["dipole"]
+        },
+        {
+          "id": "ecf8",
+          "name": "Torque on Dipole",
+          "latex": "\\vec{\\tau} = \\vec{p} \\times \\vec{E}",
+          "tags": ["dipole", "torque"]
+        }
+      ]
+    },
+    {
+      "id": "ch10",
+      "class": "12",
+      "name": "Electrostatic Potential and Capacitance",
+      "formulas": [
+        {
+          "id": "epc1",
+          "name": "Electric Potential",
+          "latex": "V = \\frac{U}{q} = \\frac{1}{4\\pi\\varepsilon_0}\\frac{q}{r}",
+          "tags": ["potential"]
+        },
+        {
+          "id": "epc2",
+          "name": "Potential Energy",
+          "latex": "U = \\frac{1}{4\\pi\\varepsilon_0}\\frac{q_1 q_2}{r}",
+          "tags": ["potential energy"]
+        },
+        {
+          "id": "epc3",
+          "name": "Potential Difference",
+          "latex": "V_B - V_A = -\\int_A^B \\vec{E} \\cdot d\\vec{l}",
+          "tags": ["potential difference"]
+        },
+        {
+          "id": "epc4",
+          "name": "Capacitance",
+          "latex": "C = \\frac{Q}{V}",
+          "tags": ["capacitance"]
+        },
+        {
+          "id": "epc5",
+          "name": "Parallel Plate Capacitor",
+          "latex": "C = \\frac{\\varepsilon_0 A}{d}",
+          "tags": ["capacitor", "parallel plate"]
+        },
+        {
+          "id": "epc6",
+          "name": "Energy Stored in Capacitor",
+          "latex": "U = \\frac{1}{2}CV^2 = \\frac{Q^2}{2C}",
+          "tags": ["capacitor", "energy"]
+        },
+        {
+          "id": "epc7",
+          "name": "Series Combination",
+          "latex": "\\frac{1}{C_{eq}} = \\frac{1}{C_1} + \\frac{1}{C_2} + \\ldots",
+          "tags": ["capacitor", "series"]
+        },
+        {
+          "id": "epc8",
+          "name": "Parallel Combination",
+          "latex": "C_{eq} = C_1 + C_2 + \\ldots",
+          "tags": ["capacitor", "parallel"]
+        }
+      ]
+    },
+    {
+      "id": "ch11",
+      "class": "12",
+      "name": "Current Electricity",
+      "formulas": [
+        {
+          "id": "ce1",
+          "name": "Ohm's Law",
+          "latex": "V = IR",
+          "tags": ["ohm", "current"]
+        },
+        {
+          "id": "ce2",
+          "name": "Resistance",
+          "latex": "R = \\frac{\\rho L}{A}",
+          "tags": ["resistance", "resistivity"]
+        },
+        {
+          "id": "ce3",
+          "name": "Electric Current",
+          "latex": "I = \\frac{dQ}{dt} = nAe v_d",
+          "tags": ["current", "drift velocity"]
+        },
+        {
+          "id": "ce4",
+          "name": "Power",
+          "latex": "P = VI = I^2R = \\frac{V^2}{R}",
+          "tags": ["power", "electric"]
+        },
+        {
+          "id": "ce5",
+          "name": "Kirchhoff's Voltage Law",
+          "latex": "\\sum V = 0 \\text{ (around a loop)}",
+          "tags": ["kirchhoff", "voltage"]
+        },
+        {
+          "id": "ce6",
+          "name": "Kirchhoff's Current Law",
+          "latex": "\\sum I_{in} = \\sum I_{out}",
+          "tags": ["kirchhoff", "current"]
+        },
+        {
+          "id": "ce7",
+          "name": "Series Resistance",
+          "latex": "R_{eq} = R_1 + R_2 + \\ldots",
+          "tags": ["resistance", "series"]
+        },
+        {
+          "id": "ce8",
+          "name": "Parallel Resistance",
+          "latex": "\\frac{1}{R_{eq}} = \\frac{1}{R_1} + \\frac{1}{R_2} + \\ldots",
+          "tags": ["resistance", "parallel"]
+        }
+      ]
+    },
+    {
+      "id": "ch12",
+      "class": "12",
+      "name": "Magnetic Effects of Current and Magnetism",
+      "formulas": [
+        {
+          "id": "mc1",
+          "name": "Biot-Savart Law",
+          "latex": "d\\vec{B} = \\frac{\\mu_0}{4\\pi}\\frac{Id\\vec{l} \\times \\hat{r}}{r^2}",
+          "tags": ["biot-savart", "magnetic field"]
+        },
+        {
+          "id": "mc2",
+          "name": "Ampere's Law",
+          "latex": "\\oint \\vec{B} \\cdot d\\vec{l} = \\mu_0 I_{enc}",
+          "tags": ["ampere", "magnetic field"]
+        },
+        {
+          "id": "mc3",
+          "name": "Force on Current-Carrying Conductor",
+          "latex": "\\vec{F} = I\\vec{l} \\times \\vec{B}",
+          "tags": ["force", "magnetic field"]
+        },
+        {
+          "id": "mc4",
+          "name": "Magnetic Field of Solenoid",
+          "latex": "B = \\mu_0 n I",
+          "tags": ["solenoid", "magnetic field"]
+        },
+        {
+          "id": "mc5",
+          "name": "Magnetic Field of Toroid",
+          "latex": "B = \\frac{\\mu_0 NI}{2\\pi r}",
+          "tags": ["toroid", "magnetic field"]
+        },
+        {
+          "id": "mc6",
+          "name": "Cyclotron Frequency",
+          "latex": "f = \\frac{qB}{2\\pi m}",
+          "tags": ["cyclotron"]
+        },
+        {
+          "id": "mc7",
+          "name": "Magnetic Dipole Moment",
+          "latex": "\\vec{M} = NIA\\hat{n}",
+          "tags": ["magnetic moment"]
+        },
+        {
+          "id": "mc8",
+          "name": "Torque on Magnetic Dipole",
+          "latex": "\\vec{\\tau} = \\vec{M} \\times \\vec{B}",
+          "tags": ["torque", "magnetic moment"]
+        }
+      ]
+    },
+    {
+      "id": "ch13",
+      "class": "12",
+      "name": "Electromagnetic Induction and Alternating Current",
+      "formulas": [
+        {
+          "id": "emi1",
+          "name": "Faraday's Law",
+          "latex": "\\varepsilon = -\\frac{d\\Phi_B}{dt}",
+          "tags": ["faraday", "induction"]
+        },
+        {
+          "id": "emi2",
+          "name": "Lenz's Law",
+          "latex": "\\varepsilon = -N\\frac{d\\Phi_B}{dt}",
+          "tags": ["lenz", "induction"]
+        },
+        {
+          "id": "emi3",
+          "name": "Self Inductance",
+          "latex": "L = \\frac{N\\Phi_B}{I}",
+          "tags": ["self inductance"]
+        },
+        {
+          "id": "emi4",
+          "name": "Mutual Inductance",
+          "latex": "M = \\frac{N_2\\Phi_{21}}{I_1}",
+          "tags": ["mutual inductance"]
+        },
+        {
+          "id": "emi5",
+          "name": "AC Voltage",
+          "latex": "V = V_0 \\sin(\\omega t)",
+          "tags": ["alternating current"]
+        },
+        {
+          "id": "emi6",
+          "name": "RMS Voltage",
+          "latex": "V_{rms} = \\frac{V_0}{\\sqrt{2}}",
+          "tags": ["alternating current", "rms"]
+        },
+        {
+          "id": "emi7",
+          "name": "Inductive Reactance",
+          "latex": "X_L = \\omega L",
+          "tags": ["reactance", "inductive"]
+        },
+        {
+          "id": "emi8",
+          "name": "Capacitive Reactance",
+          "latex": "X_C = \\frac{1}{\\omega C}",
+          "tags": ["reactance", "capacitive"]
+        },
+        {
+          "id": "emi9",
+          "name": "Impedance",
+          "latex": "Z = \\sqrt{R^2 + (X_L - X_C)^2}",
+          "tags": ["impedance", "alternating current"]
+        },
+        {
+          "id": "emi10",
+          "name": "Resonance Frequency",
+          "latex": "\\omega_0 = \\frac{1}{\\sqrt{LC}}",
+          "tags": ["resonance", "LC circuit"]
+        }
+      ]
+    },
+    {
+      "id": "ch14",
+      "class": "12",
+      "name": "Optics",
+      "formulas": [
+        {
+          "id": "o1",
+          "name": "Mirror Formula",
+          "latex": "\\frac{1}{f} = \\frac{1}{v} + \\frac{1}{u}",
+          "tags": ["mirror", "optics"]
+        },
+        {
+          "id": "o2",
+          "name": "Lens Formula",
+          "latex": "\\frac{1}{f} = \\frac{1}{v} - \\frac{1}{u}",
+          "tags": ["lens", "optics"]
+        },
+        {
+          "id": "o3",
+          "name": "Magnification",
+          "latex": "m = \\frac{h'}{h} = \\frac{v}{u}",
+          "tags": ["magnification"]
+        },
+        {
+          "id": "o4",
+          "name": "Young's Double Slit",
+          "latex": "\\beta = \\frac{\\lambda D}{d}",
+          "tags": ["young's", "interference"]
+        },
+        {
+          "id": "o5",
+          "name": "Path Difference",
+          "latex": "\\Delta x = \\frac{\\lambda D}{d}n",
+          "tags": ["interference", "path difference"]
+        },
+        {
+          "id": "o6",
+          "name": "Single Slit Diffraction",
+          "latex": "a\\sin\\theta = n\\lambda",
+          "tags": ["diffraction"]
+        },
+        {
+          "id": "o7",
+          "name": "Power of Lens",
+          "latex": "P = \\frac{1}{f} \\text{ (in metres)}",
+          "tags": ["power", "lens"]
+        },
+        {
+          "id": "o8",
+          "name": "Refractive Index",
+          "latex": "\\mu = \\frac{c}{v}",
+          "tags": ["refraction", "refractive index"]
+        },
+        {
+          "id": "o9",
+          "name": "Snell's Law",
+          "latex": "\\mu_1 \\sin\\theta_1 = \\mu_2 \\sin\\theta_2",
+          "tags": ["snell", "refraction"]
+        }
+      ]
+    },
+    {
+      "id": "ch15",
+      "class": "12",
+      "name": "Dual Nature of Radiation and Matter",
+      "formulas": [
+        {
+          "id": "dn1",
+          "name": "Photoelectric Effect",
+          "latex": "KE_{max} = h\\nu - \\phi",
+          "tags": ["photoelectric", "quantum"]
+        },
+        {
+          "id": "dn2",
+          "name": "de Broglie Wavelength",
+          "latex": "\\lambda = \\frac{h}{p} = \\frac{h}{mv}",
+          "tags": ["de broglie", "wave-particle"]
+        },
+        {
+          "id": "dn3",
+          "name": "Einstein's Equation",
+          "latex": "E = h\\nu = \\frac{hc}{\\lambda}",
+          "tags": ["einstein", "photon"]
+        },
+        {
+          "id": "dn4",
+          "name": "Stopping Potential",
+          "latex": "eV_0 = h\\nu - \\phi",
+          "tags": ["stopping potential", "photoelectric"]
+        },
+        {
+          "id": "dn5",
+          "name": "Threshold Frequency",
+          "latex": "\\nu_0 = \\frac{\\phi}{h}",
+          "tags": ["threshold", "photoelectric"]
+        }
+      ]
+    },
+    {
+      "id": "ch16",
+      "class": "12",
+      "name": "Atoms and Nuclei",
+      "formulas": [
+        {
+          "id": "an1",
+          "name": "Bohr's Radius",
+          "latex": "r_n = n^2 \\frac{a_0}{Z}",
+          "tags": ["bohr", "atom"]
+        },
+        {
+          "id": "an2",
+          "name": "Bohr's Energy Levels",
+          "latex": "E_n = -\\frac{13.6 Z^2}{n^2} \\text{ eV}",
+          "tags": ["bohr", "energy levels"]
+        },
+        {
+          "id": "an3",
+          "name": "Radius of Nucleus",
+          "latex": "R = R_0 A^{1/3}",
+          "tags": ["nucleus", "radius"]
+        },
+        {
+          "id": "an4",
+          "name": "Mass-Energy Equivalence",
+          "latex": "E = mc^2",
+          "tags": ["mass-energy", "relativity"]
+        },
+        {
+          "id": "an5",
+          "name": "Radioactive Decay Law",
+          "latex": "N = N_0 e^{-\\lambda t}",
+          "tags": ["radioactive", "decay"]
+        },
+        {
+          "id": "an6",
+          "name": "Half-Life",
+          "latex": "t_{1/2} = \\frac{\\ln 2}{\\lambda} = \\frac{0.693}{\\lambda}",
+          "tags": ["half-life", "radioactive"]
+        },
+        {
+          "id": "an7",
+          "name": "Binding Energy",
+          "latex": "BE = \\Delta m \\cdot c^2",
+          "tags": ["binding energy", "nucleus"]
+        },
+        {
+          "id": "an8",
+          "name": "Nuclear Fusion Energy",
+          "latex": "E = \\Delta m \\cdot c^2",
+          "tags": ["fusion", "nuclear"]
+        }
+      ]
+    },
+    {
+      "id": "ch17",
+      "class": "12",
+      "name": "Semiconductor Electronics",
+      "formulas": [
+        {
+          "id": "se1",
+          "name": "Conductivity",
+          "latex": "\\sigma = ne\\mu_e + pe\\mu_h",
+          "tags": ["semiconductor", "conductivity"]
+        },
+        {
+          "id": "se2",
+          "name": "Diode Current",
+          "latex": "I = I_0(e^{eV/kT} - 1)",
+          "tags": ["diode", "semiconductor"]
+        },
+        {
+          "id": "se3",
+          "name": "Transistor Current Gain",
+          "latex": "\\beta = \\frac{I_C}{I_B}",
+          "tags": ["transistor", "current gain"]
+        },
+        {
+          "id": "se4",
+          "name": "Logic Gate NOT",
+          "latex": "Y = \\overline{A}",
+          "tags": ["logic gate", "NOT"]
+        },
+        {
+          "id": "se5",
+          "name": "Logic Gate AND",
+          "latex": "Y = A \\cdot B",
+          "tags": ["logic gate", "AND"]
+        },
+        {
+          "id": "se6",
+          "name": "Logic Gate OR",
+          "latex": "Y = A + B",
+          "tags": ["logic gate", "OR"]
+        }
+      ]
+    }
+  ]
+}
