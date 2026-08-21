@@ -1,5 +1,4 @@
 import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
 import katex from "katex";
 
 export interface FormulaItem {
@@ -10,62 +9,82 @@ export interface FormulaItem {
   chapter?: string;
 }
 
-// ── Render a single KaTeX formula to a canvas via html2canvas ──
+// ── Render KaTeX formula onto a canvas using SVG foreignObject ──
+// This avoids html2canvas entirely — we build an SVG containing the
+// KaTeX HTML, load it as an image, and draw it onto a canvas.
 
 async function renderFormula(latex: string): Promise<HTMLCanvasElement | null> {
-  const el = document.createElement("div");
+  // 1. Render KaTeX to HTML
+  const tmp = document.createElement("div");
+  try {
+    katex.render(latex, tmp, { throwOnError: false, displayMode: true });
+  } catch {
+    tmp.textContent = latex;
+  }
 
-  // Position in-viewport but behind everything so html2canvas can rasterise it
-  Object.assign(el.style, {
-    position: "fixed",
-    left: "0",
-    top: "0",
-    zIndex: "-1",
-    background: "white",
-    padding: "4px 8px",
-    display: "inline-block",
-    maxWidth: "480px",
-    fontSize: "13px",
-    lineHeight: "1.5",
-    color: "#1e293b",
-    whiteSpace: "nowrap",
+  // 2. Collect KaTeX CSS rules from the page
+  let katexCSS = "";
+  try {
+    for (const sheet of Array.from(document.styleSheets)) {
+      try {
+        const rules = sheet.cssRules || sheet.rules;
+        for (const rule of Array.from(rules)) {
+          const text = rule.cssText || "";
+          if (text.includes("katex")) {
+            katexCSS += text + "\n";
+          }
+        }
+      } catch {
+        // cross-origin sheet — skip
+      }
+    }
+  } catch {
+    // document.styleSheets not accessible
+  }
+
+  // 3. Build an SVG with foreignObject
+  const w = Math.max(tmp.scrollWidth, 100) + 16;
+  const h = Math.max(tmp.scrollHeight, 24) + 12;
+
+  const serialised = new XMLSerializer().serializeToString(tmp);
+  const svgStr = [
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}">`,
+    `<foreignObject width="100%" height="100%">`,
+    `<div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;padding:2px 6px;background:#fff;color:#1e293b;font-size:14px;white-space:nowrap">`,
+    `<style>${katexCSS}</style>`,
+    serialised,
+    `</div>`,
+    `</foreignObject>`,
+    `</svg>`,
+  ].join("");
+
+  const blob = new Blob([svgStr], { type: "image/svg+xml;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+
+  // 4. Load as image → draw on canvas
+  return new Promise<HTMLCanvasElement | null>((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      const scale = 2;
+      canvas.width = img.naturalWidth * scale;
+      canvas.height = img.naturalHeight * scale;
+      const ctx = canvas.getContext("2d");
+      if (ctx) {
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.scale(scale, scale);
+        ctx.drawImage(img, 0, 0);
+      }
+      URL.revokeObjectURL(url);
+      resolve(canvas);
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      resolve(null);
+    };
+    img.src = url;
   });
-
-  try {
-    katex.render(latex, el, { throwOnError: false, displayMode: true });
-  } catch {
-    el.textContent = latex;
-  }
-
-  document.body.appendChild(el);
-
-  // Wait for fonts + layout
-  try {
-    await document.fonts.ready;
-  } catch {
-    // fonts.ready not supported in all environments
-  }
-  await new Promise((r) => setTimeout(r, 80));
-
-  try {
-    const canvas = await html2canvas(el, {
-      backgroundColor: "#ffffff",
-      scale: 2,
-      logging: false,
-      useCORS: true,
-      allowTaint: true,
-      // Capture the element itself, not the whole viewport
-      width: el.scrollWidth + 2,
-      height: el.scrollHeight + 2,
-      windowWidth: el.scrollWidth + 2,
-      windowHeight: el.scrollHeight + 2,
-    });
-    return canvas;
-  } catch {
-    return null;
-  } finally {
-    document.body.removeChild(el);
-  }
 }
 
 // ── Build and download the PDF ───────────────────────────────
@@ -138,7 +157,6 @@ export async function generatePDF(
 
     // ── Each formula ──────────────────────────────────
     for (const formula of items) {
-      // Page break check (name + estimated image height + gap)
       if (y + 20 > pageH - mx) {
         pdf.addPage();
         y = mx;
@@ -159,7 +177,6 @@ export async function generatePDF(
         const natW = canvas.width;
         const natH = canvas.height;
 
-        // Scale to fit content width, cap height at 16mm
         let drawW = cw;
         let drawH = (natH / natW) * drawW;
         if (drawH > 16) {
@@ -167,7 +184,6 @@ export async function generatePDF(
           drawW = (natW / natH) * drawH;
         }
 
-        // Final page break check
         if (y + drawH + 4 > pageH - mx) {
           pdf.addPage();
           y = mx;
@@ -176,10 +192,10 @@ export async function generatePDF(
         pdf.addImage(imgData, "PNG", mx, y, drawW, drawH);
         y += drawH + 3;
       } else {
-        // Fallback: raw LaTeX text
+        // Fallback: readable text
         pdf.setFont("courier", "normal");
-        pdf.setFontSize(8);
-        pdf.setTextColor(100, 116, 139);
+        pdf.setFontSize(9);
+        pdf.setTextColor(71, 85, 105);
         const lines = pdf.splitTextToSize(formula.latex, cw);
         for (const line of lines) {
           if (y + 4 > pageH - mx) {
@@ -187,7 +203,7 @@ export async function generatePDF(
             y = mx;
           }
           pdf.text(line, mx, y);
-          y += 3.5;
+          y += 4;
         }
         y += 2;
       }
