@@ -8,85 +8,98 @@ import FormulaGrid from "@/components/askformula/FormulaGrid";
 import PDFButton from "@/components/askformula/PDFButton";
 import Footer from "@/components/askformula/Footer";
 import { getChaptersBySubject, filterFormulas } from "@/lib/formulas";
-import { Atom } from "lucide-react";
 
 export default function Landing() {
   const [exam, setExam] = useState<"school" | "jee" | "neet" | null>(null);
   const [subject, setSubject] = useState<string | null>(null);
   const [selectedChapters, setSelectedChapters] = useState<string[]>([]);
 
-  // Get chapters for selected subject
   const chapters = useMemo(() => {
     if (!subject) return [];
     return getChaptersBySubject(subject);
   }, [subject]);
 
-  // Get filtered formulas
   const formulas = useMemo(() => {
     if (!subject || selectedChapters.length === 0) return [];
     return filterFormulas(subject, selectedChapters);
   }, [subject, selectedChapters]);
 
-  // Reset selections when subject changes
   const handleSubjectSelect = (s: string) => {
     setSubject(s);
     setSelectedChapters([]);
   };
 
-  // Reset when exam changes
   const handleExamSelect = (e: "school" | "jee" | "neet") => {
     setExam(e);
     setSubject(null);
     setSelectedChapters([]);
   };
 
+  const steps = [
+    { label: "Exam", done: !!exam },
+    { label: "Subject", done: !!subject },
+    { label: "Chapters", done: selectedChapters.length > 0 },
+    { label: "Formulas", done: formulas.length > 0 },
+  ];
+
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
       <Hero />
 
-      {/* App Section */}
       <section
         id="app-section"
-        className="relative min-h-screen bg-gradient-to-b from-slate-950 via-indigo-950/50 to-slate-950"
+        className="relative min-h-screen bg-gradient-to-b from-slate-950 via-[#080c18] to-slate-950"
       >
-        {/* Background blur orbs */}
-        <div className="absolute top-0 left-1/3 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-violet-500/5 rounded-full blur-3xl" />
+        {/* Subtle ambient orbs */}
+        <div className="absolute top-0 left-1/3 w-80 h-80 bg-blue-500/[0.03] rounded-full blur-[100px]" />
+        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-violet-500/[0.03] rounded-full blur-[100px]" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
-          {/* Navigation bar */}
+        <div className="relative z-10 max-w-4xl mx-auto px-5 sm:px-8 py-16 sm:py-24">
+          {/* Step indicator */}
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-12"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="mb-14"
           >
-            <div className="inline-flex items-center gap-2 mb-8">
-              <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-400/20 flex items-center justify-center backdrop-blur-xl">
-                <Atom className="w-5 h-5 text-blue-400" />
-              </div>
-              <span className="text-2xl font-bold text-white">
-                Ask<span className="text-blue-400">Formula</span>
-              </span>
-            </div>
-
-            {/* Step progress indicator */}
-            <div className="flex items-center gap-2 text-sm text-slate-500">
-              <span className={exam ? "text-blue-400" : ""}>Exam</span>
-              <span>→</span>
-              <span className={subject ? "text-blue-400" : ""}>Subject</span>
-              <span>→</span>
-              <span className={selectedChapters.length > 0 ? "text-blue-400" : ""}>Chapters</span>
-              <span>→</span>
-              <span className={formulas.length > 0 ? "text-blue-400" : ""}>Formulas</span>
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              {steps.map((step, i) => (
+                <div key={step.label} className="flex items-center gap-1.5 sm:gap-2">
+                  <div className="flex items-center gap-1.5">
+                    <div
+                      className={`w-6 h-6 rounded-full text-[11px] font-semibold flex items-center justify-center transition-all duration-300 ${
+                        step.done
+                          ? "bg-blue-500 text-white"
+                          : "bg-white/[0.04] text-slate-600 border border-white/[0.06]"
+                      }`}
+                    >
+                      {i + 1}
+                    </div>
+                    <span
+                      className={`text-xs font-medium transition-colors duration-300 ${
+                        step.done ? "text-slate-300" : "text-slate-600"
+                      }`}
+                    >
+                      {step.label}
+                    </span>
+                  </div>
+                  {i < steps.length - 1 && (
+                    <div
+                      className={`w-6 sm:w-10 h-px transition-colors duration-300 ${
+                        steps[i + 1].done ? "bg-blue-500/40" : "bg-white/[0.06]"
+                      }`}
+                    />
+                  )}
+                </div>
+              ))}
             </div>
           </motion.div>
 
           {/* Step 1: Exam Selector */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
+            transition={{ delay: 0.05, duration: 0.4 }}
             className="mb-10"
           >
             <ExamSelector onSelect={handleExamSelect} selected={exam} />
@@ -130,11 +143,11 @@ export default function Landing() {
           <AnimatePresence>
             {formulas.length > 0 && (
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="mb-24"
+                className="mb-28"
               >
                 <FormulaGrid formulas={formulas} />
               </motion.div>
@@ -142,7 +155,6 @@ export default function Landing() {
           </AnimatePresence>
         </div>
 
-        {/* Footer */}
         <Footer />
       </section>
 

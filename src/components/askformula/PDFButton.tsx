@@ -29,17 +29,17 @@ export default function PDFButton({ formulas, subject }: PDFButtonProps) {
       <Button
         onClick={handleDownload}
         disabled={formulas.length === 0 || isGenerating}
-        className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white px-6 py-3 rounded-2xl shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 backdrop-blur-xl border border-white/10 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+        className="bg-white text-slate-950 hover:bg-slate-100 px-5 py-3 rounded-full shadow-[0_4px_24px_-4px_rgba(255,255,255,0.1)] hover:shadow-[0_4px_32px_-4px_rgba(255,255,255,0.15)] transition-all duration-200 backdrop-blur-xl border border-white/[0.08] cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed font-medium"
       >
         {isGenerating ? (
           <>
             <Loader2 className="w-4 h-4 animate-spin" />
-            Generating...
+            Building PDF
           </>
         ) : (
           <>
             <Download className="w-4 h-4" />
-            Download PDF 📄
+            Download PDF
           </>
         )}
       </Button>

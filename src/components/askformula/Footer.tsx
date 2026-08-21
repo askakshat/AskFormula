@@ -1,31 +1,25 @@
-import { Atom, Heart } from "lucide-react";
+import { Atom } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="relative py-12 px-4">
-      {/* Top border */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
+    <footer className="relative py-16 px-6">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-px bg-white/[0.06]" />
 
       <div className="max-w-4xl mx-auto text-center">
-        {/* Logo */}
-        <div className="inline-flex items-center gap-2 mb-4">
-          <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-400/20 flex items-center justify-center">
-            <Atom className="w-4 h-4 text-blue-400" />
+        <div className="inline-flex items-center gap-2 mb-5">
+          <div className="w-7 h-7 rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center">
+            <Atom className="w-3.5 h-3.5 text-blue-400/70" strokeWidth={1.5} />
           </div>
-          <span className="text-lg font-semibold text-white">
-            Ask<span className="text-blue-400">Formula</span>
+          <span className="text-base font-semibold tracking-[-0.02em] text-white">
+            Ask<span className="text-blue-400/80">Formula</span>
           </span>
         </div>
 
-        {/* Copyright */}
-        <p className="text-sm text-slate-400 mb-2">
-          © {new Date().getFullYear()} AskFormula. All rights reserved.
+        <p className="text-xs text-slate-600 mb-1">
+          © {new Date().getFullYear()} AskFormula
         </p>
-
-        {/* Made by */}
-        <p className="text-xs text-slate-500 flex items-center justify-center gap-1">
-          Made with <Heart className="w-3 h-3 text-red-400 fill-red-400" /> by Akshat Agarwal
-          (AskAkshat)
+        <p className="text-[11px] text-slate-700">
+          Made by Akshat Agarwal
         </p>
       </div>
     </footer>
