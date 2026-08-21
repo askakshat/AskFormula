@@ -1,0 +1,38 @@
+{
+  "subject": "Mathematics",
+  "audience": ["school", "jee"],
+  "chapters": [
+    {
+      "id": "m_ch1",
+      "class": "11",
+      "name": "Sets",
+      "formulas": [
+        {
+          "id": "m1",
+          "name": "Union of Sets",
+          "latex": "A \\cup B = \\{x : x \\in A \\text{ or } x \\in B\\}",
+          "tags": ["sets", "union"]
+        },
+        {
+          "id": "m2",
+          "name": "Intersection of Sets",
+          "latex": "A \\cap B = \\{x : x \\in A \\text{ and } x \\in B\\}",
+          "tags": ["sets", "intersection"]
+        }
+      ]
+    },
+    {
+      "id": "m_ch2",
+      "class": "11",
+      "name": "Relations and Functions",
+      "formulas": [
+        {
+          "id": "m3",
+          "name": "Cartesian Product",
+          "latex": "A \\times B = \\{(a,b) : a \\in A, b \\in B\\}",
+          "tags": ["cartesian product", "relations"]
+        }
+      ]
+    }
+  ]
+}

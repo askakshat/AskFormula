@@ -1,0 +1,44 @@
+{
+  "subject": "Chemistry",
+  "audience": ["school", "jee", "neet"],
+  "chapters": [
+    {
+      "id": "c_ch1",
+      "class": "11",
+      "name": "Some Basic Concepts of Chemistry",
+      "formulas": [
+        {
+          "id": "c1",
+          "name": "Molarity",
+          "latex": "M = \\frac{\\text{Moles of solute}}{\\text{Volume of solution in L}}",
+          "tags": ["molarity", "concentration"]
+        },
+        {
+          "id": "c2",
+          "name": "Molality",
+          "latex": "m = \\frac{\\text{Moles of solute}}{\\text{Mass of solvent in kg}}",
+          "tags": ["molality", "concentration"]
+        }
+      ]
+    },
+    {
+      "id": "c_ch2",
+      "class": "11",
+      "name": "Structure of Atom",
+      "formulas": [
+        {
+          "id": "c3",
+          "name": "Energy of a photon",
+          "latex": "E = h\\nu = \\frac{hc}{\\lambda}",
+          "tags": ["energy", "photon", "planck"]
+        },
+        {
+          "id": "c4",
+          "name": "de Broglie Wavelength",
+          "latex": "\\lambda = \\frac{h}{p} = \\frac{h}{mv}",
+          "tags": ["de broglie", "wavelength"]
+        }
+      ]
+    }
+  ]
+}

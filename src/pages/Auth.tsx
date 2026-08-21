@@ -57,9 +57,9 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
     setIsLoading(true);
     setError(null);
     try {
-      const formData = new FormData(event.currentTarget);
-      await signIn("email-otp", formData);
-      setStep({ email: formData.get("email") as string });
+      // const formData = new FormData(event.currentTarget);
+      // await signIn("email-otp", formData);
+      // setStep({ email: formData.get("email") as string });
       setIsLoading(false);
     } catch (error) {
       console.error("Email sign-in error:", error);
@@ -77,8 +77,8 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
     setIsLoading(true);
     setError(null);
     try {
-      const formData = new FormData(event.currentTarget);
-      await signIn("email-otp", formData);
+      // const formData = new FormData(event.currentTarget);
+      // await signIn("email-otp", formData);
 
       console.log("signed in");
 

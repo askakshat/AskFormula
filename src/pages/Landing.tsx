@@ -115,7 +115,7 @@ export default function Landing() {
                 transition={{ duration: 0.3 }}
                 className="mb-10 overflow-hidden"
               >
-                <SubjectSelector onSelect={handleSubjectSelect} selected={subject} />
+                <SubjectSelector onSelect={handleSubjectSelect} selected={subject} exam={exam} />
               </motion.div>
             )}
           </AnimatePresence>
