@@ -1,0 +1,89 @@
+{
+  "subject": "Biology",
+  "audience": ["school", "neet"],
+  "chapters": [
+    {
+      "id": "b_ch1",
+      "class": "12",
+      "name": "Genetics and Evolution",
+      "formulas": [
+        {
+          "id": "b1",
+          "name": "Hardy-Weinberg Equation",
+          "latex": "p^2 + 2pq + q^2 = 1",
+          "tags": ["genetics", "evolution", "hardy-weinberg"]
+        },
+        {
+          "id": "b2",
+          "name": "Allele Frequency",
+          "latex": "p + q = 1",
+          "tags": ["genetics", "allele"]
+        }
+      ]
+    },
+    {
+      "id": "b_ch2",
+      "class": "12",
+      "name": "Ecology and Environment",
+      "formulas": [
+        {
+          "id": "b3",
+          "name": "Population Growth (Exponential)",
+          "latex": "\\frac{dN}{dt} = rN",
+          "tags": ["ecology", "population", "growth"]
+        },
+        {
+          "id": "b4",
+          "name": "Population Growth (Logistic)",
+          "latex": "\\frac{dN}{dt} = rN \\left( \\frac{K - N}{K} \\right)",
+          "tags": ["ecology", "population", "logistic"]
+        }
+      ]
+    },
+    {
+      "id": "b_ch3",
+      "class": "11",
+      "name": "Biomolecules",
+      "formulas": [
+        {
+          "id": "b5",
+          "name": "Michaelis-Menten Equation",
+          "latex": "v = \\frac{V_{max}[S]}{K_m + [S]}",
+          "tags": ["enzyme", "kinetics", "biomolecules"]
+        }
+      ]
+    },
+    {
+      "id": "b_ch4",
+      "class": "11",
+      "name": "Photosynthesis in Higher Plants",
+      "formulas": [
+        {
+          "id": "b6",
+          "name": "Photosynthesis Equation",
+          "latex": "6CO_2 + 12H_2O \\xrightarrow{\\text{Light}} C_6H_{12}O_6 + 6H_2O + 6O_2",
+          "tags": ["photosynthesis", "plants"]
+        }
+      ]
+    },
+    {
+      "id": "b_ch5",
+      "class": "11",
+      "name": "Respiration in Plants",
+      "formulas": [
+        {
+          "id": "b7",
+          "name": "Respiration Equation (Aerobic)",
+          "latex": "C_6H_{12}O_6 + 6O_2 \\rightarrow 6CO_2 + 6H_2O + \\text{Energy (ATP)}",
+          "tags": ["respiration", "aerobic"]
+        },
+        {
+          "id": "b8",
+          "name": "Respiratory Quotient (RQ)",
+          "latex": "RQ = \\frac{\\text{Volume of } CO_2 \\text{ evolved}}{\\text{Volume of } O_2 \\text{ consumed}}",
+          "tags": ["respiration", "rq"]
+        }
+      ]
+    }
+  ]
+}

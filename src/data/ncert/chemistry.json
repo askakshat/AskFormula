@@ -9,14 +9,26 @@
       "formulas": [
         {
           "id": "c1",
-          "name": "Molarity",
-          "latex": "M = \\frac{\\text{Moles of solute}}{\\text{Volume of solution in L}}",
-          "tags": ["molarity", "concentration"]
+          "name": "Mass Percentage",
+          "latex": "\\text{Mass \\%} = \\left( \\frac{\\text{Mass of solute}}{\\text{Mass of solution}} \\right) \\times 100",
+          "tags": ["concentration", "mass percent"]
         },
         {
           "id": "c2",
+          "name": "Mole Fraction",
+          "latex": "x_A = \\frac{n_A}{n_A + n_B}",
+          "tags": ["mole fraction", "concentration"]
+        },
+        {
+          "id": "c3",
+          "name": "Molarity",
+          "latex": "M = \\frac{\\text{Moles of solute (mol)}}{\\text{Volume of solution (L)}}",
+          "tags": ["molarity", "concentration"]
+        },
+        {
+          "id": "c4",
           "name": "Molality",
-          "latex": "m = \\frac{\\text{Moles of solute}}{\\text{Mass of solvent in kg}}",
+          "latex": "m = \\frac{\\text{Moles of solute (mol)}}{\\text{Mass of solvent (kg)}}",
           "tags": ["molality", "concentration"]
         }
       ]
@@ -27,16 +39,152 @@
       "name": "Structure of Atom",
       "formulas": [
         {
-          "id": "c3",
-          "name": "Energy of a photon",
+          "id": "c5",
+          "name": "Energy of a Photon (Planck's Equation)",
           "latex": "E = h\\nu = \\frac{hc}{\\lambda}",
           "tags": ["energy", "photon", "planck"]
         },
         {
-          "id": "c4",
+          "id": "c6",
+          "name": "Bohr Radius",
+          "latex": "r_n = 52.9 \\frac{n^2}{Z} \\text{ pm}",
+          "tags": ["bohr", "radius", "atomic structure"]
+        },
+        {
+          "id": "c7",
+          "name": "Energy of Electron in nth orbit",
+          "latex": "E_n = -2.18 \\times 10^{-18} \\left( \\frac{Z^2}{n^2} \\right) \\text{ J}",
+          "tags": ["energy", "bohr", "electron"]
+        },
+        {
+          "id": "c8",
           "name": "de Broglie Wavelength",
           "latex": "\\lambda = \\frac{h}{p} = \\frac{h}{mv}",
-          "tags": ["de broglie", "wavelength"]
+          "tags": ["de broglie", "wavelength", "quantum"]
+        },
+        {
+          "id": "c9",
+          "name": "Heisenberg's Uncertainty Principle",
+          "latex": "\\Delta x \\cdot \\Delta p \\ge \\frac{h}{4\\pi}",
+          "tags": ["heisenberg", "uncertainty", "momentum"]
+        }
+      ]
+    },
+    {
+      "id": "c_ch3",
+      "class": "11",
+      "name": "States of Matter",
+      "formulas": [
+        {
+          "id": "c10",
+          "name": "Ideal Gas Equation",
+          "latex": "PV = nRT",
+          "tags": ["ideal gas", "thermodynamics"]
+        },
+        {
+          "id": "c11",
+          "name": "van der Waals Equation",
+          "latex": "\\left( P + \\frac{an^2}{V^2} \\right)(V - nb) = nRT",
+          "tags": ["van der waals", "real gas"]
+        },
+        {
+          "id": "c12",
+          "name": "Graham's Law of Diffusion",
+          "latex": "\\frac{r_1}{r_2} = \\sqrt{\\frac{M_2}{M_1}} = \\sqrt{\\frac{d_2}{d_1}}",
+          "tags": ["diffusion", "graham", "gas"]
+        },
+        {
+          "id": "c13",
+          "name": "Root Mean Square Velocity",
+          "latex": "v_{rms} = \\sqrt{\\frac{3RT}{M}}",
+          "tags": ["rms velocity", "kinetic theory"]
+        }
+      ]
+    },
+    {
+      "id": "c_ch4",
+      "class": "11",
+      "name": "Thermodynamics",
+      "formulas": [
+        {
+          "id": "c14",
+          "name": "First Law of Thermodynamics",
+          "latex": "\\Delta U = q + w",
+          "tags": ["first law", "internal energy"]
+        },
+        {
+          "id": "c15",
+          "name": "Enthalpy Change",
+          "latex": "\\Delta H = \\Delta U + P\\Delta V",
+          "tags": ["enthalpy", "thermodynamics"]
+        },
+        {
+          "id": "c16",
+          "name": "Entropy Change",
+          "latex": "\\Delta S = \\frac{q_{rev}}{T}",
+          "tags": ["entropy", "reversible"]
+        },
+        {
+          "id": "c17",
+          "name": "Gibbs Free Energy",
+          "latex": "\\Delta G = \\Delta H - T\\Delta S",
+          "tags": ["gibbs", "free energy", "spontaneity"]
+        }
+      ]
+    },
+    {
+      "id": "c_ch5",
+      "class": "12",
+      "name": "Chemical Kinetics",
+      "formulas": [
+        {
+          "id": "c18",
+          "name": "Rate of Reaction",
+          "latex": "r = k[A]^x[B]^y",
+          "tags": ["rate", "kinetics"]
+        },
+        {
+          "id": "c19",
+          "name": "First Order Reaction",
+          "latex": "k = \\frac{2.303}{t} \\log \\left( \\frac{[A]_0}{[A]} \\right)",
+          "tags": ["first order", "kinetics"]
+        },
+        {
+          "id": "c20",
+          "name": "Half Life (First Order)",
+          "latex": "t_{1/2} = \\frac{0.693}{k}",
+          "tags": ["half life", "first order"]
+        },
+        {
+          "id": "c21",
+          "name": "Arrhenius Equation",
+          "latex": "k = A e^{-E_a/RT}",
+          "tags": ["arrhenius", "activation energy"]
+        }
+      ]
+    },
+    {
+      "id": "c_ch6",
+      "class": "12",
+      "name": "Electrochemistry",
+      "formulas": [
+        {
+          "id": "c22",
+          "name": "Nernst Equation",
+          "latex": "E_{cell} = E^\\circ_{cell} - \\frac{0.0591}{n} \\log Q",
+          "tags": ["nernst", "cell potential"]
+        },
+        {
+          "id": "c23",
+          "name": "Kohlrausch's Law",
+          "latex": "\\Lambda^\\circ_m = \\nu_+ \\lambda^\\circ_+ + \\nu_- \\lambda^\\circ_-",
+          "tags": ["kohlrausch", "molar conductivity"]
+        },
+        {
+          "id": "c24",
+          "name": "Faraday's First Law",
+          "latex": "w = ZIt",
+          "tags": ["faraday", "electrolysis"]
         }
       ]
     }
