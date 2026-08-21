@@ -27,7 +27,8 @@ export async function generatePDF(
   container.style.left = "0";
   container.style.zIndex = "-9999";
   container.style.width = "794px"; // A4 width at 96 DPI
-  container.style.backgroundColor = "white";
+  // Add a soft, abstract gradient background for the glassmorphism base
+  container.style.background = "linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)";
   container.style.padding = "40px";
   container.style.fontFamily = "system-ui, -apple-system, sans-serif";
   container.style.color = "#0f172a";
@@ -78,10 +79,11 @@ export async function generatePDF(
 
   for (const [chapterName, items] of chapters) {
     htmlContent += `
-      <div style="margin-bottom: 30px; page-break-inside: avoid;">
-        <div style="background-color: #3b82f6; color: white; display: inline-block; padding: 6px 12px; border-radius: 6px; font-weight: bold; font-size: 14px; margin-bottom: 15px;">
+      <div style="margin-bottom: 40px; page-break-inside: avoid;">
+        <div style="background-color: #3b82f6; color: white; display: inline-block; padding: 6px 16px; border-radius: 8px; font-weight: bold; font-size: 15px; margin-bottom: 20px; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2);">
           ${chapterName}
         </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
     `;
 
     for (const formula of items) {
@@ -96,18 +98,26 @@ export async function generatePDF(
       }
 
       htmlContent += `
-        <div style="margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #e2e8f0; page-break-inside: avoid;">
-          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-            <div style="width: 4px; height: 4px; background-color: #64748b; border-radius: 50%;"></div>
-            <h3 style="margin: 0; font-size: 14px; color: #334155;">${formula.name}</h3>
+          <div style="
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            padding: 16px;
+            page-break-inside: avoid;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+          ">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.3); padding-bottom: 8px;">
+              <div style="width: 6px; height: 6px; background-color: #3b82f6; border-radius: 50%;"></div>
+              <h3 style="margin: 0; font-size: 14px; color: #1e293b; font-weight: 600;">${formula.name}</h3>
+            </div>
+            <div style="font-size: 16px; color: #0f172a; display: block; width: 100%; overflow-x: hidden;">
+              ${renderedMath}
+            </div>
           </div>
-          <div style="padding-left: 12px; font-size: 16px; color: #1e293b; display: block; width: 100%;">
-            ${renderedMath}
-          </div>
-        </div>
       `;
     }
-    htmlContent += `</div>`;
+    htmlContent += `</div></div>`;
   }
 
   container.innerHTML = htmlContent;
