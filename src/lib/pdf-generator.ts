@@ -1,4 +1,6 @@
 import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
+import katex from "katex";
 
 export interface FormulaItem {
   id: string;
@@ -8,111 +10,65 @@ export interface FormulaItem {
   chapter?: string;
 }
 
-// ── LaTeX → readable plain text ─────────────────────────────
+// ── Render a single KaTeX formula to a canvas via html2canvas ──
 
-function rep(s: string, search: string, replacement: string): string {
-  return s.split(search).join(replacement);
-}
+async function renderFormula(latex: string): Promise<HTMLCanvasElement | null> {
+  const el = document.createElement("div");
 
-function repAll(s: string, search: string, replacement: string): string {
-  return s.split(search).join(replacement);
-}
+  // Position in-viewport but behind everything so html2canvas can rasterise it
+  Object.assign(el.style, {
+    position: "fixed",
+    left: "0",
+    top: "0",
+    zIndex: "-1",
+    background: "white",
+    padding: "4px 8px",
+    display: "inline-block",
+    maxWidth: "480px",
+    fontSize: "13px",
+    lineHeight: "1.5",
+    color: "#1e293b",
+    whiteSpace: "nowrap",
+  });
 
-function latexToText(latex: string): string {
-  let s = latex;
-
-  // Greek letters
-  const GREEK: [string, string][] = [
-    ["\\alpha", "α"], ["\\beta", "β"], ["\\gamma", "γ"], ["\\delta", "δ"],
-    ["\\epsilon", "ε"], ["\\theta", "θ"], ["\\lambda", "λ"], ["\\mu", "μ"],
-    ["\\pi", "π"], ["\\sigma", "σ"], ["\\omega", "ω"], ["\\phi", "φ"],
-    ["\\rho", "ρ"], ["\\tau", "τ"], ["\\psi", "ψ"],
-    ["\\Delta", "Δ"], ["\\Sigma", "Σ"], ["\\Omega", "Ω"], ["\\Phi", "Φ"],
-    ["\\Gamma", "Γ"], ["\\Lambda", "Λ"],
-  ];
-  for (const [cmd, ch] of GREEK) {
-    s = rep(s, cmd, ch);
+  try {
+    katex.render(latex, el, { throwOnError: false, displayMode: true });
+  } catch {
+    el.textContent = latex;
   }
 
-  // Common symbols
-  s = rep(s, "\\times", "×");
-  s = rep(s, "\\cdot", "·");
-  s = rep(s, "\\pm", "±");
-  s = rep(s, "\\mp", "∓");
-  s = rep(s, "\\leq", "≤");
-  s = rep(s, "\\geq", "≥");
-  s = rep(s, "\\neq", "≠");
-  s = rep(s, "\\approx", "≈");
-  s = rep(s, "\\infty", "∞");
-  s = rep(s, "\\partial", "∂");
-  s = rep(s, "\\nabla", "∇");
-  s = rep(s, "\\rightarrow", "→");
-  s = rep(s, "\\leftarrow", "←");
-  s = rep(s, "\\oint", "∮");
-  s = rep(s, "\\int", "∫");
-  s = rep(s, "\\sum", "Σ");
-  s = rep(s, "\\prod", "Π");
-  s = rep(s, "\\sqrt", "√");
-  s = rep(s, "\\hat", "");
-  s = rep(s, "\\overline", "̄");
-  s = rep(s, "\\vec", "");
+  document.body.appendChild(el);
 
-  // \text{...} / \mathrm{...} / \mathbf{...} → just the content
-  s = rep(s, "\\text{", "");
-  s = rep(s, "\\mathrm{", "");
-  s = rep(s, "\\mathbf{", "");
-  s = rep(s, "\\textbf{", "");
+  // Wait for fonts + layout
+  try {
+    await document.fonts.ready;
+  } catch {
+    // fonts.ready not supported in all environments
+  }
+  await new Promise((r) => setTimeout(r, 80));
 
-  // Fractions: \frac{a}{b} → (a)/(b)
-  s = s.replace(/\\frac\{([^}]*)\}\{([^}]*)\}/g, "($1)/($2)");
-
-  // Subscripts: _{abc} or _a
-  s = s.replace(/_\{([^}]*)\}/g, (_, inner: string) => {
-    const SUB: Record<string, string> = {
-      "0": "₀", "1": "₁", "2": "₂", "3": "₃", "4": "₄",
-      "5": "₅", "6": "₆", "7": "₇", "8": "₈", "9": "₉",
-      a: "ₐ", e: "ₑ", i: "ᵢ", o: "ₒ", u: "ᵤ",
-    };
-    return [...inner].map((c) => SUB[c] ?? c).join("");
-  });
-  s = s.replace(/_([a-zA-Z0-9])/, (_, c: string) => {
-    const SUB: Record<string, string> = {
-      "0": "₀", "1": "₁", "2": "₂", "3": "₃", "4": "₄",
-      "5": "₅", "6": "₆", "7": "₇", "8": "₈", "9": "₉",
-      a: "ₐ", e: "ₑ", i: "ᵢ", o: "ₒ", u: "ᵤ",
-    };
-    return SUB[c] ?? c;
-  });
-
-  // Superscripts: ^{abc} or ^a
-  s = s.replace(/\^\{([^}]*)\}/g, (_, inner: string) => {
-    const SUP: Record<string, string> = {
-      "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴",
-      "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹",
-      "+": "⁺", "-": "⁻", "=": "⁼", n: "ⁿ", i: "ⁱ",
-    };
-    return [...inner].map((c) => SUP[c] ?? c).join("");
-  });
-  s = s.replace(/\^([a-zA-Z0-9])/, (_, c: string) => {
-    const SUP: Record<string, string> = {
-      "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴",
-      "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹",
-      "+": "⁺", "-": "⁻", "=": "⁼", n: "ⁿ", i: "ⁱ",
-    };
-    return SUP[c] ?? c;
-  });
-
-  // Remove remaining backslash commands
-  s = s.replace(/\\[a-zA-Z]+/g, " ");
-
-  // Clean up braces and extra spaces
-  s = s.replace(/[{}]/g, "");
-  s = s.replace(/\s+/g, " ").trim();
-
-  return s;
+  try {
+    const canvas = await html2canvas(el, {
+      backgroundColor: "#ffffff",
+      scale: 2,
+      logging: false,
+      useCORS: true,
+      allowTaint: true,
+      // Capture the element itself, not the whole viewport
+      width: el.scrollWidth + 2,
+      height: el.scrollHeight + 2,
+      windowWidth: el.scrollWidth + 2,
+      windowHeight: el.scrollHeight + 2,
+    });
+    return canvas;
+  } catch {
+    return null;
+  } finally {
+    document.body.removeChild(el);
+  }
 }
 
-// ── PDF Generation ──────────────────────────────────────────
+// ── Build and download the PDF ───────────────────────────────
 
 export async function generatePDF(
   formulas: FormulaItem[],
@@ -163,7 +119,7 @@ export async function generatePDF(
 
   // ── Render each chapter ───────────────────────────────
   for (const [chapterName, items] of chapters) {
-    if (y > pageH - 35) {
+    if (y > pageH - 40) {
       pdf.addPage();
       y = mx;
     }
@@ -182,36 +138,59 @@ export async function generatePDF(
 
     // ── Each formula ──────────────────────────────────
     for (const formula of items) {
-      // Page break
-      if (y + 14 > pageH - mx) {
+      // Page break check (name + estimated image height + gap)
+      if (y + 20 > pageH - mx) {
         pdf.addPage();
         y = mx;
       }
 
-      // Name
+      // Formula name
       pdf.setFont("helvetica", "bold");
       pdf.setFontSize(9);
       pdf.setTextColor(51, 65, 85);
       pdf.text(formula.name, mx, y);
       y += 5;
 
-      // Formula text
-      const readable = latexToText(formula.latex);
-      pdf.setFont("courier", "normal");
-      pdf.setFontSize(9);
-      pdf.setTextColor(71, 85, 105);
+      // Render KaTeX → canvas → image
+      const canvas = await renderFormula(formula.latex);
 
-      const lines = pdf.splitTextToSize(readable, cw);
-      for (const line of lines) {
-        if (y + 4 > pageH - mx) {
+      if (canvas && canvas.width > 0 && canvas.height > 0) {
+        const imgData = canvas.toDataURL("image/png");
+        const natW = canvas.width;
+        const natH = canvas.height;
+
+        // Scale to fit content width, cap height at 16mm
+        let drawW = cw;
+        let drawH = (natH / natW) * drawW;
+        if (drawH > 16) {
+          drawH = 16;
+          drawW = (natW / natH) * drawH;
+        }
+
+        // Final page break check
+        if (y + drawH + 4 > pageH - mx) {
           pdf.addPage();
           y = mx;
         }
-        pdf.text(line, mx, y);
-        y += 4;
-      }
 
-      y += 1;
+        pdf.addImage(imgData, "PNG", mx, y, drawW, drawH);
+        y += drawH + 3;
+      } else {
+        // Fallback: raw LaTeX text
+        pdf.setFont("courier", "normal");
+        pdf.setFontSize(8);
+        pdf.setTextColor(100, 116, 139);
+        const lines = pdf.splitTextToSize(formula.latex, cw);
+        for (const line of lines) {
+          if (y + 4 > pageH - mx) {
+            pdf.addPage();
+            y = mx;
+          }
+          pdf.text(line, mx, y);
+          y += 3.5;
+        }
+        y += 2;
+      }
 
       // Divider
       pdf.setDrawColor(226, 232, 240);
