@@ -112,7 +112,7 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
   return (
     <div className="min-h-screen flex flex-col">
 
-      
+
       {/* Auth Content */}
       <div className="flex-1 flex items-center justify-center">
         <div className="flex items-center justify-center h-full flex-col">
@@ -137,7 +137,7 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
               </CardHeader>
               <form onSubmit={handleEmailSubmit}>
                 <CardContent>
-                  
+
                   <div className="relative flex items-center gap-2">
                     <div className="relative flex-1">
                       <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
@@ -166,7 +166,7 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
                   {error && (
                     <p className="mt-2 text-sm text-red-500">{error}</p>
                   )}
-                  
+
                   <div className="mt-4">
                     <div className="relative">
                       <div className="absolute inset-0 flex items-center">
@@ -178,7 +178,7 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
                         </span>
                       </div>
                     </div>
-                    
+
                     <Button
                       type="button"
                       variant="outline"
