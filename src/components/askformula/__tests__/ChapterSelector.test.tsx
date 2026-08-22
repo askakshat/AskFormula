@@ -8,13 +8,15 @@ describe('ChapterSelector toggleAll edge cases', () => {
   const mockChapters: Chapter[] = [
     {
       id: 'ch1',
+      class: '11',
       name: 'Chapter 1',
-      formulas: [{ id: 'f1', name: 'Formula 1', formula: 'E=mc^2', categoryId: 'cat1' }],
+      formulas: [{ id: 'f1', name: 'Formula 1', latex: 'E=mc^2', tags: ['physics'] }],
     },
     {
       id: 'ch2',
+      class: '11',
       name: 'Chapter 2',
-      formulas: [{ id: 'f2', name: 'Formula 2', formula: 'a^2+b^2=c^2', categoryId: 'cat1' }],
+      formulas: [{ id: 'f2', name: 'Formula 2', latex: 'a^2+b^2=c^2', tags: ['math'] }],
     },
   ];
 
