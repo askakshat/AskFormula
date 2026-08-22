@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Search } from "lucide-react"; // Ensure this matches your actual icon library
 import type { Chapter } from "@/lib/formulas";
 
 interface ChapterSelectorProps {
@@ -14,15 +15,14 @@ export default function ChapterSelector({
   selectedIds,
 }: ChapterSelectorProps) {
   const allSelected = chapters.every((ch) => selectedIds.includes(ch.id));
-  const someSelected = chapters.some((ch) => selectedIds.includes(ch.id));
 
   const toggleAll = () => {
     if (allSelected) {
       onSelect([]);
     } else {
-      const filteredIds = filteredChapters.map((ch) => ch.id);
-      const newSelectedIds = Array.from(new Set([...selectedIds, ...filteredIds]));
-      onSelect(newSelectedIds);
+      // Fixed: 'filteredChapters' was undefined. Using 'chapters' instead.
+      const allIds = chapters.map((ch) => ch.id);
+      onSelect(allIds);
     }
   };
 
@@ -33,7 +33,6 @@ export default function ChapterSelector({
       onSelect([...selectedIds, id]);
     }
   };
-
 
   const totalFormulas = chapters
     .filter((ch) => selectedIds.includes(ch.id))
@@ -62,12 +61,15 @@ export default function ChapterSelector({
         )}
       </div>
 
-      {/* Search Input */}
-      <div className="relative">
+      {/* Select All Button (Fixed mismatched tags) */}
+      <button 
+        onClick={toggleAll}
+        className="relative flex w-full items-center text-left"
+      >
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           <Search className="h-4 w-4 text-slate-500" />
         </div>
-        <span className="text-sm font-medium text-white">Select all chapters</span>
+        <span className="text-sm font-medium text-white pl-9">Select all chapters</span>
         <span className="text-xs text-slate-500 ml-auto">{chapters.length} available</span>
       </button>
 
@@ -80,9 +82,10 @@ export default function ChapterSelector({
               key={chapter.id}
               className={`
                 flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer transition-all duration-150
-                ${isSelected
-                  ? "bg-blue-500/[0.08]"
-                  : "hover:bg-white/[0.03]"
+                ${
+                  isSelected
+                    ? "bg-blue-500/[0.08]"
+                    : "hover:bg-white/[0.03]"
                 }
               `}
             >
