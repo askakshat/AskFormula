@@ -41,9 +41,9 @@ export async function generatePDF(
     <div style="margin-bottom: 30px;">
       <h1 style="margin: 0; font-size: 32px; color: #0f172a;">AskFormula</h1>
       <h2 style="margin: 5px 0 0 0; font-size: 18px; color: #64748b; font-weight: 400;">${subject} Formula Sheet</h2>
-      <p style="margin: 5px 0 0 0; font-size: 12px; color: #94a3b8;">Generated on ${dateStr}</p>
-      <div style="margin-top: 15px; border-bottom: 3px solid #3b82f6; width: 60px; display: inline-block;"></div>
-      <div style="margin-top: -3px; border-bottom: 1px solid #cbd5e1; width: calc(100% - 60px); display: inline-block; vertical-align: top;"></div>
+      <p style="margin: 5px 0 0 0; font-size: 12px; color: #000000;">Generated on ${dateStr}</p>
+      <div style="margin-top: 15px; border-bottom: 3px solid #000000; width: 60px; display: inline-block;"></div>
+      <div style="margin-top: -3px; border-bottom: 1px solid #0000001; width: calc(100% - 60px); display: inline-block; vertical-align: top;"></div>
     </div>
   `;
 
