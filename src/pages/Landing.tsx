@@ -86,12 +86,12 @@ export default function Landing() {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-x-hidden">
       <Hero />
 
       <section
         id="app-section"
-        className="relative min-h-screen bg-gradient-to-b from-slate-950 via-[#080c18] to-slate-950"
+        className="relative min-h-screen overflow-x-hidden bg-gradient-to-b from-slate-950 via-[#080c18] to-slate-950"
       >
         {/* Subtle ambient orbs */}
         <div className="absolute top-0 left-1/3 w-80 h-80 bg-blue-500/[0.03] rounded-full blur-[100px]" />
@@ -224,7 +224,7 @@ export default function Landing() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="mb-28"
+                className="mb-28 sm:mb-20 pb-20 sm:pb-0"
               >
                 <FormulaGrid formulas={formulas} />
               </motion.div>
