@@ -34,25 +34,8 @@ export async function generatePDF(
     chapters.get(key)!.push(f);
   }
 
-  // Directly fetch the KaTeX CDN stylesheet and inject PDF-specific overrides.
-  // Make sure version matches the installed katex package (0.18.4)
-  const stylesHtml = `
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.4/dist/katex.min.css" crossorigin="anonymous">
-    <style>
-      /* Force KaTeX text color to black for PDF export */
-      .katex-display > .katex,
-      .katex .mord,
-      .katex .mbin,
-      .katex .mrel,
-      .katex .mopen,
-      .katex .mclose,
-      .katex .mpunct,
-      .katex .mop,
-      .katex {
-        color: #000000 !important;
-      }
-    </style>
-  `;
+  // Directly fetch the KaTeX CDN stylesheet.
+  const stylesHtml = `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" crossorigin="anonymous">`;
 
   let htmlContent = `
     ${stylesHtml}
