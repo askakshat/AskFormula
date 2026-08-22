@@ -20,7 +20,9 @@ export default function ChapterSelector({
     if (allSelected) {
       onSelect([]);
     } else {
-      onSelect(chapters.map((ch) => ch.id));
+      const filteredIds = filteredChapters.map((ch) => ch.id);
+      const newSelectedIds = Array.from(new Set([...selectedIds, ...filteredIds]));
+      onSelect(newSelectedIds);
     }
   };
 
@@ -60,28 +62,10 @@ export default function ChapterSelector({
         )}
       </div>
 
-      {/* Select All */}
-      <button
-        onClick={toggleAll}
-        className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] hover:bg-white/[0.06] hover:border-white/[0.12] transition-all duration-200 cursor-pointer"
-      >
-        <div
-          className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all duration-200 ${
-            allSelected
-              ? "bg-blue-500 border-blue-500"
-              : someSelected
-                ? "bg-blue-500/20 border-blue-400"
-                : "border-slate-600"
-          }`}
-        >
-          {allSelected && (
-            <svg className="w-3 h-3 text-white" viewBox="0 0 12 12" fill="none">
-              <path d="M2 6l3 3 5-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          )}
-          {someSelected && !allSelected && (
-            <div className="w-2 h-0.5 bg-blue-400 rounded" />
-          )}
+      {/* Search Input */}
+      <div className="relative">
+        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <Search className="h-4 w-4 text-slate-500" />
         </div>
         <span className="text-sm font-medium text-white">Select all chapters</span>
         <span className="text-xs text-slate-500 ml-auto">{chapters.length} available</span>
