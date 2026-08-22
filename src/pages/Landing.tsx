@@ -11,13 +11,15 @@ import PDFButton from "@/components/askformula/PDFButton";
 import Footer from "@/components/askformula/Footer";
 import { getChaptersBySubject, filterFormulas } from "@/lib/formulas";
 import { useLocalStorage } from "@/lib/local-storage";
+import { useRef } from "react";
 
 export default function Landing() {
-  const [exam, setExam] = useState<"school" | "jee" | "neet" | null>(null);
-  const [selectedClass, setSelectedClass] = useState<string | null>(null);
-  const [subject, setSubject] = useState<string | null>(null);
-  const [selectedChapters, setSelectedChapters] = useLocalStorage<string[]>("askformula-selected-chapters", []);
-
+  // 2. Define the missing refs inside the component
+  const classRef = useRef<HTMLDivElement>(null);
+  const subjectRef = useRef<HTMLDivElement>(null);
+  const chapterRef = useRef<HTMLDivElement>(null);
+  const formulaRef = useRef<HTMLDivElement>(null);
+  
   const chapters = useMemo(() => {
     if (!subject || !selectedClass) return [];
     return getChaptersBySubject(subject).filter((ch) => ch.class === selectedClass);
