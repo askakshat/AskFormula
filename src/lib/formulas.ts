@@ -4,23 +4,25 @@ export interface Variable {
 }
 
 export interface Formula {
-  id?: string;
+  id: string; // Required non-optional string
   chapterNumber: number;
   chapterName: string;
+  chapter?: string; // Chapter name alias
   topic: string;
   name: string;
   latex: string;
   description: string;
   variables: Variable[];
+  tags: string[]; // Required for FormulaGrid and Landing components
   conditions?: string | null;
-  chapter?: string; // Optional alias for compatibility
 }
 
 export interface Chapter {
-  id?: string; // e.g. "1", "ch-1"
+  id: string; // Required non-optional string (fixes ChapterSelector errors)
   chapterNumber: number;
   chapterName: string;
-  name?: string; // Optional alias for chapterName
+  name: string; // Required alias for chapterName
+  class?: number | string; // Fixes Landing.tsx(21,60) error
   topics: string[];
   formulas: Formula[];
 }
@@ -31,7 +33,7 @@ export interface SubjectData {
   chapters: Chapter[];
 }
 
-// JSON data imports
+// All subjects data
 import rawPhysicsData from "@/data/ncert/physics.json";
 import rawChemistryData from "@/data/ncert/chemistry.json";
 import rawMathematicsData from "@/data/ncert/mathematics.json";
@@ -39,7 +41,7 @@ import rawBiologyData from "@/data/ncert/biology.json";
 
 /**
  * Normalizes input JSON into a valid SubjectData structure.
- * Handles both wrapped { subject, audience, chapters } objects and flat formula arrays.
+ * Guarantees required string IDs, tags arrays, and class properties are populated.
  */
 function normalizeSubjectData(
   raw: any,
@@ -50,36 +52,58 @@ function normalizeSubjectData(
     return { subject: defaultSubject, audience: defaultAudience, chapters: [] };
   }
 
-  // Case 1: Already structured with chapters array
+  // Case 1: Data has chapters array
   if (raw.chapters && Array.isArray(raw.chapters)) {
     return {
       subject: raw.subject || defaultSubject,
       audience: raw.audience || defaultAudience,
-      chapters: raw.chapters.map((ch: any) => ({
-        id: ch.id ?? String(ch.chapterNumber),
-        chapterNumber: ch.chapterNumber ?? 0,
-        chapterName: ch.chapterName || ch.name || "",
-        name: ch.chapterName || ch.name || "",
-        topics: ch.topics || [],
-        formulas: Array.isArray(ch.formulas) ? ch.formulas : [],
-      })),
+      chapters: raw.chapters.map((ch: any, chIdx: number) => {
+        const chId = ch.id ? String(ch.id) : String(ch.chapterNumber ?? chIdx + 1);
+        const chName = ch.chapterName || ch.name || `Chapter ${chIdx + 1}`;
+
+        return {
+          id: chId,
+          chapterNumber: ch.chapterNumber ?? chIdx + 1,
+          chapterName: chName,
+          name: chName,
+          class: ch.class ?? ch.grade ?? 11,
+          topics: Array.isArray(ch.topics) ? ch.topics : [],
+          formulas: (Array.isArray(ch.formulas) ? ch.formulas : []).map(
+            (f: any, fIdx: number) => ({
+              id: f.id ? String(f.id) : `${chId}-${fIdx + 1}`,
+              chapterNumber: f.chapterNumber ?? ch.chapterNumber ?? chIdx + 1,
+              chapterName: f.chapterName || chName,
+              chapter: chName,
+              topic: f.topic || "General",
+              name: f.name || "",
+              latex: f.latex || "",
+              description: f.description || "",
+              variables: Array.isArray(f.variables) ? f.variables : [],
+              tags: Array.isArray(f.tags) ? f.tags : [f.topic || "Formula", chName],
+              conditions: f.conditions ?? null,
+            })
+          ),
+        };
+      }),
     };
   }
 
-  // Case 2: Raw flat array of formula objects
+  // Case 2: Data is a flat array of formulas
   if (Array.isArray(raw)) {
     const chapterMap = new Map<number, Chapter>();
 
-    for (const f of raw) {
+    raw.forEach((f: any, fIdx: number) => {
       const chNum = f.chapterNumber ?? 1;
       const chName = f.chapterName || f.chapter || `Chapter ${chNum}`;
+      const chId = String(chNum);
 
       if (!chapterMap.has(chNum)) {
         chapterMap.set(chNum, {
-          id: String(chNum),
+          id: chId,
           chapterNumber: chNum,
           chapterName: chName,
           name: chName,
+          class: f.class ?? 11,
           topics: [],
           formulas: [],
         });
@@ -89,8 +113,21 @@ function normalizeSubjectData(
       if (f.topic && !chapter.topics.includes(f.topic)) {
         chapter.topics.push(f.topic);
       }
-      chapter.formulas.push(f);
-    }
+
+      chapter.formulas.push({
+        id: f.id ? String(f.id) : `${chId}-${fIdx + 1}`,
+        chapterNumber: chNum,
+        chapterName: chName,
+        chapter: chName,
+        topic: f.topic || "General",
+        name: f.name || "",
+        latex: f.latex || "",
+        description: f.description || "",
+        variables: Array.isArray(f.variables) ? f.variables : [],
+        tags: Array.isArray(f.tags) ? f.tags : [f.topic || "Formula", chName],
+        conditions: f.conditions ?? null,
+      });
+    });
 
     return {
       subject: defaultSubject,
@@ -104,7 +141,6 @@ function normalizeSubjectData(
   return { subject: defaultSubject, audience: defaultAudience, chapters: [] };
 }
 
-// All normalized subjects
 export const allSubjects: SubjectData[] = [
   normalizeSubjectData(rawPhysicsData, "Physics"),
   normalizeSubjectData(rawChemistryData, "Chemistry"),
@@ -126,24 +162,18 @@ export function getFormulasBySubject(subject: string): Formula[] {
   return chapters.flatMap((ch) => ch.formulas);
 }
 
-// Get formulas filtered by chapter IDs or chapter numbers
+// Get formulas filtered by chapter IDs
 export function filterFormulas(
   subject: string,
-  chapterIds: (string | number)[]
+  chapterIds: string[]
 ): Formula[] {
   const chapters = getChaptersBySubject(subject);
-  const normalizedIds = chapterIds.map(String);
-
   return chapters
-    .filter((ch) => {
-      const id = ch.id ? String(ch.id) : String(ch.chapterNumber);
-      return normalizedIds.includes(id) || normalizedIds.includes(String(ch.chapterNumber));
-    })
+    .filter((ch) => chapterIds.includes(ch.id))
     .flatMap((ch) =>
       ch.formulas.map((f) => ({
         ...f,
-        chapter: ch.chapterName,
-        chapterName: f.chapterName || ch.chapterName,
+        chapter: ch.name || ch.chapterName,
       }))
     );
 }
@@ -153,7 +183,7 @@ export function getFormulaCount(chapter: Chapter): number {
   return chapter.formulas.length;
 }
 
-// Search formulas across subjects or within a specific subject
+// Search formulas across all subjects or a specific subject
 export function searchFormulas(query: string, subject?: string): Formula[] {
   const q = query.trim().toLowerCase();
   if (!q) return [];
