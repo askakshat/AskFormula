@@ -19,6 +19,10 @@ export async function generatePDF(
   container.style.padding = "40px";
   container.style.fontFamily = "system-ui, -apple-system, sans-serif";
   container.style.color = "#000000";
+  container.style.background = "linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)";
+  container.style.padding = "40px";
+  container.style.fontFamily = "system-ui, -apple-system, sans-serif";
+  container.style.color = "#0f172a";
 
   const dateStr = new Date().toLocaleDateString("en-IN", {
     year: "numeric",
@@ -35,6 +39,7 @@ export async function generatePDF(
 
   // Directly fetch the KaTeX CDN stylesheet.
   const stylesHtml = `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" crossorigin="anonymous">`;
+  let stylesHtml = `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" crossorigin="anonymous">`;
 
   let htmlContent = `
     ${stylesHtml}
@@ -42,6 +47,9 @@ export async function generatePDF(
       <h1 style="margin: 0; font-size: 32px; color: #000000;">AskFormula</h1>
       <h2 style="margin: 5px 0 0 0; font-size: 18px; color: #333333; font-weight: 400;">${subject} Formula Sheet</h2>
       <p style="margin: 5px 0 0 0; font-size: 12px; color: #666666;">Generated on ${dateStr}</p>
+      <h1 style="margin: 0; font-size: 32px; color: #0f172a;">AskFormula</h1>
+      <h2 style="margin: 5px 0 0 0; font-size: 18px; color: #64748b; font-weight: 400;">${subject} Formula Sheet</h2>
+      <p style="margin: 5px 0 0 0; font-size: 12px; color: #94a3b8;">Generated on ${dateStr}</p>
       <div style="margin-top: 15px; border-bottom: 3px solid #3b82f6; width: 60px; display: inline-block;"></div>
       <div style="margin-top: -3px; border-bottom: 1px solid #cbd5e1; width: calc(100% - 60px); display: inline-block; vertical-align: top;"></div>
     </div>
@@ -71,6 +79,9 @@ export async function generatePDF(
           <div style="
             background: #ffffff;
             border: 1px solid #e2e8f0;
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
             border-radius: 12px;
             padding: 16px;
             page-break-inside: avoid;
@@ -81,6 +92,11 @@ export async function generatePDF(
               <h3 style="margin: 0; font-size: 14px; color: #000000; font-weight: 600;">${formula.name}</h3>
             </div>
             <div style="font-size: 16px; color: #000000; display: block; width: 100%; overflow-x: hidden;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.3); padding-bottom: 8px;">
+              <div style="width: 6px; height: 6px; background-color: #3b82f6; border-radius: 50%;"></div>
+              <h3 style="margin: 0; font-size: 14px; color: #1e293b; font-weight: 600;">${formula.name}</h3>
+            </div>
+            <div style="font-size: 16px; color: #0f172a; display: block; width: 100%; overflow-x: hidden;">
               ${renderedMath}
             </div>
           </div>
