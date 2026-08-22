@@ -13,6 +13,7 @@ const exams: {
   label: string;
   subtitle: string;
   icon: React.ReactNode;
+  disabled?: boolean;
 }[] = [
   {
     type: "school",
@@ -22,15 +23,17 @@ const exams: {
   },
   {
     type: "jee",
-    label: "JEE",
+    label: "JEE (Coming Soon)",
     subtitle: "Main & Advanced",
     icon: <Target className="w-7 h-7" strokeWidth={1.5} />,
+    disabled: true,
   },
   {
     type: "neet",
-    label: "NEET",
+    label: "NEET (Coming Soon)",
     subtitle: "UG Medical Entrance",
     icon: <FlaskConical className="w-7 h-7" strokeWidth={1.5} />,
+    disabled: true,
   },
 ];
 
@@ -45,33 +48,40 @@ export default function ExamSelector({ onSelect, selected }: ExamSelectorProps) 
         {exams.map((exam) => (
           <motion.button
             key={exam.type}
-            whileHover={{ scale: 1.015 }}
-            whileTap={{ scale: 0.985 }}
-            onClick={() => onSelect(exam.type)}
+            whileHover={exam.disabled ? {} : { scale: 1.015 }}
+            whileTap={exam.disabled ? {} : { scale: 0.985 }}
+            onClick={() => !exam.disabled && onSelect(exam.type)}
+            disabled={exam.disabled}
             className={`
-              group relative p-5 rounded-2xl text-left transition-all duration-200 cursor-pointer
+              group relative p-5 rounded-2xl text-left transition-all duration-200
               backdrop-blur-2xl border
               ${
-                selected === exam.type
-                  ? "bg-blue-500/[0.12] border-blue-400/30 shadow-[0_0_30px_-8px_rgba(59,130,246,0.15)]"
-                  : "bg-white/[0.03] border-white/[0.06] hover:bg-white/[0.06] hover:border-white/[0.12]"
+                exam.disabled
+                  ? "bg-white/[0.01] border-white/[0.02] text-slate-500/50 cursor-not-allowed"
+                  : selected === exam.type
+                    ? "bg-blue-500/[0.12] border-blue-400/30 shadow-[0_0_30px_-8px_rgba(59,130,246,0.15)] cursor-pointer"
+                    : "bg-white/[0.03] border-white/[0.06] hover:bg-white/[0.06] hover:border-white/[0.12] cursor-pointer"
               }
             `}
           >
             <div className="relative z-10">
               <div
                 className={`mb-3 ${
-                  selected === exam.type
-                    ? "text-blue-400"
-                    : "text-slate-500 group-hover:text-slate-400"
+                  exam.disabled
+                    ? "text-slate-500/50"
+                    : selected === exam.type
+                      ? "text-blue-400"
+                      : "text-slate-500 group-hover:text-slate-400"
                 } transition-colors duration-200`}
               >
                 {exam.icon}
               </div>
-              <h3 className="text-[15px] font-semibold text-white mb-0.5">
+              <h3 className={`text-[15px] font-semibold mb-0.5 ${exam.disabled ? 'text-white/50' : 'text-white'}`}>
                 {exam.label}
               </h3>
-              <p className="text-xs text-slate-500">{exam.subtitle}</p>
+              <p className={`text-xs ${exam.disabled ? 'text-slate-500/50' : 'text-slate-500'}`}>
+                {exam.subtitle}
+              </p>
             </div>
           </motion.button>
         ))}
