@@ -1,348 +1,1126 @@
-{
-  "subject": "Chemistry",
-  "audience": ["school", "jee", "neet"],
-  "chapters": [
-    {
-      "id": "c_ch1",
-      "class": "11",
-      "name": "Some Basic Concepts of Chemistry",
-      "formulas": [
-        {
-          "id": "c1_1",
-          "name": "Density",
-          "latex": "\\text{Density} = \\frac{\\text{Mass}}{\\text{Volume}}",
-          "tags": ["density", "basic"]
-        },
-        {
-          "id": "c1_2",
-          "name": "Celsius to Fahrenheit",
-          "latex": "^\\circ\\text{F} = \\frac{9}{5}(^\\circ\\text{C}) + 32",
-          "tags": ["temperature", "conversion"]
-        },
-        {
-          "id": "c1_3",
-          "name": "Celsius to Kelvin",
-          "latex": "\\text{K} = ^\\circ\\text{C} + 273.15",
-          "tags": ["temperature", "conversion"]
-        },
-        {
-          "id": "c1_4",
-          "name": "Atomic Mass Unit (amu)",
-          "latex": "1 \\text{ amu} = 1.66056 \\times 10^{-24} \\text{ g}",
-          "tags": ["amu", "mass"]
-        },
-        {
-          "id": "c1_5",
-          "name": "Molarity (M)",
-          "latex": "M = \\frac{\\text{Moles of solute}}{\\text{Volume of solution in L}}",
-          "tags": ["molarity", "concentration"]
-        },
-        {
-          "id": "c1_6",
-          "name": "Dilution Formula",
-          "latex": "M_1V_1 = M_2V_2",
-          "tags": ["dilution", "concentration"]
-        },
-        {
-          "id": "c1_7",
-          "name": "Number of molecules in n moles",
-          "latex": "N = n \\times N_A",
-          "tags": ["moles", "molecules", "avogadro"]
-        },
-        {
-          "id": "c1_8",
-          "name": "Mass Percentage",
-          "latex": "\\text{Mass \\%} = \\left( \\frac{\\text{Mass of solute}}{\\text{Mass of solution}} \\right) \\times 100",
-          "tags": ["concentration", "mass percent"]
-        },
-        {
-          "id": "c1_9",
-          "name": "Avogadro's Number",
-          "latex": "N_A = 6.022 \\times 10^{23} \\text{ mol}^{-1}",
-          "tags": ["avogadro", "constant"]
-        },
-        {
-          "id": "c1_10",
-          "name": "Molecular mass",
-          "latex": "\\text{Molecular mass} = 2 \\times \\text{Vapour density}",
-          "tags": ["molecular mass", "vapour density"]
-        },
-        {
-          "id": "c1_11",
-          "name": "Mole Fraction",
-          "latex": "x_A = \\frac{n_A}{n_A + n_B}",
-          "tags": ["mole fraction", "concentration"]
-        },
-        {
-          "id": "c1_12",
-          "name": "Molality (m)",
-          "latex": "m = \\frac{\\text{Moles of solute}}{\\text{Mass of solvent in kg}}",
-          "tags": ["molality", "concentration"]
-        }
-      ]
-    },
-    {
-      "id": "c_ch2",
-      "class": "11",
-      "name": "Structure of Atom",
-      "formulas": [
-        {
-          "id": "c2_1",
-          "name": "Atomic Number (Z)",
-          "latex": "Z = \\text{Number of protons} = \\text{Number of electrons (neutral atom)}",
-          "tags": ["atomic number", "protons"]
-        },
-        {
-          "id": "c2_2",
-          "name": "Mass Number (A)",
-          "latex": "A = Z + n",
-          "tags": ["mass number", "neutrons"]
-        },
-        {
-          "id": "c2_3",
-          "name": "Frequency, Wavelength, Velocity",
-          "latex": "c = \\nu \\lambda",
-          "tags": ["light", "wave"]
-        },
-        {
-          "id": "c2_4",
-          "name": "Energy of a Quantum",
-          "latex": "E = h\\nu = \\frac{hc}{\\lambda}",
-          "tags": ["energy", "photon", "planck"]
-        },
-        {
-          "id": "c2_5",
-          "name": "Kinetic Energy of Ejected Electron",
-          "latex": "K.E. = h\\nu - h\\nu_0 = h\\nu - W",
-          "tags": ["photoelectric", "kinetic energy"]
-        },
-        {
-          "id": "c2_6",
-          "name": "Rydberg's Formula",
-          "latex": "\\bar{\\nu} = \\frac{1}{\\lambda} = R_H \\left( \\frac{1}{n_1^2} - \\frac{1}{n_2^2} \\right)",
-          "tags": ["rydberg", "spectrum"]
-        },
-        {
-          "id": "c2_7",
-          "name": "Energy difference during transition",
-          "latex": "\\Delta E = E_2 - E_1 = h\\nu",
-          "tags": ["energy transition", "bohr"]
-        },
-        {
-          "id": "c2_8",
-          "name": "Angular momentum of electron",
-          "latex": "mvr = \\frac{nh}{2\\pi}",
-          "tags": ["angular momentum", "bohr"]
-        },
-        {
-          "id": "c2_9",
-          "name": "Radii of stationary states",
-          "latex": "r_n = n^2 a_0",
-          "tags": ["bohr", "radius"]
-        },
-        {
-          "id": "c2_10",
-          "name": "Energy of stationary state",
-          "latex": "E_n = -R_H \\left( \\frac{1}{n^2} \\right)",
-          "tags": ["energy", "bohr", "electron"]
-        },
-        {
-          "id": "c2_11",
-          "name": "de Broglie's Wavelength",
-          "latex": "\\lambda = \\frac{h}{p} = \\frac{h}{mv}",
-          "tags": ["de broglie", "wavelength", "quantum"]
-        },
-        {
-          "id": "c2_12",
-          "name": "Heisenberg's Uncertainty Principle",
-          "latex": "\\Delta x \\cdot \\Delta p \\ge \\frac{h}{4\\pi}",
-          "tags": ["heisenberg", "uncertainty", "momentum"]
-        }
-      ]
-    },
-    {
-      "id": "c_ch3",
-      "class": "11",
-      "name": "Chemical Bonding",
-      "formulas": [
-        {
-          "id": "c3_1",
-          "name": "Formal Charge",
-          "latex": "FC = V - N - \\frac{B}{2}",
-          "tags": ["formal charge", "bonding"]
-        },
-        {
-          "id": "c3_2",
-          "name": "Dipole Moment",
-          "latex": "\\mu = Q \\times r",
-          "tags": ["dipole moment", "bonding"]
-        }
-      ]
-    },
-    {
-      "id": "c_ch4",
-      "class": "11",
-      "name": "States Of Matter",
-      "formulas": [
-        {
-          "id": "c4_1",
-          "name": "Boyle's Law",
-          "latex": "P_1V_1 = P_2V_2 \\quad (T \\text{ constant})",
-          "tags": ["boyle", "gas law"]
-        },
-        {
-          "id": "c4_2",
-          "name": "Charles' Law",
-          "latex": "\\frac{V_1}{T_1} = \\frac{V_2}{T_2} \\quad (P \\text{ constant})",
-          "tags": ["charles", "gas law"]
-        },
-        {
-          "id": "c4_3",
-          "name": "Gay Lussac's Law",
-          "latex": "\\frac{P_1}{T_1} = \\frac{P_2}{T_2} \\quad (V \\text{ constant})",
-          "tags": ["gay lussac", "gas law"]
-        },
-        {
-          "id": "c4_4",
-          "name": "Avogadro Law",
-          "latex": "V \\propto n \\quad (P, T \\text{ constant})",
-          "tags": ["avogadro", "gas law"]
-        },
-        {
-          "id": "c4_5",
-          "name": "Ideal Gas Equation",
-          "latex": "PV = nRT",
-          "tags": ["ideal gas", "thermodynamics"]
-        },
-        {
-          "id": "c4_6",
-          "name": "Density and Molar Mass",
-          "latex": "d = \\frac{PM}{RT}",
-          "tags": ["density", "molar mass", "gas"]
-        },
-        {
-          "id": "c4_7",
-          "name": "Dalton's Law of Partial Pressure",
-          "latex": "P_{total} = P_1 + P_2 + P_3 + \\dots",
-          "tags": ["dalton", "partial pressure"]
-        },
-        {
-          "id": "c4_8",
-          "name": "Partial pressure in terms of mole fraction",
-          "latex": "P_i = x_i \\cdot P_{total}",
-          "tags": ["partial pressure", "mole fraction"]
-        },
-        {
-          "id": "c4_9",
-          "name": "Vander Waals Equation",
-          "latex": "\\left( P + \\frac{an^2}{V^2} \\right)(V - nb) = nRT",
-          "tags": ["van der waals", "real gas"]
-        }
-      ]
-    },
-    {
-      "id": "c_ch5",
-      "class": "11",
-      "name": "Thermodynamics",
-      "formulas": [
-        {
-          "id": "c5_1",
-          "name": "First Law of Thermodynamics",
-          "latex": "\\Delta U = q + w",
-          "tags": ["first law", "internal energy"]
-        },
-        {
-          "id": "c5_2",
-          "name": "Work Done",
-          "latex": "W = -P\\Delta V",
-          "tags": ["work", "thermodynamics"]
-        },
-        {
-          "id": "c5_3",
-          "name": "Work Done (Variable Pressure)",
-          "latex": "W = -\\int_{V_1}^{V_2} P_{ext} dV",
-          "tags": ["work", "integration"]
-        },
-        {
-          "id": "c5_4",
-          "name": "Work Done (Isothermal Reversible)",
-          "latex": "W_{rev} = -2.303 nRT \\log \\left( \\frac{V_2}{V_1} \\right)",
-          "tags": ["work", "reversible", "isothermal"]
-        },
-        {
-          "id": "c5_5",
-          "name": "Enthalpy Change",
-          "latex": "\\Delta H = \\Delta U + P\\Delta V",
-          "tags": ["enthalpy", "thermodynamics"]
-        },
-        {
-          "id": "c5_6",
-          "name": "Heat Capacity Relation",
-          "latex": "C_p - C_v = R",
-          "tags": ["heat capacity", "gas constant"]
-        },
-        {
-          "id": "c5_7",
-          "name": "Entropy Change",
-          "latex": "\\Delta S = \\frac{q_{rev}}{T}",
-          "tags": ["entropy", "reversible"]
-        },
-        {
-          "id": "c5_8",
-          "name": "Total Entropy Change",
-          "latex": "\\Delta S_{total} = \\Delta S_{system} + \\Delta S_{surr} > 0",
-          "tags": ["entropy", "spontaneous"]
-        },
-        {
-          "id": "c5_9",
-          "name": "Gibbs Free Energy",
-          "latex": "\\Delta G = \\Delta H - T\\Delta S",
-          "tags": ["gibbs", "free energy", "spontaneity"]
-        }
-      ]
-    },
-    {
-      "id": "c_ch6",
-      "class": "11",
-      "name": "Equilibrium",
-      "formulas": [
-        {
-          "id": "c6_1",
-          "name": "Equilibrium Constant (Kc)",
-          "latex": "K_c = \\frac{[C]^c [D]^d}{[A]^a [B]^b}",
-          "tags": ["equilibrium", "constant"]
-        },
-        {
-          "id": "c6_2",
-          "name": "Equilibrium Constant (Kp)",
-          "latex": "K_p = K_c (RT)^{\\Delta n_g}",
-          "tags": ["equilibrium", "kp", "kc"]
-        },
-        {
-          "id": "c6_3",
-          "name": "pH Value",
-          "latex": "\\text{pH} = -\\log[H^+]",
-          "tags": ["ph", "acid"]
-        },
-        {
-          "id": "c6_4",
-          "name": "pOH Value",
-          "latex": "\\text{pOH} = -\\log[OH^-]",
-          "tags": ["poh", "base"]
-        },
-        {
-          "id": "c6_5",
-          "name": "Ionic Product of Water",
-          "latex": "K_w = [H^+][OH^-] = 10^{-14} \\quad (\\text{at 298 K})",
-          "tags": ["ionic product", "water"]
-        },
-        {
-          "id": "c6_6",
-          "name": "Gibbs Energy and Equilibrium",
-          "latex": "\\Delta G = -RT \\ln K",
-          "tags": ["gibbs", "equilibrium constant"]
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "chapterNumber": 1,
+    "chapterName": "Some Basic Concepts of Chemistry",
+    "topic": "Fundamental Physical Relations & Units",
+    "name": "Density",
+    "latex": "\\text{Density} = \\frac{\\text{Mass}}{\\text{Volume}}",
+    "description": "Mass per unit volume of a substance.",
+    "variables": [
+      {
+        "symbol": "d",
+        "meaning": "Density (kg/m^3 or g/cm^3)"
+      },
+      {
+        "symbol": "m",
+        "meaning": "Mass"
+      },
+      {
+        "symbol": "V",
+        "meaning": "Volume"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 1,
+    "chapterName": "Some Basic Concepts of Chemistry",
+    "topic": "Temperature Scales",
+    "name": "Celsius to Kelvin Conversion",
+    "latex": "K = {^\\circ\\text{C}} + 273.15",
+    "description": "Relation between thermodynamic temperature in Kelvin and Celsius scale.",
+    "variables": [
+      {
+        "symbol": "K",
+        "meaning": "Temperature in Kelvin"
+      },
+      {
+        "symbol": "{^\\circ\\text{C}}",
+        "meaning": "Temperature in degrees Celsius"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 1,
+    "chapterName": "Some Basic Concepts of Chemistry",
+    "topic": "Temperature Scales",
+    "name": "Fahrenheit to Celsius Conversion",
+    "latex": "{^\\circ\\text{F}} = \\frac{9}{5}({^\\circ\\text{C}}) + 32",
+    "description": "Conversion formula between Fahrenheit and Celsius scales.",
+    "variables": [
+      {
+        "symbol": "{^\\circ\\text{F}}",
+        "meaning": "Temperature in degrees Fahrenheit"
+      },
+      {
+        "symbol": "{^\\circ\\text{C}}",
+        "meaning": "Temperature in degrees Celsius"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 1,
+    "chapterName": "Some Basic Concepts of Chemistry",
+    "topic": "Atomic Mass & Mole Concept",
+    "name": "Atomic Mass Unit (amu / u)",
+    "latex": "1\\text{ amu} = 1.66056 \\times 10^{-24}\\text{ g} = 1.66056 \\times 10^{-27}\\text{ kg}",
+    "description": "Mass exactly equal to one-twelfth the mass of one carbon-12 atom.",
+    "variables": [
+      {
+        "symbol": "\\text{amu}",
+        "meaning": "Atomic mass unit (unified mass, u)"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 1,
+    "chapterName": "Some Basic Concepts of Chemistry",
+    "topic": "Atomic Mass & Mole Concept",
+    "name": "Number of Gram Atoms (Moles of Atoms)",
+    "latex": "\\text{Number of Gram Atoms} = \\frac{\\text{Weight (in grams)}}{\\text{Gram Atomic Mass}}",
+    "description": "Calculates number of moles of atoms present in a given mass.",
+    "variables": [
+      {
+        "symbol": "w",
+        "meaning": "Weight in grams"
+      },
+      {
+        "symbol": "GAM",
+        "meaning": "Gram atomic mass (g/mol)"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 1,
+    "chapterName": "Some Basic Concepts of Chemistry",
+    "topic": "Molecular Mass & Formula Mass",
+    "name": "Molecular Mass of A_x B C_y",
+    "latex": "\\text{Molecular Mass}(A_x B C_y) = x \\cdot \\text{Atomic Mass}(A) + \\text{Atomic Mass}(B) + y \\cdot \\text{Atomic Mass}(C)",
+    "description": "Sum of atomic masses of the elements present in a molecule.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 1,
+    "chapterName": "Some Basic Concepts of Chemistry",
+    "topic": "Equivalent Weight",
+    "name": "Equivalent Weight of Element",
+    "latex": "E = \\frac{\\text{Atomic Weight}}{\\text{Valency}} \\implies A = E \\times V",
+    "description": "Ratio of atomic weight to valency of the element.",
+    "variables": [
+      {
+        "symbol": "E",
+        "meaning": "Equivalent weight"
+      },
+      {
+        "symbol": "A",
+        "meaning": "Atomic weight"
+      },
+      {
+        "symbol": "V",
+        "meaning": "Valency"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 1,
+    "chapterName": "Some Basic Concepts of Chemistry",
+    "topic": "Equivalent Weight",
+    "name": "Equivalent Weight of Common Salt",
+    "latex": "E_{\\text{salt}} = \\frac{\\text{Formula Weight of Salt}}{\\text{Total Charge on Cationic Part}}",
+    "description": "Equivalent weight of neutral salts like NaCl.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 1,
+    "chapterName": "Some Basic Concepts of Chemistry",
+    "topic": "Equivalent Weight",
+    "name": "Equivalent Weight of Acidic Salt",
+    "latex": "E_{\\text{acidic salt}} = \\frac{\\text{Formula Weight of Salt}}{\\text{Number of Displaceable H Atoms in Salt}}",
+    "description": "Equivalent weight of salts containing replaceable hydrogen (e.g., NaHCO3, NaHSO4).",
+    "variables": []
+  },
+  {
+    "chapterNumber": 1,
+    "chapterName": "Some Basic Concepts of Chemistry",
+    "topic": "Equivalent Weight",
+    "name": "Equivalent Weight of Acid",
+    "latex": "E_{\\text{acid}} = \\frac{\\text{Molecular Weight of Acid}}{\\text{Basicity (Number of replaceable } \\text{H}^+ \\text{ ions})}",
+    "description": "Ratio of molecular weight of acid to its basicity.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 1,
+    "chapterName": "Some Basic Concepts of Chemistry",
+    "topic": "Equivalent Weight",
+    "name": "Equivalent Weight of Base",
+    "latex": "E_{\\text{base}} = \\frac{\\text{Molecular Weight of Base}}{\\text{Acidity (Number of replaceable } \\text{OH}^- \\text{ ions})}",
+    "description": "Ratio of molecular weight of base to its acidity.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 1,
+    "chapterName": "Some Basic Concepts of Chemistry",
+    "topic": "Equivalent Weight",
+    "name": "Gram Equivalents",
+    "latex": "\\text{Gram Equivalents} = \\frac{\\text{Mass (in grams)}}{\\text{Equivalent Weight}}",
+    "description": "Number of gram equivalents of a substance.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 1,
+    "chapterName": "Some Basic Concepts of Chemistry",
+    "topic": "Stoichiometry & Vapour Density",
+    "name": "Molecular Weight from Vapour Density",
+    "latex": "\\text{Molecular Weight} = 2 \\times \\text{Vapour Density (V.D.)}",
+    "description": "Relates molecular mass of a volatile substance to its vapour density relative to H2.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 1,
+    "chapterName": "Some Basic Concepts of Chemistry",
+    "topic": "Empirical & Molecular Formula",
+    "name": "Molecular Formula Ratio (n)",
+    "latex": "n = \\frac{\\text{Molecular Formula Weight}}{\\text{Empirical Formula Weight}} \\implies \\text{Molecular Formula} = (\\text{Empirical Formula})_n",
+    "description": "Factor n relating empirical formula to molecular formula (n is a positive integer).",
+    "variables": []
+  },
+  {
+    "chapterNumber": 1,
+    "chapterName": "Some Basic Concepts of Chemistry",
+    "topic": "Percentage Composition",
+    "name": "Mass Percentage of Element in Compound",
+    "latex": "\\%\\text{ of Element} = \\frac{\\text{Mass of the element in 1 mol compound}}{\\text{Molar mass of the compound}} \\times 100",
+    "description": "Percentage composition of an element in a chemical compound.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 1,
+    "chapterName": "Some Basic Concepts of Chemistry",
+    "topic": "Concentration Terms",
+    "name": "Mass Percentage (w/w %)",
+    "latex": "\\text{Mass Percentage (w/w)} = \\frac{\\text{Mass of Solute}}{\\text{Mass of Solution}} \\times 100",
+    "description": "Mass of solute per 100 units mass of solution.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 1,
+    "chapterName": "Some Basic Concepts of Chemistry",
+    "topic": "Concentration Terms",
+    "name": "Mole Fraction (\\chi)",
+    "latex": "\\chi_A = \\frac{n_A}{n_A + n_B}, \\quad \\chi_B = \\frac{n_B}{n_A + n_B}, \\quad \\chi_A + \\chi_B = 1",
+    "description": "Ratio of moles of a component to total moles in solution. Sum of mole fractions equals 1.",
+    "variables": [
+      {
+        "symbol": "\\chi_A",
+        "meaning": "Mole fraction of component A"
+      },
+      {
+        "symbol": "n_A",
+        "meaning": "Moles of A"
+      },
+      {
+        "symbol": "n_B",
+        "meaning": "Moles of B"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 1,
+    "chapterName": "Some Basic Concepts of Chemistry",
+    "topic": "Concentration Terms",
+    "name": "Molarity (M)",
+    "latex": "M = \\frac{\\text{Number of Moles of Solute}}{\\text{Volume of Solution in Litres}} = \\frac{w_B \\times 1000}{M_B \\times V(\\text{mL})}",
+    "description": "Moles of solute per litre of solution (temperature dependent).",
+    "variables": [
+      {
+        "symbol": "M",
+        "meaning": "Molarity (mol/L)"
+      },
+      {
+        "symbol": "w_B",
+        "meaning": "Mass of solute (g)"
+      },
+      {
+        "symbol": "M_B",
+        "meaning": "Molar mass of solute (g/mol)"
+      },
+      {
+        "symbol": "V",
+        "meaning": "Volume in mL"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 1,
+    "chapterName": "Some Basic Concepts of Chemistry",
+    "topic": "Concentration Terms",
+    "name": "Molality (m)",
+    "latex": "m = \\frac{\\text{Number of Moles of Solute}}{\\text{Mass of Solvent in kg}} = \\frac{w_B \\times 1000}{M_B \\times w_A(\\text{g})}",
+    "description": "Moles of solute per kilogram of solvent (independent of temperature).",
+    "variables": [
+      {
+        "symbol": "m",
+        "meaning": "Molality (mol/kg)"
+      },
+      {
+        "symbol": "w_A",
+        "meaning": "Mass of solvent (g)"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 2,
+    "chapterName": "Structure of Atom",
+    "topic": "Subatomic Particles",
+    "name": "Charge-to-Mass Ratio of Electron (e/m_e)",
+    "latex": "\\frac{e}{m_e} = 1.758820 \\times 10^{11}\\text{ C}\\cdot\\text{kg}^{-1}",
+    "description": "Discovered by J.J. Thomson for cathode ray electrons.",
+    "variables": [
+      {
+        "symbol": "e",
+        "meaning": "Magnitude of electron charge (1.6022 x 10^-19 C)"
+      },
+      {
+        "symbol": "m_e",
+        "meaning": "Electron mass (9.10938 x 10^-31 kg)"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 2,
+    "chapterName": "Structure of Atom",
+    "topic": "Subatomic Particles",
+    "name": "Subatomic Particles Fundamental Properties Table",
+    "latex": "\\begin{array}{|c|c|c|c|c|}\\hline \\text{Particle} & \\text{Symbol} & \\text{Absolute Charge (C)} & \\text{Relative Charge} & \\text{Mass (kg)} \\\\ \\hline \\text{Electron} & e^- & -1.6022 \\times 10^{-19} & -1 & 9.10938 \\times 10^{-31} \\\\ \\text{Proton} & p & +1.6022 \\times 10^{-19} & +1 & 1.67262 \\times 10^{-27} \\\\ \\text{Neutron} & n & 0 & 0 & 1.67493 \\times 10^{-27} \\\\ \\hline \\end{array}",
+    "description": "Comparison of fundamental subatomic particles.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 2,
+    "chapterName": "Structure of Atom",
+    "topic": "Atomic Symbols",
+    "name": "Atomic Number & Mass Number",
+    "latex": "Z = \\text{Number of Protons} = \\text{Number of Electrons (in neutral atom)}, \\quad A = Z + N",
+    "description": "Nuclear notation representation _Z^A X where A is mass number and Z is atomic number.",
+    "variables": [
+      {
+        "symbol": "Z",
+        "meaning": "Atomic number"
+      },
+      {
+        "symbol": "A",
+        "meaning": "Mass number"
+      },
+      {
+        "symbol": "N",
+        "meaning": "Number of neutrons"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 2,
+    "chapterName": "Structure of Atom",
+    "topic": "Wave Theory of Radiation",
+    "name": "Wave Relation (Wavelength, Frequency & Speed)",
+    "latex": "c = \\nu \\lambda, \\quad \\bar{\\nu} = \\frac{1}{\\lambda} = \\frac{\\nu}{c}",
+    "description": "Relates wave velocity, frequency, wavelength, and wave number.",
+    "variables": [
+      {
+        "symbol": "c",
+        "meaning": "Speed of light (2.998 x 10^8 m/s)"
+      },
+      {
+        "symbol": "\\nu",
+        "meaning": "Frequency (Hz or s^-1)"
+      },
+      {
+        "symbol": "\\lambda",
+        "meaning": "Wavelength (m)"
+      },
+      {
+        "symbol": "\\bar{\\nu}",
+        "meaning": "Wave number (m^-1 or cm^-1)"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 2,
+    "chapterName": "Structure of Atom",
+    "topic": "Quantum Theory & Photoelectric Effect",
+    "name": "Planck's Quantum Theory & Energy of Photon",
+    "latex": "E = h\\nu = \\frac{hc}{\\lambda} = hc\\bar{\\nu}",
+    "description": "Quantized energy of a single photon (Planck constant h = 6.626 x 10^-34 J s).",
+    "variables": [
+      {
+        "symbol": "h",
+        "meaning": "Planck's constant (6.626 x 10^-34 J s)"
+      },
+      {
+        "symbol": "E",
+        "meaning": "Energy of photon"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 2,
+    "chapterName": "Structure of Atom",
+    "topic": "Quantum Theory & Photoelectric Effect",
+    "name": "Einstein's Photoelectric Equation",
+    "latex": "E = W_0 + K.E._{\\max} \\implies h\\nu = h\\nu_0 + \\frac{1}{2}m_e v_{\\max}^2 = e V_s",
+    "description": "Relates incident photon energy to work function and kinetic energy of ejected photoelectrons.",
+    "variables": [
+      {
+        "symbol": "W_0",
+        "meaning": "Work function (threshold energy h nu_0)"
+      },
+      {
+        "symbol": "\\nu_0",
+        "meaning": "Threshold frequency"
+      },
+      {
+        "symbol": "V_s",
+        "meaning": "Stopping potential"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 2,
+    "chapterName": "Structure of Atom",
+    "topic": "Bohr's Model",
+    "name": "Bohr's Angular Momentum Quantization",
+    "latex": "m_e v r = \\frac{nh}{2\\pi} = n\\hbar \\quad (n = 1, 2, 3, \\dots)",
+    "description": "Quantization condition of orbital angular momentum in hydrogenic atoms.",
+    "variables": [
+      {
+        "symbol": "n",
+        "meaning": "Principal quantum number / orbit number"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 2,
+    "chapterName": "Structure of Atom",
+    "topic": "Bohr's Model",
+    "name": "Bohr's Frequency Rule",
+    "latex": "\\nu = \\frac{\\Delta E}{h} = \\frac{E_2 - E_1}{h}",
+    "description": "Frequency of radiation emitted or absorbed during electron transition between two energy states.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 2,
+    "chapterName": "Structure of Atom",
+    "topic": "Bohr's Model",
+    "name": "Radius of Bohr Stationary States",
+    "latex": "r_n = n^2 a_0 \\frac{1}{Z} = 52.9 \\frac{n^2}{Z}\\text{ pm} = 0.529 \\frac{n^2}{Z}\\text{ \\AA}",
+    "description": "Radius of n-th Bohr orbit (Bohr radius a_0 = 52.9 pm = 0.529 A).",
+    "variables": [
+      {
+        "symbol": "a_0",
+        "meaning": "Bohr radius (52.9 pm)"
+      },
+      {
+        "symbol": "Z",
+        "meaning": "Atomic number"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 2,
+    "chapterName": "Structure of Atom",
+    "topic": "Bohr's Model",
+    "name": "Energy of Stationary States",
+    "latex": "E_n = -R_H \\left(\\frac{Z^2}{n^2}\\right) = -2.18 \\times 10^{-18}\\left(\\frac{Z^2}{n^2}\\right)\\text{ J} = -13.6\\left(\\frac{Z^2}{n^2}\\right)\\text{ eV}",
+    "description": "Total energy of electron in n-th stationary state of a hydrogenic atom.",
+    "variables": [
+      {
+        "symbol": "R_H",
+        "meaning": "Rydberg constant for energy (2.18 x 10^-18 J)"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 2,
+    "chapterName": "Structure of Atom",
+    "topic": "Hydrogen Spectrum",
+    "name": "Rydberg Formula for Spectral Lines",
+    "latex": "\\bar{\\nu} = \\frac{1}{\\lambda} = R_H Z^2 \\left[\\frac{1}{n_1^2} - \\frac{1}{n_2^2}\\right]",
+    "description": "Wave number of emitted photons in hydrogen emission spectrum (R_H = 109677 cm^-1 = 1.09677 x 10^7 m^-1).",
+    "variables": [
+      {
+        "symbol": "n_1",
+        "meaning": "Lower energy level"
+      },
+      {
+        "symbol": "n_2",
+        "meaning": "Higher energy level (n_2 > n_1)"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 2,
+    "chapterName": "Structure of Atom",
+    "topic": "Quantum Mechanics",
+    "name": "de Broglie Wavelength",
+    "latex": "\\lambda = \\frac{h}{mv} = \\frac{h}{p} = \\frac{h}{\\sqrt{2m(K.E.)}}",
+    "description": "Dual wave-particle nature of matter proposed by Louis de Broglie.",
+    "variables": [
+      {
+        "symbol": "\\lambda",
+        "meaning": "de Broglie matter wavelength"
+      },
+      {
+        "symbol": "p",
+        "meaning": "Momentum (mv)"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 2,
+    "chapterName": "Structure of Atom",
+    "topic": "Quantum Mechanics",
+    "name": "Heisenberg Uncertainty Principle",
+    "latex": "\\Delta x \\cdot \\Delta p \\ge \\frac{h}{4\\pi} \\implies \\Delta x \\cdot (m\\Delta v) \\ge \\frac{h}{4\\pi}",
+    "description": "Fundamental limit on precision of simultaneously measuring position and momentum.",
+    "variables": [
+      {
+        "symbol": "\\Delta x",
+        "meaning": "Uncertainty in position"
+      },
+      {
+        "symbol": "\\Delta p",
+        "meaning": "Uncertainty in momentum"
+      },
+      {
+        "symbol": "\\Delta v",
+        "meaning": "Uncertainty in velocity"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 2,
+    "chapterName": "Structure of Atom",
+    "topic": "Quantum Mechanics",
+    "name": "Time-Independent Schr\u00f6dinger Wave Equation",
+    "latex": "\\nabla^2 \\psi + \\frac{8\\pi^2 m}{h^2}(E - V)\\psi = 0, \\quad \\nabla^2 = \\frac{\\partial^2}{\\partial x^2} + \\frac{\\partial^2}{\\partial y^2} + \\frac{\\partial^2}{\\partial z^2}",
+    "description": "Fundamental wave equation of quantum mechanics describing atomic orbital wavefunctions.",
+    "variables": [
+      {
+        "symbol": "\\nabla^2",
+        "meaning": "Laplacian operator"
+      },
+      {
+        "symbol": "\\psi",
+        "meaning": "Wavefunction"
+      },
+      {
+        "symbol": "E",
+        "meaning": "Total energy"
+      },
+      {
+        "symbol": "V",
+        "meaning": "Potential energy"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 2,
+    "chapterName": "Structure of Atom",
+    "topic": "Quantum Numbers & Nodes",
+    "name": "Azimuthal Quantum Number (l) and Subshells",
+    "latex": "\\begin{array}{|c|c|c|c|c|c|c|}\\hline l & 0 & 1 & 2 & 3 & 4 & 5 \\\\ \\hline \\text{Subshell} & s & p & d & f & g & h \\\\ \\hline \\text{Number of Orbitals } (2l+1) & 1 & 3 & 5 & 7 & 9 & 11 \\\\ \\hline \\end{array}",
+    "description": "Relation between azimuthal quantum number l, subshell notation, and orbital degeneracy.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 2,
+    "chapterName": "Structure of Atom",
+    "topic": "Quantum Numbers & Nodes",
+    "name": "Radial, Angular, and Total Nodes",
+    "latex": "\\text{Angular Nodes} = l, \\quad \\text{Radial Nodes} = n - l - 1, \\quad \\text{Total Nodes} = (n - l - 1) + l = n - 1",
+    "description": "Formulas for calculating radial and angular nodal surfaces in atomic orbitals.",
+    "variables": [
+      {
+        "symbol": "n",
+        "meaning": "Principal quantum number"
+      },
+      {
+        "symbol": "l",
+        "meaning": "Azimuthal quantum number"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 2,
+    "chapterName": "Structure of Atom",
+    "topic": "Electronic Configuration",
+    "name": "Aufbau Principle Orbitals Energy Ordering",
+    "latex": "1s < 2s < 2p < 3s < 3p < 4s < 3d < 4p < 5s < 4d < 5p < 6s < 4f < 5d < 6p < 7s \\dots",
+    "description": "Increasing order of orbital energies based on (n + l) rule.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 3,
+    "chapterName": "Classification of Elements and Periodicity in Properties",
+    "topic": "Modern Periodic Table",
+    "name": "Periodic Table Organization & Blocks",
+    "latex": "\\text{Modern Periodic Law: Properties of elements are periodic functions of their atomic numbers } Z.",
+    "description": "The table comprises 7 horizontal periods and 18 vertical groups across 4 blocks: s-block (Groups 1-2), p-block (Groups 13-18), d-block (Groups 3-12), and f-block (Lanthanides 57-71, Actinides 89-103).",
+    "variables": []
+  },
+  {
+    "chapterNumber": 4,
+    "chapterName": "Chemical Bonding and Molecular Structure",
+    "topic": "Lewis Structures",
+    "name": "Formal Charge (F.C.)",
+    "latex": "\\text{F.C.} = V - N_{\\text{non-bonding}} - \\frac{1}{2}N_{\\text{bonding}} = V - L - \\frac{1}{2}B",
+    "description": "Calculates electrical charge difference on an individual atom in a Lewis structure.",
+    "variables": [
+      {
+        "symbol": "V",
+        "meaning": "Total number of valence electrons in free atom"
+      },
+      {
+        "symbol": "L",
+        "meaning": "Total number of non-bonding (lone pair) electrons"
+      },
+      {
+        "symbol": "B",
+        "meaning": "Total number of bonding (shared) electrons"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 4,
+    "chapterName": "Chemical Bonding and Molecular Structure",
+    "topic": "Polarity of Bonds",
+    "name": "Dipole Moment (\\mu)",
+    "latex": "\\mu = q \\times d, \\quad 1\\text{ D} = 3.33564 \\times 10^{-30}\\text{ C}\\cdot\\text{m} = 10^{-18}\\text{ esu}\\cdot\\text{cm}",
+    "description": "Vector product of charge magnitude and distance of separation between opposite charges in Debye (D).",
+    "variables": [
+      {
+        "symbol": "\\mu",
+        "meaning": "Dipole moment"
+      },
+      {
+        "symbol": "q",
+        "meaning": "Net charge"
+      },
+      {
+        "symbol": "d",
+        "meaning": "Bond distance"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 4,
+    "chapterName": "Chemical Bonding and Molecular Structure",
+    "topic": "Molecular Orbital Theory (MOT)",
+    "name": "Linear Combination of Atomic Orbitals (LCAO)",
+    "latex": "\\psi_{\\text{MO}} = \\psi_A \\pm \\psi_B \\implies \\psi_{\\sigma} = \\psi_A + \\psi_B \\; (\\text{Bonding}), \\quad \\psi_{\\sigma^*} = \\psi_A - \\psi_B \\; (\\text{Antibonding})",
+    "description": "Wavefunction representation of bonding and antibonding molecular orbitals.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 4,
+    "chapterName": "Chemical Bonding and Molecular Structure",
+    "topic": "Molecular Orbital Theory (MOT)",
+    "name": "Bond Order",
+    "latex": "\\text{Bond Order} = \\frac{1}{2}(N_b - N_a)",
+    "description": "Half the difference between number of electrons in bonding (Nb) and antibonding (Na) orbitals.",
+    "variables": [
+      {
+        "symbol": "N_b",
+        "meaning": "Number of electrons in bonding molecular orbitals"
+      },
+      {
+        "symbol": "N_a",
+        "meaning": "Number of electrons in antibonding molecular orbitals"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 5,
+    "chapterName": "States of Matter",
+    "topic": "Gas Laws",
+    "name": "Boyle's Law (Pressure-Volume Relationship)",
+    "latex": "P \\propto \\frac{1}{V} \\implies P_1 V_1 = P_2 V_2 \\quad (\\text{at constant } T, n)",
+    "description": "At constant temperature and moles, pressure of a fixed mass of gas is inversely proportional to its volume.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 5,
+    "chapterName": "States of Matter",
+    "topic": "Gas Laws",
+    "name": "Density Relation from Boyle's Law",
+    "latex": "d = \\left[\\frac{m}{k_1}\\right]P \\implies d \\propto P",
+    "description": "At constant temperature, density of a gas is directly proportional to its pressure.",
+    "variables": [
+      {
+        "symbol": "d",
+        "meaning": "Density (m/V)"
+      },
+      {
+        "symbol": "P",
+        "meaning": "Pressure"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 5,
+    "chapterName": "States of Matter",
+    "topic": "Gas Laws",
+    "name": "Charles's Law (Temperature-Volume Relationship)",
+    "latex": "V \\propto T \\implies \\frac{V_1}{T_1} = \\frac{V_2}{T_2} \\quad (\\text{at constant } P, n)",
+    "description": "At constant pressure, volume of a fixed mass of gas is directly proportional to absolute temperature.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 5,
+    "chapterName": "States of Matter",
+    "topic": "Gas Laws",
+    "name": "Gay-Lussac's Law (Pressure-Temperature Relationship)",
+    "latex": "P \\propto T \\implies \\frac{P_1}{T_1} = \\frac{P_2}{T_2} \\quad (\\text{at constant } V, n)",
+    "description": "At constant volume, pressure of a fixed mass of gas is directly proportional to absolute temperature.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 5,
+    "chapterName": "States of Matter",
+    "topic": "Gas Laws",
+    "name": "Avogadro's Law (Volume-Amount Relationship)",
+    "latex": "V \\propto n \\implies V = k_4 n \\quad (\\text{at constant } T, P)",
+    "description": "Equal volumes of all gases under the same temperature and pressure contain equal number of molecules.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 5,
+    "chapterName": "States of Matter",
+    "topic": "Ideal Gas & Equation of State",
+    "name": "Ideal Gas Equation",
+    "latex": "PV = nRT = \\frac{m}{M}RT",
+    "description": "Combined equation of state for an ideal gas.",
+    "variables": [
+      {
+        "symbol": "R",
+        "meaning": "Universal gas constant (8.314 J/mol K = 0.0821 L atm/mol K)"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 5,
+    "chapterName": "States of Matter",
+    "topic": "Ideal Gas & Equation of State",
+    "name": "Combined Gas Law",
+    "latex": "\\frac{P_1 V_1}{T_1} = \\frac{P_2 V_2}{T_2}",
+    "description": "Relates state variables of a fixed amount of gas between two thermodynamic states.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 5,
+    "chapterName": "States of Matter",
+    "topic": "Ideal Gas & Equation of State",
+    "name": "Molar Mass from Gas Density",
+    "latex": "M = \\frac{dRT}{P}",
+    "description": "Calculates molar mass of a gas from its density d at pressure P and temperature T.",
+    "variables": [
+      {
+        "symbol": "M",
+        "meaning": "Molar mass"
+      },
+      {
+        "symbol": "d",
+        "meaning": "Gas density"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 5,
+    "chapterName": "States of Matter",
+    "topic": "Dalton's Law",
+    "name": "Dalton's Law of Partial Pressures & Aqueous Tension",
+    "latex": "P_{\\text{total}} = \\sum P_i = P_1 + P_2 + P_3 + \\dots, \\quad P_{\\text{dry gas}} = P_{\\text{total}} - \\text{Aqueous Tension}",
+    "description": "Total pressure of non-reacting gas mixture equals sum of partial pressures of individual gases.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 5,
+    "chapterName": "States of Matter",
+    "topic": "Dalton's Law",
+    "name": "Partial Pressure in terms of Mole Fraction",
+    "latex": "P_i = \\chi_i P_{\\text{total}}",
+    "description": "Partial pressure of gas component i is product of its mole fraction and total pressure.",
+    "variables": [
+      {
+        "symbol": "P_i",
+        "meaning": "Partial pressure of i"
+      },
+      {
+        "symbol": "\\chi_i",
+        "meaning": "Mole fraction of i"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 5,
+    "chapterName": "States of Matter",
+    "topic": "Kinetic Theory & Molecular Speeds",
+    "name": "Kinetic Gas Equation",
+    "latex": "PV = \\frac{1}{3} m N u_{\\text{rms}}^2 = \\frac{1}{3} M_{\\text{total}} u_{\\text{rms}}^2",
+    "description": "Relates macroscopic pressure and volume to microscopic molecular mass and RMS speed.",
+    "variables": [
+      {
+        "symbol": "m",
+        "meaning": "Mass of one gas molecule"
+      },
+      {
+        "symbol": "N",
+        "meaning": "Total number of molecules"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 5,
+    "chapterName": "States of Matter",
+    "topic": "Kinetic Theory & Molecular Speeds",
+    "name": "Kinetic Energy of Gas Molecules",
+    "latex": "E_{k(\\text{per molecule})} = \\frac{3}{2}k_B T, \\quad E_{k(\\text{per mole})} = \\frac{3}{2}RT",
+    "description": "Average translational kinetic energy per molecule and per mole of an ideal gas.",
+    "variables": [
+      {
+        "symbol": "k_B",
+        "meaning": "Boltzmann constant (1.38 x 10^-23 J/K)"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 5,
+    "chapterName": "States of Matter",
+    "topic": "Kinetic Theory & Molecular Speeds",
+    "name": "Root Mean Square (RMS) Speed",
+    "latex": "u_{\\text{rms}} = \\sqrt{\\frac{\\sum u_i^2}{n}} = \\sqrt{\\frac{3RT}{M}} = \\sqrt{\\frac{3P}{\\rho}}",
+    "description": "Square root of the average of squared molecular speeds.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 5,
+    "chapterName": "States of Matter",
+    "topic": "Kinetic Theory & Molecular Speeds",
+    "name": "Average Speed (u_av)",
+    "latex": "u_{\\text{av}} = \\frac{\\sum u_i}{n} = \\sqrt{\\frac{8RT}{\\pi M}} = \\sqrt{\\frac{8P}{\\pi \\rho}}",
+    "description": "Arithmetic mean of molecular speeds.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 5,
+    "chapterName": "States of Matter",
+    "topic": "Kinetic Theory & Molecular Speeds",
+    "name": "Most Probable Speed (u_mp)",
+    "latex": "u_{\\text{mp}} = \\sqrt{\\frac{2RT}{M}} = \\sqrt{\\frac{2P}{\\rho}}",
+    "description": "Speed possessed by maximum fraction of molecules at temperature T.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 5,
+    "chapterName": "States of Matter",
+    "topic": "Kinetic Theory & Molecular Speeds",
+    "name": "Ratio & Comparison of Molecular Speeds",
+    "latex": "u_{\\text{rms}} > u_{\\text{av}} > u_{\\text{mp}}, \\quad u_{\\text{mp}} : u_{\\text{av}} : u_{\\text{rms}} = 1 : 1.128 : 1.224 = \\sqrt{2} : \\sqrt{\\frac{8}{\\pi}} : \\sqrt{3}",
+    "description": "Order and relative ratio of molecular speeds.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 5,
+    "chapterName": "States of Matter",
+    "topic": "Maxwell Distribution",
+    "name": "Maxwell-Boltzmann Speed Distribution Law",
+    "latex": "\\frac{dn_c}{n} = 4\\pi \\left[\\frac{M}{2\\pi RT}\\right]^{3/2} c^2 e^{-\\frac{Mc^2}{2RT}} dc",
+    "description": "Fraction of molecules with speeds between c and c + dc.",
+    "variables": [
+      {
+        "symbol": "dn_c",
+        "meaning": "Number of molecules with speed between c and c+dc"
+      },
+      {
+        "symbol": "n",
+        "meaning": "Total number of molecules"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 5,
+    "chapterName": "States of Matter",
+    "topic": "Diffusion & Effusion",
+    "name": "Graham's Law of Diffusion",
+    "latex": "\\frac{r_1}{r_2} = \\sqrt{\\frac{d_2}{d_1}} = \\sqrt{\\frac{M_2}{M_1}} = \\frac{V_1 / t_1}{V_2 / t_2}",
+    "description": "Rate of diffusion/effusion of a gas is inversely proportional to square root of its density/molar mass.",
+    "variables": [
+      {
+        "symbol": "r",
+        "meaning": "Rate of diffusion"
+      },
+      {
+        "symbol": "d",
+        "meaning": "Density of gas"
+      },
+      {
+        "symbol": "M",
+        "meaning": "Molar mass"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 5,
+    "chapterName": "States of Matter",
+    "topic": "Real Gases",
+    "name": "Compressibility Factor (Z)",
+    "latex": "Z = \\frac{PV}{nRT} = \\frac{V_{\\text{real}}}{V_{\\text{ideal}}} \\quad (Z=1 \\text{ for ideal gas})",
+    "description": "Deviation from ideal behavior: Z < 1 (attractive forces dominate), Z > 1 (repulsive forces dominate).",
+    "variables": []
+  },
+  {
+    "chapterNumber": 5,
+    "chapterName": "States of Matter",
+    "topic": "Real Gases",
+    "name": "Van der Waals Equation of State",
+    "latex": "\\left[P + \\frac{a n^2}{V^2}\\right](V - nb) = nRT \\implies \\left[P + \\frac{a}{V_m^2}\\right](V_m - b) = RT",
+    "description": "Corrects ideal gas equation for intermolecular attractive forces (a) and finite molecular volume (b).",
+    "variables": [
+      {
+        "symbol": "a",
+        "meaning": "Van der Waals attraction parameter (atm L^2 / mol^2)"
+      },
+      {
+        "symbol": "b",
+        "meaning": "Van der Waals co-volume / effective volume parameter (L/mol)"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 5,
+    "chapterName": "States of Matter",
+    "topic": "Liquid State Properties",
+    "name": "Viscosity & Fluidity",
+    "latex": "F = \\eta A \\frac{du}{dz}, \\quad \\text{Fluidity} = \\frac{1}{\\eta}",
+    "description": "Newton's law of viscosity where eta is viscosity coefficient and du/dz is velocity gradient.",
+    "variables": [
+      {
+        "symbol": "\\eta",
+        "meaning": "Coefficient of viscosity (Pa s or Poise)"
+      },
+      {
+        "symbol": "A",
+        "meaning": "Contact area"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 6,
+    "chapterName": "Thermodynamics",
+    "topic": "First Law & Work",
+    "name": "First Law of Thermodynamics",
+    "latex": "\\Delta U = q + w",
+    "description": "Conservation of energy for a closed system where q is heat absorbed and w is work done ON the system.",
+    "variables": [
+      {
+        "symbol": "\\Delta U",
+        "meaning": "Change in internal energy"
+      },
+      {
+        "symbol": "q",
+        "meaning": "Heat supplied to system"
+      },
+      {
+        "symbol": "w",
+        "meaning": "Work done on system"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 6,
+    "chapterName": "Thermodynamics",
+    "topic": "First Law & Work",
+    "name": "Expansion Work & Free Expansion",
+    "latex": "w_{\\text{rev}} = -\\int_{V_i}^{V_f} P_{\\text{ext}} dV = -2.303 nRT \\log_{10}\\left(\\frac{V_f}{V_i}\\right), \\quad w_{\\text{free}} = 0 \\; (P_{\\text{ext}}=0)",
+    "description": "Reversible isothermal work and free expansion into vacuum.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 6,
+    "chapterName": "Thermodynamics",
+    "topic": "Enthalpy",
+    "name": "Enthalpy and Internal Energy Relation",
+    "latex": "\\Delta H = \\Delta U + \\Delta n_g RT",
+    "description": "Relates heat change at constant pressure (delta H) to heat change at constant volume (delta U).",
+    "variables": [
+      {
+        "symbol": "\\Delta n_g",
+        "meaning": "Moles of gaseous products minus moles of gaseous reactants"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 6,
+    "chapterName": "Thermodynamics",
+    "topic": "Heat Capacity",
+    "name": "Heat Capacity & Molar Heat Capacity",
+    "latex": "q = C \\Delta T, \\quad C_m = \\frac{C}{n}, \\quad C_p - C_v = R",
+    "description": "Mayer's relation between heat capacity at constant pressure Cp and constant volume Cv.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 6,
+    "chapterName": "Thermodynamics",
+    "topic": "Thermochemistry",
+    "name": "Enthalpy of Reaction from Formation Enthalpies",
+    "latex": "\\Delta_r H^\\circ = \\sum a_i \\Delta_f H^\\circ(\\text{Products}) - \\sum b_i \\Delta_f H^\\circ(\\text{Reactants})",
+    "description": "Hess's law calculation of standard reaction enthalpy from enthalpies of formation.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 6,
+    "chapterName": "Thermodynamics",
+    "topic": "Thermochemistry",
+    "name": "Enthalpy of Reaction from Bond Enthalpies",
+    "latex": "\\Delta_r H^\\circ = \\sum \\text{B.E.}(\\text{Reactants}) - \\sum \\text{B.E.}(\\text{Products})",
+    "description": "Calculates reaction enthalpy for gaseous reactions using average bond enthalpies.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 6,
+    "chapterName": "Thermodynamics",
+    "topic": "Thermochemistry",
+    "name": "Enthalpy of Solution (Born-Haber Cycle)",
+    "latex": "\\Delta_{\\text{sol}} H^\\circ = \\Delta_{\\text{lattice}} H^\\circ + \\Delta_{\\text{hyd}} H^\\circ",
+    "description": "Sum of lattice enthalpy (endothermic) and hydration enthalpy (exothermic).",
+    "variables": []
+  },
+  {
+    "chapterNumber": 6,
+    "chapterName": "Thermodynamics",
+    "topic": "Entropy & Spontaneity",
+    "name": "Entropy Change & Total Entropy",
+    "latex": "\\Delta S = \\frac{q_{\\text{rev}}}{T}, \\quad \\Delta S_{\\text{total}} = \\Delta S_{\\text{system}} + \\Delta S_{\\text{surr}} > 0",
+    "description": "Second law criterion for spontaneous processes in an isolated universe.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 6,
+    "chapterName": "Thermodynamics",
+    "topic": "Gibbs Energy",
+    "name": "Gibbs Free Energy & Equilibrium Constant Relation",
+    "latex": "G = H - TS, \\quad \\Delta_r G^\\circ = -RT \\ln K = -2.303 RT \\log_{10} K",
+    "description": "Gibbs-Helmholtz relation and fundamental link between standard free energy and equilibrium constant.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 7,
+    "chapterName": "Equilibrium",
+    "topic": "Law of Mass Action",
+    "name": "Equilibrium Constant Expression (K_c)",
+    "latex": "K_c = \\frac{[C]^c [D]^d}{[A]^a [B]^b}, \\quad K_c' = \\frac{1}{K_c}",
+    "description": "Equilibrium constant for aA + bB <=> cC + dD, and inverse relation for reverse reaction.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 7,
+    "chapterName": "Equilibrium",
+    "topic": "Gaseous Equilibrium",
+    "name": "K_p and K_c Relation",
+    "latex": "K_p = K_c (RT)^{\\Delta n_g}, \\quad \\Delta n_g = (c+d) - (a+b)",
+    "description": "Relates pressure-based equilibrium constant Kp to concentration-based Kc.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 7,
+    "chapterName": "Equilibrium",
+    "topic": "Thermodynamic Equilibrium",
+    "name": "Gibbs Energy & Reaction Quotient Relation",
+    "latex": "\\Delta G = \\Delta G^\\circ + RT \\ln Q, \\quad K = e^{-\\frac{\\Delta G^\\circ}{RT}}",
+    "description": "Spontaneity direction depending on reaction quotient Q relative to equilibrium constant K.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 7,
+    "chapterName": "Equilibrium",
+    "topic": "Ionic Equilibrium & pH",
+    "name": "pH Definition & Acid-Base Ranges",
+    "latex": "\\text{pH} = -\\log_{10}[\\text{H}^+], \\quad \\text{Acidic: } \\text{pH} < 7, \\; \\text{Neutral: } \\text{pH} = 7, \\; \\text{Basic: } \\text{pH} > 7 \\; (\\text{at } 25^\\circ\\text{C})",
+    "description": "S\u00f8rensen pH scale for measuring aqueous hydronium concentration.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 7,
+    "chapterName": "Equilibrium",
+    "topic": "Ionic Equilibrium",
+    "name": "Autoionization of Water & Conjugate Pairs",
+    "latex": "K_a \\times K_b = K_w = 10^{-14} \\; (\\text{at } 298\\text{ K}), \\quad \\text{p}K_a + \\text{p}K_b = \\text{p}K_w = 14",
+    "description": "Relates acid dissociation constant Ka, base dissociation constant Kb, and ionic product Kw.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 7,
+    "chapterName": "Equilibrium",
+    "topic": "Buffer Solutions",
+    "name": "Henderson-Hasselbalch Equation",
+    "latex": "\\text{pH} = \\text{p}K_a + \\log_{10}\\left(\\frac{[\\text{Conjugate Base, } A^-]}{[\\text{Acid, } HA]}\\right)",
+    "description": "Calculates pH of acidic buffer solutions.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 8,
+    "chapterName": "Redox Reactions",
+    "topic": "Oxidation and Reduction Concepts",
+    "name": "Classical vs Electronic Concepts of Redox",
+    "latex": "\\text{Oxidation: Loss of electrons / Increase in O.N.} \\quad \\text{Reduction: Gain of electrons / Decrease in O.N.}",
+    "description": "Classical and modern electronic definitions of oxidation and reduction.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 8,
+    "chapterName": "Redox Reactions",
+    "topic": "Volumetric Relations",
+    "name": "Normality and Molarity Redox Titration Relations",
+    "latex": "N_1 V_1 = N_2 V_2, \\quad \\frac{M_1 V_1}{n_1} = \\frac{M_2 V_2}{n_2}",
+    "description": "Equivalence condition in volumetric acid-base and redox titrations.",
+    "variables": [
+      {
+        "symbol": "N_1, N_2",
+        "meaning": "Normalities of reacting solutions"
+      },
+      {
+        "symbol": "M_1, M_2",
+        "meaning": "Molarities"
+      },
+      {
+        "symbol": "n_1, n_2",
+        "meaning": "Stoichiometric coefficients / n-factors"
+      }
+    ]
+  },
+  {
+    "chapterNumber": 8,
+    "chapterName": "Redox Reactions",
+    "topic": "Chemical Nomenclature & Formulas",
+    "name": "Common Inorganic Compounds & Formulas Table",
+    "latex": "\\begin{array}{|l|l|l|l|}\\hline \\textbf{Compound Name} & \\textbf{Formula} & \\textbf{Compound Name} & \\textbf{Formula} \\\\ \\hline \\text{Acetic acid} & \\text{CH}_3\\text{COOH} & \\text{Potassium Nitrate} & \\text{KNO}_3 \\\\ \\text{Hydrochloric acid} & \\text{HCl} & \\text{Ammonium chloride} & \\text{NH}_4\\text{Cl} \\\\ \\text{Sulfuric acid} & \\text{H}_2\\text{SO}_4 & \\text{Ammonium hydroxide} & \\text{NH}_4\\text{OH} \\\\ \\text{Nitric acid} & \\text{HNO}_3 & \\text{Calcium nitrate} & \\text{Ca(NO}_3)_2 \\\\ \\text{Phosphoric acid} & \\text{H}_3\\text{PO}_4 & \\text{Hydrogen Peroxide} & \\text{H}_2\\text{O}_2 \\\\ \\text{Sodium Phosphate} & \\text{Na}_3\\text{PO}_4 & \\text{Silver Chloride} & \\text{AgCl} \\\\ \\text{Calcium carbonate} & \\text{CaCO}_3 & \\text{Barium Sulphate} & \\text{BaSO}_4 \\\\ \\text{Sodium Bicarbonate} & \\text{NaHCO}_3 & \\text{Magnesium Sulphate} & \\text{MgSO}_4 \\\\ \\text{Sodium Hydroxide} & \\text{NaOH} & \\text{Potassium dichromate} & \\text{K}_2\\text{Cr}_2\\text{O}_7 \\\\ \\text{Calcium Hydroxide} & \\text{Ca(OH)}_2 & \\text{Zinc Chloride} & \\text{ZnCl}_2 \\\\ \\text{Ethanol} & \\text{C}_2\\text{H}_5\\text{OH} & \\text{Zinc Sulphate} & \\text{ZnSO}_4 \\\\ \\text{Potassium Hydroxide} & \\text{KOH} & \\text{Phosphorus Pentachloride} & \\text{PCl}_5 \\\\ \\text{Silver nitrate} & \\text{AgNO}_3 & \\text{Sodium nitrite} & \\text{NaNO}_2 \\\\ \\text{Sodium carbonate} & \\text{Na}_2\\text{CO}_3 & \\text{Potassium Permanganate} & \\text{KMnO}_4 \\\\ \\text{Magnesium Hydroxide} & \\text{Mg(OH)}_2 & \\text{Boric acid} & \\text{H}_3\\text{BO}_3 \\\\ \\text{Methane} & \\text{CH}_4 & \\text{Tartaric acid} & \\text{C}_4\\text{H}_6\\text{O}_6 \\\\ \\text{Sodium chloride} & \\text{NaCl} & \\text{Aluminium Hydroxide} & \\text{Al(OH)}_3 \\\\ \\text{Carbon tetrachloride} & \\text{CCl}_4 & \\text{Iron oxide} & \\text{Fe}_2\\text{O}_3 \\\\ \\hline \\end{array}",
+    "description": "Essential chemical compound nomenclature and molecular formulas.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 9,
+    "chapterName": "Hydrogen",
+    "topic": "Physical Properties",
+    "name": "Properties of Dihydrogen (H2) & Water (H2O)",
+    "latex": "\\begin{array}{|l|c||l|c|}\\hline \\textbf{Property of } \\text{H}_2 & \\textbf{Value} & \\textbf{Property of } \\text{H}_2\\text{O} & \\textbf{Value} \\\\ \\hline \\text{Relative Abundance (\\%)} & 99.985\\% & \\text{Molecular Mass} & 18.0151\\text{ g/mol} \\\\ \\text{Relative Atomic Mass} & 1.008\\text{ u} & \\text{Melting Point} & 273.15\\text{ K (0}^\\circ\\text{C)} \\\\ \\text{Melting Point} & 13.96\\text{ K} & \\text{Boiling Point} & 373.15\\text{ K (100}^\\circ\\text{C)} \\\\ \\text{Boiling Point} & 20.39\\text{ K} & \\text{Density (at 4}^\\circ\\text{C)} & 1.0000\\text{ g/cm}^3 \\\\ \\text{Gas Density (g/L at STP)} & 0.09\\text{ g/L} & \\text{Viscosity} & 0.8903\\text{ cP} \\\\ \\text{Bond Dissociation Enthalpy} & 435.88\\text{ kJ/mol} & \\text{Dielectric Constant} & 78.39 \\\\ \\text{Covalent Radius} & 37\\text{ pm} & \\text{Electrical Conductivity} & 5.7 \\times 10^{-8}\\text{ S/m} \\\\ \\hline \\end{array}",
+    "description": "Key physical and chemical constants for dihydrogen and water.",
+    "variables": []
+  },
+  {
+    "chapterNumber": 10,
+    "chapterName": "The s-Block Elements",
+    "topic": "Electronic Configurations",
+    "name": "Group 1 (Alkali Metals) & Group 2 (Alkaline Earth Metals) Configurations",
+    "latex": "\\begin{array}{|l|c|l||l|c|l|}\\hline \\multicolumn{3}{|c||}{\\textbf{Group 1: Alkali Metals } (ns^1)} & \\multicolumn{3}{c|}{\\textbf{Group 2: Alkaline Earth Metals } (ns^2)} \\\\ \\hline \\textbf{Element} & \\textbf{Sym} & \\textbf{Configuration} & \\textbf{Element} & \\textbf{Sym} & \\textbf{Configuration} \\\\ \\hline \\text{Lithium} & \\text{Li} & [\\text{He}]\\,2s^1 & \\text{Beryllium} & \\text{Be} & [\\text{He}]\\,2s^2 \\\\ \\text{Sodium} & \\text{Na} & [\\text{Ne}]\\,3s^1 & \\text{Magnesium} & \\text{Mg} & [\\text{Ne}]\\,3s^2 \\\\ \\text{Potassium} & \\text{K} & [\\text{Ar}]\\,4s^1 & \\text{Calcium} & \\text{Ca} & [\\text{Ar}]\\,4s^2 \\\\ \\text{Rubidium} & \\text{Rb} & [\\text{Kr}]\\,5s^1 & \\text{Strontium} & \\text{Sr} & [\\text{Kr}]\\,5s^2 \\\\ \\text{Caesium} & \\text{Cs} & [\\text{Xe}]\\,6s^1 & \\text{Barium} & \\text{Ba} & [\\text{Xe}]\\,6s^2 \\\\ \\text{Francium} & \\text{Fr} & [\\text{Rn}]\\,7s^1 & \\text{Radium} & \\text{Ra} & [\\text{Rn}]\\,7s^2 \\\\ \\hline \\end{array}",
+    "description": "Valence shell electronic configurations of alkali and alkaline earth metals.",
+    "variables": []
+  }
+]
