@@ -1,5 +1,6 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { RotateCcw } from "lucide-react";
 import Hero from "@/components/askformula/Hero";
 import ExamSelector from "@/components/askformula/ExamSelector";
 import ClassSelector from "@/components/askformula/ClassSelector";
@@ -16,6 +17,11 @@ export default function Landing() {
   const [subject, setSubject] = useState<string | null>(null);
   const [selectedChapters, setSelectedChapters] = useState<string[]>([]);
 
+  const classRef = useRef<HTMLDivElement>(null);
+  const subjectRef = useRef<HTMLDivElement>(null);
+  const chapterRef = useRef<HTMLDivElement>(null);
+  const formulaRef = useRef<HTMLDivElement>(null);
+
   const chapters = useMemo(() => {
     if (!subject || !selectedClass) return [];
     return getChaptersBySubject(subject).filter((ch) => ch.class === selectedClass);
@@ -29,6 +35,9 @@ export default function Landing() {
   const handleSubjectSelect = (s: string) => {
     setSubject(s);
     setSelectedChapters([]);
+    setTimeout(() => {
+      chapterRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 150);
   };
 
   const handleExamSelect = (e: "school" | "jee" | "neet") => {
@@ -36,13 +45,37 @@ export default function Landing() {
     setSelectedClass(null);
     setSubject(null);
     setSelectedChapters([]);
+    setTimeout(() => {
+      classRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 150);
   };
 
   const handleClassSelect = (cls: string) => {
     setSelectedClass(cls);
     setSubject(null);
     setSelectedChapters([]);
+    setTimeout(() => {
+      subjectRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 150);
   };
+
+  const handleReset = () => {
+    setExam(null);
+    setSelectedClass(null);
+    setSubject(null);
+    setSelectedChapters([]);
+    setTimeout(() => {
+      document.getElementById("app-section")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
+  };
+
+  useEffect(() => {
+    if (formulas.length > 0) {
+      setTimeout(() => {
+        formulaRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 150);
+    }
+  }, [formulas.length]);
 
   const steps = [
     { label: "Exam", done: !!exam },
@@ -70,9 +103,9 @@ export default function Landing() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="mb-14"
+            className="mb-14 flex flex-col sm:flex-row sm:items-center justify-between gap-6"
           >
-            <div className="flex items-center gap-1.5 sm:gap-2">
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
               {steps.map((step, i) => (
                 <div key={step.label} className="flex items-center gap-1.5 sm:gap-2">
                   <div className="flex items-center gap-1.5">
@@ -103,6 +136,21 @@ export default function Landing() {
                 </div>
               ))}
             </div>
+
+            <AnimatePresence>
+              {exam && (
+                <motion.button
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  onClick={handleReset}
+                  className="flex items-center gap-2 text-xs font-medium text-slate-400 hover:text-white px-3 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.06] transition-all self-start sm:self-auto cursor-pointer"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  Start Over
+                </motion.button>
+              )}
+            </AnimatePresence>
           </motion.div>
 
           {/* Step 1: Exam Selector */}
@@ -119,6 +167,7 @@ export default function Landing() {
           <AnimatePresence>
             {exam && (
               <motion.div
+                ref={classRef}
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
@@ -134,6 +183,7 @@ export default function Landing() {
           <AnimatePresence>
             {selectedClass && (
               <motion.div
+                ref={subjectRef}
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
@@ -149,6 +199,7 @@ export default function Landing() {
           <AnimatePresence>
             {subject && chapters.length > 0 && selectedClass && (
               <motion.div
+                ref={chapterRef}
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
@@ -168,6 +219,7 @@ export default function Landing() {
           <AnimatePresence>
             {formulas.length > 0 && (
               <motion.div
+                ref={formulaRef}
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}

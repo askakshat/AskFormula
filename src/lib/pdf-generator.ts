@@ -34,7 +34,7 @@ export async function generatePDF(
   }
 
   // Directly fetch the KaTeX CDN stylesheet.
-  let stylesHtml = `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" crossorigin="anonymous">`;
+  const stylesHtml = `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" crossorigin="anonymous">`;
 
   let htmlContent = `
     ${stylesHtml}
