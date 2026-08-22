@@ -29,7 +29,7 @@ export interface Chapter {
 
 export interface SubjectData {
   subject: string;
-  audience: string;
+  audience: string[]; // Change this from 'string' to 'string[]'
   chapters: Chapter[];
 }
 
