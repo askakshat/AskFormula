@@ -1,21 +1,29 @@
-// Formula data types and helper functions
+export interface Variable {
+  symbol: string;
+  meaning: string;
+}
+
 export interface Formula {
-  id: string;
+  chapterNumber: number;
+  chapterName: string;
+  topic: string;
   name: string;
   latex: string;
-  tags: string[];
+  description: string;
+  variables: Variable[];
+  conditions?: string | null;
 }
 
 export interface Chapter {
-  id: string;
-  class: string;
-  name: string;
+  chapterNumber: number;
+  chapterName: string;
+  topics: string[];
   formulas: Formula[];
 }
 
 export interface SubjectData {
   subject: string;
-  audience: string[];
+  audience: string;
   chapters: Chapter[];
 }
 
