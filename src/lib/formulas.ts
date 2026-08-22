@@ -34,118 +34,16 @@ export interface SubjectData {
 }
 
 // All subjects data
-import rawPhysicsData from "@/data/ncert/physics.json";
-import rawChemistryData from "@/data/ncert/chemistry.json";
-import rawMathematicsData from "@/data/ncert/mathematics.json";
-import rawBiologyData from "@/data/ncert/biology.json";
-
-/**
- * Normalizes input JSON into a valid SubjectData structure.
- * Guarantees required string IDs, tags arrays, and class properties are populated.
- */
-function normalizeSubjectData(
-  raw: any,
-  defaultSubject: string,
-  defaultAudience: string = "Class 11"
-): SubjectData {
-  if (!raw) {
-    return { subject: defaultSubject, audience: defaultAudience, chapters: [] };
-  }
-
-  // Case 1: Data has chapters array
-  if (raw.chapters && Array.isArray(raw.chapters)) {
-    return {
-      subject: raw.subject || defaultSubject,
-      audience: raw.audience || defaultAudience,
-      chapters: raw.chapters.map((ch: any, chIdx: number) => {
-        const chId = ch.id ? String(ch.id) : String(ch.chapterNumber ?? chIdx + 1);
-        const chName = ch.chapterName || ch.name || `Chapter ${chIdx + 1}`;
-
-        return {
-          id: chId,
-          chapterNumber: ch.chapterNumber ?? chIdx + 1,
-          chapterName: chName,
-          name: chName,
-          class: ch.class ?? ch.grade ?? 11,
-          topics: Array.isArray(ch.topics) ? ch.topics : [],
-          formulas: (Array.isArray(ch.formulas) ? ch.formulas : []).map(
-            (f: any, fIdx: number) => ({
-              id: f.id ? String(f.id) : `${chId}-${fIdx + 1}`,
-              chapterNumber: f.chapterNumber ?? ch.chapterNumber ?? chIdx + 1,
-              chapterName: f.chapterName || chName,
-              chapter: chName,
-              topic: f.topic || "General",
-              name: f.name || "",
-              latex: f.latex || "",
-              description: f.description || "",
-              variables: Array.isArray(f.variables) ? f.variables : [],
-              tags: Array.isArray(f.tags) ? f.tags : [f.topic || "Formula", chName],
-              conditions: f.conditions ?? null,
-            })
-          ),
-        };
-      }),
-    };
-  }
-
-  // Case 2: Data is a flat array of formulas
-  if (Array.isArray(raw)) {
-    const chapterMap = new Map<number, Chapter>();
-
-    raw.forEach((f: any, fIdx: number) => {
-      const chNum = f.chapterNumber ?? 1;
-      const chName = f.chapterName || f.chapter || `Chapter ${chNum}`;
-      const chId = String(chNum);
-
-      if (!chapterMap.has(chNum)) {
-        chapterMap.set(chNum, {
-          id: chId,
-          chapterNumber: chNum,
-          chapterName: chName,
-          name: chName,
-          class: f.class ?? 11,
-          topics: [],
-          formulas: [],
-        });
-      }
-
-      const chapter = chapterMap.get(chNum)!;
-      if (f.topic && !chapter.topics.includes(f.topic)) {
-        chapter.topics.push(f.topic);
-      }
-
-      chapter.formulas.push({
-        id: f.id ? String(f.id) : `${chId}-${fIdx + 1}`,
-        chapterNumber: chNum,
-        chapterName: chName,
-        chapter: chName,
-        topic: f.topic || "General",
-        name: f.name || "",
-        latex: f.latex || "",
-        description: f.description || "",
-        variables: Array.isArray(f.variables) ? f.variables : [],
-        tags: Array.isArray(f.tags) ? f.tags : [f.topic || "Formula", chName],
-        conditions: f.conditions ?? null,
-      });
-    });
-
-    return {
-      subject: defaultSubject,
-      audience: defaultAudience,
-      chapters: Array.from(chapterMap.values()).sort(
-        (a, b) => a.chapterNumber - b.chapterNumber
-      ),
-    };
-  }
-
-  return { subject: defaultSubject, audience: defaultAudience, chapters: [] };
-}
+import physicsData from "@/data/ncert/physics.json";
+import chemistryData from "@/data/ncert/chemistry.json";
+import mathematicsData from "@/data/ncert/mathematics.json";
+import biologyData from "@/data/ncert/biology.json";
 
 export const allSubjects: SubjectData[] = [
-  normalizeSubjectData(rawPhysicsData, "Physics"),
-  normalizeSubjectData(rawChemistryData, "Chemistry"),
-  normalizeSubjectData(rawMathematicsData, "Mathematics"),
-  normalizeSubjectData(rawBiologyData, "Biology"),
+  physicsData,
+  chemistryData,
+  mathematicsData,
+  biologyData
 ];
 
 // Get all chapters for a subject

@@ -10,12 +10,13 @@ import FormulaGrid from "@/components/askformula/FormulaGrid";
 import PDFButton from "@/components/askformula/PDFButton";
 import Footer from "@/components/askformula/Footer";
 import { getChaptersBySubject, filterFormulas } from "@/lib/formulas";
+import { useLocalStorage } from "@/lib/local-storage";
 
 export default function Landing() {
   const [exam, setExam] = useState<"school" | "jee" | "neet" | null>(null);
   const [selectedClass, setSelectedClass] = useState<string | null>(null);
   const [subject, setSubject] = useState<string | null>(null);
-  const [selectedChapters, setSelectedChapters] = useState<string[]>([]);
+  const [selectedChapters, setSelectedChapters] = useLocalStorage<string[]>("askformula-selected-chapters", []);
 
   const classRef = useRef<HTMLDivElement>(null);
   const subjectRef = useRef<HTMLDivElement>(null);
@@ -45,23 +46,10 @@ export default function Landing() {
     setSelectedClass(null);
     setSubject(null);
     setSelectedChapters([]);
-    setTimeout(() => {
-      classRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
-    }, 150);
   };
 
   const handleClassSelect = (cls: string) => {
     setSelectedClass(cls);
-    setSubject(null);
-    setSelectedChapters([]);
-    setTimeout(() => {
-      subjectRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
-    }, 150);
-  };
-
-  const handleReset = () => {
-    setExam(null);
-    setSelectedClass(null);
     setSubject(null);
     setSelectedChapters([]);
     setTimeout(() => {
@@ -105,7 +93,7 @@ export default function Landing() {
             transition={{ duration: 0.5 }}
             className="mb-14 flex flex-col sm:flex-row sm:items-center justify-between gap-6"
           >
-            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+            <div className="flex flex-wrap items-center gap-y-3 gap-x-1.5 sm:gap-x-2">
               {steps.map((step, i) => (
                 <div key={step.label} className="flex items-center gap-1.5 sm:gap-2">
                   <div className="flex items-center gap-1.5">
@@ -184,6 +172,21 @@ export default function Landing() {
             {selectedClass && (
               <motion.div
                 ref={subjectRef}
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3 }}
+                className="mb-10 overflow-hidden"
+              >
+                <ClassSelector onSelect={handleClassSelect} selected={selectedClass} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Step 3: Subject Selector */}
+          <AnimatePresence>
+            {selectedClass && (
+              <motion.div
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}

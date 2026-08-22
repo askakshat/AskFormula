@@ -1,54 +1,102 @@
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useAuth } from "@/hooks/use-auth";
-import { LayoutDashboard, LogOut } from "lucide-react";
-import { useNavigate } from "react-router";
+import { LayoutDashboard, Book, FileText, Bookmark, ArrowLeft } from "lucide-react";
+import { useNavigate, Link } from "react-router";
+import { useLocalStorage, type SavedPDF } from "@/lib/local-storage";
 
 export default function Dashboard() {
-  const { user, signOut } = useAuth();
   const navigate = useNavigate();
-
-  const handleSignOut = async () => {
-    await signOut();
-    navigate("/");
-  };
+  const [selectedChapters] = useLocalStorage<string[]>("askformula-selected-chapters", []);
+  const [savedPDFs] = useLocalStorage<SavedPDF[]>("askformula-saved-pdfs", []);
+  const [favorites] = useLocalStorage<string[]>("askformula-favorites", []);
 
   return (
-    <main className="min-h-screen bg-background px-6 py-10 text-foreground">
+    <main className="min-h-screen bg-slate-950 px-6 py-10 text-slate-200">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8">
         <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm font-medium text-muted-foreground">
-              Authenticated workspace
-            </p>
-            <h1 className="mt-1 text-3xl font-bold tracking-tight">
-              Welcome{user?.user_metadata?.name ? `, ${user.user_metadata.name}` : ""}
+            <Link to="/" className="inline-flex items-center text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors mb-2">
+              <ArrowLeft className="w-4 h-4 mr-1" />
+              Back to Home
+            </Link>
+            <h1 className="mt-1 text-3xl font-bold tracking-tight text-white">
+              Your Dashboard
             </h1>
           </div>
-          <Button
-            type="button"
-            variant="outline"
-            className="cursor-pointer gap-2 self-start"
-            onClick={handleSignOut}
-          >
-            <LogOut className="size-4" />
-            Sign out
-          </Button>
         </header>
 
-        <Card className="border-border/70 shadow-none">
-          <CardHeader>
-            <div className="mb-3 flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-              <LayoutDashboard className="size-5" />
-            </div>
-            <CardTitle>Your dashboard is ready</CardTitle>
-          </CardHeader>
-          <CardContent className="text-sm leading-6 text-muted-foreground">
-            Replace this starter content with the product&apos;s authenticated
-            experience. The route is protected and sign-in returns here by
-            default.
-          </CardContent>
-        </Card>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Card className="border-slate-800 bg-slate-900 shadow-none">
+            <CardHeader>
+              <div className="mb-3 flex size-10 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400">
+                <FileText className="size-5" />
+              </div>
+              <CardTitle className="text-white">Generated PDFs</CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm leading-6 text-slate-400">
+              {savedPDFs.length > 0 ? (
+                <ul className="space-y-3">
+                  {savedPDFs.map((pdf) => (
+                    <li key={pdf.id} className="flex justify-between items-center border-b border-slate-800 pb-2 last:border-0 last:pb-0">
+                      <div>
+                        <p className="font-medium text-slate-300">{pdf.subject}</p>
+                        <p className="text-xs text-slate-500">{new Date(pdf.date).toLocaleDateString()}</p>
+                      </div>
+                      <span className="text-xs bg-slate-800 px-2 py-1 rounded text-slate-400 capitalize">{pdf.layout}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>No PDFs generated yet. Generate some from the home page!</p>
+              )}
+            </CardContent>
+          </Card>
+
+          <Card className="border-slate-800 bg-slate-900 shadow-none">
+            <CardHeader>
+              <div className="mb-3 flex size-10 items-center justify-center rounded-lg bg-purple-500/10 text-purple-400">
+                <Book className="size-5" />
+              </div>
+              <CardTitle className="text-white">Selected Chapters</CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm leading-6 text-slate-400">
+              {selectedChapters.length > 0 ? (
+                <ul className="space-y-2">
+                  {selectedChapters.map((chapter) => (
+                    <li key={chapter} className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-purple-400" />
+                      <span className="truncate">{chapter}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>You haven't selected any chapters recently.</p>
+              )}
+            </CardContent>
+          </Card>
+
+          <Card className="border-slate-800 bg-slate-900 shadow-none">
+            <CardHeader>
+              <div className="mb-3 flex size-10 items-center justify-center rounded-lg bg-amber-500/10 text-amber-400">
+                <Bookmark className="size-5" />
+              </div>
+              <CardTitle className="text-white">Favorites</CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm leading-6 text-slate-400">
+              {favorites.length > 0 ? (
+                <ul className="space-y-2">
+                  {favorites.map((fav) => (
+                    <li key={fav} className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                      <span className="truncate">{fav}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>You haven't added any favorite formulas yet.</p>
+              )}
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </main>
   );

@@ -42,12 +42,12 @@ export default function Hero() {
             Every formula you need. One sheet. Zero hassle.
           </p>
 
-          {/* Pill tags */}
+          {/* Content Stats / Pill tags */}
           <div className="flex flex-wrap items-center justify-center gap-2.5 mb-12">
-            {["NCERT", "JEE", "NEET"].map((tag) => (
+            {["200+ Formulas", "NCERT Class 11–12", "Export to PDF"].map((tag) => (
               <span
                 key={tag}
-                className="px-4 py-1.5 text-xs font-medium tracking-wide uppercase rounded-full bg-white/[0.04] backdrop-blur-md border border-white/[0.06] text-slate-400"
+                className="px-4 py-1.5 text-[13px] font-medium tracking-wide rounded-full bg-white/[0.04] backdrop-blur-md border border-white/[0.06] text-slate-300"
               >
                 {tag}
               </span>

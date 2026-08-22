@@ -8,7 +8,6 @@ interface ClassSelectorProps {
 const classes = [
   { id: "11", name: "Class 11" },
   { id: "12", name: "Class 12" },
-  { id: "10", name: "Class 10 (Coming soon)", disabled: true },
 ];
 
 export default function ClassSelector({ onSelect, selected }: ClassSelectorProps) {
@@ -27,19 +26,16 @@ export default function ClassSelector({ onSelect, selected }: ClassSelectorProps
         {classes.map((cls) => (
           <motion.button
             key={cls.id}
-            whileHover={cls.disabled ? {} : { scale: 1.02 }}
-            whileTap={cls.disabled ? {} : { scale: 0.97 }}
-            onClick={() => !cls.disabled && onSelect(cls.id)}
-            disabled={cls.disabled}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.97 }}
+            onClick={() => onSelect(cls.id)}
             className={`
-              group relative px-5 py-4 rounded-2xl text-center transition-all duration-200
+              group relative px-5 py-4 rounded-2xl text-center transition-all duration-200 cursor-pointer
               backdrop-blur-2xl border
               ${
-                cls.disabled
-                  ? "bg-white/[0.01] border-white/[0.02] text-slate-500/50 cursor-not-allowed"
-                  : selected === cls.id
-                    ? "bg-blue-500/[0.12] border-blue-400/30 shadow-[0_0_30px_-8px_rgba(59,130,246,0.15)] text-blue-400 cursor-pointer"
-                    : "bg-white/[0.03] border-white/[0.06] hover:bg-white/[0.06] hover:border-white/[0.12] text-white cursor-pointer"
+                selected === cls.id
+                  ? "bg-blue-500/[0.12] border-blue-400/30 shadow-[0_0_30px_-8px_rgba(59,130,246,0.15)] text-blue-400"
+                  : "bg-white/[0.03] border-white/[0.06] hover:bg-white/[0.06] hover:border-white/[0.12] text-white"
               }
             `}
           >

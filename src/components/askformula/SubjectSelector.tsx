@@ -89,6 +89,11 @@ export default function SubjectSelector({ onSelect, selected, exam }: SubjectSel
                     <span className="text-[10px] font-medium text-slate-300 whitespace-nowrap">Coming soon</span>
                   </div>
                 )}
+                {isAvailable && (
+                  <div className="absolute top-0 right-0 -mt-2 -mr-2 bg-blue-500/20 border border-blue-400/30 rounded-full px-2 py-0.5 flex items-center shadow-lg">
+                    <span className="text-[10px] font-medium text-blue-300 whitespace-nowrap">Ready</span>
+                  </div>
+                )}
               </div>
             </motion.button>
           );
