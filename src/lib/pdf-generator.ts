@@ -46,6 +46,14 @@ export async function generatePDF(
       <div style="margin-top: -3px; border-bottom: 1px solid #0000001; width: calc(100% - 60px); display: inline-block; vertical-align: top;"></div>
     </div>
   `;
+   const stylesHtml = `
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" crossorigin="anonymous">
+  <style>
+    .katex, .katex * {
+      color: #000000 !important;
+    }
+  </style>
+`;
 
   for (const [chapterName, items] of chapters) {
     htmlContent += `
@@ -81,7 +89,7 @@ export async function generatePDF(
               <div style="width: 6px; height: 6px; background-color: #3b82f6; border-radius: 50%;"></div>
               <h3 style="margin: 0; font-size: 14px; color: #1e293b; font-weight: 600;">${formula.name}</h3>
             </div>
-            <div style="font-size: 16px; color: #0f172a; display: block; width: 100%; overflow-x: hidden;">
+            <div style="font-size: 16px; color: #000000 !important; display: block; width: 100%; overflow-x: hidden;">
               ${renderedMath}
             </div>
           </div>
