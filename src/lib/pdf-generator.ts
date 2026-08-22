@@ -1,5 +1,6 @@
-import html2pdf from "html2pdf.js";
 import katex from "katex";
+import * as htmlToImage from "html-to-image";
+import jsPDF from "jspdf";
 
 export interface FormulaItem {
   id: string;
@@ -34,8 +35,9 @@ export async function generatePDF(
   }
 
   // Directly fetch the KaTeX CDN stylesheet and inject PDF-specific overrides.
+  // Make sure version matches the installed katex package (0.18.4)
   const stylesHtml = `
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.4/dist/katex.min.css" crossorigin="anonymous">
     <style>
       /* Force KaTeX text color to black for PDF export */
       .katex-display > .katex,
@@ -110,14 +112,56 @@ export async function generatePDF(
   const slug = subject.toLowerCase().replace(/\s+/g, "-");
   const date = new Date().toISOString().split("T")[0];
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const opt: any = {
-    margin: 10,
-    filename: `askformula-${slug}-${date}.pdf`,
-    image: { type: 'jpeg', quality: 1 },
-    html2canvas: { scale: 2, useCORS: true },
-    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-  };
+  // We must append the container to the document body temporarily so html-to-image can read computed styles properly
+  container.style.position = "absolute";
+  container.style.left = "-9999px";
+  container.style.top = "-9999px";
+  document.body.appendChild(container);
 
-  await html2pdf().set(opt).from(container).save();
+  // Wait a tiny bit for the browser to parse the injected CSS and fonts
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
+  try {
+    const canvasDataUrl = await htmlToImage.toPng(container, {
+      pixelRatio: 2,
+      backgroundColor: "#f8fafc",
+    });
+
+    const pdf = new jsPDF({
+      unit: "mm",
+      format: "a4",
+      orientation: "portrait",
+    });
+
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+
+    const img = new Image();
+    img.src = canvasDataUrl;
+    await new Promise((resolve) => {
+      img.onload = resolve;
+    });
+
+    const margin = 10;
+    const innerWidth = pdfWidth - margin * 2;
+    const imgRatio = img.height / img.width;
+    const imgHeightMm = innerWidth * imgRatio;
+
+    let heightLeft = imgHeightMm;
+    let position = margin;
+
+    pdf.addImage(canvasDataUrl, "PNG", margin, position, innerWidth, imgHeightMm);
+    heightLeft -= (pdfHeight - margin * 2);
+
+    while (heightLeft > 0) {
+      position = heightLeft - imgHeightMm + margin;
+      pdf.addPage();
+      pdf.addImage(canvasDataUrl, "PNG", margin, position, innerWidth, imgHeightMm);
+      heightLeft -= (pdfHeight - margin * 2);
+    }
+
+    pdf.save(`askformula-${slug}-${date}.pdf`);
+  } finally {
+    document.body.removeChild(container);
+  }
 }
