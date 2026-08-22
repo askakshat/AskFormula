@@ -25,7 +25,7 @@ export default function FormulaGrid({ formulas }: FormulaGridProps) {
     >
       <div className="flex items-center justify-between mb-5">
         <h2 className="text-xl font-semibold text-white tracking-[-0.02em]">
-          <span className="text-blue-400/70 mr-2 text-base font-medium">04</span>
+          <span className="text-blue-400/70 mr-2 text-base font-medium">05</span>
           Your formulas
         </h2>
         <span className="text-sm text-slate-500 tabular-nums">
