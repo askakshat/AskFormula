@@ -2,22 +2,25 @@ import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Hero from "@/components/askformula/Hero";
 import ExamSelector from "@/components/askformula/ExamSelector";
+import ClassSelector from "@/components/askformula/ClassSelector";
 import SubjectSelector from "@/components/askformula/SubjectSelector";
 import ChapterSelector from "@/components/askformula/ChapterSelector";
 import FormulaGrid from "@/components/askformula/FormulaGrid";
 import PDFButton from "@/components/askformula/PDFButton";
 import Footer from "@/components/askformula/Footer";
 import { getChaptersBySubject, filterFormulas } from "@/lib/formulas";
+import { useLocalStorage } from "@/lib/local-storage";
 
 export default function Landing() {
   const [exam, setExam] = useState<"school" | "jee" | "neet" | null>(null);
+  const [selectedClass, setSelectedClass] = useState<string | null>(null);
   const [subject, setSubject] = useState<string | null>(null);
-  const [selectedChapters, setSelectedChapters] = useState<string[]>([]);
+  const [selectedChapters, setSelectedChapters] = useLocalStorage<string[]>("askformula-selected-chapters", []);
 
   const chapters = useMemo(() => {
-    if (!subject) return [];
-    return getChaptersBySubject(subject);
-  }, [subject]);
+    if (!subject || !selectedClass) return [];
+    return getChaptersBySubject(subject).filter((ch) => ch.class === selectedClass);
+  }, [subject, selectedClass]);
 
   const formulas = useMemo(() => {
     if (!subject || selectedChapters.length === 0) return [];
@@ -31,24 +34,32 @@ export default function Landing() {
 
   const handleExamSelect = (e: "school" | "jee" | "neet") => {
     setExam(e);
+    setSelectedClass(null);
+    setSubject(null);
+    setSelectedChapters([]);
+  };
+
+  const handleClassSelect = (cls: string) => {
+    setSelectedClass(cls);
     setSubject(null);
     setSelectedChapters([]);
   };
 
   const steps = [
     { label: "Exam", done: !!exam },
+    { label: "Class", done: !!selectedClass },
     { label: "Subject", done: !!subject },
     { label: "Chapters", done: selectedChapters.length > 0 },
     { label: "Formulas", done: formulas.length > 0 },
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-x-hidden">
       <Hero />
 
       <section
         id="app-section"
-        className="relative min-h-screen bg-gradient-to-b from-slate-950 via-[#080c18] to-slate-950"
+        className="relative min-h-screen overflow-x-hidden bg-gradient-to-b from-slate-950 via-[#080c18] to-slate-950"
       >
         {/* Subtle ambient orbs */}
         <div className="absolute top-0 left-1/3 w-80 h-80 bg-blue-500/[0.03] rounded-full blur-[100px]" />
@@ -62,7 +73,7 @@ export default function Landing() {
             transition={{ duration: 0.5 }}
             className="mb-14"
           >
-            <div className="flex items-center gap-1.5 sm:gap-2">
+            <div className="flex flex-wrap items-center gap-y-3 gap-x-1.5 sm:gap-x-2">
               {steps.map((step, i) => (
                 <div key={step.label} className="flex items-center gap-1.5 sm:gap-2">
                   <div className="flex items-center gap-1.5">
@@ -105,7 +116,7 @@ export default function Landing() {
             <ExamSelector onSelect={handleExamSelect} selected={exam} />
           </motion.div>
 
-          {/* Step 2: Subject Selector */}
+          {/* Step 2: Class Selector */}
           <AnimatePresence>
             {exam && (
               <motion.div
@@ -115,14 +126,29 @@ export default function Landing() {
                 transition={{ duration: 0.3 }}
                 className="mb-10 overflow-hidden"
               >
-                <SubjectSelector onSelect={handleSubjectSelect} selected={subject} />
+                <ClassSelector onSelect={handleClassSelect} selected={selectedClass} />
               </motion.div>
             )}
           </AnimatePresence>
 
-          {/* Step 3: Chapter Selector */}
+          {/* Step 3: Subject Selector */}
           <AnimatePresence>
-            {subject && chapters.length > 0 && (
+            {selectedClass && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3 }}
+                className="mb-10 overflow-hidden"
+              >
+                <SubjectSelector onSelect={handleSubjectSelect} selected={subject} exam={exam!} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Step 4: Chapter Selector */}
+          <AnimatePresence>
+            {subject && chapters.length > 0 && selectedClass && (
               <motion.div
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
@@ -139,7 +165,7 @@ export default function Landing() {
             )}
           </AnimatePresence>
 
-          {/* Step 4: Formula Grid */}
+          {/* Step 5: Formula Grid */}
           <AnimatePresence>
             {formulas.length > 0 && (
               <motion.div
@@ -147,7 +173,7 @@ export default function Landing() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="mb-28"
+                className="mb-28 sm:mb-20 pb-20 sm:pb-0"
               >
                 <FormulaGrid formulas={formulas} />
               </motion.div>

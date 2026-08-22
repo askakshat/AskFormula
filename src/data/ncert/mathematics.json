@@ -1,0 +1,174 @@
+{
+  "subject": "Mathematics",
+  "audience": ["school", "jee"],
+  "chapters": [
+    {
+      "id": "m_ch1",
+      "class": "11",
+      "name": "Trigonometric Functions",
+      "formulas": [
+        {
+          "id": "m1",
+          "name": "Pythagorean Identity",
+          "latex": "\\sin^2\\theta + \\cos^2\\theta = 1",
+          "tags": ["trigonometry", "identity"]
+        },
+        {
+          "id": "m2",
+          "name": "Sum of Angles (Sine)",
+          "latex": "\\sin(A \\pm B) = \\sin A \\cos B \\pm \\cos A \\sin B",
+          "tags": ["trigonometry", "sum formula"]
+        },
+        {
+          "id": "m3",
+          "name": "Sum of Angles (Cosine)",
+          "latex": "\\cos(A \\pm B) = \\cos A \\cos B \\mp \\sin A \\sin B",
+          "tags": ["trigonometry", "sum formula"]
+        },
+        {
+          "id": "m4",
+          "name": "Double Angle (Sine)",
+          "latex": "\\sin 2A = 2 \\sin A \\cos A = \\frac{2\\tan A}{1 + \\tan^2 A}",
+          "tags": ["trigonometry", "double angle"]
+        },
+        {
+          "id": "m5",
+          "name": "Double Angle (Cosine)",
+          "latex": "\\cos 2A = \\cos^2 A - \\sin^2 A = 2\\cos^2 A - 1 = 1 - 2\\sin^2 A",
+          "tags": ["trigonometry", "double angle"]
+        }
+      ]
+    },
+    {
+      "id": "m_ch2",
+      "class": "11",
+      "name": "Complex Numbers and Quadratic Equations",
+      "formulas": [
+        {
+          "id": "m6",
+          "name": "Roots of Quadratic Equation",
+          "latex": "x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}",
+          "tags": ["quadratic", "roots"]
+        },
+        {
+          "id": "m7",
+          "name": "Modulus of Complex Number",
+          "latex": "|z| = \\sqrt{a^2 + b^2}",
+          "tags": ["complex numbers", "modulus"]
+        },
+        {
+          "id": "m8",
+          "name": "Polar Form",
+          "latex": "z = r(\\cos\\theta + i\\sin\\theta)",
+          "tags": ["complex numbers", "polar"]
+        }
+      ]
+    },
+    {
+      "id": "m_ch3",
+      "class": "11",
+      "name": "Sequences and Series",
+      "formulas": [
+        {
+          "id": "m9",
+          "name": "nth term of A.P.",
+          "latex": "a_n = a + (n-1)d",
+          "tags": ["progression", "arithmetic"]
+        },
+        {
+          "id": "m10",
+          "name": "Sum of n terms of A.P.",
+          "latex": "S_n = \\frac{n}{2}[2a + (n-1)d] = \\frac{n}{2}(a + l)",
+          "tags": ["progression", "arithmetic sum"]
+        },
+        {
+          "id": "m11",
+          "name": "nth term of G.P.",
+          "latex": "a_n = ar^{n-1}",
+          "tags": ["progression", "geometric"]
+        },
+        {
+          "id": "m12",
+          "name": "Sum of n terms of G.P.",
+          "latex": "S_n = \\frac{a(r^n - 1)}{r - 1}, \\quad (r \\neq 1)",
+          "tags": ["progression", "geometric sum"]
+        },
+        {
+          "id": "m13",
+          "name": "Sum of infinite G.P.",
+          "latex": "S_\\infty = \\frac{a}{1 - r}, \\quad (|r| < 1)",
+          "tags": ["progression", "infinite geometric sum"]
+        }
+      ]
+    },
+    {
+      "id": "m_ch4",
+      "class": "12",
+      "name": "Calculus: Differentiation",
+      "formulas": [
+        {
+          "id": "m14",
+          "name": "Product Rule",
+          "latex": "\\frac{d}{dx}(uv) = u\\frac{dv}{dx} + v\\frac{du}{dx}",
+          "tags": ["derivative", "product rule"]
+        },
+        {
+          "id": "m15",
+          "name": "Quotient Rule",
+          "latex": "\\frac{d}{dx}\\left(\\frac{u}{v}\\right) = \\frac{v\\frac{du}{dx} - u\\frac{dv}{dx}}{v^2}",
+          "tags": ["derivative", "quotient rule"]
+        },
+        {
+          "id": "m16",
+          "name": "Chain Rule",
+          "latex": "\\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx}",
+          "tags": ["derivative", "chain rule"]
+        }
+      ]
+    },
+    {
+      "id": "m_ch5",
+      "class": "12",
+      "name": "Calculus: Integration",
+      "formulas": [
+        {
+          "id": "m17",
+          "name": "Power Rule",
+          "latex": "\\int x^n dx = \\frac{x^{n+1}}{n+1} + C \\quad (n \\neq -1)",
+          "tags": ["integral", "power rule"]
+        },
+        {
+          "id": "m18",
+          "name": "Integration by Parts",
+          "latex": "\\int u v dx = u \\int v dx - \\int \\left( \\frac{du}{dx} \\int v dx \\right) dx",
+          "tags": ["integral", "by parts"]
+        },
+        {
+          "id": "m19",
+          "name": "Definite Integral (Fundamental Theorem)",
+          "latex": "\\int_a^b f(x) dx = F(b) - F(a)",
+          "tags": ["integral", "definite"]
+        }
+      ]
+    },
+    {
+      "id": "m_ch6",
+      "class": "12",
+      "name": "Vector Algebra",
+      "formulas": [
+        {
+          "id": "m20",
+          "name": "Dot Product",
+          "latex": "\\vec{a} \\cdot \\vec{b} = |\\vec{a}||\\vec{b}|\\cos\\theta",
+          "tags": ["vector", "dot product"]
+        },
+        {
+          "id": "m21",
+          "name": "Cross Product Magnitude",
+          "latex": "|\\vec{a} \\times \\vec{b}| = |\\vec{a}||\\vec{b}|\\sin\\theta",
+          "tags": ["vector", "cross product"]
+        }
+      ]
+    }
+  ]
+}

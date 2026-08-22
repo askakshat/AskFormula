@@ -1,5 +1,7 @@
 import { useMemo } from "react";
 import katex from "katex";
+import { Star } from "lucide-react";
+import { useLocalStorage } from "@/lib/local-storage";
 
 interface FormulaCardProps {
   formula: {
@@ -12,6 +14,18 @@ interface FormulaCardProps {
 }
 
 export default function FormulaCard({ formula }: FormulaCardProps) {
+  const [favorites, setFavorites] = useLocalStorage<string[]>("askformula-favorites", []);
+
+  const isFavorite = favorites.includes(formula.name);
+
+  const toggleFavorite = () => {
+    if (isFavorite) {
+      setFavorites(favorites.filter(f => f !== formula.name));
+    } else {
+      setFavorites([...favorites, formula.name]);
+    }
+  };
+
   const rendered = useMemo(() => {
     try {
       return katex.renderToString(formula.latex, {
@@ -25,7 +39,16 @@ export default function FormulaCard({ formula }: FormulaCardProps) {
 
   return (
     <div className="group relative p-5 rounded-2xl bg-white/[0.03] backdrop-blur-2xl border border-white/[0.06] hover:bg-white/[0.06] hover:border-white/[0.12] transition-all duration-200">
-      <div className="relative z-10">
+      <div className="absolute top-4 right-4 z-20">
+        <button
+          onClick={toggleFavorite}
+          className="text-slate-400 hover:text-amber-400 transition-colors focus:outline-none"
+          title={isFavorite ? "Remove from favorites" : "Add to favorites"}
+        >
+          <Star className={`w-4 h-4 ${isFavorite ? "fill-amber-400 text-amber-400" : ""}`} />
+        </button>
+      </div>
+      <div className="relative z-10 pr-6">
         {/* Formula name */}
         <h3 className="text-[13px] font-medium text-slate-300 mb-3 tracking-[-0.01em]">
           {formula.name}
