@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+  <div id="target">Hello</div>
+  <script type="module">
+    import html2pdf from "https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js";
+    const iframe = document.createElement('iframe');
+    document.body.appendChild(iframe);
+    const container = iframe.contentDocument.createElement('div');
+    container.innerHTML = '<h1>Test</h1>';
+    iframe.contentDocument.body.appendChild(container);
+    // test if ownerDocument is iframe's document
+    console.log(container.ownerDocument === iframe.contentDocument);
+  </script>
+</body>
+</html>
