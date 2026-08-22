@@ -34,8 +34,9 @@ export const allSubjects: SubjectData[] = [
 
 // Get all chapters for a subject
 export function getChaptersBySubject(subject: string): Chapter[] {
+  const normalizedSubject = subject.toLowerCase();
   const data = allSubjects.find(
-    (s) => s.subject.toLowerCase() === subject.toLowerCase()
+    (s) => s.subject.toLowerCase() === normalizedSubject
   );
   return data?.chapters ?? [];
 }
