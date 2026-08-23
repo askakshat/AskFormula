@@ -25,6 +25,8 @@ export interface Chapter {
   chapterName?: string;
   topics?: string[];
   formulas: Formula[];
+  keyPoints?: string[];
+  keyDerivations?: string[];
 }
 
 export interface SubjectData {
