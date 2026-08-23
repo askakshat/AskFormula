@@ -1,7 +1,304 @@
 {
   "subject": "Biology",
-  "audience": ["school", "neet"],
+  "audience": [
+    "school",
+    "neet"
+  ],
   "chapters": [
+    {
+      "id": "b_ch3",
+      "class": "11",
+      "name": "Biomolecules",
+      "formulas": [
+        {
+          "id": "b5",
+          "name": "Michaelis-Menten Equation",
+          "latex": "v = \\frac{V_{max}[S]}{K_m + [S]}",
+          "tags": [
+            "enzyme",
+            "kinetics",
+            "biomolecules"
+          ]
+        }
+      ],
+      "keyPoints": [
+        "Biochemical Fractions: Acid-soluble pool contains micromolecules ($<1000\\text{ Da}$); acid-insoluble fraction contains macromolecules (proteins, nucleic acids, polysaccharides) and membrane lipids.",
+        "Protein Hierarchy: Polymers of 20 amino acids linked by peptide bonds; tertiary structure determines 3D active site conformation; quaternary structure involves multi-subunit complexes (Hemoglobin).",
+        "Carbohydrate Polymers: Cellulose (unbranched $\\beta$-glucose), Starch ($\\text{I}_2$-trapping helical $\\alpha$-glucose), Glycogen (branched storage), Chitin (N-acetylglucosamine).",
+        "Enzymatic Catalysis: Enzymes lower activation energy of transition state; affected by temperature, $\\text{pH}$, and competitive inhibitors (malonate competing with succinate).",
+        "Cofactor Classes: Essential non-protein constituents classified as firmly bound prosthetic groups (haem), transient coenzymes (NAD/niacin), or metal ions ($\\text{Zn}^{2+}$)."
+      ],
+      "keyDerivations": []
+    },
+    {
+      "id": "b_ch4",
+      "class": "11",
+      "name": "Photosynthesis in Higher Plants",
+      "formulas": [
+        {
+          "id": "b6",
+          "name": "Photosynthesis Equation",
+          "latex": "6CO_2 + 12H_2O \\xrightarrow{\\text{Light}} C_6H_{12}O_6 + 6H_2O + 6O_2",
+          "tags": [
+            "photosynthesis",
+            "plants"
+          ]
+        }
+      ],
+      "keyPoints": [
+        "Photophosphorylation Pathways: Non-cyclic photophosphorylation (PS II and PS I) produces ATP, $\\text{NADPH}$, and $\\text{O}_2$ via photolysis; cyclic photophosphorylation (PS I only) produces ATP alone.",
+        "Chemiosmotic ATP Synthesis: Protons accumulate in the thylakoid lumen; diffusion through $\\text{CF}_0\\text{-}\\text{CF}_1$ ATP synthase drives photophosphorylation.",
+        "Calvin Cycle ($\\text{C}_3$): Primary $\\text{CO}_2$ fixation by RuBisCO onto RuBP produces 3-PGA; fixing $6\\text{CO}_2$ consumes $18\\text{ ATP}$ and $12\\text{ NADPH}$.",
+        "$\\text{C}_4$ Adaptations: Kranz anatomy and initial fixation by PEP carboxylase in mesophyll avoids photorespiration, increasing photosynthetic efficiency in high temperatures."
+      ],
+      "keyDerivations": []
+    },
+    {
+      "id": "b_ch5",
+      "class": "11",
+      "name": "Respiration in Plants",
+      "formulas": [
+        {
+          "id": "b7",
+          "name": "Respiration Equation (Aerobic)",
+          "latex": "C_6H_{12}O_6 + 6O_2 \\rightarrow 6CO_2 + 6H_2O + \\text{Energy (ATP)}",
+          "tags": [
+            "respiration",
+            "aerobic"
+          ]
+        },
+        {
+          "id": "b8",
+          "name": "Respiratory Quotient (RQ)",
+          "latex": "RQ = \\frac{\\text{Volume of } CO_2 \\text{ evolved}}{\\text{Volume of } O_2 \\text{ consumed}}",
+          "tags": [
+            "respiration",
+            "rq"
+          ]
+        }
+      ],
+      "keyPoints": [
+        "Glycolysis (EMP Pathway): Cytoplasmic conversion of 1 glucose to 2 pyruvate yielding a net gain of $2\\text{ ATP} + 2\\text{ NADH}$ without oxygen.",
+        "Link Reaction & Krebs Cycle: Mitochondrial matrix oxidation converts pyruvate to Acetyl-CoA, yielding $6\\text{ NADH}, 2\\text{ FADH}_2, 2\\text{ GTP}$, and $4\\text{ CO}_2$ per glucose.",
+        "Electron Transport System: Complexes I–IV transfer electrons to terminal $\\text{O}_2$ while pumping protons; Complex V ($\\text{F}_0\\text{-}\\text{F}_1$) generates ATP ($1\\text{ NADH} = 3\\text{ ATP}, 1\\text{ FADH}_2 = 2\\text{ ATP}$).",
+        "Respiratory Quotient: Measures $\\text{CO}_2$ evolved per $\\text{O}_2$ consumed (Carbohydrates $= 1.0$, Fats $= 0.7$, Proteins $= 0.9$)."
+      ],
+      "keyDerivations": []
+    },
+    {
+      "id": "b_ch30",
+      "class": "11",
+      "name": "The Living World",
+      "formulas": [],
+      "keyPoints": [
+        "Defining Criteria of Life: Cellular organisation, metabolism, and consciousness define living organisms without exception; growth and reproduction are non-defining.",
+        "Binomial Nomenclature: System by Linnaeus using Latinised binomials (Genus species Author); genus capitalized, species lowercase, italicized in print or separately underlined when written.",
+        "Taxonomic Hierarchy Order: Obligate sequence from specific to general is Species $\\to$ Genus $\\to$ Family $\\to$ Order $\\to$ Class $\\to$ Phylum/Division $\\to$ Kingdom.",
+        "Taxonomic Invariance: Number of shared similarities decreases as one ascends the taxonomic hierarchy from species to kingdom."
+      ],
+      "keyDerivations": []
+    },
+    {
+      "id": "b_ch31",
+      "class": "11",
+      "name": "Biological Classification",
+      "formulas": [],
+      "keyPoints": [
+        "Whittaker's Five Kingdoms: Classifies Monera (prokaryotic), Protista (unicellular eukaryotic), Fungi (heterotrophic eukaryotic with chitin walls), Plantae (autotrophic cellulosic), and Animalia (holozoic, no cell wall).",
+        "Bacterial Diversity & Archaebacteria: Monera exhibits highest metabolic diversity; Archaebacteria survive extremes due to unique branched-chain lipid cell wall architecture.",
+        "Protistan Adaptations: Diatoms form indestructible diatomaceous earth; Dinoflagellates produce red tides (Gonyaulax); Euglenoids possess flexible protein pellicle.",
+        "Fungal Taxonomy: Classified into Phycomycetes (coenocytic), Ascomycetes (endogenous ascospores in asci), Basidiomycetes (exogenous basidiospores on basidia), and Deuteromycetes (imperfect, no sexual stage).",
+        "Acellular Pathogens: Viruses consist of protein capsid surrounding DNA or RNA (never both); Viroids are free low-MW RNA lacking capsid; Prions are infectious folded proteins."
+      ],
+      "keyDerivations": []
+    },
+    {
+      "id": "b_ch32",
+      "class": "11",
+      "name": "Plant Kingdom",
+      "formulas": [],
+      "keyPoints": [
+        "Algal Pigmentation & Storage: Chlorophyceae (Chl $a, b$, starch in pyrenoids), Phaeophyceae (Chl $a, c$, fucoxanthin, laminarin/mannitol, algin), Rhodophyceae (Chl $a, d$, r-phycoerythrin, floridean starch).",
+        "Bryophyte Generation Alternation: Dominant gametophyte produces gametes in multicellular antheridia and flask-shaped archegonia; sporophyte remains attached and nutritionally dependent.",
+        "Pteridophyte Evolution: First terrestrial plants with vascular tissues (xylem/phloem); sporophyte is dominant; heterospory (Selaginella) serves as a precursor to seed habit.",
+        "Gymnosperm Naked Seeds: Ovules remain exposed on megasporophylls before and after fertilization; gametophytes have no independent free-living existence."
+      ],
+      "keyDerivations": []
+    },
+    {
+      "id": "b_ch33",
+      "class": "11",
+      "name": "Animal Kingdom",
+      "formulas": [],
+      "keyPoints": [
+        "Fundamental Body Architecture: Invertebrates and chordates are classified by symmetry (radial vs. bilateral), coelom (acoelomate, pseudocoelomate, eucoelomate), and embryonic germ layers.",
+        "Unique Phylum Markers: Porifera (choanocytes, canal system), Cnidaria (cnidoblasts, metagenesis), Ctenophora (comb plates, bioluminescence), Platyhelminthes (flame cells, flat acoelomates), Aschelminthes (pseudocoelomate, muscular pharynx).",
+        "Coelomate Adaptations: Annelida (metamerism, nephridia), Arthropoda (jointed appendages, chitinous exoskeleton, Malpighian tubules), Mollusca (radula, mantle, visceral hump), Echinodermata (water vascular system, adult radial).",
+        "Chordate Hallmarks: Characterized by notochord, dorsal hollow nerve cord, pharyngeal gill slits, and post-anal tail; divided into Urochordata, Cephalochordata, and Vertebrata.",
+        "Vertebrate Classes: Cyclostomata (jawless), Chondrichthyes (cartilaginous, placoid scales, claspers), Osteichthyes (bony, operculum, swim bladder), Amphibia (cloaca, moist skin), Reptilia (epidermal scutes, cleidoic eggs), Aves (feathers, pneumatic bones), Mammalia (mammary glands, hair)."
+      ],
+      "keyDerivations": []
+    },
+    {
+      "id": "b_ch34",
+      "class": "11",
+      "name": "Morphology of Flowering Plants",
+      "formulas": [],
+      "keyPoints": [
+        "Root & Leaf Configurations: Taproots develop from radicle, adventitious from other parts; phyllotaxy is alternate, opposite, or whorled; venation is reticulate (dicots) or parallel (monocots).",
+        "Floral Symmetry & Ovary Insertion: Flowers are actinomorphic (radial) or zygomorphic (bilateral); ovary is superior (hypogynous), half-inferior (perigynous), or inferior (epigynous).",
+        "Aestivation Modes: Arrangement of sepals/petals in bud includes valvate, twisted, imbricate, and vexillary (papilionaceous).",
+        "Placentation Types: Ovule arrangement in ovary is marginal (pea), axile (lemon, tomato), parietal (mustard with replum), free central (Dianthus), or basal (sunflower).",
+        "Solanaceae Profile: Potato family characterized by $\\oplus \\ \\text{\\textdied} \\ K_{(5)} \\ \\overbrace{C_{(5)} \\ A_5} \\ \\underline{G}_{(2)}$ with persistent calyx and swollen axile placenta."
+      ],
+      "keyDerivations": []
+    },
+    {
+      "id": "b_ch35",
+      "class": "11",
+      "name": "Anatomy of Flowering Plants",
+      "formulas": [],
+      "keyPoints": [
+        "Tissue Systems: Epidermal (cells, cuticle, stomatal apparatus, trichomes), Ground (parenchyma, collenchyma, sclerenchyma), and Vascular (xylem and phloem).",
+        "Vascular Bundle Configurations: Radial (roots) vs. Conjoint (stems/leaves); Open with cambium (dicot stem) vs. Closed without cambium (monocot stem).",
+        "Root Anatomy: Dicot root has diarch-tetrarch xylem and small pith; monocot root has polyarch ($>6$) xylem and large pith; endodermis bears suberized Casparian strips.",
+        "Stem & Leaf Differentiation: Dicot stem has vascular bundles in a ring; monocot stem has scattered bundles in ground tissue; monocot leaves possess bulliform cells for rolling."
+      ],
+      "keyDerivations": []
+    },
+    {
+      "id": "b_ch36",
+      "class": "11",
+      "name": "Structural Organisation in Animals",
+      "formulas": [],
+      "keyPoints": [
+        "Poikilothermic Amphibian Adaptation: Rana tigrina exhibits camouflage, hibernation, and aestivation; skin is moist, vascularized, and performs cutaneous respiration.",
+        "Digestive & Excretory Anatomy: Short alimentary canal, bilobed tongue; ureotelic excretion via kidneys; male ureters act as urinogenital ducts opening into cloaca.",
+        "Circulatory Features: 3-chambered heart (2 atria, 1 ventricle) with sinus venosus and conus arteriosus; closed double circulation with hepatic and renal portal systems.",
+        "Reproductive Pathways: Male testes connect via 10–12 vasa efferentia to Bidder's canal; females lay 2500–3000 eggs; development is indirect via aquatic tadpole metamorphosis."
+      ],
+      "keyDerivations": []
+    },
+    {
+      "id": "b_ch37",
+      "class": "11",
+      "name": "Cell: The Unit of Life",
+      "formulas": [],
+      "keyPoints": [
+        "Cell Theory Axiom: All living organisms are composed of cells arising from pre-existing cells via division (Omnis cellula-e cellula by Virchow).",
+        "Prokaryotic Structure: Lacks membrane-bound organelles; possesses peptidoglycan wall, mesosome infoldings, naked circular DNA with plasmids, and 70S ribosomes.",
+        "Fluid Mosaic Membrane: Singer-Nicolson model describes a phospholipid bilayer with mobile integral/peripheral proteins and cholesterol, exhibiting selective permeability.",
+        "Endomembrane System: Coordinated network comprising Endoplasmic Reticulum (RER for protein, SER for lipid), Golgi (glycosylation/packaging), Lysosomes (acid hydrolases), and Vacuoles (tonoplast).",
+        "Semiautonomous Organelles: Mitochondria (cristae, ATP generation) and Chloroplasts (thylakoids/grana, stroma) possess circular DNA, 70S ribosomes, and divide by fission."
+      ],
+      "keyDerivations": []
+    },
+    {
+      "id": "b_ch38",
+      "class": "11",
+      "name": "Cell Cycle and Cell Division",
+      "formulas": [],
+      "keyPoints": [
+        "Interphase Sequence: Comprises $G_1$ (growth/organelle duplication), S (DNA replication doubles content $2\\text{C} \\to 4\\text{C}$, chromosome number $2n$ unchanged), and $G_2$ (tubulin/protein synthesis).",
+        "Mitotic Stages: Prophase (condensation), Metaphase (equatorial alignment at metaphase plate via kinetochores), Anaphase (centromere splitting, chromatid migration), Telophase (envelope reformation).",
+        "Prophase I Sub-stages: Leptotene (visibility) $\\to$ Zygotene (synaptonemal complex, synapsis) $\\to$ Pachytene (crossing over via recombinase) $\\to$ Diplotene (chiasmata formation) $\\to$ Diakinesis (terminalisation).",
+        "Meiotic Outcome & Significance: Homologous separation in Anaphase I reduces chromosome number by half ($2n \\to n$); sister chromatid separation in Anaphase II yields 4 genetically variable haploid gametes."
+      ],
+      "keyDerivations": []
+    },
+    {
+      "id": "b_ch39",
+      "class": "11",
+      "name": "Plant Growth and Development",
+      "formulas": [],
+      "keyPoints": [
+        "Growth Kinetics: Arithmetic growth exhibits linear elongation ($L_t = L_0 + rt$); geometric growth follows a sigmoid curve ($W_1 = W_0 e^{rt}$).",
+        "Growth Promoters: Auxins mediate apical dominance and rooting; Gibberellins induce bolting and seed germination; Cytokinins promote cytokinesis and delay senescence.",
+        "Growth Inhibitors: Ethylene promotes fruit ripening and abscission; Abscisic Acid (ABA) acts as a stress hormone by inducing stomatal closure and bud dormancy.",
+        "Cellular Plasticity: Differentiation produces specialized cells; dedifferentiation restores meristematic ability; redifferentiation forms mature secondary tissues."
+      ],
+      "keyDerivations": []
+    },
+    {
+      "id": "b_ch40",
+      "class": "11",
+      "name": "Breathing and Exchange of Gases",
+      "formulas": [],
+      "keyPoints": [
+        "Lung Capacities: Vital Capacity ($\\text{VC} = \\text{TV} + \\text{IRV} + \\text{ERV} \\approx 4500\\text{ mL}$); Functional Residual Capacity ($\\text{FRC} = \\text{ERV} + \\text{RV}$).",
+        "Alveolar Gas Exchange: Governed by partial pressure gradients ($p\\text{O}_2 = 104\\text{ mm Hg}$ in alveoli vs. $40\\text{ mm Hg}$ in deoxygenated blood; $p\\text{CO}_2 = 40$ vs. $45\\text{ mm Hg}$).",
+        "Oxygen Transport: $97\\%$ bound to hemoglobin as oxyhemoglobin; sigmoid dissociation curve shifts right with high $p\\text{CO}_2$, high $\\text{H}^+$, and elevated temperature.",
+        "Carbon Dioxide Transport: $70\\%$ transported as bicarbonate ions ($\\text{HCO}_3^-$) via carbonic anhydrase, $23\\%$ as carbaminohaemoglobin, $7\\%$ in plasma solution.",
+        "Respiratory Control: Medullary rhythm center and pontine pneumotaxic center regulate breathing based on $\\text{CO}_2$ and $\\text{H}^+$ concentrations."
+      ],
+      "keyDerivations": []
+    },
+    {
+      "id": "b_ch41",
+      "class": "11",
+      "name": "Body Fluids and Circulation",
+      "formulas": [],
+      "keyPoints": [
+        "Formed Elements: Erythrocytes (gas transport), Leucocytes (neutrophils/monocytes phagocytic, lymphocytes immune, basophils inflammatory), Platelets (thromboplastin release).",
+        "Coagulation Cascade: Thrombokinase converts prothrombin to thrombin, which polymerizes soluble fibrinogen into an insoluble fibrin meshwork in the presence of $\\text{Ca}^{2+}$.",
+        "Cardiac Mechanics: SAN initiates rhythm ($72\\text{ beats/min}$); cardiac output equals stroke volume $\\times$ heart rate ($\\approx 5\\text{ L/min}$).",
+        "ECG Waves: P-wave (atrial depolarization), QRS complex (ventricular depolarization), T-wave (ventricular repolarization).",
+        "Double Circulation: Complete separation of systemic and pulmonary circuits prevents mixing of oxygenated and deoxygenated blood."
+      ],
+      "keyDerivations": []
+    },
+    {
+      "id": "b_ch42",
+      "class": "11",
+      "name": "Excretory Products and their Elimination",
+      "formulas": [],
+      "keyPoints": [
+        "Nitrogenous Excretion: Animals are ammonotelic (aquatic, highly toxic), ureotelic (mammals/amphibians, urea), or uricotelic (birds/reptiles, uric acid paste).",
+        "Urine Formation Steps: Glomerular ultrafiltration ($\\text{GFR} = 125\\text{ mL/min}$) $\\to$ Tubular reabsorption (PCT reabsorbs $70\\text{--}80\\%$ water/solutes) $\\to$ Tubular secretion ($\\text{H}^+, \\text{K}^+$ into lumen).",
+        "Counter-Current Mechanism: Henle’s loop and vasa recta maintain hyperosmolar medullary gradient ($300 \\to 1200\\text{ mOsmol/L}$) to concentrate urine.",
+        "Endocrine Feedback: RAAS mechanism (Renin $\\to$ Angiotensin II $\\to$ Aldosterone) and ADH increase water retention; ANF promotes vasodilation and $\\text{Na}^+$ excretion."
+      ],
+      "keyDerivations": []
+    },
+    {
+      "id": "b_ch43",
+      "class": "11",
+      "name": "Locomotion and Movement",
+      "formulas": [],
+      "keyPoints": [
+        "Sarcomere Sliding Mechanism: $\\text{Ca}^{2+}$ binds Troponin C to expose actin sites; myosin cross-bridges pull actin toward M-line, shortening I-band and H-zone while A-band remains constant.",
+        "Muscle Filament Proteins: Thin filament contains F-actin, tropomyosin, and troponin; thick filament consists of meromyosin with globular ATPase heads.",
+        "Skeletal Divisions: Human skeleton has 206 bones divided into 80 axial (skull, vertebral column, ribs, sternum) and 126 appendicular (girdles and limbs).",
+        "Synovial Joint Varieties: Freely movable joints including ball & socket (shoulder/hip), hinge (elbow/knee), pivot (atlas/axis), and saddle (thumb)."
+      ],
+      "keyDerivations": []
+    },
+    {
+      "id": "b_ch44",
+      "class": "11",
+      "name": "Neural Control and Coordination",
+      "formulas": [],
+      "keyPoints": [
+        "Resting Membrane Potential: Maintained at $-70\\text{ mV}$ by differential permeability ($\\text{K}^+ > \\text{Na}^+$) and active $\\text{Na}^+/\\text{K}^+$ ATPase pump ($3\\text{ Na}^+$ out / $2\\text{ K}^+$ in).",
+        "Action Potential Generation: Threshold stimulus triggers voltage-gated $\\text{Na}^+$ influx, causing rapid depolarization to $+30\\text{ mV}$, followed by $\\text{K}^+$ efflux for repolarization.",
+        "Synaptic Transmission: Action potential induces $\\text{Ca}^{2+}$-mediated neurotransmitter exocytosis across synaptic cleft to open ligand-gated channels on postsynaptic membrane.",
+        "Brain Functional Regions: Cerebrum coordinates sensory/motor associations; Corpus callosum connects hemispheres; Hypothalamus controls homeostasis; Medulla regulates autonomic vitals."
+      ],
+      "keyDerivations": []
+    },
+    {
+      "id": "b_ch45",
+      "class": "11",
+      "name": "Chemical Coordination and Integration",
+      "formulas": [],
+      "keyPoints": [
+        "Pituitary Master Control: Anterior pituitary secretes tropic hormones (GH, TSH, ACTH, LH, FSH); posterior pituitary stores oxytocin and vasopressin (ADH).",
+        "Metabolic & Calcium Regulators: Thyroid hormones ($\\text{T}_3/\\text{T}_4$) govern basal metabolic rate; Parathyroid hormone (PTH, hypercalcemic) opposes Thyrocalcitonin (TCT, hypocalcemic) for $\\text{Ca}^{2+}$ homeostasis.",
+        "Adrenal & Pancreatic Hormones: Adrenal medulla secretes catecholamines (fight-or-flight); cortex releases Aldosterone and Cortisol; Pancreatic Insulin lowers and Glucagon raises blood glucose.",
+        "Mechanisms of Hormone Action: Peptide hormones act via membrane receptors and second messengers ($\\text{cAMP}, \\text{IP}_3, \\text{Ca}^{2+}$); steroid and thyroid hormones bind intracellular receptors to regulate gene expression directly."
+      ],
+      "keyDerivations": []
+    },
     {
       "id": "b_ch1",
       "class": "12",
@@ -11,13 +308,20 @@
           "id": "b1",
           "name": "Hardy-Weinberg Equation",
           "latex": "p^2 + 2pq + q^2 = 1",
-          "tags": ["genetics", "evolution", "hardy-weinberg"]
+          "tags": [
+            "genetics",
+            "evolution",
+            "hardy-weinberg"
+          ]
         },
         {
           "id": "b2",
           "name": "Allele Frequency",
           "latex": "p + q = 1",
-          "tags": ["genetics", "allele"]
+          "tags": [
+            "genetics",
+            "allele"
+          ]
         }
       ]
     },
@@ -30,58 +334,21 @@
           "id": "b3",
           "name": "Population Growth (Exponential)",
           "latex": "\\frac{dN}{dt} = rN",
-          "tags": ["ecology", "population", "growth"]
+          "tags": [
+            "ecology",
+            "population",
+            "growth"
+          ]
         },
         {
           "id": "b4",
           "name": "Population Growth (Logistic)",
           "latex": "\\frac{dN}{dt} = rN \\left( \\frac{K - N}{K} \\right)",
-          "tags": ["ecology", "population", "logistic"]
-        }
-      ]
-    },
-    {
-      "id": "b_ch3",
-      "class": "11",
-      "name": "Biomolecules",
-      "formulas": [
-        {
-          "id": "b5",
-          "name": "Michaelis-Menten Equation",
-          "latex": "v = \\frac{V_{max}[S]}{K_m + [S]}",
-          "tags": ["enzyme", "kinetics", "biomolecules"]
-        }
-      ]
-    },
-    {
-      "id": "b_ch4",
-      "class": "11",
-      "name": "Photosynthesis in Higher Plants",
-      "formulas": [
-        {
-          "id": "b6",
-          "name": "Photosynthesis Equation",
-          "latex": "6CO_2 + 12H_2O \\xrightarrow{\\text{Light}} C_6H_{12}O_6 + 6H_2O + 6O_2",
-          "tags": ["photosynthesis", "plants"]
-        }
-      ]
-    },
-    {
-      "id": "b_ch5",
-      "class": "11",
-      "name": "Respiration in Plants",
-      "formulas": [
-        {
-          "id": "b7",
-          "name": "Respiration Equation (Aerobic)",
-          "latex": "C_6H_{12}O_6 + 6O_2 \\rightarrow 6CO_2 + 6H_2O + \\text{Energy (ATP)}",
-          "tags": ["respiration", "aerobic"]
-        },
-        {
-          "id": "b8",
-          "name": "Respiratory Quotient (RQ)",
-          "latex": "RQ = \\frac{\\text{Volume of } CO_2 \\text{ evolved}}{\\text{Volume of } O_2 \\text{ consumed}}",
-          "tags": ["respiration", "rq"]
+          "tags": [
+            "ecology",
+            "population",
+            "logistic"
+          ]
         }
       ]
     }
