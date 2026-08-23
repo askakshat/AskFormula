@@ -18,12 +18,12 @@ export interface Formula {
 }
 
 export interface Chapter {
-  id: string; // Required non-optional string (fixes ChapterSelector errors)
-  chapterNumber: number;
-  chapterName: string;
-  name: string; // Required alias for chapterName
-  class?: number | string; // Fixes Landing.tsx(21,60) error
-  topics: string[];
+  id: string;
+  class: string;
+  name: string;
+  chapterNumber?: number;
+  chapterName?: string;
+  topics?: string[];
   formulas: Formula[];
 }
 
