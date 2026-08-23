@@ -1,10 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { LayoutDashboard, Book, FileText, Bookmark, ArrowLeft } from "lucide-react";
-import { useNavigate, Link } from "react-router";
+import { Book, FileText, Bookmark, ArrowLeft } from "lucide-react";
+import { Link } from "react-router";
 import { useLocalStorage, type SavedPDF } from "@/lib/local-storage";
 
 export default function Dashboard() {
-  const navigate = useNavigate();
   const [selectedChapters] = useLocalStorage<string[]>("askformula-selected-chapters", []);
   const [savedPDFs] = useLocalStorage<SavedPDF[]>("askformula-saved-pdfs", []);
   const [favorites] = useLocalStorage<string[]>("askformula-favorites", []);

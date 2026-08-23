@@ -145,17 +145,22 @@ export async function generatePDF(
 
   // We must append the container to the document body temporarily so html-to-image can read computed styles properly
   container.style.position = "absolute";
-  container.style.left = "-9999px";
-  container.style.top = "-9999px";
+  container.style.left = "0px";
+  container.style.top = "0px";
+  container.style.zIndex = "-9999";
+  container.style.opacity = "0"; // hide it visually without display: none
+  container.style.pointerEvents = "none";
   document.body.appendChild(container);
 
-  // Wait a tiny bit for the browser to parse the injected CSS and fonts
-  await new Promise((resolve) => setTimeout(resolve, 500));
+  // Wait for fonts to load and ensure browser parses injected CSS
+  await document.fonts.ready;
+  await new Promise((resolve) => setTimeout(resolve, 1000));
 
   try {
     const canvasDataUrl = await htmlToImage.toPng(container, {
       pixelRatio: 2,
       backgroundColor: "#f8fafc",
+      skipFonts: false, // Ensure fonts are embedded
     });
 
     const pdf = new jsPDF({

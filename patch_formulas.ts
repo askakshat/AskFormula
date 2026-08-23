@@ -3,7 +3,7 @@ import * as fs from 'fs';
 const content = fs.readFileSync('src/lib/formulas.ts', 'utf8');
 
 // Replace Chapter interface to include missing properties from type 'Chapter': chapterNumber, chapterName, topics
-let patched = content.replace(
+const patched = content.replace(
 `export interface Chapter {
   id: string;
   class: string;
