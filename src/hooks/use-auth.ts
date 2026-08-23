@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 
+import type { User, Provider } from "@supabase/supabase-js";
+
 export function useAuth() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -24,9 +26,9 @@ export function useAuth() {
     return () => subscription.unsubscribe();
   }, []);
 
-  const signIn = async (provider: any) => {
+  const signIn = async (provider: Provider | string) => {
     // Basic wrapper to avoid breaking current calls if any
-    return await supabase.auth.signInWithOAuth({ provider: 'github' });
+    return await supabase.auth.signInWithOAuth({ provider: provider as Provider });
   };
 
   const signOut = async () => {

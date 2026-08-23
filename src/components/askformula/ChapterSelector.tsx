@@ -15,7 +15,6 @@ export default function ChapterSelector({
   selectedIds,
 }: ChapterSelectorProps) {
   const allSelected = chapters.every((ch) => selectedIds.includes(ch.id));
-  const someSelected = chapters.some((ch) => selectedIds.includes(ch.id));
 
   const toggleAll = () => {
     if (allSelected) {

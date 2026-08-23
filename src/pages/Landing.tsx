@@ -18,6 +18,18 @@ export default function Landing() {
   const [subject, setSubject] = useState<string | null>(null);
   const [selectedChapters, setSelectedChapters] = useLocalStorage<string[]>("askformula-selected-chapters", []);
 
+  const classRef = useRef<HTMLDivElement>(null);
+  const subjectRef = useRef<HTMLDivElement>(null);
+  const chapterRef = useRef<HTMLDivElement>(null);
+  const formulaRef = useRef<HTMLDivElement>(null);
+
+  const handleReset = () => {
+    setExam(null);
+    setSelectedClass(null);
+    setSubject(null);
+    setSelectedChapters([]);
+  };
+
   const chapters = useMemo(() => {
     if (!subject || !selectedClass) return [];
     return getChaptersBySubject(subject).filter((ch) => ch.class === selectedClass);
