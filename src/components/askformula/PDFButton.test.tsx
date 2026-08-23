@@ -44,12 +44,8 @@ describe("PDFButton Error Path", () => {
     // Setup user event
     const user = userEvent.setup();
 
-    // Click the download button to open dropdown menu
+    // Click the download button
     await user.click(button);
-
-    // Click layout option
-    const compactOption = screen.getByText(/Compact Layout/i);
-    await user.click(compactOption);
 
     // Verify loading state appears
     expect(screen.getByRole("button", { name: /Building PDF/i })).toBeInTheDocument();
@@ -86,10 +82,6 @@ describe("PDFButton Error Path", () => {
     const user = userEvent.setup();
     await user.click(button);
 
-    // Click layout option
-    const compactOption = screen.getByText(/Compact Layout/i);
-    await user.click(compactOption);
-
     // Verify loading state appears
     expect(screen.getByRole("button", { name: /Building PDF/i })).toBeInTheDocument();
 
@@ -101,7 +93,7 @@ describe("PDFButton Error Path", () => {
       expect(screen.getByRole("button", { name: /Download PDF/i })).toBeInTheDocument();
     });
 
-    expect(generatePDF).toHaveBeenCalledWith(mockFormulas, mockSubject, "compact");
+    expect(generatePDF).toHaveBeenCalledWith(mockFormulas, mockSubject);
     expect(screen.getByRole("button", { name: /Download PDF/i })).not.toBeDisabled();
   });
 });
