@@ -12,10 +12,14 @@ export interface FormulaItem {
 
 export type PDFLayout = "compact" | "full";
 
+import { Chapter } from "./formulas";
+
 export async function generatePDF(
   formulas: FormulaItem[],
+  chaptersData: Chapter[],
   subject: string,
-  layout: PDFLayout = "full"
+  layout: PDFLayout = "full",
+  includeContent: ("formulas"|"keyPoints"|"keyDerivations")[] = ["formulas", "keyPoints", "keyDerivations"]
 ): Promise<void> {
   const container = document.createElement("div");
   // A4 size roughly at 96 DPI: 794px width. We'll use this as base and scale up via pixelRatio.
@@ -78,12 +82,47 @@ export async function generatePDF(
 
   let colorIndex = 0;
 
-  for (const [chapterName, items] of chapters) {
+  // Use chaptersData to ensure we get empty chapters too, or chapters with only theory
+  const chapterNames = Array.from(new Set([
+    ...chaptersData.map(ch => ch.name || ch.chapterName || "General"),
+    ...Array.from(chapters.keys())
+  ]));
+
+  const renderKaTeXHTML = (text: string, inline: boolean = true) => {
+    try {
+      const parts = text.split(/(\$.*?\$)/g);
+      return parts.map(part => {
+        if (part.startsWith('$') && part.endsWith('$')) {
+          const math = part.slice(1, -1);
+          return katex.renderToString(math, {
+            throwOnError: false,
+            displayMode: !inline,
+          });
+        }
+        return part;
+      }).join('');
+    } catch {
+      return text;
+    }
+  };
+
+  for (const chapterName of chapterNames) {
+    const items = chapters.get(chapterName) || [];
+    const chapterMeta = chaptersData.find(ch => (ch.name || ch.chapterName) === chapterName);
+    const keyPoints = chapterMeta?.keyPoints || [];
+    const keyDerivations = chapterMeta?.keyDerivations || [];
+
+    const hasFormulas = includeContent.includes("formulas") && items.length > 0;
+    const hasKeyPoints = includeContent.includes("keyPoints") && keyPoints.length > 0;
+    const hasDerivations = includeContent.includes("keyDerivations") && keyDerivations.length > 0;
+
+    if (!hasFormulas && !hasKeyPoints && !hasDerivations) continue;
+
     const chapterColor = titleColors[colorIndex % titleColors.length];
     colorIndex++;
 
     htmlContent += `
-      <div style="margin-bottom: ${layout === "compact" ? "20px" : "40px"}; page-break-inside: avoid;">
+      <div style="margin-bottom: ${layout === "compact" ? "20px" : "40px"};">
         <div style="text-align: center; margin-bottom: ${layout === "compact" ? "15px" : "25px"};">
           <div style="
             background-color: ${chapterColor};
@@ -99,43 +138,72 @@ export async function generatePDF(
             ${chapterName}
           </div>
         </div>
-        <div style="display: grid; grid-template-columns: ${gridColumns}; gap: ${gapSize}; align-items: start;">
     `;
 
-    for (const formula of items) {
-      let renderedMath = "";
-      try {
-        renderedMath = katex.renderToString(formula.latex, {
-          displayMode: true,
-          throwOnError: false,
-        });
-      } catch {
-        renderedMath = `<span style="color: red;">Error rendering formula</span>`;
-      }
-
+    if (hasKeyPoints) {
       htmlContent += `
-          <div style="
-            background: #ffffff;
-            border: 2px solid #1e293b;
-            border-radius: 8px;
-            padding: ${cardPadding};
-            page-break-inside: avoid;
-            box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1);
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-          ">
-            <div style="display: flex; align-items: flex-start; justify-content: flex-start; gap: 6px;">
-              <span style="color: #eab308; font-size: 14px;">⭐</span>
-              <h3 style="margin: 0; font-size: 13px; color: #1e293b; font-weight: 700; line-height: 1.2;">${formula.name}</h3>
-            </div>
-            <div style="font-size: ${mathSize}; color: #000000; display: block; width: 100%; overflow-x: hidden; text-align: center; padding: 4px 0;">
-              ${renderedMath}
-            </div>
-          </div>
+        <div style="margin-bottom: ${gapSize}; background: #fefce8; border: 2px solid #1e293b; border-radius: 8px; padding: ${cardPadding}; box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1); page-break-inside: avoid;">
+          <h4 style="margin: 0 0 10px 0; font-size: 14px; font-weight: bold; color: #1e293b; text-transform: uppercase;">Key Points</h4>
+          <ul style="margin: 0; padding-left: 20px; font-size: ${mathSize}; color: #000000; line-height: 1.5;">
+            ${keyPoints.map(point => `<li style="margin-bottom: 6px;">${renderKaTeXHTML(point)}</li>`).join('')}
+          </ul>
+        </div>
       `;
     }
-    htmlContent += `</div></div>`;
+
+    if (hasDerivations) {
+      htmlContent += `
+        <div style="margin-bottom: ${gapSize}; background: #f0fdf4; border: 2px solid #1e293b; border-radius: 8px; padding: ${cardPadding}; box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1); page-break-inside: avoid;">
+          <h4 style="margin: 0 0 10px 0; font-size: 14px; font-weight: bold; color: #1e293b; text-transform: uppercase;">Key Derivations</h4>
+          <ul style="margin: 0; padding-left: 20px; font-size: ${mathSize}; color: #000000; line-height: 1.5;">
+            ${keyDerivations.map(der => `<li style="margin-bottom: 6px;">${renderKaTeXHTML(der)}</li>`).join('')}
+          </ul>
+        </div>
+      `;
+    }
+
+    if (hasFormulas) {
+      htmlContent += `
+        <div style="display: grid; grid-template-columns: ${gridColumns}; gap: ${gapSize}; align-items: start;">
+      `;
+
+      for (const formula of items) {
+        let renderedMath = "";
+        try {
+          renderedMath = katex.renderToString(formula.latex, {
+            displayMode: true,
+            throwOnError: false,
+          });
+        } catch {
+          renderedMath = `<span style="color: red;">Error rendering formula</span>`;
+        }
+
+        htmlContent += `
+            <div style="
+              background: #ffffff;
+              border: 2px solid #1e293b;
+              border-radius: 8px;
+              padding: ${cardPadding};
+              page-break-inside: avoid;
+              box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1);
+              display: flex;
+              flex-direction: column;
+              gap: 8px;
+            ">
+              <div style="display: flex; align-items: flex-start; justify-content: flex-start; gap: 6px;">
+                <span style="color: #eab308; font-size: 14px;">⭐</span>
+                <h3 style="margin: 0; font-size: 13px; color: #1e293b; font-weight: 700; line-height: 1.2;">${formula.name}</h3>
+              </div>
+              <div style="font-size: ${mathSize}; color: #000000; display: block; width: 100%; overflow-x: hidden; text-align: center; padding: 4px 0;">
+                ${renderedMath}
+              </div>
+            </div>
+        `;
+      }
+      htmlContent += `</div>`;
+    }
+
+    htmlContent += `</div>`;
   }
 
   container.innerHTML = htmlContent;
