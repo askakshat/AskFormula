@@ -5,14 +5,14 @@ export interface Variable {
 
 export interface Formula {
   id: string; // Required non-optional string
-  chapterNumber: number;
-  chapterName: string;
+  chapterNumber?: number;
+  chapterName?: string;
   chapter?: string; // Chapter name alias
-  topic: string;
+  topic?: string;
   name: string;
   latex: string;
-  description: string;
-  variables: Variable[];
+  description?: string;
+  variables?: Variable[];
   tags: string[]; // Required for FormulaGrid and Landing components
   conditions?: string | null;
 }
@@ -96,10 +96,10 @@ export function searchFormulas(query: string, subject?: string): Formula[] {
       for (const f of ch.formulas) {
         if (
           f.name.toLowerCase().includes(q) ||
-          f.topic.toLowerCase().includes(q) ||
-          f.description.toLowerCase().includes(q) ||
+          (f.topic && f.topic.toLowerCase().includes(q)) ||
+          (f.description && f.description.toLowerCase().includes(q)) ||
           f.latex.toLowerCase().includes(q) ||
-          f.chapterName.toLowerCase().includes(q)
+          (f.chapterName && f.chapterName.toLowerCase().includes(q))
         ) {
           results.push(f);
         }
