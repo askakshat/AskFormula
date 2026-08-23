@@ -1,0 +1,31 @@
+<<<<<<< SEARCH
+          <AnimatePresence>
+            {formulas.length > 0 && (
+              <motion.div
+                ref={formulaRef}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="mb-28 sm:mb-20 pb-20 sm:pb-0"
+              >
+                <FormulaGrid formulas={formulas} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+=======
+          <AnimatePresence>
+            {formulas.length > 0 && (
+              <motion.div
+                ref={formulaRef}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="mb-28 sm:mb-20 pb-20 sm:pb-0"
+              >
+                <FormulaGrid formulas={formulas} chapters={chapters.filter((ch) => selectedChapters.includes(ch.id))} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+>>>>>>> REPLACE

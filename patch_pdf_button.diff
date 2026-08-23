@@ -1,0 +1,47 @@
+<<<<<<< SEARCH
+import { useState } from "react";
+import { Download, Loader2, LayoutGrid, Maximize2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import { generatePDF, type FormulaItem, type PDFLayout } from "@/lib/pdf-generator";
+import { useLocalStorage, type SavedPDF } from "@/lib/local-storage";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+interface PDFButtonProps {
+  formulas: FormulaItem[];
+  subject: string;
+}
+
+export default function PDFButton({ formulas, subject }: PDFButtonProps) {
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [savedPDFs, setSavedPDFs] = useLocalStorage<SavedPDF[]>("askformula-saved-pdfs", []);
+=======
+import { useState } from "react";
+import { Download, Loader2, LayoutGrid, Maximize2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import { generatePDF, type FormulaItem, type PDFLayout } from "@/lib/pdf-generator";
+import { useLocalStorage, type SavedPDF } from "@/lib/local-storage";
+import { Chapter } from "@/lib/formulas";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+interface PDFButtonProps {
+  formulas: FormulaItem[];
+  chapters?: Chapter[];
+  subject: string;
+}
+
+export default function PDFButton({ formulas, chapters = [], subject }: PDFButtonProps) {
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [savedPDFs, setSavedPDFs] = useLocalStorage<SavedPDF[]>("askformula-saved-pdfs", []);
+>>>>>>> REPLACE
