@@ -15,6 +15,7 @@ export default function ChapterSelector({
   selectedIds,
 }: ChapterSelectorProps) {
   const allSelected = chapters.every((ch) => selectedIds.includes(ch.id));
+  const someSelected = chapters.some((ch) => selectedIds.includes(ch.id));
 
   const toggleAll = () => {
     if (allSelected) {
@@ -33,6 +34,7 @@ export default function ChapterSelector({
       onSelect([...selectedIds, id]);
     }
   };
+
 
   const totalFormulas = chapters
     .filter((ch) => selectedIds.includes(ch.id))
@@ -82,10 +84,9 @@ export default function ChapterSelector({
               key={chapter.id}
               className={`
                 flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer transition-all duration-150
-                ${
-                  isSelected
-                    ? "bg-blue-500/[0.08]"
-                    : "hover:bg-white/[0.03]"
+                ${isSelected
+                  ? "bg-blue-500/[0.08]"
+                  : "hover:bg-white/[0.03]"
                 }
               `}
             >

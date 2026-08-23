@@ -11,15 +11,13 @@ import PDFButton from "@/components/askformula/PDFButton";
 import Footer from "@/components/askformula/Footer";
 import { getChaptersBySubject, filterFormulas } from "@/lib/formulas";
 import { useLocalStorage } from "@/lib/local-storage";
-import { useRef } from "react";
 
 export default function Landing() {
-  // 2. Define the missing refs inside the component
-  const classRef = useRef<HTMLDivElement>(null);
-  const subjectRef = useRef<HTMLDivElement>(null);
-  const chapterRef = useRef<HTMLDivElement>(null);
-  const formulaRef = useRef<HTMLDivElement>(null);
-  
+  const [exam, setExam] = useState<"school" | "jee" | "neet" | null>(null);
+  const [selectedClass, setSelectedClass] = useState<string | null>(null);
+  const [subject, setSubject] = useState<string | null>(null);
+  const [selectedChapters, setSelectedChapters] = useLocalStorage<string[]>("askformula-selected-chapters", []);
+
   const chapters = useMemo(() => {
     if (!subject || !selectedClass) return [];
     return getChaptersBySubject(subject).filter((ch) => ch.class === selectedClass);
@@ -169,6 +167,21 @@ export default function Landing() {
             {selectedClass && (
               <motion.div
                 ref={subjectRef}
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3 }}
+                className="mb-10 overflow-hidden"
+              >
+                <ClassSelector onSelect={handleClassSelect} selected={selectedClass} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Step 3: Subject Selector */}
+          <AnimatePresence>
+            {selectedClass && (
+              <motion.div
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
