@@ -16,7 +16,10 @@ export default function Landing() {
   const [exam, setExam] = useState<"school" | "jee" | "neet" | null>(null);
   const [selectedClass, setSelectedClass] = useState<string | null>(null);
   const [subject, setSubject] = useState<string | null>(null);
-  const [selectedChapters, setSelectedChapters] = useLocalStorage<string[]>("askformula-selected-chapters", []);
+  const [selectedChapters, setSelectedChapters] = useLocalStorage<string[]>(
+    "askformula-selected-chapters",
+    [],
+  );
 
   const classRef = useRef<HTMLDivElement>(null);
   const subjectRef = useRef<HTMLDivElement>(null);
@@ -32,7 +35,9 @@ export default function Landing() {
 
   const chapters = useMemo(() => {
     if (!subject || !selectedClass) return [];
-    return getChaptersBySubject(subject).filter((ch) => ch.class === selectedClass);
+    return getChaptersBySubject(subject).filter(
+      (ch) => ch.class === selectedClass,
+    );
   }, [subject, selectedClass]);
 
   const formulas = useMemo(() => {
@@ -44,7 +49,10 @@ export default function Landing() {
     setSubject(s);
     setSelectedChapters([]);
     setTimeout(() => {
-      chapterRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      chapterRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
     }, 150);
   };
 
@@ -60,14 +68,19 @@ export default function Landing() {
     setSubject(null);
     setSelectedChapters([]);
     setTimeout(() => {
-      document.getElementById("app-section")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      document
+        .getElementById("app-section")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 50);
   };
 
   useEffect(() => {
     if (formulas.length > 0) {
       setTimeout(() => {
-        formulaRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        formulaRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
       }, 150);
     }
   }, [formulas.length]);
@@ -102,7 +115,10 @@ export default function Landing() {
           >
             <div className="flex flex-wrap items-center gap-y-3 gap-x-1.5 sm:gap-x-2">
               {steps.map((step, i) => (
-                <div key={step.label} className="flex items-center gap-1.5 sm:gap-2">
+                <div
+                  key={step.label}
+                  className="flex items-center gap-1.5 sm:gap-2"
+                >
                   <div className="flex items-center gap-1.5">
                     <div
                       className={`w-6 h-6 rounded-full text-[11px] font-semibold flex items-center justify-center transition-all duration-300 ${
@@ -169,7 +185,10 @@ export default function Landing() {
                 transition={{ duration: 0.3 }}
                 className="mb-10 overflow-hidden"
               >
-                <ClassSelector onSelect={handleClassSelect} selected={selectedClass} />
+                <ClassSelector
+                  onSelect={handleClassSelect}
+                  selected={selectedClass}
+                />
               </motion.div>
             )}
           </AnimatePresence>
@@ -185,52 +204,11 @@ export default function Landing() {
                 transition={{ duration: 0.3 }}
                 className="mb-10 overflow-hidden"
               >
-                <ClassSelector onSelect={handleClassSelect} selected={selectedClass} />
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* Step 3: Subject Selector */}
-          <AnimatePresence>
-            {selectedClass && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
-                className="mb-10 overflow-hidden"
-              >
-                <ClassSelector onSelect={handleClassSelect} selected={selectedClass} />
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* Step 3: Subject Selector */}
-          <AnimatePresence>
-            {selectedClass && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
-                className="mb-10 overflow-hidden"
-              >
-                <ClassSelector onSelect={handleClassSelect} selected={selectedClass} />
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* Step 3: Subject Selector */}
-          <AnimatePresence>
-            {selectedClass && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
-                className="mb-10 overflow-hidden"
-              >
-                <SubjectSelector onSelect={handleSubjectSelect} selected={subject} exam={exam!} />
+                <SubjectSelector
+                  onSelect={handleSubjectSelect}
+                  selected={subject}
+                  exam={exam!}
+                />
               </motion.div>
             )}
           </AnimatePresence>
@@ -283,7 +261,8 @@ export default function Landing() {
             name: f.name,
             latex: f.latex,
             tags: f.tags,
-            chapter: "chapter" in f ? (f as { chapter?: string }).chapter : undefined,
+            chapter:
+              "chapter" in f ? (f as { chapter?: string }).chapter : undefined,
           }))}
           subject={subject ?? "Physics"}
         />
