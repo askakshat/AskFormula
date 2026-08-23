@@ -1,11 +1,12 @@
 import { Atom } from "lucide-react";
+import { FAQDialog } from "./FAQDialog";
 
 export default function Footer() {
   return (
     <footer className="relative py-16 px-6">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-px bg-white/[0.06]" />
 
-      <div className="max-w-4xl mx-auto text-center">
+      <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
         <div className="inline-flex items-center gap-2 mb-5">
           <div className="w-7 h-7 rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center">
             <Atom className="w-3.5 h-3.5 text-blue-400/70" strokeWidth={1.5} />
@@ -19,8 +20,10 @@ export default function Footer() {
           © {new Date().getFullYear()} AskFormula
         </p>
         <p className="text-[11px] text-slate-700">
-          Made by Akshat Agarwal
+          Made by AskAkshat (Akshat Agarwal)
         </p>
+
+        <FAQDialog />
       </div>
     </footer>
   );
