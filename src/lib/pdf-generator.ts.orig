@@ -143,25 +143,18 @@ export async function generatePDF(
   const slug = subject.toLowerCase().replace(/\s+/g, "-");
   const date = new Date().toISOString().split("T")[0];
 
-  // Create a wrapper to hide the container off-screen
-  // We do this instead of applying opacity: 0 to the container directly,
-  // because html-to-image will clone inline styles and render the container as transparent.
-  const wrapper = document.createElement("div");
-  wrapper.style.position = "fixed";
-  wrapper.style.top = "200vh"; // Push far off-screen vertically
-  wrapper.style.left = "0";
-  wrapper.style.width = "0";
-  wrapper.style.height = "0";
-  wrapper.style.overflow = "visible";
-  wrapper.style.pointerEvents = "none";
-  wrapper.style.zIndex = "-9999";
-
-  wrapper.appendChild(container);
-  document.body.appendChild(wrapper);
+  // We must append the container to the document body temporarily so html-to-image can read computed styles properly
+  container.style.position = "absolute";
+  container.style.left = "0px";
+  container.style.top = "0px";
+  container.style.zIndex = "-9999";
+  container.style.opacity = "0"; // hide it visually without display: none
+  container.style.pointerEvents = "none";
+  document.body.appendChild(container);
 
   // Wait for fonts to load and ensure browser parses injected CSS
   await document.fonts.ready;
-  await new Promise((resolve) => setTimeout(resolve, 1500));
+  await new Promise((resolve) => setTimeout(resolve, 1000));
 
   try {
     const canvasDataUrl = await htmlToImage.toPng(container, {
@@ -205,6 +198,6 @@ export async function generatePDF(
 
     pdf.save(`askformula-${slug}-${date}.pdf`);
   } finally {
-    document.body.removeChild(wrapper);
+    document.body.removeChild(container);
   }
 }
