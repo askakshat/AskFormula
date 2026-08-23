@@ -10,6 +10,9 @@ export interface Chapter {
   id: string;
   class: string;
   name: string;
+  chapterNumber?: number;
+  chapterName?: string;
+  topics?: string[];
   formulas: Formula[];
 }
 
