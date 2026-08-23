@@ -1,6 +1,9 @@
 {
   "subject": "Mathematics",
-  "audience": ["school", "jee"],
+  "audience": [
+    "school",
+    "jee"
+  ],
   "chapters": [
     {
       "id": "m_ch1",
@@ -11,32 +14,57 @@
           "id": "m1",
           "name": "Pythagorean Identity",
           "latex": "\\sin^2\\theta + \\cos^2\\theta = 1",
-          "tags": ["trigonometry", "identity"]
+          "tags": [
+            "trigonometry",
+            "identity"
+          ]
         },
         {
           "id": "m2",
           "name": "Sum of Angles (Sine)",
           "latex": "\\sin(A \\pm B) = \\sin A \\cos B \\pm \\cos A \\sin B",
-          "tags": ["trigonometry", "sum formula"]
+          "tags": [
+            "trigonometry",
+            "sum formula"
+          ]
         },
         {
           "id": "m3",
           "name": "Sum of Angles (Cosine)",
           "latex": "\\cos(A \\pm B) = \\cos A \\cos B \\mp \\sin A \\sin B",
-          "tags": ["trigonometry", "sum formula"]
+          "tags": [
+            "trigonometry",
+            "sum formula"
+          ]
         },
         {
           "id": "m4",
           "name": "Double Angle (Sine)",
           "latex": "\\sin 2A = 2 \\sin A \\cos A = \\frac{2\\tan A}{1 + \\tan^2 A}",
-          "tags": ["trigonometry", "double angle"]
+          "tags": [
+            "trigonometry",
+            "double angle"
+          ]
         },
         {
           "id": "m5",
           "name": "Double Angle (Cosine)",
           "latex": "\\cos 2A = \\cos^2 A - \\sin^2 A = 2\\cos^2 A - 1 = 1 - 2\\sin^2 A",
-          "tags": ["trigonometry", "double angle"]
+          "tags": [
+            "trigonometry",
+            "double angle"
+          ]
         }
+      ],
+      "keyPoints": [
+        "Radian Measure & Arc Length: Angles measured in radians satisfy $\\theta = l/r$; conversion is governed by $\\pi\\text{ rad} = 180^\\circ$.",
+        "Sign of Trigonometric Functions: Determined by the ASTC rule across four quadrants, with periods $2\\pi$ for sine/cosine and $\\pi$ for tangent/cotangent.",
+        "Compound & Multiple Angles: Core identities include $\\cos(x \\pm y) = \\cos x \\cos y \\mp \\sin x \\sin y$, $\\sin 2x = 2\\sin x \\cos x$, and $\\cos 2x = \\cos^2 x - \\sin^2 x$.",
+        "Sum-to-Product (C-D) Transformations: Formulas express sums/differences of sines and cosines as products, enabling systematic algebraic simplification.",
+        "$\\sin(-x) = -\\sin x$ (odd function); $\\cos(-x) = \\cos x$ (even function)."
+      ],
+      "keyDerivations": [
+        "Addition Formula $\\cos(x+y) = \\cos x \\cos y - \\sin x \\sin y$: Using points on a unit circle $P_1(\\cos x, \\sin x)$, $P_2(\\cos(x+y), \\sin(x+y))$, $P_3(\\cos(-y), \\sin(-y))$, and $P_4(1,0)$. Equating $(P_1 P_3)^2 = (P_2 P_4)^2$ yields the result."
       ]
     },
     {
@@ -48,21 +76,38 @@
           "id": "m6",
           "name": "Roots of Quadratic Equation",
           "latex": "x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}",
-          "tags": ["quadratic", "roots"]
+          "tags": [
+            "quadratic",
+            "roots"
+          ]
         },
         {
           "id": "m7",
           "name": "Modulus of Complex Number",
           "latex": "|z| = \\sqrt{a^2 + b^2}",
-          "tags": ["complex numbers", "modulus"]
+          "tags": [
+            "complex numbers",
+            "modulus"
+          ]
         },
         {
           "id": "m8",
           "name": "Polar Form",
           "latex": "z = r(\\cos\\theta + i\\sin\\theta)",
-          "tags": ["complex numbers", "polar"]
+          "tags": [
+            "complex numbers",
+            "polar"
+          ]
         }
-      ]
+      ],
+      "keyPoints": [
+        "Complex Number Definition: Defined as $z = a + ib$ where $i = \\sqrt{-1}$ ($i^2 = -1$), with powers of $i$ repeating in a cycle of 4 ($i^{4k} = 1$).",
+        "Modulus & Conjugate: For $z = a + ib$, modulus is $|z| = \\sqrt{a^2 + b^2}$ and conjugate is $\\bar{z} = a - ib$, satisfying $z\\bar{z} = |z|^2$.",
+        "Multiplicative Inverse: The reciprocal of a non-zero complex number is $z^{-1} = \\frac{\\bar{z}}{|z|^2}$.",
+        "Complex Quadratic Roots: Quadratic equations with negative discriminant ($D = b^2 - 4ac < 0$) yield conjugate imaginary roots $x = \\frac{-b \\pm i\\sqrt{|D|}}{2a}$.",
+        "Complex numbers do not satisfy order relations ($z_1 > z_2$ is meaningless)."
+      ],
+      "keyDerivations": []
     },
     {
       "id": "m_ch3",
@@ -73,32 +118,221 @@
           "id": "m9",
           "name": "nth term of A.P.",
           "latex": "a_n = a + (n-1)d",
-          "tags": ["progression", "arithmetic"]
+          "tags": [
+            "progression",
+            "arithmetic"
+          ]
         },
         {
           "id": "m10",
           "name": "Sum of n terms of A.P.",
           "latex": "S_n = \\frac{n}{2}[2a + (n-1)d] = \\frac{n}{2}(a + l)",
-          "tags": ["progression", "arithmetic sum"]
+          "tags": [
+            "progression",
+            "arithmetic sum"
+          ]
         },
         {
           "id": "m11",
           "name": "nth term of G.P.",
           "latex": "a_n = ar^{n-1}",
-          "tags": ["progression", "geometric"]
+          "tags": [
+            "progression",
+            "geometric"
+          ]
         },
         {
           "id": "m12",
           "name": "Sum of n terms of G.P.",
           "latex": "S_n = \\frac{a(r^n - 1)}{r - 1}, \\quad (r \\neq 1)",
-          "tags": ["progression", "geometric sum"]
+          "tags": [
+            "progression",
+            "geometric sum"
+          ]
         },
         {
           "id": "m13",
           "name": "Sum of infinite G.P.",
           "latex": "S_\\infty = \\frac{a}{1 - r}, \\quad (|r| < 1)",
-          "tags": ["progression", "infinite geometric sum"]
+          "tags": [
+            "progression",
+            "infinite geometric sum"
+          ]
         }
+      ],
+      "keyPoints": [
+        "Geometric Progression (GP): Sequence where each term has a constant ratio $r$; $n^{\\text{th}}$ term is $a_n = a r^{n-1}$ and sum is $S_n = \\frac{a(1 - r^n)}{1 - r}$.",
+        "If every term of a GP is multiplied or divided by a non-zero constant $k$, the resulting sequence is still a GP.",
+        "Infinite GP Sum: For $|r| < 1$, the sum of an infinite geometric series converges to $S_\\infty = \\frac{a}{1 - r}$.",
+        "Means & Definitions: Arithmetic Mean of $a, b$ is $A = \\frac{a+b}{2}$; Geometric Mean is $G = \\sqrt{ab}$.",
+        "AM-GM Inequality: For any positive real numbers $a$ and $b$, $\\text{AM} \\ge \\text{GM}$ ($\\frac{a+b}{2} \\ge \\sqrt{ab}$), with equality holding if and only if $a = b$."
+      ],
+      "keyDerivations": [
+        "Sum of $n$ Terms of a GP: $S_n = a + ar + \\dots + ar^{n-1}$. Multiply by $r$: $rS_n = ar + \\dots + ar^n$. Subtracting yields $S_n(1-r) = a(1-r^n)$.",
+        "AM $\\ge$ GM Proof: $A - G = \\frac{a+b}{2} - \\sqrt{ab} = \\frac{(\\sqrt{a} - \\sqrt{b})^2}{2} \\ge 0$."
+      ]
+    },
+    {
+      "id": "ch20",
+      "class": "11",
+      "name": "Sets",
+      "formulas": [],
+      "keyPoints": [
+        "Set Representation & Cardinality: Sets are well-defined collections written in roster or set-builder form; a set of n elements has $2^n$ total subsets and $2^n - 1$ proper subsets.",
+        "An element belongs to a set ($a \\in A$), whereas a subset is contained in a set ($A \\subset B$).",
+        "Intervals as Subsets of $\\mathbb{R}$: Bounded sets of real numbers are represented as open $(a, b)$, closed $[a, b]$, or half-open intervals with length $b - a$.",
+        "De Morgan’s Laws: For any sets $A$ and $B$, $(A \\cup B)' = A' \\cap B'$ and $(A \\cap B)' = A' \\cup B'$.",
+        "Cardinality Addition Principle: $n(A \\cup B) = n(A) + n(B) - n(A \\cap B)$; if $A$ and $B$ are disjoint, $n(A \\cup B) = n(A) + n(B)$.",
+        "A - B, $A \\cap B$, and B - A are mutually disjoint sets whose union is $A \\cup B$."
+      ],
+      "keyDerivations": [
+        "De Morgan’s Law $(A \\cup B)' = A' \\cap B'$: Let $x \\in (A \\cup B)' \\implies x \\notin (A \\cup B) \\implies x \\notin A$ and $x \\notin B \\implies x \\in A'$ and $x \\in B' \\implies x \\in (A' \\cap B')$. Thus $(A \\cup B)' \\subseteq A' \\cap B'$. Similarly, $A' \\cap B' \\subseteq (A \\cup B)'$."
+      ]
+    },
+    {
+      "id": "ch21",
+      "class": "11",
+      "name": "Relations and Functions",
+      "formulas": [],
+      "keyPoints": [
+        "Cartesian Product & Relations: $A \\times B = \\{(a, b) : a \\in A, b \\in B\\}$ contains $pq$ ordered pairs; a relation is any subset of $A \\times B$, with $2^{pq}$ possible relations.",
+        "Function Definition: A relation $f: A \\to B$ is a function if and only if every element in domain A is associated with exactly one image in codomain B.",
+        "In a function, no two distinct ordered pairs can have the same first coordinate.",
+        "Special Real Functions: Modulus $|x|$ maps to $[0, \\infty)$; Signum function outputs $\\{-1, 0, 1\\}$; Greatest Integer Function $[x]$ outputs the largest integer $\\le x$.",
+        "Algebra of Functions: Sum, difference, and product of real functions have domain $\\text{Dom}(f) \\cap \\text{Dom}(g)$; quotient $f/g$ excludes points where $g(x) = 0$."
+      ],
+      "keyDerivations": []
+    },
+    {
+      "id": "ch22",
+      "class": "11",
+      "name": "Linear Inequalities",
+      "formulas": [],
+      "keyPoints": [
+        "Axioms of Inequalities: Adding or subtracting any real number preserves inequality; multiplying/dividing by a negative number reverses the inequality sign.",
+        "Strict inequalities use $<$ or $>$; slack inequalities include equality ($\\le$ or $\\ge$).",
+        "Solution Representation: Solutions are expressed using interval notation on $\\mathbb{R}$ and represented graphically on a 1D real number line.",
+        "Double Inequalities: Inequalities of the form $a \\le f(x) \\le b$ are solved simultaneously by isolating the variable in the middle.",
+        "Applied Constraint Modeling: Real-world word problems translate constraints into linear inequality systems where feasible regions represent valid solutions."
+      ],
+      "keyDerivations": []
+    },
+    {
+      "id": "ch23",
+      "class": "11",
+      "name": "Permutations and Combinations",
+      "formulas": [],
+      "keyPoints": [
+        "Fundamental Counting Principle: Sequential independent events multiply ($m \\times n$), while mutually exclusive alternative choices add ($m + n$).",
+        "Permutations deal with ordered arrangements where sequence matters. Number of ways to arrange $r$ objects from $n$ distinct items is $^nP_r = \\frac{n!}{(n-r)!}$.",
+        "Combinations deal with selections where order is irrelevant. Number of ways to choose $r$ objects from $n$ items is $^nC_r = \\frac{n!}{r!(n-r)!}$.",
+        "Combinatorial Identities: Complementary selection gives $^nC_r = ^nC_{n-r}$, and Pascal's identity gives $^nC_r + ^nC_{r-1} = ^{n+1}C_r$."
+      ],
+      "keyDerivations": [
+        "Pascal’s Identity $^nC_r + ^nC_{r-1} = ^{n+1}C_r$: $\\text{LHS} = \\frac{n!}{r!(n-r)!} + \\frac{n!}{(r-1)!(n-r+1)!}$. Factoring $\\frac{n!}{(r-1)!(n-r)!} \\left[\\frac{1}{r} + \\frac{1}{n-r+1}\\right]$ simplifies to $\\frac{(n+1)!}{r!(n+1-r)!} = ^{n+1}C_r$."
+      ]
+    },
+    {
+      "id": "ch24",
+      "class": "11",
+      "name": "Binomial Theorem",
+      "formulas": [],
+      "keyPoints": [
+        "Binomial Expansion Formula: $(a+b)^n = \\sum_{r=0}^n {^nC_r} a^{n-r} b^r$ contains exactly ($n+1$) terms with total power $n$ in each term.",
+        "General Term Formula: The $(r+1)^{\\text{th}}$ term in the expansion of $(a+b)^n$ is $T_{r+1} = {^nC_r} a^{n-r} b^r$.",
+        "Middle Term Structure: Even $n$ produces a single middle term $T_{\\frac{n}{2}+1}$; odd $n$ produces two middle terms $T_{\\frac{n+1}{2}}$ and $T_{\\frac{n+3}{2}}$.",
+        "Coefficient Properties: Binomial coefficients are symmetric ($^nC_r = ^nC_{n-r}$) and sum to $\\sum_{r=0}^n {^nC_r} = 2^n$."
+      ],
+      "keyDerivations": [
+        "Binomial Theorem by Mathematical Induction: Assume true for $n=k$. For $n=k+1$, multiply $(a+b)^k$ by $(a+b)$ and expand, grouping terms and applying Pascal's Identity to prove the result."
+      ]
+    },
+    {
+      "id": "ch25",
+      "class": "11",
+      "name": "Straight Lines",
+      "formulas": [],
+      "keyPoints": [
+        "Slope of a Line: Inclination angle $\\theta$ defines slope $m = \\tan\\theta = \\frac{y_2 - y_1}{x_2 - x_1}$; parallel lines have $m_1 = m_2$, perpendicular lines have $m_1 m_2 = -1$.",
+        "Standard Line Forms: Includes point-slope $y - y_1 = m(x - x_1)$, slope-intercept $y = mx + c$, and intercept form $\\frac{x}{a} + \\frac{y}{b} = 1$.",
+        "Angle Between Lines: Acute angle $\\theta$ between intersecting lines is given by $\\tan\\theta = \\left|\\frac{m_2 - m_1}{1 + m_1 m_2}\\right|$.",
+        "Perpendicular Distance Formulas: Distance from $(x_1, y_1)$ to $Ax + By + C = 0$ is $d = \\frac{|Ax_1 + By_1 + C|}{\\sqrt{A^2 + B^2}}$; distance between parallel lines is $d = \\frac{|C_1 - C_2|}{\\sqrt{A^2 + B^2}}$."
+      ],
+      "keyDerivations": []
+    },
+    {
+      "id": "ch26",
+      "class": "11",
+      "name": "Conic Sections",
+      "formulas": [],
+      "keyPoints": [
+        "Conic Generation: Formed by intersecting a double-napped cone with a plane: circle ($\\beta = 90^\\circ$), ellipse ($\\alpha < \\beta < 90^\\circ$), parabola ($\\beta = \\alpha$), hyperbola ($0 \\le \\beta < \\alpha$).",
+        "Circle equation is $(x-h)^2 + (y-k)^2 = r^2$; standard parabola $y^2 = 4ax$ has focus $(a, 0)$, directrix $x = -a$, and latus rectum $4a$.",
+        "Ellipse Properties ($e < 1$): Standard form $\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1$ ($a > b$) satisfies $b^2 = a^2(1 - e^2)$, foci $(\\pm ae, 0)$, and sum of focal distances $PF_1 + PF_2 = 2a$.",
+        "Hyperbola Properties ($e > 1$): Standard form $\\frac{x^2}{a^2} - \\frac{y^2}{b^2} = 1$ satisfies $b^2 = a^2(e^2 - 1)$, foci $(\\pm ae, 0)$, and difference of focal distances $|PF_1 - PF_2| = 2a$."
+      ],
+      "keyDerivations": [
+        "Parabola Standard Equation $y^2 = 4ax$: Distance from $P(x, y)$ to focus $F(a, 0)$ equals distance to directrix $x = -a$. Thus $(x-a)^2 + y^2 = (x+a)^2 \\implies y^2 = 4ax$."
+      ]
+    },
+    {
+      "id": "ch27",
+      "class": "11",
+      "name": "Introduction to Three Dimensional Geometry",
+      "formulas": [],
+      "keyPoints": [
+        "3D Coordinate Framework: Three mutually perpendicular planes (XY, YZ, ZX) divide space into 8 octants with distinct sign triplets.",
+        "Points on coordinate planes: XY-plane $(x, y, 0)$, YZ-plane $(0, y, z)$, ZX-plane $(x, 0, z)$.",
+        "3D Distance Formula: The Euclidean distance between $P(x_1, y_1, z_1)$ and $Q(x_2, y_2, z_2)$ is $d = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2}$.",
+        "Section Formula in 3D: Point dividing line segment PQ in ratio $m:n$ has coordinates $\\left(\\frac{mx_2 \\pm nx_1}{m \\pm n}, \\frac{my_2 \\pm ny_1}{m \\pm n}, \\frac{mz_2 \\pm nz_1}{m \\pm n}\\right)$.",
+        "Centroid of a Triangle: Centroid $G$ of $\\triangle ABC$ with vertices $(x_i, y_i, z_i)$ is $G = \\left(\\frac{x_1 + x_2 + x_3}{3}, \\frac{y_1 + y_2 + y_3}{3}, \\frac{z_1 + z_2 + z_3}{3}\\right)$."
+      ],
+      "keyDerivations": []
+    },
+    {
+      "id": "ch28",
+      "class": "11",
+      "name": "Limits and Derivatives",
+      "formulas": [],
+      "keyPoints": [
+        "Limit Existence & Sandwich Theorem: $\\lim_{x \\to a} f(x)$ exists if and only if $\\text{LHL} = \\text{RHL}$.",
+        "Sandwich Theorem: If $f(x) \\le g(x) \\le h(x)$ and $\\lim f = \\lim h = l$, then $\\lim g = l$.",
+        "Fundamental Standard Limits: $\\lim_{x \\to a} \\frac{x^n - a^n}{x - a} = n a^{n-1}$, $\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1$, and $\\lim_{x \\to 0} \\frac{1 - \\cos x}{x} = 0$.",
+        "For $0/0$ indeterminate forms of rational functions, factorize and cancel vanishing common factors $(x - a)$.",
+        "First Principles Derivative: Derivative measures instantaneous rate of change and geometric tangent slope: $f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}$.",
+        "Differentiation Rules: Product rule $(uv)' = u'v + uv'$; Quotient rule $\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}$."
+      ],
+      "keyDerivations": [
+        "Sandwich Theorem Limit $\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1$: Using areas in a unit circle, $\\sin x < x < \\tan x$. Dividing by $\\sin x$ gives $\\cos x < \\frac{\\sin x}{x} < 1$. Taking limit $x \\to 0$ gives $1$.",
+        "Derivative of $\\sin x$: $f'(x) = \\lim_{h \\to 0} \\frac{\\sin(x+h) - \\sin x}{h} = \\lim_{h \\to 0} \\frac{2\\cos(x + h/2)\\sin(h/2)}{h} = \\cos x$."
+      ]
+    },
+    {
+      "id": "ch29",
+      "class": "11",
+      "name": "Statistics",
+      "formulas": [],
+      "keyPoints": [
+        "Measures of Dispersion: Measures the scatter of data around a central tendency; includes Range, Mean Deviation (MD), Variance ($\\sigma^2$), and Standard Deviation ($\\sigma$).",
+        "Mean deviation about median is always less than or equal to mean deviation about any other central value.",
+        "Variance is the mean of squared deviations: $\\sigma^2 = \\frac{1}{N}\\sum f_i x_i^2 - (\\bar{x})^2$; Standard Deviation is $\\sigma = \\sqrt{\\sigma^2}$.",
+        "Transformation Invariance: Adding a constant $a$ to all data leaves variance and SD unchanged; multiplying by $k$ scales variance by $k^2$ and SD by $|k|$."
+      ],
+      "keyDerivations": []
+    },
+    {
+      "id": "ch30",
+      "class": "11",
+      "name": "Probability",
+      "formulas": [],
+      "keyPoints": [
+        "Axiomatic Foundations: For sample space S, $0 \\le P(E) \\le 1$, $P(S) = 1$, $P(\\emptyset) = 0$, and for mutually exclusive events $P(E \\cup F) = P(E) + P(F)$.",
+        "Equally Likely Probability: When all outcomes in finite sample space S are equally likely, $P(E) = \\frac{n(E)}{n(S)}$.",
+        "Addition Theorem of Probability: For any two events, $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$.",
+        "Complement & Difference Rules: $P(\\text{not } A) = P(A') = 1 - P(A)$, and $P(A \\text{ but not } B) = P(A - B) = P(A) - P(A \\cap B)$."
+      ],
+      "keyDerivations": [
+        "Addition Rule $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$: Since $A \\cup B = (A - B) \\cup (A \\cap B) \\cup (B - A)$ as disjoint sets, applying Axiom 3 yields the result."
       ]
     },
     {
@@ -110,19 +344,28 @@
           "id": "m14",
           "name": "Product Rule",
           "latex": "\\frac{d}{dx}(uv) = u\\frac{dv}{dx} + v\\frac{du}{dx}",
-          "tags": ["derivative", "product rule"]
+          "tags": [
+            "derivative",
+            "product rule"
+          ]
         },
         {
           "id": "m15",
           "name": "Quotient Rule",
           "latex": "\\frac{d}{dx}\\left(\\frac{u}{v}\\right) = \\frac{v\\frac{du}{dx} - u\\frac{dv}{dx}}{v^2}",
-          "tags": ["derivative", "quotient rule"]
+          "tags": [
+            "derivative",
+            "quotient rule"
+          ]
         },
         {
           "id": "m16",
           "name": "Chain Rule",
           "latex": "\\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx}",
-          "tags": ["derivative", "chain rule"]
+          "tags": [
+            "derivative",
+            "chain rule"
+          ]
         }
       ]
     },
@@ -135,19 +378,28 @@
           "id": "m17",
           "name": "Power Rule",
           "latex": "\\int x^n dx = \\frac{x^{n+1}}{n+1} + C \\quad (n \\neq -1)",
-          "tags": ["integral", "power rule"]
+          "tags": [
+            "integral",
+            "power rule"
+          ]
         },
         {
           "id": "m18",
           "name": "Integration by Parts",
           "latex": "\\int u v dx = u \\int v dx - \\int \\left( \\frac{du}{dx} \\int v dx \\right) dx",
-          "tags": ["integral", "by parts"]
+          "tags": [
+            "integral",
+            "by parts"
+          ]
         },
         {
           "id": "m19",
           "name": "Definite Integral (Fundamental Theorem)",
           "latex": "\\int_a^b f(x) dx = F(b) - F(a)",
-          "tags": ["integral", "definite"]
+          "tags": [
+            "integral",
+            "definite"
+          ]
         }
       ]
     },
@@ -160,13 +412,19 @@
           "id": "m20",
           "name": "Dot Product",
           "latex": "\\vec{a} \\cdot \\vec{b} = |\\vec{a}||\\vec{b}|\\cos\\theta",
-          "tags": ["vector", "dot product"]
+          "tags": [
+            "vector",
+            "dot product"
+          ]
         },
         {
           "id": "m21",
           "name": "Cross Product Magnitude",
           "latex": "|\\vec{a} \\times \\vec{b}| = |\\vec{a}||\\vec{b}|\\sin\\theta",
-          "tags": ["vector", "cross product"]
+          "tags": [
+            "vector",
+            "cross product"
+          ]
         }
       ]
     }
