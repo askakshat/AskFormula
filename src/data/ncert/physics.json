@@ -12,64 +12,70 @@
       "name": "Units and Measurements",
       "formulas": [
         {
-          "id": "um1",
-          "name": "Absolute Error",
-          "latex": "\\Delta a = a_m - a_i",
+          "id": "p1_1",
+          "name": "Supplementary Angles",
+          "latex": "d\\theta = \\frac{ds}{r}\\text{ (rad)}, \\qquad d\\Omega = \\frac{dA}{r^2}\\text{ (sr)}",
           "tags": [
-            "errors",
-            "measurement"
+            "angles",
+            "supplementary"
           ]
         },
         {
-          "id": "um2",
+          "id": "p1_2",
+          "name": "Mean & Absolute Error",
+          "latex": "a_{\\text{mean}} = \\frac{1}{n}\\sum_{i=1}^n a_i, \\qquad \\Delta a_i = \\vert{}a_{\\text{mean}} - a_i\\vert{}",
+          "tags": [
+            "error",
+            "mean",
+            "absolute"
+          ]
+        },
+        {
+          "id": "p1_3",
           "name": "Mean Absolute Error",
-          "latex": "\\overline{\\Delta a} = \\frac{1}{n} \\sum_{i=1}^{n} |\\Delta a_i|",
+          "latex": "\\Delta a_{\\text{mean}} = \\frac{1}{n}\\sum_{i=1}^n \\Delta a_i",
           "tags": [
-            "errors",
-            "measurement"
+            "error",
+            "mean absolute"
           ]
         },
         {
-          "id": "um3",
-          "name": "Relative Error",
-          "latex": "\\frac{\\overline{\\Delta a}}{a_m}",
+          "id": "p1_4",
+          "name": "Relative & Percentage Error",
+          "latex": "\\text{Relative Error} = \\frac{\\Delta a_{\\text{mean}}}{a_{\\text{mean}}}, \\qquad (\\delta a) = \\frac{\\Delta a_{\\text{mean}}}{a_{\\text{mean}}} \\times 100\\%",
           "tags": [
-            "errors",
-            "measurement"
+            "error",
+            "relative",
+            "percentage"
           ]
         },
         {
-          "id": "um4",
-          "name": "Percentage Error",
-          "latex": "\\frac{\\overline{\\Delta a}}{a_m} \\times 100\\%",
+          "id": "p1_5",
+          "name": "Error in Addition/Subtraction",
+          "latex": "\\Delta Z = \\Delta A + \\Delta B",
           "tags": [
-            "errors",
-            "measurement"
+            "error",
+            "addition",
+            "subtraction"
           ]
         },
         {
-          "id": "um5",
-          "name": "Dimensional Formula",
-          "latex": "[M^a L^b T^c]",
+          "id": "p1_6",
+          "name": "Error in Multiplication/Division",
+          "latex": "\\frac{\\Delta Z}{Z} = \\frac{\\Delta A}{A} + \\frac{\\Delta B}{B} + \\frac{\\Delta C}{C}",
           "tags": [
-            "dimensions"
+            "error",
+            "multiplication",
+            "division"
           ]
         },
         {
-          "id": "um6",
-          "name": "Speed of Light",
-          "latex": "c = 3 \\times 10^8 \\text{ m/s}",
+          "id": "p1_7",
+          "name": "Error in Power Relation",
+          "latex": "\\frac{\\Delta Z}{Z} = p\\left(\\frac{\\Delta A}{A}\\right) + q\\left(\\frac{\\Delta B}{B}\\right) + r\\left(\\frac{\\Delta C}{C}\\right)",
           "tags": [
-            "constants"
-          ]
-        },
-        {
-          "id": "um7",
-          "name": "Parallax Formula",
-          "latex": "d = \\frac{D}{\\theta}",
-          "tags": [
-            "measurement",
-            "distance"
+            "error",
+            "power"
           ]
         }
       ],
@@ -93,75 +99,106 @@
       "name": "Motion in a Straight Line",
       "formulas": [
         {
-          "id": "ms1",
-          "name": "Average Velocity",
-          "latex": "v_{avg} = \\frac{\\Delta x}{\\Delta t} = \\frac{x_f - x_i}{t_f - t_i}",
+          "id": "p2_1",
+          "name": "Kinematic Definitions",
+          "latex": "v = \\frac{dx}{dt}, \\qquad a = \\frac{dv}{dt} = v\\frac{dv}{dx} = \\frac{d^2x}{dt^2}",
           "tags": [
+            "kinematics",
             "velocity",
-            "kinematics"
+            "acceleration"
           ]
         },
         {
-          "id": "ms2",
-          "name": "Average Acceleration",
-          "latex": "a_{avg} = \\frac{\\Delta v}{\\Delta t} = \\frac{v_f - v_i}{t_f - t_i}",
+          "id": "p2_2",
+          "name": "Average Velocity & Speed",
+          "latex": "v_{\\text{avg}} = \\frac{\\Delta x}{\\Delta t}, \\qquad v_{\\text{avg, speed}} = \\frac{\\text{Total Path Length}}{\\text{Total Time}}",
           "tags": [
-            "acceleration",
-            "kinematics"
+            "average",
+            "velocity",
+            "speed"
           ]
         },
         {
-          "id": "ms3",
-          "name": "First Equation of Motion",
-          "latex": "v = u + at",
+          "id": "p2_3",
+          "name": "Velocity-Time Equation",
+          "latex": "v = v_0 + at",
           "tags": [
-            "equations of motion",
-            "kinematics"
+            "kinematics",
+            "velocity",
+            "time"
           ]
         },
         {
-          "id": "ms4",
-          "name": "Second Equation of Motion",
-          "latex": "s = ut + \\frac{1}{2}at^2",
+          "id": "p2_4",
+          "name": "Position-Time Equation",
+          "latex": "x = x_0 + v_0 t + \\frac{1}{2}at^2",
           "tags": [
-            "equations of motion",
-            "kinematics"
+            "kinematics",
+            "position",
+            "time"
           ]
         },
         {
-          "id": "ms5",
-          "name": "Third Equation of Motion",
-          "latex": "v^2 = u^2 + 2as",
+          "id": "p2_5",
+          "name": "Velocity-Position Equation",
+          "latex": "v^2 = v_0^2 + 2a(x - x_0)",
           "tags": [
-            "equations of motion",
-            "kinematics"
+            "kinematics",
+            "velocity",
+            "position"
           ]
         },
         {
-          "id": "ms6",
-          "name": "Displacement in nth Second",
-          "latex": "s_n = u + \\frac{a}{2}(2n - 1)",
+          "id": "p2_6",
+          "name": "Displacement in nth second",
+          "latex": "S_n = v_0 + \\frac{a}{2}(2n - 1)",
           "tags": [
-            "equations of motion",
-            "kinematics"
+            "displacement",
+            "nth second"
           ]
         },
         {
-          "id": "ms7",
-          "name": "Free Fall",
-          "latex": "h = \\frac{1}{2}gt^2",
+          "id": "p2_7",
+          "name": "Average Velocity (Constant a)",
+          "latex": "\\bar{v} = \\frac{v + v_0}{2}",
           "tags": [
-            "free fall",
-            "gravity"
+            "average velocity",
+            "constant acceleration"
           ]
         },
         {
-          "id": "ms8",
-          "name": "Distance vs Displacement",
-          "latex": "|\\vec{d}| \\leq s",
+          "id": "p2_8",
+          "name": "Free Fall from Rest",
+          "latex": "v = -gt, \\quad y = -\\frac{1}{2}gt^2, \\quad v^2 = -2gy \\quad (v_0 = 0)",
           "tags": [
-            "distance",
-            "displacement"
+            "free fall"
+          ]
+        },
+        {
+          "id": "p2_9",
+          "name": "Maximum Height & Time",
+          "latex": "h_{\\max} = \\frac{v_0^2}{2g}, \\qquad t = \\frac{v_0}{g}",
+          "tags": [
+            "projectile",
+            "maximum height",
+            "time"
+          ]
+        },
+        {
+          "id": "p2_10",
+          "name": "Stopping Distance & Reaction Time",
+          "latex": "d_s = \\frac{v_0^2}{2a}, \\qquad t_r = \\sqrt{\\frac{2d}{g}}",
+          "tags": [
+            "stopping distance",
+            "reaction time"
+          ]
+        },
+        {
+          "id": "p2_11",
+          "name": "Relative Velocity",
+          "latex": "v_{AB} = v_A - v_B, \\qquad v_{BA} = v_B - v_A = -v_{AB}",
+          "tags": [
+            "relative velocity"
           ]
         }
       ],
@@ -186,75 +223,94 @@
       "name": "Motion in a Plane",
       "formulas": [
         {
-          "id": "mp1",
-          "name": "Vector Addition",
-          "latex": "\\vec{R} = \\vec{A} + \\vec{B}",
+          "id": "p3_1",
+          "name": "Vector Components & Magnitude",
+          "latex": "\\mathbf{A} = A_x\\hat{\\mathbf{i}} + A_y\\hat{\\mathbf{j}} + A_z\\hat{\\mathbf{k}}, \\qquad \\vert{}\\mathbf{A}\\vert{} = \\sqrt{A_x^2 + A_y^2 + A_z^2}",
           "tags": [
-            "vectors",
-            "addition"
+            "vector",
+            "components",
+            "magnitude"
           ]
         },
         {
-          "id": "mp2",
-          "name": "Magnitude of Resultant",
-          "latex": "R = \\sqrt{A^2 + B^2 + 2AB\\cos\\theta}",
+          "id": "p3_2",
+          "name": "Vector Resultant",
+          "latex": "R = \\sqrt{A^2 + B^2 + 2AB\\cos\\theta}, \\qquad \\tan\\alpha = \\frac{B\\sin\\theta}{A + B\\cos\\theta}",
           "tags": [
-            "vectors",
+            "vector",
             "resultant"
           ]
         },
         {
-          "id": "mp3",
-          "name": "Direction of Resultant",
-          "latex": "\\alpha = \\tan^{-1}\\left(\\frac{B\\sin\\theta}{A + B\\cos\\theta}\\right)",
+          "id": "p3_3",
+          "name": "Scalar Product",
+          "latex": "\\mathbf{A}\\cdot\\mathbf{B} = AB\\cos\\theta = A_x B_x + A_y B_y + A_z B_z",
           "tags": [
-            "vectors",
-            "direction"
+            "scalar product",
+            "dot product"
           ]
         },
         {
-          "id": "mp4",
-          "name": "Projectile Range",
-          "latex": "R = \\frac{u^2 \\sin 2\\theta}{g}",
+          "id": "p3_4",
+          "name": "Vector Product",
+          "latex": "\\mathbf{A}\\times\\mathbf{B} = AB\\sin\\theta\\,\\hat{\\mathbf{n}}",
+          "tags": [
+            "vector product",
+            "cross product"
+          ]
+        },
+        {
+          "id": "p3_5",
+          "name": "Projectile Trajectory",
+          "latex": "y = (\\tan\\theta_0)x - \\frac{g}{2(v_0\\cos\\theta_0)^2}x^2",
+          "tags": [
+            "projectile",
+            "trajectory"
+          ]
+        },
+        {
+          "id": "p3_6",
+          "name": "Projectile Time of Flight",
+          "latex": "T_f = \\frac{2v_0\\sin\\theta_0}{g}, \\qquad t_m = \\frac{v_0\\sin\\theta_0}{g}",
+          "tags": [
+            "projectile",
+            "time of flight"
+          ]
+        },
+        {
+          "id": "p3_7",
+          "name": "Projectile Maximum Height",
+          "latex": "h_m = \\frac{v_0^2\\sin^2\\theta_0}{2g}",
+          "tags": [
+            "projectile",
+            "maximum height"
+          ]
+        },
+        {
+          "id": "p3_8",
+          "name": "Projectile Horizontal Range",
+          "latex": "R = \\frac{v_0^2\\sin 2\\theta_0}{g}, \\qquad R_{\\max} = \\frac{v_0^2}{g} \\quad (\\text{at } \\theta_0 = 45^\\circ)",
           "tags": [
             "projectile",
             "range"
           ]
         },
         {
-          "id": "mp5",
-          "name": "Maximum Height",
-          "latex": "H = \\frac{u^2 \\sin^2\\theta}{2g}",
+          "id": "p3_9",
+          "name": "Uniform Circular Motion",
+          "latex": "\\omega = \\frac{d\\theta}{dt} = \\frac{2\\pi}{T} = 2\\pi\\nu, \\qquad v = \\omega R",
           "tags": [
-            "projectile",
-            "height"
+            "circular motion",
+            "angular velocity"
           ]
         },
         {
-          "id": "mp6",
-          "name": "Time of Flight",
-          "latex": "T = \\frac{2u\\sin\\theta}{g}",
+          "id": "p3_10",
+          "name": "Centripetal Acceleration",
+          "latex": "a_c = \\frac{v^2}{R} = \\omega^2 R = 4\\pi^2\\nu^2 R",
           "tags": [
-            "projectile",
-            "time"
-          ]
-        },
-        {
-          "id": "mp7",
-          "name": "Cross Product",
-          "latex": "\\vec{A} \\times \\vec{B} = AB\\sin\\theta\\,\\hat{n}",
-          "tags": [
-            "vectors",
-            "cross product"
-          ]
-        },
-        {
-          "id": "mp8",
-          "name": "Dot Product",
-          "latex": "\\vec{A} \\cdot \\vec{B} = AB\\cos\\theta",
-          "tags": [
-            "vectors",
-            "dot product"
+            "centripetal acceleration",
+            "circular motion"
           ]
         }
       ],
@@ -280,73 +336,64 @@
       "name": "Laws of Motion",
       "formulas": [
         {
-          "id": "lm1",
-          "name": "Newton's Second Law",
-          "latex": "\\vec{F} = m\\vec{a}",
+          "id": "p4_1",
+          "name": "Momentum & Force",
+          "latex": "\\mathbf{p} = m\\mathbf{v}, \\qquad \\mathbf{F} = \\frac{d\\mathbf{p}}{dt} = m\\mathbf{a}",
           "tags": [
-            "newton",
+            "momentum",
             "force"
           ]
         },
         {
-          "id": "lm2",
-          "name": "Momentum",
-          "latex": "\\vec{p} = m\\vec{v}",
-          "tags": [
-            "momentum"
-          ]
-        },
-        {
-          "id": "lm3",
+          "id": "p4_2",
           "name": "Impulse",
-          "latex": "\\vec{J} = \\vec{F}\\Delta t = \\Delta\\vec{p}",
+          "latex": "\\mathbf{I} = \\int_{t_1}^{t_2} \\mathbf{F}\\,dt = \\Delta\\mathbf{p} = \\mathbf{F}_{\\text{avg}}\\Delta t",
           "tags": [
-            "impulse",
-            "momentum"
+            "impulse"
           ]
         },
         {
-          "id": "lm4",
-          "name": "Friction Force",
-          "latex": "f = \\mu N",
+          "id": "p4_3",
+          "name": "Action-Reaction & Pseudo Force",
+          "latex": "\\mathbf{F}_{AB} = -\\mathbf{F}_{BA}, \\qquad \\mathbf{F}_{\\text{pseudo}} = -m\\mathbf{a}_0",
+          "tags": [
+            "newton",
+            "pseudo force"
+          ]
+        },
+        {
+          "id": "p4_4",
+          "name": "Friction",
+          "latex": "f_s \\le f_{s,\\max} = \\mu_s N, \\qquad f_k = \\mu_k N",
           "tags": [
             "friction"
           ]
         },
         {
-          "id": "lm5",
-          "name": "Centripetal Force",
-          "latex": "F_c = \\frac{mv^2}{r}",
+          "id": "p4_5",
+          "name": "Level Curved Road",
+          "latex": "v_{\\max} = \\sqrt{\\mu_s R g}",
           "tags": [
             "circular motion",
-            "centripetal"
+            "friction"
           ]
         },
         {
-          "id": "lm6",
-          "name": "Banking of Roads",
-          "latex": "\\tan\\theta = \\frac{v^2}{rg}",
+          "id": "p4_6",
+          "name": "Banked Road (Optimum Speed)",
+          "latex": "v_0 = \\sqrt{R g \\tan\\theta}",
           "tags": [
-            "circular motion",
-            "banking"
+            "banked road",
+            "optimum speed"
           ]
         },
         {
-          "id": "lm7",
-          "name": "Newton's Third Law",
-          "latex": "\\vec{F}_{12} = -\\vec{F}_{21}",
+          "id": "p4_7",
+          "name": "Banked Road with Friction",
+          "latex": "v_{\\max} = \\sqrt{Rg\\left(\\frac{\\mu_s + \\tan\\theta}{1 - \\mu_s\\tan\\theta}\\right)}, \\quad v_{\\min} = \\sqrt{Rg\\left(\\frac{\\tan\\theta - \\mu_s}{1 + \\mu_s\\tan\\theta}\\right)}",
           "tags": [
-            "newton",
-            "action-reaction"
-          ]
-        },
-        {
-          "id": "lm8",
-          "name": "Weight",
-          "latex": "W = mg",
-          "tags": [
-            "weight",
-            "gravity"
+            "banked road",
+            "friction"
           ]
         }
       ],
@@ -369,73 +416,80 @@
       "name": "Work, Energy and Power",
       "formulas": [
         {
-          "id": "wep1",
-          "name": "Work Done",
-          "latex": "W = \\vec{F} \\cdot \\vec{d} = Fd\\cos\\theta",
+          "id": "p5_1",
+          "name": "Work",
+          "latex": "W = \\mathbf{F}\\cdot\\mathbf{d} = Fd\\cos\\theta, \\qquad W = \\int_{x_i}^{x_f} F(x)\\,dx",
           "tags": [
-            "work",
-            "energy"
+            "work"
           ]
         },
         {
-          "id": "wep2",
-          "name": "Kinetic Energy",
-          "latex": "KE = \\frac{1}{2}mv^2",
+          "id": "p5_2",
+          "name": "Kinetic Energy & Work-Energy Theorem",
+          "latex": "K = \\frac{1}{2}mv^2 = \\frac{p^2}{2m}, \\qquad W_{\\text{net}} = \\Delta K = K_f - K_i",
           "tags": [
-            "kinetic energy"
+            "kinetic energy",
+            "work-energy theorem"
           ]
         },
         {
-          "id": "wep3",
-          "name": "Potential Energy",
-          "latex": "PE = mgh",
-          "tags": [
-            "potential energy",
-            "gravity"
-          ]
-        },
-        {
-          "id": "wep4",
-          "name": "Work-Energy Theorem",
-          "latex": "W_{net} = \\Delta KE = KE_f - KE_i",
-          "tags": [
-            "work",
-            "kinetic energy"
-          ]
-        },
-        {
-          "id": "wep5",
-          "name": "Conservation of Energy",
-          "latex": "KE_i + PE_i = KE_f + PE_f",
-          "tags": [
-            "conservation",
-            "energy"
-          ]
-        },
-        {
-          "id": "wep6",
+          "id": "p5_3",
           "name": "Power",
-          "latex": "P = \\frac{W}{t} = Fv",
+          "latex": "P_{\\text{inst}} = \\frac{dW}{dt} = \\mathbf{F}\\cdot\\mathbf{v}, \\qquad P_{\\text{avg}} = \\frac{W}{\\Delta t} \\quad [1\\text{ hp} = 746\\text{ W}]",
           "tags": [
             "power"
           ]
         },
         {
-          "id": "wep7",
-          "name": "Elastic Potential Energy",
-          "latex": "PE = \\frac{1}{2}kx^2",
+          "id": "p5_4",
+          "name": "Potential Energy & Conservative Force",
+          "latex": "F(x) = -\\frac{dU}{dx} \\implies \\Delta U = -\\int_{x_i}^{x_f} F(x)\\,dx",
           "tags": [
             "potential energy",
+            "conservative force"
+          ]
+        },
+        {
+          "id": "p5_5",
+          "name": "Gravitational & Spring PE",
+          "latex": "U_{\\text{grav}} = mgh, \\qquad U_{\\text{spring}} = \\frac{1}{2}kx^2",
+          "tags": [
+            "potential energy",
+            "gravity",
             "spring"
           ]
         },
         {
-          "id": "wep8",
+          "id": "p5_6",
           "name": "Coefficient of Restitution",
-          "latex": "e = \\frac{v_2 - v_1}{u_1 - u_2}",
+          "latex": "e = \\frac{v_{2f} - v_{1f}}{v_{1i} - v_{2i}}",
           "tags": [
-            "collision",
-            "restitution"
+            "restitution",
+            "collisions"
+          ]
+        },
+        {
+          "id": "p5_7",
+          "name": "1D Elastic Collision",
+          "latex": "v_{1f} = \\left(\\frac{m_1 - m_2}{m_1 + m_2}\\right)v_{1i} + \\left(\\frac{2m_2}{m_1 + m_2}\\right)v_{2i}",
+          "tags": [
+            "elastic collision"
+          ]
+        },
+        {
+          "id": "p5_8",
+          "name": "1D Elastic Collision (Particle 2)",
+          "latex": "v_{2f} = \\left(\\frac{2m_1}{m_1 + m_2}\\right)v_{1i} + \\left(\\frac{m_2 - m_1}{m_1 + m_2}\\right)v_{2i}",
+          "tags": [
+            "elastic collision"
+          ]
+        },
+        {
+          "id": "p5_9",
+          "name": "Perfect Inelastic Collision",
+          "latex": "v_f = \\frac{m_1 v_{1i} + m_2 v_{2i}}{m_1 + m_2}",
+          "tags": [
+            "inelastic collision"
           ]
         }
       ],
@@ -456,69 +510,131 @@
       "name": "System of Particles and Rotational Motion",
       "formulas": [
         {
-          "id": "spr1",
-          "name": "Center of Mass",
-          "latex": "\\vec{r}_{cm} = \\frac{\\sum m_i \\vec{r}_i}{\\sum m_i}",
+          "id": "p6_1",
+          "name": "Center of Mass (COM)",
+          "latex": "\\mathbf{R}_{\\text{CM}} = \\frac{\\sum m_i \\mathbf{r}_i}{M} = \\frac{1}{M}\\int \\mathbf{r}\\,dm",
           "tags": [
             "center of mass"
           ]
         },
         {
-          "id": "spr2",
-          "name": "Moment of Inertia",
-          "latex": "I = \\sum m_i r_i^2",
+          "id": "p6_2",
+          "name": "Velocity & Acceleration of COM",
+          "latex": "\\mathbf{V}_{\\text{CM}} = \\frac{\\sum m_i \\mathbf{v}_i}{M}, \\qquad \\mathbf{A}_{\\text{CM}} = \\frac{\\mathbf{F}_{\\text{ext}}}{M}",
           "tags": [
-            "moment of inertia"
+            "center of mass",
+            "velocity",
+            "acceleration"
           ]
         },
         {
-          "id": "spr3",
-          "name": "Torque",
-          "latex": "\\vec{\\tau} = \\vec{r} \\times \\vec{F} = I\\vec{\\alpha}",
+          "id": "p6_3",
+          "name": "Torque & Angular Momentum",
+          "latex": "\\boldsymbol{\\tau} = \\mathbf{r} \\times \\mathbf{F} = I\\boldsymbol{\\alpha}, \\qquad \\mathbf{L} = \\mathbf{r} \\times \\mathbf{p} = I\\boldsymbol{\\omega}",
           "tags": [
-            "torque"
-          ]
-        },
-        {
-          "id": "spr4",
-          "name": "Angular Momentum",
-          "latex": "\\vec{L} = I\\vec{\\omega} = \\vec{r} \\times \\vec{p}",
-          "tags": [
+            "torque",
             "angular momentum"
           ]
         },
         {
-          "id": "spr5",
-          "name": "Rolling Motion",
-          "latex": "v = r\\omega",
+          "id": "p6_4",
+          "name": "Torque & Angular Momentum Derivative",
+          "latex": "\\boldsymbol{\\tau}_{\\text{ext}} = \\frac{d\\mathbf{L}}{dt}",
           "tags": [
-            "rolling"
+            "torque",
+            "angular momentum"
           ]
         },
         {
-          "id": "spr6",
-          "name": "Kinetic Energy of Rotation",
-          "latex": "KE_{rot} = \\frac{1}{2}I\\omega^2",
+          "id": "p6_5",
+          "name": "Rotational Energy, Work, Power",
+          "latex": "K_{\\text{rot}} = \\frac{1}{2}I\\omega^2, \\qquad W_{\\text{rot}} = \\tau\\theta, \\qquad P_{\\text{rot}} = \\tau\\omega",
           "tags": [
-            "rotational energy"
+            "rotational energy",
+            "work",
+            "power"
           ]
         },
         {
-          "id": "spr7",
-          "name": "Parallel Axis Theorem",
-          "latex": "I = I_{cm} + md^2",
+          "id": "p6_6",
+          "name": "Rotational Kinematics",
+          "latex": "\\omega = \\omega_0 + \\alpha t, \\quad \\theta = \\omega_0 t + \\frac{1}{2}\\alpha t^2, \\quad \\omega^2 = \\omega_0^2 + 2\\alpha\\theta",
+          "tags": [
+            "rotational kinematics"
+          ]
+        },
+        {
+          "id": "p6_7",
+          "name": "Moment of Inertia (Thin Ring & Hollow Cylinder)",
+          "latex": "I = MR^2",
           "tags": [
             "moment of inertia",
-            "theorem"
+            "ring",
+            "cylinder"
           ]
         },
         {
-          "id": "spr8",
-          "name": "Perpendicular Axis Theorem",
-          "latex": "I_z = I_x + I_y",
+          "id": "p6_8",
+          "name": "Moment of Inertia (Disc & Solid Cylinder)",
+          "latex": "I = \\frac{1}{2}MR^2",
           "tags": [
             "moment of inertia",
-            "theorem"
+            "disc",
+            "cylinder"
+          ]
+        },
+        {
+          "id": "p6_9",
+          "name": "Moment of Inertia (Solid Sphere)",
+          "latex": "I = \\frac{2}{5}MR^2",
+          "tags": [
+            "moment of inertia",
+            "sphere"
+          ]
+        },
+        {
+          "id": "p6_10",
+          "name": "Moment of Inertia (Spherical Shell)",
+          "latex": "I = \\frac{2}{3}MR^2",
+          "tags": [
+            "moment of inertia",
+            "spherical shell"
+          ]
+        },
+        {
+          "id": "p6_11",
+          "name": "Moment of Inertia (Thin Rod, Center)",
+          "latex": "I = \\frac{1}{12}ML^2",
+          "tags": [
+            "moment of inertia",
+            "rod"
+          ]
+        },
+        {
+          "id": "p6_12",
+          "name": "Moment of Inertia (Thin Rod, End)",
+          "latex": "I = \\frac{1}{3}ML^2",
+          "tags": [
+            "moment of inertia",
+            "rod"
+          ]
+        },
+        {
+          "id": "p6_13",
+          "name": "Pure Rolling Kinematics & Energy",
+          "latex": "v_{\\text{cm}} = \\omega R, \\qquad K_{\\text{total}} = \\frac{1}{2}M v_{\\text{cm}}^2\\left(1 + \\frac{k^2}{R^2}\\right)",
+          "tags": [
+            "pure rolling",
+            "energy"
+          ]
+        },
+        {
+          "id": "p6_14",
+          "name": "Rolling on Incline",
+          "latex": "a = \\frac{g\\sin\\theta}{1 + \\frac{k^2}{R^2}}, \\qquad v = \\sqrt{\\frac{2gh}{1 + \\frac{k^2}{R^2}}}",
+          "tags": [
+            "rolling",
+            "incline"
           ]
         }
       ],
@@ -539,75 +655,82 @@
       "name": "Gravitation",
       "formulas": [
         {
-          "id": "g1",
-          "name": "Universal Law of Gravitation",
-          "latex": "F = \\frac{Gm_1m_2}{r^2}",
+          "id": "p7_1",
+          "name": "Gravitational Force",
+          "latex": "F = G\\frac{m_1 m_2}{r^2}",
           "tags": [
             "gravitation",
             "force"
           ]
         },
         {
-          "id": "g2",
-          "name": "Gravitational Potential Energy",
-          "latex": "PE = -\\frac{Gm_1m_2}{r}",
+          "id": "p7_2",
+          "name": "Acceleration due to Gravity",
+          "latex": "g_0 = \\frac{GM}{R_E^2}",
           "tags": [
-            "gravitation",
-            "potential energy"
+            "gravity",
+            "acceleration"
           ]
         },
         {
-          "id": "g3",
-          "name": "Escape Velocity",
-          "latex": "v_e = \\sqrt{\\frac{2GM}{R}}",
+          "id": "p7_3",
+          "name": "Gravity at Altitude h",
+          "latex": "g_h = \\frac{GM}{(R_E + h)^2} \\approx g_0\\left(1 - \\frac{2h}{R_E}\\right)",
           "tags": [
-            "gravitation",
-            "escape velocity"
+            "gravity",
+            "altitude"
           ]
         },
         {
-          "id": "g4",
-          "name": "Orbital Velocity",
-          "latex": "v_o = \\sqrt{\\frac{GM}{r}}",
+          "id": "p7_4",
+          "name": "Gravity at Depth d",
+          "latex": "g_d = g_0\\left(1 - \\frac{d}{R_E}\\right)",
           "tags": [
-            "gravitation",
-            "orbital velocity"
+            "gravity",
+            "depth"
           ]
         },
         {
-          "id": "g5",
-          "name": "Time Period of Satellite",
-          "latex": "T = 2\\pi\\sqrt{\\frac{r^3}{GM}}",
+          "id": "p7_5",
+          "name": "Gravitational Potential & PE",
+          "latex": "V(r) = -\\frac{GM}{r}, \\qquad U(r) = -\\frac{GMm}{r}",
           "tags": [
             "gravitation",
-            "satellite"
+            "potential",
+            "energy"
           ]
         },
         {
-          "id": "g6",
+          "id": "p7_6",
+          "name": "Escape Speed",
+          "latex": "v_e = \\sqrt{\\frac{2GM}{R_E}} = \\sqrt{2gR_E} \\approx 11.2\\text{ km/s}",
+          "tags": [
+            "escape speed"
+          ]
+        },
+        {
+          "id": "p7_7",
+          "name": "Orbital Speed",
+          "latex": "v_o = \\sqrt{\\frac{GM}{R_E + h}} \\approx \\sqrt{gR_E} \\implies v_e = \\sqrt{2}v_o",
+          "tags": [
+            "orbital speed"
+          ]
+        },
+        {
+          "id": "p7_8",
           "name": "Kepler's Third Law",
-          "latex": "T^2 \\propto a^3",
+          "latex": "T = \\frac{2\\pi(R_E + h)^{3/2}}{\\sqrt{GM}} \\implies T^2 = \\left(\\frac{4\\pi^2}{GM}\\right)a^3",
           "tags": [
             "kepler",
-            "gravitation"
+            "period"
           ]
         },
         {
-          "id": "g7",
-          "name": "Acceleration due to Gravity",
-          "latex": "g = \\frac{GM}{R^2}",
+          "id": "p7_9",
+          "name": "Total Orbital Energy",
+          "latex": "E = K + U = -\\frac{GMm}{2r} = -K = \\frac{1}{2}U",
           "tags": [
-            "gravitation",
-            "gravity"
-          ]
-        },
-        {
-          "id": "g8",
-          "name": "Gravitational Field",
-          "latex": "\\vec{E} = -\\frac{GM}{r^2}\\hat{r}",
-          "tags": [
-            "gravitation",
-            "field"
+            "orbital energy"
           ]
         }
       ],
@@ -630,57 +753,48 @@
       "name": "Mechanical Properties of Solids",
       "formulas": [
         {
-          "id": "mps1",
-          "name": "Young's Modulus",
-          "latex": "Y = \\frac{\\text{Stress}}{\\text{Strain}} = \\frac{F/A}{\\Delta L/L}",
+          "id": "p8_1",
+          "name": "Stress and Strain",
+          "latex": "\\sigma = \\frac{F}{A}, \\qquad \\epsilon = \\frac{\\Delta L}{L}, \\qquad \\theta = \\frac{\\Delta x}{L}, \\qquad \\text{Volume Strain} = \\frac{\\Delta V}{V}",
           "tags": [
-            "elasticity",
-            "modulus"
-          ]
-        },
-        {
-          "id": "mps2",
-          "name": "Stress",
-          "latex": "\\text{Stress} = \\frac{F}{A}",
-          "tags": [
-            "elasticity",
-            "stress"
-          ]
-        },
-        {
-          "id": "mps3",
-          "name": "Strain",
-          "latex": "\\text{Strain} = \\frac{\\Delta L}{L}",
-          "tags": [
-            "elasticity",
+            "stress",
             "strain"
           ]
         },
         {
-          "id": "mps4",
-          "name": "Bulk Modulus",
-          "latex": "B = -V\\frac{\\Delta P}{\\Delta V}",
+          "id": "p8_2",
+          "name": "Elastic Moduli",
+          "latex": "Y = \\frac{FL}{A\\Delta L}, \\qquad G = \\frac{FL}{A\\Delta x} \\approx \\frac{Y}{3}, \\qquad B = -\\frac{\\Delta p}{\\Delta V/V}, \\qquad k = \\frac{1}{B}",
           "tags": [
-            "elasticity",
-            "bulk modulus"
+            "elastic moduli",
+            "young",
+            "shear",
+            "bulk"
           ]
         },
         {
-          "id": "mps5",
-          "name": "Shear Modulus",
-          "latex": "G = \\frac{\\text{Shear Stress}}{\\text{Shear Strain}}",
-          "tags": [
-            "elasticity",
-            "shear modulus"
-          ]
-        },
-        {
-          "id": "mps6",
+          "id": "p8_3",
           "name": "Poisson's Ratio",
-          "latex": "\\sigma = -\\frac{\\text{Lateral Strain}}{\\text{Longitudinal Strain}}",
+          "latex": "\\nu = -\\frac{\\text{Lateral Strain}}{\\text{Longitudinal Strain}} = -\\frac{\\Delta d/d}{\\Delta L/L}",
           "tags": [
-            "elasticity",
-            "poisson"
+            "poisson ratio"
+          ]
+        },
+        {
+          "id": "p8_4",
+          "name": "Elastic Potential Energy Density",
+          "latex": "u = \\frac{1}{2}\\sigma\\epsilon = \\frac{1}{2}Y\\epsilon^2 = \\frac{\\sigma^2}{2Y}",
+          "tags": [
+            "elastic energy density"
+          ]
+        },
+        {
+          "id": "p8_5",
+          "name": "Sag of Loaded Beam",
+          "latex": "\\delta = \\frac{Wl^3}{4bd^3 Y}",
+          "tags": [
+            "sag",
+            "beam"
           ]
         }
       ],
@@ -698,7 +812,100 @@
       "id": "ch20",
       "class": "11",
       "name": "Mechanical Properties of Fluids",
-      "formulas": [],
+      "formulas": [
+        {
+          "id": "p9_1",
+          "name": "Pressure and Depth",
+          "latex": "p = \\frac{F}{A}, \\qquad p_2 - p_1 = \\rho gh \\implies p = p_a + \\rho gh",
+          "tags": [
+            "pressure",
+            "depth"
+          ]
+        },
+        {
+          "id": "p9_2",
+          "name": "Pascal's Hydraulic Lift",
+          "latex": "\\frac{F_1}{A_1} = \\frac{F_2}{A_2} \\implies F_2 = F_1\\left(\\frac{A_2}{A_1}\\right)",
+          "tags": [
+            "pascal",
+            "hydraulic"
+          ]
+        },
+        {
+          "id": "p9_3",
+          "name": "Equation of Continuity",
+          "latex": "A_1 v_1 = A_2 v_2 \\implies Av = \\text{constant}",
+          "tags": [
+            "continuity"
+          ]
+        },
+        {
+          "id": "p9_4",
+          "name": "Bernoulli's Equation",
+          "latex": "p + \\frac{1}{2}\\rho v^2 + \\rho gh = \\text{constant}",
+          "tags": [
+            "bernoulli"
+          ]
+        },
+        {
+          "id": "p9_5",
+          "name": "Torricelli's Efflux Speed",
+          "latex": "v = \\sqrt{2gh + \\frac{2(p - p_a)}{\\rho}} \\xrightarrow{p=p_a} \\sqrt{2gh}",
+          "tags": [
+            "torricelli",
+            "efflux"
+          ]
+        },
+        {
+          "id": "p9_6",
+          "name": "Venturi Meter",
+          "latex": "v_1 = A_2\\sqrt{\\frac{2(p_1 - p_2)}{\\rho(A_1^2 - A_2^2)}}",
+          "tags": [
+            "venturi meter"
+          ]
+        },
+        {
+          "id": "p9_7",
+          "name": "Newton's Viscosity Law",
+          "latex": "F = -\\eta A\\frac{dv}{dx}",
+          "tags": [
+            "viscosity"
+          ]
+        },
+        {
+          "id": "p9_8",
+          "name": "Stokes' Law & Terminal Velocity",
+          "latex": "F = 6\\pi\\eta a v, \\qquad v_t = \\frac{2}{9}\\frac{a^2(\\rho - \\sigma)g}{\\eta}",
+          "tags": [
+            "stokes",
+            "terminal velocity"
+          ]
+        },
+        {
+          "id": "p9_9",
+          "name": "Surface Tension",
+          "latex": "S = \\frac{F}{2l} = \\frac{\\Delta W}{\\Delta A}",
+          "tags": [
+            "surface tension"
+          ]
+        },
+        {
+          "id": "p9_10",
+          "name": "Excess Pressure",
+          "latex": "\\Delta p = \\frac{2S}{r} \\text{ (Drop)}, \\qquad \\Delta p = \\frac{4S}{r} \\text{ (Bubble)}",
+          "tags": [
+            "excess pressure"
+          ]
+        },
+        {
+          "id": "p9_11",
+          "name": "Capillary Rise",
+          "latex": "h = \\frac{2S\\cos\\theta}{\\rho g r}",
+          "tags": [
+            "capillary rise"
+          ]
+        }
+      ],
       "keyPoints": [
         "Pascal’s Principle: Pressure applied to an enclosed static incompressible fluid is transmitted undiminished in all directions.",
         "Pressure in a static fluid is a scalar quantity and is identical at all points along the same horizontal depth.",
@@ -721,7 +928,94 @@
       "id": "ch21",
       "class": "11",
       "name": "Thermal Properties of Matter",
-      "formulas": [],
+      "formulas": [
+        {
+          "id": "p10_1",
+          "name": "Temperature Scales",
+          "latex": "\\frac{T_F - 32}{180} = \\frac{T_C}{100} = \\frac{T_K - 273.15}{100}",
+          "tags": [
+            "temperature",
+            "scales"
+          ]
+        },
+        {
+          "id": "p10_2",
+          "name": "Thermal Expansion",
+          "latex": "\\Delta l = \\alpha_l l \\Delta T, \\quad \\Delta A = 2\\alpha_l A \\Delta T, \\quad \\Delta V = \\alpha_v V \\Delta T",
+          "tags": [
+            "thermal expansion"
+          ]
+        },
+        {
+          "id": "p10_3",
+          "name": "Volume Expansion Coefficient",
+          "latex": "\\alpha_v = 3\\alpha_l",
+          "tags": [
+            "volume expansion"
+          ]
+        },
+        {
+          "id": "p10_4",
+          "name": "Thermal Stress",
+          "latex": "\\frac{F}{A} = Y\\alpha_l \\Delta T",
+          "tags": [
+            "thermal stress"
+          ]
+        },
+        {
+          "id": "p10_5",
+          "name": "Calorimetry & Latent Heat",
+          "latex": "\\Delta Q = ms\\Delta T = nC\\Delta T, \\qquad \\Delta Q = mL",
+          "tags": [
+            "calorimetry",
+            "latent heat"
+          ]
+        },
+        {
+          "id": "p10_6",
+          "name": "Heat Conduction",
+          "latex": "H = \\frac{dQ}{dt} = KA\\frac{T_H - T_C}{L}",
+          "tags": [
+            "heat conduction"
+          ]
+        },
+        {
+          "id": "p10_7",
+          "name": "Equivalent Conductivity (Series)",
+          "latex": "K_{\\text{eq}} = \\frac{2K_1 K_2}{K_1 + K_2}",
+          "tags": [
+            "conductivity",
+            "series"
+          ]
+        },
+        {
+          "id": "p10_8",
+          "name": "Wien's Displacement Law",
+          "latex": "\\lambda_m T = b \\quad [b = 2.898 \\times 10^{-3}\\text{ m}\\cdot\\text{K}]",
+          "tags": [
+            "wien",
+            "displacement"
+          ]
+        },
+        {
+          "id": "p10_9",
+          "name": "Stefan-Boltzmann Law",
+          "latex": "H = e\\sigma A(T^4 - T_s^4)",
+          "tags": [
+            "stefan-boltzmann",
+            "radiation"
+          ]
+        },
+        {
+          "id": "p10_10",
+          "name": "Newton's Law of Cooling",
+          "latex": "-\\frac{dT}{dt} = K(T - T_s)",
+          "tags": [
+            "newton",
+            "cooling"
+          ]
+        }
+      ],
       "keyPoints": [
         "Fixed Points & Triple Point: The triple point of water ($273.16\\text{ K}$) is the unique standard reference point for thermodynamic temperature scales.",
         "Anomalous Water Expansion: Water contracts on heating from $0^\\circ\\text{C}$ to $4^\\circ\\text{C}$, reaching maximum density at $4^\\circ\\text{C}$, preserving aquatic life.",
@@ -739,7 +1033,92 @@
       "id": "ch22",
       "class": "11",
       "name": "Thermodynamics",
-      "formulas": [],
+      "formulas": [
+        {
+          "id": "p11_1",
+          "name": "First Law of Thermodynamics",
+          "latex": "\\Delta Q = \\Delta U + \\Delta W \\quad (\\Delta W = p\\Delta V)",
+          "tags": [
+            "first law",
+            "thermodynamics"
+          ]
+        },
+        {
+          "id": "p11_2",
+          "name": "Specific Heats",
+          "latex": "C_p - C_v = R, \\qquad \\gamma = \\frac{C_p}{C_v}",
+          "tags": [
+            "specific heat"
+          ]
+        },
+        {
+          "id": "p11_3",
+          "name": "Isothermal Process",
+          "latex": "pV = \\text{const}, \\qquad Q = W = nRT\\ln\\left(\\frac{V_2}{V_1}\\right) = 2.303 nRT\\log\\left(\\frac{V_2}{V_1}\\right)",
+          "tags": [
+            "isothermal"
+          ]
+        },
+        {
+          "id": "p11_4",
+          "name": "Adiabatic Process Relations",
+          "latex": "pV^\\gamma = \\text{const}, \\quad TV^{\\gamma-1} = \\text{const}, \\quad p^{1-\\gamma}T^\\gamma = \\text{const}",
+          "tags": [
+            "adiabatic"
+          ]
+        },
+        {
+          "id": "p11_5",
+          "name": "Adiabatic Work",
+          "latex": "W = \\frac{nR(T_1 - T_2)}{\\gamma - 1} = \\frac{p_1 V_1 - p_2 V_2}{\\gamma - 1} = -\\Delta U",
+          "tags": [
+            "adiabatic",
+            "work"
+          ]
+        },
+        {
+          "id": "p11_6",
+          "name": "Isochoric Process",
+          "latex": "W = 0, \\quad Q = \\Delta U = nC_v \\Delta T",
+          "tags": [
+            "isochoric"
+          ]
+        },
+        {
+          "id": "p11_7",
+          "name": "Isobaric Process",
+          "latex": "W = p(V_2 - V_1) = nR(T_2 - T_1), \\quad Q = nC_p \\Delta T",
+          "tags": [
+            "isobaric"
+          ]
+        },
+        {
+          "id": "p11_8",
+          "name": "Cyclic Process",
+          "latex": "\\Delta U = 0 \\implies Q_{\\text{net}} = W_{\\text{net}}",
+          "tags": [
+            "cyclic"
+          ]
+        },
+        {
+          "id": "p11_9",
+          "name": "Carnot Efficiency",
+          "latex": "\\eta = \\frac{W}{Q_1} = 1 - \\frac{Q_2}{Q_1} = 1 - \\frac{T_2}{T_1}",
+          "tags": [
+            "carnot",
+            "efficiency"
+          ]
+        },
+        {
+          "id": "p11_10",
+          "name": "Refrigerator COP",
+          "latex": "\\beta = \\frac{Q_2}{W} = \\frac{T_2}{T_1 - T_2}",
+          "tags": [
+            "refrigerator",
+            "cop"
+          ]
+        }
+      ],
       "keyPoints": [
         "First Law & Energy Conservation: Energy is conserved in all processes ($\\Delta Q = \\Delta U + p\\Delta V$); internal energy $U$ is a state variable depending only on $T$ for ideal gases.",
         "Gas Process Work: Isothermal work is $W = 2.303 nRT \\log(V_2/V_1)$; adiabatic work is done at the expense of internal energy.",
@@ -759,7 +1138,84 @@
       "id": "ch23",
       "class": "11",
       "name": "Kinetic Theory of Gases",
-      "formulas": [],
+      "formulas": [
+        {
+          "id": "p12_1",
+          "name": "Ideal Gas Law & Pressure",
+          "latex": "pV = \\mu RT = k_B NT, \\qquad p = \\frac{1}{3}\\rho\\overline{v^2} = \\frac{1}{3}nm\\overline{v^2}",
+          "tags": [
+            "ideal gas",
+            "pressure"
+          ]
+        },
+        {
+          "id": "p12_2",
+          "name": "Translational Kinetic Energy",
+          "latex": "\\overline{E}_{\\text{trans}} = \\frac{1}{2}m\\overline{v^2} = \\frac{3}{2}k_B T, \\qquad E_{\\text{total, 1 mol}} = \\frac{3}{2}RT",
+          "tags": [
+            "kinetic energy",
+            "translational"
+          ]
+        },
+        {
+          "id": "p12_3",
+          "name": "Molecular Speeds",
+          "latex": "v_{\\text{rms}} = \\sqrt{\\frac{3RT}{M}}, \\quad \\overline{v} = \\sqrt{\\frac{8RT}{\\pi M}}, \\quad v_{\\text{mp}} = \\sqrt{\\frac{2RT}{M}}",
+          "tags": [
+            "molecular speeds"
+          ]
+        },
+        {
+          "id": "p12_4",
+          "name": "Speed Ratios",
+          "latex": "v_{\\text{rms}} : \\overline{v} : v_{\\text{mp}} = \\sqrt{3} : \\sqrt{\\frac{8}{\\pi}} : \\sqrt{2}",
+          "tags": [
+            "speed ratios"
+          ]
+        },
+        {
+          "id": "p12_5",
+          "name": "Equipartition of Energy",
+          "latex": "U = \\frac{f}{2}nRT, \\qquad C_v = \\frac{f}{2}R, \\qquad C_p = \\left(\\frac{f}{2} + 1\\right)R, \\qquad \\gamma = 1 + \\frac{2}{f}",
+          "tags": [
+            "equipartition"
+          ]
+        },
+        {
+          "id": "p12_6",
+          "name": "Specific Heats (Monatomic)",
+          "latex": "C_v = \\frac{3}{2}R, \\ C_p = \\frac{5}{2}R, \\ \\gamma = \\frac{5}{3}",
+          "tags": [
+            "specific heat",
+            "monatomic"
+          ]
+        },
+        {
+          "id": "p12_7",
+          "name": "Specific Heats (Diatomic)",
+          "latex": "C_v = \\frac{5}{2}R, \\ C_p = \\frac{7}{2}R, \\ \\gamma = \\frac{7}{5}",
+          "tags": [
+            "specific heat",
+            "diatomic"
+          ]
+        },
+        {
+          "id": "p12_8",
+          "name": "Dulong-Petit Law",
+          "latex": "C = 3R \\approx 25\\text{ J}\\cdot\\text{mol}^{-1}\\cdot\\text{K}^{-1}",
+          "tags": [
+            "dulong-petit"
+          ]
+        },
+        {
+          "id": "p12_9",
+          "name": "Mean Free Path",
+          "latex": "l = \\frac{1}{\\sqrt{2}n\\pi d^2} = \\frac{k_B T}{\\sqrt{2}\\pi d^2 p}",
+          "tags": [
+            "mean free path"
+          ]
+        }
+      ],
       "keyPoints": [
         "Kinetic Pressure & Temperature: Gas pressure originates from molecular collisions ($p = \\frac{1}{3}\\rho\\overline{v^2}$).",
         "Absolute temperature is proportional to mean translational kinetic energy ($\\frac{1}{2}m\\overline{v^2} = \\frac{3}{2}k_B T$).",
@@ -777,7 +1233,98 @@
       "id": "ch24",
       "class": "11",
       "name": "Oscillations",
-      "formulas": [],
+      "formulas": [
+        {
+          "id": "p13_1",
+          "name": "SHM Displacement",
+          "latex": "x(t) = A\\cos(\\omega t + \\phi)",
+          "tags": [
+            "shm",
+            "displacement"
+          ]
+        },
+        {
+          "id": "p13_2",
+          "name": "SHM Velocity",
+          "latex": "v(t) = -\\omega A\\sin(\\omega t + \\phi) = \\pm\\omega\\sqrt{A^2 - x^2}",
+          "tags": [
+            "shm",
+            "velocity"
+          ]
+        },
+        {
+          "id": "p13_3",
+          "name": "SHM Acceleration",
+          "latex": "a(t) = -\\omega^2 A\\cos(\\omega t + \\phi) = -\\omega^2 x",
+          "tags": [
+            "shm",
+            "acceleration"
+          ]
+        },
+        {
+          "id": "p13_4",
+          "name": "SHM Frequency & Period",
+          "latex": "\\omega = 2\\pi\\nu = \\frac{2\\pi}{T} = \\sqrt{\\frac{k}{m}}, \\qquad T = 2\\pi\\sqrt{\\frac{m}{k}}",
+          "tags": [
+            "shm",
+            "frequency",
+            "period"
+          ]
+        },
+        {
+          "id": "p13_5",
+          "name": "SHM Kinetic Energy",
+          "latex": "K = \\frac{1}{2}k(A^2 - x^2) = \\frac{1}{2}kA^2\\sin^2(\\omega t + \\phi)",
+          "tags": [
+            "shm",
+            "kinetic energy"
+          ]
+        },
+        {
+          "id": "p13_6",
+          "name": "SHM Potential Energy",
+          "latex": "U = \\frac{1}{2}kx^2 = \\frac{1}{2}kA^2\\cos^2(\\omega t + \\phi)",
+          "tags": [
+            "shm",
+            "potential energy"
+          ]
+        },
+        {
+          "id": "p13_7",
+          "name": "SHM Total Energy",
+          "latex": "E_{\\text{total}} = K + U = \\frac{1}{2}kA^2 = \\frac{1}{2}m\\omega^2 A^2 = \\text{constant}",
+          "tags": [
+            "shm",
+            "total energy"
+          ]
+        },
+        {
+          "id": "p13_8",
+          "name": "Simple Pendulum",
+          "latex": "T = 2\\pi\\sqrt{\\frac{L}{g}}",
+          "tags": [
+            "pendulum"
+          ]
+        },
+        {
+          "id": "p13_9",
+          "name": "Springs in Series",
+          "latex": "\\frac{1}{k_s} = \\frac{1}{k_1} + \\frac{1}{k_2} \\implies T = 2\\pi\\sqrt{\\frac{m(k_1 + k_2)}{k_1 k_2}}",
+          "tags": [
+            "springs",
+            "series"
+          ]
+        },
+        {
+          "id": "p13_10",
+          "name": "Springs in Parallel",
+          "latex": "k_p = k_1 + k_2 \\implies T = 2\\pi\\sqrt{\\frac{m}{k_1 + k_2}}",
+          "tags": [
+            "springs",
+            "parallel"
+          ]
+        }
+      ],
       "keyPoints": [
         "SHM Condition: Simple harmonic motion occurs when restoring force is proportional to displacement ($F = -kx \\implies a = -\\omega^2 x$).",
         "SHM is the projection of uniform circular motion on a diameter of the reference circle.",
@@ -794,7 +1341,98 @@
       "id": "ch25",
       "class": "11",
       "name": "Waves",
-      "formulas": [],
+      "formulas": [
+        {
+          "id": "p14_1",
+          "name": "Progressive Wave Equation",
+          "latex": "y(x,t) = a\\sin(kx - \\omega t + \\phi)",
+          "tags": [
+            "progressive wave"
+          ]
+        },
+        {
+          "id": "p14_2",
+          "name": "Wave Parameters",
+          "latex": "k = \\frac{2\\pi}{\\lambda}, \\qquad \\omega = 2\\pi\\nu, \\qquad v = \\nu\\lambda = \\frac{\\omega}{k}",
+          "tags": [
+            "wave number",
+            "frequency",
+            "velocity"
+          ]
+        },
+        {
+          "id": "p14_3",
+          "name": "Transverse Wave Speed (String)",
+          "latex": "v = \\sqrt{\\frac{T}{\\mu}} \\quad \\left(\\mu = \\frac{m}{L}\\right)",
+          "tags": [
+            "wave speed",
+            "string"
+          ]
+        },
+        {
+          "id": "p14_4",
+          "name": "Longitudinal Wave Speed (Fluid & Solid)",
+          "latex": "v = \\sqrt{\\frac{B}{\\rho}}, \\qquad \\text{Solid Bar: } v = \\sqrt{\\frac{Y}{\\rho}}",
+          "tags": [
+            "wave speed",
+            "fluid",
+            "solid"
+          ]
+        },
+        {
+          "id": "p14_5",
+          "name": "Speed of Sound in Gas",
+          "latex": "v = \\sqrt{\\frac{\\gamma p}{\\rho}} = \\sqrt{\\frac{\\gamma RT}{M}}",
+          "tags": [
+            "speed of sound",
+            "gas"
+          ]
+        },
+        {
+          "id": "p14_6",
+          "name": "Standing Wave Equation",
+          "latex": "y(x,t) = [2a\\sin kx]\\cos\\omega t",
+          "tags": [
+            "standing wave"
+          ]
+        },
+        {
+          "id": "p14_7",
+          "name": "Nodes & Antinodes Position",
+          "latex": "\\text{Nodes: } x = \\frac{n\\lambda}{2}, \\qquad \\text{Antinodes: } x = \\left(n + \\frac{1}{2}\\right)\\frac{\\lambda}{2}",
+          "tags": [
+            "nodes",
+            "antinodes"
+          ]
+        },
+        {
+          "id": "p14_8",
+          "name": "Stretched String / Open Organ Pipe",
+          "latex": "\\lambda_n = \\frac{2L}{n}, \\qquad \\nu_n = \\frac{nv}{2L}",
+          "tags": [
+            "harmonics",
+            "open pipe",
+            "string"
+          ]
+        },
+        {
+          "id": "p14_9",
+          "name": "Closed Organ Pipe",
+          "latex": "\\lambda_n = \\frac{4L}{2n+1}, \\qquad \\nu_n = (2n + 1)\\frac{v}{4L}",
+          "tags": [
+            "harmonics",
+            "closed pipe"
+          ]
+        },
+        {
+          "id": "p14_10",
+          "name": "Beats Frequency",
+          "latex": "\\nu_{\\text{beat}} = \\vert{}\\nu_1 - \\nu_2\\vert{}",
+          "tags": [
+            "beats"
+          ]
+        }
+      ],
       "keyPoints": [
         "Wave Types & Media Requirements: Transverse waves require shear elasticity (solids, stretched strings); longitudinal waves require bulk elasticity (solids, liquids, gases).",
         "Speed of Sound: Newton's isothermal formula was corrected by Laplace for adiabatic sound propagation ($B_{\\text{ad}} = \\gamma p$), giving $v = \\sqrt{\\gamma p/\\rho}$.",
