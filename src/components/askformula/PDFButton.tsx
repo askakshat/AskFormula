@@ -1,31 +1,27 @@
 import { useState } from "react";
-import { Download, Loader2, LayoutGrid, Maximize2, Layers } from "lucide-react";
+import { Download, Loader2, LayoutGrid, Maximize2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { generatePDF, type FormulaItem, type PDFLayout } from "@/lib/pdf-generator";
 import { useLocalStorage, type SavedPDF } from "@/lib/local-storage";
-import { Chapter } from "@/lib/formulas";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-  DropdownMenuSeparator,
-  DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
 
 interface PDFButtonProps {
   formulas: FormulaItem[];
-  chapters?: Chapter[];
   subject: string;
 }
 
-export default function PDFButton({ formulas, chapters = [], subject }: PDFButtonProps) {
+export default function PDFButton({ formulas, subject }: PDFButtonProps) {
   const [isGenerating, setIsGenerating] = useState(false);
   const [savedPDFs, setSavedPDFs] = useLocalStorage<SavedPDF[]>("askformula-saved-pdfs", []);
 
-  const handleDownload = async (layout: PDFLayout, includeContent: ("formulas"|"keyPoints"|"keyDerivations")[]) => {
-    if ((formulas.length === 0 && chapters.length === 0) || isGenerating) return;
+  const handleDownload = async (layout: PDFLayout) => {
+    if (formulas.length === 0 || isGenerating) return;
 
     setIsGenerating(true);
     const toastId = toast.loading(`Generating ${layout} PDF layout...`, {
@@ -33,7 +29,7 @@ export default function PDFButton({ formulas, chapters = [], subject }: PDFButto
     });
 
     try {
-      await generatePDF(formulas, chapters, subject, layout, includeContent);
+      await generatePDF(formulas, subject, layout);
 
       const newSavedPdf = {
         id: crypto.randomUUID(),
@@ -79,30 +75,20 @@ export default function PDFButton({ formulas, chapters = [], subject }: PDFButto
             )}
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-56 bg-slate-800 border-slate-700 text-slate-200">
-          <DropdownMenuLabel className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Quick Export</DropdownMenuLabel>
+        <DropdownMenuContent align="end" className="w-48 bg-slate-800 border-slate-700 text-slate-200">
           <DropdownMenuItem
-            onClick={() => handleDownload("compact", ["formulas", "keyPoints"])}
+            onClick={() => handleDownload("compact")}
             className="cursor-pointer focus:bg-slate-700 focus:text-white"
           >
             <LayoutGrid className="mr-2 h-4 w-4 text-slate-400" />
-            Compact (Formulas + Major Points)
-          </DropdownMenuItem>
-          <DropdownMenuSeparator className="bg-slate-700" />
-          <DropdownMenuLabel className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Detailed Export</DropdownMenuLabel>
-          <DropdownMenuItem
-            onClick={() => handleDownload("full", ["formulas", "keyPoints", "keyDerivations"])}
-            className="cursor-pointer focus:bg-slate-700 focus:text-white"
-          >
-            <Layers className="mr-2 h-4 w-4 text-slate-400" />
-            Full Sheet (All Content)
+            Compact Layout (More cols)
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() => handleDownload("full", ["keyPoints", "keyDerivations"])}
+            onClick={() => handleDownload("full")}
             className="cursor-pointer focus:bg-slate-700 focus:text-white"
           >
             <Maximize2 className="mr-2 h-4 w-4 text-slate-400" />
-            Theory Only (No Formulas)
+            Full Layout (Bigger text)
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

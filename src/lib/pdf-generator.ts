@@ -32,10 +32,8 @@ const KATEX_CSS = `
 
 export async function generatePDF(
   formulas: FormulaItem[],
-  chaptersData: Chapter[],
   subject: string,
-  layout: PDFLayout = "full",
-  includeContent: ("formulas"|"keyPoints"|"keyDerivations")[] = ["formulas", "keyPoints", "keyDerivations"]
+  layout: PDFLayout = "full"
 ): Promise<void> {
   // 1. Preload fonts by injecting a dummy KaTeX element
   const dummyFontPreloader = document.createElement("div");
