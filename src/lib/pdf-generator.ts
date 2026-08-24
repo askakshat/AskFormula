@@ -42,11 +42,23 @@ export async function generatePDF(
     chapters.get(key)!.push(f);
   }
 
-  // Directly fetch the KaTeX CDN stylesheet and inject PDF-specific overrides.
-  // Make sure version matches the installed katex package (0.18.4)
+  // Pre-fetch KaTeX CSS and inline it (external <link> tags don't survive html-to-image's SVG foreignObject)
+  const KATEX_CSS_URL = "https://cdn.jsdelivr.net/npm/katex@0.18.4/dist/katex.min.css";
+  const KATEX_FONT_BASE = "https://cdn.jsdelivr.net/npm/katex@0.18.4/dist/fonts/";
+
+  let katexCssText = "";
+  try {
+    const cssResponse = await fetch(KATEX_CSS_URL);
+    katexCssText = await cssResponse.text();
+    // Rewrite relative font URLs to absolute CDN URLs so they survive foreignObject cloning
+    katexCssText = katexCssText.replace(/url\(fonts\//g, `url(${KATEX_FONT_BASE}`);
+  } catch {
+    console.warn("[PDF] Failed to fetch KaTeX CSS, formulas may render without styling");
+  }
+
   const stylesHtml = `
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.4/dist/katex.min.css" crossorigin="anonymous">
     <style>
+      ${katexCssText}
       /* Force KaTeX text color to black for PDF export */
       .katex-display > .katex,
       .katex .mord,
@@ -213,6 +225,27 @@ export async function generatePDF(
   const slug = subject.toLowerCase().replace(/\s+/g, "-");
   const date = new Date().toISOString().split("T")[0];
 
+  // Pre-load KaTeX web fonts so html-to-image can embed them
+  if (katexCssText) {
+    const fontUrls = [...new Set([...katexCssText.matchAll(/url\(([^)]+\.woff2?)\)/g)].map(m => m[1]))];
+    await Promise.all(
+      fontUrls.map(async (url) => {
+        try {
+          const resp = await fetch(url);
+          const buffer = await resp.arrayBuffer();
+          const face = new FontFace(
+            url.match(/([^/]+)\.woff/)?.[1] ?? "KaTeX_Unknown",
+            buffer,
+          );
+          document.fonts.add(face);
+          await face.load();
+        } catch {
+          // Font loading failure is non-fatal
+        }
+      })
+    );
+  }
+
   // We must append the container to the document body temporarily so html-to-image can read computed styles properly
   container.style.position = "absolute";
   container.style.left = "0px";
@@ -224,7 +257,7 @@ export async function generatePDF(
 
   // Wait for fonts to load and ensure browser parses injected CSS
   await document.fonts.ready;
-  await new Promise((resolve) => setTimeout(resolve, 1500));
+  await new Promise((resolve) => setTimeout(resolve, 1000));
 
   try {
     const canvasDataUrl = await htmlToImage.toPng(container, {
