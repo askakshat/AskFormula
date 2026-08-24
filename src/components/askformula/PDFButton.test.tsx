@@ -1,106 +1,77 @@
+
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { vi, describe, it, expect, beforeEach, afterEach } from "vitest";
 import PDFButton from "./PDFButton";
-import { generatePDF } from "@/lib/pdf-generator";
+import { toast } from "sonner";
+import { MemoryRouter } from "react-router";
 
-vi.mock("@/lib/pdf-generator", () => ({
-  generatePDF: vi.fn(),
+vi.mock("react-router", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("react-router")>();
+  return {
+    ...actual,
+    useNavigate: vi.fn(),
+  };
+});
+
+vi.mock("sonner", () => ({
+  toast: {
+    loading: vi.fn(() => "toast-id"),
+    success: vi.fn(),
+    error: vi.fn(),
+  },
 }));
 
-describe("PDFButton Error Path", () => {
-  const mockFormulas = [
-    { id: "1", name: "Test Formula", latex: "E=mc^2" },
-  ];
-  const mockSubject = "Physics";
+const mockFormulas = [
+  { id: "1", name: "Force", latex: "F = ma", chapter: "Mechanics" },
+];
+const mockSubject = "Physics";
 
+describe("PDFButton Export Path", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    sessionStorage.clear();
   });
 
-  afterEach(() => {
-    vi.restoreAllMocks();
-  });
+  it("handles successful PDF preparation properly", async () => {
+    const mockNavigate = vi.fn();
+    const { useNavigate } = await import("react-router");
+    vi.mocked(useNavigate).mockReturnValue(mockNavigate);
 
-  it("handles PDF generation errors properly and resets state", async () => {
-    // We need to control when the promise rejects so we can test the intermediate loading state
-    let rejectPromise: (reason?: Error) => void;
-    const generatePromise = new Promise((_, reject) => {
-      rejectPromise = reject;
-    });
-
-    vi.mocked(generatePDF).mockReturnValue(generatePromise as never);
-
-    // Spy on console.error
-    const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
-
-    // Render the component
-    render(<PDFButton formulas={mockFormulas} subject={mockSubject} />);
-
-    const button = screen.getByRole("button", { name: /Download PDF/i });
-    expect(button).toBeInTheDocument();
-    expect(button).not.toBeDisabled();
-
-    // Setup user event
-    const user = userEvent.setup();
-
-    // Click the download button to open dropdown
-    await user.click(button);
-
-    // Find the full export option and click it
-    const fullOption = screen.getByText(/Full Sheet/i);
-    await user.click(fullOption);
-
-    // Verify loading state appears on the main button
-    expect(screen.getByRole("button", { name: /Building PDF/i })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /Building PDF/i })).toBeDisabled();
-
-    // Now trigger the error
-    const mockError = new Error("Generation failed");
-    rejectPromise!(mockError);
-
-    // Wait for the async operation to complete
-    await waitFor(() => {
-      // Button should return to original state
-      expect(screen.getByRole("button", { name: /Download PDF/i })).toBeInTheDocument();
-    });
-
-    // Verify the error was logged
-    expect(consoleErrorSpy).toHaveBeenCalledWith("PDF generation failed:", mockError);
-
-    // Verify the button is enabled again
-    expect(screen.getByRole("button", { name: /Download PDF/i })).not.toBeDisabled();
-  });
-
-  it("handles successful PDF generation properly", async () => {
-    let resolvePromise: (value?: void) => void;
-    const generatePromise = new Promise((resolve) => {
-      resolvePromise = resolve;
-    });
-
-    vi.mocked(generatePDF).mockReturnValue(generatePromise as never);
-
-    render(<PDFButton formulas={mockFormulas} subject={mockSubject} />);
-    const button = screen.getByRole("button", { name: /Download PDF/i });
+    render(
+      <MemoryRouter>
+        <PDFButton formulas={mockFormulas} subject={mockSubject} />
+      </MemoryRouter>
+    );
+    const button = screen.getByRole("button", { name: /Export to PDF/i });
 
     const user = userEvent.setup();
     await user.click(button);
 
-    const fullOption = screen.getByText(/Full Sheet/i);
-    await user.click(fullOption);
-
-    // Verify loading state appears
-    expect(screen.getByRole("button", { name: /Building PDF/i })).toBeInTheDocument();
-
-    // Trigger success
-    resolvePromise!();
-
-    // Wait for the async operation to complete
-    await waitFor(() => {
-      expect(screen.getByRole("button", { name: /Download PDF/i })).toBeInTheDocument();
+    const compactOption = screen.getByRole("menuitem", {
+      name: /Compact/i,
     });
+    await user.click(compactOption);
 
-    expect(generatePDF).toHaveBeenCalledWith(mockFormulas, [], mockSubject, "full", ["formulas", "keyPoints", "keyDerivations"]);
-    expect(screen.getByRole("button", { name: /Download PDF/i })).not.toBeDisabled();
+    // Verify loading toast
+    expect(toast.loading).toHaveBeenCalledWith(
+      expect.stringContaining("Preparing compact PDF layout"),
+      expect.any(Object)
+    );
+
+    // Verify session storage
+    const stored = JSON.parse(sessionStorage.getItem("askformula-print-data") || "{}");
+    expect(stored.subject).toBe("Physics");
+    expect(stored.layout).toBe("compact");
+    expect(stored.formulas.length).toBe(1);
+
+    // Verify window open
+    expect(mockNavigate).toHaveBeenCalledWith("/print");
+
+    // Verify success toast
+    expect(toast.success).toHaveBeenCalledWith(
+      "Print view ready!",
+      expect.any(Object)
+    );
   });
 });
