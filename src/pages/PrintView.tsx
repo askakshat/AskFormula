@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
+import { Chapter } from "@/lib/formulas";
+import { Button } from "@/components/ui/button";
+import { Printer, ArrowLeft } from "lucide-react";
+import katex from "katex";
+import "katex/dist/katex.min.css";
+
 export interface FormulaItem {
   id: string;
   name: string;
   latex: string;
   chapter?: string;
   category?: string;
-} // Will move this interface out later or just copy it
-import { Chapter } from "@/lib/formulas";
-import { Button } from "@/components/ui/button";
-import { Printer, ArrowLeft } from "lucide-react";
-import katex from "katex";
-import "katex/dist/katex.min.css";
+}
 
 // Interface definitions (copied from pdf-generator.ts temporarily until we delete it)
 export type PDFLayout = "compact" | "full";
@@ -150,41 +151,25 @@ export default function PrintView() {
           }
 
           /* Native KaTeX Print Fixes */
+          /* We use container queries in inline-size to shrink formulas to fit. */
+          .scale-math-full .katex-display {
+             font-size: min(1.125rem, 4.5cqi) !important;
+          }
+          .scale-math-compact .katex-display {
+             font-size: min(0.875rem, 4.5cqi) !important;
+          }
+
           .katex-display {
              max-width: 100%;
-             overflow-x: hidden;
-             overflow-y: hidden;
-             white-space: normal;
-             word-break: break-word;
-             overflow-wrap: break-word;
           }
           .katex {
-             display: inline-block;
              max-width: 100%;
-             white-space: normal;
-             word-break: break-word;
-          }
-          .katex-html {
-             max-width: 100%;
-             display: inline-flex;
-             flex-wrap: wrap;
-             justify-content: center;
-             white-space: normal;
-          }
-          .katex .base {
-             display: inline-flex;
-             flex-wrap: wrap;
-             max-width: 100%;
-             white-space: normal;
-          }
-          .katex .mord, .katex .mbin, .katex .mrel, .katex .minner {
-             white-space: normal;
           }
         `}
       </style>
 
       {/* Main Print Content */}
-      <div className="max-w-[1123px] mx-auto p-8 print:p-0 bg-white print:bg-transparent shadow-lg print:shadow-none min-h-[297mm]">
+      <div className="w-full max-w-[794px] print:max-w-full mx-auto p-8 print:p-0 bg-white print:bg-transparent shadow-lg print:shadow-none min-h-[297mm] break-words">
         <div className={`${layout === "compact" ? "mb-6" : "mb-10"} text-center`}>
           <h1 className={`m-0 text-slate-800 uppercase tracking-wide font-bold ${layout === 'compact' ? 'text-2xl' : 'text-4xl'}`}>
             AskFormula
@@ -250,15 +235,15 @@ export default function PrintView() {
                   {items.map(formula => (
                     <div
                       key={formula.id}
-                      className={`bg-white border-2 border-slate-800 rounded-lg ${cardPadding} break-inside-avoid shadow-[2px_2px_0px_0px_rgba(30,41,59,1)] flex flex-col gap-2 w-full`}
+                      className={`bg-white border-2 border-slate-800 rounded-lg ${cardPadding} break-inside-avoid shadow-[2px_2px_0px_0px_rgba(30,41,59,1)] flex flex-col gap-2 w-full min-w-0 [container-type:inline-size]`}
                     >
-                      <div className="flex items-start gap-1.5 w-full">
-                        <span className="text-yellow-500 text-sm">⭐</span>
-                        <h3 className="m-0 text-[13px] text-slate-800 font-bold leading-tight break-words flex-1">
+                      <div className="flex items-start gap-1.5 w-full min-w-0">
+                        <span className="text-yellow-500 text-sm shrink-0">⭐</span>
+                        <h3 className="m-0 text-[13px] text-slate-800 font-bold leading-tight break-words flex-1 min-w-0">
                           {formula.name}
                         </h3>
                       </div>
-                      <div className={`${mathSize} text-black block w-full text-center py-1 break-words overflow-x-hidden max-w-full`}>
+                      <div className={`text-black block w-full text-center py-1 break-words max-w-full min-w-0 ${layout === "compact" ? "scale-math-compact" : "scale-math-full"}`}>
                         {renderMath(formula.latex)}
                       </div>
                     </div>
