@@ -44,14 +44,14 @@ describe("PDFButton Error Path", () => {
     // Setup user event
     const user = userEvent.setup();
 
-    // Click the download button to open dropdown
+    // Click the download button to open dropdown menu
     await user.click(button);
 
-    // Find the full export option and click it
-    const fullOption = screen.getByText(/Full Sheet/i);
-    await user.click(fullOption);
+    // Click layout option
+    const compactOption = screen.getByText(/Compact Layout/i);
+    await user.click(compactOption);
 
-    // Verify loading state appears on the main button
+    // Verify loading state appears
     expect(screen.getByRole("button", { name: /Building PDF/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /Building PDF/i })).toBeDisabled();
 
@@ -86,8 +86,9 @@ describe("PDFButton Error Path", () => {
     const user = userEvent.setup();
     await user.click(button);
 
-    const fullOption = screen.getByText(/Full Sheet/i);
-    await user.click(fullOption);
+    // Click layout option
+    const compactOption = screen.getByText(/Compact Layout/i);
+    await user.click(compactOption);
 
     // Verify loading state appears
     expect(screen.getByRole("button", { name: /Building PDF/i })).toBeInTheDocument();
@@ -100,7 +101,7 @@ describe("PDFButton Error Path", () => {
       expect(screen.getByRole("button", { name: /Download PDF/i })).toBeInTheDocument();
     });
 
-    expect(generatePDF).toHaveBeenCalledWith(mockFormulas, [], mockSubject, "full", ["formulas", "keyPoints", "keyDerivations"]);
+    expect(generatePDF).toHaveBeenCalledWith(mockFormulas, mockSubject, "compact");
     expect(screen.getByRole("button", { name: /Download PDF/i })).not.toBeDisabled();
   });
 });

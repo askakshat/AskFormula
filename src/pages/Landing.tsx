@@ -244,7 +244,7 @@ export default function Landing() {
                 transition={{ duration: 0.3 }}
                 className="mb-28 sm:mb-20 pb-20 sm:pb-0"
               >
-                <FormulaGrid formulas={formulas} chapters={chapters.filter((ch) => selectedChapters.includes(ch.id))} />
+                <FormulaGrid formulas={formulas} />
               </motion.div>
             )}
           </AnimatePresence>
@@ -254,7 +254,7 @@ export default function Landing() {
       </section>
 
       {/* Floating PDF Button */}
-      {(formulas.length > 0 || selectedChapters.length > 0) && (
+      {formulas.length > 0 && (
         <PDFButton
           formulas={formulas.map((f) => ({
             id: f.id,
@@ -264,7 +264,6 @@ export default function Landing() {
             chapter:
               "chapter" in f ? (f as { chapter?: string }).chapter : undefined,
           }))}
-          chapters={chapters.filter((ch) => selectedChapters.includes(ch.id))}
           subject={subject ?? "Physics"}
         />
       )}
