@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import { useState } from "react";
 import { Download, Loader2, LayoutGrid, Maximize2, Layers } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -30,6 +31,7 @@ interface PDFButtonProps {
 }
 
 export default function PDFButton({ formulas, chapters = [], subject }: PDFButtonProps) {
+  const navigate = useNavigate();
   const [isGenerating, setIsGenerating] = useState(false);
   const [savedPDFs, setSavedPDFs] = useLocalStorage<SavedPDF[]>("askformula-saved-pdfs", []);
 
@@ -63,10 +65,10 @@ export default function PDFButton({ formulas, chapters = [], subject }: PDFButto
 
       toast.success("Print view ready!", {
         id: toastId,
-        description: "Opening in a new tab.",
+        description: "Opening print preview.",
       });
 
-      window.open("/print", "_blank");
+      navigate("/print");
     } catch (err) {
       console.error("Print preparation failed:", err);
       toast.error("Failed to prepare PDF.", {
