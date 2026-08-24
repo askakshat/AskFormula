@@ -294,10 +294,7 @@ export async function generatePDF(
   wrapper.style.top = "0";
   wrapper.style.left = "0";
   // The actual rendering width in pixels before html2canvas scaling, matching typical A4 width roughly at 96 DPI
-  // Use a wider canvas so formula cards have room; html2pdf scales to A4 automatically
-  // Full layout: 960px gives ~440px per column after gaps/margins — enough for most formulas
-  // Compact layout: 1200px for 4-column grid
-  wrapper.style.width = layout === "compact" ? "1200px" : "960px";
+  wrapper.style.width = layout === "compact" ? "1123px" : "794px";
   wrapper.style.pointerEvents = "none";
   wrapper.style.zIndex = "-9999"; // Place behind current content
   wrapper.style.backgroundColor = "#f8fafc"; // Ensure background color
@@ -317,7 +314,7 @@ export async function generatePDF(
       margin: 15, // 15mm margin on all sides
       filename: `askformula-${slug}-${date}.pdf`,
       image: { type: 'jpeg' as const, quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true, logging: true, scrollX: 0, scrollY: 0, windowWidth: layout === "compact" ? 1200 : 960 },
+      html2canvas: { scale: 2, useCORS: true, logging: true, scrollX: 0, scrollY: 0, windowWidth: layout === "compact" ? 1123 : 794 },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' as const },
       pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
     };
