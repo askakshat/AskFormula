@@ -4,6 +4,15 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import PDFButton from "./PDFButton";
 import { toast } from "sonner";
+import { MemoryRouter } from "react-router";
+
+vi.mock("react-router", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("react-router")>();
+  return {
+    ...actual,
+    useNavigate: vi.fn(),
+  };
+});
 
 vi.mock("sonner", () => ({
   toast: {
@@ -22,11 +31,18 @@ describe("PDFButton Export Path", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     sessionStorage.clear();
-    global.window.open = vi.fn();
   });
 
   it("handles successful PDF preparation properly", async () => {
-    render(<PDFButton formulas={mockFormulas} subject={mockSubject} />);
+    const mockNavigate = vi.fn();
+    const { useNavigate } = await import("react-router");
+    vi.mocked(useNavigate).mockReturnValue(mockNavigate);
+
+    render(
+      <MemoryRouter>
+        <PDFButton formulas={mockFormulas} subject={mockSubject} />
+      </MemoryRouter>
+    );
     const button = screen.getByRole("button", { name: /Export to PDF/i });
 
     const user = userEvent.setup();
@@ -50,7 +66,7 @@ describe("PDFButton Export Path", () => {
     expect(stored.formulas.length).toBe(1);
 
     // Verify window open
-    expect(window.open).toHaveBeenCalledWith("/print", "_blank");
+    expect(mockNavigate).toHaveBeenCalledWith("/print");
 
     // Verify success toast
     expect(toast.success).toHaveBeenCalledWith(

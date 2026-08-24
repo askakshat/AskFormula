@@ -105,7 +105,7 @@ export default function PrintView() {
   };
 
   const handleBack = () => {
-    window.close();
+    window.history.back();
   };
 
   return (
@@ -152,20 +152,33 @@ export default function PrintView() {
           /* Native KaTeX Print Fixes */
           .katex-display {
              max-width: 100%;
+             overflow-x: hidden;
+             overflow-y: hidden;
+             white-space: normal;
+             word-break: break-word;
              overflow-wrap: break-word;
-             word-wrap: break-word;
           }
           .katex {
              display: inline-block;
              max-width: 100%;
              white-space: normal;
+             word-break: break-word;
           }
           .katex-html {
              max-width: 100%;
-             display: flex;
+             display: inline-flex;
              flex-wrap: wrap;
              justify-content: center;
-             align-items: center;
+             white-space: normal;
+          }
+          .katex .base {
+             display: inline-flex;
+             flex-wrap: wrap;
+             max-width: 100%;
+             white-space: normal;
+          }
+          .katex .mord, .katex .mbin, .katex .mrel, .katex .minner {
+             white-space: normal;
           }
         `}
       </style>
