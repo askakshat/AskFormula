@@ -14,6 +14,43 @@ export type PDFLayout = "compact" | "full";
 
 import { Chapter } from "./formulas";
 
+const KATEX_CDN = "https://cdn.jsdelivr.net/npm/katex@0.18.4/dist";
+
+/** Fetch KaTeX CSS, replace font urls with base64 data URIs so everything is self-contained for html-to-image */
+async function fetchEmbeddedKaTeXCSS(): Promise<string> {
+  const cssResp = await fetch(`${KATEX_CDN}/katex.min.css`);
+  let css = await cssResp.text();
+
+  // Collect unique font file references
+  const fontRefs = [...new Set([...css.matchAll(/url\(fonts\/([^)]+)\)/g)].map(m => m[1]))];
+
+  // Fetch each font and convert to base64 data URI
+  const dataUriMap = new Map<string, string>();
+  await Promise.all(
+    fontRefs.map(async (ref) => {
+      try {
+        const resp = await fetch(`${KATEX_CDN}/fonts/${ref}`);
+        const buf = await resp.arrayBuffer();
+        const bytes = new Uint8Array(buf);
+        let binary = "";
+        for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+        const ext = ref.endsWith(".woff2") ? "font/woff2" : "font/woff";
+        dataUriMap.set(ref, `data:${ext};base64,${btoa(binary)}`);
+      } catch {
+        // non-fatal
+      }
+    })
+  );
+
+  // Replace relative font URLs with embedded data URIs
+  css = css.replace(/url\(fonts\/([^)]+)\)/g, (_match, filename) => {
+    const dataUri = dataUriMap.get(filename);
+    return dataUri ? `url(${dataUri})` : _match;
+  });
+
+  return css;
+}
+
 export async function generatePDF(
   formulas: FormulaItem[],
   chaptersData: Chapter[],
@@ -22,7 +59,7 @@ export async function generatePDF(
   includeContent: ("formulas"|"keyPoints"|"keyDerivations")[] = ["formulas", "keyPoints", "keyDerivations"]
 ): Promise<void> {
   const container = document.createElement("div");
-  // A4 size roughly at 96 DPI: 794px width. We'll use this as base and scale up via pixelRatio.
+  // A4 size roughly at 96 DPI: 794px width.
   container.style.width = layout === "compact" ? "1123px" : "794px";
   container.style.background = "#ffffff";
   container.style.padding = layout === "compact" ? "20px" : "40px";
@@ -42,37 +79,13 @@ export async function generatePDF(
     chapters.get(key)!.push(f);
   }
 
-  // Pre-fetch KaTeX CSS and inline it (external <link> tags don't survive html-to-image's SVG foreignObject)
-  const KATEX_CSS_URL = "https://cdn.jsdelivr.net/npm/katex@0.18.4/dist/katex.min.css";
-  const KATEX_FONT_BASE = "https://cdn.jsdelivr.net/npm/katex@0.18.4/dist/fonts/";
-
-  let katexCssText = "";
+  // Fetch KaTeX CSS with all fonts embedded as base64 data URIs
+  let katexCssInlined = "";
   try {
-    const cssResponse = await fetch(KATEX_CSS_URL);
-    katexCssText = await cssResponse.text();
-    // Rewrite relative font URLs to absolute CDN URLs so they survive foreignObject cloning
-    katexCssText = katexCssText.replace(/url\(fonts\//g, `url(${KATEX_FONT_BASE}`);
+    katexCssInlined = await fetchEmbeddedKaTeXCSS();
   } catch {
-    console.warn("[PDF] Failed to fetch KaTeX CSS, formulas may render without styling");
+    console.warn("[PDF] Failed to fetch/embed KaTeX CSS");
   }
-
-  const stylesHtml = `
-    <style>
-      ${katexCssText}
-      /* Force KaTeX text color to black for PDF export */
-      .katex-display > .katex,
-      .katex .mord,
-      .katex .mbin,
-      .katex .mrel,
-      .katex .mopen,
-      .katex .mclose,
-      .katex .mpunct,
-      .katex .mop,
-      .katex {
-        color: #000000 !important;
-      }
-    </style>
-  `;
 
   const titleSize = layout === "compact" ? "24px" : "36px";
   const subtitleSize = layout === "compact" ? "16px" : "20px";
@@ -83,8 +96,29 @@ export async function generatePDF(
   const mathSize = layout === "compact" ? "14px" : "18px";
   const titleColors = ["#fecaca", "#bbf7d0", "#bfdbfe", "#fef08a", "#e9d5ff"];
 
+  const renderKaTeXHTML = (text: string, inline: boolean = true) => {
+    try {
+      const parts = text.split(/(\$.*?\$)/g);
+      return parts.map(part => {
+        if (part.startsWith('$') && part.endsWith('$')) {
+          const math = part.slice(1, -1);
+          return katex.renderToString(math, { throwOnError: false, displayMode: !inline });
+        }
+        return part;
+      }).join('');
+    } catch {
+      return text;
+    }
+  };
+
   let htmlContent = `
-    ${stylesHtml}
+    <style>
+      ${katexCssInlined}
+      .katex-display > .katex,
+      .katex .mord, .katex .mbin, .katex .mrel,
+      .katex .mopen, .katex .mclose, .katex .mpunct, .katex .mop,
+      .katex { color: #000000 !important; }
+    </style>
     <div style="margin-bottom: ${headerMargin}; text-align: center;">
       <h1 style="margin: 0; font-size: ${titleSize}; color: #1e293b; text-transform: uppercase; letter-spacing: 1px;">AskFormula</h1>
       <h2 style="margin: 5px 0 0 0; font-size: ${subtitleSize}; color: #334155; font-weight: 600;">${subject} Revision Sheet</h2>
@@ -94,29 +128,10 @@ export async function generatePDF(
 
   let colorIndex = 0;
 
-  // Use chaptersData to ensure we get empty chapters too, or chapters with only theory
   const chapterNames = Array.from(new Set([
     ...chaptersData.map(ch => ch.name || ch.chapterName || "General"),
     ...Array.from(chapters.keys())
   ]));
-
-  const renderKaTeXHTML = (text: string, inline: boolean = true) => {
-    try {
-      const parts = text.split(/(\$.*?\$)/g);
-      return parts.map(part => {
-        if (part.startsWith('$') && part.endsWith('$')) {
-          const math = part.slice(1, -1);
-          return katex.renderToString(math, {
-            throwOnError: false,
-            displayMode: !inline,
-          });
-        }
-        return part;
-      }).join('');
-    } catch {
-      return text;
-    }
-  };
 
   for (const chapterName of chapterNames) {
     const items = chapters.get(chapterName) || [];
@@ -134,19 +149,9 @@ export async function generatePDF(
     colorIndex++;
 
     htmlContent += `
-      <div style="margin-bottom: ${layout === "compact" ? "20px" : "40px"}; page-break-inside: avoid;">
+      <div style="margin-bottom: ${layout === "compact" ? "20px" : "40px"};">
         <div style="text-align: center; margin-bottom: ${layout === "compact" ? "15px" : "25px"};">
-          <div style="
-            background-color: ${chapterColor};
-            color: #1e293b;
-            display: inline-block;
-            padding: 8px 24px;
-            border-radius: 20px;
-            border: 2px solid #1e293b;
-            font-weight: bold;
-            font-size: ${layout === "compact" ? "16px" : "22px"};
-            box-shadow: 3px 3px 0px 0px rgba(30, 41, 59, 1);
-          ">
+          <div style="background-color: ${chapterColor}; color: #1e293b; display: inline-block; padding: 8px 24px; border-radius: 20px; border: 2px solid #1e293b; font-weight: bold; font-size: ${layout === "compact" ? "16px" : "22px"}; box-shadow: 3px 3px 0px 0px rgba(30, 41, 59, 1);">
             ${chapterName}
           </div>
         </div>
@@ -154,7 +159,7 @@ export async function generatePDF(
 
     if (hasKeyPoints) {
       htmlContent += `
-        <div style="margin-bottom: ${gapSize}; background: #fefce8; border: 2px solid #1e293b; border-radius: 8px; padding: ${cardPadding}; box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1); page-break-inside: avoid; width: 100%; box-sizing: border-box;">
+        <div style="margin-bottom: ${gapSize}; background: #fefce8; border: 2px solid #1e293b; border-radius: 8px; padding: ${cardPadding}; box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1); width: 100%; box-sizing: border-box;">
           <h4 style="margin: 0 0 10px 0; font-size: 14px; font-weight: bold; color: #1e293b; text-transform: uppercase;">Key Points</h4>
           <ul style="margin: 0; padding-left: 20px; font-size: ${mathSize}; color: #000000; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word;">
             ${keyPoints.map(point => `<li style="margin-bottom: 6px;">${renderKaTeXHTML(point)}</li>`).join('')}
@@ -165,7 +170,7 @@ export async function generatePDF(
 
     if (hasDerivations) {
       htmlContent += `
-        <div style="margin-bottom: ${gapSize}; background: #f0fdf4; border: 2px solid #1e293b; border-radius: 8px; padding: ${cardPadding}; box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1); page-break-inside: avoid; width: 100%; box-sizing: border-box;">
+        <div style="margin-bottom: ${gapSize}; background: #f0fdf4; border: 2px solid #1e293b; border-radius: 8px; padding: ${cardPadding}; box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1); width: 100%; box-sizing: border-box;">
           <h4 style="margin: 0 0 10px 0; font-size: 14px; font-weight: bold; color: #1e293b; text-transform: uppercase;">Key Derivations</h4>
           <ul style="margin: 0; padding-left: 20px; font-size: ${mathSize}; color: #000000; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word;">
             ${keyDerivations.map(der => `<li style="margin-bottom: 6px;">${renderKaTeXHTML(der)}</li>`).join('')}
@@ -175,35 +180,18 @@ export async function generatePDF(
     }
 
     if (hasFormulas) {
-      htmlContent += `
-        <div style="display: grid; grid-template-columns: ${gridColumns}; gap: ${gapSize}; align-items: start;">
-    `;
+      htmlContent += `<div style="display: grid; grid-template-columns: ${gridColumns}; gap: ${gapSize}; align-items: start;">`;
 
       for (const formula of items) {
         let renderedMath = "";
         try {
-          renderedMath = katex.renderToString(formula.latex, {
-            displayMode: true,
-            throwOnError: false,
-          });
+          renderedMath = katex.renderToString(formula.latex, { displayMode: true, throwOnError: false });
         } catch {
           renderedMath = `<span style="color: red;">Error rendering formula</span>`;
         }
 
         htmlContent += `
-          <div style="
-            background: #ffffff;
-            border: 2px solid #1e293b;
-            border-radius: 8px;
-            padding: ${cardPadding};
-            page-break-inside: avoid;
-            box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1);
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            box-sizing: border-box;
-            overflow: hidden;
-          ">
+          <div style="background: #ffffff; border: 2px solid #1e293b; border-radius: 8px; padding: ${cardPadding}; box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1); display: flex; flex-direction: column; gap: 8px; box-sizing: border-box; overflow: hidden;">
             <div style="display: flex; align-items: flex-start; justify-content: flex-start; gap: 6px;">
               <span style="color: #eab308; font-size: 14px;">⭐</span>
               <h3 style="margin: 0; font-size: 13px; color: #1e293b; font-weight: 700; line-height: 1.2;">${formula.name}</h3>
@@ -225,61 +213,31 @@ export async function generatePDF(
   const slug = subject.toLowerCase().replace(/\s+/g, "-");
   const date = new Date().toISOString().split("T")[0];
 
-  // Pre-load KaTeX web fonts so html-to-image can embed them
-  if (katexCssText) {
-    const fontUrls = [...new Set([...katexCssText.matchAll(/url\(([^)]+\.woff2?)\)/g)].map(m => m[1]))];
-    await Promise.all(
-      fontUrls.map(async (url) => {
-        try {
-          const resp = await fetch(url);
-          const buffer = await resp.arrayBuffer();
-          const face = new FontFace(
-            url.match(/([^/]+)\.woff/)?.[1] ?? "KaTeX_Unknown",
-            buffer,
-          );
-          document.fonts.add(face);
-          await face.load();
-        } catch {
-          // Font loading failure is non-fatal
-        }
-      })
-    );
-  }
-
-  // We must append the container to the document body temporarily so html-to-image can read computed styles properly
+  // Position off-screen for html-to-image to capture
   container.style.position = "absolute";
-  container.style.left = "0px";
-  container.style.top = "0px";
-  container.style.zIndex = "-9999";
-  container.style.opacity = "0"; // hide it visually without display: none
+  container.style.left = "-9999px";
+  container.style.top = "0";
   container.style.pointerEvents = "none";
   document.body.appendChild(container);
 
-  // Wait for fonts to load and ensure browser parses injected CSS
+  // Wait for the browser to fully parse the inlined CSS and fonts
   await document.fonts.ready;
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, 2000));
 
   try {
     const canvasDataUrl = await htmlToImage.toPng(container, {
       pixelRatio: 2,
-      backgroundColor: "#f8fafc",
-      skipFonts: false, // Ensure fonts are embedded
+      backgroundColor: "#ffffff",
+      cacheBust: true,
     });
 
-    const pdf = new jsPDF({
-      unit: "mm",
-      format: "a4",
-      orientation: "portrait",
-    });
-
+    const pdf = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const pdfHeight = pdf.internal.pageSize.getHeight();
 
     const img = new Image();
     img.src = canvasDataUrl;
-    await new Promise((resolve) => {
-      img.onload = resolve;
-    });
+    await new Promise((resolve) => { img.onload = resolve; });
 
     const margin = 10;
     const innerWidth = pdfWidth - margin * 2;
