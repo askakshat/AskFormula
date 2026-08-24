@@ -1,6 +1,5 @@
 import katex from "katex";
-import * as htmlToImage from "html-to-image";
-import jsPDF from "jspdf";
+import html2pdf from "html2pdf.js";
 
 export interface FormulaItem {
   id: string;
@@ -213,16 +212,17 @@ export async function generatePDF(
 
   // Create a wrapper to hide the container off-screen
   // We do this instead of applying opacity: 0 to the container directly,
-  // because html-to-image will clone inline styles and render the container as transparent.
+  // because html2pdf will clone inline styles and render the container as transparent.
   const wrapper = document.createElement("div");
   wrapper.style.position = "fixed";
   wrapper.style.top = "200vh"; // Push far off-screen vertically
   wrapper.style.left = "0";
-  wrapper.style.width = "0";
-  wrapper.style.height = "0";
+  wrapper.style.width = "210mm"; // Fix width to A4 width for consistent wrapping
   wrapper.style.overflow = "visible";
   wrapper.style.pointerEvents = "none";
   wrapper.style.zIndex = "-9999";
+  wrapper.style.backgroundColor = "#f8fafc"; // Ensure background color
+  wrapper.style.padding = "10mm"; // Simulate margins
 
   wrapper.appendChild(container);
   document.body.appendChild(wrapper);
@@ -232,62 +232,16 @@ export async function generatePDF(
   await new Promise((resolve) => setTimeout(resolve, 1500));
 
   try {
-    const canvasDataUrl = await htmlToImage.toPng(container, {
-      pixelRatio: 2,
-      backgroundColor: "#f8fafc",
-      skipFonts: false, // Ensure fonts are embedded
-    });
+    const opt = {
+      margin: 0,
+      filename: `askformula-${slug}-${date}.pdf`,
+      image: { type: 'jpeg' as const, quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true, logging: false },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' as const },
+      pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+    };
 
-    const pdf = new jsPDF({
-      unit: "mm",
-      format: "a4",
-      orientation: "portrait",
-    });
-
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = pdf.internal.pageSize.getHeight();
-
-    const img = new Image();
-    img.src = canvasDataUrl;
-    await new Promise((resolve) => {
-      img.onload = resolve;
-    });
-
-    const margin = 10;
-    const innerWidth = pdfWidth - margin * 2;
-    const imgRatio = img.height / img.width;
-    const imgHeightMm = innerWidth * imgRatio;
-
-    const pageHeightInside = pdfHeight - margin * 2;
-    let heightLeft = imgHeightMm;
-    let position = margin;
-    let pageOffset = 0;
-
-    pdf.addImage(canvasDataUrl, "PNG", margin, position, innerWidth, imgHeightMm);
-
-    // Draw white rectangles to cover the margins and prevent overlap/duplication artifacts
-    pdf.setFillColor(255, 255, 255);
-    pdf.rect(0, 0, pdfWidth, margin, "F");
-    pdf.rect(0, pdfHeight - margin, pdfWidth, margin, "F");
-
-    heightLeft -= pageHeightInside;
-
-    while (heightLeft > 0) {
-      pageOffset += pageHeightInside;
-      position = margin - pageOffset;
-
-      pdf.addPage();
-      pdf.addImage(canvasDataUrl, "PNG", margin, position, innerWidth, imgHeightMm);
-
-      // Draw white rectangles for margins on subsequent pages
-      pdf.setFillColor(255, 255, 255);
-      pdf.rect(0, 0, pdfWidth, margin, "F");
-      pdf.rect(0, pdfHeight - margin, pdfWidth, margin, "F");
-
-      heightLeft -= pageHeightInside;
-    }
-
-    pdf.save(`askformula-${slug}-${date}.pdf`);
+    await html2pdf().set(opt).from(wrapper).save();
   } finally {
     document.body.removeChild(wrapper);
   }
