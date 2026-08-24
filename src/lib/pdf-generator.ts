@@ -214,13 +214,12 @@ export async function generatePDF(
   // We do this instead of applying opacity: 0 to the container directly,
   // because html2pdf will clone inline styles and render the container as transparent.
   const wrapper = document.createElement("div");
-  wrapper.style.position = "fixed";
-  wrapper.style.top = "200vh"; // Push far off-screen vertically
+  wrapper.style.position = "absolute"; // Use absolute instead of fixed to prevent blank render in html2canvas
+  wrapper.style.top = "0";
   wrapper.style.left = "0";
   wrapper.style.width = "210mm"; // Fix width to A4 width for consistent wrapping
-  wrapper.style.overflow = "visible";
   wrapper.style.pointerEvents = "none";
-  wrapper.style.zIndex = "-9999";
+  wrapper.style.zIndex = "-9999"; // Place behind current content
   wrapper.style.backgroundColor = "#f8fafc"; // Ensure background color
   wrapper.style.padding = "10mm"; // Simulate margins
 
@@ -236,7 +235,7 @@ export async function generatePDF(
       margin: 0,
       filename: `askformula-${slug}-${date}.pdf`,
       image: { type: 'jpeg' as const, quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true, logging: false },
+      html2canvas: { scale: 2, useCORS: true, logging: true, scrollX: 0, scrollY: 0 },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' as const },
       pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
     };
