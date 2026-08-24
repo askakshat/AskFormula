@@ -177,12 +177,12 @@ export async function generatePDF(
         catch { renderedMath = `<span style="color: red;">Error rendering formula</span>`; }
 
         htmlContent += `
-          <div style="background: #ffffff; border: 2px solid #1e293b; border-radius: 8px; padding: ${cardPadding}; box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1); display: flex; flex-direction: column; gap: 8px; box-sizing: border-box; overflow: hidden;">
+          <div style="background: #ffffff; border: 2px solid #1e293b; border-radius: 8px; padding: ${cardPadding}; box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1); display: flex; flex-direction: column; gap: 8px; box-sizing: border-box;">
             <div style="display: flex; align-items: flex-start; gap: 6px;">
               <span style="color: #eab308; font-size: 14px;">⭐</span>
               <h3 style="margin: 0; font-size: 13px; color: #1e293b; font-weight: 700; line-height: 1.2;">${formula.name}</h3>
             </div>
-            <div style="font-size: ${mathSize}; color: #000000; width: 100%; overflow: hidden; text-align: center; padding: 4px 0; box-sizing: border-box;">
+            <div data-math style="font-size: ${mathSize}; color: #000000; width: 100%; text-align: center; padding: 4px 0; box-sizing: border-box;">
               ${renderedMath}
             </div>
           </div>`;
@@ -197,7 +197,7 @@ export async function generatePDF(
   const slug = subject.toLowerCase().replace(/\s+/g, "-");
   const date = new Date().toISOString().split("T")[0];
 
-  // Position in normal flow but visually hidden — html2canvas reads computed layout
+  // Position in normal flow — html2canvas reads computed layout
   container.style.position = "relative";
   container.style.left = "0";
   container.style.top = "0";
@@ -207,6 +207,24 @@ export async function generatePDF(
   // Let browser compute styles and render
   await document.fonts.ready;
   await new Promise(r => setTimeout(r, 500));
+
+  // Scale down any formula whose KaTeX output is wider than its card
+  const containerWidth = container.clientWidth;
+  const cols = layout === "compact" ? 4 : 2;
+  const gapPx = parseFloat(gapSize);
+  const availablePerCol = (containerWidth - (cols - 1) * gapPx) / cols;
+
+  container.querySelectorAll<HTMLElement>('[data-math]').forEach((el) => {
+    // Measure natural width of the KaTeX content
+    const katexEl = el.querySelector<HTMLElement>('.katex-display') || el.querySelector<HTMLElement>('.katex');
+    if (!katexEl) return;
+
+    const naturalWidth = katexEl.scrollWidth;
+    if (naturalWidth > availablePerCol) {
+      const zoom = availablePerCol / naturalWidth;
+      katexEl.style.zoom = String(zoom);
+    }
+  });
 
   try {
     // html2canvas reads rendered pixels — no SVG foreignObject, no external resource issues
