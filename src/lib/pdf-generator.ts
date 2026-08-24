@@ -1,5 +1,6 @@
 import katex from "katex";
-import html2pdf from "html2pdf.js";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 export interface FormulaItem {
   id: string;
@@ -13,6 +14,38 @@ export type PDFLayout = "compact" | "full";
 
 import { Chapter } from "./formulas";
 
+const KATEX_CDN = "https://cdn.jsdelivr.net/npm/katex@0.18.4/dist";
+
+/** Fetch KaTeX CSS, replace font urls with base64 data URIs so html2canvas can use them */
+async function fetchEmbeddedKaTeXCSS(): Promise<string> {
+  const cssResp = await fetch(`${KATEX_CDN}/katex.min.css`);
+  let css = await cssResp.text();
+
+  const fontRefs = [...new Set([...css.matchAll(/url\(fonts\/([^)]+)\)/g)].map(m => m[1]))];
+
+  const dataUriMap = new Map<string, string>();
+  await Promise.all(
+    fontRefs.map(async (ref) => {
+      try {
+        const resp = await fetch(`${KATEX_CDN}/fonts/${ref}`);
+        const buf = await resp.arrayBuffer();
+        const bytes = new Uint8Array(buf);
+        let binary = "";
+        for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+        const mime = ref.endsWith(".woff2") ? "font/woff2" : "font/woff";
+        dataUriMap.set(ref, `data:${mime};base64,${btoa(binary)}`);
+      } catch { /* non-fatal */ }
+    })
+  );
+
+  css = css.replace(/url\(fonts\/([^)]+)\)/g, (_m, f) => {
+    const uri = dataUriMap.get(f);
+    return uri ? `url(${uri})` : _m;
+  });
+
+  return css;
+}
+
 export async function generatePDF(
   formulas: FormulaItem[],
   chaptersData: Chapter[],
@@ -20,18 +53,35 @@ export async function generatePDF(
   layout: PDFLayout = "full",
   includeContent: ("formulas"|"keyPoints"|"keyDerivations")[] = ["formulas", "keyPoints", "keyDerivations"]
 ): Promise<void> {
+  // Fetch and embed KaTeX CSS with base64 fonts FIRST
+  let katexCssInlined = "";
+  try {
+    katexCssInlined = await fetchEmbeddedKaTeXCSS();
+  } catch {
+    console.warn("[PDF] Failed to fetch/embed KaTeX CSS");
+  }
+
+  // Inject a <style> into document.head so html2canvas sees the KaTeX styles
+  const styleEl = document.createElement("style");
+  styleEl.setAttribute("data-pdf", "true");
+  styleEl.textContent = `
+    ${katexCssInlined}
+    .katex-display > .katex,
+    .katex .mord, .katex .mbin, .katex .mrel,
+    .katex .mopen, .katex .mclose, .katex .mpunct, .katex .mop,
+    .katex { color: #000000 !important; }
+  `;
+  document.head.appendChild(styleEl);
+
   const container = document.createElement("div");
-  // A4 size roughly at 96 DPI: 794px width. We'll use this as base and scale up via pixelRatio.
-  container.style.width = layout === "compact" ? "1123px" : "794px"; // Landscape/wider base for compact to fit more columns
+  container.style.width = layout === "compact" ? "1123px" : "794px";
   container.style.background = "#ffffff";
   container.style.padding = layout === "compact" ? "20px" : "40px";
-  container.style.fontFamily = "'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', system-ui, sans-serif"; // More playful, handwritten feel if available
+  container.style.fontFamily = "'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', system-ui, sans-serif";
   container.style.color = "#1e293b";
 
   const dateStr = new Date().toLocaleDateString("en-IN", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+    year: "numeric", month: "long", day: "numeric",
   });
 
   const chapters = new Map<string, FormulaItem[]>();
@@ -92,8 +142,18 @@ export async function generatePDF(
   const mathSize = layout === "compact" ? "14px" : "18px";
   const titleColors = ["#fecaca", "#bbf7d0", "#bfdbfe", "#fef08a", "#e9d5ff"];
 
+  const renderKaTeXHTML = (text: string, inline = true) => {
+    try {
+      return text.split(/(\$.*?\$)/g).map(part => {
+        if (part.startsWith('$') && part.endsWith('$')) {
+          return katex.renderToString(part.slice(1, -1), { throwOnError: false, displayMode: !inline });
+        }
+        return part;
+      }).join('');
+    } catch { return text; }
+  };
+
   let htmlContent = `
-    ${stylesHtml}
     <div style="margin-bottom: ${headerMargin}; text-align: center;">
       <h1 style="margin: 0; font-size: ${titleSize}; color: #1e293b; text-transform: uppercase; letter-spacing: 1px;">AskFormula</h1>
       <h2 style="margin: 5px 0 0 0; font-size: ${subtitleSize}; color: #334155; font-weight: 600;">${subject} Revision Sheet</h2>
@@ -102,30 +162,10 @@ export async function generatePDF(
   `;
 
   let colorIndex = 0;
-
-  // Use chaptersData to ensure we get empty chapters too, or chapters with only theory
   const chapterNames = Array.from(new Set([
     ...chaptersData.map(ch => ch.name || ch.chapterName || "General"),
     ...Array.from(chapters.keys())
   ]));
-
-  const renderKaTeXHTML = (text: string, inline: boolean = true) => {
-    try {
-      const parts = text.split(/(\$.*?\$)/g);
-      return parts.map(part => {
-        if (part.startsWith('$') && part.endsWith('$')) {
-          const math = part.slice(1, -1);
-          return katex.renderToString(math, {
-            throwOnError: false,
-            displayMode: !inline,
-          });
-        }
-        return part;
-      }).join('');
-    } catch {
-      return text;
-    }
-  };
 
   for (const chapterName of chapterNames) {
     const items = chapters.get(chapterName) || [];
@@ -145,17 +185,7 @@ export async function generatePDF(
     htmlContent += `
       <div style="margin-bottom: ${layout === "compact" ? "20px" : "40px"};">
         <div style="text-align: center; margin-bottom: ${layout === "compact" ? "15px" : "25px"};">
-          <div style="
-            background-color: ${chapterColor};
-            color: #1e293b;
-            display: inline-block;
-            padding: 8px 24px;
-            border-radius: 20px;
-            border: 2px solid #1e293b;
-            font-weight: bold;
-            font-size: ${layout === "compact" ? "16px" : "22px"};
-            box-shadow: 3px 3px 0px 0px rgba(30, 41, 59, 1);
-          ">
+          <div style="background-color: ${chapterColor}; color: #1e293b; display: inline-block; padding: 8px 24px; border-radius: 20px; border: 2px solid #1e293b; font-weight: bold; font-size: ${layout === "compact" ? "16px" : "22px"}; box-shadow: 3px 3px 0px 0px rgba(30, 41, 59, 1);">
             ${chapterName}
           </div>
         </div>
@@ -165,22 +195,20 @@ export async function generatePDF(
       htmlContent += `
         <div style="margin-bottom: ${gapSize}; background: #fefce8; border: 2px solid #1e293b; border-radius: 8px; padding: ${cardPadding}; box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1); page-break-inside: avoid; width: 100%; box-sizing: border-box; min-width: 0; overflow-wrap: break-word; word-break: break-word;">
           <h4 style="margin: 0 0 10px 0; font-size: 14px; font-weight: bold; color: #1e293b; text-transform: uppercase;">Key Points</h4>
-          <ul style="margin: 0; padding-left: 20px; font-size: ${mathSize}; color: #000000; line-height: 1.5;">
-            ${keyPoints.map(point => `<li style="margin-bottom: 6px;">${renderKaTeXHTML(point)}</li>`).join('')}
+          <ul style="margin: 0; padding-left: 20px; font-size: ${mathSize}; color: #000000; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word;">
+            ${keyPoints.map(p => `<li style="margin-bottom: 6px;">${renderKaTeXHTML(p)}</li>`).join('')}
           </ul>
-        </div>
-      `;
+        </div>`;
     }
 
     if (hasDerivations) {
       htmlContent += `
         <div style="margin-bottom: ${gapSize}; background: #f0fdf4; border: 2px solid #1e293b; border-radius: 8px; padding: ${cardPadding}; box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1); page-break-inside: avoid; width: 100%; box-sizing: border-box; min-width: 0; overflow-wrap: break-word; word-break: break-word;">
           <h4 style="margin: 0 0 10px 0; font-size: 14px; font-weight: bold; color: #1e293b; text-transform: uppercase;">Key Derivations</h4>
-          <ul style="margin: 0; padding-left: 20px; font-size: ${mathSize}; color: #000000; line-height: 1.5;">
-            ${keyDerivations.map(der => `<li style="margin-bottom: 6px;">${renderKaTeXHTML(der)}</li>`).join('')}
+          <ul style="margin: 0; padding-left: 20px; font-size: ${mathSize}; color: #000000; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word;">
+            ${keyDerivations.map(d => `<li style="margin-bottom: 6px;">${renderKaTeXHTML(d)}</li>`).join('')}
           </ul>
-        </div>
-      `;
+        </div>`;
     }
 
     if (hasFormulas) {
@@ -190,14 +218,8 @@ export async function generatePDF(
 
       for (const formula of items) {
         let renderedMath = "";
-        try {
-          renderedMath = katex.renderToString(formula.latex, {
-            displayMode: true,
-            throwOnError: false,
-          });
-        } catch {
-          renderedMath = `<span style="color: red;">Error rendering formula</span>`;
-        }
+        try { renderedMath = katex.renderToString(formula.latex, { displayMode: true, throwOnError: false }); }
+        catch { renderedMath = `<span style="color: red;">Error rendering formula</span>`; }
 
         htmlContent += `
             <div style="
@@ -219,11 +241,10 @@ export async function generatePDF(
                 ${renderedMath}
               </div>
             </div>
-        `;
+          </div>`;
       }
       htmlContent += `</div>`;
     }
-
     htmlContent += `</div>`;
   }
 
@@ -232,25 +253,34 @@ export async function generatePDF(
   const slug = subject.toLowerCase().replace(/\s+/g, "-");
   const date = new Date().toISOString().split("T")[0];
 
-  // Create a wrapper to hide the container off-screen
-  // We do this instead of applying opacity: 0 to the container directly,
-  // because html2pdf will clone inline styles and render the container as transparent.
-  const wrapper = document.createElement("div");
-  wrapper.style.position = "absolute"; // Use absolute instead of fixed to prevent blank render in html2canvas
-  wrapper.style.top = "0";
-  wrapper.style.left = "0";
-  wrapper.style.width = "210mm"; // Fix width to A4 width for consistent wrapping
-  wrapper.style.pointerEvents = "none";
-  wrapper.style.zIndex = "-9999"; // Place behind current content
-  wrapper.style.backgroundColor = "#f8fafc"; // Ensure background color
-  wrapper.style.padding = "10mm"; // Simulate margins
+  // Position in normal flow — html2canvas reads computed layout
+  container.style.position = "relative";
+  container.style.left = "0";
+  container.style.top = "0";
+  container.style.zIndex = "-1";
+  document.body.appendChild(container);
 
-  wrapper.appendChild(container);
-  document.body.appendChild(wrapper);
-
-  // Wait for fonts to load and ensure browser parses injected CSS
+  // Let browser compute styles and render
   await document.fonts.ready;
-  await new Promise((resolve) => setTimeout(resolve, 1500));
+  await new Promise(r => setTimeout(r, 500));
+
+  // Scale down any formula whose KaTeX output is wider than its card
+  const containerWidth = container.clientWidth;
+  const cols = layout === "compact" ? 4 : 2;
+  const gapPx = parseFloat(gapSize);
+  const availablePerCol = (containerWidth - (cols - 1) * gapPx) / cols;
+
+  container.querySelectorAll<HTMLElement>('[data-math]').forEach((el) => {
+    // Measure natural width of the KaTeX content
+    const katexEl = el.querySelector<HTMLElement>('.katex-display') || el.querySelector<HTMLElement>('.katex');
+    if (!katexEl) return;
+
+    const naturalWidth = katexEl.scrollWidth;
+    if (naturalWidth > availablePerCol) {
+      const zoom = availablePerCol / naturalWidth;
+      katexEl.style.zoom = String(zoom);
+    }
+  });
 
   try {
     const opt = {
@@ -264,6 +294,7 @@ export async function generatePDF(
 
     await html2pdf().set(opt).from(wrapper).save();
   } finally {
-    document.body.removeChild(wrapper);
+    document.body.removeChild(container);
+    document.head.removeChild(styleEl);
   }
 }
