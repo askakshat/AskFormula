@@ -185,7 +185,7 @@ export default function PrintView() {
 
       {/* Main Print Content */}
       <div className="max-w-[1123px] mx-auto p-8 print:p-0 bg-white print:bg-transparent shadow-lg print:shadow-none min-h-[297mm]">
-        <div className={`mb-${layout === 'compact' ? '6' : '10'} text-center`}>
+        <div className={`${layout === "compact" ? "mb-6" : "mb-10"} text-center`}>
           <h1 className={`m-0 text-slate-800 uppercase tracking-wide font-bold ${layout === 'compact' ? 'text-2xl' : 'text-4xl'}`}>
             AskFormula
           </h1>
@@ -213,8 +213,8 @@ export default function PrintView() {
           const mathSize = layout === "compact" ? "text-[14px]" : "text-[18px]";
 
           return (
-            <div key={chapterName} className={`mb-${layout === "compact" ? "6" : "10"}`}>
-              <div className={`text-center mb-${layout === "compact" ? "4" : "6"}`}>
+            <div key={chapterName} className={layout === "compact" ? "mb-6" : "mb-10"}>
+              <div className={`text-center ${layout === "compact" ? "mb-4" : "mb-6"}`}>
                 <div
                   className={`inline-block px-6 py-2 rounded-full border-2 border-slate-800 font-bold ${layout === "compact" ? "text-base" : "text-xl"} shadow-[3px_3px_0px_0px_rgba(30,41,59,1)] text-slate-800`}
                   style={{ backgroundColor: chapterColor }}
