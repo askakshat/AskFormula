@@ -91,6 +91,48 @@ export async function generatePDF(
     chapters.get(key)!.push(f);
   }
 
+  // Directly fetch the KaTeX CDN stylesheet and inject PDF-specific overrides.
+  // Make sure version matches the installed katex package (0.18.4)
+  const stylesHtml = `
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.4/dist/katex.min.css" crossorigin="anonymous">
+    <style>
+      /* Force KaTeX text color to black for PDF export */
+      .katex-display > .katex,
+      .katex .mord,
+      .katex .mbin,
+      .katex .mrel,
+      .katex .mopen,
+      .katex .mclose,
+      .katex .mpunct,
+      .katex .mop,
+      .katex {
+        color: #000000 !important;
+      }
+          /* Force text and KaTeX to wrap to prevent cutting */
+      #askformula-pdf-container, #askformula-pdf-container * {
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+      }
+      #askformula-pdf-container .katex-display {
+        max-width: 100% !important;
+        overflow-wrap: break-word !important;
+        word-wrap: break-word !important;
+      }
+      #askformula-pdf-container .katex {
+        display: inline-block !important;
+        max-width: 100% !important;
+        white-space: normal !important;
+      }
+      #askformula-pdf-container .katex-html {
+        max-width: 100% !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        align-items: center !important;
+      }
+    </style>
+  `;
+
   const titleSize = layout === "compact" ? "24px" : "36px";
   const subtitleSize = layout === "compact" ? "16px" : "20px";
   const headerMargin = layout === "compact" ? "20px" : "30px";
@@ -151,7 +193,7 @@ export async function generatePDF(
 
     if (hasKeyPoints) {
       htmlContent += `
-        <div style="margin-bottom: ${gapSize}; background: #fefce8; border: 2px solid #1e293b; border-radius: 8px; padding: ${cardPadding}; box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1); width: 100%; box-sizing: border-box;">
+        <div style="margin-bottom: ${gapSize}; background: #fefce8; border: 2px solid #1e293b; border-radius: 8px; padding: ${cardPadding}; box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1); page-break-inside: avoid; width: 100%; box-sizing: border-box; min-width: 0; overflow-wrap: break-word; word-break: break-word;">
           <h4 style="margin: 0 0 10px 0; font-size: 14px; font-weight: bold; color: #1e293b; text-transform: uppercase;">Key Points</h4>
           <ul style="margin: 0; padding-left: 20px; font-size: ${mathSize}; color: #000000; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word;">
             ${keyPoints.map(p => `<li style="margin-bottom: 6px;">${renderKaTeXHTML(p)}</li>`).join('')}
@@ -161,7 +203,7 @@ export async function generatePDF(
 
     if (hasDerivations) {
       htmlContent += `
-        <div style="margin-bottom: ${gapSize}; background: #f0fdf4; border: 2px solid #1e293b; border-radius: 8px; padding: ${cardPadding}; box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1); width: 100%; box-sizing: border-box;">
+        <div style="margin-bottom: ${gapSize}; background: #f0fdf4; border: 2px solid #1e293b; border-radius: 8px; padding: ${cardPadding}; box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1); page-break-inside: avoid; width: 100%; box-sizing: border-box; min-width: 0; overflow-wrap: break-word; word-break: break-word;">
           <h4 style="margin: 0 0 10px 0; font-size: 14px; font-weight: bold; color: #1e293b; text-transform: uppercase;">Key Derivations</h4>
           <ul style="margin: 0; padding-left: 20px; font-size: ${mathSize}; color: #000000; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word;">
             ${keyDerivations.map(d => `<li style="margin-bottom: 6px;">${renderKaTeXHTML(d)}</li>`).join('')}
@@ -170,20 +212,34 @@ export async function generatePDF(
     }
 
     if (hasFormulas) {
-      htmlContent += `<div style="display: grid; grid-template-columns: ${gridColumns}; gap: ${gapSize}; align-items: start;">`;
+      htmlContent += `
+        <div style="display: grid; grid-template-columns: ${gridColumns}; gap: ${gapSize}; align-items: start; width: 100%; box-sizing: border-box; min-width: 0; max-width: 100%;">
+      `;
+
       for (const formula of items) {
         let renderedMath = "";
         try { renderedMath = katex.renderToString(formula.latex, { displayMode: true, throwOnError: false }); }
         catch { renderedMath = `<span style="color: red;">Error rendering formula</span>`; }
 
         htmlContent += `
-          <div style="background: #ffffff; border: 2px solid #1e293b; border-radius: 8px; padding: ${cardPadding}; box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1); display: flex; flex-direction: column; gap: 8px; box-sizing: border-box;">
-            <div style="display: flex; align-items: flex-start; gap: 6px;">
-              <span style="color: #eab308; font-size: 14px;">⭐</span>
-              <h3 style="margin: 0; font-size: 13px; color: #1e293b; font-weight: 700; line-height: 1.2;">${formula.name}</h3>
-            </div>
-            <div data-math style="font-size: ${mathSize}; color: #000000; width: 100%; text-align: center; padding: 4px 0; box-sizing: border-box;">
-              ${renderedMath}
+            <div style="
+              background: #ffffff;
+              border: 2px solid #1e293b;
+              border-radius: 8px;
+              padding: ${cardPadding};
+              page-break-inside: avoid;
+              box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1);
+              display: flex;
+              flex-direction: column;
+              gap: 8px;
+            ">
+              <div style="display: flex; align-items: flex-start; justify-content: flex-start; gap: 6px;">
+                <span style="color: #eab308; font-size: 14px;">⭐</span>
+                <h3 style="margin: 0; font-size: 13px; color: #1e293b; font-weight: 700; line-height: 1.2; word-break: break-word; overflow-wrap: break-word; flex: 1; min-width: 0;">${formula.name}</h3>
+              </div>
+              <div style="font-size: ${mathSize}; color: #000000; display: block; width: 100%; overflow-x: hidden; text-align: center; padding: 4px 0;">
+                ${renderedMath}
+              </div>
             </div>
           </div>`;
       }
@@ -227,44 +283,16 @@ export async function generatePDF(
   });
 
   try {
-    // html2canvas reads rendered pixels — no SVG foreignObject, no external resource issues
-    const canvas = await html2canvas(container, {
-      scale: 2,
-      useCORS: true,
-      backgroundColor: "#ffffff",
-      logging: false,
-      windowWidth: parseInt(container.style.width, 10),
-    });
+    const opt = {
+      margin: 15, // 15mm margin on all sides
+      filename: `askformula-${slug}-${date}.pdf`,
+      image: { type: 'jpeg' as const, quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true, logging: true, scrollX: 0, scrollY: 0, windowWidth: layout === "compact" ? 1123 : 794 },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' as const },
+      pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+    };
 
-    const canvasDataUrl = canvas.toDataURL("image/png");
-
-    const pdf = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = pdf.internal.pageSize.getHeight();
-
-    const img = new Image();
-    img.src = canvasDataUrl;
-    await new Promise(r => { img.onload = r; });
-
-    const margin = 10;
-    const innerWidth = pdfWidth - margin * 2;
-    const imgRatio = img.height / img.width;
-    const imgHeightMm = innerWidth * imgRatio;
-
-    let heightLeft = imgHeightMm;
-    let position = margin;
-
-    pdf.addImage(canvasDataUrl, "PNG", margin, position, innerWidth, imgHeightMm);
-    heightLeft -= (pdfHeight - margin * 2);
-
-    while (heightLeft > 0) {
-      position = heightLeft - imgHeightMm + margin;
-      pdf.addPage();
-      pdf.addImage(canvasDataUrl, "PNG", margin, position, innerWidth, imgHeightMm);
-      heightLeft -= (pdfHeight - margin * 2);
-    }
-
-    pdf.save(`askformula-${slug}-${date}.pdf`);
+    await html2pdf().set(opt).from(wrapper).save();
   } finally {
     document.body.removeChild(container);
     document.head.removeChild(styleEl);
