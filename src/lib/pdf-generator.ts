@@ -67,14 +67,24 @@ export async function generatePDF(
         overflow-wrap: break-word !important;
       }
       #askformula-pdf-container .katex-display {
-        overflow-x: hidden !important;
+        overflow-x: auto !important;
         overflow-y: hidden !important;
         white-space: normal !important;
+        word-break: break-word !important;
+        max-width: 100% !important;
       }
       #askformula-pdf-container .katex {
         white-space: normal !important;
         display: inline-block !important;
         max-width: 100% !important;
+        word-break: break-word !important;
+      }
+      #askformula-pdf-container .katex * {
+        white-space: normal !important;
+      }
+      #askformula-pdf-container .katex-html {
+        max-width: 100% !important;
+        overflow-wrap: break-word !important;
       }
     </style>
   `;
@@ -159,7 +169,7 @@ export async function generatePDF(
 
     if (hasKeyPoints) {
       htmlContent += `
-        <div style="margin-bottom: ${gapSize}; background: #fefce8; border: 2px solid #1e293b; border-radius: 8px; padding: ${cardPadding}; box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1); page-break-inside: avoid;">
+        <div style="margin-bottom: ${gapSize}; background: #fefce8; border: 2px solid #1e293b; border-radius: 8px; padding: ${cardPadding}; box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1); page-break-inside: avoid; width: 100%; box-sizing: border-box; min-width: 0; overflow-wrap: break-word; word-break: break-word;">
           <h4 style="margin: 0 0 10px 0; font-size: 14px; font-weight: bold; color: #1e293b; text-transform: uppercase;">Key Points</h4>
           <ul style="margin: 0; padding-left: 20px; font-size: ${mathSize}; color: #000000; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word;">
             ${keyPoints.map(point => `<li style="margin-bottom: 6px;">${renderKaTeXHTML(point)}</li>`).join('')}
@@ -170,7 +180,7 @@ export async function generatePDF(
 
     if (hasDerivations) {
       htmlContent += `
-        <div style="margin-bottom: ${gapSize}; background: #f0fdf4; border: 2px solid #1e293b; border-radius: 8px; padding: ${cardPadding}; box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1); page-break-inside: avoid;">
+        <div style="margin-bottom: ${gapSize}; background: #f0fdf4; border: 2px solid #1e293b; border-radius: 8px; padding: ${cardPadding}; box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1); page-break-inside: avoid; width: 100%; box-sizing: border-box; min-width: 0; overflow-wrap: break-word; word-break: break-word;">
           <h4 style="margin: 0 0 10px 0; font-size: 14px; font-weight: bold; color: #1e293b; text-transform: uppercase;">Key Derivations</h4>
           <ul style="margin: 0; padding-left: 20px; font-size: ${mathSize}; color: #000000; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word;">
             ${keyDerivations.map(der => `<li style="margin-bottom: 6px;">${renderKaTeXHTML(der)}</li>`).join('')}
@@ -181,7 +191,7 @@ export async function generatePDF(
 
     if (hasFormulas) {
       htmlContent += `
-        <div style="display: grid; grid-template-columns: ${gridColumns}; gap: ${gapSize}; align-items: start;">
+        <div style="display: grid; grid-template-columns: ${gridColumns}; gap: ${gapSize}; align-items: start; width: 100%; box-sizing: border-box; min-width: 0; max-width: 100%;">
       `;
 
       for (const formula of items) {
@@ -208,12 +218,16 @@ export async function generatePDF(
               gap: 8px;
               box-sizing: border-box;
               max-width: 100%;
+              width: 100%;
+              min-width: 0;
+              word-break: break-word;
+              overflow-wrap: break-word;
             ">
-              <div style="display: flex; align-items: flex-start; justify-content: flex-start; gap: 6px; flex-wrap: wrap;">
+              <div style="display: flex; align-items: flex-start; justify-content: flex-start; gap: 6px; flex-wrap: wrap; width: 100%; min-width: 0; box-sizing: border-box;">
                 <span style="color: #eab308; font-size: 14px;">⭐</span>
-                <h3 style="margin: 0; font-size: 13px; color: #1e293b; font-weight: 700; line-height: 1.2; word-wrap: break-word;">${formula.name}</h3>
+                <h3 style="margin: 0; font-size: 13px; color: #1e293b; font-weight: 700; line-height: 1.2; word-break: break-word; overflow-wrap: break-word; flex: 1; min-width: 0;">${formula.name}</h3>
               </div>
-              <div style="font-size: ${mathSize}; color: #000000; display: block; width: 100%; text-align: center; padding: 4px 0; word-wrap: break-word;">
+              <div style="font-size: ${mathSize}; color: #000000; display: block; width: 100%; text-align: center; padding: 4px 0; word-break: break-word; overflow-wrap: break-word; min-width: 0; overflow-x: auto; max-width: 100%; box-sizing: border-box;">
                 ${renderedMath}
               </div>
             </div>
