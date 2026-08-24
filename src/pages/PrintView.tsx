@@ -31,6 +31,7 @@ export default function PrintView() {
     const stored = sessionStorage.getItem("askformula-print-data");
     if (stored) {
       try {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setData(JSON.parse(stored));
       } catch (e) {
         console.error("Failed to parse print data", e);
@@ -58,10 +59,25 @@ export default function PrintView() {
   for (const f of formulas) {
     const key = f.chapter ?? "General";
     if (!chapters.has(key)) chapters.set(key, []);
-    chapters.get(key)!.push(f);
+
+    // Split formulas containing multiple equations separated by \qquad
+    const parts = f.latex.split(/,\s*\\qquad\s*|\\qquad\s*/).filter(p => p.trim());
+    if (parts.length > 1) {
+      parts.forEach((part, index) => {
+        chapters.get(key)!.push({
+          ...f,
+          id: `${f.id}_part${index + 1}`,
+          name: `${f.name} (${index + 1})`,
+          latex: part
+        });
+      });
+    } else {
+      chapters.get(key)!.push(f);
+    }
   }
 
   const chapterNames = Array.from(new Set([
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ...chaptersData.map(ch => ch.name || (ch as any).chapterName || "General"),
     ...Array.from(chapters.keys())
   ]));
@@ -161,9 +177,23 @@ export default function PrintView() {
 
           .katex-display {
              max-width: 100%;
+             overflow-wrap: break-word;
+             word-wrap: break-word;
+             white-space: normal;
           }
           .katex {
              max-width: 100%;
+             white-space: normal;
+          }
+          /* Allow specific elements inside katex to wrap */
+          .katex-html {
+             white-space: normal !important;
+             overflow-wrap: break-word !important;
+          }
+          /* We don't want math rendering to completely break, but we need it to wrap if necessary */
+          .base {
+             white-space: normal !important;
+             display: inline !important;
           }
         `}
       </style>
@@ -182,6 +212,7 @@ export default function PrintView() {
 
         {chapterNames.map((chapterName, idx) => {
           const items = chapters.get(chapterName) || [];
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const chapterMeta = chaptersData.find(ch => (ch.name || (ch as any).chapterName) === chapterName);
           const keyPoints = chapterMeta?.keyPoints || [];
           const keyDerivations = chapterMeta?.keyDerivations || [];
