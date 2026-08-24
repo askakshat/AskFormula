@@ -27,6 +27,7 @@ export async function generatePDF(
   container.style.boxSizing = "border-box";
   container.style.background = "#ffffff";
   container.style.padding = "0"; // Handled by html2pdf margins
+  container.style.overflow = "hidden";
   container.style.fontFamily = "'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', system-ui, sans-serif"; // More playful, handwritten feel if available
   container.style.color = "#1e293b";
 
@@ -61,30 +62,71 @@ export async function generatePDF(
         color: #000000 !important;
       }
 
-      /* Force text and KaTeX to wrap to prevent cutting */
+      /* Prevent any content from overflowing the container */
+      #askformula-pdf-container {
+        overflow: hidden !important;
+      }
       #askformula-pdf-container, #askformula-pdf-container * {
         word-wrap: break-word !important;
         overflow-wrap: break-word !important;
+        box-sizing: border-box !important;
       }
+
+      /* Formula card inner content: clip overflow, never scroll */
+      .formula-card {
+        overflow: hidden !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+      .formula-card .math-content {
+        overflow: hidden !important;
+        text-align: center !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+
+      /* KaTeX display math: constrain width, allow graceful shrink */
       #askformula-pdf-container .katex-display {
-        overflow-x: auto !important;
-        overflow-y: hidden !important;
+        overflow: hidden !important;
         white-space: normal !important;
         word-break: break-word !important;
         max-width: 100% !important;
+        margin: 0.5em 0 !important;
       }
+
+      /* KaTeX inline math: prevent horizontal blowout */
       #askformula-pdf-container .katex {
         white-space: normal !important;
         display: inline-block !important;
         max-width: 100% !important;
         word-break: break-word !important;
+        overflow-wrap: break-word !important;
       }
       #askformula-pdf-container .katex * {
         white-space: normal !important;
       }
       #askformula-pdf-container .katex-html {
         max-width: 100% !important;
+        overflow: hidden !important;
+      }
+      #askformula-pdf-container .katex-html > .katexordtext {
         overflow-wrap: break-word !important;
+      }
+
+      /* Key points / derivations list: ensure text wraps */
+      .content-list li {
+        overflow-wrap: break-word !important;
+        word-break: break-word !important;
+      }
+      .content-box {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        overflow: hidden !important;
+      }
+
+      /* Chapter section: prevent awkward mid-chapter page breaks */
+      .chapter-section {
+        page-break-before: auto !important;
       }
     </style>
   `;
@@ -149,7 +191,7 @@ export async function generatePDF(
     colorIndex++;
 
     htmlContent += `
-      <div style="margin-bottom: ${layout === "compact" ? "20px" : "40px"};">
+      <div class="chapter-section" style="margin-bottom: ${layout === "compact" ? "20px" : "40px"};">
         <div style="text-align: center; margin-bottom: ${layout === "compact" ? "15px" : "25px"};">
           <div style="
             background-color: ${chapterColor};
@@ -169,9 +211,9 @@ export async function generatePDF(
 
     if (hasKeyPoints) {
       htmlContent += `
-        <div style="margin-bottom: ${gapSize}; background: #fefce8; border: 2px solid #1e293b; border-radius: 8px; padding: ${cardPadding}; box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1); page-break-inside: avoid; width: 100%; box-sizing: border-box; min-width: 0; overflow-wrap: break-word; word-break: break-word;">
+        <div class="content-box" style="margin-bottom: ${gapSize}; background: #fefce8; border: 2px solid #1e293b; border-radius: 8px; padding: ${cardPadding}; box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1); width: 100%; box-sizing: border-box; min-width: 0; overflow: hidden; overflow-wrap: break-word; word-break: break-word;">
           <h4 style="margin: 0 0 10px 0; font-size: 14px; font-weight: bold; color: #1e293b; text-transform: uppercase;">Key Points</h4>
-          <ul style="margin: 0; padding-left: 20px; font-size: ${mathSize}; color: #000000; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word;">
+          <ul class="content-list" style="margin: 0; padding-left: 20px; font-size: ${mathSize}; color: #000000; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word;">
             ${keyPoints.map(point => `<li style="margin-bottom: 6px;">${renderKaTeXHTML(point)}</li>`).join('')}
           </ul>
         </div>
@@ -180,9 +222,9 @@ export async function generatePDF(
 
     if (hasDerivations) {
       htmlContent += `
-        <div style="margin-bottom: ${gapSize}; background: #f0fdf4; border: 2px solid #1e293b; border-radius: 8px; padding: ${cardPadding}; box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1); page-break-inside: avoid; width: 100%; box-sizing: border-box; min-width: 0; overflow-wrap: break-word; word-break: break-word;">
+        <div class="content-box" style="margin-bottom: ${gapSize}; background: #f0fdf4; border: 2px solid #1e293b; border-radius: 8px; padding: ${cardPadding}; box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1); width: 100%; box-sizing: border-box; min-width: 0; overflow: hidden; overflow-wrap: break-word; word-break: break-word;">
           <h4 style="margin: 0 0 10px 0; font-size: 14px; font-weight: bold; color: #1e293b; text-transform: uppercase;">Key Derivations</h4>
-          <ul style="margin: 0; padding-left: 20px; font-size: ${mathSize}; color: #000000; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word;">
+          <ul class="content-list" style="margin: 0; padding-left: 20px; font-size: ${mathSize}; color: #000000; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word;">
             ${keyDerivations.map(der => `<li style="margin-bottom: 6px;">${renderKaTeXHTML(der)}</li>`).join('')}
           </ul>
         </div>
@@ -206,12 +248,11 @@ export async function generatePDF(
         }
 
         htmlContent += `
-            <div style="
+            <div class="formula-card" style="
               background: #ffffff;
               border: 2px solid #1e293b;
               border-radius: 8px;
               padding: ${cardPadding};
-              page-break-inside: avoid;
               box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1);
               display: flex;
               flex-direction: column;
@@ -222,12 +263,13 @@ export async function generatePDF(
               min-width: 0;
               word-break: break-word;
               overflow-wrap: break-word;
+              overflow: hidden;
             ">
               <div style="display: flex; align-items: flex-start; justify-content: flex-start; gap: 6px; flex-wrap: wrap; width: 100%; min-width: 0; box-sizing: border-box;">
                 <span style="color: #eab308; font-size: 14px;">⭐</span>
                 <h3 style="margin: 0; font-size: 13px; color: #1e293b; font-weight: 700; line-height: 1.2; word-break: break-word; overflow-wrap: break-word; flex: 1; min-width: 0;">${formula.name}</h3>
               </div>
-              <div style="font-size: ${mathSize}; color: #000000; display: block; width: 100%; text-align: center; padding: 4px 0; word-break: break-word; overflow-wrap: break-word; min-width: 0; overflow-x: auto; max-width: 100%; box-sizing: border-box;">
+              <div class="math-content" style="font-size: ${mathSize}; color: #000000; display: block; width: 100%; text-align: center; padding: 4px 0; word-break: break-word; overflow-wrap: break-word; min-width: 0; overflow: hidden; max-width: 100%; box-sizing: border-box;">
                 ${renderedMath}
               </div>
             </div>
@@ -252,12 +294,16 @@ export async function generatePDF(
   wrapper.style.top = "0";
   wrapper.style.left = "0";
   // The actual rendering width in pixels before html2canvas scaling, matching typical A4 width roughly at 96 DPI
-  wrapper.style.width = layout === "compact" ? "1123px" : "794px";
+  // Use a wider canvas so formula cards have room; html2pdf scales to A4 automatically
+  // Full layout: 960px gives ~440px per column after gaps/margins — enough for most formulas
+  // Compact layout: 1200px for 4-column grid
+  wrapper.style.width = layout === "compact" ? "1200px" : "960px";
   wrapper.style.pointerEvents = "none";
   wrapper.style.zIndex = "-9999"; // Place behind current content
   wrapper.style.backgroundColor = "#f8fafc"; // Ensure background color
-  wrapper.style.padding = "0"; // Padding removed, handled by html2pdf margin
+  wrapper.style.padding = "0";
   wrapper.style.boxSizing = "border-box";
+  wrapper.style.overflow = "hidden";
 
   wrapper.appendChild(container);
   document.body.appendChild(wrapper);
@@ -271,7 +317,7 @@ export async function generatePDF(
       margin: 15, // 15mm margin on all sides
       filename: `askformula-${slug}-${date}.pdf`,
       image: { type: 'jpeg' as const, quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true, logging: true, scrollX: 0, scrollY: 0, windowWidth: layout === "compact" ? 1123 : 794 },
+      html2canvas: { scale: 2, useCORS: true, logging: true, scrollX: 0, scrollY: 0, windowWidth: layout === "compact" ? 1200 : 960 },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' as const },
       pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
     };
