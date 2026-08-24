@@ -12,6 +12,7 @@ const Landing = lazy(() => import("./pages/Landing.tsx"));
 const AuthPage = lazy(() => import("./pages/Auth.tsx"));
 const Dashboard = lazy(() => import("./pages/Dashboard.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
+const PrintView = lazy(() => import("./pages/PrintView.tsx"));
 
 // Simple loading fallback for route transitions
 function RouteLoading() {
@@ -121,6 +122,7 @@ createRoot(document.getElementById("root")!).render(
               path="/dashboard"
                 element={<Dashboard />}
             />
+            <Route path="/print" element={<PrintView />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
