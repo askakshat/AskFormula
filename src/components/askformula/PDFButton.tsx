@@ -2,9 +2,18 @@ import { useState } from "react";
 import { Download, Loader2, LayoutGrid, Maximize2, Layers } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { generatePDF, type FormulaItem, type PDFLayout } from "@/lib/pdf-generator";
 import { useLocalStorage, type SavedPDF } from "@/lib/local-storage";
 import { Chapter } from "@/lib/formulas";
+
+// Re-defining these here temporarily since we're deleting pdf-generator.ts
+export type PDFLayout = "compact" | "full";
+export interface FormulaItem {
+  id: string;
+  name: string;
+  latex: string;
+  chapter?: string;
+  category?: string;
+}
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,13 +37,22 @@ export default function PDFButton({ formulas, chapters = [], subject }: PDFButto
     if ((formulas.length === 0 && chapters.length === 0) || isGenerating) return;
 
     setIsGenerating(true);
-    const toastId = toast.loading(`Generating ${layout} PDF layout...`, {
-      description: "Please wait, rendering formulas. This may take a moment."
+    const toastId = toast.loading(`Preparing ${layout} PDF layout...`, {
+      description: "Please wait, opening print view."
     });
 
     try {
-      await generatePDF(formulas, chapters, subject, layout, includeContent);
+      // Save data to session storage so the print view can read it
+      const printData = {
+        formulas,
+        chapters,
+        subject,
+        layout,
+        includeContent
+      };
+      sessionStorage.setItem("askformula-print-data", JSON.stringify(printData));
 
+      // Also record this in their dashboard history
       const newSavedPdf = {
         id: crypto.randomUUID(),
         subject,
@@ -43,15 +61,17 @@ export default function PDFButton({ formulas, chapters = [], subject }: PDFButto
       };
       setSavedPDFs([newSavedPdf, ...savedPDFs].slice(0, 50)); // keep last 50
 
-      toast.success("PDF generated successfully!", {
+      toast.success("Print view ready!", {
         id: toastId,
-        description: "Your file is ready to download.",
+        description: "Opening in a new tab.",
       });
+
+      window.open("/print", "_blank");
     } catch (err) {
-      console.error("PDF generation failed:", err);
-      toast.error("Failed to generate PDF.", {
+      console.error("Print preparation failed:", err);
+      toast.error("Failed to prepare PDF.", {
         id: toastId,
-        description: "An error occurred while creating your file. Please try again.",
+        description: "An error occurred while setting up the print view. Please try again.",
       });
     } finally {
       setIsGenerating(false);
@@ -74,7 +94,7 @@ export default function PDFButton({ formulas, chapters = [], subject }: PDFButto
             ) : (
               <>
                 <Download className="w-5 h-5 sm:w-4 sm:h-4 mr-2" />
-                Download PDF
+                Export to PDF
               </>
             )}
           </Button>
