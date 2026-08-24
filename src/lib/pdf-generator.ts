@@ -21,10 +21,12 @@ export async function generatePDF(
   includeContent: ("formulas"|"keyPoints"|"keyDerivations")[] = ["formulas", "keyPoints", "keyDerivations"]
 ): Promise<void> {
   const container = document.createElement("div");
-  // A4 size roughly at 96 DPI: 794px width. We'll use this as base and scale up via pixelRatio.
-  container.style.width = layout === "compact" ? "1123px" : "794px"; // Landscape/wider base for compact to fit more columns
+  container.id = "askformula-pdf-container";
+  // Set width 100% of the wrapper
+  container.style.width = "100%";
+  container.style.boxSizing = "border-box";
   container.style.background = "#ffffff";
-  container.style.padding = layout === "compact" ? "20px" : "40px";
+  container.style.padding = "0"; // Handled by html2pdf margins
   container.style.fontFamily = "'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', system-ui, sans-serif"; // More playful, handwritten feel if available
   container.style.color = "#1e293b";
 
@@ -57,6 +59,22 @@ export async function generatePDF(
       .katex .mop,
       .katex {
         color: #000000 !important;
+      }
+
+      /* Force text and KaTeX to wrap to prevent cutting */
+      #askformula-pdf-container, #askformula-pdf-container * {
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+      }
+      #askformula-pdf-container .katex-display {
+        overflow-x: hidden !important;
+        overflow-y: hidden !important;
+        white-space: normal !important;
+      }
+      #askformula-pdf-container .katex {
+        white-space: normal !important;
+        display: inline-block !important;
+        max-width: 100% !important;
       }
     </style>
   `;
@@ -143,7 +161,7 @@ export async function generatePDF(
       htmlContent += `
         <div style="margin-bottom: ${gapSize}; background: #fefce8; border: 2px solid #1e293b; border-radius: 8px; padding: ${cardPadding}; box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1); page-break-inside: avoid;">
           <h4 style="margin: 0 0 10px 0; font-size: 14px; font-weight: bold; color: #1e293b; text-transform: uppercase;">Key Points</h4>
-          <ul style="margin: 0; padding-left: 20px; font-size: ${mathSize}; color: #000000; line-height: 1.5;">
+          <ul style="margin: 0; padding-left: 20px; font-size: ${mathSize}; color: #000000; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word;">
             ${keyPoints.map(point => `<li style="margin-bottom: 6px;">${renderKaTeXHTML(point)}</li>`).join('')}
           </ul>
         </div>
@@ -154,7 +172,7 @@ export async function generatePDF(
       htmlContent += `
         <div style="margin-bottom: ${gapSize}; background: #f0fdf4; border: 2px solid #1e293b; border-radius: 8px; padding: ${cardPadding}; box-shadow: 2px 2px 0px 0px rgba(30, 41, 59, 1); page-break-inside: avoid;">
           <h4 style="margin: 0 0 10px 0; font-size: 14px; font-weight: bold; color: #1e293b; text-transform: uppercase;">Key Derivations</h4>
-          <ul style="margin: 0; padding-left: 20px; font-size: ${mathSize}; color: #000000; line-height: 1.5;">
+          <ul style="margin: 0; padding-left: 20px; font-size: ${mathSize}; color: #000000; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word;">
             ${keyDerivations.map(der => `<li style="margin-bottom: 6px;">${renderKaTeXHTML(der)}</li>`).join('')}
           </ul>
         </div>
@@ -188,12 +206,14 @@ export async function generatePDF(
               display: flex;
               flex-direction: column;
               gap: 8px;
+              box-sizing: border-box;
+              max-width: 100%;
             ">
-              <div style="display: flex; align-items: flex-start; justify-content: flex-start; gap: 6px;">
+              <div style="display: flex; align-items: flex-start; justify-content: flex-start; gap: 6px; flex-wrap: wrap;">
                 <span style="color: #eab308; font-size: 14px;">⭐</span>
-                <h3 style="margin: 0; font-size: 13px; color: #1e293b; font-weight: 700; line-height: 1.2;">${formula.name}</h3>
+                <h3 style="margin: 0; font-size: 13px; color: #1e293b; font-weight: 700; line-height: 1.2; word-wrap: break-word;">${formula.name}</h3>
               </div>
-              <div style="font-size: ${mathSize}; color: #000000; display: block; width: 100%; overflow-x: hidden; text-align: center; padding: 4px 0;">
+              <div style="font-size: ${mathSize}; color: #000000; display: block; width: 100%; text-align: center; padding: 4px 0; word-wrap: break-word;">
                 ${renderedMath}
               </div>
             </div>
@@ -217,11 +237,13 @@ export async function generatePDF(
   wrapper.style.position = "absolute"; // Use absolute instead of fixed to prevent blank render in html2canvas
   wrapper.style.top = "0";
   wrapper.style.left = "0";
-  wrapper.style.width = "210mm"; // Fix width to A4 width for consistent wrapping
+  // The actual rendering width in pixels before html2canvas scaling, matching typical A4 width roughly at 96 DPI
+  wrapper.style.width = layout === "compact" ? "1123px" : "794px";
   wrapper.style.pointerEvents = "none";
   wrapper.style.zIndex = "-9999"; // Place behind current content
   wrapper.style.backgroundColor = "#f8fafc"; // Ensure background color
-  wrapper.style.padding = "10mm"; // Simulate margins
+  wrapper.style.padding = "0"; // Padding removed, handled by html2pdf margin
+  wrapper.style.boxSizing = "border-box";
 
   wrapper.appendChild(container);
   document.body.appendChild(wrapper);
@@ -232,10 +254,10 @@ export async function generatePDF(
 
   try {
     const opt = {
-      margin: 0,
+      margin: 15, // 15mm margin on all sides
       filename: `askformula-${slug}-${date}.pdf`,
       image: { type: 'jpeg' as const, quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true, logging: true, scrollX: 0, scrollY: 0 },
+      html2canvas: { scale: 2, useCORS: true, logging: true, scrollX: 0, scrollY: 0, windowWidth: layout === "compact" ? 1123 : 794 },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' as const },
       pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
     };
