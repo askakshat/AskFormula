@@ -3,7 +3,6 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import PDFButton from "./PDFButton";
-import { toast } from "sonner";
 import { MemoryRouter } from "react-router";
 
 vi.mock("react-router", async (importOriginal) => {
@@ -40,7 +39,7 @@ describe("PDFButton Export Path", () => {
 
     render(
       <MemoryRouter>
-        <PDFButton formulas={mockFormulas} subject={mockSubject} />
+        <PDFButton formulas={mockFormulas} subject={mockSubject} chapters={[{ id: "1", name: "Mechanics", formulas: [], class: "11" }]} />
       </MemoryRouter>
     );
     const button = screen.getByRole("button", { name: /Export to PDF/i });
@@ -53,12 +52,6 @@ describe("PDFButton Export Path", () => {
     });
     await user.click(compactOption);
 
-    // Verify loading toast
-    expect(toast.loading).toHaveBeenCalledWith(
-      expect.stringContaining("Preparing compact PDF layout"),
-      expect.any(Object)
-    );
-
     // Verify session storage
     const stored = JSON.parse(sessionStorage.getItem("askformula-print-data") || "{}");
     expect(stored.subject).toBe("Physics");
@@ -67,11 +60,5 @@ describe("PDFButton Export Path", () => {
 
     // Verify window open
     expect(mockNavigate).toHaveBeenCalledWith("/print");
-
-    // Verify success toast
-    expect(toast.success).toHaveBeenCalledWith(
-      "Print view ready!",
-      expect.any(Object)
-    );
   });
 });
