@@ -158,7 +158,7 @@ export default function PrintView() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 print:bg-white text-slate-900 font-sans">
+    <div className="bg-slate-100 print:bg-white text-slate-900 font-sans">
       {/* Print Controls (Hidden on print) */}
       <div className="print:hidden sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm p-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
@@ -232,15 +232,12 @@ export default function PrintView() {
              display: inline !important;
           }
 
-          .no-break {
-              break-inside: avoid;
-              page-break-inside: avoid;
-          }
+
         `}
       </style>
 
       {/* Main Print Content */}
-      <div className="w-full max-w-[794px] print:max-w-full mx-auto p-8 print:p-0 bg-white print:bg-transparent shadow-lg print:shadow-none min-h-[297mm] break-words">
+      <div className="w-full max-w-[794px] print:max-w-full mx-auto p-8 print:p-0 bg-white print:bg-transparent shadow-lg print:shadow-none  break-words">
         <div
           className={`${layout === "compact" ? "mb-6" : "mb-10"} text-center`}
         >
@@ -284,7 +281,7 @@ export default function PrintView() {
           return (
             <div
               key={chapterName}
-              className={`no-break ${layout === "compact" ? "mb-6" : "mb-10"} w-full`}
+              className={`${layout === "compact" ? "mb-6" : "mb-10"} w-full`}
             >
               <div
                 className={`text-center ${layout === "compact" ? "mb-4" : "mb-6"}`}
