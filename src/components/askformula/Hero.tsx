@@ -28,9 +28,7 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row gap-4 mt-2">
             <Button
               onClick={() => {
-                document
-                  .getElementById("app-section")
-                  ?.scrollIntoView({ behavior: "smooth" });
+                window.location.href = '/build';
               }}
               className="bg-[#00275d] text-[#aec6ff] h-10 px-6 rounded border border-[#32353c] hover:border-[#aec6ff] hover:bg-[#00275d] transition-all text-[12px] font-medium tracking-wide flex items-center justify-center gap-2"
             >

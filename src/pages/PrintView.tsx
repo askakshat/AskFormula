@@ -128,17 +128,22 @@ export default function PrintView() {
   return (
     <div className="min-h-screen bg-slate-100 print:bg-white text-slate-900 font-sans">
       {/* Print Controls (Hidden on print) */}
-      <div className="print:hidden sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm p-4 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-           <Button variant="outline" onClick={handleBack} className="gap-2">
-             <ArrowLeft className="w-4 h-4" /> Close
-           </Button>
-           <h1 className="font-semibold text-lg text-slate-800">Print Preview: {subject}</h1>
+      <header className="print:hidden flex flex-col md:flex-row justify-between items-start md:items-end gap-4 p-8 bg-[#0b0e15] border-b border-[#32353c] text-[#e1e2ec]">
+        <div>
+          <h1 className="text-3xl font-bold mb-2">Finalize Your Cheat Sheet</h1>
+          <p className="text-[14px] text-[#e1e2ec]/70 flex items-center gap-2">
+            {subject} · {chapterNames.length} Chapters · {formulas.length} Formulas
+          </p>
         </div>
-        <Button onClick={handlePrint} className="gap-2 bg-blue-600 hover:bg-blue-700 text-white">
-          <Printer className="w-4 h-4" /> Print / Save as PDF
-        </Button>
-      </div>
+        <div className="flex flex-wrap gap-3">
+          <Button variant="outline" onClick={handleBack} className="bg-[#272a31] border-[#32353c] hover:border-[#aec6ff] hover:text-[#aec6ff] hover:bg-[#272a31] transition-colors text-[14px] h-[36px] px-4 gap-2 text-[#e1e2ec]">
+            <ArrowLeft className="w-[18px] h-[18px]" /> Close
+          </Button>
+          <Button onClick={handlePrint} className="bg-[#aec6ff] text-[#002e6a] hover:opacity-90 hover:bg-[#aec6ff] transition-opacity font-medium text-[14px] h-[36px] px-4 gap-2">
+            <Printer className="w-[18px] h-[18px]" /> Export to PDF
+          </Button>
+        </div>
+      </header>
 
       <style>
         {`
@@ -198,17 +203,89 @@ export default function PrintView() {
         `}
       </style>
 
-      {/* Main Print Content */}
-      <div className="w-full max-w-[794px] print:max-w-full mx-auto p-8 print:p-0 bg-white print:bg-transparent shadow-lg print:shadow-none min-h-[297mm] break-words">
-        <div className={`${layout === "compact" ? "mb-6" : "mb-10"} text-center`}>
-          <h1 className={`m-0 text-slate-800 uppercase tracking-wide font-bold ${layout === 'compact' ? 'text-2xl' : 'text-4xl'}`}>
-            AskFormula
-          </h1>
-          <h2 className={`mt-2 font-semibold text-slate-700 ${layout === 'compact' ? 'text-lg' : 'text-xl'}`}>
-            {subject} Revision Sheet
-          </h2>
-          <p className="mt-1 text-sm text-slate-500">Generated on {dateStr}</p>
+      {/* Main Print Content Preview Pane Wrapper */}
+      <div className="print:hidden w-full max-w-[1200px] mx-auto p-8 flex-grow">
+        <div className="bg-[#0b0e15] border border-[#32353c] rounded-lg overflow-hidden flex flex-col shadow-[0_0_40px_rgba(0,0,0,0.5)]">
+          <div className="bg-[#11131a] px-4 py-2 border-b border-[#32353c] flex items-center justify-between text-[#e1e2ec]/70">
+            <span className="font-mono text-[13px]">Sheet Preview (A4 - {layout === 'compact' ? '2 Columns' : 'Single Column'})</span>
+          </div>
+          <div className="flex-grow overflow-y-auto bg-[#11131a] p-8">
+            <div className="w-full max-w-[800px] mx-auto p-8 shadow-sm flex flex-col bg-[#e1e2ec] text-[#11131a] min-h-[1131px] break-words">
+              <div className="border-b-2 border-[#11131a] pb-4 mb-4">
+                <h2 className="text-center text-[#11131a] uppercase tracking-wider font-bold text-xl">{subject} Formulas</h2>
+              </div>
+              <div className={`gap-8 ${layout === 'compact' ? 'columns-1 md:columns-2' : 'columns-1'}`}>
+
+              {chapterNames.map((chapterName, idx) => {
+                const items = chapters.get(chapterName) || [];
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                const chapterMeta = chaptersData.find(ch => (ch.name || (ch as any).chapterName) === chapterName);
+                const keyPoints = chapterMeta?.keyPoints || [];
+                const keyDerivations = chapterMeta?.keyDerivations || [];
+
+                const hasFormulas = includeContent.includes("formulas") && items.length > 0;
+                const hasKeyPoints = includeContent.includes("keyPoints") && keyPoints.length > 0;
+                const hasDerivations = includeContent.includes("keyDerivations") && keyDerivations.length > 0;
+
+                if (!hasFormulas && !hasKeyPoints && !hasDerivations) return null;
+
+                return (
+                  <div key={chapterName} className="break-inside-avoid mb-8">
+                    <h3 className="text-base font-bold mb-3 border-b border-gray-400 pb-1 text-[#11131a]">{idx + 1}. {chapterName}</h3>
+
+                    {hasKeyPoints && (
+                      <div className="mb-4 text-[14px]">
+                        <h4 className="m-0 mb-1 text-[13px] font-bold text-slate-800 uppercase">Key Points</h4>
+                        <ul className="m-0 pl-5 text-black leading-relaxed space-y-1 list-disc list-inside">
+                          {keyPoints.map((point, i) => (
+                            <li key={i}>{renderKaTeXHTML(point)}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {hasDerivations && (
+                      <div className="mb-4 text-[14px]">
+                        <h4 className="m-0 mb-1 text-[13px] font-bold text-slate-800 uppercase">Key Derivations</h4>
+                        <ul className="m-0 pl-5 text-black leading-relaxed space-y-1 list-disc list-inside">
+                          {keyDerivations.map((der, i) => (
+                            <li key={i}>{renderKaTeXHTML(der)}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {hasFormulas && (
+                      <div>
+                        {items.map(formula => (
+                          <div key={formula.id} className="mb-4">
+                            <div className={`text-center my-2 italic text-black ${layout === "compact" ? "scale-math-compact" : "scale-math-full"} max-w-full min-w-0 [container-type:inline-size]`}>
+                              {renderMath(formula.latex)}
+                            </div>
+                            <div className="grid grid-cols-2 gap-x-4 gap-y-1 font-mono text-[13px] text-sm">
+                              <div className="flex justify-between text-gray-700"><span>⭐</span><span className="text-right truncate">{formula.name}</span></div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+
+      {/* Actual Print Content (Only visible on print) */}
+      <div className="hidden print:block w-full max-w-full mx-auto p-0 bg-transparent shadow-none min-h-[297mm] break-words">
+        <div className="border-b-2 border-black pb-4 mb-4 text-center">
+          <h2 className="text-black uppercase tracking-wider font-bold text-2xl">{subject} Formulas</h2>
+          <p className="mt-1 text-sm text-slate-500">AskFormula - Generated on {dateStr}</p>
+        </div>
+        <div className={`gap-8 ${layout === 'compact' ? 'columns-2' : 'columns-1'}`}>
 
         {chapterNames.map((chapterName, idx) => {
           const items = chapters.get(chapterName) || [];
@@ -223,26 +300,14 @@ export default function PrintView() {
 
           if (!hasFormulas && !hasKeyPoints && !hasDerivations) return null;
 
-          const chapterColor = titleColors[idx % titleColors.length];
-          const gapSize = layout === "compact" ? "gap-3" : "gap-6";
-          const cardPadding = layout === "compact" ? "p-3" : "p-4";
-          const mathSize = layout === "compact" ? "text-[14px]" : "text-[18px]";
-
           return (
-            <div key={chapterName} className={layout === "compact" ? "mb-6" : "mb-10"}>
-              <div className={`text-center ${layout === "compact" ? "mb-4" : "mb-6"}`}>
-                <div
-                  className={`inline-block px-6 py-2 rounded-full border-2 border-slate-800 font-bold ${layout === "compact" ? "text-base" : "text-xl"} shadow-[3px_3px_0px_0px_rgba(30,41,59,1)] text-slate-800`}
-                  style={{ backgroundColor: chapterColor }}
-                >
-                  {chapterName}
-                </div>
-              </div>
+            <div key={chapterName} className="break-inside-avoid mb-8">
+              <h3 className="text-base font-bold mb-3 border-b border-gray-400 pb-1 text-black">{idx + 1}. {chapterName}</h3>
 
               {hasKeyPoints && (
-                <div className={`mb-4 bg-yellow-50 border-2 border-slate-800 rounded-lg ${cardPadding} shadow-[2px_2px_0px_0px_rgba(30,41,59,1)] break-inside-avoid w-full`}>
-                  <h4 className="m-0 mb-2 text-sm font-bold text-slate-800 uppercase">Key Points</h4>
-                  <ul className={`m-0 pl-5 ${mathSize} text-black leading-relaxed space-y-2 list-disc list-inside`}>
+                <div className="mb-4 text-[14px]">
+                  <h4 className="m-0 mb-1 text-[13px] font-bold text-black uppercase">Key Points</h4>
+                  <ul className="m-0 pl-5 text-black leading-relaxed space-y-1 list-disc list-inside">
                     {keyPoints.map((point, i) => (
                       <li key={i}>{renderKaTeXHTML(point)}</li>
                     ))}
@@ -251,9 +316,9 @@ export default function PrintView() {
               )}
 
               {hasDerivations && (
-                <div className={`mb-4 bg-green-50 border-2 border-slate-800 rounded-lg ${cardPadding} shadow-[2px_2px_0px_0px_rgba(30,41,59,1)] break-inside-avoid w-full`}>
-                  <h4 className="m-0 mb-2 text-sm font-bold text-slate-800 uppercase">Key Derivations</h4>
-                  <ul className={`m-0 pl-5 ${mathSize} text-black leading-relaxed space-y-2 list-disc list-inside`}>
+                <div className="mb-4 text-[14px]">
+                  <h4 className="m-0 mb-1 text-[13px] font-bold text-black uppercase">Key Derivations</h4>
+                  <ul className="m-0 pl-5 text-black leading-relaxed space-y-1 list-disc list-inside">
                     {keyDerivations.map((der, i) => (
                       <li key={i}>{renderKaTeXHTML(der)}</li>
                     ))}
@@ -262,20 +327,14 @@ export default function PrintView() {
               )}
 
               {hasFormulas && (
-                <div className={`grid ${layout === "compact" ? "grid-cols-4" : "grid-cols-2"} ${gapSize} items-start w-full`}>
+                <div>
                   {items.map(formula => (
-                    <div
-                      key={formula.id}
-                      className={`bg-white border-2 border-slate-800 rounded-lg ${cardPadding} break-inside-avoid shadow-[2px_2px_0px_0px_rgba(30,41,59,1)] flex flex-col gap-2 w-full min-w-0 [container-type:inline-size]`}
-                    >
-                      <div className="flex items-start gap-1.5 w-full min-w-0">
-                        <span className="text-yellow-500 text-sm shrink-0">⭐</span>
-                        <h3 className="m-0 text-[13px] text-slate-800 font-bold leading-tight break-words flex-1 min-w-0">
-                          {formula.name}
-                        </h3>
-                      </div>
-                      <div className={`text-black block w-full text-center py-1 break-words max-w-full min-w-0 ${layout === "compact" ? "scale-math-compact" : "scale-math-full"}`}>
+                    <div key={formula.id} className="mb-4">
+                      <div className={`text-center my-2 italic text-black ${layout === "compact" ? "scale-math-compact" : "scale-math-full"} max-w-full min-w-0 [container-type:inline-size]`}>
                         {renderMath(formula.latex)}
+                      </div>
+                      <div className="grid grid-cols-2 gap-x-4 gap-y-1 font-mono text-[13px] text-sm">
+                        <div className="flex justify-between text-gray-700"><span>⭐</span><span className="text-right truncate">{formula.name}</span></div>
                       </div>
                     </div>
                   ))}
@@ -284,7 +343,9 @@ export default function PrintView() {
             </div>
           );
         })}
+        </div>
       </div>
+
     </div>
   );
 }
