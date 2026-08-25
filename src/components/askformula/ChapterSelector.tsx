@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Search } from "lucide-react"; // Ensure this matches your actual icon library
+import { Search } from "lucide-react";
 import type { Chapter } from "@/lib/formulas";
+import { useState, useMemo } from "react";
 
 interface ChapterSelectorProps {
   chapters: Chapter[];
@@ -14,15 +15,24 @@ export default function ChapterSelector({
   onSelect,
   selectedIds,
 }: ChapterSelectorProps) {
-  const allSelected = chapters.every((ch) => selectedIds.includes(ch.id));
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredChapters = useMemo(() => {
+    return chapters.filter(ch =>
+      ch.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [chapters, searchTerm]);
+
+  const allFilteredSelected = filteredChapters.length > 0 && filteredChapters.every((ch) => selectedIds.includes(ch.id));
 
   const toggleAll = () => {
-    if (allSelected) {
-      onSelect([]);
+    if (allFilteredSelected) {
+      const filteredIds = new Set(filteredChapters.map(ch => ch.id));
+      onSelect(selectedIds.filter(id => !filteredIds.has(id)));
     } else {
-      // Fixed: 'filteredChapters' was undefined. Using 'chapters' instead.
-      const allIds = chapters.map((ch) => ch.id);
-      onSelect(allIds);
+      const newIds = new Set(selectedIds);
+      filteredChapters.forEach(ch => newIds.add(ch.id));
+      onSelect(Array.from(newIds));
     }
   };
 
@@ -62,21 +72,33 @@ export default function ChapterSelector({
         )}
       </div>
 
-      {/* Select All Button (Fixed mismatched tags) */}
-      <button 
-        onClick={toggleAll}
-        className="relative flex w-full items-center text-left"
-      >
+      {/* Search Bar */}
+      <div className="relative">
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           <Search className="h-4 w-4 text-slate-500" />
         </div>
-        <span className="text-sm font-medium text-white pl-9">Select all chapters</span>
-        <span className="text-xs text-slate-500 ml-auto">{chapters.length} available</span>
-      </button>
+        <input
+          type="text"
+          placeholder="Search chapters..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full bg-slate-900 border border-slate-700 text-slate-200 text-sm rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+        />
+      </div>
+
+      <div className="flex justify-between items-center py-2 px-1">
+        <button
+          onClick={toggleAll}
+          className="text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors"
+        >
+          {allFilteredSelected ? "Deselect All" : "Select All"}
+        </button>
+        <span className="text-xs text-slate-500">{filteredChapters.length} available</span>
+      </div>
 
       {/* Chapter rows */}
-      <div className="space-y-0.5 pl-1">
-        {chapters.map((chapter) => {
+      <div className="space-y-0.5 pl-1 max-h-96 overflow-y-auto pr-1 custom-scrollbar">
+        {filteredChapters.map((chapter) => {
           const isSelected = selectedIds.includes(chapter.id);
           return (
             <label

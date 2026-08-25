@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef, useEffect } from "react";
+import { useState, useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { RotateCcw } from "lucide-react";
 import Hero from "@/components/askformula/Hero";
@@ -73,17 +73,6 @@ export default function Landing() {
         ?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 50);
   };
-
-  useEffect(() => {
-    if (formulas.length > 0) {
-      setTimeout(() => {
-        formulaRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }, 150);
-    }
-  }, [formulas.length]);
 
   const steps = [
     { label: "Exam", done: !!exam },
@@ -254,7 +243,7 @@ export default function Landing() {
       </section>
 
       {/* Floating PDF Button */}
-      {(formulas.length > 0 || selectedChapters.length > 0) && (
+      {selectedChapters.length > 0 && (
         <PDFButton
           formulas={formulas.map((f) => ({
             id: f.id,
