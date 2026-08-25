@@ -74,84 +74,55 @@ export default function Landing() {
     }, 50);
   };
 
-  const steps = [
-    { label: "Exam", done: !!exam },
-    { label: "Class", done: !!selectedClass },
-    { label: "Subject", done: !!subject },
-    { label: "Chapters", done: selectedChapters.length > 0 },
-    { label: "Formulas", done: formulas.length > 0 },
-  ];
-
   return (
-    <div className="min-h-screen overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden bg-[#0b0e15] text-[#e1e2ec] font-sans flex flex-col">
       <Hero />
 
       <section
         id="app-section"
-        className="relative min-h-screen overflow-x-hidden bg-gradient-to-b from-slate-950 via-[#080c18] to-slate-950"
+        className="relative flex-grow flex justify-center w-full bg-[#0b0e15]"
       >
-        {/* Subtle ambient orbs */}
-        <div className="absolute top-0 left-1/3 w-80 h-80 bg-blue-500/[0.03] rounded-full blur-[100px]" />
-        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-violet-500/[0.03] rounded-full blur-[100px]" />
+        <div className="w-full max-w-[1200px] px-6 md:px-12 py-16 relative">
+          {/* Breadcrumb / Step indicator */}
+          {exam && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center gap-2 text-[12px] font-medium text-slate-400 mb-8"
+            >
+              <span className="hover:text-[#aec6ff] cursor-pointer transition-colors" onClick={() => { setSubject(null); setSelectedClass(null); }}>
+                {exam === "school" ? "School" : exam === "jee" ? "JEE" : "NEET"}
+              </span>
+              {selectedClass && (
+                <>
+                  <span>/</span>
+                  <span className="hover:text-[#aec6ff] cursor-pointer transition-colors" onClick={() => setSubject(null)}>
+                    Class {selectedClass}
+                  </span>
+                </>
+              )}
+              {subject && (
+                <>
+                  <span>/</span>
+                  <span className="text-[#aec6ff]">{subject}</span>
+                </>
+              )}
 
-        <div className="relative z-10 max-w-4xl mx-auto px-5 sm:px-8 py-16 sm:py-24">
-          {/* Step indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="mb-14 flex flex-col sm:flex-row sm:items-center justify-between gap-6"
-          >
-            <div className="flex flex-wrap items-center gap-y-3 gap-x-1.5 sm:gap-x-2">
-              {steps.map((step, i) => (
-                <div
-                  key={step.label}
-                  className="flex items-center gap-1.5 sm:gap-2"
-                >
-                  <div className="flex items-center gap-1.5">
-                    <div
-                      className={`w-6 h-6 rounded-full text-[11px] font-semibold flex items-center justify-center transition-all duration-300 ${
-                        step.done
-                          ? "bg-blue-500 text-white"
-                          : "bg-white/[0.04] text-slate-600 border border-white/[0.06]"
-                      }`}
-                    >
-                      {i + 1}
-                    </div>
-                    <span
-                      className={`text-xs font-medium transition-colors duration-300 ${
-                        step.done ? "text-slate-300" : "text-slate-600"
-                      }`}
-                    >
-                      {step.label}
-                    </span>
-                  </div>
-                  {i < steps.length - 1 && (
-                    <div
-                      className={`w-6 sm:w-10 h-px transition-colors duration-300 ${
-                        steps[i + 1].done ? "bg-blue-500/40" : "bg-white/[0.06]"
-                      }`}
-                    />
-                  )}
-                </div>
-              ))}
-            </div>
-
-            <AnimatePresence>
-              {exam && (
+              <AnimatePresence>
                 <motion.button
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   onClick={handleReset}
-                  className="flex items-center gap-2 text-xs font-medium text-slate-400 hover:text-white px-3 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.06] transition-all self-start sm:self-auto cursor-pointer"
+                  className="ml-auto flex items-center gap-2 text-xs font-medium text-slate-400 hover:text-white px-3 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.06] transition-all cursor-pointer"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                   Start Over
                 </motion.button>
-              )}
-            </AnimatePresence>
-          </motion.div>
+              </AnimatePresence>
+            </motion.div>
+          )}
 
           {/* Step 1: Exam Selector */}
           <motion.div
