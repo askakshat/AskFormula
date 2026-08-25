@@ -5,6 +5,7 @@ import React, { StrictMode, useEffect, lazy, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router";
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import "katex/dist/katex.min.css";
 import "./index.css";
 
@@ -132,6 +133,7 @@ createRoot(document.getElementById("root")!).render(
       </BrowserRouter>
       <Toaster />
       <Analytics />
+      <SpeedInsights />
     </RootErrorBoundary>
   </StrictMode>,
 );
