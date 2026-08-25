@@ -296,7 +296,7 @@ export default function PrintView() {
 
               {hasKeyPoints && (
                 <div
-                  className={`mb-4 bg-yellow-50 border-2 border-slate-800 rounded-lg ${cardPadding} shadow-[2px_2px_0px_0px_rgba(30,41,59,1)]  w-full`}
+                  className={`mb-4 bg-yellow-50 border-2 border-slate-800 rounded-lg ${cardPadding} shadow-[2px_2px_0px_0px_rgba(30,41,59,1)] break-inside-avoid w-full`}
                 >
                   <h4 className="m-0 mb-2 text-sm font-bold text-slate-800 uppercase">
                     Key Points
@@ -313,7 +313,7 @@ export default function PrintView() {
 
               {hasDerivations && (
                 <div
-                  className={`mb-4 bg-green-50 border-2 border-slate-800 rounded-lg ${cardPadding} shadow-[2px_2px_0px_0px_rgba(30,41,59,1)]  w-full`}
+                  className={`mb-4 bg-green-50 border-2 border-slate-800 rounded-lg ${cardPadding} shadow-[2px_2px_0px_0px_rgba(30,41,59,1)] break-inside-avoid w-full`}
                 >
                   <h4 className="m-0 mb-2 text-sm font-bold text-slate-800 uppercase">
                     Key Derivations
@@ -338,7 +338,7 @@ export default function PrintView() {
                     return (
                       <div
                         key={formula.id}
-                        className={`bg-white border-2 border-slate-800 rounded-lg ${cardPadding}  shadow-[2px_2px_0px_0px_rgba(30,41,59,1)] flex flex-col gap-2 w-full min-w-0 [container-type:inline-size]`}
+                        className={`bg-white border-2 border-slate-800 rounded-lg ${cardPadding} break-inside-avoid shadow-[2px_2px_0px_0px_rgba(30,41,59,1)] flex flex-col gap-2 w-full min-w-0 [container-type:inline-size]`}
                       >
                         <div className="flex items-start gap-1.5 w-full min-w-0">
                           <span className="text-yellow-500 text-sm shrink-0">
