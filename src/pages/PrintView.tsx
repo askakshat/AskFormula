@@ -200,6 +200,13 @@ export default function PrintView() {
              white-space: normal !important;
              display: inline !important;
           }
+          .print-content-wrapper {
+              display: block !important;
+          }
+          .no-break {
+              break-inside: avoid;
+              page-break-inside: avoid;
+          }
         `}
       </style>
 
@@ -214,7 +221,7 @@ export default function PrintView() {
               <div className="border-b-2 border-[#11131a] pb-4 mb-4">
                 <h2 className="text-center text-[#11131a] uppercase tracking-wider font-bold text-xl">{subject} Formulas</h2>
               </div>
-              <div className={`gap-8 ${layout === 'compact' ? 'columns-1 md:columns-2' : 'columns-1'}`}>
+              <div className={`gap-8 columns-1`}>
 
               {chapterNames.map((chapterName, idx) => {
                 const items = chapters.get(chapterName) || [];
@@ -230,7 +237,7 @@ export default function PrintView() {
                 if (!hasFormulas && !hasKeyPoints && !hasDerivations) return null;
 
                 return (
-                  <div key={chapterName} className="break-inside-avoid mb-8">
+                  <div key={chapterName} className="no-break mb-8 w-full">
                     <h3 className="text-base font-bold mb-3 border-b border-gray-400 pb-1 text-[#11131a]">{idx + 1}. {chapterName}</h3>
 
                     {hasKeyPoints && (
@@ -280,12 +287,12 @@ export default function PrintView() {
       </div>
 
       {/* Actual Print Content (Only visible on print) */}
-      <div className="hidden print:block w-full max-w-full mx-auto p-0 bg-transparent shadow-none min-h-[297mm] break-words">
+      <div className="hidden print:block w-full max-w-full mx-auto p-0 bg-transparent shadow-none break-words text-black print-content-wrapper">
         <div className="border-b-2 border-black pb-4 mb-4 text-center">
           <h2 className="text-black uppercase tracking-wider font-bold text-2xl">{subject} Formulas</h2>
           <p className="mt-1 text-sm text-slate-500">AskFormula - Generated on {dateStr}</p>
         </div>
-        <div className={`gap-8 ${layout === 'compact' ? 'columns-2' : 'columns-1'}`}>
+        <div className={`gap-8 columns-1`}>
 
         {chapterNames.map((chapterName, idx) => {
           const items = chapters.get(chapterName) || [];
@@ -301,7 +308,7 @@ export default function PrintView() {
           if (!hasFormulas && !hasKeyPoints && !hasDerivations) return null;
 
           return (
-            <div key={chapterName} className="break-inside-avoid mb-8">
+            <div key={chapterName} className="no-break mb-8 w-full">
               <h3 className="text-base font-bold mb-3 border-b border-gray-400 pb-1 text-black">{idx + 1}. {chapterName}</h3>
 
               {hasKeyPoints && (
@@ -328,16 +335,24 @@ export default function PrintView() {
 
               {hasFormulas && (
                 <div>
-                  {items.map(formula => (
-                    <div key={formula.id} className="mb-4">
-                      <div className={`text-center my-2 italic text-black ${layout === "compact" ? "scale-math-compact" : "scale-math-full"} max-w-full min-w-0 [container-type:inline-size]`}>
-                        {renderMath(formula.latex)}
+                  {items.map(formula => {
+                    const isMissingFormula = !formula.latex || formula.latex.trim() === "";
+                    return (
+                      <div key={formula.id} className="mb-4 w-full">
+                        {!isMissingFormula && (
+                          <div className={`text-center my-2 italic text-black ${layout === "compact" ? "scale-math-compact" : "scale-math-full"} max-w-full min-w-0 [container-type:inline-size]`}>
+                            {renderMath(formula.latex)}
+                          </div>
+                        )}
+                        <div className="flex font-mono text-[13px] text-sm">
+                          <div className="flex items-start text-gray-700 w-full overflow-hidden">
+                            <span className="mr-1 flex-shrink-0">⭐</span>
+                            <span className="break-words whitespace-normal leading-tight text-left">{formula.name}</span>
+                          </div>
+                        </div>
                       </div>
-                      <div className="grid grid-cols-2 gap-x-4 gap-y-1 font-mono text-[13px] text-sm">
-                        <div className="flex justify-between text-gray-700"><span>⭐</span><span className="text-right truncate">{formula.name}</span></div>
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
             </div>
