@@ -40,8 +40,8 @@ export default function SubjectSelector({ onSelect, selected, exam }: SubjectSel
       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       className="space-y-4"
     >
-      <h2 className="text-xl font-semibold text-white tracking-[-0.02em]">
-        <span className="text-blue-400/70 mr-2 text-base font-medium">03</span>
+      <h2 className="text-xl font-semibold text-[#e1e2ec] tracking-[-0.02em] flex items-center">
+        <span className="font-mono text-[13px] text-[#aec6ff] bg-[#00275d]/20 px-2 py-0.5 rounded mr-2">03</span>
         Pick a subject
       </h2>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
