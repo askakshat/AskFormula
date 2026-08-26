@@ -1,0 +1,1240 @@
+{
+  "subject": "Physics",
+  "classLevel": "12",
+  "chapters": [
+    {
+      "id": "c12_p_1",
+      "name": "Electric Charges and Fields",
+      "keyPoints": [
+        "Charge Invariance: Electric charge is independent of the frame of reference or its speed (unlike mass).",
+        "Field Lines: Originate on positive charges, terminate on negative charges, never intersect, and cannot form closed loops in electrostatics (conservative field).",
+        "Conductor Boundary: At the surface of a charged conductor, $\\vec{E} = \\frac{\\sigma}{\\varepsilon_0}\\hat{n}$, which is discontinuous across the boundary ($E_{\\text{out}} - E_{\\text{in}} = \\sigma/\\varepsilon_0$)."
+      ],
+      "keyDerivations": [
+        "Dipole Axial Field: $E_{\\text{axial}} = E_{+q} - E_{-q} = \\frac{q}{4\\pi\\varepsilon_0}\\left[\\frac{1}{(r-a)^2} - \\frac{1}{(r+a)^2}\\right] = \\frac{q}{4\\pi\\varepsilon_0}\\frac{4ar}{(r^2-a^2)^2} \\xrightarrow{r \\gg a} \\frac{2p}{4\\pi\\varepsilon_0 r^3}$",
+        "Dipole Equatorial Field: Normal components cancel. Parallel components add: $E_{\\text{eq}} = 2E_{+q}\\cos\\theta = 2\\left[\\frac{q}{4\\pi\\varepsilon_0(r^2+a^2)}\\right]\\left[\\frac{a}{\\sqrt{r^2+a^2}}\\right] = \\frac{p}{4\\pi\\varepsilon_0(r^2+a^2)^{3/2}} \\xrightarrow{r \\gg a} \\frac{p}{4\\pi\\varepsilon_0 r^3}$",
+        "Gauss's Law Applications: Line Charge: Cylinder of radius $r$, length $l$: $\\oint \\vec{E}\\cdot d\\vec{S} = E(2\\pi rl) = \\frac{\\lambda l}{\\varepsilon_0} \\implies E = \\frac{\\lambda}{2\\pi\\varepsilon_0 r}$. Plane Sheet: Pillbox of area $A$: $2EA = \\frac{\\sigma A}{\\varepsilon_0} \\implies E = \\frac{\\sigma}{2\\varepsilon_0}$. Spherical Shell: For $r \\ge R$: $E(4\\pi r^2) = \\frac{q}{\\varepsilon_0} \\implies E = \\frac{q}{4\\pi\\varepsilon_0 r^2}$; for $r < R$: $q_{\\text{enc}} = 0 \\implies E = 0$."
+      ],
+      "formulas": [
+        {
+          "id": "f_1_1",
+          "chapter": "Electric Charges and Fields",
+          "name": "Quantisation of Charge",
+          "latex": "q = \\pm ne \\qquad n \\in \\mathbb{Z}^+, e = 1.602 \\times 10^{-19}\\text{ C}",
+          "tags": []
+        },
+        {
+          "id": "f_1_2",
+          "chapter": "Electric Charges and Fields",
+          "name": "Coulomb\u2019s Law",
+          "latex": "\\vec{F}_{21} = \\frac{1}{4\\pi\\varepsilon_0}\\frac{q_1 q_2}{r_{21}^2}\\hat{r}_{21} \\qquad \\frac{1}{4\\pi\\varepsilon_0} \\approx 9 \\times 10^9\\text{ N m}^2\\text{ C}^{-2}, \\varepsilon_0 = 8.854 \\times 10^{-12}\\text{ C}^2\\text{ N}^{-1}\\text{ m}^{-2}",
+          "tags": []
+        },
+        {
+          "id": "f_1_3",
+          "chapter": "Electric Charges and Fields",
+          "name": "Force in Medium",
+          "latex": "F_{\\text{med}} = \\frac{F_{\\text{vac}}}{K} = \\frac{1}{4\\pi\\varepsilon}\\frac{q_1 q_2}{r^2} \\qquad K = \\varepsilon_r = \\varepsilon/\\varepsilon_0 \\text{ (Dielectric constant / Relative permittivity)}",
+          "tags": []
+        },
+        {
+          "id": "f_1_4",
+          "chapter": "Electric Charges and Fields",
+          "name": "Superposition Principle",
+          "latex": "\\vec{F}_1 = \\sum_{i=2}^n \\frac{1}{4\\pi\\varepsilon_0}\\frac{q_1 q_i}{r_{1i}^2}\\hat{r}_{1i} \\qquad \\text{Vector sum of forces exerted by individual charges}",
+          "tags": []
+        },
+        {
+          "id": "f_1_5",
+          "chapter": "Electric Charges and Fields",
+          "name": "Electric Field",
+          "latex": "\\vec{E} = \\lim_{q_0 \\to 0}\\frac{\\vec{F}}{q_0} = \\frac{1}{4\\pi\\varepsilon_0}\\frac{q}{r^2}\\hat{r} \\qquad \\text{Force per unit positive test charge; } \\vec{F} = q\\vec{E}",
+          "tags": []
+        },
+        {
+          "id": "f_1_6",
+          "chapter": "Electric Charges and Fields",
+          "name": "Electric Dipole Moment",
+          "latex": "\\vec{p} = q(2\\vec{a}) \\qquad \\text{Vector pointing from negative charge } (-q) \\text{ to positive charge } (+q)",
+          "tags": []
+        },
+        {
+          "id": "f_1_7",
+          "chapter": "Electric Charges and Fields",
+          "name": "Dipole Field (Axial, r >> a)",
+          "latex": "\\vec{E}_{\\text{axial}} = \\frac{1}{4\\pi\\varepsilon_0}\\frac{2\\vec{p}}{r^3} \\qquad \\text{Directed along } \\vec{p}; \\text{general: } E = \\frac{1}{4\\pi\\varepsilon_0}\\frac{2pr}{(r^2-a^2)^2}",
+          "tags": []
+        },
+        {
+          "id": "f_1_8",
+          "chapter": "Electric Charges and Fields",
+          "name": "Dipole Field (Equatorial, r >> a)",
+          "latex": "\\vec{E}_{\\text{eq}} = -\\frac{1}{4\\pi\\varepsilon_0}\\frac{\\vec{p}}{r^3} \\qquad \\text{Directed opposite to } \\vec{p}; \\text{general: } E = \\frac{1}{4\\pi\\varepsilon_0}\\frac{p}{(r^2+a^2)^{3/2}}",
+          "tags": []
+        },
+        {
+          "id": "f_1_9",
+          "chapter": "Electric Charges and Fields",
+          "name": "Torque on Dipole in Uniform E",
+          "latex": "\\vec{\\tau} = \\vec{p} \\times \\vec{E} \\qquad \\text{Magnitude: } \\tau = pE\\sin\\theta",
+          "tags": []
+        },
+        {
+          "id": "f_1_10",
+          "chapter": "Electric Charges and Fields",
+          "name": "Potential Energy of Dipole",
+          "latex": "U = -\\vec{p}\\cdot\\vec{E} = -pE\\cos\\theta \\qquad \\text{Work done: } W_{\\theta_0 \\to \\theta_1} = pE(\\cos\\theta_0 - \\cos\\theta_1)",
+          "tags": []
+        },
+        {
+          "id": "f_1_11",
+          "chapter": "Electric Charges and Fields",
+          "name": "Charge Densities",
+          "latex": "\\lambda = \\frac{dq}{dl},\\; \\sigma = \\frac{dq}{dS},\\; \\rho = \\frac{dq}{dV} \\qquad \\text{Linear (C m}^{-1}\\text{), Surface (C m}^{-2}\\text{), Volume (C m}^{-3}\\text{)}",
+          "tags": []
+        },
+        {
+          "id": "f_1_12",
+          "chapter": "Electric Charges and Fields",
+          "name": "Electric Flux",
+          "latex": "\\Phi_E = \\int \\vec{E}\\cdot d\\vec{S} = E\\Delta S\\cos\\theta \\qquad \\text{Unit: N m}^2\\text{ C}^{-1} \\text{ or V m}",
+          "tags": []
+        },
+        {
+          "id": "f_1_13",
+          "chapter": "Electric Charges and Fields",
+          "name": "Gauss\u2019s Law",
+          "latex": "\\Phi_E = \\oint \\vec{E}\\cdot d\\vec{S} = \\frac{q_{\\text{enclosed}}}{\\varepsilon_0} \\qquad \\text{Flux through any closed surface equals enclosed charge divided by } \\varepsilon_0",
+          "tags": []
+        },
+        {
+          "id": "f_1_14",
+          "chapter": "Electric Charges and Fields",
+          "name": "Field of Infinite Line Charge",
+          "latex": "E = \\frac{\\lambda}{2\\pi\\varepsilon_0 r}\\hat{n} \\qquad r = \\text{perpendicular distance}, \\hat{n} = \\text{radial unit vector}",
+          "tags": []
+        },
+        {
+          "id": "f_1_15",
+          "chapter": "Electric Charges and Fields",
+          "name": "Field of Infinite Plane Sheet",
+          "latex": "E = \\frac{\\sigma}{2\\varepsilon_0}\\hat{n} \\qquad \\text{Independent of distance } r \\text{ from sheet}",
+          "tags": []
+        },
+        {
+          "id": "f_1_16",
+          "chapter": "Electric Charges and Fields",
+          "name": "Field of Spherical Shell (R)",
+          "latex": "\\text{Outside (} r \\ge R \\text{): } E = \\frac{q}{4\\pi\\varepsilon_0 r^2} \\qquad \\text{Inside (} r < R \\text{): } E = 0 \\qquad q = 4\\pi R^2\\sigma; \\text{ behaves as a point charge at center for exterior points}",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_p_2",
+      "name": "Electrostatic Potential and Capacitance",
+      "keyPoints": [
+        "Equipotential Surface: Surface with constant potential ($V = \\text{const}$); $\\vec{E}$ is always perpendicular to it; no work is done moving charge on it ($W = 0$).",
+        "Electrostatic Shielding: The field inside any cavity of a conductor is zero, regardless of outside charge distributions."
+      ],
+      "keyDerivations": [
+        "Potential from $\\vec{E}$: $W = -\\int_\\infty^r \\vec{F}_E \\cdot d\\vec{r} = -\\int_\\infty^r \\frac{Q}{4\\pi\\varepsilon_0 {r'}^2} dr' = \\frac{Q}{4\\pi\\varepsilon_0 r} \\implies V(r) = \\frac{Q}{4\\pi\\varepsilon_0 r}$.",
+        "Parallel Plate Capacitance: $E = \\frac{\\sigma}{\\varepsilon_0} = \\frac{Q}{\\varepsilon_0 A}$. Potential difference: $V = Ed = \\frac{Qd}{\\varepsilon_0 A} \\implies C = \\frac{Q}{V} = \\frac{\\varepsilon_0 A}{d}$.",
+        "Energy Stored: $dW = V' dq' = \\frac{q'}{C}dq' \\implies W = \\int_0^Q \\frac{q'}{C}dq' = \\frac{Q^2}{2C} = \\frac{1}{2}CV^2$."
+      ],
+      "formulas": [
+        {
+          "id": "f_2_1",
+          "chapter": "Electrostatic Potential and Capacitance",
+          "name": "Electrostatic Potential Difference",
+          "latex": "V_P - V_R = \\frac{U_P - U_R}{q} = -\\int_R^P \\vec{E}\\cdot d\\vec{r} \\qquad \\text{Work done by external force per unit positive test charge}",
+          "tags": []
+        },
+        {
+          "id": "f_2_2",
+          "chapter": "Electrostatic Potential and Capacitance",
+          "name": "Potential of a Point Charge",
+          "latex": "V(r) = \\frac{1}{4\\pi\\varepsilon_0}\\frac{Q}{r} \\qquad \\text{Reference point: } V(\\infty) = 0",
+          "tags": []
+        },
+        {
+          "id": "f_2_3",
+          "chapter": "Electrostatic Potential and Capacitance",
+          "name": "Potential of an Electric Dipole",
+          "latex": "V(r, \\theta) = \\frac{1}{4\\pi\\varepsilon_0}\\frac{\\vec{p}\\cdot\\hat{r}}{r^2} = \\frac{p\\cos\\theta}{4\\pi\\varepsilon_0 r^2} \\qquad \\text{Valid for } r \\gg a; \\text{ Axial: } V = \\pm\\frac{p}{4\\pi\\varepsilon_0 r^2}, \\text{ Equatorial: } V = 0",
+          "tags": []
+        },
+        {
+          "id": "f_2_4",
+          "chapter": "Electrostatic Potential and Capacitance",
+          "name": "Potential of Spherical Shell (R)",
+          "latex": "\\text{Outside (} r \\ge R \\text{): } V = \\frac{q}{4\\pi\\varepsilon_0 r} \\qquad \\text{Inside (} r \\le R \\text{): } V = \\frac{q}{4\\pi\\varepsilon_0 R} \\qquad \\text{Potential is constant throughout the interior of the shell}",
+          "tags": []
+        },
+        {
+          "id": "f_2_5",
+          "chapter": "Electrostatic Potential and Capacitance",
+          "name": "Relation between E and V",
+          "latex": "E = -\\frac{dV}{dr},\\; \\vec{E} = -\\left(\\frac{\\partial V}{\\partial x}\\hat{i} + \\frac{\\partial V}{\\partial y}\\hat{j} + \\frac{\\partial V}{\\partial z}\\hat{k}\\right) \\qquad \\vec{E} \\text{ points in the direction of steepest potential decrease}",
+          "tags": []
+        },
+        {
+          "id": "f_2_6",
+          "chapter": "Electrostatic Potential and Capacitance",
+          "name": "Potential Energy of Charge System",
+          "latex": "U = \\frac{1}{4\\pi\\varepsilon_0}\\sum_{i<j}\\frac{q_i q_j}{r_{ij}} \\qquad \\text{For 2 charges: } U = \\frac{1}{4\\pi\\varepsilon_0}\\frac{q_1 q_2}{r_{12}}",
+          "tags": []
+        },
+        {
+          "id": "f_2_7",
+          "chapter": "Electrostatic Potential and Capacitance",
+          "name": "Potential Energy in External Field",
+          "latex": "U = q_1 V(\\vec{r}_1) + q_2 V(\\vec{r}_2) + \\frac{q_1 q_2}{4\\pi\\varepsilon_0 r_{12}} \\qquad \\text{Two charges in external potential } V(\\vec{r})",
+          "tags": []
+        },
+        {
+          "id": "f_2_8",
+          "chapter": "Electrostatic Potential and Capacitance",
+          "name": "Capacitance",
+          "latex": "C = \\frac{Q}{V} \\qquad \\text{Unit: Farad (F} = \\text{C V}^{-1}\\text{)}",
+          "tags": []
+        },
+        {
+          "id": "f_2_9",
+          "chapter": "Electrostatic Potential and Capacitance",
+          "name": "Parallel Plate Capacitor",
+          "latex": "C_0 = \\frac{\\varepsilon_0 A}{d} \\text{ (Vacuum)}; C = \\frac{K\\varepsilon_0 A}{d} = K C_0 \\qquad A = \\text{plate area}, d = \\text{plate separation}",
+          "tags": []
+        },
+        {
+          "id": "f_2_10",
+          "chapter": "Electrostatic Potential and Capacitance",
+          "name": "Dielectric Slab of Thickness t",
+          "latex": "C = \\frac{\\varepsilon_0 A}{d - t + \\frac{t}{K}} \\qquad \\text{For } t < d; \\text{ if conducting slab (}K=\\infty\\text{): } C = \\frac{\\varepsilon_0 A}{d - t}",
+          "tags": []
+        },
+        {
+          "id": "f_2_11",
+          "chapter": "Electrostatic Potential and Capacitance",
+          "name": "Capacitors in Series",
+          "latex": "\\frac{1}{C_{\\text{eq}}} = \\frac{1}{C_1} + \\frac{1}{C_2} + \\dots + \\frac{1}{C_n} \\qquad \\text{Same charge } Q \\text{ on each capacitor; } V = \\sum V_i",
+          "tags": []
+        },
+        {
+          "id": "f_2_12",
+          "chapter": "Electrostatic Potential and Capacitance",
+          "name": "Capacitors in Parallel",
+          "latex": "C_{\\text{eq}} = C_1 + C_2 + \\dots + C_n \\qquad \\text{Same potential difference } V \\text{ across each; } Q = \\sum Q_i",
+          "tags": []
+        },
+        {
+          "id": "f_2_13",
+          "chapter": "Electrostatic Potential and Capacitance",
+          "name": "Energy Stored in Capacitor",
+          "latex": "U = \\frac{1}{2}CV^2 = \\frac{Q^2}{2C} = \\frac{1}{2}QV \\qquad \\text{Work done in establishing charge}",
+          "tags": []
+        },
+        {
+          "id": "f_2_14",
+          "chapter": "Electrostatic Potential and Capacitance",
+          "name": "Energy Density of Electric Field",
+          "latex": "u = \\frac{1}{2}\\varepsilon_0 E^2 \\qquad \\text{Energy per unit volume (J m}^{-3}\\text{)}",
+          "tags": []
+        },
+        {
+          "id": "f_2_15",
+          "chapter": "Electrostatic Potential and Capacitance",
+          "name": "Energy Loss on Charge Redistribution",
+          "latex": "\\Delta U = \\frac{C_1 C_2(V_1 - V_2)^2}{2(C_1 + C_2)} \\qquad \\text{Dissipated as heat and electromagnetic radiation}",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_p_3",
+      "name": "Current Electricity",
+      "keyPoints": [
+        "Current is a scalar quantity because it does not follow the polygon law of vector addition ($I = \\int \\vec{j}\\cdot d\\vec{S}$).",
+        "In metals, $\\alpha > 0$ (resistance increases with $T$); in semiconductors, $\\alpha < 0$ (resistance decreases with $T$ as $n$ rises exponentially)."
+      ],
+      "keyDerivations": [
+        "Deduction of Ohm's Law: Using $v_d = \\frac{e E \\tau}{m} = \\frac{e V \\tau}{m l}$ in $I = n e A v_d \\implies I = n e A \\left(\\frac{e V \\tau}{m l}\\right) = \\left(\\frac{n e^2 \\tau A}{m l}\\right)V \\implies V = \\left(\\frac{m}{n e^2 \\tau}\\frac{l}{A}\\right)I = RI$, giving $\\rho = \\frac{m}{n e^2 \\tau}$.",
+        "Wheatstone Bridge Balance Condition: For loops ABDA and BCDB with $I_g = 0$: $I_1 R_1 - I_2 R_2 = 0 \\implies \\frac{I_1}{I_2} = \\frac{R_2}{R_1}$, and $I_1 R_3 - I_2 R_4 = 0 \\implies \\frac{I_1}{I_2} = \\frac{R_4}{R_3} \\implies \\frac{R_1}{R_2} = \\frac{R_3}{R_4}$."
+      ],
+      "formulas": [
+        {
+          "id": "f_3_1",
+          "chapter": "Current Electricity",
+          "name": "Electric Current",
+          "latex": "I = \\frac{dq}{dt} = n e A v_d \\qquad n = \\text{free electron density}, A = \\text{cross-sectional area}",
+          "tags": []
+        },
+        {
+          "id": "f_3_2",
+          "chapter": "Current Electricity",
+          "name": "Current Density (j)",
+          "latex": "\\vec{j} = \\frac{I}{A}\\hat{n} = n q \\vec{v}_d = \\sigma \\vec{E} \\qquad \\text{Vector quantity (A m}^{-2}\\text{)}",
+          "tags": []
+        },
+        {
+          "id": "f_3_3",
+          "chapter": "Current Electricity",
+          "name": "Drift Velocity (vd)",
+          "latex": "\\vec{v}_d = -\\frac{e\\vec{E}}{m}\\tau \\implies v_d = \\frac{e E \\tau}{m} = \\frac{e V \\tau}{m l} \\qquad \\tau = \\text{relaxation time}, m = \\text{mass of electron}",
+          "tags": []
+        },
+        {
+          "id": "f_3_4",
+          "chapter": "Current Electricity",
+          "name": "Electron Mobility",
+          "latex": "\\mu = \\frac{\\Vert v_d\\Vert}{E} = \\frac{e\\tau}{m} \\qquad \\text{Unit: m}^2\\text{ V}^{-1}\\text{ s}^{-1}",
+          "tags": []
+        },
+        {
+          "id": "f_3_5",
+          "chapter": "Current Electricity",
+          "name": "Ohm's Law & Resistivity",
+          "latex": "V = IR,\\; R = \\rho\\frac{l}{A},\\; \\rho = \\frac{m}{n e^2 \\tau},\\; \\sigma = \\frac{n e^2 \\tau}{m} \\qquad \\text{Microscopic form: } \\vec{j} = \\sigma \\vec{E}",
+          "tags": []
+        },
+        {
+          "id": "f_3_6",
+          "chapter": "Current Electricity",
+          "name": "Temperature Dependence",
+          "latex": "R(T) = R_0[1 + \\alpha(T - T_0)],\\; \\rho(T) = \\rho_0[1 + \\alpha(T - T_0)] \\qquad \\alpha = \\text{temperature coefficient of resistivity}",
+          "tags": []
+        },
+        {
+          "id": "f_3_7",
+          "chapter": "Current Electricity",
+          "name": "Electrical Power & Energy",
+          "latex": "P = VI = I^2 R = \\frac{V^2}{R},\\; W = P\\Delta t \\qquad \\text{Unit: Watt (W), Joule (J)}",
+          "tags": []
+        },
+        {
+          "id": "f_3_8",
+          "chapter": "Current Electricity",
+          "name": "Cell EMF and Terminal Voltage",
+          "latex": "\\text{Discharging: } V = \\varepsilon - Ir \\qquad \\text{Charging: } V = \\varepsilon + Ir \\qquad I = \\frac{\\varepsilon}{R+r}; \\text{ Maximum current: } I_{\\max} = \\frac{\\varepsilon}{r} \\text{ (}R=0\\text{)}",
+          "tags": []
+        },
+        {
+          "id": "f_3_9",
+          "chapter": "Current Electricity",
+          "name": "Cells in Series",
+          "latex": "\\varepsilon_{\\text{eq}} = \\sum \\varepsilon_i,\\; r_{\\text{eq}} = \\sum r_i \\qquad \\text{For } n \\text{ identical cells: } I = \\frac{n\\varepsilon}{R + nr}",
+          "tags": []
+        },
+        {
+          "id": "f_3_10",
+          "chapter": "Current Electricity",
+          "name": "Cells in Parallel",
+          "latex": "\\frac{\\varepsilon_{\\text{eq}}}{r_{\\text{eq}}} = \\sum \\frac{\\varepsilon_i}{r_i},\\; \\frac{1}{r_{\\text{eq}}} = \\sum \\frac{1}{r_i} \\qquad \\text{For 2 cells: } \\varepsilon_{\\text{eq}} = \\frac{\\varepsilon_1 r_2 + \\varepsilon_2 r_1}{r_1 + r_2},\\; r_{\\text{eq}} = \\frac{r_1 r_2}{r_1 + r_2}",
+          "tags": []
+        },
+        {
+          "id": "f_3_11",
+          "chapter": "Current Electricity",
+          "name": "Kirchhoff's Rules",
+          "latex": "\\text{Junction Rule: } \\sum I = 0 \\qquad \\text{Loop Rule: } \\sum \\Delta V = 0 \\qquad \\text{Junction } \\to \\text{ Charge conservation; Loop } \\to \\text{ Energy conservation}",
+          "tags": []
+        },
+        {
+          "id": "f_3_12",
+          "chapter": "Current Electricity",
+          "name": "Wheatstone Bridge Balance",
+          "latex": "\\frac{R_1}{R_2} = \\frac{R_3}{R_4} \\implies I_g = 0 \\qquad \\text{Galvanometer current vanishes}",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_p_4",
+      "name": "Moving Charges and Magnetism",
+      "keyPoints": [
+        "$\\vec{F}_m$ does zero work on moving charges ($W = 0$) because $\\vec{F}_m \\perp \\vec{v}$.",
+        "1 Ampere is defined as the current which produces a force of $2 \\times 10^{-7}\\text{ N m}^{-1}$ between two parallel conductors separated by $1\\text{ m}$ in vacuum."
+      ],
+      "keyDerivations": [
+        "Axial Field of Circular Current Loop: $dB_x = dB\\cos\\theta = \\left[\\frac{\\mu_0 I dl}{4\\pi(x^2+R^2)}\\right]\\left[\\frac{R}{\\sqrt{x^2+R^2}}\\right]$. Summing over perimeter $\\oint dl = 2\\pi R$: $B = \\oint dB_x = \\frac{\\mu_0 I R (2\\pi R)}{4\\pi (x^2+R^2)^{3/2}} = \\frac{\\mu_0 I R^2}{2(x^2+R^2)^{3/2}}$",
+        "Field of Solenoid via Ampere's Law: Amperian rectangle abcd: $\\oint \\vec{B}\\cdot d\\vec{l} = \\int_a^b \\vec{B}\\cdot d\\vec{l} = Bh$. $I_{\\text{enc}} = n h I \\implies Bh = \\mu_0 n h I \\implies B = \\mu_0 n I$."
+      ],
+      "formulas": [
+        {
+          "id": "f_4_1",
+          "chapter": "Moving Charges and Magnetism",
+          "name": "Lorentz Force",
+          "latex": "\\vec{F} = q(\\vec{E} + \\vec{v} \\times \\vec{B}) \\qquad \\text{Magnetic force: } \\vec{F}_m = q(\\vec{v}\\times\\vec{B}) = qvB\\sin\\theta\\hat{n}",
+          "tags": []
+        },
+        {
+          "id": "f_4_2",
+          "chapter": "Moving Charges and Magnetism",
+          "name": "Magnetic Force on Conductor",
+          "latex": "\\vec{F} = I(\\vec{l} \\times \\vec{B}) \\qquad F = I l B \\sin\\theta",
+          "tags": []
+        },
+        {
+          "id": "f_4_3",
+          "chapter": "Moving Charges and Magnetism",
+          "name": "Helical Motion (v at angle theta)",
+          "latex": "\\text{Radius: } r = \\frac{mv_\\perp}{qB} = \\frac{mv\\sin\\theta}{qB} \\qquad \\text{Pitch: } p = v_\\parallel T = \\frac{2\\pi m v\\cos\\theta}{qB} \\qquad \\text{Time period: } T = \\frac{2\\pi m}{qB}; \\text{ Cyclotron freq: } \\nu = \\frac{qB}{2\\pi m}",
+          "tags": []
+        },
+        {
+          "id": "f_4_4",
+          "chapter": "Moving Charges and Magnetism",
+          "name": "Biot-Savart Law",
+          "latex": "d\\vec{B} = \\frac{\\mu_0}{4\\pi}\\frac{I(d\\vec{l}\\times\\hat{r})}{r^2} = \\frac{\\mu_0}{4\\pi}\\frac{I dl\\sin\\theta}{r^2}\\hat{n} \\qquad \\frac{\\mu_0}{4\\pi} = 10^{-7}\\text{ T m A}^{-1}; c = \\frac{1}{\\sqrt{\\mu_0\\varepsilon_0}}",
+          "tags": []
+        },
+        {
+          "id": "f_4_5",
+          "chapter": "Moving Charges and Magnetism",
+          "name": "Field on Axis of Circular Loop",
+          "latex": "B = \\frac{\\mu_0 N I R^2}{2(x^2 + R^2)^{3/2}} \\qquad \\text{Center (}x=0\\text{): } B_0 = \\frac{\\mu_0 N I}{2R}; \\text{ Axial (}x \\gg R\\text{): } B = \\frac{\\mu_0}{4\\pi}\\frac{2m}{x^3}",
+          "tags": []
+        },
+        {
+          "id": "f_4_6",
+          "chapter": "Moving Charges and Magnetism",
+          "name": "Ampere\u2019s Circuital Law",
+          "latex": "\\oint \\vec{B}\\cdot d\\vec{l} = \\mu_0 I_{\\text{enclosed}} \\qquad \\text{Valid for steady symmetric currents}",
+          "tags": []
+        },
+        {
+          "id": "f_4_7",
+          "chapter": "Moving Charges and Magnetism",
+          "name": "Field of Long Straight Wire",
+          "latex": "B = \\frac{\\mu_0 I}{2\\pi r} \\qquad \\text{Concentric circular field lines}",
+          "tags": []
+        },
+        {
+          "id": "f_4_8",
+          "chapter": "Moving Charges and Magnetism",
+          "name": "Field inside Long Solenoid",
+          "latex": "B = \\mu_0 n I \\qquad n = N/L \\text{ (turns per unit length)}",
+          "tags": []
+        },
+        {
+          "id": "f_4_9",
+          "chapter": "Moving Charges and Magnetism",
+          "name": "Force between Parallel Currents",
+          "latex": "\\frac{F}{L} = \\frac{\\mu_0 I_1 I_2}{2\\pi d} \\qquad \\text{Parallel currents attract; antiparallel currents repel}",
+          "tags": []
+        },
+        {
+          "id": "f_4_10",
+          "chapter": "Moving Charges and Magnetism",
+          "name": "Magnetic Moment of Loop",
+          "latex": "\\vec{m} = N I \\vec{A} \\qquad \\text{Direction given by right-hand rule (A m}^2 \\text{ or J T}^{-1}\\text{)}",
+          "tags": []
+        },
+        {
+          "id": "f_4_11",
+          "chapter": "Moving Charges and Magnetism",
+          "name": "Torque on Magnetic Dipole",
+          "latex": "\\vec{\\tau} = \\vec{m} \\times \\vec{B} \\qquad \\tau = mB\\sin\\theta; \\text{ Potential Energy: } U = -\\vec{m}\\cdot\\vec{B}",
+          "tags": []
+        },
+        {
+          "id": "f_4_12",
+          "chapter": "Moving Charges and Magnetism",
+          "name": "Moving Coil Galvanometer",
+          "latex": "\\phi = \\left(\\frac{NAB}{k}\\right)I \\qquad k = \\text{torsion constant of suspension spring}",
+          "tags": []
+        },
+        {
+          "id": "f_4_13",
+          "chapter": "Moving Charges and Magnetism",
+          "name": "Current & Voltage Sensitivity",
+          "latex": "S_I = \\frac{\\phi}{I} = \\frac{NAB}{k},\\; S_V = \\frac{\\phi}{V} = \\frac{NAB}{k R_G} = \\frac{S_I}{R_G} \\qquad R_G = \\text{galvanometer resistance}",
+          "tags": []
+        },
+        {
+          "id": "f_4_14",
+          "chapter": "Moving Charges and Magnetism",
+          "name": "Conversion to Ammeter",
+          "latex": "r_s = \\frac{I_g R_G}{I - I_g} \\qquad \\text{Connected in parallel}",
+          "tags": []
+        },
+        {
+          "id": "f_4_15",
+          "chapter": "Moving Charges and Magnetism",
+          "name": "Conversion to Voltmeter",
+          "latex": "R = \\frac{V}{I_g} - R_G \\qquad \\text{Connected in series}",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_p_5",
+      "name": "Magnetism and Matter",
+      "keyPoints": [
+        "Magnetic Properties Comparison: Diamagnetic: $\\chi$ negative and small ($-1 \\le \\chi < 0$), $\\mu_r < 1$; repelled by field; temperature-independent.",
+        "Paramagnetic: $\\chi$ positive and small ($0 < \\chi < \\varepsilon$), $\\mu_r > 1$; weakly attracted; obeys Curie's law.",
+        "Ferromagnetic: $\\chi \\gg 1$, $\\mu_r \\gg 1$; strongly magnetized due to domain alignment; becomes paramagnetic above Curie temperature $T_c$."
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "f_5_1",
+          "chapter": "Magnetism and Matter",
+          "name": "Axial Field of Short Bar Magnet",
+          "latex": "\\vec{B}_{\\text{axial}} = \\frac{\\mu_0}{4\\pi}\\frac{2\\vec{m}}{r^3} \\qquad r \\gg l; \\text{ along } \\vec{m}",
+          "tags": []
+        },
+        {
+          "id": "f_5_2",
+          "chapter": "Magnetism and Matter",
+          "name": "Equatorial Field of Short Bar Magnet",
+          "latex": "\\vec{B}_{\\text{eq}} = -\\frac{\\mu_0}{4\\pi}\\frac{\\vec{m}}{r^3} \\qquad r \\gg l; \\text{ opposite to } \\vec{m}",
+          "tags": []
+        },
+        {
+          "id": "f_5_3",
+          "chapter": "Magnetism and Matter",
+          "name": "Oscillation Period of Dipole",
+          "latex": "T = 2\\pi\\sqrt{\\frac{\\mathcal{I}}{mB}} \\qquad \\mathcal{I} = \\text{moment of inertia}, m = \\text{magnetic moment}",
+          "tags": []
+        },
+        {
+          "id": "f_5_4",
+          "chapter": "Magnetism and Matter",
+          "name": "Gauss\u2019s Law for Magnetism",
+          "latex": "\\oint \\vec{B}\\cdot d\\vec{S} = 0 \\qquad \\text{Net magnetic flux through any closed surface is zero}",
+          "tags": []
+        },
+        {
+          "id": "f_5_5",
+          "chapter": "Magnetism and Matter",
+          "name": "Magnetisation",
+          "latex": "\\vec{M} = \\frac{\\vec{m}_{\\text{net}}}{V} \\qquad \\text{Net magnetic dipole moment per unit volume (A m}^{-1}\\text{)}",
+          "tags": []
+        },
+        {
+          "id": "f_5_6",
+          "chapter": "Magnetism and Matter",
+          "name": "Magnetic Intensity",
+          "latex": "\\vec{H} = \\frac{\\vec{B}}{\\mu_0} - \\vec{M} \\implies \\vec{B} = \\mu_0(\\vec{H} + \\vec{M}) \\qquad \\text{Unit: A m}^{-1}",
+          "tags": []
+        },
+        {
+          "id": "f_5_7",
+          "chapter": "Magnetism and Matter",
+          "name": "Magnetic Susceptibility",
+          "latex": "\\vec{M} = \\chi \\vec{H} \\qquad \\text{Dimensionless proportionality constant}",
+          "tags": []
+        },
+        {
+          "id": "f_5_8",
+          "chapter": "Magnetism and Matter",
+          "name": "Permeability Relations",
+          "latex": "\\mu_r = 1 + \\chi,\\; \\mu = \\mu_0 \\mu_r = \\mu_0(1+\\chi) \\qquad \\vec{B} = \\mu \\vec{H}",
+          "tags": []
+        },
+        {
+          "id": "f_5_9",
+          "chapter": "Magnetism and Matter",
+          "name": "Curie's Law for Paramagnets",
+          "latex": "\\chi = \\frac{C}{T} \\implies M = C\\frac{B_0}{T} \\qquad C = \\text{Curie constant}, T = \\text{absolute temperature}",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_p_6",
+      "name": "Electromagnetic Induction",
+      "keyPoints": [
+        "Lenz's Law: Polarity of induced EMF opposes the flux change (energy conservation principle)."
+      ],
+      "keyDerivations": [
+        "Motional EMF: Flux enclosed $\\Phi_B = Blx \\implies \\varepsilon = -\\frac{d\\Phi_B}{dt} = -Bl\\frac{dx}{dt} = Blv$ (since $\\frac{dx}{dt} = -v$).",
+        "Self-Inductance of Solenoid: $B = \\mu_0 n I \\implies N\\Phi_B = (nl)(\\mu_0 n I A) = \\mu_0 n^2 A l I$. Equating to $LI \\implies L = \\mu_0 n^2 A l$.",
+        "Magnetic Energy in Inductor: $\\frac{dW}{dt} = |\\varepsilon|I = L I \\frac{dI}{dt} \\implies W = \\int_0^I L I dI = \\frac{1}{2}LI^2$."
+      ],
+      "formulas": [
+        {
+          "id": "f_6_1",
+          "chapter": "Electromagnetic Induction",
+          "name": "Magnetic Flux",
+          "latex": "\\Phi_B = \\vec{B}\\cdot\\vec{A} = BA\\cos\\theta \\qquad \\text{Unit: Weber (Wb = T m}^2\\text{)}",
+          "tags": []
+        },
+        {
+          "id": "f_6_2",
+          "chapter": "Electromagnetic Induction",
+          "name": "Faraday's Law of Induction",
+          "latex": "\\varepsilon = -\\frac{d\\Phi_B}{dt} = -N\\frac{d\\Phi_B}{dt} \\qquad \\text{Rate of change of magnetic flux}",
+          "tags": []
+        },
+        {
+          "id": "f_6_3",
+          "chapter": "Electromagnetic Induction",
+          "name": "Induced Current & Charge",
+          "latex": "I = \\frac{\\varepsilon}{R} = -\\frac{N}{R}\\frac{d\\Phi_B}{dt},\\; \\Delta q = \\frac{\\Delta\\Phi_{\\text{net}}}{R} \\qquad \\text{Charge } \\Delta q \\text{ is independent of time}",
+          "tags": []
+        },
+        {
+          "id": "f_6_4",
+          "chapter": "Electromagnetic Induction",
+          "name": "Translational Motional EMF",
+          "latex": "\\varepsilon = B l v \\qquad \\text{Conductor of length } l \\text{ moving perpendicular to } \\vec{B} \\text{ with speed } v",
+          "tags": []
+        },
+        {
+          "id": "f_6_5",
+          "chapter": "Electromagnetic Induction",
+          "name": "Rotational Motional EMF",
+          "latex": "\\varepsilon = \\frac{1}{2}B\\omega R^2 = B\\pi R^2 \\nu \\qquad \\text{Rod of radius } R \\text{ rotated about one end with angular frequency } \\omega",
+          "tags": []
+        },
+        {
+          "id": "f_6_6",
+          "chapter": "Electromagnetic Induction",
+          "name": "Mutual Inductance (M)",
+          "latex": "N_1\\Phi_1 = M_{12} I_2 \\implies \\varepsilon_1 = -M\\frac{dI_2}{dt} \\qquad M_{12} = M_{21} = M \\text{ (Unit: Henry, H)}",
+          "tags": []
+        },
+        {
+          "id": "f_6_7",
+          "chapter": "Electromagnetic Induction",
+          "name": "M of Coaxial Solenoids",
+          "latex": "M = \\mu_0 n_1 n_2 \\pi r_1^2 l \\qquad r_1 = \\text{inner radius}, l = \\text{length}",
+          "tags": []
+        },
+        {
+          "id": "f_6_8",
+          "chapter": "Electromagnetic Induction",
+          "name": "M of Concentric Coils",
+          "latex": "M = \\frac{\\mu_0 \\pi r_1^2}{2r_2} \\qquad \\text{Two concentric coplanar loops (}r_1 \\ll r_2\\text{)}",
+          "tags": []
+        },
+        {
+          "id": "f_6_9",
+          "chapter": "Electromagnetic Induction",
+          "name": "Self-Inductance (L)",
+          "latex": "N\\Phi_B = L I \\implies \\varepsilon = -L\\frac{dI}{dt} \\qquad \\text{Back EMF opposes change in current}",
+          "tags": []
+        },
+        {
+          "id": "f_6_10",
+          "chapter": "Electromagnetic Induction",
+          "name": "Self-Inductance of Solenoid",
+          "latex": "L = \\mu_0 n^2 A l = \\frac{\\mu_0 N^2 A}{l} \\qquad \\text{With core: } L = \\mu_r \\mu_0 n^2 A l",
+          "tags": []
+        },
+        {
+          "id": "f_6_11",
+          "chapter": "Electromagnetic Induction",
+          "name": "Energy Stored in Inductor",
+          "latex": "U_B = \\frac{1}{2}L I^2 \\qquad \\text{Stored in magnetic field; Energy density: } u_B = \\frac{B^2}{2\\mu_0}",
+          "tags": []
+        },
+        {
+          "id": "f_6_12",
+          "chapter": "Electromagnetic Induction",
+          "name": "AC Generator Output",
+          "latex": "\\varepsilon = N B A \\omega \\sin(\\omega t) = \\varepsilon_0 \\sin(\\omega t) \\qquad \\text{Peak EMF } \\varepsilon_0 = NBA\\omega = 2\\pi\\nu NBA",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_p_7",
+      "name": "Alternating Current",
+      "keyPoints": [
+        "RMS Values: $I_{\\text{rms}} = I = \\frac{i_m}{\\sqrt{2}} \\approx 0.707 i_m$, $V_{\\text{rms}} = V = \\frac{v_m}{\\sqrt{2}} \\approx 0.707 v_m$.",
+        "Resonance in Series LCR: $\\omega_0 = \\frac{1}{\\sqrt{LC}} \\implies \\nu_0 = \\frac{1}{2\\pi\\sqrt{LC}}$, $Z_{\\min} = R$, $I_{\\max} = \\frac{V}{R}$, $\\phi = 0$.",
+        "Quality Factor (Q): $Q = \\frac{\\omega_0 L}{R} = \\frac{1}{\\omega_0 C R} = \\frac{1}{R}\\sqrt{\\frac{L}{C}} = \\frac{\\omega_0}{2\\Delta\\omega}$.",
+        "Power Factor: $\\cos\\phi = \\frac{R}{Z}$; Wattless Current: $I_q = I_{\\text{rms}}\\sin\\phi$.",
+        "Transformer Equations: $\\frac{V_s}{V_p} = \\frac{N_s}{N_p} = \\frac{I_p}{I_s}$, Efficiency $\\eta = \\frac{V_s I_s}{V_p I_p} \\times 100\\%$."
+      ],
+      "keyDerivations": [
+        "Impedance of Series LCR (Phasor Method): $v_m^2 = v_{Rm}^2 + (v_{Cm} - v_{Lm})^2 = (i_m R)^2 + [i_m(X_C - X_L)]^2 = i_m^2 [R^2 + (X_C - X_L)^2]$. $i_m = \\frac{v_m}{\\sqrt{R^2 + (X_C - X_L)^2}} = \\frac{v_m}{Z},\\quad \\tan\\phi = \\frac{X_C - X_L}{R}$"
+      ],
+      "formulas": [
+        {
+          "id": "f_7_1",
+          "chapter": "Alternating Current",
+          "name": "Pure Resistor (R)",
+          "latex": "\\text{Impedance: } R \\qquad \\text{Phase } \\phi = 0 \\qquad i_m = \\frac{v_m}{R} \\qquad P = VI = I^2 R",
+          "tags": []
+        },
+        {
+          "id": "f_7_2",
+          "chapter": "Alternating Current",
+          "name": "Pure Inductor (L)",
+          "latex": "\\text{Reactance: } X_L = \\omega L = 2\\pi\\nu L \\qquad \\text{Current lags voltage by } \\pi/2 \\qquad i_m = \\frac{v_m}{X_L} \\qquad P = 0",
+          "tags": []
+        },
+        {
+          "id": "f_7_3",
+          "chapter": "Alternating Current",
+          "name": "Pure Capacitor (C)",
+          "latex": "\\text{Reactance: } X_C = \\frac{1}{\\omega C} = \\frac{1}{2\\pi\\nu C} \\qquad \\text{Current leads voltage by } \\pi/2 \\qquad i_m = \\frac{v_m}{X_C} \\qquad P = 0",
+          "tags": []
+        },
+        {
+          "id": "f_7_4",
+          "chapter": "Alternating Current",
+          "name": "Series LCR Circuit",
+          "latex": "\\text{Impedance: } Z = \\sqrt{R^2 + (X_C - X_L)^2} \\qquad \\tan\\phi = \\frac{X_C - X_L}{R} \\qquad i_m = \\frac{v_m}{Z} \\qquad P = VI\\cos\\phi = I^2 Z\\cos\\phi",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_p_8",
+      "name": "Electromagnetic Waves",
+      "keyPoints": [
+        "Maxwell's Equations in Vacuum: $\\oint \\vec{E}\\cdot d\\vec{A} = \\frac{Q}{\\varepsilon_0}$ (Gauss's Law for Electricity); $\\oint \\vec{B}\\cdot d\\vec{A} = 0$ (Gauss's Law for Magnetism); $\\oint \\vec{E}\\cdot d\\vec{l} = -\\frac{d\\Phi_B}{dt}$ (Faraday's Law); $\\oint \\vec{B}\\cdot d\\vec{l} = \\mu_0 i_c + \\mu_0\\varepsilon_0\\frac{d\\Phi_E}{dt}$ (Ampere-Maxwell Law)",
+        "EM Spectrum (Order of decreasing $\\lambda$ / increasing $\\nu$): Radio Waves ($\\lambda > 0.1\\text{ m}$), Microwaves ($0.1\\text{ m} - 1\\text{ mm}$), Infrared ($1\\text{ mm} - 700\\text{ nm}$), Visible Light ($700\\text{ nm} - 400\\text{ nm}$), Ultraviolet ($400\\text{ nm} - 1\\text{ nm}$), X-rays ($1\\text{ nm} - 10^{-3}\\text{ nm}$), Gamma Rays ($< 10^{-3}\\text{ nm}$)."
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "f_8_1",
+          "chapter": "Electromagnetic Waves",
+          "name": "Displacement Current",
+          "latex": "i_d = \\varepsilon_0 \\frac{d\\Phi_E}{dt} \\qquad \\Phi_E = \\text{electric flux between plates}",
+          "tags": []
+        },
+        {
+          "id": "f_8_2",
+          "chapter": "Electromagnetic Waves",
+          "name": "Ampere-Maxwell Law",
+          "latex": "\\oint \\vec{B}\\cdot d\\vec{l} = \\mu_0 i_c + \\mu_0 \\varepsilon_0 \\frac{d\\Phi_E}{dt} \\qquad \\text{Total current } i = i_c + i_d",
+          "tags": []
+        },
+        {
+          "id": "f_8_3",
+          "chapter": "Electromagnetic Waves",
+          "name": "Plane EM Wave Equations",
+          "latex": "E_x(z,t) = E_0\\sin(kz - \\omega t) \\qquad B_y(z,t) = B_0\\sin(kz - \\omega t) \\qquad \\text{Wave travels in +z direction; } \\vec{E} \\perp \\vec{B} \\perp \\hat{k}",
+          "tags": []
+        },
+        {
+          "id": "f_8_4",
+          "chapter": "Electromagnetic Waves",
+          "name": "Speed of EM Wave in Vacuum",
+          "latex": "c = \\frac{\\omega}{k} = \\nu\\lambda = \\frac{1}{\\sqrt{\\mu_0\\varepsilon_0}} \\approx 3 \\times 10^8\\text{ m s}^{-1} \\qquad k = \\frac{2\\pi}{\\lambda},\\; \\omega = 2\\pi\\nu",
+          "tags": []
+        },
+        {
+          "id": "f_8_5",
+          "chapter": "Electromagnetic Waves",
+          "name": "Speed of EM Wave in Medium",
+          "latex": "v = \\frac{1}{\\sqrt{\\mu\\varepsilon}} = \\frac{c}{\\sqrt{\\mu_r \\varepsilon_r}} = \\frac{c}{n} \\qquad n = \\text{refractive index}",
+          "tags": []
+        },
+        {
+          "id": "f_8_6",
+          "chapter": "Electromagnetic Waves",
+          "name": "Amplitude Ratio",
+          "latex": "\\frac{E_0}{B_0} = \\frac{E_{\\text{rms}}}{B_{\\text{rms}}} = c \\qquad \\text{Electric and magnetic field strengths}",
+          "tags": []
+        },
+        {
+          "id": "f_8_7",
+          "chapter": "Electromagnetic Waves",
+          "name": "Total Energy Density",
+          "latex": "u = u_E + u_B = \\frac{1}{2}\\varepsilon_0 E^2 + \\frac{B^2}{2\\mu_0} = \\varepsilon_0 E_{\\text{rms}}^2 \\qquad \\langle u_E \\rangle = \\langle u_B \\rangle = \\frac{1}{4}\\varepsilon_0 E_0^2",
+          "tags": []
+        },
+        {
+          "id": "f_8_8",
+          "chapter": "Electromagnetic Waves",
+          "name": "Wave Intensity",
+          "latex": "I = \\langle u \\rangle c = \\frac{1}{2}\\varepsilon_0 E_0^2 c \\qquad \\text{Power per unit area (W m}^{-2}\\text{)}",
+          "tags": []
+        },
+        {
+          "id": "f_8_9",
+          "chapter": "Electromagnetic Waves",
+          "name": "Momentum & Radiation Pressure (absorption)",
+          "latex": "p = \\frac{U}{c},\\; P_{\\text{rad}} = \\frac{I}{c} \\qquad \\text{Transferred to surface of area A}",
+          "tags": []
+        },
+        {
+          "id": "f_8_10",
+          "chapter": "Electromagnetic Waves",
+          "name": "Momentum & Radiation Pressure (reflection)",
+          "latex": "p = \\frac{2U}{c},\\; P_{\\text{rad}} = \\frac{2I}{c} \\qquad \\text{Transferred to surface of area A}",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_p_9",
+      "name": "Ray Optics and Optical Instruments",
+      "keyPoints": [],
+      "keyDerivations": [
+        "Refraction at a Spherical Surface: Using $\\tan\\theta \\approx \\theta$, $i = \\angle NOM + \\angle NCM = \\frac{MN}{OM} + \\frac{MN}{MC}$ and $r = \\angle NCM - \\angle NIM = \\frac{MN}{MC} - \\frac{MN}{MI}$. Applying Snell's Law $n_1 i = n_2 r$ with sign conventions ($OM = -u, MI = +v, MC = +R$): $\\frac{n_2}{v} - \\frac{n_1}{u} = \\frac{n_2 - n_1}{R}$",
+        "Lens Maker's Formula: Refraction at 1st surface: $\\frac{n_2}{v_1} - \\frac{n_1}{u} = \\frac{n_2 - n_1}{R_1}$; at 2nd surface: $\\frac{n_1}{v} - \\frac{n_2}{v_1} = \\frac{n_1 - n_2}{R_2} = -\\frac{n_2 - n_1}{R_2}$. Adding both: $\\frac{n_1}{v} - \\frac{n_1}{u} = (n_2 - n_1)\\left(\\frac{1}{R_1} - \\frac{1}{R_2}\\right) \\implies \\frac{1}{f} = (n_{21} - 1)\\left(\\frac{1}{R_1} - \\frac{1}{R_2}\\right)$."
+      ],
+      "formulas": [
+        {
+          "id": "f_9_1",
+          "chapter": "Ray Optics and Optical Instruments",
+          "name": "Mirror Formula",
+          "latex": "\\frac{1}{v} + \\frac{1}{u} = \\frac{1}{f} = \\frac{2}{R} \\qquad \\text{Concave: } f < 0; \\text{ Convex: } f > 0; \\text{ } m = -\\frac{v}{u} = \\frac{f}{f-u}",
+          "tags": []
+        },
+        {
+          "id": "f_9_2",
+          "chapter": "Ray Optics and Optical Instruments",
+          "name": "Snell\u2019s Law",
+          "latex": "n_{21} = \\frac{n_2}{n_1} = \\frac{\\sin i}{\\sin r} = \\frac{v_1}{v_2} = \\frac{\\lambda_1}{\\lambda_2} \\qquad \\text{Apparent depth: } h' = \\frac{h}{n_{21}}",
+          "tags": []
+        },
+        {
+          "id": "f_9_3",
+          "chapter": "Ray Optics and Optical Instruments",
+          "name": "Critical Angle & TIR",
+          "latex": "\\sin i_c = \\frac{n_2}{n_1} = \\frac{1}{n_{12}} \\text{ (}n_1 > n_2\\text{)} \\qquad \\text{For water-air (n=4/3): } i_c \\approx 48.75^\\circ; \\text{ glass-air (n=1.5): } i_c \\approx 41.8^\\circ",
+          "tags": []
+        },
+        {
+          "id": "f_9_4",
+          "chapter": "Ray Optics and Optical Instruments",
+          "name": "Refraction at Spherical Surface",
+          "latex": "\\frac{n_2}{v} - \\frac{n_1}{u} = \\frac{n_2 - n_1}{R} \\qquad n_1 = \\text{incident medium}, n_2 = \\text{refracting medium}",
+          "tags": []
+        },
+        {
+          "id": "f_9_5",
+          "chapter": "Ray Optics and Optical Instruments",
+          "name": "Lens Maker\u2019s Formula",
+          "latex": "\\frac{1}{f} = (n_{21} - 1)\\left(\\frac{1}{R_1} - \\frac{1}{R_2}\\right) \\qquad \\text{Convex lens: } R_1 > 0, R_2 < 0 \\implies f > 0",
+          "tags": []
+        },
+        {
+          "id": "f_9_6",
+          "chapter": "Ray Optics and Optical Instruments",
+          "name": "Thin Lens Formula",
+          "latex": "\\frac{1}{v} - \\frac{1}{u} = \\frac{1}{f} \\qquad \\text{Linear magnification: } m = \\frac{v}{u} = \\frac{f}{f+u}",
+          "tags": []
+        },
+        {
+          "id": "f_9_7",
+          "chapter": "Ray Optics and Optical Instruments",
+          "name": "Power of a Lens",
+          "latex": "P = \\frac{1}{f\\text{ (m)}} \\text{ (Dioptres, D)} \\qquad \\text{Converging: } P > 0; \\text{ Diverging: } P < 0",
+          "tags": []
+        },
+        {
+          "id": "f_9_8",
+          "chapter": "Ray Optics and Optical Instruments",
+          "name": "Lenses in Contact",
+          "latex": "\\frac{1}{f_{\\text{eq}}} = \\sum \\frac{1}{f_i},\\; P_{\\text{eq}} = \\sum P_i,\\; m = \\prod m_i \\qquad \\text{For two lenses: } P = P_1 + P_2",
+          "tags": []
+        },
+        {
+          "id": "f_9_9",
+          "chapter": "Ray Optics and Optical Instruments",
+          "name": "Prism Formula",
+          "latex": "n_{21} = \\frac{\\sin\\left(\\frac{A + D_m}{2}\\right)}{\\sin(A/2)} \\qquad \\text{Angle of deviation: } \\delta = i + e - A; \\text{ Thin prism: } D_m = (n - 1)A",
+          "tags": []
+        },
+        {
+          "id": "f_9_10",
+          "chapter": "Ray Optics and Optical Instruments",
+          "name": "Simple Microscope",
+          "latex": "m = 1 + \\frac{D}{f} \\text{ (at near point D)},\\quad m = \\frac{D}{f} \\text{ (at infinity)} \\qquad D = 25\\text{ cm (least distance of distinct vision)}",
+          "tags": []
+        },
+        {
+          "id": "f_9_11",
+          "chapter": "Ray Optics and Optical Instruments",
+          "name": "Compound Microscope",
+          "latex": "m = \\left(\\frac{L}{f_o}\\right)\\left(1 + \\frac{D}{f_e}\\right) \\text{ (at D)},\\quad m = \\left(\\frac{L}{f_o}\\right)\\left(\\frac{D}{f_e}\\right) \\text{ (at }\\infty\\text{)} \\qquad L = \\text{tube length}, f_o = \\text{objective focal length}, f_e = \\text{eyepiece focal length}",
+          "tags": []
+        },
+        {
+          "id": "f_9_12",
+          "chapter": "Ray Optics and Optical Instruments",
+          "name": "Astronomical Telescope",
+          "latex": "m = \\frac{f_o}{f_e} \\text{ (at }\\infty\\text{)}, \\text{Tube length } L = f_o + f_e \\qquad m = \\frac{f_o}{f_e}\\left(1 + \\frac{f_e}{D}\\right) \\text{ (at D)} \\qquad \\text{Large objective focal length } f_o \\text{ and aperture required}",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_p_10",
+      "name": "Wave Optics",
+      "keyPoints": [],
+      "keyDerivations": [
+        "Refraction via Huygens\u2019 Principle: In time $\\tau$, incident wavefront travels $BC = v_1\\tau$ in Medium 1, and refracted wavefront travels $AE = v_2\\tau$ in Medium 2. $\\sin i = \\frac{BC}{AC} = \\frac{v_1\\tau}{AC}$, $\\sin r = \\frac{AE}{AC} = \\frac{v_2\\tau}{AC} \\implies \\frac{\\sin i}{\\sin r} = \\frac{v_1}{v_2} = \\frac{n_2}{n_1} \\implies n_1\\sin i = n_2\\sin r$.",
+        "Fringe Width in YDSE: Path difference $\\Delta x = S_2 P - S_1 P \\approx \\frac{xd}{D}$. For bright fringes: $\\frac{x_n d}{D} = n\\lambda \\implies x_n = \\frac{n\\lambda D}{d}$. Fringe width: $\\beta = x_{n+1} - x_n = \\frac{(n+1)\\lambda D}{d} - \\frac{n\\lambda D}{d} = \\frac{\\lambda D}{d}$."
+      ],
+      "formulas": [
+        {
+          "id": "f_10_1",
+          "chapter": "Wave Optics",
+          "name": "Resultant Intensity (Interference)",
+          "latex": "I = I_1 + I_2 + 2\\sqrt{I_1 I_2}\\cos\\phi \\qquad \\text{For identical sources (}I_1=I_2=I_0\\text{): } I = 4I_0\\cos^2(\\phi/2)",
+          "tags": []
+        },
+        {
+          "id": "f_10_2",
+          "chapter": "Wave Optics",
+          "name": "Constructive Interference",
+          "latex": "\\Delta x = n\\lambda,\\; \\phi = 2n\\pi \\text{ (}n=0,1,2,\\dots\\text{)} \\qquad I_{\\max} = (\\sqrt{I_1} + \\sqrt{I_2})^2 = 4I_0",
+          "tags": []
+        },
+        {
+          "id": "f_10_3",
+          "chapter": "Wave Optics",
+          "name": "Destructive Interference",
+          "latex": "\\Delta x = \\left(n + \\frac{1}{2}\\right)\\lambda,\\; \\phi = (2n+1)\\pi \\qquad I_{\\min} = (\\sqrt{I_1} - \\sqrt{I_2})^2 = 0",
+          "tags": []
+        },
+        {
+          "id": "f_10_4",
+          "chapter": "Wave Optics",
+          "name": "YDSE Fringe Positions (Bright)",
+          "latex": "x_n = n\\frac{\\lambda D}{d} \\text{ (}n = 0, \\pm 1, \\dots\\text{)} \\qquad d = \\text{slit separation}, D = \\text{screen distance}",
+          "tags": []
+        },
+        {
+          "id": "f_10_5",
+          "chapter": "Wave Optics",
+          "name": "YDSE Fringe Positions (Dark)",
+          "latex": "x_n = \\left(n - \\frac{1}{2}\\right)\\frac{\\lambda D}{d} \\text{ (}n = 1, 2, \\dots\\text{)} \\qquad d = \\text{slit separation}, D = \\text{screen distance}",
+          "tags": []
+        },
+        {
+          "id": "f_10_6",
+          "chapter": "Wave Optics",
+          "name": "Fringe Width",
+          "latex": "\\beta = \\frac{\\lambda D}{d},\\; \\theta = \\frac{\\lambda}{d} \\qquad \\text{Fringe width } \\beta \\text{ is identical for bright and dark fringes}",
+          "tags": []
+        },
+        {
+          "id": "f_10_7",
+          "chapter": "Wave Optics",
+          "name": "Single Slit Diffraction Minima",
+          "latex": "a\\sin\\theta = n\\lambda \\implies \\theta_n \\approx \\frac{n\\lambda}{a} \\qquad n = \\pm 1, \\pm 2, \\dots \\text{ (}a = \\text{slit width)}",
+          "tags": []
+        },
+        {
+          "id": "f_10_8",
+          "chapter": "Wave Optics",
+          "name": "Single Slit Secondary Maxima",
+          "latex": "a\\sin\\theta \\approx \\left(n + \\frac{1}{2}\\right)\\lambda \\implies \\theta_n \\approx \\left(n + \\frac{1}{2}\\right)\\frac{\\lambda}{a} \\qquad n = 1, 2, 3, \\dots",
+          "tags": []
+        },
+        {
+          "id": "f_10_9",
+          "chapter": "Wave Optics",
+          "name": "Central Maximum Width",
+          "latex": "\\text{Angular: } 2\\theta_1 = \\frac{2\\lambda}{a}; \\text{ Linear: } \\beta_0 = \\frac{2\\lambda D}{a} = 2\\beta \\qquad \\text{Double the width of secondary maxima}",
+          "tags": []
+        },
+        {
+          "id": "f_10_10",
+          "chapter": "Wave Optics",
+          "name": "Malus\u2019s Law",
+          "latex": "I = I_0\\cos^2\\theta \\qquad \\theta = \\text{angle between polariser and analyser pass axes}",
+          "tags": []
+        },
+        {
+          "id": "f_10_11",
+          "chapter": "Wave Optics",
+          "name": "Intensity after Single Polaroid",
+          "latex": "I = \\frac{1}{2}I_{\\text{unpolarised}} \\qquad \\text{Half of unpolarised intensity is transmitted}",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_p_11",
+      "name": "Dual Nature of Radiation and Matter",
+      "keyPoints": [
+        "Photoelectric emission is instantaneous ($\\approx 10^{-9}\\text{ s}$ delay) and occurs only if $\\nu \\ge \\nu_0$.",
+        "Photocurrent $\\propto$ Intensity; $K_{\\max}$ and $V_0$ depend strictly on frequency $\\nu$ and target material $\\phi_0$, independent of intensity."
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "f_11_1",
+          "chapter": "Dual Nature of Radiation and Matter",
+          "name": "Work Function",
+          "latex": "\\phi_0 = h\\nu_0 = \\frac{hc}{\\lambda_0} \\qquad \\text{Minimum energy required for electron ejection (}1\\text{ eV} = 1.602 \\times 10^{-19}\\text{ J)}",
+          "tags": []
+        },
+        {
+          "id": "f_11_2",
+          "chapter": "Dual Nature of Radiation and Matter",
+          "name": "Einstein\u2019s Photoelectric Equation",
+          "latex": "K_{\\max} = h\\nu - \\phi_0 = h(\\nu - \\nu_0) = hc\\left(\\frac{1}{\\lambda} - \\frac{1}{\\lambda_0}\\right) \\qquad K_{\\max} = \\frac{1}{2}m v_{\\max}^2 = e V_0",
+          "tags": []
+        },
+        {
+          "id": "f_11_3",
+          "chapter": "Dual Nature of Radiation and Matter",
+          "name": "Stopping Potential (V0)",
+          "latex": "V_0 = \\left(\\frac{h}{e}\\right)\\nu - \\frac{\\phi_0}{e} \\qquad \\text{Linear graph of } V_0 \\text{ vs } \\nu \\text{ with slope } h/e \\text{ and intercept } -\\phi_0/e",
+          "tags": []
+        },
+        {
+          "id": "f_11_4",
+          "chapter": "Dual Nature of Radiation and Matter",
+          "name": "Photon Properties",
+          "latex": "E = h\\nu = \\frac{hc}{\\lambda},\\; p = \\frac{h\\nu}{c} = \\frac{h}{\\lambda},\\; m_{\\text{rest}} = 0 \\qquad \\text{Energy and linear momentum of photon}",
+          "tags": []
+        },
+        {
+          "id": "f_11_5",
+          "chapter": "Dual Nature of Radiation and Matter",
+          "name": "Rate of Photon Emission",
+          "latex": "N = \\frac{P}{E} = \\frac{P}{h\\nu} = \\frac{P\\lambda}{hc} \\qquad P = \\text{source power}",
+          "tags": []
+        },
+        {
+          "id": "f_11_6",
+          "chapter": "Dual Nature of Radiation and Matter",
+          "name": "de Broglie Wavelength (Particle)",
+          "latex": "\\lambda = \\frac{h}{p} = \\frac{h}{mv} = \\frac{h}{\\sqrt{2mK}} \\qquad \\text{Matter wave associated with momentum } p",
+          "tags": []
+        },
+        {
+          "id": "f_11_7",
+          "chapter": "Dual Nature of Radiation and Matter",
+          "name": "de Broglie Wavelength (Accelerated q)",
+          "latex": "\\lambda = \\frac{h}{\\sqrt{2mqV}} \\qquad \\text{Particle with charge } q \\text{ accelerated through potential } V",
+          "tags": []
+        },
+        {
+          "id": "f_11_8",
+          "chapter": "Dual Nature of Radiation and Matter",
+          "name": "Electron de Broglie Wavelength",
+          "latex": "\\lambda_e = \\frac{h}{\\sqrt{2m_e e V}} = \\frac{1.227}{\\sqrt{V}}\\text{ nm} = \\sqrt{\\frac{150}{V}}\\text{ \\AA} \\qquad V \\text{ is accelerating potential in Volts}",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_p_12",
+      "name": "Atoms",
+      "keyPoints": [
+        "Spectral Series of Hydrogen (Z=1): Lyman: $n_f = 1,\\; n_i = 2, 3, \\dots$ (UV), Balmer: $n_f = 2,\\; n_i = 3, 4, \\dots$ (Visible), Paschen: $n_f = 3,\\; n_i = 4, 5, \\dots$ (IR), Brackett: $n_f = 4,\\; n_i = 5, 6, \\dots$ (IR), Pfund: $n_f = 5,\\; n_i = 6, 7, \\dots$ (IR)."
+      ],
+      "keyDerivations": [
+        "Radius and Energy Expressions: Electrostatic force provides centripetal force: $\\frac{m v_n^2}{r_n} = \\frac{1}{4\\pi\\varepsilon_0}\\frac{Z e^2}{r_n^2} \\implies v_n^2 = \\frac{Z e^2}{4\\pi\\varepsilon_0 m r_n}$.",
+        "From Bohr's quantisation: $v_n = \\frac{nh}{2\\pi m r_n}$.",
+        "Substituting $v_n$: $\\left(\\frac{nh}{2\\pi m r_n}\\right)^2 = \\frac{Z e^2}{4\\pi\\varepsilon_0 m r_n} \\implies r_n = \\frac{\\varepsilon_0 n^2 h^2}{\\pi m Z e^2}$.",
+        "Total Energy $E_n = K_n + U_n = \\frac{1}{2}m v_n^2 - \\frac{Z e^2}{4\\pi\\varepsilon_0 r_n} = -\\frac{Z e^2}{8\\pi\\varepsilon_0 r_n} = -\\frac{m Z^2 e^4}{8\\varepsilon_0^2 n^2 h^2} = -\\frac{13.6 Z^2}{n^2}\\text{ eV}$."
+      ],
+      "formulas": [
+        {
+          "id": "f_12_1",
+          "chapter": "Atoms",
+          "name": "Distance of Closest Approach",
+          "latex": "d = \\frac{1}{4\\pi\\varepsilon_0}\\frac{2 Z e^2}{K_\\alpha} \\qquad \\text{Turning point in } \\alpha \\text{-scattering where } K_\\alpha = U_{\\text{electrostatic}}",
+          "tags": []
+        },
+        {
+          "id": "f_12_2",
+          "chapter": "Atoms",
+          "name": "Impact Parameter (b)",
+          "latex": "b = \\frac{1}{4\\pi\\varepsilon_0}\\frac{Z e^2 \\cot(\\theta/2)}{K_\\alpha} \\qquad b=0 \\implies \\theta = 180^\\circ \\text{ (head-on collision)}",
+          "tags": []
+        },
+        {
+          "id": "f_12_3",
+          "chapter": "Atoms",
+          "name": "Bohr\u2019s Quantisation Postulate",
+          "latex": "L = m v_n r_n = \\frac{nh}{2\\pi} \\qquad n = 1, 2, 3, \\dots \\text{ (Principal quantum number)}",
+          "tags": []
+        },
+        {
+          "id": "f_12_4",
+          "chapter": "Atoms",
+          "name": "Bohr Transition Condition",
+          "latex": "h\\nu = E_i - E_f \\qquad \\text{Frequency of emitted/absorbed photon}",
+          "tags": []
+        },
+        {
+          "id": "f_12_5",
+          "chapter": "Atoms",
+          "name": "Bohr Orbit Radius (rn)",
+          "latex": "r_n = \\frac{n^2 h^2 \\varepsilon_0}{\\pi m Z e^2} = \\frac{n^2}{Z} a_0 \\qquad a_0 = \\frac{\\varepsilon_0 h^2}{\\pi m e^2} \\approx 0.529\\text{ \\AA} \\text{ (0.0529 nm)}",
+          "tags": []
+        },
+        {
+          "id": "f_12_6",
+          "chapter": "Atoms",
+          "name": "Orbital Speed (vn)",
+          "latex": "v_n = \\frac{Z e^2}{2\\varepsilon_0 n h} = \\left(\\frac{c}{137}\\right)\\frac{Z}{n} \\qquad \\text{For H (}Z=1, n=1\\text{): } v_1 \\approx 2.18 \\times 10^6\\text{ m s}^{-1}",
+          "tags": []
+        },
+        {
+          "id": "f_12_7",
+          "chapter": "Atoms",
+          "name": "Total Energy Levels (En)",
+          "latex": "E_n = -\\frac{m Z^2 e^4}{8\\varepsilon_0^2 n^2 h^2} = -13.6\\frac{Z^2}{n^2}\\text{ eV} \\qquad K_n = -E_n = +13.6\\frac{Z^2}{n^2}\\text{ eV}, U_n = 2E_n = -27.2\\frac{Z^2}{n^2}\\text{ eV}",
+          "tags": []
+        },
+        {
+          "id": "f_12_8",
+          "chapter": "Atoms",
+          "name": "Rydberg Formula",
+          "latex": "\\frac{1}{\\lambda} = R Z^2\\left(\\frac{1}{n_f^2} - \\frac{1}{n_i^2}\\right) \\qquad \\text{Rydberg constant } R = \\frac{m e^4}{8\\varepsilon_0^2 c h^3} \\approx 1.097 \\times 10^7\\text{ m}^{-1}",
+          "tags": []
+        },
+        {
+          "id": "f_12_9",
+          "chapter": "Atoms",
+          "name": "de Broglie Relation for Bohr Orbit",
+          "latex": "2\\pi r_n = n\\lambda = n\\left(\\frac{h}{m v_n}\\right) \\implies m v_n r_n = \\frac{nh}{2\\pi} \\qquad \\text{Standing wave condition for stable circular orbit}",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_p_13",
+      "name": "Nuclei",
+      "keyPoints": [
+        "Binding Energy Curve Characteristics: Nearly constant ($\\sim 8.5\\text{ MeV/nucleon}$) for $30 < A < 170$ due to short-range saturation of nuclear forces.",
+        "Maximum at ${}^{56}\\text{Fe}$ ($8.75\\text{ MeV/nucleon}$).",
+        "Drops for heavy nuclei ($A > 170$, $\\sim 7.6\\text{ MeV}$ for ${}^{238}\\text{U}$) $\\implies$ energy released in nuclear fission ($\\sim 200\\text{ MeV}$ per fission).",
+        "Lower for light nuclei ($A < 30$) $\\implies$ energy released in nuclear fusion (p-p cycle: $4 {}^1\\text{H} + 2e^- \\to {}^4\\text{He} + 2\\nu + 6\\gamma + 26.7\\text{ MeV}$).",
+        "Nuclear Force: Strongest fundamental force, short-range ($\\sim 1\\text{ fm}$), charge-independent ($F_{pp} \\approx F_{pn} \\approx F_{nn}$), attractive for $r > 0.8\\text{ fm}$ and repulsive for $r < 0.8\\text{ fm}$."
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "f_13_1",
+          "chapter": "Nuclei",
+          "name": "Nuclear Size & Radius",
+          "latex": "R = R_0 A^{1/3} \\qquad R_0 \\approx 1.2\\text{ fm} = 1.2 \\times 10^{-15}\\text{ m}, A = \\text{mass number}",
+          "tags": []
+        },
+        {
+          "id": "f_13_2",
+          "chapter": "Nuclei",
+          "name": "Nuclear Density",
+          "latex": "\\rho = \\frac{M}{V} = \\frac{A \\cdot m_{\\text{nucleon}}}{\\frac{4}{3}\\pi R_0^3 A} \\approx 2.3 \\times 10^{17}\\text{ kg m}^{-3} \\qquad \\text{Constant and independent of mass number } A",
+          "tags": []
+        },
+        {
+          "id": "f_13_3",
+          "chapter": "Nuclei",
+          "name": "Mass Defect",
+          "latex": "\\Delta M = [Z m_p + (A - Z)m_n] - M_{\\text{nucleus}} \\qquad m_p = 1.00727\\text{ u}, m_n = 1.00866\\text{ u}",
+          "tags": []
+        },
+        {
+          "id": "f_13_4",
+          "chapter": "Nuclei",
+          "name": "Binding Energy",
+          "latex": "E_b = \\Delta M \\cdot c^2 = \\Delta M \\text{ (in u)} \\times 931.5\\text{ MeV} \\qquad 1\\text{ u} = 1.660539 \\times 10^{-27}\\text{ kg} = 931.5\\text{ MeV}/c^2",
+          "tags": []
+        },
+        {
+          "id": "f_13_5",
+          "chapter": "Nuclei",
+          "name": "Binding Energy per Nucleon",
+          "latex": "E_{bn} = \\frac{E_b}{A} \\qquad \\text{Measure of stability of nucleus}",
+          "tags": []
+        },
+        {
+          "id": "f_13_6",
+          "chapter": "Nuclei",
+          "name": "Q-value of Nuclear Reaction",
+          "latex": "Q = (M_{\\text{initial}} - M_{\\text{final}})c^2 = \\sum E_{b,\\text{final}} - \\sum E_{b,\\text{initial}} \\qquad Q > 0\\text{: Exothermic; } Q < 0\\text{: Endothermic}",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_p_14",
+      "name": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+      "keyPoints": [
+        "p-n Junction Operation: Unbiased: Diffusion of majority carriers creates a space-charge depletion layer and barrier potential ($V_0 \\approx 0.7\\text{ V}$ for Si, 0.2-0.3$\\text{ V}$ for Ge) until $I_{\\text{diff}} = I_{\\text{drift}}$.",
+        "Forward Bias: External V opposes $V_0$; barrier height decreases to ($V_0 - V$); depletion width decreases; majority diffusion current flows ($\\text{mA}$).",
+        "Reverse Bias: External V aids $V_0$; barrier height increases to ($V_0 + V$); depletion width increases; minority drift current flows ($\\mu\\text{A}$).",
+        "Rectification & Filters: Diodes conduct only during forward bias.",
+        "A parallel capacitor filter reduces ripple by charging to peak voltage and discharging slowly through the load resistor $R_L$ with time constant $\\tau = C R_L$."
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "f_14_1",
+          "chapter": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+          "name": "Energy Band Gap (Eg)",
+          "latex": "\\text{Metals: } E_g \\approx 0 \\qquad \\text{Semiconductors: } 0.2\\text{ eV} < E_g < 3\\text{ eV} \\qquad \\text{Insulators: } E_g > 3\\text{ eV} \\qquad \\text{Silicon: } E_g = 1.1\\text{ eV} \\quad \\text{Germanium: } E_g = 0.72\\text{ eV} \\quad \\text{Carbon (Diamond): } E_g = 5.4\\text{ eV}",
+          "tags": []
+        },
+        {
+          "id": "f_14_2",
+          "chapter": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+          "name": "Carrier Balance in Intrinsic Semiconductor",
+          "latex": "n_e = n_h = n_i \\qquad n_i = \\text{intrinsic carrier concentration}",
+          "tags": []
+        },
+        {
+          "id": "f_14_3",
+          "chapter": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+          "name": "Extrinsic Semiconductors",
+          "latex": "\\text{n-type: } n_e \\approx N_D \\gg n_h \\text{ (Pentavalent: P, As, Sb)} \\qquad \\text{p-type: } n_h \\approx N_A \\gg n_e \\text{ (Trivalent: B, Al, In)} \\qquad \\text{Maintains overall charge neutrality}",
+          "tags": []
+        },
+        {
+          "id": "f_14_4",
+          "chapter": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+          "name": "Mass Action Law",
+          "latex": "n_e n_h = n_i^2 \\qquad \\text{Valid at thermal equilibrium}",
+          "tags": []
+        },
+        {
+          "id": "f_14_5",
+          "chapter": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+          "name": "Total Conduction Current",
+          "latex": "I = I_e + I_h = e A (n_e v_e + n_h v_h) \\qquad v_e = \\mu_e E, v_h = \\mu_h E",
+          "tags": []
+        },
+        {
+          "id": "f_14_6",
+          "chapter": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+          "name": "Conductivity & Resistivity",
+          "latex": "\\sigma = e(n_e \\mu_e + n_h \\mu_h),\\; \\rho = \\frac{1}{\\sigma} \\qquad \\text{Electron mobility } \\mu_e > \\text{hole mobility } \\mu_h",
+          "tags": []
+        },
+        {
+          "id": "f_14_7",
+          "chapter": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+          "name": "Dynamic Resistance of Diode",
+          "latex": "r_d = \\frac{\\Delta V}{\\Delta I} \\qquad \\text{Reciprocal of slope of V-I characteristic curve}",
+          "tags": []
+        },
+        {
+          "id": "f_14_8",
+          "chapter": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+          "name": "Rectifier Output Frequencies",
+          "latex": "\\text{Half-Wave: } f_{\\text{out}} = f_{\\text{in}} \\qquad \\text{Full-Wave: } f_{\\text{out}} = 2f_{\\text{in}} \\qquad \\text{For } 50\\text{ Hz input, Full-Wave output ripple frequency is } 100\\text{ Hz}",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    }
+  ],
+  "audience": [
+    "CBSE Class 12"
+  ]
+}

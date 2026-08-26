@@ -37,21 +37,31 @@ export interface SubjectData {
 
 // All subjects data
 import physicsData from "@/data/ncert/physics.json";
+import class12PhysicsData from "@/data/ncert/class12_physics.json";
 import chemistryData from "@/data/ncert/chemistry.json";
 import mathematicsData from "@/data/ncert/mathematics.json";
 import biologyData from "@/data/ncert/biology.json";
 
+const mergedPhysicsData = {
+  ...physicsData,
+  chapters: [...physicsData.chapters, ...class12PhysicsData.chapters],
+  audience: [
+    ...(physicsData.audience || []),
+    ...(class12PhysicsData.audience || []),
+  ],
+};
+
 export const allSubjects: SubjectData[] = [
-  physicsData,
-  chemistryData,
-  mathematicsData,
-  biologyData
+  mergedPhysicsData as SubjectData,
+  chemistryData as SubjectData,
+  mathematicsData as SubjectData,
+  biologyData as SubjectData,
 ];
 
 // Get all chapters for a subject
 export function getChaptersBySubject(subject: string): Chapter[] {
   const data = allSubjects.find(
-    (s) => s.subject.toLowerCase() === subject.toLowerCase()
+    (s) => s.subject.toLowerCase() === subject.toLowerCase(),
   );
   return data?.chapters ?? [];
 }
@@ -65,7 +75,7 @@ export function getFormulasBySubject(subject: string): Formula[] {
 // Get formulas filtered by chapter IDs
 export function filterFormulas(
   subject: string,
-  chapterIds: string[]
+  chapterIds: string[],
 ): Formula[] {
   const chapters = getChaptersBySubject(subject);
   return chapters
@@ -74,7 +84,7 @@ export function filterFormulas(
       ch.formulas.map((f) => ({
         ...f,
         chapter: ch.name || ch.chapterName,
-      }))
+      })),
     );
 }
 
@@ -89,7 +99,9 @@ export function searchFormulas(query: string, subject?: string): Formula[] {
   if (!q) return [];
 
   const targetSubjects = subject
-    ? allSubjects.filter((s) => s.subject.toLowerCase() === subject.toLowerCase())
+    ? allSubjects.filter(
+        (s) => s.subject.toLowerCase() === subject.toLowerCase(),
+      )
     : allSubjects;
 
   const results: Formula[] = [];
