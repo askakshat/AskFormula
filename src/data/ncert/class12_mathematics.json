@@ -1,0 +1,838 @@
+{
+  "subject": "Mathematics",
+  "classLevel": "12",
+  "audience": [
+    "CBSE Class 12"
+  ],
+  "chapters": [
+    {
+      "id": "c12_m_1",
+      "name": "Relations and Functions",
+      "keyPoints": [
+        "Number of relations on set A ($|A| = n$): $2^{n^2}$",
+        "Number of reflexive relations: $2^{n(n-1)}$",
+        "Number of symmetric relations: $2^{\\frac{n(n+1)}{2}}$",
+        "Number of functions from A to B ($|A| = n, |B| = m$): $m^n$",
+        "Number of bijections on a set of $n$ elements: $n!$"
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "fm_1_1",
+          "chapter": "Relations and Functions",
+          "name": "Empty Relation",
+          "latex": "R = \\phi \\subset A \\times A \\qquad \\text{No element of A is related to any element of A.}",
+          "tags": []
+        },
+        {
+          "id": "fm_1_2",
+          "chapter": "Relations and Functions",
+          "name": "Universal Relation",
+          "latex": "R = A \\times A \\qquad \\text{Every element of A is related to every element of A.}",
+          "tags": []
+        },
+        {
+          "id": "fm_1_3",
+          "chapter": "Relations and Functions",
+          "name": "Reflexive Relation",
+          "latex": "(a, a) \\in R, \\quad \\forall a \\in A \\qquad \\text{Every element is related to itself.}",
+          "tags": []
+        },
+        {
+          "id": "fm_1_4",
+          "chapter": "Relations and Functions",
+          "name": "Symmetric Relation",
+          "latex": "(a, b) \\in R \\implies (b, a) \\in R, \\quad \\forall a, b \\in A \\qquad \\text{Order in pairs can be reversed.}",
+          "tags": []
+        },
+        {
+          "id": "fm_1_5",
+          "chapter": "Relations and Functions",
+          "name": "Transitive Relation",
+          "latex": "(a, b) \\in R \\text{ and } (b, c) \\in R \\implies (a, c) \\in R, \\quad \\forall a, b, c \\in A",
+          "tags": []
+        },
+        {
+          "id": "fm_1_6",
+          "chapter": "Relations and Functions",
+          "name": "Equivalence Class",
+          "latex": "[a] = \\{x \\in A : (x, a) \\in R\\}",
+          "tags": []
+        },
+        {
+          "id": "fm_1_7",
+          "chapter": "Relations and Functions",
+          "name": "One-One (Injective)",
+          "latex": "f(x_1) = f(x_2) \\implies x_1 = x_2, \\quad \\forall x_1, x_2 \\in X",
+          "tags": []
+        },
+        {
+          "id": "fm_1_8",
+          "chapter": "Relations and Functions",
+          "name": "Onto (Surjective)",
+          "latex": "\\forall y \\in Y, \\; \\exists x \\in X \\text{ such that } f(x) = y \\qquad \\text{Range}(f) = \\text{Co-domain}(Y)",
+          "tags": []
+        },
+        {
+          "id": "fm_1_9",
+          "chapter": "Relations and Functions",
+          "name": "Composition of Functions",
+          "latex": "(g \\circ f)(x) = g(f(x)), \\quad \\forall x \\in A",
+          "tags": []
+        },
+        {
+          "id": "fm_1_10",
+          "chapter": "Relations and Functions",
+          "name": "Invertible Function",
+          "latex": "\\exists g: Y \\to X \\text{ such that } g \\circ f = I_X \\text{ and } f \\circ g = I_Y",
+          "tags": []
+        },
+        {
+          "id": "fm_1_11",
+          "chapter": "Relations and Functions",
+          "name": "Number of One-One Functions",
+          "latex": "^mP_n = \\frac{m!}{(m-n)!} \\quad \\text{if } m \\ge n \\qquad \\text{0 if } m < n",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_m_2",
+      "name": "Inverse Trigonometric Functions",
+      "keyPoints": [],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "fm_2_1",
+          "chapter": "Inverse Trigonometric Functions",
+          "name": "Self-Inversion (Sin)",
+          "latex": "\\sin(\\sin^{-1}x) = x, \\; x \\in [-1, 1] \\qquad \\sin^{-1}(\\sin x) = x, \\; x \\in \\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]",
+          "tags": []
+        },
+        {
+          "id": "fm_2_2",
+          "chapter": "Inverse Trigonometric Functions",
+          "name": "Self-Inversion (Cos)",
+          "latex": "\\cos(\\cos^{-1}x) = x, \\; x \\in [-1, 1] \\qquad \\cos^{-1}(\\cos x) = x, \\; x \\in [0, \\pi]",
+          "tags": []
+        },
+        {
+          "id": "fm_2_3",
+          "chapter": "Inverse Trigonometric Functions",
+          "name": "Self-Inversion (Tan)",
+          "latex": "\\tan(\\tan^{-1}x) = x, \\; x \\in \\mathbb{R} \\qquad \\tan^{-1}(\\tan x) = x, \\; x \\in \\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)",
+          "tags": []
+        },
+        {
+          "id": "fm_2_4",
+          "chapter": "Inverse Trigonometric Functions",
+          "name": "Negative Arguments (Sin, Tan, Csc)",
+          "latex": "\\sin^{-1}(-x) = -\\sin^{-1}x, \\quad \\tan^{-1}(-x) = -\\tan^{-1}x, \\quad \\csc^{-1}(-x) = -\\csc^{-1}x",
+          "tags": []
+        },
+        {
+          "id": "fm_2_5",
+          "chapter": "Inverse Trigonometric Functions",
+          "name": "Negative Arguments (Cos, Cot, Sec)",
+          "latex": "\\cos^{-1}(-x) = \\pi - \\cos^{-1}x, \\quad \\cot^{-1}(-x) = \\pi - \\cot^{-1}x, \\quad \\sec^{-1}(-x) = \\pi - \\sec^{-1}x",
+          "tags": []
+        },
+        {
+          "id": "fm_2_6",
+          "chapter": "Inverse Trigonometric Functions",
+          "name": "Reciprocal Identities",
+          "latex": "\\csc^{-1}x = \\sin^{-1}\\left(\\frac{1}{x}\\right), \\qquad \\sec^{-1}x = \\cos^{-1}\\left(\\frac{1}{x}\\right)",
+          "tags": []
+        },
+        {
+          "id": "fm_2_7",
+          "chapter": "Inverse Trigonometric Functions",
+          "name": "Complementary Angles",
+          "latex": "\\sin^{-1}x + \\cos^{-1}x = \\frac{\\pi}{2}, \\qquad \\tan^{-1}x + \\cot^{-1}x = \\frac{\\pi}{2}, \\qquad \\sec^{-1}x + \\csc^{-1}x = \\frac{\\pi}{2}",
+          "tags": []
+        },
+        {
+          "id": "fm_2_8",
+          "chapter": "Inverse Trigonometric Functions",
+          "name": "Multiple Angle Relations (Tan)",
+          "latex": "2\\tan^{-1}x = \\sin^{-1}\\left(\\frac{2x}{1+x^2}\\right) = \\cos^{-1}\\left(\\frac{1-x^2}{1+x^2}\\right) = \\tan^{-1}\\left(\\frac{2x}{1-x^2}\\right)",
+          "tags": []
+        },
+        {
+          "id": "fm_2_9",
+          "chapter": "Inverse Trigonometric Functions",
+          "name": "Multiple Angle Relations (Sin)",
+          "latex": "2\\sin^{-1}x = \\sin^{-1}\\left(2x\\sqrt{1-x^2}\\right) \\qquad 3\\sin^{-1}x = \\sin^{-1}(3x - 4x^3)",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_m_3",
+      "name": "Matrices",
+      "keyPoints": [
+        "Decomposition Theorem: Every square matrix A can be uniquely expressed as the sum of a symmetric and a skew-symmetric matrix: $A = \\frac{1}{2}(A + A') + \\frac{1}{2}(A - A')$",
+        "Commutativity of Symmetric Matrices: If A and B are symmetric matrices, AB is symmetric $\\iff AB = BA$.",
+        "Skew-Symmetry of Commutator: If A and B are symmetric, $AB - BA$ is always skew-symmetric: $(AB - BA)' = -(AB - BA)$"
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "fm_3_1",
+          "chapter": "Matrices",
+          "name": "Matrix Addition",
+          "latex": "C = A + B \\implies c_{ij} = a_{ij} + b_{ij}",
+          "tags": []
+        },
+        {
+          "id": "fm_3_2",
+          "chapter": "Matrices",
+          "name": "Scalar Multiplication",
+          "latex": "kA = [k \\cdot a_{ij}]_{m \\times n}",
+          "tags": []
+        },
+        {
+          "id": "fm_3_3",
+          "chapter": "Matrices",
+          "name": "Matrix Multiplication",
+          "latex": "C = AB \\implies c_{ik} = \\sum_{j=1}^n a_{ij} b_{jk} \\qquad A_{m \\times n} \\text{ and } B_{n \\times p} \\implies C_{m \\times p}",
+          "tags": []
+        },
+        {
+          "id": "fm_3_4",
+          "chapter": "Matrices",
+          "name": "Transpose Properties",
+          "latex": "(A')' = A, \\; (kA)' = k A', \\; (A \\pm B)' = A' \\pm B', \\; (AB)' = B'A'",
+          "tags": []
+        },
+        {
+          "id": "fm_3_5",
+          "chapter": "Matrices",
+          "name": "Symmetric Matrix",
+          "latex": "A' = A \\implies a_{ij} = a_{ji}",
+          "tags": []
+        },
+        {
+          "id": "fm_3_6",
+          "chapter": "Matrices",
+          "name": "Skew-Symmetric Matrix",
+          "latex": "A' = -A \\implies a_{ij} = -a_{ji} \\qquad \\text{All diagonal elements are zero}",
+          "tags": []
+        },
+        {
+          "id": "fm_3_7",
+          "chapter": "Matrices",
+          "name": "Orthogonal Matrix",
+          "latex": "A A^T = A^T A = I",
+          "tags": []
+        },
+        {
+          "id": "fm_3_8",
+          "chapter": "Matrices",
+          "name": "Reversal Law of Inverse",
+          "latex": "(AB)^{-1} = B^{-1}A^{-1}",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_m_4",
+      "name": "Determinants",
+      "keyPoints": [
+        "Unique Solution (Consistent): If $|A| \\ne 0 \\implies X = A^{-1}B = \\frac{1}{|A|}(\\text{adj } A)B$.",
+        "No Solution (Inconsistent): If $|A| = 0$ and $(\\text{adj } A)B \\ne O$.",
+        "Infinitely Many Solutions or Inconsistent: If $|A| = 0$ and $(\\text{adj } A)B = O$."
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "fm_4_1",
+          "chapter": "Determinants",
+          "name": "2x2 Determinant",
+          "latex": "\\begin{vmatrix} a_{11} & a_{12} \\\\ a_{21} & a_{22} \\end{vmatrix} = a_{11} a_{22} - a_{12} a_{21}",
+          "tags": []
+        },
+        {
+          "id": "fm_4_2",
+          "chapter": "Determinants",
+          "name": "3x3 Determinant",
+          "latex": "|A| = a_{11}(a_{22}a_{33} - a_{23}a_{32}) - a_{12}(a_{21}a_{33} - a_{23}a_{31}) + a_{13}(a_{21}a_{32} - a_{22}a_{31})",
+          "tags": []
+        },
+        {
+          "id": "fm_4_3",
+          "chapter": "Determinants",
+          "name": "Area of Triangle",
+          "latex": "\\Delta = \\frac{1}{2} \\begin{vmatrix} x_1 & y_1 & 1 \\\\ x_2 & y_2 & 1 \\\\ x_3 & y_3 & 1 \\end{vmatrix}",
+          "tags": []
+        },
+        {
+          "id": "fm_4_4",
+          "chapter": "Determinants",
+          "name": "Collinearity Condition",
+          "latex": "\\begin{vmatrix} x_1 & y_1 & 1 \\\\ x_2 & y_2 & 1 \\\\ x_3 & y_3 & 1 \\end{vmatrix} = 0",
+          "tags": []
+        },
+        {
+          "id": "fm_4_5",
+          "chapter": "Determinants",
+          "name": "Equation of Line",
+          "latex": "\\begin{vmatrix} x & y & 1 \\\\ x_1 & y_1 & 1 \\\\ x_2 & y_2 & 1 \\end{vmatrix} = 0",
+          "tags": []
+        },
+        {
+          "id": "fm_4_6",
+          "chapter": "Determinants",
+          "name": "Cofactor",
+          "latex": "A_{ij} = (-1)^{i+j} M_{ij} \\qquad M_{ij} = \\text{minor of } a_{ij}",
+          "tags": []
+        },
+        {
+          "id": "fm_4_7",
+          "chapter": "Determinants",
+          "name": "Adjoint Matrix",
+          "latex": "\\text{adj } A = [A_{ij}]^T",
+          "tags": []
+        },
+        {
+          "id": "fm_4_8",
+          "chapter": "Determinants",
+          "name": "Fundamental Identity",
+          "latex": "A (\\text{adj } A) = (\\text{adj } A) A = |A| I_n",
+          "tags": []
+        },
+        {
+          "id": "fm_4_9",
+          "chapter": "Determinants",
+          "name": "Inverse Formula",
+          "latex": "A^{-1} = \\frac{1}{|A|} \\text{adj } A \\qquad \\text{Exists } \\iff |A| \\ne 0",
+          "tags": []
+        },
+        {
+          "id": "fm_4_10",
+          "chapter": "Determinants",
+          "name": "Determinant of Adjoint",
+          "latex": "|\\text{adj } A| = |A|^{n-1} \\qquad |\\text{adj}(\\text{adj } A)| = |A|^{(n-1)^2}",
+          "tags": []
+        },
+        {
+          "id": "fm_4_11",
+          "chapter": "Determinants",
+          "name": "Double Adjoint",
+          "latex": "\\text{adj}(\\text{adj } A) = |A|^{n-2} A",
+          "tags": []
+        },
+        {
+          "id": "fm_4_12",
+          "chapter": "Determinants",
+          "name": "Scalar Multiplication",
+          "latex": "|kA| = k^n |A| \\qquad \\text{For } n \\times n \\text{ matrix A}",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_m_5",
+      "name": "Continuity and Differentiability",
+      "keyPoints": [
+        "Relation: $f(x)$ differentiable at $c \\implies f(x)$ continuous at $c$. Converse is not generally true."
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "fm_5_1",
+          "chapter": "Continuity and Differentiability",
+          "name": "Continuity at x=c",
+          "latex": "\\lim_{x \\to c^-} f(x) = \\lim_{x \\to c^+} f(x) = f(c)",
+          "tags": []
+        },
+        {
+          "id": "fm_5_2",
+          "chapter": "Continuity and Differentiability",
+          "name": "Differentiability at x=c",
+          "latex": "f'(c) = \\lim_{h \\to 0} \\frac{f(c+h) - f(c)}{h} \\qquad \\text{LHD} = \\text{RHD}",
+          "tags": []
+        },
+        {
+          "id": "fm_5_3",
+          "chapter": "Continuity and Differentiability",
+          "name": "Chain Rule",
+          "latex": "\\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx}",
+          "tags": []
+        },
+        {
+          "id": "fm_5_4",
+          "chapter": "Continuity and Differentiability",
+          "name": "Product Rule",
+          "latex": "(uv)' = u'v + uv'",
+          "tags": []
+        },
+        {
+          "id": "fm_5_5",
+          "chapter": "Continuity and Differentiability",
+          "name": "Quotient Rule",
+          "latex": "\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}",
+          "tags": []
+        },
+        {
+          "id": "fm_5_6",
+          "chapter": "Continuity and Differentiability",
+          "name": "Parametric Differentiation",
+          "latex": "\\frac{dy}{dx} = \\frac{dy/dt}{dx/dt} = \\frac{g'(t)}{f'(t)}",
+          "tags": []
+        },
+        {
+          "id": "fm_5_7",
+          "chapter": "Continuity and Differentiability",
+          "name": "Parametric 2nd Derivative",
+          "latex": "\\frac{d^2y}{dx^2} = \\frac{d}{dt}\\left(\\frac{dy}{dx}\\right) \\cdot \\frac{dt}{dx} = \\frac{\\frac{d}{dt}(y')}{x'(t)}",
+          "tags": []
+        },
+        {
+          "id": "fm_5_8",
+          "chapter": "Continuity and Differentiability",
+          "name": "Logarithmic Differentiation",
+          "latex": "\\frac{d}{dx}[u^v] = u^v \\left[ v' \\ln u + \\frac{v \\cdot u'}{u} \\right]",
+          "tags": []
+        },
+        {
+          "id": "fm_5_9",
+          "chapter": "Continuity and Differentiability",
+          "name": "Trig Derivatives",
+          "latex": "\\frac{d}{dx}(\\sin x) = \\cos x, \\quad \\frac{d}{dx}(\\cos x) = -\\sin x, \\quad \\frac{d}{dx}(\\tan x) = \\sec^2 x",
+          "tags": []
+        },
+        {
+          "id": "fm_5_10",
+          "chapter": "Continuity and Differentiability",
+          "name": "Inverse Trig Derivatives",
+          "latex": "\\frac{d}{dx}(\\sin^{-1}x) = \\frac{1}{\\sqrt{1-x^2}}, \\quad \\frac{d}{dx}(\\tan^{-1}x) = \\frac{1}{1+x^2}",
+          "tags": []
+        },
+        {
+          "id": "fm_5_11",
+          "chapter": "Continuity and Differentiability",
+          "name": "Exponential & Log Derivatives",
+          "latex": "\\frac{d}{dx}(e^x) = e^x, \\quad \\frac{d}{dx}(a^x) = a^x \\ln a, \\quad \\frac{d}{dx}(\\ln x) = \\frac{1}{x}",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_m_6",
+      "name": "Application of Derivatives",
+      "keyPoints": [
+        "First Derivative Test: Evaluated in neighborhood $(c-h, c+h)$. If $f'(x)$ changes $+ \\to -$ $\\implies$ Local Maxima at $c$. If $f'(x)$ changes $- \\to +$ $\\implies$ Local Minima at $c$. No sign change $\\implies$ Point of Inflection.",
+        "Second Derivative Test: $f'(c) = 0$ and $f''(c) < 0 \\implies$ Local Maxima at $c$. $f'(c) = 0$ and $f''(c) > 0 \\implies$ Local Minima at $c$. $f''(c) = 0 \\implies$ Test Fails.",
+        "Absolute Extrema on $[a, b]$: Evaluate $f(x)$ at all critical points and boundaries."
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "fm_6_1",
+          "chapter": "Application of Derivatives",
+          "name": "Rate of Change",
+          "latex": "\\frac{dy}{dx} = \\frac{dy/dt}{dx/dt}",
+          "tags": []
+        },
+        {
+          "id": "fm_6_2",
+          "chapter": "Application of Derivatives",
+          "name": "Marginal Cost / Revenue",
+          "latex": "MC = \\frac{dC}{dx}, \\quad MR = \\frac{dR}{dx}",
+          "tags": []
+        },
+        {
+          "id": "fm_6_3",
+          "chapter": "Application of Derivatives",
+          "name": "Strictly Increasing",
+          "latex": "f'(x) > 0, \\quad \\forall x \\in (a, b)",
+          "tags": []
+        },
+        {
+          "id": "fm_6_4",
+          "chapter": "Application of Derivatives",
+          "name": "Strictly Decreasing",
+          "latex": "f'(x) < 0, \\quad \\forall x \\in (a, b)",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_m_7",
+      "name": "Integrals",
+      "keyPoints": [
+        "$P_0$ (Dummy Variable): $\\int_a^b f(x) dx = \\int_a^b f(t) dt$",
+        "$P_1$ (Limits Reversal): $\\int_a^b f(x) dx = -\\int_b^a f(x) dx$; $\\int_a^a f(x) dx = 0$",
+        "$P_2$ (Interval Splitting): $\\int_a^b f(x) dx = \\int_a^c f(x) dx + \\int_c^b f(x) dx$",
+        "$P_3$ (Shift Property): $\\int_a^b f(x) dx = \\int_a^b f(a + b - x) dx$",
+        "$P_4$ (King's Property): $\\int_0^a f(x) dx = \\int_0^a f(a - x) dx$",
+        "$P_5$ (Double Angle Split): $\\int_0^{2a} f(x) dx = \\int_0^a f(x) dx + \\int_0^a f(2a - x) dx$"
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "fm_7_1",
+          "chapter": "Integrals",
+          "name": "Polynomial Integral",
+          "latex": "\\int x^n \\, dx = \\frac{x^{n+1}}{n+1} + C \\quad (n \\ne -1)",
+          "tags": []
+        },
+        {
+          "id": "fm_7_2",
+          "chapter": "Integrals",
+          "name": "Log Integral",
+          "latex": "\\int \\frac{1}{x} \\, dx = \\ln|x| + C",
+          "tags": []
+        },
+        {
+          "id": "fm_7_3",
+          "chapter": "Integrals",
+          "name": "Exponential Integral",
+          "latex": "\\int e^x \\, dx = e^x + C, \\quad \\int a^x \\, dx = \\frac{a^x}{\\ln a} + C",
+          "tags": []
+        },
+        {
+          "id": "fm_7_4",
+          "chapter": "Integrals",
+          "name": "Trig Integrals (Basic)",
+          "latex": "\\int \\sin x \\, dx = -\\cos x + C, \\quad \\int \\cos x \\, dx = \\sin x + C",
+          "tags": []
+        },
+        {
+          "id": "fm_7_5",
+          "chapter": "Integrals",
+          "name": "Trig Integrals (Advanced)",
+          "latex": "\\int \\tan x \\, dx = \\ln|\\sec x| + C, \\quad \\int \\cot x \\, dx = \\ln|\\sin x| + C",
+          "tags": []
+        },
+        {
+          "id": "fm_7_6",
+          "chapter": "Integrals",
+          "name": "Trig Integrals (Sec, Csc)",
+          "latex": "\\int \\sec x \\, dx = \\ln|\\sec x + \\tan x| + C, \\quad \\int \\csc x \\, dx = \\ln|\\csc x - \\cot x| + C",
+          "tags": []
+        },
+        {
+          "id": "fm_7_7",
+          "chapter": "Integrals",
+          "name": "Rational Function 1",
+          "latex": "\\int \\frac{dx}{x^2 - a^2} = \\frac{1}{2a} \\ln\\left|\\frac{x-a}{x+a}\\right| + C",
+          "tags": []
+        },
+        {
+          "id": "fm_7_8",
+          "chapter": "Integrals",
+          "name": "Rational Function 2",
+          "latex": "\\int \\frac{dx}{a^2 - x^2} = \\frac{1}{2a} \\ln\\left|\\frac{a+x}{a-x}\\right| + C",
+          "tags": []
+        },
+        {
+          "id": "fm_7_9",
+          "chapter": "Integrals",
+          "name": "Rational Function 3",
+          "latex": "\\int \\frac{dx}{x^2 + a^2} = \\frac{1}{a} \\tan^{-1}\\left(\\frac{x}{a}\\right) + C",
+          "tags": []
+        },
+        {
+          "id": "fm_7_10",
+          "chapter": "Integrals",
+          "name": "Radical Integral 1",
+          "latex": "\\int \\frac{dx}{\\sqrt{x^2 \\pm a^2}} = \\ln\\left|x + \\sqrt{x^2 \\pm a^2}\\right| + C",
+          "tags": []
+        },
+        {
+          "id": "fm_7_11",
+          "chapter": "Integrals",
+          "name": "Radical Integral 2",
+          "latex": "\\int \\frac{dx}{\\sqrt{a^2 - x^2}} = \\sin^{-1}\\left(\\frac{x}{a}\\right) + C",
+          "tags": []
+        },
+        {
+          "id": "fm_7_12",
+          "chapter": "Integrals",
+          "name": "Root Polynomial Integral 1",
+          "latex": "\\int \\sqrt{x^2 \\pm a^2} \\, dx = \\frac{x}{2}\\sqrt{x^2 \\pm a^2} \\pm \\frac{a^2}{2}\\ln\\left|x + \\sqrt{x^2 \\pm a^2}\\right| + C",
+          "tags": []
+        },
+        {
+          "id": "fm_7_13",
+          "chapter": "Integrals",
+          "name": "Root Polynomial Integral 2",
+          "latex": "\\int \\sqrt{a^2 - x^2} \\, dx = \\frac{x}{2}\\sqrt{a^2 - x^2} + \\frac{a^2}{2}\\sin^{-1}\\left(\\frac{x}{a}\\right) + C",
+          "tags": []
+        },
+        {
+          "id": "fm_7_14",
+          "chapter": "Integrals",
+          "name": "Integration by Parts",
+          "latex": "\\int u v \\, dx = u \\int v \\, dx - \\int \\left( u' \\int v \\, dx \\right) dx",
+          "tags": []
+        },
+        {
+          "id": "fm_7_15",
+          "chapter": "Integrals",
+          "name": "Exponential Integration Form",
+          "latex": "\\int e^x [f(x) + f'(x)] \\, dx = e^x f(x) + C",
+          "tags": []
+        },
+        {
+          "id": "fm_7_16",
+          "chapter": "Integrals",
+          "name": "Even/Odd Properties",
+          "latex": "\\int_{-a}^a f(x) dx = 2\\int_0^a f(x) dx \\text{ (even)}, \\quad 0 \\text{ (odd)}",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_m_8",
+      "name": "Application of Integrals",
+      "keyPoints": [],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "fm_8_1",
+          "chapter": "Application of Integrals",
+          "name": "Area under curve",
+          "latex": "A = \\int_a^b y \\, dx = \\int_a^b f(x) \\, dx",
+          "tags": []
+        },
+        {
+          "id": "fm_8_2",
+          "chapter": "Application of Integrals",
+          "name": "Area of Ellipse",
+          "latex": "A = 4 \\frac{b}{a} \\int_0^a \\sqrt{a^2 - x^2} \\, dx = \\pi a b \\qquad \\text{For } \\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_m_9",
+      "name": "Differential Equations",
+      "keyPoints": [
+        "Order: Highest order derivative. Degree: Highest power of highest order derivative in polynomial form."
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "fm_9_1",
+          "chapter": "Differential Equations",
+          "name": "Variable Separable",
+          "latex": "\\frac{dy}{dx} = h(y) g(x) \\implies \\int \\frac{dy}{h(y)} = \\int g(x) dx + C",
+          "tags": []
+        },
+        {
+          "id": "fm_9_2",
+          "chapter": "Differential Equations",
+          "name": "Homogeneous DE",
+          "latex": "\\frac{dy}{dx} = g\\left(\\frac{y}{x}\\right) \\implies \\text{Put } y = vx \\implies v + x\\frac{dv}{dx} = g(v)",
+          "tags": []
+        },
+        {
+          "id": "fm_9_3",
+          "chapter": "Differential Equations",
+          "name": "Linear DE",
+          "latex": "\\frac{dy}{dx} + P(x) y = Q(x) \\implies \\text{I.F.} = e^{\\int P(x) dx}, \\quad y \\cdot (\\text{I.F.}) = \\int [Q(x) \\cdot \\text{I.F.}] dx + C",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_m_10",
+      "name": "Vector Algebra",
+      "keyPoints": [
+        "Cauchy-Schwarz Inequality: $|\\vec{a} \\cdot \\vec{b}| \\le |\\vec{a}| |\\vec{b}|$",
+        "Triangle Inequality: $|\\vec{a} + \\vec{b}| \\le |\\vec{a}| + |\\vec{b}|$"
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "fm_10_1",
+          "chapter": "Vector Algebra",
+          "name": "Position Vector",
+          "latex": "\\vec{r} = x\\hat{i} + y\\hat{j} + z\\hat{k} \\implies |\\vec{r}| = \\sqrt{x^2 + y^2 + z^2}",
+          "tags": []
+        },
+        {
+          "id": "fm_10_2",
+          "chapter": "Vector Algebra",
+          "name": "Direction Cosines",
+          "latex": "l = \\cos\\alpha = \\frac{a_1}{|\\vec{a}|}, \\; m = \\frac{a_2}{|\\vec{a}|}, \\; n = \\frac{a_3}{|\\vec{a}|} \\qquad l^2 + m^2 + n^2 = 1",
+          "tags": []
+        },
+        {
+          "id": "fm_10_3",
+          "chapter": "Vector Algebra",
+          "name": "Section Formula (Internal)",
+          "latex": "\\vec{r} = \\frac{m\\vec{b} + n\\vec{a}}{m + n}",
+          "tags": []
+        },
+        {
+          "id": "fm_10_4",
+          "chapter": "Vector Algebra",
+          "name": "Scalar (Dot) Product",
+          "latex": "\\vec{a} \\cdot \\vec{b} = |\\vec{a}| |\\vec{b}| \\cos\\theta = a_1 b_1 + a_2 b_2 + a_3 b_3",
+          "tags": []
+        },
+        {
+          "id": "fm_10_5",
+          "chapter": "Vector Algebra",
+          "name": "Projection of a on b",
+          "latex": "\\text{Proj}_{\\vec{b}}(\\vec{a}) = \\vec{a} \\cdot \\hat{b} = \\frac{\\vec{a} \\cdot \\vec{b}}{|\\vec{b}|}",
+          "tags": []
+        },
+        {
+          "id": "fm_10_6",
+          "chapter": "Vector Algebra",
+          "name": "Vector (Cross) Product",
+          "latex": "\\vec{a} \\times \\vec{b} = (|\\vec{a}| |\\vec{b}| \\sin\\theta) \\hat{n} = \\begin{vmatrix} \\hat{i} & \\hat{j} & \\hat{k} \\\\ a_1 & a_2 & a_3 \\\\ b_1 & b_2 & b_3 \\end{vmatrix}",
+          "tags": []
+        },
+        {
+          "id": "fm_10_7",
+          "chapter": "Vector Algebra",
+          "name": "Area of Triangle",
+          "latex": "\\text{Area} = \\frac{1}{2} |\\vec{a} \\times \\vec{b}|",
+          "tags": []
+        },
+        {
+          "id": "fm_10_8",
+          "chapter": "Vector Algebra",
+          "name": "Area of Parallelogram",
+          "latex": "\\text{Area} = |\\vec{a} \\times \\vec{b}|",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_m_11",
+      "name": "Three Dimensional Geometry",
+      "keyPoints": [],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "fm_11_1",
+          "chapter": "Three Dimensional Geometry",
+          "name": "Line (1 Point, Parallel Vector)",
+          "latex": "\\vec{r} = \\vec{a} + \\lambda \\vec{b} \\qquad \\frac{x - x_1}{a} = \\frac{y - y_1}{b} = \\frac{z - z_1}{c}",
+          "tags": []
+        },
+        {
+          "id": "fm_11_2",
+          "chapter": "Three Dimensional Geometry",
+          "name": "Line (2 Points)",
+          "latex": "\\vec{r} = \\vec{a} + \\lambda(\\vec{b} - \\vec{a}) \\qquad \\frac{x - x_1}{x_2 - x_1} = \\frac{y - y_1}{y_2 - y_1} = \\frac{z - z_1}{z_2 - z_1}",
+          "tags": []
+        },
+        {
+          "id": "fm_11_3",
+          "chapter": "Three Dimensional Geometry",
+          "name": "Angle between two lines",
+          "latex": "\\cos\\theta = \\frac{|\\vec{b}_1 \\cdot \\vec{b}_2|}{|\\vec{b}_1| |\\vec{b}_2|}",
+          "tags": []
+        },
+        {
+          "id": "fm_11_4",
+          "chapter": "Three Dimensional Geometry",
+          "name": "Shortest Distance (Skew Lines)",
+          "latex": "d = \\left| \\frac{(\\vec{b}_1 \\times \\vec{b}_2) \\cdot (\\vec{a}_2 - \\vec{a}_1)}{|\\vec{b}_1 \\times \\vec{b}_2|} \\right|",
+          "tags": []
+        },
+        {
+          "id": "fm_11_5",
+          "chapter": "Three Dimensional Geometry",
+          "name": "Distance between Parallel Lines",
+          "latex": "d = \\left| \\frac{\\vec{b} \\times (\\vec{a}_2 - \\vec{a}_1)}{|\\vec{b}|} \\right|",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_m_12",
+      "name": "Linear Programming",
+      "keyPoints": [
+        "Corner Point Theorem: The optimal value of $Z$ occurs at a vertex (corner point) of the feasible region.",
+        "Bounded Region: Maximum and minimum always exist at the corner points.",
+        "Unbounded Region Check: $M$ is the maximum $\\iff$ open half-plane $ax + by > M$ has no points in common with feasible region.",
+        "Multiple Optimal Solutions: If two corner points give the same optimal value, every point on the line segment joining them is also an optimal solution."
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "fm_12_1",
+          "chapter": "Linear Programming",
+          "name": "Objective Function",
+          "latex": "Z = ax + by",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_m_13",
+      "name": "Probability",
+      "keyPoints": [
+        "Complementary Independence: If A, B are independent $\\implies$ (A, B'), (A', B), (A', B') are also independent.",
+        "Partition of Sample Space: Disjoint and exhaustive subsets with $P(E_i) > 0$."
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "fm_13_1",
+          "chapter": "Probability",
+          "name": "Conditional Probability",
+          "latex": "P(E|F) = \\frac{P(E \\cap F)}{P(F)}",
+          "tags": []
+        },
+        {
+          "id": "fm_13_2",
+          "chapter": "Probability",
+          "name": "Multiplication Theorem",
+          "latex": "P(E \\cap F) = P(E) P(F|E) = P(F) P(E|F)",
+          "tags": []
+        },
+        {
+          "id": "fm_13_3",
+          "chapter": "Probability",
+          "name": "Independent Events",
+          "latex": "P(A \\cap B) = P(A) P(B) \\iff P(A|B) = P(A)",
+          "tags": []
+        },
+        {
+          "id": "fm_13_4",
+          "chapter": "Probability",
+          "name": "Probability of At Least One",
+          "latex": "P(A \\cup B) = 1 - P(A') P(B')",
+          "tags": []
+        },
+        {
+          "id": "fm_13_5",
+          "chapter": "Probability",
+          "name": "Theorem of Total Probability",
+          "latex": "P(A) = \\sum_{j=1}^n P(E_j) P(A|E_j)",
+          "tags": []
+        },
+        {
+          "id": "fm_13_6",
+          "chapter": "Probability",
+          "name": "Bayes’ Theorem",
+          "latex": "P(E_i|A) = \\frac{P(E_i) P(A|E_i)}{\\sum_{j=1}^n P(E_j) P(A|E_j)}",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    }
+  ]
+}

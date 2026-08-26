@@ -2,7 +2,6 @@ import { useNavigate } from "react-router";
 import { useState } from "react";
 import { Download, Loader2, LayoutGrid, Maximize2, Layers } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
 import { useLocalStorage, type SavedPDF } from "@/lib/local-storage";
 import { Chapter } from "@/lib/formulas";
 
@@ -36,12 +35,9 @@ export default function PDFButton({ formulas, chapters = [], subject }: PDFButto
   const [savedPDFs, setSavedPDFs] = useLocalStorage<SavedPDF[]>("askformula-saved-pdfs", []);
 
   const handleDownload = async (layout: PDFLayout, includeContent: ("formulas"|"keyPoints"|"keyDerivations")[]) => {
-    if ((formulas.length === 0 && chapters.length === 0) || isGenerating) return;
+    if (chapters.length === 0 || isGenerating) return;
 
     setIsGenerating(true);
-    const toastId = toast.loading(`Preparing ${layout} PDF layout...`, {
-      description: "Please wait, opening print view."
-    });
 
     try {
       // Save data to session storage so the print view can read it
@@ -63,18 +59,9 @@ export default function PDFButton({ formulas, chapters = [], subject }: PDFButto
       };
       setSavedPDFs([newSavedPdf, ...savedPDFs].slice(0, 50)); // keep last 50
 
-      toast.success("Print view ready!", {
-        id: toastId,
-        description: "Opening print preview.",
-      });
-
       navigate("/print");
     } catch (err) {
       console.error("Print preparation failed:", err);
-      toast.error("Failed to prepare PDF.", {
-        id: toastId,
-        description: "An error occurred while setting up the print view. Please try again.",
-      });
     } finally {
       setIsGenerating(false);
     }
@@ -85,7 +72,7 @@ export default function PDFButton({ formulas, chapters = [], subject }: PDFButto
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
-            disabled={formulas.length === 0 || isGenerating}
+            disabled={chapters.length === 0 || isGenerating}
             className="w-full sm:w-auto bg-white text-slate-950 hover:bg-slate-100 px-5 h-12 sm:h-10 rounded-full shadow-[0_4px_24px_-4px_rgba(255,255,255,0.1)] hover:shadow-[0_4px_32px_-4px_rgba(255,255,255,0.15)] transition-all duration-200 backdrop-blur-xl border border-white/[0.08] cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed font-medium text-base sm:text-sm"
           >
             {isGenerating ? (

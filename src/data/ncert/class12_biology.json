@@ -1,0 +1,217 @@
+{
+  "subject": "Biology",
+  "classLevel": "12",
+  "audience": [
+    "CBSE Class 12"
+  ],
+  "chapters": [
+    {
+      "id": "c12_b_1",
+      "name": "Sexual Reproduction in Flowering Plants",
+      "keyPoints": [
+        "Microsporogenesis: Sporogenous tissue $\\xrightarrow{\\text{meiosis}}$ Microspore tetrad (haploid, $n$).",
+        "Megasporogenesis & Female Gametophyte (Embryo Sac): Megaspore Mother Cell (MMC, $2n$) in micropylar nucellus $\\xrightarrow{\\text{meiosis}}$ 4 linear megaspores ($n$). 3 degenerate; 1 functional megaspore develops into embryo sac.",
+        "7-celled, 8-nucleate mature embryo sac: Egg apparatus (1 Egg cell + 2 Synergids), Central cell (2 polar nuclei), Antipodal cells (3 cells).",
+        "Double Fertilisation: Syngamy: Male gamete ($n$) + Egg cell ($n$) $\\to$ Zygote ($2n$). Triple Fusion: Male gamete ($n$) + 2 Polar nuclei ($2n$) $\\to$ Primary Endosperm Nucleus (PEN, $3n$).",
+        "Embryogeny: Zygote ($2n$) $\\to$ Proembryo $\\to$ Globular embryo $\\to$ Heart-shaped embryo $\\to$ Mature embryo."
+      ],
+      "keyDerivations": [],
+      "formulas": [],
+      "class": "12"
+    },
+    {
+      "id": "c12_b_2",
+      "name": "Human Reproduction",
+      "keyPoints": [
+        "Spermatogenesis: Spermatogonia ($2n, 46$) $\\xrightarrow{\\text{mitosis}}$ Primary Spermatocyte ($2n, 46$) $\\xrightarrow{\\text{Meiosis I}}$ 2 Secondary Spermatocytes ($n, 23$) $\\xrightarrow{\\text{Meiosis II}}$ 4 Spermatids ($n, 23$) $\\xrightarrow{\\text{Spermiogenesis}}$ 4 Spermatozoa ($n, 23$)",
+        "Oogenesis: Oogonia ($2n$) $\\xrightarrow{\\text{mitosis in fetal ovary}}$ Primary Oocytes ($2n$) $\\xrightarrow{\\text{arrested at Prophase-I}}$ Secondary Oocyte ($n$) + 1st Polar Body ($n$) $\\to$ Graafian follicle $\\xrightarrow{\\text{LH surge, Day 14}}$ Ovulation",
+        "Menstrual Cycle Phases: Menstrual Phase (Days 1–5), Follicular / Proliferative Phase (Days 6–13), Ovulatory Phase (Day 14), Luteal / Secretory Phase (Days 15–28).",
+        "Cleavage & Implantation: Zygote ($2n$) $\\xrightarrow{\\text{cleavage}}$ Morula (8-16 blastomeres) $\\xrightarrow{\\text{cavitation}}$ Blastocyst (Trophoblast outer layer + Inner Cell Mass)"
+      ],
+      "keyDerivations": [],
+      "formulas": [],
+      "class": "12"
+    },
+    {
+      "id": "c12_b_3",
+      "name": "Reproductive Health",
+      "keyPoints": [
+        "Medical Termination of Pregnancy (MTP): Legalized in India in 1971. Safe in 1st trimester (up to 12 weeks).",
+        "Assisted Reproductive Technologies (ART): IVF-ET (In Vitro Fertilisation & Embryo Transfer), ZIFT (Zygote Intra-Fallopian Transfer), IUT (Intra-Uterine Transfer), GIFT (Gamete Intra-Fallopian Transfer), ICSI (Intra-Cytoplasmic Sperm Injection), AI / IUI (Artificial Insemination / Intra-Uterine Insemination)."
+      ],
+      "keyDerivations": [],
+      "formulas": [],
+      "class": "12"
+    },
+    {
+      "id": "c12_b_4",
+      "name": "Principles of Inheritance and Variation",
+      "keyPoints": [
+        "Monohybrid Cross ($TT \\times tt \\to Tt$): Phenotypic Ratio: $3 : 1$ (Tall : Dwarf). Genotypic Ratio: $1 : 2 : 1$ ($TT : Tt : tt$).",
+        "Dihybrid Cross ($RRYY \\times rryy \\to RrYy$): Phenotypic Ratio: $9 : 3 : 3 : 1$. Number of genotypes = $3^n = 9$; Number of phenotypes = $2^n = 4$ (where $n = \\text{number of heterozygous gene pairs} = 2$).",
+        "Incomplete Dominance: F$_1$ phenotype intermediate between parents ($RR$ Red $\\times rr$ White $\\to Rr$ Pink; F$_2$ phenotypic & genotypic ratio = $1 : 2 : 1$).",
+        "Sex Determination Mechanisms: Male Heterogamety: XX-XY (Humans, Drosophila), XX-XO (Grasshopper). Female Heterogamety: ZZ-ZW (Birds). Haplodiploidy: Honey bees.",
+        "Sickle-Cell Anaemia: Autosomal recessive ($Hb^A Hb^S$). Point mutation: GAG $\\to$ GUG substitution at $6^{\\text{th}}$ codon of $\\beta$-globin gene; Glutamic acid $\\to$ Valine."
+      ],
+      "keyDerivations": [],
+      "formulas": [],
+      "class": "12"
+    },
+    {
+      "id": "c12_b_5",
+      "name": "Molecular Basis of Inheritance",
+      "keyPoints": [
+        "Chargaff's Rule: $[A] = [T]$, $[G] = [C] \\implies \\frac{[A]+[G]}{[T]+[C]} = 1$.",
+        "Griffith’s Transformation Experiment (1928): Heat-killed S + Live R injected in mice $\\to$ Mice die; live S bacteria recovered. Proved transforming principle.",
+        "Hershey-Chase Experiment (1952): $^{35}\\text{S}$ labelled protein coat and $^{32}\\text{P}$ labelled DNA proved DNA is viral genetic material.",
+        "Meselson & Stahl Experiment (1958): Proved semiconservative replication in E. coli using heavy isotope $^{15}\\text{NH}_4\\text{Cl}$ and $^{14}\\text{NH}_4\\text{Cl}$.",
+        "Transcription Unit: Promoter ($5'$-end of coding strand), Structural Gene, Terminator ($3'$-end of coding strand). Template strand: $3' \\to 5'$; Coding strand: $5' \\to 3'$."
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "fb_5_1",
+          "chapter": "Molecular Basis of Inheritance",
+          "name": "Chargaff's Rule",
+          "latex": "\\frac{[A]+[G]}{[T]+[C]} = 1",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_b_6",
+      "name": "Evolution",
+      "keyPoints": [
+        "Hardy-Weinberg Equation: $p + q = 1 \\implies p^2 + 2pq + q^2 = 1$ where $p = \\text{freq}(A)$, $q = \\text{freq}(a)$; $p^2 = \\text{freq}(AA)$, $2pq = \\text{freq}(Aa)$, $q^2 = \\text{freq}(aa)$.",
+        "Urey-Miller Experiment (1953): Electric discharge at $800^\\circ\\text{C}$ in gas mixture ($\\text{CH}_4 : \\text{NH}_3 : \\text{H}_2 = 2:1:2$ + water vapour) $\\to$ synthesis of amino acids."
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "fb_6_1",
+          "chapter": "Evolution",
+          "name": "Hardy-Weinberg Equation",
+          "latex": "p^2 + 2pq + q^2 = 1 \\qquad (p + q = 1)",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_b_7",
+      "name": "Human Health and Disease",
+      "keyPoints": [
+        "Innate Immunity: Physical Barriers, Physiological Barriers, Cellular Barriers, Cytokine Barriers.",
+        "Acquired Immunity: Humoral Immune Response (B-lymphocytes produce antibodies), Cell-Mediated Immunity (T-lymphocytes).",
+        "AIDS Mechanism: Viral RNA converts to viral DNA via reverse transcriptase $\\to$ integrates into host genome $\\to$ new viruses infect Helper T-lymphocytes (T$_H$, CD4)."
+      ],
+      "keyDerivations": [],
+      "formulas": [],
+      "class": "12"
+    },
+    {
+      "id": "c12_b_8",
+      "name": "Microbes in Human Welfare",
+      "keyPoints": [
+        "BOD (Biochemical Oxygen Demand): Amount of O$_2$ consumed if all organic matter in 1 L water oxidised by bacteria; indicator of pollution.",
+        "Biogas Production: Anaerobic degradation by methanogens $\\to$ Biogas ($\\text{CH}_4 + \\text{CO}_2 + \\text{H}_2\\text{S}$)."
+      ],
+      "keyDerivations": [],
+      "formulas": [],
+      "class": "12"
+    },
+    {
+      "id": "c12_b_9",
+      "name": "Biotechnology: Principles and Processes",
+      "keyPoints": [
+        "Restriction Endonucleases: Cleave phosphodiester bonds on both strands away from centre of symmetry (e.g., EcoRI cuts $5'\\text{-G}\\downarrow\\text{AATTC-3}'$).",
+        "PCR (Polymerase Chain Reaction): Denaturation ($94\\text{--}96^\\circ\\text{C}$), Annealing ($50\\text{--}60^\\circ\\text{C}$), Extension ($72^\\circ\\text{C}$)."
+      ],
+      "keyDerivations": [],
+      "formulas": [],
+      "class": "12"
+    },
+    {
+      "id": "c12_b_10",
+      "name": "Biotechnology and Its Applications",
+      "keyPoints": [
+        "Genetically Engineered Insulin: Eli Lilly synthesised two separate DNA sequences for A and B chains, cloned them in E. coli plasmids, extracted chains separately, and combined them via disulphide bonds.",
+        "RNA Interference (RNAi): Nematode-specific genes introduced into host plant $\\to$ produces both sense and anti-sense RNA $\\to$ forms double-stranded RNA (dsRNA) $\\to$ initiates cellular defense RNAi $\\to$ silences specific nematode mRNA."
+      ],
+      "keyDerivations": [],
+      "formulas": [],
+      "class": "12"
+    },
+    {
+      "id": "c12_b_11",
+      "name": "Organisms and Populations",
+      "keyPoints": [
+        "Exponential Growth: $\\frac{dN}{dt} = (b - d)N = rN \\implies N_t = N_0 e^{rt}$",
+        "Verhulst-Pearl Logistic Growth: $\\frac{dN}{dt} = rN\\left(\\frac{K - N}{K}\\right)$",
+        "Population Dynamics Equation: $N_{t+1} = N_t + [(B + I) - (D + E)]$"
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "fb_11_1",
+          "chapter": "Organisms and Populations",
+          "name": "Exponential Growth",
+          "latex": "\\frac{dN}{dt} = (b - d)N = rN \\implies N_t = N_0 e^{rt}",
+          "tags": []
+        },
+        {
+          "id": "fb_11_2",
+          "chapter": "Organisms and Populations",
+          "name": "Logistic Growth",
+          "latex": "\\frac{dN}{dt} = rN\\left(\\frac{K - N}{K}\\right)",
+          "tags": []
+        },
+        {
+          "id": "fb_11_3",
+          "chapter": "Organisms and Populations",
+          "name": "Population Dynamics",
+          "latex": "N_{t+1} = N_t + [(B + I) - (D + E)]",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_b_12",
+      "name": "Ecosystem",
+      "keyPoints": [
+        "Net Primary Productivity (NPP): $\\text{NPP} = \\text{GPP} - R$ (where $R = \\text{respiratory loss}$)."
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "fb_12_1",
+          "chapter": "Ecosystem",
+          "name": "Net Primary Productivity",
+          "latex": "\\text{NPP} = \\text{GPP} - R",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_b_13",
+      "name": "Biodiversity and Conservation",
+      "keyPoints": [
+        "Species-Area Relationship: $\\log S = \\log C + Z \\log A \\quad \\left(S = C A^Z\\right)$"
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "fb_13_1",
+          "chapter": "Biodiversity and Conservation",
+          "name": "Species-Area Relationship",
+          "latex": "\\log S = \\log C + Z \\log A \\quad (S = C A^Z)",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    }
+  ]
+}

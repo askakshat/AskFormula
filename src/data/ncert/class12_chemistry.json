@@ -1,0 +1,864 @@
+{
+  "subject": "Chemistry",
+  "classLevel": "12",
+  "audience": [
+    "CBSE Class 12"
+  ],
+  "chapters": [
+    {
+      "id": "c12_c_1",
+      "name": "Solutions",
+      "keyPoints": [
+        "Temperature Dependence: Mass %, ppm, mole fraction, and molality do not change with temperature; molarity and volume % change with temperature.",
+        "Henry's Law Constant ($K_H$): Higher $K_H$ at a given pressure indicates lower gas solubility. $K_H$ increases with temperature $\\implies$ gases are more soluble in liquids at lower temperatures (aquatic life is more comfortable in cold water).",
+        "Ideal Solutions: Obey Raoult's law at all concentrations; $\\Delta_{\\text{mix}}H = 0$, $\\Delta_{\\text{mix}}V = 0$; A-B intermolecular forces $\\approx$ A-A and B-B forces (e.g., n-hexane + n-heptane, benzene + toluene, bromoethane + chloroethane).",
+        "Non-Ideal Solutions with Positive Deviation: A-B interactions are weaker than A-A and B-B; $\\Delta_{\\text{mix}}H > 0$, $\\Delta_{\\text{mix}}V > 0$; $p_{\\text{total}} > p_1^\\circ x_1 + p_2^\\circ x_2$; form minimum boiling azeotropes (e.g., ethanol + acetone, $\\text{CS}_2$ + acetone, 95% ethanol + 5% water).",
+        "Non-Ideal Solutions with Negative Deviation: A-B interactions are stronger than A-A and B-B (often due to new H-bonding); $\\Delta_{\\text{mix}}H < 0$, $\\Delta_{\\text{mix}}V < 0$; $p_{\\text{total}} < p_1^\\circ x_1 + p_2^\\circ x_2$; form maximum boiling azeotropes (e.g., phenol + aniline, chloroform + acetone, 68% $\\text{HNO}_3$ + 32% water).",
+        "Reverse Osmosis: Occurs when an external pressure greater than the osmotic pressure ($\\Pi$) is applied on the solution side; pure solvent passes through the semipermeable membrane (SPM: cellulose acetate) from solution to solvent side."
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "f_1_1",
+          "chapter": "Solutions",
+          "name": "Mass Percentage (w/w)",
+          "latex": "\\text{Mass } \\% = \\frac{w_B}{w_A + w_B} \\times 100 \\qquad w_B = \\text{mass of solute}, w_A = \\text{mass of solvent}",
+          "tags": []
+        },
+        {
+          "id": "f_1_2",
+          "chapter": "Solutions",
+          "name": "Volume Percentage (V/V)",
+          "latex": "\\text{Volume } \\% = \\frac{V_B}{V_{\\text{total}}} \\times 100 \\qquad V_B = \\text{volume of solute}, V_{\\text{total}} = \\text{solution volume}",
+          "tags": []
+        },
+        {
+          "id": "f_1_3",
+          "chapter": "Solutions",
+          "name": "Parts Per Million (ppm)",
+          "latex": "\\text{ppm} = \\frac{w_B}{w_{\\text{solution}}} \\times 10^6 \\qquad \\text{Used for trace quantities}",
+          "tags": []
+        },
+        {
+          "id": "f_1_4",
+          "chapter": "Solutions",
+          "name": "Mole Fraction (x)",
+          "latex": "x_A = \\frac{n_A}{n_A + n_B},\\; x_B = \\frac{n_B}{n_A + n_B} \\qquad x_A + x_B = 1; \\text{ dimensionless}",
+          "tags": []
+        },
+        {
+          "id": "f_1_5",
+          "chapter": "Solutions",
+          "name": "Molarity (M)",
+          "latex": "M = \\frac{n_B}{V\\text{ (in L)}} = \\frac{w_B \\times 1000}{M_B \\times V\\text{ (in mL)}} \\qquad \\text{Unit: mol L}^{-1}; \\text{ temperature-dependent}",
+          "tags": []
+        },
+        {
+          "id": "f_1_6",
+          "chapter": "Solutions",
+          "name": "Molality (m)",
+          "latex": "m = \\frac{n_B}{w_A\\text{ (in kg)}} = \\frac{w_B \\times 1000}{M_B \\times w_A\\text{ (in g)}} \\qquad \\text{Unit: mol kg}^{-1}; \\text{ temperature-independent}",
+          "tags": []
+        },
+        {
+          "id": "f_1_7",
+          "chapter": "Solutions",
+          "name": "Henry’s Law",
+          "latex": "p = K_H x \\qquad p = \\text{partial pressure}, K_H = \\text{Henry's constant}",
+          "tags": []
+        },
+        {
+          "id": "f_1_8",
+          "chapter": "Solutions",
+          "name": "Raoult’s Law (Volatile)",
+          "latex": "p_1 = p_1^\\circ x_1,\\; p_2 = p_2^\\circ x_2 \\qquad p_{\\text{total}} = p_1 + p_2 = p_1^\\circ + (p_2^\\circ - p_1^\\circ)x_2 \\qquad p_i^\\circ = \\text{vapour pressure of pure component } i",
+          "tags": []
+        },
+        {
+          "id": "f_1_9",
+          "chapter": "Solutions",
+          "name": "Vapour Phase Composition",
+          "latex": "y_1 = \\frac{p_1}{p_{\\text{total}}},\\; y_2 = \\frac{p_2}{p_{\\text{total}}} \\qquad y_i = \\text{mole fraction in vapour phase (Dalton's Law)}",
+          "tags": []
+        },
+        {
+          "id": "f_1_10",
+          "chapter": "Solutions",
+          "name": "Relative Lowering of Vapour Pressure",
+          "latex": "\\frac{p_1^\\circ - p}{p_1^\\circ} = i x_2 \\approx i \\frac{n_2}{n_1} = i \\frac{w_2 M_1}{M_2 w_1} \\qquad \\text{Dilute solution of non-volatile solute in volatile solvent}",
+          "tags": []
+        },
+        {
+          "id": "f_1_11",
+          "chapter": "Solutions",
+          "name": "Elevation of Boiling Point",
+          "latex": "\\Delta T_b = T_b - T_b^\\circ = i K_b m = i \\frac{1000 K_b w_2}{M_2 w_1} \\qquad K_b = \\frac{R M_1 T_b^{\\circ 2}}{1000 \\Delta_{\\text{vap}}H} \\text{ (Ebullioscopic constant)}",
+          "tags": []
+        },
+        {
+          "id": "f_1_12",
+          "chapter": "Solutions",
+          "name": "Depression of Freezing Point",
+          "latex": "\\Delta T_f = T_f^\\circ - T_f = i K_f m = i \\frac{1000 K_f w_2}{M_2 w_1} \\qquad K_f = \\frac{R M_1 T_f^{\\circ 2}}{1000 \\Delta_{\\text{fus}}H} \\text{ (Cryoscopic constant)}",
+          "tags": []
+        },
+        {
+          "id": "f_1_13",
+          "chapter": "Solutions",
+          "name": "Osmotic Pressure",
+          "latex": "\\Pi = i C R T = i \\left(\\frac{n_2}{V}\\right) R T = i \\frac{w_2 R T}{M_2 V} \\qquad C = \\text{molarity}, R = 0.0831\\text{ L bar K}^{-1}\\text{ mol}^{-1}",
+          "tags": []
+        },
+        {
+          "id": "f_1_14",
+          "chapter": "Solutions",
+          "name": "Van ’t Hoff Factor (i)",
+          "latex": "i = \\frac{\\text{Observed Colligative Property}}{\\text{Calculated Colligative Property}} = \\frac{M_{\\text{normal}}}{M_{\\text{abnormal}}} \\qquad i = \\frac{\\text{Total moles after dissociation/association}}{\\text{Moles before dissociation/association}}",
+          "tags": []
+        },
+        {
+          "id": "f_1_15",
+          "chapter": "Solutions",
+          "name": "Degree of Dissociation",
+          "latex": "\\alpha = \\frac{i - 1}{n - 1} \\qquad n = \\text{number of ions produced per formula unit}",
+          "tags": []
+        },
+        {
+          "id": "f_1_16",
+          "chapter": "Solutions",
+          "name": "Degree of Association",
+          "latex": "\\alpha = \\frac{1 - i}{1 - 1/n} \\qquad n = \\text{number of molecules associated to form a polymer}",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_c_2",
+      "name": "Electrochemistry",
+      "keyPoints": [
+        "Dry Cell (Leclanché): Anode: $\\text{Zn} \\to \\text{Zn}^{2+} + 2e^-$; Cathode: $\\text{MnO}_2 + \\text{NH}_4^+ + e^- \\to \\text{MnO(OH)} + \\text{NH}_3$; $E \\approx 1.5\\text{ V}$.",
+        "Mercury Cell: Anode: $\\text{Zn(Hg)} + 2\\text{OH}^- \\to \\text{ZnO} + \\text{H}_2\\text{O} + 2e^-$; Cathode: $\\text{HgO} + \\text{H}_2\\text{O} + 2e^- \\to \\text{Hg} + 2\\text{OH}^-$; Overall: $\\text{Zn(Hg)} + \\text{HgO} \\to \\text{ZnO} + \\text{Hg}$; $E = 1.35\\text{ V}$ (constant throughout life as no net ionic concentration change occurs).",
+        "Lead Storage Battery (Discharging): Anode: $\\text{Pb}(s) + \\text{SO}_4^{2-} \\to \\text{PbSO}_4(s) + 2e^-$; Cathode: $\\text{PbO}_2(s) + \\text{SO}_4^{2-} + 4\\text{H}^+ + 2e^- \\to \\text{PbSO}_4(s) + 2\\text{H}_2\\text{O}(l)$; Overall: $\\text{Pb}(s) + \\text{PbO}_2(s) + 2\\text{H}_2\\text{SO}_4(aq) \\to 2\\text{PbSO}_4(s) + 2\\text{H}_2\\text{O}(l)$. Recharging: Reactions reverse; density of $\\text{H}_2\\text{SO}_4$ rises.",
+        "$\\text{H}_2\\text{-O}_2$ Fuel Cell: Anode: $2\\text{H}_2 + 4\\text{OH}^- \\to 4\\text{H}_2\\text{O} + 4e^-$; Cathode: $\\text{O}_2 + 2\\text{H}_2\\text{O} + 4e^- \\to 4\\text{OH}^-$; Overall: $2\\text{H}_2 + \\text{O}_2 \\to 2\\text{H}_2\\text{O}$; Efficiency $\\approx 70\\%$.",
+        "Rusting of Iron (Electrochemical Mechanism): Anode: $2\\text{Fe}(s) \\to 2\\text{Fe}^{2+} + 4e^-$ ($E^\\circ = -0.44\\text{ V}$); Cathode: $\\text{O}_2(g) + 4\\text{H}^+ + 4e^- \\to 2\\text{H}_2\\text{O}(l)$ ($E^\\circ = 1.23\\text{ V}$); Overall: $2\\text{Fe} + \\text{O}_2 + 4\\text{H}^+ \\to 2\\text{Fe}^{2+} + 2\\text{H}_2\\text{O}$ ($E_{\\text{cell}}^\\circ = 1.67\\text{ V}$). Rust: $2\\text{Fe}^{2+} + 2\\text{H}_2\\text{O} + \\frac{1}{2}\\text{O}_2 \\to \\text{Fe}_2\\text{O}_3 \\cdot x\\text{H}_2\\text{O} + 4\\text{H}^+$."
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "f_2_1",
+          "chapter": "Electrochemistry",
+          "name": "Standard Cell Potential",
+          "latex": "E_{\\text{cell}}^\\circ = E_{\\text{cathode}}^\\circ - E_{\\text{anode}}^\\circ = E_R^\\circ - E_L^\\circ \\qquad \\text{Standard reduction potentials (IUPAC)}",
+          "tags": []
+        },
+        {
+          "id": "f_2_2",
+          "chapter": "Electrochemistry",
+          "name": "Nernst Equation (Electrode)",
+          "latex": "E_{(M^{n+}/M)} = E_{(M^{n+}/M)}^\\circ - \\frac{RT}{nF}\\ln\\frac{1}{[M^{n+}]} = E^\\circ - \\frac{0.0591}{n}\\log\\frac{1}{[M^{n+}]} \\qquad \\text{At } T = 298\\text{ K}, F = 96487\\text{ C mol}^{-1} \\approx 96500\\text{ C}",
+          "tags": []
+        },
+        {
+          "id": "f_2_3",
+          "chapter": "Electrochemistry",
+          "name": "Nernst Equation (Cell Reaction)",
+          "latex": "E_{\\text{cell}} = E_{\\text{cell}}^\\circ - \\frac{RT}{nF}\\ln Q = E_{\\text{cell}}^\\circ - \\frac{0.0591}{n}\\log\\frac{[\\text{Products}]^c}{[\\text{Reactants}]^a} \\qquad \\text{For } aA + bB \\xrightarrow{ne^-} cC + dD; Q = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+          "tags": []
+        },
+        {
+          "id": "f_2_4",
+          "chapter": "Electrochemistry",
+          "name": "Equilibrium Constant (Kc)",
+          "latex": "\\log K_c = \\frac{n E_{\\text{cell}}^\\circ}{0.0591} \\text{ (at 298 K)} \\qquad \\text{At equilibrium: } E_{\\text{cell}} = 0 \\implies E_{\\text{cell}}^\\circ = \\frac{2.303 RT}{nF}\\log K_c",
+          "tags": []
+        },
+        {
+          "id": "f_2_5",
+          "chapter": "Electrochemistry",
+          "name": "Gibbs Energy of Cell Reaction",
+          "latex": "\\Delta_r G = -n F E_{\\text{cell}},\\; \\Delta_r G^\\circ = -n F E_{\\text{cell}}^\\circ = -2.303 RT\\log K_c \\qquad E_{\\text{cell}} \\text{ is intensive; } \\Delta_r G \\text{ is extensive}",
+          "tags": []
+        },
+        {
+          "id": "f_2_6",
+          "chapter": "Electrochemistry",
+          "name": "Resistance & Resistivity",
+          "latex": "R = \\rho\\frac{l}{A},\\; G = \\frac{1}{R} = \\kappa\\frac{A}{l} \\qquad R \\text{ in } \\Omega, \\rho \\text{ in } \\Omega\\text{ m}, G \\text{ in S } (\\Omega^{-1}), \\kappa \\text{ in S m}^{-1} \\text{ or S cm}^{-1}",
+          "tags": []
+        },
+        {
+          "id": "f_2_7",
+          "chapter": "Electrochemistry",
+          "name": "Cell Constant (G*)",
+          "latex": "G^* = \\frac{l}{A} = R \\kappa \\qquad \\text{Measured using standard KCl solutions}",
+          "tags": []
+        },
+        {
+          "id": "f_2_8",
+          "chapter": "Electrochemistry",
+          "name": "Molar Conductivity",
+          "latex": "\\Lambda_m = \\frac{\\kappa}{c} = \\frac{1000 \\times \\kappa\\text{ (in S cm}^{-1}\\text{)}}{M\\text{ (in mol L}^{-1}\\text{)}} \\qquad \\text{Unit: S cm}^2\\text{ mol}^{-1} \\text{ (}1\\text{ S m}^2\\text{ mol}^{-1} = 10^4\\text{ S cm}^2\\text{ mol}^{-1}\\text{)}",
+          "tags": []
+        },
+        {
+          "id": "f_2_9",
+          "chapter": "Electrochemistry",
+          "name": "Debye-Hückel-Onsager Equation",
+          "latex": "\\Lambda_m = \\Lambda_m^\\circ - A\\sqrt{c} \\qquad \\text{For strong electrolytes; } A = \\text{constant}",
+          "tags": []
+        },
+        {
+          "id": "f_2_10",
+          "chapter": "Electrochemistry",
+          "name": "Kohlrausch’s Law",
+          "latex": "\\Lambda_m^\\circ = \\nu_+ \\lambda_+^\\circ + \\nu_- \\lambda_-^\\circ \\qquad \\text{Limiting molar conductivity at infinite dilution}",
+          "tags": []
+        },
+        {
+          "id": "f_2_11",
+          "chapter": "Electrochemistry",
+          "name": "Degree of Dissociation",
+          "latex": "\\alpha = \\frac{\\Lambda_m}{\\Lambda_m^\\circ} \\qquad \\text{For weak electrolytes}",
+          "tags": []
+        },
+        {
+          "id": "f_2_12",
+          "chapter": "Electrochemistry",
+          "name": "Dissociation Constant (Ka)",
+          "latex": "K_a = \\frac{c\\alpha^2}{1 - \\alpha} = \\frac{c \\Lambda_m^2}{\\Lambda_m^\\circ(\\Lambda_m^\\circ - \\Lambda_m)} \\qquad \\text{Ostwald's dilution law}",
+          "tags": []
+        },
+        {
+          "id": "f_2_13",
+          "chapter": "Electrochemistry",
+          "name": "Faraday’s 1st Law of Electrolysis",
+          "latex": "w = z Q = z I t = \\frac{E}{96500} I t = \\frac{M}{n F} I t \\qquad z = \\text{electrochemical equivalent}, E = \\text{equivalent weight}",
+          "tags": []
+        },
+        {
+          "id": "f_2_14",
+          "chapter": "Electrochemistry",
+          "name": "Faraday’s 2nd Law of Electrolysis",
+          "latex": "\\frac{w_1}{w_2} = \\frac{E_1}{E_2} \\qquad \\text{For cells connected in series}",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_c_3",
+      "name": "Chemical Kinetics",
+      "keyPoints": [],
+      "keyDerivations": [
+        "Zero Order Integrated Rate Law: $-\\frac{d[R]}{dt} = k[R]^0 = k \\implies \\int_{[R]_0}^{[R]} d[R] = -k\\int_0^t dt \\implies [R] - [R]_0 = -kt \\implies [R] = [R]_0 - kt$. At $t = t_{1/2}$, $[R] = [R]_0/2 \\implies t_{1/2} = \\frac{[R]_0}{2k}$.",
+        "First Order Integrated Rate Law: $-\\frac{d[R]}{dt} = k[R] \\implies \\int_{[R]_0}^{[R]} \\frac{d[R]}{[R]} = -k\\int_0^t dt \\implies \\ln\\frac{[R]}{[R]_0} = -kt \\implies k = \\frac{2.303}{t}\\log\\frac{[R]_0}{[R]}$. At $t = t_{1/2}$, $[R] = [R]_0/2 \\implies t_{1/2} = \\frac{\\ln 2}{k} = \\frac{0.693}{k}$.",
+        "Gas Phase First Order Reaction ($A(g) \\to B(g) + C(g)$): At $t=0$, $p_A = p_i$, $p_B = 0$, $p_C = 0$. At time $t$, $p_A = p_i - x$, $p_B = x$, $p_C = x$. Total pressure $p_t = p_i - x + x + x = p_i + x \\implies x = p_t - p_i \\implies p_A = p_i - (p_t - p_i) = 2p_i - p_t$. $k = \\frac{2.303}{t}\\log\\frac{p_i}{p_A} = \\frac{2.303}{t}\\log\\frac{p_i}{2p_i - p_t}$"
+      ],
+      "formulas": [
+        {
+          "id": "f_3_1",
+          "chapter": "Chemical Kinetics",
+          "name": "Rate of Reaction",
+          "latex": "r_{\\text{avg}} = -\\frac{1}{a}\\frac{\\Delta[A]}{\\Delta t} = \\frac{1}{c}\\frac{\\Delta[C]}{\\Delta t},\\; r_{\\text{inst}} = -\\frac{1}{a}\\frac{d[A]}{dt} \\qquad \\text{For reaction: } aA + bB \\to cC + dD",
+          "tags": []
+        },
+        {
+          "id": "f_3_2",
+          "chapter": "Chemical Kinetics",
+          "name": "Rate Law & Order",
+          "latex": "\\text{Rate} = k[A]^x[B]^y,\\; \\text{Order } n = x + y \\qquad x, y \\text{ are experimentally determined powers}",
+          "tags": []
+        },
+        {
+          "id": "f_3_3",
+          "chapter": "Chemical Kinetics",
+          "name": "Units of Rate Constant (k)",
+          "latex": "\\text{Units of } k = (\\text{mol L}^{-1})^{1-n} \\text{ s}^{-1} \\qquad n = \\text{order of reaction}",
+          "tags": []
+        },
+        {
+          "id": "f_3_4",
+          "chapter": "Chemical Kinetics",
+          "name": "Zero Order Integrated Rate Law",
+          "latex": "[R] = [R]_0 - kt \\implies k = \\frac{[R]_0 - [R]}{t} \\qquad \\text{Linear plot: } [R] \\text{ vs } t \\text{ (slope = } -k, \\text{ intercept = } [R]_0\\text{)}",
+          "tags": []
+        },
+        {
+          "id": "f_3_5",
+          "chapter": "Chemical Kinetics",
+          "name": "Zero Order Half-Life",
+          "latex": "t_{1/2} = \\frac{[R]_0}{2k} \\qquad t_{1/2} \\propto [R]_0",
+          "tags": []
+        },
+        {
+          "id": "f_3_6",
+          "chapter": "Chemical Kinetics",
+          "name": "First Order Integrated Rate Law",
+          "latex": "[R] = [R]_0 e^{-kt} \\implies k = \\frac{2.303}{t}\\log\\frac{[R]_0}{[R]} \\qquad \\text{Linear plot: } \\ln[R] \\text{ vs } t \\text{ (slope = } -k\\text{) or } \\log\\frac{[R]_0}{[R]} \\text{ vs } t \\text{ (slope = } k/2.303\\text{)}",
+          "tags": []
+        },
+        {
+          "id": "f_3_7",
+          "chapter": "Chemical Kinetics",
+          "name": "First Order Half-Life",
+          "latex": "t_{1/2} = \\frac{\\ln 2}{k} = \\frac{0.693}{k} \\qquad \\text{Independent of initial concentration } [R]_0",
+          "tags": []
+        },
+        {
+          "id": "f_3_8",
+          "chapter": "Chemical Kinetics",
+          "name": "First Order Gas Phase Reaction",
+          "latex": "k = \\frac{2.303}{t}\\log\\frac{p_i}{2p_i - p_t} \\qquad \\text{For } A(g) \\to B(g) + C(g); p_i = \\text{initial pressure}, p_t = \\text{total pressure}",
+          "tags": []
+        },
+        {
+          "id": "f_3_9",
+          "chapter": "Chemical Kinetics",
+          "name": "Arrhenius Equation",
+          "latex": "k = A e^{-E_a/RT} \\qquad A = \\text{frequency factor}, E_a = \\text{activation energy}",
+          "tags": []
+        },
+        {
+          "id": "f_3_10",
+          "chapter": "Chemical Kinetics",
+          "name": "Logarithmic Arrhenius Forms",
+          "latex": "\\ln k = \\ln A - \\frac{E_a}{RT},\\; \\log k = \\log A - \\frac{E_a}{2.303 RT} \\qquad \\text{Plot of } \\log k \\text{ vs } 1/T \\text{ has slope } = -\\frac{E_a}{2.303 R}",
+          "tags": []
+        },
+        {
+          "id": "f_3_11",
+          "chapter": "Chemical Kinetics",
+          "name": "Two-Temperature Arrhenius Form",
+          "latex": "\\log\\frac{k_2}{k_1} = \\frac{E_a}{2.303 R}\\left[\\frac{T_2 - T_1}{T_1 T_2}\\right] \\qquad k_1, k_2 \\text{ are rate constants at } T_1, T_2",
+          "tags": []
+        },
+        {
+          "id": "f_3_12",
+          "chapter": "Chemical Kinetics",
+          "name": "Collision Theory Rate",
+          "latex": "\\text{Rate} = P Z_{AB} e^{-E_a/RT} \\qquad P = \\text{steric factor}, Z_{AB} = \\text{collision frequency}",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_c_4",
+      "name": "The d- and f-Block Elements",
+      "keyPoints": [
+        "Lanthanoid Contraction: The steady decrease in atomic and ionic radii along the lanthanoid series ($\\text{La}^{3+} \\to \\text{Lu}^{3+}$) due to poor shielding of nuclear charge by $4f$ electrons. Consequence: Almost identical atomic radii for $4d$ and $5d$ pairs (e.g., $\\text{Zr} = 160\\text{ pm}$ and $\\text{Hf} = 159\\text{ pm}$), making their separation difficult.",
+        "Actinoid Contraction: Greater from element to element than lanthanoid contraction due to poorer shielding by $5f$ electrons.",
+        "Preparation of $\\text{K}_2\\text{Cr}_2\\text{O}_7$: $4\\text{FeCr}_2\\text{O}_4 + 8\\text{Na}_2\\text{CO}_3 + 7\\text{O}_2 \\to 8\\text{Na}_2\\text{CrO}_4\\text{ (yellow)} + 2\\text{Fe}_2\\text{O}_3 + 8\\text{CO}_2$; $2\\text{Na}_2\\text{CrO}_4 + 2\\text{H}^+ \\to \\text{Na}_2\\text{Cr}_2\\text{O}_7\\text{ (orange)} + 2\\text{Na}^+ + \\text{H}_2\\text{O}$; $\\text{Na}_2\\text{Cr}_2\\text{O}_7 + 2\\text{KCl} \\to \\text{K}_2\\text{Cr}_2\\text{O}_7\\text{ (crystallises)} + 2\\text{NaCl}$",
+        "Preparation of $\\text{KMnO}_4$: $2\\text{MnO}_2 + 4\\text{KOH} + \\text{O}_2 \\to 2\\text{K}_2\\text{MnO}_4\\text{ (dark green)} + 2\\text{H}_2\\text{O}$; $3\\text{MnO}_4^{2-} + 4\\text{H}^+ \\to 2\\text{MnO}_4^-\\text{ (purple)} + \\text{MnO}_2 + 2\\text{H}_2\\text{O}$ (or via electrolytic oxidation)"
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "f_4_1",
+          "chapter": "The d- and f-Block Elements",
+          "name": "General Configuration (d-block)",
+          "latex": "(n-1)d^{1-10} ns^{1-2} \\qquad \\text{Anomalous: Cr: } 3d^5 4s^1, \\text{ Cu: } 3d^{10} 4s^1, \\text{ Pd: } 4d^{10} 5s^0",
+          "tags": []
+        },
+        {
+          "id": "f_4_2",
+          "chapter": "The d- and f-Block Elements",
+          "name": "General Configuration (f-block)",
+          "latex": "(n-2)f^{1-14} (n-1)d^{0-1} ns^2 \\qquad \\text{Lanthanoids: } [\\text{Xe}] 4f^{1-14} 5d^{0-1} 6s^2; \\text{ Actinoids: } [\\text{Rn}] 5f^{1-14} 6d^{0-1} 7s^2",
+          "tags": []
+        },
+        {
+          "id": "f_4_3",
+          "chapter": "The d- and f-Block Elements",
+          "name": "Spin-Only Magnetic Moment",
+          "latex": "\\mu = \\sqrt{n(n+2)}\\text{ BM} \\qquad n = \\text{number of unpaired electrons}, 1\\text{ BM} = \\frac{eh}{4\\pi m_e}",
+          "tags": []
+        },
+        {
+          "id": "f_4_4",
+          "chapter": "The d- and f-Block Elements",
+          "name": "Chromate-Dichromate Equilibrium",
+          "latex": "2\\text{CrO}_4^{2-} + 2\\text{H}^+ \\rightleftharpoons \\text{Cr}_2\\text{O}_7^{2-} + \\text{H}_2\\text{O} \\qquad \\text{Yellow (alkaline/neutral)} \\rightleftharpoons \\text{Orange (acidic)}",
+          "tags": []
+        },
+        {
+          "id": "f_4_5",
+          "chapter": "The d- and f-Block Elements",
+          "name": "Dichromate Half-Reaction",
+          "latex": "\\text{Cr}_2\\text{O}_7^{2-} + 14\\text{H}^+ + 6e^- \\to 2\\text{Cr}^{3+} + 7\\text{H}_2\\text{O} \\qquad E^\\circ = +1.33\\text{ V}",
+          "tags": []
+        },
+        {
+          "id": "f_4_6",
+          "chapter": "The d- and f-Block Elements",
+          "name": "Permanganate Half-Reaction (Acidic)",
+          "latex": "\\text{MnO}_4^- + 8\\text{H}^+ + 5e^- \\to \\text{Mn}^{2+} + 4\\text{H}_2\\text{O} \\qquad E^\\circ = +1.52\\text{ V}",
+          "tags": []
+        },
+        {
+          "id": "f_4_7",
+          "chapter": "The d- and f-Block Elements",
+          "name": "Permanganate Half-Reaction (Neutral/Alkaline)",
+          "latex": "\\text{MnO}_4^- + 2\\text{H}_2\\text{O} + 3e^- \\to \\text{MnO}_2 + 4\\text{OH}^- \\qquad E^\\circ = +1.69\\text{ V} \\text{ (Oxidises I}^- \\to \\text{IO}_3^-, \\text{S}_2\\text{O}_3^{2-} \\to \\text{SO}_4^{2-}\\text{)}",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_c_5",
+      "name": "Coordination Compounds",
+      "keyPoints": [
+        "Spectrochemical Series: $\\text{I}^- < \\text{Br}^- < \\text{SCN}^- < \\text{Cl}^- < \\text{S}^{2-} < \\text{F}^- < \\text{OH}^- < \\text{C}_2\\text{O}_4^{2-} < \\text{H}_2\\text{O} < \\text{NCS}^- < \\text{edta}^{4-} < \\text{NH}_3 < \\text{en} < \\text{CN}^- < \\text{CO}$",
+        "Werner’s Theory: Primary valence is ionisable and corresponds to the oxidation state; secondary valence is non-ionisable, corresponds to the coordination number, and dictates spatial geometry.",
+        "Structural Isomerism: Linkage (ambidentate ligands), Coordination (interchange between spheres), Ionisation (counter ion swaps with ligand), Solvate/Hydrate.",
+        "Stereoisomerism: Geometrical (Cis/Trans, fac/mer), Optical (non-superimposable chiral entities like $[\\text{Co(en)}_3]^{3+}$).",
+        "Synergic Bonding in Metal Carbonyls: $\\sigma$-bond formed by donation of lone pair from carbonyl carbon into vacant metal orbital; $\\pi$-backbond formed by back-donation from filled metal $d$-orbital into empty $\\pi^*$ antibonding orbital of CO."
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "f_5_1",
+          "chapter": "Coordination Compounds",
+          "name": "Octahedral CFSE",
+          "latex": "\\text{CFSE} = \\left(-0.4 n_{t_{2g}} + 0.6 n_{e_g}\\right)\\Delta_o + mP \\qquad n_{t_{2g}}, n_{e_g} = \\text{electrons in } t_{2g}, e_g; P = \\text{pairing energy}",
+          "tags": []
+        },
+        {
+          "id": "f_5_2",
+          "chapter": "Coordination Compounds",
+          "name": "Tetrahedral Splitting",
+          "latex": "\\Delta_t = \\frac{4}{9}\\Delta_o \\qquad \\text{Tetrahedral complexes are always high spin (} \\Delta_t < P \\text{)}",
+          "tags": []
+        },
+        {
+          "id": "f_5_3",
+          "chapter": "Coordination Compounds",
+          "name": "Magnetic Moment",
+          "latex": "\\mu = \\sqrt{n(n+2)}\\text{ BM} \\qquad \\text{Unpaired electrons } n \\text{ determined via VBT / CFT}",
+          "tags": []
+        },
+        {
+          "id": "f_5_4",
+          "chapter": "Coordination Compounds",
+          "name": "Stability Constant",
+          "latex": "\\beta_n = K_1 \\times K_2 \\times \\dots \\times K_n \\qquad \\text{Overall stability constant of complex } [ML_n]",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_c_6",
+      "name": "Haloalkanes and Haloarenes",
+      "keyPoints": [
+        "Haloarenes are extremely unreactive towards nucleophilic substitution due to: Partial double bond character of C-Cl bond through resonance, $sp^2$ hybridised carbon holding electrons more tightly than $sp^3$, instability of phenyl cation, electrostatic repulsion between electron-rich arene ring and incoming nucleophile."
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "f_6_1",
+          "chapter": "Haloalkanes and Haloarenes",
+          "name": "Darzen’s Process",
+          "latex": "\\text{R-OH} + \\text{SOCl}_2 \\to \\text{R-Cl} + \\text{SO}_2(g) \\uparrow + \\text{HCl}(g) \\uparrow \\qquad \\text{Best method for pure alkyl chlorides}",
+          "tags": []
+        },
+        {
+          "id": "f_6_2",
+          "chapter": "Haloalkanes and Haloarenes",
+          "name": "Finkelstein Reaction",
+          "latex": "\\text{R-X} + \\text{NaI} \\xrightarrow{\\text{dry acetone}} \\text{R-I} + \\text{NaX} \\downarrow \\qquad \\text{X = Cl, Br; NaX precipitates out}",
+          "tags": []
+        },
+        {
+          "id": "f_6_3",
+          "chapter": "Haloalkanes and Haloarenes",
+          "name": "Swarts Reaction",
+          "latex": "\\text{R-Br} + \\text{AgF} \\to \\text{R-F} + \\text{AgBr} \\qquad \\text{Metal fluorides: AgF, Hg}_2\\text{F}_2\\text{, CoF}_2\\text{, SbF}_3",
+          "tags": []
+        },
+        {
+          "id": "f_6_4",
+          "chapter": "Haloalkanes and Haloarenes",
+          "name": "Sandmeyer Reaction",
+          "latex": "\\text{Ar-N}_2^+\\text{X}^- \\xrightarrow{\\text{Cu}_2\\text{Cl}_2/\\text{HCl}} \\text{Ar-Cl} + \\text{N}_2 \\qquad \\text{For introducing -Cl, -Br, -CN}",
+          "tags": []
+        },
+        {
+          "id": "f_6_5",
+          "chapter": "Haloalkanes and Haloarenes",
+          "name": "Gattermann Reaction",
+          "latex": "\\text{Ar-N}_2^+\\text{X}^- \\xrightarrow{\\text{Cu}/\\text{HCl}} \\text{Ar-Cl} + \\text{N}_2 + \\text{CuX} \\qquad \\text{Lower yield than Sandmeyer}",
+          "tags": []
+        },
+        {
+          "id": "f_6_6",
+          "chapter": "Haloalkanes and Haloarenes",
+          "name": "SN2 Mechanism",
+          "latex": "\\text{Nu}^- + \\text{R-X} \\to [\\text{Nu}\\cdots\\text{C}\\cdots\\text{X}]^{\\ddagger} \\to \\text{Nu-R} + \\text{X}^- \\qquad \\text{1-step, bimolecular, inversion, Reactivity: } 1^\\circ > 2^\\circ > 3^\\circ",
+          "tags": []
+        },
+        {
+          "id": "f_6_7",
+          "chapter": "Haloalkanes and Haloarenes",
+          "name": "SN1 Mechanism",
+          "latex": "\\text{R-X} \\xrightarrow{\\text{slow}} \\text{R}^+ + \\text{X}^- \\xrightarrow[\\text{fast}]{\\text{Nu}^-} \\text{R-Nu} \\qquad \\text{2-step via planar carbocation, racemisation, Reactivity: } 3^\\circ > 2^\\circ > 1^\\circ",
+          "tags": []
+        },
+        {
+          "id": "f_6_8",
+          "chapter": "Haloalkanes and Haloarenes",
+          "name": "Saytzeff’s Elimination",
+          "latex": "\\text{R-CH}_2\\text{-CH(X)-R}' \\xrightarrow{\\text{alc. KOH}, \\Delta} \\text{R-CH=CH-R}' \\qquad \\text{More substituted alkene is major product}",
+          "tags": []
+        },
+        {
+          "id": "f_6_9",
+          "chapter": "Haloalkanes and Haloarenes",
+          "name": "Grignard Formation",
+          "latex": "\\text{R-X} + \\text{Mg} \\xrightarrow{\\text{dry ether}} \\text{R-MgX} \\qquad \\text{RMgX} + \\text{H}_2\\text{O} \\to \\text{R-H} + \\text{Mg(OH)X}",
+          "tags": []
+        },
+        {
+          "id": "f_6_10",
+          "chapter": "Haloalkanes and Haloarenes",
+          "name": "Wurtz Reaction",
+          "latex": "2\\text{R-X} + 2\\text{Na} \\xrightarrow{\\text{dry ether}} \\text{R-R} + 2\\text{NaX} \\qquad \\text{Symmetric alkanes}",
+          "tags": []
+        },
+        {
+          "id": "f_6_11",
+          "chapter": "Haloalkanes and Haloarenes",
+          "name": "Wurtz-Fittig Reaction",
+          "latex": "\\text{Ar-X} + \\text{R-X} + 2\\text{Na} \\xrightarrow{\\text{dry ether}} \\text{Ar-R} + 2\\text{NaX} \\qquad \\text{Alkylarene formation}",
+          "tags": []
+        },
+        {
+          "id": "f_6_12",
+          "chapter": "Haloalkanes and Haloarenes",
+          "name": "Fittig Reaction",
+          "latex": "2\\text{Ar-X} + 2\\text{Na} \\xrightarrow{\\text{dry ether}} \\text{Ar-Ar} + 2\\text{NaX} \\qquad \\text{Diphenyl formation}",
+          "tags": []
+        },
+        {
+          "id": "f_6_13",
+          "chapter": "Haloalkanes and Haloarenes",
+          "name": "Dow’s Process",
+          "latex": "\\text{C}_6\\text{H}_5\\text{Cl} \\xrightarrow[623\\text{ K},\\; 300\\text{ atm}]{(i)\\text{ NaOH}} \\xrightarrow{(ii)\\text{ H}^+} \\text{C}_6\\text{H}_5\\text{OH} \\qquad \\text{Activated by -NO}_2 \\text{ groups at o, p-positions}",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_c_7",
+      "name": "Alcohols, Phenols and Ethers",
+      "keyPoints": [],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "f_7_1",
+          "chapter": "Alcohols, Phenols and Ethers",
+          "name": "Acid-Catalysed Hydration",
+          "latex": "\\text{R-CH=CH}_2 + \\text{H}_2\\text{O} \\xrightarrow{\\text{H}^+} \\text{R-CH(OH)-CH}_3 \\qquad \\text{Markovnikov addition (via carbocation)}",
+          "tags": []
+        },
+        {
+          "id": "f_7_2",
+          "chapter": "Alcohols, Phenols and Ethers",
+          "name": "Hydroboration-Oxidation",
+          "latex": "6\\text{R-CH=CH}_2 + \\text{B}_2\\text{H}_6 \\to 2(\\text{R-CH}_2\\text{-CH}_2)_3\\text{B} \\xrightarrow{\\text{H}_2\\text{O}_2/\\text{OH}^-} 3\\text{R-CH}_2\\text{-CH}_2\\text{OH} \\qquad \\text{Net Anti-Markovnikov addition of H}_2\\text{O}",
+          "tags": []
+        },
+        {
+          "id": "f_7_3",
+          "chapter": "Alcohols, Phenols and Ethers",
+          "name": "Grignard with Carbonyls",
+          "latex": "\\text{HCHO} + \\text{RMgX} \\xrightarrow{\\text{H}_3\\text{O}^+} 1^\\circ\\text{ Alcohol},\\quad \\text{R}'\\text{CHO} + \\text{RMgX} \\xrightarrow{\\text{H}_3\\text{O}^+} 2^\\circ\\text{ Alcohol},\\quad \\text{R}'\\text{COR}'' + \\text{RMgX} \\xrightarrow{\\text{H}_3\\text{O}^+} 3^\\circ\\text{ Alcohol}",
+          "tags": []
+        },
+        {
+          "id": "f_7_4",
+          "chapter": "Alcohols, Phenols and Ethers",
+          "name": "Cumene Process for Phenol",
+          "latex": "\\text{Cumene} \\xrightarrow{\\text{O}_2} \\text{Cumene Hydroperoxide} \\xrightarrow{\\text{H}^+/\\text{H}_2\\text{O}} \\text{Phenol} + \\text{CH}_3\\text{COCH}_3 \\qquad \\text{Industrial synthesis; acetone is valuable by-product}",
+          "tags": []
+        },
+        {
+          "id": "f_7_5",
+          "chapter": "Alcohols, Phenols and Ethers",
+          "name": "Lucas Test",
+          "latex": "\\text{R-OH} + \\text{conc. HCl} \\xrightarrow{\\text{anh. ZnCl}_2} \\text{R-Cl} \\downarrow + \\text{H}_2\\text{O} \\qquad 3^\\circ\\text{: Immediate turbidity; } 2^\\circ\\text{: 5 min; } 1^\\circ\\text{: No turbidity at room temp}",
+          "tags": []
+        },
+        {
+          "id": "f_7_6",
+          "chapter": "Alcohols, Phenols and Ethers",
+          "name": "Dehydration of Alcohols",
+          "latex": "\\text{CH}_3\\text{CH}_2\\text{OH} \\xrightarrow[443\\text{ K}]{\\text{conc. H}_2\\text{SO}_4} \\text{CH}_2\\text{=CH}_2 + \\text{H}_2\\text{O},\\quad 2\\text{CH}_3\\text{CH}_2\\text{OH} \\xrightarrow[413\\text{ K}]{\\text{conc. H}_2\\text{SO}_4} \\text{CH}_3\\text{CH}_2\\text{-O-CH}_2\\text{CH}_3 \\qquad \\text{Ease: } 3^\\circ > 2^\\circ > 1^\\circ",
+          "tags": []
+        },
+        {
+          "id": "f_7_7",
+          "chapter": "Alcohols, Phenols and Ethers",
+          "name": "Kolbe’s Reaction",
+          "latex": "\\text{Phenol} \\xrightarrow{\\text{NaOH}} \\text{Sodium Phenoxide} \\xrightarrow[(ii)\\text{ H}^+]{(i)\\text{ CO}_2,\\; \\Delta} \\text{Salicylic acid} \\qquad \\text{Electrophilic substitution by weak electrophile CO}_2",
+          "tags": []
+        },
+        {
+          "id": "f_7_8",
+          "chapter": "Alcohols, Phenols and Ethers",
+          "name": "Reimer-Tiemann Reaction",
+          "latex": "\\text{Phenol} + \\text{CHCl}_3 + 3\\text{NaOH} \\xrightarrow{\\text{H}^+} \\text{Salicylaldehyde} \\qquad \\text{Intermediate is dichlorocarbene (}:\\text{CCl}_2\\text{)}",
+          "tags": []
+        },
+        {
+          "id": "f_7_9",
+          "chapter": "Alcohols, Phenols and Ethers",
+          "name": "Reaction with Zinc Dust",
+          "latex": "\\text{C}_6\\text{H}_5\\text{OH} + \\text{Zn} \\xrightarrow{\\Delta} \\text{C}_6\\text{H}_6 + \\text{ZnO} \\qquad \\text{Deoxygenation of phenol to benzene}",
+          "tags": []
+        },
+        {
+          "id": "f_7_10",
+          "chapter": "Alcohols, Phenols and Ethers",
+          "name": "Williamson Ether Synthesis",
+          "latex": "\\text{R-X} + \\text{R}'\\text{ONa} \\to \\text{R-O-R}' + \\text{NaX} \\qquad \\text{R-X must be } 1^\\circ\\text{; } 3^\\circ\\text{ R-X gives alkene exclusively}",
+          "tags": []
+        },
+        {
+          "id": "f_7_11",
+          "chapter": "Alcohols, Phenols and Ethers",
+          "name": "Cleavage of Ethers by HI",
+          "latex": "\\text{R-O-R}' + \\text{HI} \\to \\text{R-I} + \\text{R}'\\text{OH} \\text{ (for } 1^\\circ/2^\\circ \\text{ alkyls via S}_{N}2\\text{)},\\quad \\text{tert-Butyl-O-CH}_3 + \\text{HI} \\to \\text{tert-Butyl-I} + \\text{CH}_3\\text{OH} \\text{ (via S}_{N}1\\text{)} \\qquad \\text{Anisole gives Phenol + CH}_3\\text{I}",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_c_8",
+      "name": "Aldehydes, Ketones and Carboxylic Acids",
+      "keyPoints": [
+        "Relative Acidity Order of Carboxylic Acids: $\\text{CF}_3\\text{COOH} > \\text{CCl}_3\\text{COOH} > \\text{CHCl}_2\\text{COOH} > \\text{NO}_2\\text{CH}_2\\text{COOH} > \\text{NC-CH}_2\\text{COOH} > \\text{FCH}_2\\text{COOH} > \\text{ClCH}_2\\text{COOH} > \\text{BrCH}_2\\text{COOH} > \\text{HCOOH} > \\text{ClCH}_2\\text{CH}_2\\text{COOH} > \\text{C}_6\\text{H}_5\\text{COOH} > \\text{CH}_3\\text{COOH} > \\text{CH}_3\\text{CH}_2\\text{COOH}$"
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "f_8_1",
+          "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+          "name": "Rosenmund Reduction",
+          "latex": "\\text{RCOCl} + \\text{H}_2 \\xrightarrow{\\text{Pd/BaSO}_4} \\text{RCHO} + \\text{HCl} \\qquad \\text{Poisoned catalyst prevents further reduction to alcohol}",
+          "tags": []
+        },
+        {
+          "id": "f_8_2",
+          "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+          "name": "Stephen Reaction",
+          "latex": "\\text{R-CN} + \\text{SnCl}_2 + \\text{HCl} \\to \\text{R-CH=NH} \\cdot \\text{HCl} \\xrightarrow{\\text{H}_3\\text{O}^+} \\text{RCHO} \\qquad \\text{Reduction of nitriles to aldehydes}",
+          "tags": []
+        },
+        {
+          "id": "f_8_3",
+          "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+          "name": "DIBAL-H Reduction",
+          "latex": "\\text{R-CN} \\text{ or } \\text{R-COOR}' \\xrightarrow[(ii)\\text{ H}_2\\text{O}]{(i)\\text{ DIBAL-H}} \\text{RCHO} \\qquad \\text{Selective reduction at low temperature}",
+          "tags": []
+        },
+        {
+          "id": "f_8_4",
+          "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+          "name": "Étard Reaction",
+          "latex": "\\text{Toluene} + \\text{CrO}_2\\text{Cl}_2 \\xrightarrow{\\text{CS}_2} \\text{Cr-complex} \\xrightarrow{\\text{H}_3\\text{O}^+} \\text{Benzaldehyde} \\qquad \\text{Selective methyl oxidation}",
+          "tags": []
+        },
+        {
+          "id": "f_8_5",
+          "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+          "name": "Gattermann-Koch Reaction",
+          "latex": "\\text{Benzene} + \\text{CO} + \\text{HCl} \\xrightarrow{\\text{anh. AlCl}_3/\\text{CuCl}} \\text{Benzaldehyde} \\qquad \\text{Formylation of benzene}",
+          "tags": []
+        },
+        {
+          "id": "f_8_6",
+          "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+          "name": "Clemmensen Reduction",
+          "latex": ">\\text{C=O} \\xrightarrow{\\text{Zn-Hg / conc. HCl}} >\\text{CH}_2 + \\text{H}_2\\text{O} \\qquad \\text{Reduction of carbonyl to methylene in acidic medium}",
+          "tags": []
+        },
+        {
+          "id": "f_8_7",
+          "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+          "name": "Wolff-Kishner Reduction",
+          "latex": ">\\text{C=O} \\xrightarrow{\\text{NH}_2\\text{NH}_2, -\\text{H}_2\\text{O}} >\\text{C=NNH}_2 \\xrightarrow[\\Delta]{\\text{KOH / ethylene glycol}} >\\text{CH}_2 + \\text{N}_2 \\qquad \\text{Reduction in basic medium}",
+          "tags": []
+        },
+        {
+          "id": "f_8_8",
+          "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+          "name": "Tollens’ Test",
+          "latex": "\\text{RCHO} + 2[\\text{Ag(NH}_3)_2]^+ + 3\\text{OH}^- \\to \\text{RCOO}^- + 2\\text{Ag} \\downarrow\\text{ (mirror)} + 4\\text{NH}_3 + 2\\text{H}_2\\text{O} \\qquad \\text{Distinguishes aldehydes from ketones}",
+          "tags": []
+        },
+        {
+          "id": "f_8_9",
+          "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+          "name": "Fehling’s Test",
+          "latex": "\\text{RCHO} + 2\\text{Cu}^{2+} + 5\\text{OH}^- \\to \\text{RCOO}^- + \\text{Cu}_2\\text{O} \\downarrow\\text{ (red-brown)} + 3\\text{H}_2\\text{O} \\qquad \\text{Aromatic aldehydes do not respond}",
+          "tags": []
+        },
+        {
+          "id": "f_8_10",
+          "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+          "name": "Haloform (Iodoform) Test",
+          "latex": "\\text{R-CO-CH}_3 + 3\\text{NaOI} \\to \\text{R-COONa} + \\text{CHI}_3 \\downarrow\\text{ (yellow)} + 2\\text{NaOH} \\qquad \\text{Specific for CH}_3\\text{C=O and CH}_3\\text{CH(OH)- groups}",
+          "tags": []
+        },
+        {
+          "id": "f_8_11",
+          "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+          "name": "Aldol Condensation",
+          "latex": "2\\text{CH}_3\\text{CHO} \\xrightarrow{\\text{dil. NaOH}} \\text{CH}_3\\text{CH(OH)CH}_2\\text{CHO} \\xrightarrow[\\Delta]{-\\text{H}_2\\text{O}} \\text{CH}_3\\text{CH=CH-CHO} \\qquad \\text{Requires at least one } \\alpha\\text{-H}",
+          "tags": []
+        },
+        {
+          "id": "f_8_12",
+          "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+          "name": "Cannizzaro Reaction",
+          "latex": "2\\text{HCHO} \\xrightarrow{\\text{conc. KOH}} \\text{CH}_3\\text{OH} + \\text{HCOOK} \\qquad \\text{Disproportionation of aldehydes lacking } \\alpha\\text{-H}",
+          "tags": []
+        },
+        {
+          "id": "f_8_13",
+          "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+          "name": "Hell-Volhard-Zelinsky (HVZ)",
+          "latex": "\\text{R-CH}_2\\text{-COOH} \\xrightarrow[(ii)\\text{ H}_2\\text{O}]{(i)\\text{ X}_2/\\text{red P}} \\text{R-CH(X)-COOH} \\qquad \\text{X = Cl, Br; halogenation at } \\alpha\\text{-carbon}",
+          "tags": []
+        },
+        {
+          "id": "f_8_14",
+          "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+          "name": "Decarboxylation",
+          "latex": "\\text{R-COONa} + \\text{NaOH} \\xrightarrow[\\Delta]{\\text{CaO}} \\text{R-H} + \\text{Na}_2\\text{CO}_3 \\qquad \\text{Sodalime ratio is 3:1}",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_c_9",
+      "name": "Amines",
+      "keyPoints": [
+        "Basicity Trends in Amines: Gaseous Phase: $3^\\circ > 2^\\circ > 1^\\circ > \\text{NH}_3$ (governed solely by +I inductive effect).",
+        "Aqueous Phase (Ethyl-substituted): $(\\text{C}_2\\text{H}_5)_2\\text{NH} > (\\text{C}_2\\text{H}_5)_3\\text{N} > \\text{C}_2\\text{H}_5\\text{NH}_2 > \\text{NH}_3$ ($2^\\circ > 3^\\circ > 1^\\circ > \\text{NH}_3$).",
+        "Aqueous Phase (Methyl-substituted): $(\\text{CH}_3)_2\\text{NH} > \\text{CH}_3\\text{NH}_2 > (\\text{CH}_3)_3\\text{N} > \\text{NH}_3$ ($2^\\circ > 1^\\circ > 3^\\circ > \\text{NH}_3$).",
+        "Aromatic Amines: Aniline is weaker than ammonia ($pK_b = 9.38$ vs $4.75$) due to resonance delocalisation of the nitrogen lone pair into the ring."
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "f_9_1",
+          "chapter": "Amines",
+          "name": "Gabriel Phthalimide Synthesis",
+          "latex": "\\text{Phthalimide} \\xrightarrow{\\text{KOH}} \\text{Potassium Phthalimide} \\xrightarrow{\\text{R-X}} \\text{N-Alkylphthalimide} \\xrightarrow{\\text{NaOH}(aq)} 1^\\circ\\text{ Amine} + \\text{Sodium Phthalate} \\qquad \\text{Pure } 1^\\circ \\text{ aliphatic amines only}",
+          "tags": []
+        },
+        {
+          "id": "f_9_2",
+          "chapter": "Amines",
+          "name": "Hoffmann Bromamide Degradation",
+          "latex": "\\text{R-CONH}_2 + \\text{Br}_2 + 4\\text{NaOH} \\to \\text{R-NH}_2 + \\text{Na}_2\\text{CO}_3 + 2\\text{NaBr} + 2\\text{H}_2\\text{O} \\qquad \\text{Product has one less carbon than starting amide}",
+          "tags": []
+        },
+        {
+          "id": "f_9_3",
+          "chapter": "Amines",
+          "name": "Carbylamine Test",
+          "latex": "\\text{R-NH}_2 + \\text{CHCl}_3 + 3\\text{KOH} \\xrightarrow{\\Delta} \\text{R-NC}\\text{ (isocyanide)} + 3\\text{KCl} + 3\\text{H}_2\\text{O} \\qquad \\text{Specific test for } 1^\\circ \\text{ aliphatic and aromatic amines}",
+          "tags": []
+        },
+        {
+          "id": "f_9_4",
+          "chapter": "Amines",
+          "name": "Hinsberg’s Test",
+          "latex": "1^\\circ\\text{ Amine} + \\text{C}_6\\text{H}_5\\text{SO}_2\\text{Cl} \\to \\text{Soluble in alkali}; \\quad 2^\\circ\\text{ Amine} + \\text{C}_6\\text{H}_5\\text{SO}_2\\text{Cl} \\to \\text{Insoluble in alkali}; \\quad 3^\\circ\\text{ Amine} + \\text{C}_6\\text{H}_5\\text{SO}_2\\text{Cl} \\to \\text{No Reaction} \\qquad \\text{Reagent: Benzenesulphonyl chloride}",
+          "tags": []
+        },
+        {
+          "id": "f_9_5",
+          "chapter": "Amines",
+          "name": "Diazotisation",
+          "latex": "\\text{Ar-NH}_2 + \\text{NaNO}_2 + 2\\text{HCl} \\xrightarrow{273-278\\text{ K}} \\text{Ar-N}_2^+\\text{Cl}^- + \\text{NaCl} + 2\\text{H}_2\\text{O} \\qquad \\text{Low temperature required to prevent decomposition}",
+          "tags": []
+        },
+        {
+          "id": "f_9_6",
+          "chapter": "Amines",
+          "name": "Azo Coupling (with Phenol)",
+          "latex": "\\text{Ar-N}_2^+\\text{Cl}^- + \\text{C}_6\\text{H}_5\\text{OH} \\xrightarrow{\\text{OH}^-,\\; \\text{pH } 9-10} \\text{p-hydroxyazobenzene} + \\text{Cl}^- + \\text{H}_2\\text{O} \\qquad \\text{Orange dye}",
+          "tags": []
+        },
+        {
+          "id": "f_9_7",
+          "chapter": "Amines",
+          "name": "Azo Coupling (with Aniline)",
+          "latex": "\\text{Ar-N}_2^+\\text{Cl}^- + \\text{C}_6\\text{H}_5\\text{NH}_2 \\xrightarrow{\\text{H}^+,\\; \\text{pH } 4-5} \\text{p-aminoazobenzene} + \\text{Cl}^- + \\text{H}_2\\text{O} \\qquad \\text{Yellow dye}",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    },
+    {
+      "id": "c12_c_10",
+      "name": "Biomolecules",
+      "keyPoints": [
+        "D-(+)-Glucose: Aldohexose (6-carbon polyhydroxy aldehyde); Pyranose ring ($\\alpha$ and $\\beta$ anomers at C1).",
+        "D-(-)-Fructose: Ketohexose; Furanose ring ($\\alpha$ and $\\beta$ anomers at C2). Laevorotatory, sweetest naturally occurring sugar.",
+        "Sucrose: $\\alpha$-D-Glucopyranose (C1) + $\\beta$-D-Fructofuranose (C2); Glycosidic linkage. Non-reducing sugar; hydrolyses to give Invert Sugar (dextro $\\to$ laevo).",
+        "Maltose: $\\alpha$-D-Glucose (C1) + $\\alpha$-D-Glucose (C4). Reducing sugar (free aldehyde at C1 of 2nd glucose).",
+        "Lactose: $\\beta$-D-Galactose (C1) + $\\beta$-D-Glucose (C4). Milk sugar; reducing sugar.",
+        "Starch: Amylose (15–20%, unbranched, $\\alpha$-1,4-linkage) + Amylopectin (80–85%, branched, $\\alpha$-1,4-chain with $\\alpha$-1,6-branches). Storage polysaccharide in plants.",
+        "Cellulose: Linear polymer of $\\beta$-D-Glucose ($\\beta$-1,4-glycosidic linkage). Chief constituent of plant cell walls.",
+        "Amino Acids: Contain -$\\text{NH}_2$ and -$\\text{COOH}$; exist as Zwitterion ($\\text{H}_3\\text{N}^+-\\text{CHR}-\\text{COO}^-$). All natural $\\alpha$-amino acids have L-configuration; Glycine is achiral.",
+        "Proteins: Polymers of $\\alpha$-amino acids joined by Peptide bonds (-$\\text{CO}-\\text{NH}$-). Primary: Amino acid sequence; Secondary: $\\alpha$-Helix & $\\beta$-Pleated sheet (H-bonding); Tertiary: Overall folding; Quaternary: Assembly of polypeptide subunits.",
+        "Denaturation: Uncoiling of helix and loss of biological activity. Disrupts $2^\\circ$ and $3^\\circ$ structures; $1^\\circ$ structure remains intact.",
+        "Nucleic Acids: Polynucleotides connected via 3', 5'-phosphodiester linkages. DNA: $\\beta$-D-2-deoxyribose + A, G, C, T (Double stranded). RNA: $\\beta$-D-ribose + A, G, C, U (Single stranded). Base Pairing: Adenine = Thymine (2 H-bonds); Guanine $\\equiv$ Cytosine (3 H-bonds).",
+        "Fat-Soluble Vitamins (A, D, E, K): A (Xerophthalmia, Night blindness), D (Rickets, Osteomalacia), E (Increased RBC fragility), K (Increased blood clotting time).",
+        "Water-Soluble Vitamins (B-complex, C): $\\text{B}_1$ (Beri-beri), $\\text{B}_2$ (Cheilosis), $\\text{B}_6$ (Convulsions), $\\text{B}_{12}$ (Pernicious anaemia), C (Scurvy)."
+      ],
+      "keyDerivations": [],
+      "formulas": [
+        {
+          "id": "f_10_1",
+          "chapter": "Biomolecules",
+          "name": "Glucose Reactions 1",
+          "latex": "\\text{Glucose} \\xrightarrow{\\text{HI}, \\Delta} \\text{n-hexane}",
+          "tags": []
+        },
+        {
+          "id": "f_10_2",
+          "chapter": "Biomolecules",
+          "name": "Glucose Reactions 2",
+          "latex": "\\text{Glucose} \\xrightarrow{\\text{Br}_2/\\text{H}_2\\text{O}} \\text{Gluconic acid}",
+          "tags": []
+        },
+        {
+          "id": "f_10_3",
+          "chapter": "Biomolecules",
+          "name": "Glucose Reactions 3",
+          "latex": "\\text{Glucose} \\xrightarrow{\\text{conc. HNO}_3} \\text{Saccharic acid}",
+          "tags": []
+        },
+        {
+          "id": "f_10_4",
+          "chapter": "Biomolecules",
+          "name": "Glucose Reactions 4",
+          "latex": "\\text{Glucose} \\xrightarrow{(\\text{CH}_3\\text{CO})_2\\text{O}} \\text{Pentaacetate} \\text{ (proves 5 -OH groups)}",
+          "tags": []
+        }
+      ],
+      "class": "12"
+    }
+  ]
+}
