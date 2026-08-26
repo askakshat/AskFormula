@@ -25,6 +25,7 @@ export default function Hero() {
           </div>
 
           <h1 className="text-4xl md:text-[56px] md:leading-[64px] font-bold tracking-tight text-[#e1e2ec]">
+            <span className="sr-only">AskFormula by AskAkshat - Free Formula Sheets for JEE, NEET & NCERT</span>
             Every formula.
             <br />
             <span className="text-[#aec6ff]">Exactly where you need it.</span>
