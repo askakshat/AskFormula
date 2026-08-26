@@ -43,6 +43,7 @@ import class12ChemistryData from "@/data/ncert/class12_chemistry.json";
 import mathematicsData from "@/data/ncert/mathematics.json";
 import class12MathematicsData from "@/data/ncert/class12_mathematics.json";
 import biologyData from "@/data/ncert/biology.json";
+import class12BiologyData from "@/data/ncert/class12_biology.json";
 
 const mergedPhysicsData = {
   ...physicsData,
@@ -71,7 +72,14 @@ export const allSubjects: SubjectData[] = [
       ...(class12MathematicsData.audience || []),
     ],
   } as SubjectData,
-  biologyData as SubjectData,
+  {
+    ...biologyData,
+    chapters: [...biologyData.chapters, ...class12BiologyData.chapters],
+    audience: [
+      ...(biologyData.audience || []),
+      ...(class12BiologyData.audience || []),
+    ],
+  } as SubjectData,
 ];
 
 // Get all chapters for a subject
