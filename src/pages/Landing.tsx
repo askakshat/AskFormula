@@ -36,7 +36,7 @@ export default function Landing() {
           <div className="bg-[#11131a] border border-[#32353c] rounded-lg p-6">
             <h3 className="text-lg font-semibold text-[#aec6ff] mb-2">Are all chapters covered?</h3>
             <p className="text-[#e1e2ec]/80 text-sm leading-relaxed">
-              Currently, we support comprehensive coverage for Class 11 Physics (CBSE/NCERT). Mathematics and Chemistry modules are currently in development.
+              Currently, we support comprehensive coverage for Class 11 and Class 12 Physics, Chemistry, Mathematics, and Biology (CBSE/NCERT).
             </p>
           </div>
 
