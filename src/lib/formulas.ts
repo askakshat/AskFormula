@@ -39,6 +39,7 @@ export interface SubjectData {
 import physicsData from "@/data/ncert/physics.json";
 import class12PhysicsData from "@/data/ncert/class12_physics.json";
 import chemistryData from "@/data/ncert/chemistry.json";
+import class12ChemistryData from "@/data/ncert/class12_chemistry.json";
 import mathematicsData from "@/data/ncert/mathematics.json";
 import biologyData from "@/data/ncert/biology.json";
 
@@ -53,7 +54,14 @@ const mergedPhysicsData = {
 
 export const allSubjects: SubjectData[] = [
   mergedPhysicsData as SubjectData,
-  chemistryData as SubjectData,
+  {
+    ...chemistryData,
+    chapters: [...chemistryData.chapters, ...class12ChemistryData.chapters],
+    audience: [
+      ...(chemistryData.audience || []),
+      ...(class12ChemistryData.audience || []),
+    ],
+  } as SubjectData,
   mathematicsData as SubjectData,
   biologyData as SubjectData,
 ];
