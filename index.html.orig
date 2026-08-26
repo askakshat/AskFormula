@@ -13,7 +13,6 @@
   <meta name="description" content="Generate and export beautiful, comprehensive formula sheets for JEE, NEET, and School exams in seconds. The ultimate revision tool for students." />
   <meta name="keywords" content="formulas, JEE, NEET, NCERT, physics, chemistry, mathematics, biology, formula sheet, pdf generator, study material, revision notes" />
   <meta name="author" content="AskFormula" />
-  <link rel="canonical" href="https://askformula.vercel.app/" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
@@ -28,24 +27,6 @@
   <meta property="twitter:title" content="AskFormula | Free Formula Sheets for JEE, NEET & NCERT" />
   <meta property="twitter:description" content="Generate beautiful formula sheets for your exams in seconds. Export to PDF easily." />
   <meta property="twitter:image" content="https://askformula.vercel.app/logo.svg" />
-
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "AskFormula",
-      "url": "https://askformula.vercel.app/",
-      "description": "Generate and export beautiful, comprehensive formula sheets for JEE, NEET, and School exams in seconds.",
-      "applicationCategory": "EducationalApplication",
-      "operatingSystem": "All",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
-    }
-  </script>
 </head>
 
 

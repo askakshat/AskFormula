@@ -1,21 +1,16 @@
-import { Atom, Youtube, Twitter, Linkedin, Instagram, Facebook } from "lucide-react";
+import re
 
-export default function Footer() {
-  return (
-    <footer className="relative py-16 px-6">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-px bg-white/[0.06]" />
+with open('src/components/askformula/Footer.tsx', 'r') as f:
+    content = f.read()
 
-      <div className="max-w-4xl mx-auto text-center">
-        <div className="inline-flex items-center gap-2 mb-5">
-          <div className="w-7 h-7 rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center">
-            <Atom className="w-3.5 h-3.5 text-blue-400/70" strokeWidth={1.5} />
-          </div>
-          <span className="text-base font-semibold tracking-[-0.02em] text-white">
-            Ask<span className="text-blue-400/80">Formula</span>
-          </span>
-        </div>
+# Add imports
+content = content.replace(
+    'import { Atom } from "lucide-react";',
+    'import { Atom, Youtube, Twitter, Linkedin, Instagram, Facebook } from "lucide-react";'
+)
 
-
+# Insert social links before copyright
+social_links = """
         <div className="flex justify-center items-center gap-4 mb-6">
           <a href="https://youtube.com/@askformula" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-blue-400 transition-colors" aria-label="YouTube">
             <Youtube className="w-5 h-5" />
@@ -33,14 +28,12 @@ export default function Footer() {
             <Facebook className="w-4 h-4" />
           </a>
         </div>
+"""
 
-        <p className="text-xs text-slate-600 mb-1">
-          © {new Date().getFullYear()} AskFormula
-        </p>
-        <p className="text-[11px] text-slate-700">
-          Made by Akshat Agarwal
-        </p>
-      </div>
-    </footer>
-  );
-}
+content = content.replace(
+    '<p className="text-xs text-slate-600 mb-1">',
+    social_links + '\n        <p className="text-xs text-slate-600 mb-1">'
+)
+
+with open('src/components/askformula/Footer.tsx', 'w') as f:
+    f.write(content)

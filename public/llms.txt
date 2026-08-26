@@ -1,0 +1,9 @@
+# AskFormula - Educational Tool
+
+> AskFormula is a free online tool for students to generate and download customized mathematics, physics, chemistry, and biology formula sheets for their exams like JEE, NEET, and school boards.
+
+## Features
+- Generate beautiful, customizable PDF formula sheets.
+- Select from multiple exam formats, classes, and subjects.
+- Global formula search using keyboard shortcuts (Cmd+K).
+- Formulas rendered accurately using KaTeX.

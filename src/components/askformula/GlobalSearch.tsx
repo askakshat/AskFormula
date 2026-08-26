@@ -14,9 +14,9 @@ export default function GlobalSearch() {
   const resultsRef = useRef<HTMLDivElement>(null);
 
   const [selectedChapters, setSelectedChapters] = useLocalStorage<string[]>('askformula-selected-chapters', []);
-  const [subject, setSubject] = useLocalStorage<string | null>('askformula-subject', null);
-  const [exam, setExam] = useLocalStorage<"school" | "jee" | "neet" | null>('askformula-exam', null);
-  const [selectedClass, setSelectedClass] = useLocalStorage<string | null>('askformula-class', null);
+  const [, setSubject] = useLocalStorage<string | null>('askformula-subject', null);
+  const [, setExam] = useLocalStorage<"school" | "jee" | "neet" | null>('askformula-exam', null);
+  const [, setSelectedClass] = useLocalStorage<string | null>('askformula-class', null);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

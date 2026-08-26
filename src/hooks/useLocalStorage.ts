@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T | ((val: T) => T)) => void] {
   // Get from local storage then
@@ -38,10 +38,7 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T 
     }
   };
 
-  useEffect(() => {
-    setStoredValue(readValue());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
 
   return [storedValue, setValue];
 }

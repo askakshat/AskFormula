@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-20 pb-16">
       {/* Deep, clean background */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-[#0a0f1e] to-slate-950" />
 
@@ -38,13 +38,19 @@ export default function Hero() {
           </h1>
 
           {/* Subtitle — clean, confident */}
-          <p className="text-lg sm:text-xl text-slate-400/90 mb-6 font-normal tracking-[-0.01em]">
+          <p className="text-lg sm:text-xl text-slate-400/90 mb-4 font-normal tracking-[-0.01em]">
             Every formula you need. One sheet. Zero hassle.
+          </p>
+          <p className="text-sm sm:text-base text-slate-500 mb-8 max-w-2xl mx-auto leading-relaxed">
+            AskFormula is the ultimate free study tool for students preparing for JEE, NEET, and school board exams.
+            Instantly generate beautifully formatted, comprehensive PDF formula sheets across Physics, Chemistry, Mathematics,
+            and Biology. No login required. Just select your class, choose your chapters, and download a print-ready revision guide
+            in seconds. Master your subjects faster with our interactive formula builder.
           </p>
 
           {/* Content Stats / Pill tags */}
           <div className="flex flex-wrap items-center justify-center gap-2.5 mb-12">
-            {["200+ Formulas", "NCERT Class 11–12", "Export to PDF"].map((tag) => (
+            {["JEE & NEET Ready", "NCERT Class 11–12", "Instant PDF Export", "Global Search"].map((tag) => (
               <span
                 key={tag}
                 className="px-4 py-1.5 text-[13px] font-medium tracking-wide rounded-full bg-white/[0.04] backdrop-blur-md border border-white/[0.06] text-slate-300"
