@@ -10,7 +10,6 @@ import FormulaGrid from "@/components/askformula/FormulaGrid";
 import PDFButton from "@/components/askformula/PDFButton";
 import Footer from "@/components/askformula/Footer";
 import { getChaptersBySubject, filterFormulas } from "@/lib/formulas";
-import GlobalSearch from "@/components/askformula/GlobalSearch";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 export default function Landing() {
@@ -45,7 +44,7 @@ export default function Landing() {
     setSubject(s);
     setSelectedChapters([]);
     setTimeout(() => {
-      chapterRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      chapterRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 150);
   };
 
@@ -61,14 +60,14 @@ export default function Landing() {
     setSubject(null);
     setSelectedChapters([]);
     setTimeout(() => {
-      document.getElementById("app-section")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      document.getElementById("app-section")?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 50);
   };
 
   useEffect(() => {
     if (formulas.length > 0) {
       setTimeout(() => {
-        formulaRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+        formulaRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
       }, 150);
     }
   }, [formulas.length]);
@@ -83,7 +82,6 @@ export default function Landing() {
 
   return (
     <div className="min-h-screen overflow-x-hidden">
-      <GlobalSearch />
       <Hero />
 
       <section

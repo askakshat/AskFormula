@@ -1,0 +1,11 @@
+
+> vite-template@0.0.0 dev
+> vite
+
+Port 5173 is in use, trying another one...
+Port 5174 is in use, trying another one...
+
+  VITE v7.3.6  ready in 405 ms
+
+  ➜  Local:   http://localhost:5175/
+  ➜  Network: http://192.168.0.2:5175/

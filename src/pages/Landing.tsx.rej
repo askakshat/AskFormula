@@ -1,0 +1,19 @@
+--- Landing.tsx
++++ Landing.tsx
+@@ -10,13 +10,13 @@
+ import PDFButton from "@/components/askformula/PDFButton";
+ import Footer from "@/components/askformula/Footer";
+ import { getChaptersBySubject, filterFormulas } from "@/lib/formulas";
+-import { useLocalStorage } from "@/lib/local-storage";
++import { useLocalStorage } from "@/hooks/useLocalStorage";
+
+ export default function Landing() {
+-  const [exam, setExam] = useState<"school" | "jee" | "neet" | null>(null);
+-  const [selectedClass, setSelectedClass] = useState<string | null>(null);
+-  const [subject, setSubject] = useState<string | null>(null);
++  const [exam, setExam] = useLocalStorage<"school" | "jee" | "neet" | null>("askformula-exam", null);
++  const [selectedClass, setSelectedClass] = useLocalStorage<string | null>("askformula-class", null);
++  const [subject, setSubject] = useLocalStorage<string | null>("askformula-subject", null);
+   const [selectedChapters, setSelectedChapters] = useLocalStorage<string[]>(
+     "askformula-selected-chapters",
+     [],
