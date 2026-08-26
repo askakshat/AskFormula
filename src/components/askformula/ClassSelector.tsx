@@ -7,10 +7,13 @@ interface ClassSelectorProps {
 
 const classes = [
   { id: "11", name: "Class 11" },
-  { id: "12", name: "Class 12 (Coming Soon)", disabled: true },
+  { id: "12", name: "Class 12", disabled: false },
 ];
 
-export default function ClassSelector({ onSelect, selected }: ClassSelectorProps) {
+export default function ClassSelector({
+  onSelect,
+  selected,
+}: ClassSelectorProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
@@ -18,8 +21,10 @@ export default function ClassSelector({ onSelect, selected }: ClassSelectorProps
       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       className="space-y-4"
     >
-      <h2 className="text-xl font-semibold text-white tracking-[-0.02em]">
-        <span className="text-blue-400/70 mr-2 text-base font-medium">02</span>
+      <h2 className="text-xl font-semibold text-[#e1e2ec] tracking-[-0.02em] flex items-center">
+        <span className="font-mono text-[13px] text-[#aec6ff] bg-[#00275d]/20 px-2 py-0.5 rounded mr-2">
+          02
+        </span>
         Select your class
       </h2>
       <div className="grid grid-cols-2 gap-3 sm:max-w-md">
@@ -42,7 +47,11 @@ export default function ClassSelector({ onSelect, selected }: ClassSelectorProps
               }
             `}
           >
-            <h3 className={`text-[15px] font-semibold ${cls.disabled ? 'text-white/50' : ''}`}>{cls.name}</h3>
+            <h3
+              className={`text-[15px] font-semibold ${cls.disabled ? "text-white/50" : ""}`}
+            >
+              {cls.name}
+            </h3>
           </motion.button>
         ))}
       </div>
