@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import React, { useState, useEffect, useRef } from "react";
 import { Search, X } from "lucide-react";
 import { searchFormulas, Formula } from "@/lib/formulas";
@@ -5,6 +6,20 @@ import katex from "katex";
 import "katex/dist/katex.min.css";
 
 export default function GlobalSearch() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleCopyLink = (e: React.MouseEvent, id: string) => {
+    e.stopPropagation();
+    const url = new URL(window.location.origin + "/build");
+    url.searchParams.set("formula", id);
+    navigator.clipboard.writeText(url.toString());
+    setCopiedId(id);
+    toast.success("Link to formula copied!");
+    setTimeout(() => setCopiedId(null), 2000);
+  };
+
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<Formula[]>([]);
@@ -22,7 +37,14 @@ export default function GlobalSearch() {
     };
 
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+
+    const handleOpenSearch = () => setIsOpen(true);
+    window.addEventListener("open-global-search", handleOpenSearch);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("open-global-search", handleOpenSearch);
+    };
   }, [isOpen]);
 
   useEffect(() => {
@@ -33,6 +55,7 @@ export default function GlobalSearch() {
 
   useEffect(() => {
     if (query.trim()) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setResults(searchFormulas(query));
     } else {
       setResults([]);
