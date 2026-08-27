@@ -42,6 +42,7 @@ export default function Hero() {
 
           <div className="flex flex-col sm:flex-row gap-4 mt-2">
             <Button
+              variant="outline"
               onClick={() => {
                 window.location.href = "/build";
               }}
