@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import {
   Copy,
   ArrowRight,
@@ -12,69 +11,8 @@ import {
 import { Button } from "@/components/ui/button";
 
 export default function Hero() {
-  const [demoActive, setDemoActive] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [demoStep, setDemoStep] = useState(0);
-
-  useEffect(() => {
-    if (!demoActive) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setDemoStep(0);
-      return;
-    }
-
-    // Simple sequence to simulate selecting elements for a screen recording
-    const interval = setInterval(() => {
-      setDemoStep((prev) => {
-        if (prev >= 4) {
-          clearInterval(interval);
-          setTimeout(() => setDemoActive(false), 3000);
-          return prev;
-        }
-        return prev + 1;
-      });
-    }, 1200);
-
-    return () => clearInterval(interval);
-  }, [demoActive]);
-
   return (
     <div className="flex-grow pt-12 flex flex-col items-center w-full">
-      {demoActive && (
-        <div className="fixed inset-0 z-[100] bg-[#0b0e15]/90 backdrop-blur-sm flex flex-col items-center justify-center pointer-events-auto">
-          <div className="bg-[#11131a] border border-[#32353c] p-6 rounded-xl shadow-2xl w-[90%] max-w-[400px] flex flex-col gap-4">
-             <div className="flex justify-between items-center mb-2">
-                <span className="text-[#aec6ff] font-semibold text-lg">Building Sheet...</span>
-                <span className="text-xs font-mono text-[#e1e2ec]/50 flex items-center">REC <span className="inline-block w-2 h-2 rounded-full bg-red-500 animate-pulse ml-1"></span></span>
-             </div>
-
-             <div className={`p-3 rounded-lg border flex items-center gap-3 transition-colors ${demoStep >= 1 ? 'border-green-500/50 bg-green-500/10' : 'border-[#32353c] bg-[#1a1d24]'}`}>
-                {demoStep >= 1 ? <div className="w-5 h-5 rounded-full bg-green-500" /> : <div className="w-5 h-5 rounded-full border border-[#32353c]" />}
-                <span className={demoStep >= 1 ? 'text-green-400' : 'text-[#e1e2ec]/70'}>Selected JEE Mains</span>
-             </div>
-
-             <div className={`p-3 rounded-lg border flex items-center gap-3 transition-colors ${demoStep >= 2 ? 'border-green-500/50 bg-green-500/10' : 'border-[#32353c] bg-[#1a1d24]'}`}>
-                {demoStep >= 2 ? <div className="w-5 h-5 rounded-full bg-green-500" /> : <div className="w-5 h-5 rounded-full border border-[#32353c]" />}
-                <span className={demoStep >= 2 ? 'text-green-400' : 'text-[#e1e2ec]/70'}>Class 12 Physics</span>
-             </div>
-
-             <div className={`p-3 rounded-lg border flex items-center gap-3 transition-colors ${demoStep >= 3 ? 'border-green-500/50 bg-green-500/10' : 'border-[#32353c] bg-[#1a1d24]'}`}>
-                {demoStep >= 3 ? <div className="w-5 h-5 rounded-full bg-green-500" /> : <div className="w-5 h-5 rounded-full border border-[#32353c]" />}
-                <span className={demoStep >= 3 ? 'text-green-400' : 'text-[#e1e2ec]/70'}>Added 42 Formulas</span>
-             </div>
-
-             <div
-                className={`mt-4 p-3 bg-blue-600 rounded-lg text-white text-center font-semibold transition-opacity duration-300 ${demoStep >= 4 ? 'opacity-100' : 'opacity-0'}`}
-             >
-                Generating PDF...
-             </div>
-          </div>
-          <div className="absolute bottom-10 text-white/50 text-sm font-mono animate-pulse">
-            Perfect for screen recording
-          </div>
-        </div>
-      )}
-
       {/* Hero Section */}
       <section className="relative w-full max-w-[1200px] px-6 md:px-12 py-16 md:py-[120px] flex flex-col items-center text-center overflow-hidden">
         {/* Background Grid - mimicking the Stitch mask-fade-out with tailwind bg */}
@@ -115,10 +53,14 @@ export default function Hero() {
             </Button>
             <Button
               variant="outline"
-              onClick={() => setDemoActive(true)}
+              onClick={() => {
+                document
+                  .getElementById("how-it-works")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
               className="bg-transparent text-[#e1e2ec] h-10 px-6 rounded border border-[#32353c] hover:border-[#aec6ff] hover:text-[#aec6ff] hover:bg-transparent transition-all text-[12px] font-medium tracking-wide flex items-center justify-center gap-2"
             >
-              Watch Demo (For Reels)
+              View Demo
               <PlayCircle className="w-4 h-4" />
             </Button>
           </div>

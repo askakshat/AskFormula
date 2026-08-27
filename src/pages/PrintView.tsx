@@ -398,12 +398,6 @@ export default function PrintView() {
           );
         })}
       </div>
-
-      {/* Explicit visual footer for browsers that don't support @page headers/footers well */}
-      <div className="hidden print:block fixed bottom-0 left-0 right-0 text-center text-[11px] text-slate-500 py-2 border-t border-slate-200 bg-white z-50">
-        Generated for free at <span className="font-semibold">AskFormula</span>{" "}
-        - askformula.vercel.app
-      </div>
     </div>
   );
 }
