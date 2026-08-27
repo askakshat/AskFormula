@@ -1,26 +1,24 @@
-import { Atom } from "lucide-react";
+import React from "react";
 
 export default function Footer() {
   return (
-    <footer className="relative py-16 px-6">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-px bg-white/[0.06]" />
-
-      <div className="max-w-4xl mx-auto text-center">
-        <div className="inline-flex items-center gap-2 mb-5">
-          <div className="w-7 h-7 rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center">
-            <Atom className="w-3.5 h-3.5 text-blue-400/70" strokeWidth={1.5} />
-          </div>
-          <span className="text-base font-semibold tracking-[-0.02em] text-white">
-            Ask<span className="text-blue-400/80">Formula</span>
-          </span>
+    <footer className="w-full border-t border-[#32353c] bg-[#0b0e15] py-12 px-6 md:px-12 mt-auto">
+      <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="flex flex-col items-center md:items-start gap-2 text-center md:text-left">
+          <h3 className="font-bold text-lg text-[#e1e2ec]">
+            AskFormula{" "}
+            <span className="text-sm font-normal text-[#aec6ff]">
+              by AskAkshat (Akshat Agarwal)
+            </span>
+          </h3>
+          <p className="text-sm text-[#e1e2ec]/60">
+            Your ultimate academic reference tool for JEE, NEET, and NCERT.
+          </p>
         </div>
-
-        <p className="text-xs text-slate-600 mb-1">
-          © {new Date().getFullYear()} AskFormula
-        </p>
-        <p className="text-[11px] text-slate-700">
-          Made by Akshat Agarwal
-        </p>
+      </div>
+      <div className="max-w-[1200px] mx-auto mt-8 pt-8 border-t border-[#32353c]/50 text-center text-xs text-[#e1e2ec]/40">
+        &copy; {new Date().getFullYear()} AskFormula by AskAkshat. All rights
+        reserved.
       </div>
     </footer>
   );
