@@ -14,7 +14,7 @@ export default function Hero() {
   return (
     <div className="flex-grow pt-12 flex flex-col items-center w-full">
       {/* Hero Section */}
-      <section className="relative w-full max-w-[1200px] px-6 md:px-12 py-20 md:py-[120px] flex flex-col items-center text-center overflow-hidden">
+      <section className="relative w-full max-w-[1200px] px-6 md:px-12 py-16 md:py-[120px] flex flex-col items-center text-center overflow-hidden">
         {/* Background Grid - mimicking the Stitch mask-fade-out with tailwind bg */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#32353c_1px,transparent_1px),linear-gradient(to_bottom,#32353c_1px,transparent_1px)] bg-[size:40px_40px] opacity-20 [mask-image:linear-gradient(to_bottom,black_40%,transparent_100%)] z-0 pointer-events-none" />
 
@@ -24,8 +24,11 @@ export default function Hero() {
             <span>v3.0 Academic Edition Released</span>
           </div>
 
-          <h1 className="text-4xl md:text-[56px] md:leading-[64px] font-bold tracking-tight text-[#e1e2ec]">
-            <span className="sr-only">AskFormula by AskAkshat - Free Formula Sheets for JEE, NEET & NCERT</span>
+          <h1 className="text-4xl leading-[48px] md:text-[56px] md:leading-[64px] font-bold tracking-tight text-[#e1e2ec]">
+            <span className="sr-only">
+              AskFormula by AskAkshat - Free Formula Sheets for JEE, NEET &
+              NCERT
+            </span>
             Every formula.
             <br />
             <span className="text-[#aec6ff]">Exactly where you need it.</span>
@@ -33,12 +36,13 @@ export default function Hero() {
 
           <p className="text-base text-[#e1e2ec] max-w-xl">
             A high-density, distraction-free environment for scientific study.
-            Build custom PDF reference sheets tailored to your CBSE Class 11 and 12
-            curriculum in seconds.
+            Build custom PDF reference sheets tailored to your CBSE Class 11 and
+            12 curriculum in seconds.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mt-2">
             <Button
+              variant="outline"
               onClick={() => {
                 window.location.href = "/build";
               }}
@@ -77,7 +81,7 @@ export default function Hero() {
             v² = u² + 2as
           </div>
 
-          <div className="grid grid-cols-4 gap-2 border-t border-[#32353c] pt-2">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-2 border-t border-[#32353c] pt-2">
             <div className="flex flex-col">
               <span className="text-[12px] font-bold text-[#aec6ff]">v</span>
               <span className="text-[11px] font-mono text-[#e1e2ec]">

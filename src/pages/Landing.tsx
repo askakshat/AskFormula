@@ -55,7 +55,7 @@ export default function Landing() {
         id="faq"
         className="w-full max-w-[800px] mx-auto px-6 md:px-12 py-20 mt-10"
       >
-        <h2 className="text-3xl font-bold text-center text-[#e1e2ec] mb-12">
+        <h2 className="text-2xl md:text-3xl font-bold text-center text-[#e1e2ec] mb-12">
           Frequently Asked Questions
         </h2>
 
