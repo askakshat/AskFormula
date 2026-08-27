@@ -1,16 +1,12 @@
-import GlobalSearch from "@/components/askformula/GlobalSearch";
 import { useState, useMemo, useRef, useEffect } from "react";
 import { useSearchParams } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { RotateCcw } from "lucide-react";
-import Hero from "@/components/askformula/Hero";
 import ExamSelector from "@/components/askformula/ExamSelector";
 import ClassSelector from "@/components/askformula/ClassSelector";
 import SubjectSelector from "@/components/askformula/SubjectSelector";
 import ChapterSelector from "@/components/askformula/ChapterSelector";
-import FormulaGrid from "@/components/askformula/FormulaGrid";
 import PDFButton from "@/components/askformula/PDFButton";
-import Footer from "@/components/askformula/Footer";
 import { getChaptersBySubject, filterFormulas } from "@/lib/formulas";
 import { useLocalStorage } from "@/lib/local-storage";
 
@@ -18,15 +14,44 @@ export default function Build() {
   const [exam, setExam] = useState<"school" | "jee" | "neet" | null>(null);
   const [selectedClass, setSelectedClass] = useState<string | null>(null);
   const [subject, setSubject] = useState<string | null>(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Template pre-fill logic
+  useEffect(() => {
+    const template = searchParams.get('template');
+    if (template) {
+      if (template === 'jee-physics') {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setExam('jee');
+        setSelectedClass('12');
+        setSubject('Physics');
+      } else if (template === 'neet-bio') {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setExam('neet');
+        setSelectedClass('11');
+        setSubject('Biology');
+      } else if (template === 'cbse-math') {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setExam('school');
+        setSelectedClass('12');
+        setSubject('Mathematics');
+      }
+
+      // Clear param so it doesn't persist awkwardly
+      searchParams.delete('template');
+      setSearchParams(searchParams, { replace: true });
+    }
+  }, [searchParams, setSearchParams, setExam, setSelectedClass, setSubject]);
+
   const [selectedChapters, setSelectedChapters] = useLocalStorage<string[]>(
     "askformula-selected-chapters",
     [],
   );
 
   const classRef = useRef<HTMLDivElement>(null);
+
   const subjectRef = useRef<HTMLDivElement>(null);
   const chapterRef = useRef<HTMLDivElement>(null);
-  const formulaRef = useRef<HTMLDivElement>(null);
 
   const handleReset = () => {
     setExam(null);
