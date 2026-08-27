@@ -14,13 +14,16 @@ interface FormulaCardProps {
 }
 
 export default function FormulaCard({ formula }: FormulaCardProps) {
-  const [favorites, setFavorites] = useLocalStorage<string[]>("askformula-favorites", []);
+  const [favorites, setFavorites] = useLocalStorage<string[]>(
+    "askformula-favorites",
+    [],
+  );
 
   const isFavorite = favorites.includes(formula.name);
 
   const toggleFavorite = () => {
     if (isFavorite) {
-      setFavorites(favorites.filter(f => f !== formula.name));
+      setFavorites(favorites.filter((f) => f !== formula.name));
     } else {
       setFavorites([...favorites, formula.name]);
     }
@@ -45,7 +48,9 @@ export default function FormulaCard({ formula }: FormulaCardProps) {
           className="text-slate-400 hover:text-amber-400 transition-colors focus:outline-none"
           title={isFavorite ? "Remove from favorites" : "Add to favorites"}
         >
-          <Star className={`w-4 h-4 ${isFavorite ? "fill-amber-400 text-amber-400" : ""}`} />
+          <Star
+            className={`w-4 h-4 ${isFavorite ? "fill-amber-400 text-amber-400" : ""}`}
+          />
         </button>
       </div>
       <div className="relative z-10 pr-6">

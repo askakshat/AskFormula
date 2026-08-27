@@ -28,6 +28,7 @@ interface PrintData {
 }
 
 export default function PrintView() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const navigate = useNavigate();
   const [data, setData] = useState<PrintData | null>(null);
 
@@ -45,6 +46,7 @@ export default function PrintView() {
     const storedData = sessionStorage.getItem("askformula-print-data");
     if (storedData) {
       try {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setData(JSON.parse(storedData));
       } catch (e) {
         console.error("Failed to parse print data", e);
@@ -103,8 +105,8 @@ export default function PrintView() {
 
   const chapterNames = Array.from(
     new Set([
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ...chaptersData.map(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (ch) => ch.name || (ch as any).chapterName || "General",
       ),
       ...Array.from(chapters.keys()),
@@ -189,6 +191,7 @@ export default function PrintView() {
             }
           }
 
+
           /* Force KaTeX text color to black for PDF export */
           .katex-display > .katex,
           .katex .mord,
@@ -201,6 +204,37 @@ export default function PrintView() {
           .katex {
             color: #000000 !important;
           }
+
+          /* Footer styling */
+          @page {
+            margin: 15mm;
+            @bottom-center {
+              content: "Generated for free at AskFormula - askformula.vercel.app";
+              font-family: sans-serif;
+              font-size: 10pt;
+              color: #64748b;
+            }
+          }
+
+          .print-footer {
+             display: none;
+          }
+
+          @media print {
+            .print-footer {
+              display: block;
+              position: fixed;
+              bottom: 0;
+              left: 0;
+              width: 100%;
+              text-align: center;
+              font-size: 10px;
+              color: #64748b;
+              padding-bottom: 10px;
+              page-break-after: always;
+            }
+          }
+
 
           /* Native KaTeX Print Fixes */
           /* We use container queries in inline-size to shrink formulas to fit. */
@@ -256,8 +290,8 @@ export default function PrintView() {
 
         {chapterNames.map((chapterName, idx) => {
           const items = chapters.get(chapterName) || [];
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const chapterMeta = chaptersData.find(
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             (ch) => (ch.name || (ch as any).chapterName) === chapterName,
           );
           const keyPoints = chapterMeta?.keyPoints || [];
@@ -363,6 +397,12 @@ export default function PrintView() {
             </div>
           );
         })}
+      </div>
+
+      {/* Explicit visual footer for browsers that don't support @page headers/footers well */}
+      <div className="hidden print:block fixed bottom-0 left-0 right-0 text-center text-[11px] text-slate-500 py-2 border-t border-slate-200 bg-white z-50">
+        Generated for free at <span className="font-semibold">AskFormula</span>{" "}
+        - askformula.vercel.app
       </div>
     </div>
   );
