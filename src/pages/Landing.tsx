@@ -3,6 +3,7 @@ import Hero from "@/components/askformula/Hero";
 import Footer from "@/components/askformula/Footer";
 import { Link } from "react-router";
 import { LogoDropdown } from "@/components/LogoDropdown";
+import { Search } from "lucide-react";
 
 export default function Landing() {
   return (
@@ -30,7 +31,23 @@ export default function Landing() {
         </nav>
 
         <div className="flex items-center gap-4">
-          <div className="hidden md:flex items-center gap-1 text-[13px] text-[#e1e2ec]/60 mr-4 font-mono">
+          <button
+            onClick={() =>
+              window.dispatchEvent(new Event("open-global-search"))
+            }
+            className="md:hidden flex items-center justify-center p-2 text-[#e1e2ec]/70 hover:text-[#aec6ff] transition-colors"
+            title="Search Formulas"
+          >
+            <Search className="w-5 h-5" />
+          </button>
+
+          <div
+            className="hidden md:flex items-center gap-1 text-[13px] text-[#e1e2ec]/60 mr-4 font-mono cursor-pointer hover:text-[#aec6ff] transition-colors"
+            onClick={() =>
+              window.dispatchEvent(new Event("open-global-search"))
+            }
+            title="Search Formulas"
+          >
             <span className="bg-[#272a31] border border-[#32353c] px-1.5 rounded text-[11px]">
               Cmd
             </span>

@@ -7,6 +7,7 @@ import ClassSelector from "@/components/askformula/ClassSelector";
 import SubjectSelector from "@/components/askformula/SubjectSelector";
 import ChapterSelector from "@/components/askformula/ChapterSelector";
 import PDFButton from "@/components/askformula/PDFButton";
+import GlobalSearch from "@/components/askformula/GlobalSearch";
 import { getChaptersBySubject, filterFormulas } from "@/lib/formulas";
 import { useLocalStorage } from "@/lib/local-storage";
 
@@ -18,27 +19,27 @@ export default function Build() {
 
   // Template pre-fill logic
   useEffect(() => {
-    const template = searchParams.get('template');
+    const template = searchParams.get("template");
     if (template) {
-      if (template === 'jee-physics') {
+      if (template === "jee-physics") {
         // eslint-disable-next-line react-hooks/set-state-in-effect
-        setExam('jee');
-        setSelectedClass('12');
-        setSubject('Physics');
-      } else if (template === 'neet-bio') {
+        setExam("jee");
+        setSelectedClass("12");
+        setSubject("Physics");
+      } else if (template === "neet-bio") {
         // eslint-disable-next-line react-hooks/set-state-in-effect
-        setExam('neet');
-        setSelectedClass('11');
-        setSubject('Biology');
-      } else if (template === 'cbse-math') {
+        setExam("neet");
+        setSelectedClass("11");
+        setSubject("Biology");
+      } else if (template === "cbse-math") {
         // eslint-disable-next-line react-hooks/set-state-in-effect
-        setExam('school');
-        setSelectedClass('12');
-        setSubject('Mathematics');
+        setExam("school");
+        setSelectedClass("12");
+        setSubject("Mathematics");
       }
 
       // Clear param so it doesn't persist awkwardly
-      searchParams.delete('template');
+      searchParams.delete("template");
       setSearchParams(searchParams, { replace: true });
     }
   }, [searchParams, setSearchParams, setExam, setSelectedClass, setSubject]);
@@ -354,6 +355,8 @@ export default function Build() {
           </div>
         </div>
       </section>
+
+      <GlobalSearch />
 
       {/* Floating PDF Button */}
       {selectedChapters.length > 0 && (
