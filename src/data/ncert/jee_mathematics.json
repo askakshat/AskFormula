@@ -1,8 +1,6 @@
 {
   "subject": "Mathematics",
-  "audience": [
-    "jee"
-  ],
+  "audience": ["jee"],
   "chapters": [
     {
       "id": "jee_m_ch1",
@@ -13,70 +11,48 @@
           "id": "jee_m_1_1",
           "name": "Set Cardinality",
           "latex": "n(A \\cup B) = n(A) + n(B) - n(A \\cap B)",
-          "tags": [
-            "sets",
-            "cardinality"
-          ]
+          "tags": ["sets", "cardinality"]
         },
         {
           "id": "jee_m_1_2",
           "name": "Set Cardinality (3 sets)",
           "latex": "n(A \\cup B \\cup C) = \\sum n(A) - \\sum n(A \\cap B) + n(A \\cap B \\cap C)",
-          "tags": [
-            "sets",
-            "cardinality"
-          ]
+          "tags": ["sets", "cardinality"]
         },
         {
           "id": "jee_m_1_3",
           "name": "De Morgan's Laws",
           "latex": "(A \\cup B)' = A' \\cap B', \\qquad (A \\cap B)' = A' \\cup B'",
           "description": "Number of subsets of set of n elements = 2\u207f. Proper subsets = 2\u207f - 1.",
-          "tags": [
-            "sets",
-            "de morgan"
-          ]
+          "tags": ["sets", "de morgan"]
         },
         {
           "id": "jee_m_1_4",
           "name": "Counting Relations",
           "latex": "\\text{Total: } 2^{n^2}, \\qquad \\text{Reflexive: } 2^{n(n - 1)}, \\qquad \\text{Symmetric: } 2^{n(n + 1)/2}",
           "description": "On set A (|A| = n)",
-          "tags": [
-            "relations",
-            "counting"
-          ]
+          "tags": ["relations", "counting"]
         },
         {
           "id": "jee_m_1_5",
           "name": "Counting Functions",
           "latex": "\\text{Total: } m^n, \\qquad \\text{Injective (1-1): } ^mP_n \\text{ } (m \\ge n)",
           "description": "Functions A \u2192 B (|A|=n, |B|=m)",
-          "tags": [
-            "functions",
-            "counting"
-          ]
+          "tags": ["functions", "counting"]
         },
         {
           "id": "jee_m_1_6",
           "name": "Surjective Functions",
           "latex": "\\sum_{r=0}^m (-1)^{m-r} \\; ^mC_r \\; r^n",
           "description": "Number of bijective functions on set of n elements = n!.",
-          "tags": [
-            "functions",
-            "surjective"
-          ]
+          "tags": ["functions", "surjective"]
         },
         {
           "id": "jee_m_1_7",
           "name": "Standard Functions Properties",
           "latex": "|x| = x (x \\ge 0), -x (x < 0)",
           "description": "Signum: sgn(x) = |x|/x (x \u2260 0), 0 (x = 0). Greatest Integer: [x] \u2264 x < [x] + 1; x = [x] + {x}",
-          "tags": [
-            "modulus",
-            "greatest integer",
-            "signum"
-          ]
+          "tags": ["modulus", "greatest integer", "signum"]
         }
       ],
       "keyPoints": [
@@ -94,111 +70,153 @@
           "id": "jee_m_2_1",
           "name": "Compound Angles",
           "latex": "\\sin(x \\pm y) = \\sin x \\cos y \\pm \\cos x \\sin y, \\qquad \\cos(x \\pm y) = \\cos x \\cos y \\mp \\sin x \\sin y",
-          "tags": [
-            "trigonometry",
-            "compound angles"
-          ]
+          "tags": ["trigonometry", "compound angles"]
         },
         {
           "id": "jee_m_2_2",
           "name": "Compound Angles (Tan)",
           "latex": "\\tan(x \\pm y) = \\frac{\\tan x \\pm \\tan y}{1 \\mp \\tan x \\tan y}",
-          "tags": [
-            "trigonometry",
-            "compound angles"
-          ]
+          "tags": ["trigonometry", "compound angles"]
         },
         {
           "id": "jee_m_2_3",
           "name": "Multiple Angles (Sin)",
           "latex": "\\sin 2x = 2\\sin x \\cos x = \\frac{2\\tan x}{1 + \\tan^2x}, \\qquad \\sin 3x = 3\\sin x - 4\\sin^3x",
-          "tags": [
-            "trigonometry",
-            "multiple angles"
-          ]
+          "tags": ["trigonometry", "multiple angles"]
         },
         {
           "id": "jee_m_2_4",
           "name": "Multiple Angles (Cos)",
           "latex": "\\cos 2x = \\cos^2x - \\sin^2x = 2\\cos^2x - 1 = 1 - 2\\sin^2x = \\frac{1 - \\tan^2x}{1 + \\tan^2x}",
-          "tags": [
-            "trigonometry",
-            "multiple angles"
-          ]
+          "tags": ["trigonometry", "multiple angles"]
         },
         {
           "id": "jee_m_2_5",
           "name": "Multiple Angles (Cos 3x)",
           "latex": "\\cos 3x = 4\\cos^3x - 3\\cos x",
-          "tags": [
-            "trigonometry",
-            "multiple angles"
-          ]
+          "tags": ["trigonometry", "multiple angles"]
         },
         {
           "id": "jee_m_2_6",
           "name": "Multiple Angles (Tan)",
           "latex": "\\tan 2x = \\frac{2\\tan x}{1 - \\tan^2x}, \\qquad \\tan 3x = \\frac{3\\tan x - \\tan^3x}{1 - 3\\tan^2x}",
-          "tags": [
-            "trigonometry",
-            "multiple angles"
-          ]
+          "tags": ["trigonometry", "multiple angles"]
         },
         {
           "id": "jee_m_2_7",
           "name": "Sum-to-Product (C-D)",
           "latex": "\\sin C + \\sin D = 2 \\sin\\left(\\frac{C+D}{2}\\right) \\cos\\left(\\frac{C-D}{2}\\right), \\qquad \\sin C - \\sin D = 2 \\cos\\left(\\frac{C+D}{2}\\right) \\sin\\left(\\frac{C-D}{2}\\right)",
-          "tags": [
-            "trigonometry",
-            "c and d formulas"
-          ]
+          "tags": ["trigonometry", "c and d formulas"]
         },
         {
           "id": "jee_m_2_8",
           "name": "Sum-to-Product (C-D Cosine)",
           "latex": "\\cos C + \\cos D = 2 \\cos\\left(\\frac{C+D}{2}\\right) \\cos\\left(\\frac{C-D}{2}\\right), \\qquad \\cos C - \\cos D = -2 \\sin\\left(\\frac{C+D}{2}\\right) \\sin\\left(\\frac{C-D}{2}\\right) = 2 \\sin\\left(\\frac{C+D}{2}\\right) \\sin\\left(\\frac{D-C}{2}\\right)",
-          "tags": [
-            "trigonometry",
-            "c and d formulas"
-          ]
+          "tags": ["trigonometry", "c and d formulas"]
         },
         {
           "id": "jee_m_2_9",
           "name": "Product-to-Sum",
           "latex": "2\\cos x \\cos y = \\cos(x+y) + \\cos(x-y), \\qquad 2\\sin x \\sin y = \\cos(x-y) - \\cos(x+y)",
-          "tags": [
-            "trigonometry",
-            "product to sum"
-          ]
+          "tags": ["trigonometry", "product to sum"]
         },
         {
           "id": "jee_m_2_10",
           "name": "Extreme values",
           "latex": "a \\cos x + b \\sin x \\in [-\\sqrt{a^2+b^2}, \\sqrt{a^2+b^2}]",
-          "tags": [
-            "trigonometry",
-            "range"
-          ]
+          "tags": ["trigonometry", "range"]
         },
         {
           "id": "jee_m_2_11",
           "name": "General Solutions",
           "latex": "\\sin \\theta = \\sin \\alpha \\implies \\theta = n\\pi + (-1)^n \\alpha, \\qquad \\cos \\theta = \\cos \\alpha \\implies \\theta = 2n\\pi \\pm \\alpha",
           "description": "n \u2208 \u2124.",
-          "tags": [
-            "trigonometry",
-            "general solution"
-          ]
+          "tags": ["trigonometry", "general solution"]
         },
         {
           "id": "jee_m_2_12",
           "name": "General Solutions (Tan and Squares)",
           "latex": "\\tan \\theta = \\tan \\alpha \\implies \\theta = n\\pi + \\alpha, \\qquad \\sin^2\\theta = \\sin^2\\alpha \\implies \\theta = n\\pi \\pm \\alpha",
           "description": "Similar for cos\u00b2\u03b8 = cos\u00b2\u03b1, tan\u00b2\u03b8 = tan\u00b2\u03b1. n \u2208 \u2124.",
-          "tags": [
-            "trigonometry",
-            "general solution"
-          ]
+          "tags": ["trigonometry", "general solution"]
+        },
+        {
+          "name": "Pythagorean Identity",
+          "latex": "\\sin^2\\theta + \\cos^2\\theta = 1",
+          "tags": ["pythagorean"],
+          "id": "jee_m_ch2_add_13"
+        },
+        {
+          "name": "sec-tan Identity",
+          "latex": "1 + \\tan^2\\theta = \\sec^2\\theta",
+          "tags": ["sec tan"],
+          "id": "jee_m_ch2_add_14"
+        },
+        {
+          "name": "Compound Angle (sin)",
+          "latex": "\\sin(A\\pm B) = \\sin A \\cos B \\pm \\cos A \\sin B",
+          "tags": ["compound angle"],
+          "id": "jee_m_ch2_add_15"
+        },
+        {
+          "name": "Compound Angle (cos)",
+          "latex": "\\cos(A\\pm B) = \\cos A \\cos B \\mp \\sin A \\sin B",
+          "tags": ["compound angle"],
+          "id": "jee_m_ch2_add_16"
+        },
+        {
+          "name": "Double Angle (sin)",
+          "latex": "\\sin 2A = 2\\sin A \\cos A",
+          "tags": ["double angle"],
+          "id": "jee_m_ch2_add_17"
+        },
+        {
+          "name": "Double Angle (cos)",
+          "latex": "\\cos 2A = \\cos^2A - \\sin^2A",
+          "tags": ["double angle"],
+          "id": "jee_m_ch2_add_18"
+        },
+        {
+          "name": "Half Angle (sin)",
+          "latex": "\\sin^2(A/2) = \\frac{1-\\cos A}{2}",
+          "tags": ["half angle"],
+          "id": "jee_m_ch2_add_19"
+        },
+        {
+          "name": "Half Angle (cos)",
+          "latex": "\\cos^2(A/2) = \\frac{1+\\cos A}{2}",
+          "tags": ["half angle"],
+          "id": "jee_m_ch2_add_20"
+        },
+        {
+          "name": "Sum-to-Product",
+          "latex": "\\sin C + \\sin D = 2\\sin\\left(\\frac{C+D}{2}\\right)\\cos\\left(\\frac{C-D}{2}\\right)",
+          "tags": ["sum to product"],
+          "id": "jee_m_ch2_add_21"
+        },
+        {
+          "name": "Product-to-Sum",
+          "latex": "2\\sin A \\cos B = \\sin(A+B) + \\sin(A-B)",
+          "tags": ["product to sum"],
+          "id": "jee_m_ch2_add_22"
+        },
+        {
+          "name": "Sine Rule",
+          "latex": "\\frac{a}{\\sin A} = \\frac{b}{\\sin B} = \\frac{c}{\\sin C} = 2R",
+          "tags": ["sine rule"],
+          "id": "jee_m_ch2_add_23"
+        },
+        {
+          "name": "Cosine Rule",
+          "latex": "c^2 = a^2 + b^2 - 2ab \\cos C",
+          "tags": ["cosine rule"],
+          "id": "jee_m_ch2_add_24"
+        },
+        {
+          "name": "Area of Triangle",
+          "latex": "\\Delta = \\frac{1}{2}ab \\sin C = \\sqrt{s(s-a)(s-b)(s-c)}",
+          "tags": ["area"],
+          "id": "jee_m_ch2_add_25"
         }
       ]
     },
@@ -211,77 +229,166 @@
           "id": "jee_m_3_1",
           "name": "Algebra of Complex Numbers",
           "latex": "z = x + iy = r(\\cos\\theta + i \\sin\\theta) = r e^{i\\theta}",
-          "tags": [
-            "complex numbers",
-            "polar form"
-          ]
+          "tags": ["complex numbers", "polar form"]
         },
         {
           "id": "jee_m_3_2",
           "name": "Modulus & Conjugate",
           "latex": "|z| = \\sqrt{x^2 + y^2}, \\qquad \\bar{z} = x - iy, \\qquad z \\bar{z} = |z|^2, \\qquad z^{-1} = \\frac{\\bar{z}}{|z|^2}",
-          "tags": [
-            "complex numbers",
-            "modulus",
-            "conjugate"
-          ]
+          "tags": ["complex numbers", "modulus", "conjugate"]
         },
         {
           "id": "jee_m_3_3",
           "name": "Argument",
           "latex": "\\theta = \\text{arg}(z) = \\tan^{-1}(y/x)",
           "description": "principal arg \u2208 (-\u03c0, \u03c0]",
-          "tags": [
-            "complex numbers",
-            "argument"
-          ]
+          "tags": ["complex numbers", "argument"]
         },
         {
           "id": "jee_m_3_4",
           "name": "Properties",
           "latex": "|z_1 z_2| = |z_1||z_2|, \\qquad \\text{arg}(z_1 z_2) = \\text{arg}(z_1) + \\text{arg}(z_2)",
-          "tags": [
-            "complex numbers",
-            "properties"
-          ]
+          "tags": ["complex numbers", "properties"]
         },
         {
           "id": "jee_m_3_5",
           "name": "Triangle Inequality",
           "latex": "||z_1| - |z_2|| \\le |z_1 \\pm z_2| \\le |z_1| + |z_2|",
-          "tags": [
-            "complex numbers",
-            "triangle inequality"
-          ]
+          "tags": ["complex numbers", "triangle inequality"]
         },
         {
           "id": "jee_m_3_6",
           "name": "Cube Roots of Unity",
           "latex": "1, \\omega, \\omega^2 \\quad \\text{where } \\omega = \\frac{-1 + i\\sqrt{3}}{2} = e^{i2\\pi/3}",
           "description": "Properties: 1 + \u03c9 + \u03c9\u00b2 = 0; \u03c9\u00b3 = 1; \u03c9\u00b3k = 1",
-          "tags": [
-            "complex numbers",
-            "cube roots"
-          ]
+          "tags": ["complex numbers", "cube roots"]
         },
         {
           "id": "jee_m_3_7",
           "name": "Factorisations",
           "latex": "x^3 - y^3 = (x - y)(x - \\omega y)(x - \\omega^2y)",
           "description": "x\u00b2 + y\u00b2 + z\u00b2 - xy - yz - zx = (x + \u03c9y + \u03c9\u00b2z)(x + \u03c9\u00b2y + \u03c9z).",
-          "tags": [
-            "complex numbers",
-            "factorisation"
-          ]
+          "tags": ["complex numbers", "factorisation"]
         },
         {
           "id": "jee_m_3_8",
           "name": "Quadratic Roots",
           "latex": "\\alpha + \\beta = -\\frac{b}{a}, \\qquad \\alpha\\beta = \\frac{c}{a}, \\qquad D = b^2 - 4ac",
-          "tags": [
-            "quadratic equations",
-            "sum and product"
-          ]
+          "tags": ["quadratic equations", "sum and product"]
+        },
+        {
+          "name": "Quadratic Formula",
+          "latex": "x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}",
+          "tags": ["quadratic"],
+          "id": "jee_m_ch5_add_6"
+        },
+        {
+          "name": "Discriminant",
+          "latex": "D = b^2 - 4ac",
+          "tags": ["discriminant"],
+          "id": "jee_m_ch5_add_7"
+        },
+        {
+          "name": "Sum of Roots",
+          "latex": "\\alpha + \\beta = -\\frac{b}{a}",
+          "tags": ["sum of roots"],
+          "id": "jee_m_ch5_add_8"
+        },
+        {
+          "name": "Product of Roots",
+          "latex": "\\alpha\\beta = \\frac{c}{a}",
+          "tags": ["product of roots"],
+          "id": "jee_m_ch5_add_9"
+        },
+        {
+          "name": "AP nth Term",
+          "latex": "a_n = a + (n-1)d",
+          "tags": ["ap"],
+          "id": "jee_m_ch5_add_10"
+        },
+        {
+          "name": "AP Sum",
+          "latex": "S_n = \\frac{n}{2}[2a + (n-1)d] = \\frac{n}{2}(a + l)",
+          "tags": ["ap sum"],
+          "id": "jee_m_ch5_add_11"
+        },
+        {
+          "name": "GP nth Term",
+          "latex": "a_n = ar^{n-1}",
+          "tags": ["gp"],
+          "id": "jee_m_ch5_add_12"
+        },
+        {
+          "name": "GP Sum (Finite)",
+          "latex": "S_n = a\\frac{(r^n-1)}{r-1}",
+          "tags": ["gp sum"],
+          "id": "jee_m_ch5_add_13"
+        },
+        {
+          "name": "GP Sum (Infinite)",
+          "latex": "S_\\infty = \\frac{a}{1-r}",
+          "tags": ["gp sum", "infinite"],
+          "id": "jee_m_ch5_add_14"
+        },
+        {
+          "name": "AM-GM Inequality",
+          "latex": "\\frac{a+b}{2} \\ge \\sqrt{ab}",
+          "tags": ["am-gm"],
+          "id": "jee_m_ch5_add_15"
+        },
+        {
+          "name": "Sum of Squares",
+          "latex": "\\sum n^2 = \\frac{n(n+1)(2n+1)}{6}",
+          "tags": ["sum of squares"],
+          "id": "jee_m_ch5_add_16"
+        },
+        {
+          "name": "Sum of Cubes",
+          "latex": "\\sum n^3 = \\left[\\frac{n(n+1)}{2}\\right]^2",
+          "tags": ["sum of cubes"],
+          "id": "jee_m_ch5_add_17"
+        },
+        {
+          "name": "Euler's Formula",
+          "latex": "e^{i\\theta} = \\cos\\theta + i \\sin\\theta",
+          "tags": ["euler"],
+          "id": "jee_m_ch3_add_21"
+        },
+        {
+          "name": "Modulus",
+          "latex": "|z| = \\sqrt{x^2 + y^2}",
+          "tags": ["modulus"],
+          "id": "jee_m_ch3_add_22"
+        },
+        {
+          "name": "Argument",
+          "latex": "\\arg(z) = \\tan^{-1}\\left(\\frac{y}{x}\\right)",
+          "tags": ["argument"],
+          "id": "jee_m_ch3_add_23"
+        },
+        {
+          "name": "Roots of Unity",
+          "latex": "z^n = 1 \\implies z = e^{2\\pi ik/n}",
+          "tags": ["roots of unity"],
+          "id": "jee_m_ch3_add_24"
+        },
+        {
+          "name": "Triangle Inequality",
+          "latex": "||z_1| - |z_2|| \\le |z_1 + z_2| \\le |z_1| + |z_2|",
+          "tags": ["triangle inequality"],
+          "id": "jee_m_ch3_add_25"
+        },
+        {
+          "name": "Matrix Inverse (2x2)",
+          "latex": "A^{-1} = \\frac{1}{\\det A}\\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}",
+          "tags": ["matrix inverse"],
+          "id": "jee_m_ch3_add_26"
+        },
+        {
+          "name": "Cramer's Rule",
+          "latex": "x = \\frac{D_x}{D}, \\quad y = \\frac{D_y}{D}, \\quad z = \\frac{D_z}{D}",
+          "tags": ["cramers rule"],
+          "id": "jee_m_ch3_add_27"
         }
       ],
       "keyPoints": [
@@ -302,74 +409,100 @@
           "id": "jee_m_4_1",
           "name": "Combinatorial Identities",
           "latex": "^nP_r = \\frac{n!}{(n - r)!}, \\qquad ^nC_r = \\frac{n!}{r! (n - r)!}",
-          "tags": [
-            "permutations",
-            "combinations"
-          ]
+          "tags": ["permutations", "combinations"]
         },
         {
           "id": "jee_m_4_2",
           "name": "Pascal's Rule & Ratio",
           "latex": "^nC_r + ^nC_{r-1} = ^{n+1}C_r, \\qquad \\frac{^nC_r}{^nC_{r-1}} = \\frac{n - r + 1}{r}",
-          "tags": [
-            "combinations",
-            "properties"
-          ]
+          "tags": ["combinations", "properties"]
         },
         {
           "id": "jee_m_4_3",
           "name": "Division into groups & Distribution",
           "latex": "\\text{Groups: } \\frac{(m + n)!}{m! n!}, \\qquad \\text{Identical items to r boxes: } ^{n+r-1}C_{r-1}",
           "description": "Distribution of n distinct items into r distinct boxes: r\u207f.",
-          "tags": [
-            "combinations",
-            "groups",
-            "distribution"
-          ]
+          "tags": ["combinations", "groups", "distribution"]
         },
         {
           "id": "jee_m_4_4",
           "name": "Derangements",
           "latex": "D_n = n! \\left[1 - \\frac{1}{1!} + \\frac{1}{2!} - \\frac{1}{3!} + ... + \\frac{(-1)^n}{n!}\\right]",
           "description": "D1 = 0, D2 = 1, D3 = 2, D4 = 9, D5 = 44.",
-          "tags": [
-            "derangement"
-          ]
+          "tags": ["derangement"]
         },
         {
           "id": "jee_m_4_5",
           "name": "Multinomial expansion",
           "latex": "(x_1 + x_2 + ... + x_k)^n \\text{ has } ^{n+k-1}C_{k-1} \\text{ terms}",
-          "tags": [
-            "multinomial"
-          ]
+          "tags": ["multinomial"]
         },
         {
           "id": "jee_m_4_6",
           "name": "Binomial Theorem",
           "latex": "(a + b)^n = \\sum_{r=0}^n \\; ^nC_r \\; a^{n-r} b^r",
-          "tags": [
-            "binomial theorem"
-          ]
+          "tags": ["binomial theorem"]
         },
         {
           "id": "jee_m_4_7",
           "name": "General Term",
           "latex": "T_{r+1} = \\; ^nC_r \\; a^{n-r} b^r",
           "description": "Middle Term: n even \u21d2 Tn/2 + 1; n odd \u21d2 T(n+1)/2 and T(n+3)/2",
-          "tags": [
-            "binomial theorem",
-            "general term"
-          ]
+          "tags": ["binomial theorem", "general term"]
         },
         {
           "id": "jee_m_4_8",
           "name": "Sum of coefficients",
           "latex": "\\sum \\; ^nC_r = 2^n, \\qquad \\sum (-1)^r \\; ^nC_r = 0, \\qquad \\sum r \\; ^nC_r = n 2^{n-1}",
-          "tags": [
-            "binomial theorem",
-            "coefficients"
-          ]
+          "tags": ["binomial theorem", "coefficients"]
+        },
+        {
+          "name": "Permutation",
+          "latex": "^nP_r = \\frac{n!}{(n-r)!}",
+          "tags": ["permutation"],
+          "id": "jee_m_ch4_add_9"
+        },
+        {
+          "name": "Combination",
+          "latex": "^nC_r = \\frac{n!}{r!(n-r)!}",
+          "tags": ["combination"],
+          "id": "jee_m_ch4_add_10"
+        },
+        {
+          "name": "Circular Permutation",
+          "latex": "(n-1)!",
+          "tags": ["circular permutation"],
+          "id": "jee_m_ch4_add_11"
+        },
+        {
+          "name": "Derangement",
+          "latex": "D_n = n!\\left[1 - \\frac{1}{1!} + \\frac{1}{2!} - \\frac{1}{3!} + ...\\right]",
+          "tags": ["derangement"],
+          "id": "jee_m_ch4_add_12"
+        },
+        {
+          "name": "Binomial Theorem",
+          "latex": "(a+b)^n = \\sum ^nC_r a^{n-r} b^r",
+          "tags": ["binomial theorem"],
+          "id": "jee_m_ch4_add_13"
+        },
+        {
+          "name": "General Term",
+          "latex": "T_{r+1} = ^nC_r \\cdot a^{n-r} \\cdot b^r",
+          "tags": ["general term"],
+          "id": "jee_m_ch4_add_14"
+        },
+        {
+          "name": "Multinomial Coefficient",
+          "latex": "\\frac{n!}{a!b!c!} \\quad (a+b+c = n)",
+          "tags": ["multinomial"],
+          "id": "jee_m_ch4_add_15"
+        },
+        {
+          "name": "Stars & Bars",
+          "latex": "^{n+k-1}C_{k-1}",
+          "tags": ["stars and bars"],
+          "id": "jee_m_ch4_add_16"
         }
       ]
     },
@@ -383,47 +516,105 @@
           "name": "Arithmetic Progression (AP)",
           "latex": "T_n = a + (n - 1)d, \\qquad S_n = \\frac{n}{2}[2a + (n - 1)d] = \\frac{n}{2}(a + l)",
           "description": "AM = (a + b) / 2",
-          "tags": [
-            "ap",
-            "progression"
-          ]
+          "tags": ["ap", "progression"]
         },
         {
           "id": "jee_m_5_2",
           "name": "Geometric Progression (GP)",
           "latex": "T_n = a r^{n-1}, \\qquad S_n = \\frac{a(1 - r^n)}{1 - r} (r \\neq 1)",
           "description": "S\u221e = a / (1 - r) (|r| < 1). GM = \u221a(ab)",
-          "tags": [
-            "gp",
-            "progression"
-          ]
+          "tags": ["gp", "progression"]
         },
         {
           "id": "jee_m_5_3",
           "name": "Arithmetico-Geometric (AGP)",
           "latex": "T_n = [a + (n - 1)d] r^{n-1}, \\qquad S_\\infty = \\frac{a}{1 - r} + \\frac{dr}{(1 - r)^2} \\; (|r| < 1)",
-          "tags": [
-            "agp",
-            "progression"
-          ]
+          "tags": ["agp", "progression"]
         },
         {
           "id": "jee_m_5_4",
           "name": "Sum of Special Series",
           "latex": "\\sum n = \\frac{n(n+1)}{2}, \\qquad \\sum n^2 = \\frac{n(n+1)(2n+1)}{6}, \\qquad \\sum n^3 = \\left[\\frac{n(n+1)}{2}\\right]^2",
-          "tags": [
-            "special series",
-            "summation"
-          ]
+          "tags": ["special series", "summation"]
         },
         {
           "id": "jee_m_5_5",
           "name": "Means Inequality",
           "latex": "AM \\ge GM \\ge HM",
           "description": "For positive real numbers. Equality holds \u21d4 all numbers are equal.",
-          "tags": [
-            "am gm hm inequality"
-          ]
+          "tags": ["am gm hm inequality"]
+        },
+        {
+          "name": "Quadratic Formula",
+          "latex": "x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}",
+          "tags": ["quadratic"],
+          "id": "jee_m_ch5_add_6"
+        },
+        {
+          "name": "Discriminant",
+          "latex": "D = b^2 - 4ac",
+          "tags": ["discriminant"],
+          "id": "jee_m_ch5_add_7"
+        },
+        {
+          "name": "Sum of Roots",
+          "latex": "\\alpha + \\beta = -\\frac{b}{a}",
+          "tags": ["sum of roots"],
+          "id": "jee_m_ch5_add_8"
+        },
+        {
+          "name": "Product of Roots",
+          "latex": "\\alpha\\beta = \\frac{c}{a}",
+          "tags": ["product of roots"],
+          "id": "jee_m_ch5_add_9"
+        },
+        {
+          "name": "AP nth Term",
+          "latex": "a_n = a + (n-1)d",
+          "tags": ["ap"],
+          "id": "jee_m_ch5_add_10"
+        },
+        {
+          "name": "AP Sum",
+          "latex": "S_n = \\frac{n}{2}[2a + (n-1)d] = \\frac{n}{2}(a + l)",
+          "tags": ["ap sum"],
+          "id": "jee_m_ch5_add_11"
+        },
+        {
+          "name": "GP nth Term",
+          "latex": "a_n = ar^{n-1}",
+          "tags": ["gp"],
+          "id": "jee_m_ch5_add_12"
+        },
+        {
+          "name": "GP Sum (Finite)",
+          "latex": "S_n = a\\frac{(r^n-1)}{r-1}",
+          "tags": ["gp sum"],
+          "id": "jee_m_ch5_add_13"
+        },
+        {
+          "name": "GP Sum (Infinite)",
+          "latex": "S_\\infty = \\frac{a}{1-r}",
+          "tags": ["gp sum", "infinite"],
+          "id": "jee_m_ch5_add_14"
+        },
+        {
+          "name": "AM-GM Inequality",
+          "latex": "\\frac{a+b}{2} \\ge \\sqrt{ab}",
+          "tags": ["am-gm"],
+          "id": "jee_m_ch5_add_15"
+        },
+        {
+          "name": "Sum of Squares",
+          "latex": "\\sum n^2 = \\frac{n(n+1)(2n+1)}{6}",
+          "tags": ["sum of squares"],
+          "id": "jee_m_ch5_add_16"
+        },
+        {
+          "name": "Sum of Cubes",
+          "latex": "\\sum n^3 = \\left[\\frac{n(n+1)}{2}\\right]^2",
+          "tags": ["sum of cubes"],
+          "id": "jee_m_ch5_add_17"
         }
       ]
     },
@@ -436,114 +627,177 @@
           "id": "jee_m_6_1",
           "name": "Straight Lines",
           "latex": "Ax + By + C = 0, \\qquad \\text{Slope: } m = -A/B",
-          "tags": [
-            "straight line",
-            "coordinate geometry"
-          ]
+          "tags": ["straight line", "coordinate geometry"]
         },
         {
           "id": "jee_m_6_2",
           "name": "Distance from point",
           "latex": "d = \\frac{|Ax_1 + By_1 + C|}{\\sqrt{A^2 + B^2}}",
-          "tags": [
-            "straight line",
-            "distance"
-          ]
+          "tags": ["straight line", "distance"]
         },
         {
           "id": "jee_m_6_3",
           "name": "Parallel lines distance & Angle bisectors",
           "latex": "d = \\frac{|C_1 - C_2|}{\\sqrt{A^2 + B^2}}, \\qquad \\frac{a_1x + b_1y + c_1}{\\sqrt{a_1^2+b_1^2}} = \\pm \\frac{a_2x + b_2y + c_2}{\\sqrt{a_2^2+b_2^2}}",
-          "tags": [
-            "straight line",
-            "angle bisector"
-          ]
+          "tags": ["straight line", "angle bisector"]
         },
         {
           "id": "jee_m_6_4",
           "name": "Pair of Straight Lines",
           "latex": "ax^2 + 2hxy + by^2 = 0, \\qquad \\tan\\theta = \\frac{2\\sqrt{h^2 - ab}}{|a + b|}",
           "description": "Perpendicular \u21d4 a + b = 0; Coincident \u21d4 h\u00b2 = ab. Pair condition: \u0394 = abc + 2fgh - af\u00b2 - bg\u00b2 - ch\u00b2 = 0",
-          "tags": [
-            "pair of straight lines"
-          ]
+          "tags": ["pair of straight lines"]
         },
         {
           "id": "jee_m_6_5",
           "name": "Circle Equation",
           "latex": "x^2 + y^2 + 2gx + 2fy + c = 0",
           "description": "Center: (-g, -f), Radius: \u221a(g\u00b2 + f\u00b2 - c)",
-          "tags": [
-            "circle"
-          ]
+          "tags": ["circle"]
         },
         {
           "id": "jee_m_6_6",
           "name": "Circle Tangent",
           "latex": "T = xx_1 + yy_1 + g(x+x_1) + f(y+y_1) + c = 0, \\qquad y = mx \\pm r\\sqrt{1 + m^2}",
           "description": "Director Circle: x\u00b2 + y\u00b2 = 2r\u00b2. Orthogonality condition: 2g\u2081g\u2082 + 2f\u2081f\u2082 = c\u2081 + c\u2082",
-          "tags": [
-            "circle",
-            "tangent"
-          ]
+          "tags": ["circle", "tangent"]
         },
         {
           "id": "jee_m_6_7",
           "name": "Parabola (y\u00b2 = 4ax)",
           "latex": "\\text{Focus: } (a, 0); \\quad \\text{Directrix: } x = -a; \\quad \\text{Latus Rectum } = 4a",
-          "tags": [
-            "parabola"
-          ]
+          "tags": ["parabola"]
         },
         {
           "id": "jee_m_6_8",
           "name": "Parabola Tangent & Normal",
           "latex": "yy_1 = 2a(x + x_1), \\qquad y = mx + \\frac{a}{m}, \\qquad y = mx - 2am - am^3",
           "description": "Parametric Tangent: ty = x + at\u00b2; Normal: y = -tx + 2at + at\u00b3",
-          "tags": [
-            "parabola",
-            "tangent",
-            "normal"
-          ]
+          "tags": ["parabola", "tangent", "normal"]
         },
         {
           "id": "jee_m_6_9",
           "name": "Ellipse",
           "latex": "\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1 \\; (a > b), \\qquad e = \\sqrt{1 - \\frac{b^2}{a^2}} < 1",
           "description": "Foci: (\u00b1ae, 0); Directrices: x = \u00b1a/e. Latus Rectum = 2b\u00b2/a",
-          "tags": [
-            "ellipse"
-          ]
+          "tags": ["ellipse"]
         },
         {
           "id": "jee_m_6_10",
           "name": "Ellipse Tangent & Normal",
           "latex": "y = mx \\pm \\sqrt{a^2m^2 + b^2}, \\qquad \\frac{a^2x}{x_1} - \\frac{b^2y}{y_1} = a^2 - b^2",
           "description": "Director Circle: x\u00b2 + y\u00b2 = a\u00b2 + b\u00b2. Focal property: PF\u2081 + PF\u2082 = 2a",
-          "tags": [
-            "ellipse",
-            "tangent",
-            "normal"
-          ]
+          "tags": ["ellipse", "tangent", "normal"]
         },
         {
           "id": "jee_m_6_11",
           "name": "Hyperbola",
           "latex": "\\frac{x^2}{a^2} - \\frac{y^2}{b^2} = 1, \\qquad e = \\sqrt{1 + \\frac{b^2}{a^2}} > 1",
           "description": "Foci: (\u00b1ae, 0); Directrices: x = \u00b1a/e. Latus Rectum = 2b\u00b2/a",
-          "tags": [
-            "hyperbola"
-          ]
+          "tags": ["hyperbola"]
         },
         {
           "id": "jee_m_6_12",
           "name": "Hyperbola Tangent & Properties",
           "latex": "y = mx \\pm \\sqrt{a^2m^2 - b^2}",
           "description": "Director Circle: x\u00b2 + y\u00b2 = a\u00b2 - b\u00b2. Rectangular Hyperbola (xy = c\u00b2): e = \u221a2. Focal property: |PF\u2081 - PF\u2082| = 2a",
-          "tags": [
-            "hyperbola",
-            "tangent"
-          ]
+          "tags": ["hyperbola", "tangent"]
+        },
+        {
+          "name": "Distance Formula",
+          "latex": "d = \\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}",
+          "tags": ["distance"],
+          "id": "jee_m_ch6_add_13"
+        },
+        {
+          "name": "Section Formula",
+          "latex": "\\left(\\frac{mx_2+nx_1}{m+n}, \\frac{my_2+ny_1}{m+n}\\right)",
+          "tags": ["section formula"],
+          "id": "jee_m_ch6_add_14"
+        },
+        {
+          "name": "Slope-Intercept",
+          "latex": "y = mx + c",
+          "tags": ["slope intercept"],
+          "id": "jee_m_ch6_add_15"
+        },
+        {
+          "name": "Angle Between Lines",
+          "latex": "\\tan\\theta = \\left|\\frac{m_1-m_2}{1+m_1m_2}\\right|",
+          "tags": ["angle"],
+          "id": "jee_m_ch6_add_16"
+        },
+        {
+          "name": "Distance from Point to Line",
+          "latex": "d = \\frac{|ax_1 + by_1 + c|}{\\sqrt{a^2 + b^2}}",
+          "tags": ["distance to line"],
+          "id": "jee_m_ch6_add_17"
+        },
+        {
+          "name": "Length of Tangent",
+          "latex": "L = \\sqrt{x_1^2 + y_1^2 + 2gx_1 + 2fy_1 + c}",
+          "tags": ["tangent"],
+          "id": "jee_m_ch6_add_18"
+        },
+        {
+          "name": "Radical Axis",
+          "latex": "S_1 - S_2 = 0",
+          "tags": ["radical axis"],
+          "id": "jee_m_ch6_add_19"
+        },
+        {
+          "name": "Family of Circles",
+          "latex": "S + \\lambda L = 0",
+          "tags": ["family of circles"],
+          "id": "jee_m_ch6_add_20"
+        },
+        {
+          "name": "Parabola Standard",
+          "latex": "y^2 = 4ax",
+          "tags": ["parabola"],
+          "id": "jee_m_ch6_add_21"
+        },
+        {
+          "name": "Ellipse Standard",
+          "latex": "\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1",
+          "tags": ["ellipse"],
+          "id": "jee_m_ch6_add_22"
+        },
+        {
+          "name": "Hyperbola Standard",
+          "latex": "\\frac{x^2}{a^2} - \\frac{y^2}{b^2} = 1",
+          "tags": ["hyperbola"],
+          "id": "jee_m_ch6_add_23"
+        },
+        {
+          "name": "Tangent to Parabola",
+          "latex": "y = mx + \\frac{a}{m}",
+          "tags": ["tangent", "parabola"],
+          "id": "jee_m_ch6_add_24"
+        },
+        {
+          "name": "Tangent to Ellipse",
+          "latex": "y = mx \\pm \\sqrt{a^2m^2+b^2}",
+          "tags": ["tangent", "ellipse"],
+          "id": "jee_m_ch6_add_25"
+        },
+        {
+          "name": "Eccentricity Relation",
+          "latex": "e_1e_2 = 1 \\quad \\text{(conjugate hyperbolas)}",
+          "tags": ["eccentricity"],
+          "id": "jee_m_ch6_add_26"
+        },
+        {
+          "name": "Focal Chord Length (Parabola)",
+          "latex": "4a \\csc^2\\theta",
+          "tags": ["focal chord"],
+          "id": "jee_m_ch6_add_27"
+        },
+        {
+          "name": "Latus Rectum (Ellipse)",
+          "latex": "LR = \\frac{2b^2}{a}",
+          "tags": ["latus rectum"],
+          "id": "jee_m_ch6_add_28"
         }
       ]
     }

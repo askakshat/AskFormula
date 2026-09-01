@@ -117,6 +117,48 @@
           "name": "Shortest distance between moving bodies",
           "latex": "d_{min} = \\frac{|r_{12} \\times v_{12}|}{|v_{12}|}",
           "tags": ["relative motion", "shortest distance"]
+        },
+        {
+          "name": "Equations of Motion",
+          "latex": "v = u + at; \\quad s = ut + \\frac{1}{2}at^2; \\quad v^2 = u^2 + 2as",
+          "tags": ["kinematics", "motion"],
+          "id": "jee_p_ch1_add_18"
+        },
+        {
+          "name": "Relative Velocity",
+          "latex": "v_{AB} = v_A - v_B",
+          "tags": ["kinematics", "relative"],
+          "id": "jee_p_ch1_add_19"
+        },
+        {
+          "name": "Projectile Range",
+          "latex": "R = \\frac{u^2\\sin 2\\theta}{g}",
+          "tags": ["projectile", "range"],
+          "id": "jee_p_ch1_add_20"
+        },
+        {
+          "name": "Projectile Max Height",
+          "latex": "H = \\frac{u^2\\sin^2\\theta}{2g}",
+          "tags": ["projectile", "height"],
+          "id": "jee_p_ch1_add_21"
+        },
+        {
+          "name": "Projectile on Incline",
+          "latex": "R = \\frac{2u^2\\sin\\alpha\\cdot\\cos(\\alpha+\\beta)}{g\\cdot\\cos^2\\beta}",
+          "tags": ["projectile", "incline"],
+          "id": "jee_p_ch1_add_22"
+        },
+        {
+          "name": "River Crossing (min time)",
+          "latex": "t = \\frac{d}{v_{swim}}; \\quad \\text{Drift} = \\left(\\frac{v_{river}}{v_{swim}}\\right)\\times d",
+          "tags": ["river"],
+          "id": "jee_p_ch1_add_23"
+        },
+        {
+          "name": "Circular Motion (Centripetal)",
+          "latex": "a_c = \\frac{v^2}{r} = \\omega^2r",
+          "tags": ["circular"],
+          "id": "jee_p_ch1_add_24"
         }
       ],
       "keyPoints": [
@@ -176,6 +218,54 @@
           "latex": "v_{max} = \\sqrt{R g \\left(\\frac{\\mu_s + \\tan\\theta}{1 - \\mu_s\\tan\\theta}\\right)}",
           "description": "Level road: vmax = \u221a(\u03bcs R g). Optimum speed: v0 = \u221a(R g tan\u03b8). \u03b8 = banking angle of road.",
           "tags": ["banking", "circular track", "friction"]
+        },
+        {
+          "name": "Newton's 2nd Law",
+          "latex": "F = ma = \\frac{dp}{dt}",
+          "tags": ["newtons laws"],
+          "id": "jee_p_ch2_add_8"
+        },
+        {
+          "name": "Friction",
+          "latex": "f \\le \\mu N; \\quad f_{kinetic} = \\mu_k N",
+          "tags": ["friction"],
+          "id": "jee_p_ch2_add_9"
+        },
+        {
+          "name": "Pseudo Force",
+          "latex": "F_{pseudo} = -ma_{frame}",
+          "tags": ["pseudo force"],
+          "id": "jee_p_ch2_add_10"
+        },
+        {
+          "name": "Pulley (Atwood)",
+          "latex": "a = \\frac{(m_1 - m_2)g}{m_1 + m_2}; \\quad T = \\frac{2m_1m_2g}{m_1 + m_2}",
+          "tags": ["pulley"],
+          "id": "jee_p_ch2_add_11"
+        },
+        {
+          "name": "Banking Angle",
+          "latex": "\\tan \\theta = \\frac{v^2}{rg}",
+          "tags": ["banking"],
+          "id": "jee_p_ch2_add_12"
+        },
+        {
+          "name": "Spring Force",
+          "latex": "F = -kx",
+          "tags": ["spring"],
+          "id": "jee_p_ch2_add_13"
+        },
+        {
+          "name": "Impulse",
+          "latex": "J = F\\Delta t = \\Delta p",
+          "tags": ["impulse"],
+          "id": "jee_p_ch2_add_14"
+        },
+        {
+          "name": "Conical Pendulum",
+          "latex": "T = 2\\pi\\sqrt{\\frac{L \\cos\\theta}{g}}",
+          "tags": ["pendulum"],
+          "id": "jee_p_ch2_add_15"
         }
       ]
     },
@@ -231,6 +321,48 @@
           "latex": "T = mg \\cos\\theta + \\frac{mv^2}{L}",
           "description": "Tension at angle \u03b8 from bottom. Tbottom - Ttop = 6mg. For light rigid rod: umin at bottom = \u221a(4gL) = 2\u221a(gL).",
           "tags": ["vertical circular motion", "tension"]
+        },
+        {
+          "name": "Work Done",
+          "latex": "W = F\\cdot d\\cdot\\cos\\theta = \\int F\\cdot ds",
+          "tags": ["work"],
+          "id": "jee_p_ch3_add_8"
+        },
+        {
+          "name": "Kinetic Energy",
+          "latex": "KE = \\frac{1}{2}mv^2",
+          "tags": ["kinetic energy"],
+          "id": "jee_p_ch3_add_9"
+        },
+        {
+          "name": "Gravitational PE",
+          "latex": "U = -\\frac{GMm}{r} \\quad \\text{(from infinity)}; \\quad U = mgh \\quad \\text{(near surface)}",
+          "tags": ["potential energy"],
+          "id": "jee_p_ch3_add_10"
+        },
+        {
+          "name": "Spring PE",
+          "latex": "U = \\frac{1}{2}kx^2",
+          "tags": ["spring energy"],
+          "id": "jee_p_ch3_add_11"
+        },
+        {
+          "name": "Power",
+          "latex": "P = \\frac{W}{t} = F\\cdot v",
+          "tags": ["power"],
+          "id": "jee_p_ch3_add_12"
+        },
+        {
+          "name": "Coefficient of Restitution",
+          "latex": "e = -\\frac{(v_2 - v_1)}{(u_2 - u_1)}",
+          "tags": ["restitution"],
+          "id": "jee_p_ch3_add_13"
+        },
+        {
+          "name": "Elastic Collision (1D)",
+          "latex": "v_1 = \\frac{(m_1-m_2)u_1 + 2m_2u_2}{m_1+m_2}",
+          "tags": ["collision"],
+          "id": "jee_p_ch3_add_14"
         }
       ]
     },
@@ -375,6 +507,66 @@
           "latex": "v_{cm} = \\sqrt{\\frac{2gh}{1 + k^2/R^2}}",
           "description": "Total KE: K = \u00bdMvcm\u00b2(1 + k\u00b2/R\u00b2)",
           "tags": ["rolling", "velocity", "kinetic energy"]
+        },
+        {
+          "name": "Angular Momentum",
+          "latex": "L = I\\omega = mvr",
+          "tags": ["angular momentum"],
+          "id": "jee_p_ch6_add_12"
+        },
+        {
+          "name": "MOI (Rod, center)",
+          "latex": "I = \\frac{ML^2}{12}",
+          "tags": ["moi"],
+          "id": "jee_p_ch6_add_16"
+        },
+        {
+          "name": "Rolling (No Slip)",
+          "latex": "v = R\\omega; \\quad a = R\\alpha",
+          "tags": ["rolling"],
+          "id": "jee_p_ch6_add_18"
+        },
+        {
+          "name": "KE of Rolling Body",
+          "latex": "KE = \\frac{1}{2}mv^2\\left(1 + \\frac{k^2}{R^2}\\right)",
+          "tags": ["rolling energy"],
+          "id": "jee_p_ch6_add_19"
+        },
+        {
+          "name": "Newton's Gravity",
+          "latex": "F = \\frac{GMm}{r^2}",
+          "tags": ["gravity"],
+          "id": "jee_p_ch6_add_20"
+        },
+        {
+          "name": "Orbital Velocity",
+          "latex": "v_0 = \\sqrt{\\frac{GM}{r}} = \\sqrt{gR}",
+          "tags": ["orbital velocity"],
+          "id": "jee_p_ch6_add_21"
+        },
+        {
+          "name": "Escape Velocity",
+          "latex": "v_e = \\sqrt{2gR} = \\sqrt{\\frac{2GM}{R}}",
+          "tags": ["escape velocity"],
+          "id": "jee_p_ch6_add_22"
+        },
+        {
+          "name": "Kepler's 3rd Law",
+          "latex": "T^2 \\propto a^3",
+          "tags": ["keplers law"],
+          "id": "jee_p_ch6_add_23"
+        },
+        {
+          "name": "g at Height h",
+          "latex": "g' = g\\left(1 - \\frac{2h}{R}\\right)",
+          "tags": ["gravity", "height"],
+          "id": "jee_p_ch6_add_24"
+        },
+        {
+          "name": "g at Depth d",
+          "latex": "g' = g\\left(1 - \\frac{d}{R}\\right)",
+          "tags": ["gravity", "depth"],
+          "id": "jee_p_ch6_add_25"
         }
       ]
     },
@@ -449,6 +641,96 @@
           "latex": "T = 2\\pi \\sqrt{\\frac{d^3}{G(m_1 + m_2)}}",
           "description": "d = separation between binary stars.",
           "tags": ["binary stars", "time period"]
+        },
+        {
+          "name": "Torque",
+          "latex": "\\tau = r \\times F = I\\alpha",
+          "tags": ["torque"],
+          "id": "jee_p_ch6_add_11"
+        },
+        {
+          "name": "Angular Momentum",
+          "latex": "L = I\\omega = mvr",
+          "tags": ["angular momentum"],
+          "id": "jee_p_ch6_add_12"
+        },
+        {
+          "name": "MOI (Disc)",
+          "latex": "I = \\frac{1}{2}MR^2",
+          "tags": ["moi"],
+          "id": "jee_p_ch6_add_13"
+        },
+        {
+          "name": "MOI (Solid Sphere)",
+          "latex": "I = \\frac{2}{5}MR^2",
+          "tags": ["moi"],
+          "id": "jee_p_ch6_add_14"
+        },
+        {
+          "name": "MOI (Hollow Sphere)",
+          "latex": "I = \\frac{2}{3}MR^2",
+          "tags": ["moi"],
+          "id": "jee_p_ch6_add_15"
+        },
+        {
+          "name": "MOI (Rod, center)",
+          "latex": "I = \\frac{ML^2}{12}",
+          "tags": ["moi"],
+          "id": "jee_p_ch6_add_16"
+        },
+        {
+          "name": "Parallel Axis Theorem",
+          "latex": "I = I_{cm} + Md^2",
+          "tags": ["parallel axis"],
+          "id": "jee_p_ch6_add_17"
+        },
+        {
+          "name": "Rolling (No Slip)",
+          "latex": "v = R\\omega; \\quad a = R\\alpha",
+          "tags": ["rolling"],
+          "id": "jee_p_ch6_add_18"
+        },
+        {
+          "name": "KE of Rolling Body",
+          "latex": "KE = \\frac{1}{2}mv^2\\left(1 + \\frac{k^2}{R^2}\\right)",
+          "tags": ["rolling energy"],
+          "id": "jee_p_ch6_add_19"
+        },
+        {
+          "name": "Newton's Gravity",
+          "latex": "F = \\frac{GMm}{r^2}",
+          "tags": ["gravity"],
+          "id": "jee_p_ch6_add_20"
+        },
+        {
+          "name": "Orbital Velocity",
+          "latex": "v_0 = \\sqrt{\\frac{GM}{r}} = \\sqrt{gR}",
+          "tags": ["orbital velocity"],
+          "id": "jee_p_ch6_add_21"
+        },
+        {
+          "name": "Escape Velocity",
+          "latex": "v_e = \\sqrt{2gR} = \\sqrt{\\frac{2GM}{R}}",
+          "tags": ["escape velocity"],
+          "id": "jee_p_ch6_add_22"
+        },
+        {
+          "name": "Kepler's 3rd Law",
+          "latex": "T^2 \\propto a^3",
+          "tags": ["keplers law"],
+          "id": "jee_p_ch6_add_23"
+        },
+        {
+          "name": "g at Height h",
+          "latex": "g' = g\\left(1 - \\frac{2h}{R}\\right)",
+          "tags": ["gravity", "height"],
+          "id": "jee_p_ch6_add_24"
+        },
+        {
+          "name": "g at Depth d",
+          "latex": "g' = g\\left(1 - \\frac{d}{R}\\right)",
+          "tags": ["gravity", "depth"],
+          "id": "jee_p_ch6_add_25"
         }
       ]
     },
@@ -612,6 +894,66 @@
           "name": "Beats frequency",
           "latex": "\\nu_{beat} = |\\nu_1 - \\nu_2|",
           "tags": ["beats", "frequency"]
+        },
+        {
+          "name": "SHM Displacement",
+          "latex": "x = A \\sin(\\omega t + \\phi)",
+          "tags": ["shm"],
+          "id": "jee_p_ch9_add_11"
+        },
+        {
+          "name": "SHM Period (Spring)",
+          "latex": "T = 2\\pi\\sqrt{\\frac{m}{k}}",
+          "tags": ["shm", "spring"],
+          "id": "jee_p_ch8_add_13"
+        },
+        {
+          "name": "SHM Period (Pendulum)",
+          "latex": "T = 2\\pi\\sqrt{\\frac{L}{g}}",
+          "tags": ["shm", "pendulum"],
+          "id": "jee_p_ch8_add_14"
+        },
+        {
+          "name": "SHM Velocity",
+          "latex": "v = \\omega\\sqrt{A^2 - x^2}",
+          "tags": ["shm", "velocity"],
+          "id": "jee_p_ch9_add_12"
+        },
+        {
+          "name": "SHM Energy",
+          "latex": "E = \\frac{1}{2}kA^2 = \\frac{1}{2}m\\omega^2A^2",
+          "tags": ["shm", "energy"],
+          "id": "jee_p_ch9_add_13"
+        },
+        {
+          "name": "Wave Speed",
+          "latex": "v = f\\lambda = \\frac{\\omega}{k}",
+          "tags": ["wave"],
+          "id": "jee_p_ch9_add_14"
+        },
+        {
+          "name": "Beat Frequency",
+          "latex": "f_{beat} = |f_1 - f_2|",
+          "tags": ["beat"],
+          "id": "jee_p_ch9_add_16"
+        },
+        {
+          "name": "Doppler Effect",
+          "latex": "f' = f\\frac{v \\pm v_{observer}}{v \\mp v_{source}}",
+          "tags": ["doppler"],
+          "id": "jee_p_ch9_add_17"
+        },
+        {
+          "name": "Standing Wave (Both Ends Fixed)",
+          "latex": "f_n = \\frac{nv}{2L}",
+          "tags": ["standing wave"],
+          "id": "jee_p_ch9_add_18"
+        },
+        {
+          "name": "Resonance (Closed Pipe)",
+          "latex": "f_n = \\frac{nv}{4L}",
+          "tags": ["resonance"],
+          "id": "jee_p_ch9_add_19"
         }
       ]
     },
@@ -682,6 +1024,60 @@
           "name": "Series and Parallel springs",
           "latex": "\\frac{1}{k_{eq}} = \\sum \\frac{1}{k_i}, \\qquad k_{eq} = \\sum k_i",
           "tags": ["springs in series", "springs in parallel"]
+        },
+        {
+          "name": "SHM Displacement",
+          "latex": "x = A \\sin(\\omega t + \\phi)",
+          "tags": ["shm"],
+          "id": "jee_p_ch9_add_11"
+        },
+        {
+          "name": "SHM Velocity",
+          "latex": "v = \\omega\\sqrt{A^2 - x^2}",
+          "tags": ["shm", "velocity"],
+          "id": "jee_p_ch9_add_12"
+        },
+        {
+          "name": "SHM Energy",
+          "latex": "E = \\frac{1}{2}kA^2 = \\frac{1}{2}m\\omega^2A^2",
+          "tags": ["shm", "energy"],
+          "id": "jee_p_ch9_add_13"
+        },
+        {
+          "name": "Wave Speed",
+          "latex": "v = f\\lambda = \\frac{\\omega}{k}",
+          "tags": ["wave"],
+          "id": "jee_p_ch9_add_14"
+        },
+        {
+          "name": "String Wave Speed",
+          "latex": "v = \\sqrt{\\frac{T}{\\mu}}",
+          "tags": ["wave", "string"],
+          "id": "jee_p_ch9_add_15"
+        },
+        {
+          "name": "Beat Frequency",
+          "latex": "f_{beat} = |f_1 - f_2|",
+          "tags": ["beat"],
+          "id": "jee_p_ch9_add_16"
+        },
+        {
+          "name": "Doppler Effect",
+          "latex": "f' = f\\frac{v \\pm v_{observer}}{v \\mp v_{source}}",
+          "tags": ["doppler"],
+          "id": "jee_p_ch9_add_17"
+        },
+        {
+          "name": "Standing Wave (Both Ends Fixed)",
+          "latex": "f_n = \\frac{nv}{2L}",
+          "tags": ["standing wave"],
+          "id": "jee_p_ch9_add_18"
+        },
+        {
+          "name": "Resonance (Closed Pipe)",
+          "latex": "f_n = \\frac{nv}{4L}",
+          "tags": ["resonance"],
+          "id": "jee_p_ch9_add_19"
         }
       ]
     },
@@ -779,6 +1175,90 @@
           "latex": "\\beta = \\frac{Q_2}{W} = \\frac{T_2}{T_1 - T_2}",
           "description": "Relation: \u03b2 = (1 - \u03b7) / \u03b7.",
           "tags": ["refrigerator", "cop"]
+        },
+        {
+          "name": "Ideal Gas Law",
+          "latex": "PV = nRT",
+          "tags": ["ideal gas"],
+          "id": "jee_p_ch10_add_15"
+        },
+        {
+          "name": "KE of Gas Molecule",
+          "latex": "KE = \\frac{3}{2}kT",
+          "tags": ["kinetic energy"],
+          "id": "jee_p_ch10_add_16"
+        },
+        {
+          "name": "RMS Speed",
+          "latex": "v_{rms} = \\sqrt{\\frac{3RT}{M}} = \\sqrt{\\frac{3kT}{m}}",
+          "tags": ["rms"],
+          "id": "jee_p_ch10_add_17"
+        },
+        {
+          "name": "Most Probable Speed",
+          "latex": "v_{mp} = \\sqrt{\\frac{2RT}{M}}",
+          "tags": ["mp speed"],
+          "id": "jee_p_ch10_add_18"
+        },
+        {
+          "name": "Mean Speed",
+          "latex": "v_{mean} = \\sqrt{\\frac{8RT}{\\pi M}}",
+          "tags": ["mean speed"],
+          "id": "jee_p_ch10_add_19"
+        },
+        {
+          "name": "First Law",
+          "latex": "\\Delta U = Q - W",
+          "tags": ["first law"],
+          "id": "jee_p_ch10_add_20"
+        },
+        {
+          "name": "Isothermal Work",
+          "latex": "W = nRT \\ln\\left(\\frac{V_2}{V_1}\\right)",
+          "tags": ["isothermal"],
+          "id": "jee_p_ch10_add_21"
+        },
+        {
+          "name": "Adiabatic Process",
+          "latex": "PV^\\gamma = \\text{constant}; \\quad TV^{\\gamma-1} = \\text{constant}",
+          "tags": ["adiabatic"],
+          "id": "jee_p_ch10_add_22"
+        },
+        {
+          "name": "Carnot Efficiency",
+          "latex": "\\eta = 1 - \\frac{T_{cold}}{T_{hot}}",
+          "tags": ["carnot"],
+          "id": "jee_p_ch10_add_23"
+        },
+        {
+          "name": "Entropy",
+          "latex": "\\Delta S = \\frac{Q_{rev}}{T}",
+          "tags": ["entropy"],
+          "id": "jee_p_ch10_add_24"
+        },
+        {
+          "name": "Stefan's Law",
+          "latex": "P = \\sigma AT^4",
+          "tags": ["stefans law"],
+          "id": "jee_p_ch10_add_25"
+        },
+        {
+          "name": "Newton's Law of Cooling",
+          "latex": "\\frac{dT}{dt} = -k(T - T_s)",
+          "tags": ["newtons cooling"],
+          "id": "jee_p_ch10_add_26"
+        },
+        {
+          "name": "Wien's Law",
+          "latex": "\\lambda_{max} T = b",
+          "tags": ["wiens law"],
+          "id": "jee_p_ch10_add_27"
+        },
+        {
+          "name": "Thermal Conductivity",
+          "latex": "\\frac{Q}{t} = kA\\frac{(T_1 - T_2)}{L}",
+          "tags": ["thermal conductivity"],
+          "id": "jee_p_ch10_add_28"
         }
       ],
       "keyPoints": [

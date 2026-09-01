@@ -81,6 +81,60 @@
           "name": "Energy Loss on Sharing Charges",
           "latex": "\\Delta U = \\frac{C_1 C_2}{2(C_1 + C_2)} (V_1 - V_2)^2",
           "tags": ["capacitance", "energy loss"]
+        },
+        {
+          "name": "Coulomb's Law",
+          "latex": "F = \\frac{kq_1q_2}{r^2}",
+          "tags": ["coulomb"],
+          "id": "jee_c12_ch1_add_13"
+        },
+        {
+          "name": "Electric Field",
+          "latex": "E = \\frac{kQ}{r^2} = \\frac{F}{q_0}",
+          "tags": ["electric field"],
+          "id": "jee_c12_ch1_add_14"
+        },
+        {
+          "name": "Gauss's Law",
+          "latex": "\\oint E\\cdot dA = \\frac{Q_{enc}}{\\varepsilon_0}",
+          "tags": ["gauss"],
+          "id": "jee_c12_ch1_add_15"
+        },
+        {
+          "name": "Electric Potential",
+          "latex": "V = \\frac{kQ}{r}",
+          "tags": ["potential"],
+          "id": "jee_c12_ch1_add_16"
+        },
+        {
+          "name": "Potential Energy",
+          "latex": "U = \\frac{kq_1q_2}{r}",
+          "tags": ["potential energy"],
+          "id": "jee_c12_ch1_add_17"
+        },
+        {
+          "name": "Capacitance (Parallel Plate)",
+          "latex": "C = \\frac{\\varepsilon_0 A}{d}",
+          "tags": ["capacitance"],
+          "id": "jee_c12_ch1_add_18"
+        },
+        {
+          "name": "Capacitors in Series",
+          "latex": "\\frac{1}{C_{eq}} = \\frac{1}{C_1} + \\frac{1}{C_2} + ...",
+          "tags": ["capacitors", "series"],
+          "id": "jee_c12_ch1_add_19"
+        },
+        {
+          "name": "Capacitors in Parallel",
+          "latex": "C_{eq} = C_1 + C_2 + ...",
+          "tags": ["capacitors", "parallel"],
+          "id": "jee_c12_ch1_add_20"
+        },
+        {
+          "name": "Electric Dipole Moment",
+          "latex": "p = qd",
+          "tags": ["dipole"],
+          "id": "jee_c12_ch1_add_21"
         }
       ],
       "keyPoints": [
@@ -138,6 +192,108 @@
           "name": "Meter Bridge & Potentiometer",
           "latex": "\\frac{R}{S} = \\frac{l}{100 - l}, \\qquad \\frac{\\varepsilon_1}{\\varepsilon_2} = \\frac{l_1}{l_2}, \\quad r = R\\left(\\frac{l_1}{l_2} - 1\\right)",
           "tags": ["current", "meter bridge", "potentiometer"]
+        },
+        {
+          "name": "Ohm's Law",
+          "latex": "V = IR",
+          "tags": ["ohms law"],
+          "id": "jee_c12_ch4_add_9"
+        },
+        {
+          "name": "Resistance",
+          "latex": "R = \\frac{\\rho L}{A}",
+          "tags": ["resistance"],
+          "id": "jee_c12_ch4_add_10"
+        },
+        {
+          "name": "Power",
+          "latex": "P = VI = I^2R = \\frac{V^2}{R}",
+          "tags": ["power"],
+          "id": "jee_c12_ch4_add_11"
+        },
+        {
+          "name": "Kirchhoff's Laws",
+          "latex": "\\sum I = 0 \\quad \\text{(junction)}; \\quad \\sum V = 0 \\quad \\text{(loop)}",
+          "tags": ["kirchhoff"],
+          "id": "jee_c12_ch4_add_12"
+        },
+        {
+          "name": "Wheatstone Bridge",
+          "latex": "\\frac{R_1}{R_2} = \\frac{R_3}{R_4}",
+          "tags": ["wheatstone"],
+          "id": "jee_c12_ch4_add_13"
+        },
+        {
+          "name": "EMF & Internal Resistance",
+          "latex": "V = \\varepsilon - Ir",
+          "tags": ["emf"],
+          "id": "jee_c12_ch4_add_14"
+        },
+        {
+          "name": "Biot-Savart Law",
+          "latex": "dB = \\frac{\\mu_0}{4\\pi}\\frac{(I dl \\times \\hat{r})}{r^2}",
+          "tags": ["biot savart"],
+          "id": "jee_c12_ch4_add_15"
+        },
+        {
+          "name": "B (Infinite Wire)",
+          "latex": "B = \\frac{\\mu_0 I}{2\\pi r}",
+          "tags": ["magnetic field", "wire"],
+          "id": "jee_c12_ch4_add_16"
+        },
+        {
+          "name": "B (Center of Coil)",
+          "latex": "B = \\frac{\\mu_0 NI}{2R}",
+          "tags": ["magnetic field", "coil"],
+          "id": "jee_c12_ch4_add_17"
+        },
+        {
+          "name": "B (Solenoid)",
+          "latex": "B = \\mu_0 n I",
+          "tags": ["magnetic field", "solenoid"],
+          "id": "jee_c12_ch4_add_18"
+        },
+        {
+          "name": "Force on Current",
+          "latex": "F = BIL \\sin\\theta",
+          "tags": ["magnetic force"],
+          "id": "jee_c12_ch4_add_19"
+        },
+        {
+          "name": "Force on Charge",
+          "latex": "F = qv \\times B = qvB \\sin\\theta",
+          "tags": ["magnetic force"],
+          "id": "jee_c12_ch4_add_20"
+        },
+        {
+          "name": "Faraday's Law",
+          "latex": "EMF = -\\frac{d\\Phi}{dt} = -N\\frac{d\\Phi}{dt}",
+          "tags": ["faradays law"],
+          "id": "jee_c12_ch4_add_21"
+        },
+        {
+          "name": "Self Inductance",
+          "latex": "V = -L\\frac{dI}{dt}; \\quad \\text{Energy} = \\frac{1}{2}LI^2",
+          "tags": ["inductance"],
+          "id": "jee_c12_ch4_add_22"
+        },
+        {
+          "name": "Impedance (RLC)",
+          "latex": "Z = \\sqrt{R^2 + (X_L - X_C)^2}",
+          "tags": ["impedance"],
+          "id": "jee_c12_ch4_add_23"
+        },
+        {
+          "name": "Resonant Frequency",
+          "latex": "f_0 = \\frac{1}{2\\pi\\sqrt{LC}}",
+          "tags": ["resonance"],
+          "id": "jee_c12_ch4_add_24"
+        },
+        {
+          "name": "Transformer",
+          "latex": "\\frac{V_s}{V_p} = \\frac{N_s}{N_p} = \\frac{I_p}{I_s}",
+          "tags": ["transformer"],
+          "id": "jee_c12_ch4_add_25"
         }
       ],
       "keyPoints": [
@@ -211,6 +367,102 @@
           "name": "Magnetic Materials",
           "latex": "B = \\mu_0(H + M) = \\mu H = \\mu_0 \\mu_r H, \\qquad M = \\chi H \\implies \\mu_r = 1 + \\chi",
           "tags": ["magnetism", "materials"]
+        },
+        {
+          "name": "Ohm's Law",
+          "latex": "V = IR",
+          "tags": ["ohms law"],
+          "id": "jee_c12_ch4_add_9"
+        },
+        {
+          "name": "Resistance",
+          "latex": "R = \\frac{\\rho L}{A}",
+          "tags": ["resistance"],
+          "id": "jee_c12_ch4_add_10"
+        },
+        {
+          "name": "Power",
+          "latex": "P = VI = I^2R = \\frac{V^2}{R}",
+          "tags": ["power"],
+          "id": "jee_c12_ch4_add_11"
+        },
+        {
+          "name": "Kirchhoff's Laws",
+          "latex": "\\sum I = 0 \\quad \\text{(junction)}; \\quad \\sum V = 0 \\quad \\text{(loop)}",
+          "tags": ["kirchhoff"],
+          "id": "jee_c12_ch4_add_12"
+        },
+        {
+          "name": "Wheatstone Bridge",
+          "latex": "\\frac{R_1}{R_2} = \\frac{R_3}{R_4}",
+          "tags": ["wheatstone"],
+          "id": "jee_c12_ch4_add_13"
+        },
+        {
+          "name": "EMF & Internal Resistance",
+          "latex": "V = \\varepsilon - Ir",
+          "tags": ["emf"],
+          "id": "jee_c12_ch4_add_14"
+        },
+        {
+          "name": "Biot-Savart Law",
+          "latex": "dB = \\frac{\\mu_0}{4\\pi}\\frac{(I dl \\times \\hat{r})}{r^2}",
+          "tags": ["biot savart"],
+          "id": "jee_c12_ch4_add_15"
+        },
+        {
+          "name": "B (Center of Coil)",
+          "latex": "B = \\frac{\\mu_0 NI}{2R}",
+          "tags": ["magnetic field", "coil"],
+          "id": "jee_c12_ch4_add_17"
+        },
+        {
+          "name": "B (Solenoid)",
+          "latex": "B = \\mu_0 n I",
+          "tags": ["magnetic field", "solenoid"],
+          "id": "jee_c12_ch4_add_18"
+        },
+        {
+          "name": "Force on Current",
+          "latex": "F = BIL \\sin\\theta",
+          "tags": ["magnetic force"],
+          "id": "jee_c12_ch4_add_19"
+        },
+        {
+          "name": "Force on Charge",
+          "latex": "F = qv \\times B = qvB \\sin\\theta",
+          "tags": ["magnetic force"],
+          "id": "jee_c12_ch4_add_20"
+        },
+        {
+          "name": "Faraday's Law",
+          "latex": "EMF = -\\frac{d\\Phi}{dt} = -N\\frac{d\\Phi}{dt}",
+          "tags": ["faradays law"],
+          "id": "jee_c12_ch4_add_21"
+        },
+        {
+          "name": "Self Inductance",
+          "latex": "V = -L\\frac{dI}{dt}; \\quad \\text{Energy} = \\frac{1}{2}LI^2",
+          "tags": ["inductance"],
+          "id": "jee_c12_ch4_add_22"
+        },
+        {
+          "name": "Impedance (RLC)",
+          "latex": "Z = \\sqrt{R^2 + (X_L - X_C)^2}",
+          "tags": ["impedance"],
+          "id": "jee_c12_ch4_add_23"
+        },
+        {
+          "name": "Resonant Frequency",
+          "latex": "f_0 = \\frac{1}{2\\pi\\sqrt{LC}}",
+          "tags": ["resonance"],
+          "id": "jee_c12_ch4_add_24"
+        },
+        {
+          "name": "Transformer",
+          "latex": "\\frac{V_s}{V_p} = \\frac{N_s}{N_p} = \\frac{I_p}{I_s}",
+          "tags": ["transformer"],
+          "id": "jee_c12_ch4_add_25"
         }
       ],
       "keyPoints": [
@@ -274,6 +526,108 @@
           "name": "Resonance & Quality Factor",
           "latex": "\\omega_0 = \\frac{1}{\\sqrt{LC}}, \\qquad Q = \\frac{\\omega_0 L}{R} = \\frac{1}{R}\\sqrt{\\frac{L}{C}}",
           "tags": ["ac", "resonance", "q factor"]
+        },
+        {
+          "name": "Ohm's Law",
+          "latex": "V = IR",
+          "tags": ["ohms law"],
+          "id": "jee_c12_ch4_add_9"
+        },
+        {
+          "name": "Resistance",
+          "latex": "R = \\frac{\\rho L}{A}",
+          "tags": ["resistance"],
+          "id": "jee_c12_ch4_add_10"
+        },
+        {
+          "name": "Power",
+          "latex": "P = VI = I^2R = \\frac{V^2}{R}",
+          "tags": ["power"],
+          "id": "jee_c12_ch4_add_11"
+        },
+        {
+          "name": "Kirchhoff's Laws",
+          "latex": "\\sum I = 0 \\quad \\text{(junction)}; \\quad \\sum V = 0 \\quad \\text{(loop)}",
+          "tags": ["kirchhoff"],
+          "id": "jee_c12_ch4_add_12"
+        },
+        {
+          "name": "Wheatstone Bridge",
+          "latex": "\\frac{R_1}{R_2} = \\frac{R_3}{R_4}",
+          "tags": ["wheatstone"],
+          "id": "jee_c12_ch4_add_13"
+        },
+        {
+          "name": "EMF & Internal Resistance",
+          "latex": "V = \\varepsilon - Ir",
+          "tags": ["emf"],
+          "id": "jee_c12_ch4_add_14"
+        },
+        {
+          "name": "Biot-Savart Law",
+          "latex": "dB = \\frac{\\mu_0}{4\\pi}\\frac{(I dl \\times \\hat{r})}{r^2}",
+          "tags": ["biot savart"],
+          "id": "jee_c12_ch4_add_15"
+        },
+        {
+          "name": "B (Infinite Wire)",
+          "latex": "B = \\frac{\\mu_0 I}{2\\pi r}",
+          "tags": ["magnetic field", "wire"],
+          "id": "jee_c12_ch4_add_16"
+        },
+        {
+          "name": "B (Center of Coil)",
+          "latex": "B = \\frac{\\mu_0 NI}{2R}",
+          "tags": ["magnetic field", "coil"],
+          "id": "jee_c12_ch4_add_17"
+        },
+        {
+          "name": "B (Solenoid)",
+          "latex": "B = \\mu_0 n I",
+          "tags": ["magnetic field", "solenoid"],
+          "id": "jee_c12_ch4_add_18"
+        },
+        {
+          "name": "Force on Current",
+          "latex": "F = BIL \\sin\\theta",
+          "tags": ["magnetic force"],
+          "id": "jee_c12_ch4_add_19"
+        },
+        {
+          "name": "Force on Charge",
+          "latex": "F = qv \\times B = qvB \\sin\\theta",
+          "tags": ["magnetic force"],
+          "id": "jee_c12_ch4_add_20"
+        },
+        {
+          "name": "Faraday's Law",
+          "latex": "EMF = -\\frac{d\\Phi}{dt} = -N\\frac{d\\Phi}{dt}",
+          "tags": ["faradays law"],
+          "id": "jee_c12_ch4_add_21"
+        },
+        {
+          "name": "Self Inductance",
+          "latex": "V = -L\\frac{dI}{dt}; \\quad \\text{Energy} = \\frac{1}{2}LI^2",
+          "tags": ["inductance"],
+          "id": "jee_c12_ch4_add_22"
+        },
+        {
+          "name": "Impedance (RLC)",
+          "latex": "Z = \\sqrt{R^2 + (X_L - X_C)^2}",
+          "tags": ["impedance"],
+          "id": "jee_c12_ch4_add_23"
+        },
+        {
+          "name": "Resonant Frequency",
+          "latex": "f_0 = \\frac{1}{2\\pi\\sqrt{LC}}",
+          "tags": ["resonance"],
+          "id": "jee_c12_ch4_add_24"
+        },
+        {
+          "name": "Transformer",
+          "latex": "\\frac{V_s}{V_p} = \\frac{N_s}{N_p} = \\frac{I_p}{I_s}",
+          "tags": ["transformer"],
+          "id": "jee_c12_ch4_add_25"
         }
       ],
       "keyPoints": [
@@ -342,6 +696,72 @@
           "name": "Malus's Law & Brewster's Law",
           "latex": "I = I_0 \\cos^2\\theta, \\qquad \\tan i_p = n \\implies i_p + r_p = 90^\\circ",
           "tags": ["wave optics", "polarisation"]
+        },
+        {
+          "name": "Snell's Law",
+          "latex": "n_1 \\sin\\theta_1 = n_2 \\sin\\theta_2",
+          "tags": ["snells law"],
+          "id": "jee_c12_ch5_add_10"
+        },
+        {
+          "name": "Critical Angle",
+          "latex": "\\sin\\theta_c = \\frac{n_2}{n_1}",
+          "tags": ["critical angle"],
+          "id": "jee_c12_ch5_add_11"
+        },
+        {
+          "name": "Mirror Formula",
+          "latex": "\\frac{1}{v} + \\frac{1}{u} = \\frac{1}{f}",
+          "tags": ["mirror"],
+          "id": "jee_c12_ch5_add_12"
+        },
+        {
+          "name": "Lens Formula",
+          "latex": "\\frac{1}{v} - \\frac{1}{u} = \\frac{1}{f}",
+          "tags": ["lens"],
+          "id": "jee_c12_ch5_add_13"
+        },
+        {
+          "name": "Lens Maker's",
+          "latex": "\\frac{1}{f} = (n-1)\\left(\\frac{1}{R_1} - \\frac{1}{R_2}\\right)",
+          "tags": ["lens makers"],
+          "id": "jee_c12_ch5_add_14"
+        },
+        {
+          "name": "Magnification",
+          "latex": "m = -\\frac{v}{u} \\quad \\text{(mirror)}; \\quad m = \\frac{v}{u} \\quad \\text{(lens)}",
+          "tags": ["magnification"],
+          "id": "jee_c12_ch5_add_15"
+        },
+        {
+          "name": "Power of Lens",
+          "latex": "P = \\frac{1}{f}",
+          "tags": ["power"],
+          "id": "jee_c12_ch5_add_16"
+        },
+        {
+          "name": "YDSE Fringe Width",
+          "latex": "\\beta = \\frac{\\lambda D}{d}",
+          "tags": ["ydse"],
+          "id": "jee_c12_ch5_add_17"
+        },
+        {
+          "name": "Single Slit Min",
+          "latex": "a \\sin\\theta = n\\lambda",
+          "tags": ["single slit"],
+          "id": "jee_c12_ch5_add_18"
+        },
+        {
+          "name": "Brewster's Angle",
+          "latex": "\\tan \\theta_B = \\frac{n_2}{n_1}",
+          "tags": ["brewster"],
+          "id": "jee_c12_ch5_add_19"
+        },
+        {
+          "name": "Resolving Power",
+          "latex": "\\theta_{min} = 1.22\\frac{\\lambda}{D}",
+          "tags": ["resolving power"],
+          "id": "jee_c12_ch5_add_20"
         }
       ],
       "keyPoints": [
@@ -403,6 +823,72 @@
           "name": "Errors (Vernier & Screw Gauge)",
           "latex": "LC = 1 \\text{ MSD} - 1 \\text{ VSD}, \\qquad LC = \\frac{\\text{Pitch}}{\\text{Number of Circular Divisions}}",
           "tags": ["error analysis", "instruments"]
+        },
+        {
+          "name": "Photoelectric Effect",
+          "latex": "KE_{max} = h\\nu - \\phi = eV_0",
+          "tags": ["photoelectric"],
+          "id": "jee_c12_ch6_add_8"
+        },
+        {
+          "name": "de Broglie Wavelength",
+          "latex": "\\lambda = \\frac{h}{p} = \\frac{h}{mv}",
+          "tags": ["de broglie"],
+          "id": "jee_c12_ch6_add_9"
+        },
+        {
+          "name": "Bohr Model Energy",
+          "latex": "E_n = -13.6\\frac{Z^2}{n^2} \\text{ eV}",
+          "tags": ["bohr energy"],
+          "id": "jee_c12_ch6_add_10"
+        },
+        {
+          "name": "Bohr Model Radius",
+          "latex": "r_n = 0.529\\frac{n^2}{Z} \\text{ \\AA}",
+          "tags": ["bohr radius"],
+          "id": "jee_c12_ch6_add_11"
+        },
+        {
+          "name": "Half-Life",
+          "latex": "t_{1/2} = \\frac{0.693}{\\lambda}; \\quad N = N_0e^{-\\lambda t}",
+          "tags": ["half life"],
+          "id": "jee_c12_ch6_add_12"
+        },
+        {
+          "name": "Activity",
+          "latex": "A = \\lambda N = A_0e^{-\\lambda t}",
+          "tags": ["activity"],
+          "id": "jee_c12_ch6_add_13"
+        },
+        {
+          "name": "Mass-Energy",
+          "latex": "E = mc^2",
+          "tags": ["mass energy"],
+          "id": "jee_c12_ch6_add_14"
+        },
+        {
+          "name": "Binding Energy per Nucleon",
+          "latex": "BE/A = \\frac{[Zm_p + Nm_n - M]c^2}{A}",
+          "tags": ["binding energy"],
+          "id": "jee_c12_ch6_add_15"
+        },
+        {
+          "name": "Q-value",
+          "latex": "Q = (m_{reactants} - m_{products})c^2",
+          "tags": ["q value"],
+          "id": "jee_c12_ch6_add_16"
+        },
+        {
+          "name": "X-ray Cutoff Wavelength",
+          "latex": "\\lambda_{min} = \\frac{hc}{eV}",
+          "tags": ["xray"],
+          "id": "jee_c12_ch6_add_17"
+        },
+        {
+          "name": "Moseley's Law",
+          "latex": "\\sqrt{\\nu} = a(Z - b)",
+          "tags": ["moseleys law"],
+          "id": "jee_c12_ch6_add_18"
         }
       ],
       "keyPoints": [

@@ -37,6 +37,42 @@
           "name": "Hexagonal Close Packed (HCP)",
           "latex": "z = 6, \\quad CN = 12, \\quad c = 4r \\sqrt{2/3}, \\quad a = 2r, \\quad \\text{PF} = 74\\%",
           "tags": ["solid state", "hcp"]
+        },
+        {
+          "name": "Freundlich Adsorption",
+          "latex": "\\frac{x}{m} = kP^{1/n}",
+          "tags": ["freundlich"],
+          "id": "jee_c12_ch1_add_6"
+        },
+        {
+          "name": "Langmuir Adsorption",
+          "latex": "\\frac{P}{x/m} = \\frac{1}{ab} + \\frac{P}{a}",
+          "tags": ["langmuir"],
+          "id": "jee_c12_ch1_add_7"
+        },
+        {
+          "name": "Density of Unit Cell",
+          "latex": "\\rho = \\frac{ZM}{a^3N_A}",
+          "tags": ["density"],
+          "id": "jee_c12_ch1_add_8"
+        },
+        {
+          "name": "Bragg's Law",
+          "latex": "n\\lambda = 2d \\sin \\theta",
+          "tags": ["bragg"],
+          "id": "jee_c12_ch1_add_9"
+        },
+        {
+          "name": "Void Radius (Octahedral)",
+          "latex": "\\frac{r_{void}}{r_{sphere}} = 0.414",
+          "tags": ["void", "octahedral"],
+          "id": "jee_c12_ch1_add_10"
+        },
+        {
+          "name": "Void Radius (Tetrahedral)",
+          "latex": "\\frac{r_{void}}{r_{sphere}} = 0.225",
+          "tags": ["void", "tetrahedral"],
+          "id": "jee_c12_ch1_add_11"
         }
       ],
       "keyPoints": [
@@ -104,6 +140,60 @@
           "latex": "\\alpha = \\frac{1 - i}{1 - 1/n}",
           "description": "K4[Fe(CN)6]: n = 5 \u21d2 i = 1 + 4\u03b1. Acetic acid dimerizes in benzene (n = 2) \u21d2 i = 1 - \u03b1/2.",
           "tags": ["solutions", "van t hoff", "association"]
+        },
+        {
+          "name": "Raoult's Law",
+          "latex": "P = P^\\circ_A x_A + P^\\circ_B x_B",
+          "tags": ["raoult"],
+          "id": "jee_c12_ch2_add_9"
+        },
+        {
+          "name": "Relative Lowering of VP",
+          "latex": "\\frac{P^\\circ - P}{P^\\circ} = \\chi_{solute} = \\frac{n_2}{n_1 + n_2}",
+          "tags": ["rlvp"],
+          "id": "jee_c12_ch2_add_10"
+        },
+        {
+          "name": "Elevation in BP",
+          "latex": "\\Delta T_b = K_b \\times m \\times i",
+          "tags": ["boiling point"],
+          "id": "jee_c12_ch2_add_11"
+        },
+        {
+          "name": "Depression in FP",
+          "latex": "\\Delta T_f = K_f \\times m \\times i",
+          "tags": ["freezing point"],
+          "id": "jee_c12_ch2_add_12"
+        },
+        {
+          "name": "Osmotic Pressure",
+          "latex": "\\pi = iCRT = \\frac{inRT}{V}",
+          "tags": ["osmotic pressure"],
+          "id": "jee_c12_ch2_add_13"
+        },
+        {
+          "name": "Van't Hoff Factor",
+          "latex": "i = 1 + (n-1)\\alpha",
+          "tags": ["vant hoff"],
+          "id": "jee_c12_ch2_add_14"
+        },
+        {
+          "name": "Kb Formula",
+          "latex": "K_b = \\frac{RT_b^2 M_1}{1000 \\times \\Delta H_{vap}}",
+          "tags": ["kb"],
+          "id": "jee_c12_ch2_add_15"
+        },
+        {
+          "name": "Kf Formula",
+          "latex": "K_f = \\frac{RT_f^2 M_1}{1000 \\times \\Delta H_{fus}}",
+          "tags": ["kf"],
+          "id": "jee_c12_ch2_add_16"
+        },
+        {
+          "name": "Henry's Law",
+          "latex": "P = K_H \\times \\chi",
+          "tags": ["henrys law"],
+          "id": "jee_c12_ch2_add_17"
         }
       ],
       "keyPoints": [
@@ -155,6 +245,54 @@
           "latex": "w = z Q = z I t = \\left[\\frac{M}{n F}\\right] I t, \\qquad \\frac{w_1}{w_2} = \\frac{E_1}{E_2}",
           "description": "z = E / 96500 = electrochemical equivalent.",
           "tags": ["electrochemistry", "faradays laws"]
+        },
+        {
+          "name": "Nernst Equation",
+          "latex": "E = E^\\circ - \\frac{0.0592}{n}\\log Q",
+          "tags": ["nernst"],
+          "id": "jee_c12_ch3_add_7"
+        },
+        {
+          "name": "Cell EMF",
+          "latex": "E^\\circ_{cell} = E^\\circ_{cathode} - E^\\circ_{anode}",
+          "tags": ["emf"],
+          "id": "jee_c12_ch3_add_8"
+        },
+        {
+          "name": "Faraday's 1st Law",
+          "latex": "w = ZIt = \\frac{M \\times I \\times t}{n \\times F}",
+          "tags": ["faraday"],
+          "id": "jee_c12_ch3_add_9"
+        },
+        {
+          "name": "Faraday's 2nd Law",
+          "latex": "\\frac{w_1}{w_2} = \\frac{E_1}{E_2}",
+          "tags": ["faraday"],
+          "id": "jee_c12_ch3_add_10"
+        },
+        {
+          "name": "Conductance",
+          "latex": "G = \\frac{1}{R} = \\kappa \\times \\frac{A}{l}",
+          "tags": ["conductance"],
+          "id": "jee_c12_ch3_add_11"
+        },
+        {
+          "name": "Molar Conductivity",
+          "latex": "\\Lambda_m = \\kappa \\times \\frac{1000}{M}",
+          "tags": ["molar conductivity"],
+          "id": "jee_c12_ch3_add_12"
+        },
+        {
+          "name": "Kohlrausch's Law",
+          "latex": "\\Lambda^\\circ_m = \\nu_+\\lambda^\\circ_+ + \\nu_-\\lambda^\\circ_-",
+          "tags": ["kohlrausch"],
+          "id": "jee_c12_ch3_add_13"
+        },
+        {
+          "name": "Debye-H\u00fcckel-Onsager",
+          "latex": "\\Lambda_m = \\Lambda^\\circ_m - b\\sqrt{c}",
+          "tags": ["debye huckel"],
+          "id": "jee_c12_ch3_add_14"
         }
       ],
       "keyPoints": [
@@ -196,6 +334,54 @@
           "latex": "k = A e^{-E_a/RT} \\implies \\log\\left(\\frac{k_2}{k_1}\\right) = \\frac{E_a}{2.303 R} \\left[\\frac{T_2 - T_1}{T_1 T_2}\\right]",
           "description": "Plot of log k vs 1/T has Slope = -Ea / (2.303 R) and Intercept = log A.",
           "tags": ["kinetics", "arrhenius"]
+        },
+        {
+          "name": "Rate Law",
+          "latex": "\\text{Rate} = k[A]^m[B]^n",
+          "tags": ["rate law"],
+          "id": "jee_c12_ch4_add_5"
+        },
+        {
+          "name": "Zero Order",
+          "latex": "[A] = [A]_0 - kt; \\quad t_{1/2} = \\frac{[A]_0}{2k}",
+          "tags": ["zero order"],
+          "id": "jee_c12_ch4_add_6"
+        },
+        {
+          "name": "First Order",
+          "latex": "k = \\frac{2.303}{t}\\log\\left(\\frac{[A]_0}{[A]}\\right); \\quad t_{1/2} = \\frac{0.693}{k}",
+          "tags": ["first order"],
+          "id": "jee_c12_ch4_add_7"
+        },
+        {
+          "name": "Second Order",
+          "latex": "\\frac{1}{[A]} = \\frac{1}{[A]_0} + kt; \\quad t_{1/2} = \\frac{1}{k[A]_0}",
+          "tags": ["second order"],
+          "id": "jee_c12_ch4_add_8"
+        },
+        {
+          "name": "Arrhenius Equation",
+          "latex": "k = Ae^{-E_a/RT}",
+          "tags": ["arrhenius"],
+          "id": "jee_c12_ch4_add_9"
+        },
+        {
+          "name": "Arrhenius (Two Temp)",
+          "latex": "\\log\\left(\\frac{k_2}{k_1}\\right) = \\frac{E_a}{2.303R}\\left(\\frac{1}{T_1} - \\frac{1}{T_2}\\right)",
+          "tags": ["arrhenius"],
+          "id": "jee_c12_ch4_add_10"
+        },
+        {
+          "name": "Temperature Coefficient",
+          "latex": "\\mu = \\frac{k(T+10)}{k(T)} \\approx 2-3",
+          "tags": ["temperature coefficient"],
+          "id": "jee_c12_ch4_add_11"
+        },
+        {
+          "name": "nth Order Half-Life",
+          "latex": "t_{1/2} \\propto [A]_0^{1-n}",
+          "tags": ["half life"],
+          "id": "jee_c12_ch4_add_12"
         }
       ]
     },
@@ -224,6 +410,36 @@
           "latex": "\\mu = \\sqrt{n(n + 2)} \\text{ BM}",
           "description": "n = number of unpaired d-electrons.",
           "tags": ["coordination compounds", "magnetic moment"]
+        },
+        {
+          "name": "EAN Rule",
+          "latex": "EAN = Z - OS + 2(CN)",
+          "tags": ["ean"],
+          "id": "jee_c12_ch5_add_4"
+        },
+        {
+          "name": "Lattice Energy",
+          "latex": "U \\propto \\frac{Z^+ \\times Z^-}{r^+ + r^-}",
+          "tags": ["lattice energy"],
+          "id": "jee_c12_ch5_add_5"
+        },
+        {
+          "name": "Hybridization Formula",
+          "latex": "H = \\frac{1}{2}(V + M - C + A)",
+          "tags": ["hybridization"],
+          "id": "jee_c12_ch5_add_6"
+        },
+        {
+          "name": "Bond Order",
+          "latex": "BO = \\frac{N_b - N_a}{2}",
+          "tags": ["bond order"],
+          "id": "jee_c12_ch5_add_7"
+        },
+        {
+          "name": "Dipole Moment",
+          "latex": "\\mu = q \\times d",
+          "tags": ["dipole moment"],
+          "id": "jee_c12_ch5_add_8"
         }
       ],
       "keyPoints": [
