@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useMemo, useCallback } from "react";
 import { Formula, allSubjects } from "@/lib/formulas";
 
 export type QuestionType =
@@ -99,7 +99,7 @@ const evaluateSimpleFormula = (
       return null;
     }
 
-        const result = eval(expression);
+    const result = eval(expression);
     return Number.isFinite(result) ? result : null;
   } catch {
     return null;
@@ -264,8 +264,23 @@ const generateProportionality = (formula: Formula): QuizQuestion | null => {
   };
 };
 
-export function useQuizEngine() {
-  const [allFormulas] = useState<Formula[]>(getAllFormulas());
+export function useQuizEngine(selectedChapterIds: string[] = []) {
+  const allFormulas = useMemo(() => {
+    const formulas = getAllFormulas();
+    if (selectedChapterIds.length === 0) return formulas;
+
+    // We need chapter info to filter by ID.
+    // getAllFormulas flattens them, let's just grab the formulas that match the chapter IDs.
+    const filtered: Formula[] = [];
+    allSubjects.forEach((subject) => {
+      subject.chapters.forEach((chapter) => {
+        if (selectedChapterIds.includes(chapter.id)) {
+          filtered.push(...chapter.formulas);
+        }
+      });
+    });
+    return filtered.length > 0 ? filtered : formulas; // Fallback if none found
+  }, [selectedChapterIds]);
 
   const generateQuestion = useCallback((): QuizQuestion => {
     let question: QuizQuestion | null = null;

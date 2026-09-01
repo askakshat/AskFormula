@@ -1,9 +1,31 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useNavigate } from "react-router";
 import { BrainCircuit, Activity, ChevronRight, Target } from "lucide-react";
+import ChapterSelector from "@/components/askformula/ChapterSelector";
+import { allSubjects } from "@/lib/formulas";
+import { useLocalStorage } from "@/lib/local-storage";
 
 export default function QuizDashboard() {
   const navigate = useNavigate();
+  const [selectedChapters, setSelectedChapters] = useLocalStorage<string[]>(
+    "askformula-quiz-chapters",
+    [],
+  );
+
+  // Get all chapters across all subjects to allow multi-selection
+  const allChapters = useMemo(() => {
+    return allSubjects.flatMap((subject) =>
+      subject.chapters.map((ch) => ({
+        ...ch,
+        name: `${subject.subject} - ${ch.name}`, // Prefix subject to chapter name for clarity in global list
+      })),
+    );
+  }, []);
+
+  const handleStart = () => {
+    // Navigate with state or let ActiveQuiz pull from local storage
+    navigate("/quiz/active");
+  };
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-slate-200 font-sans pb-24">
@@ -30,7 +52,7 @@ export default function QuizDashboard() {
             </p>
           </div>
           <button
-            onClick={() => navigate("/quiz/active")}
+            onClick={handleStart}
             className="bg-[#d8e2ff] text-[#003122] font-semibold px-6 py-3 rounded-lg hover:bg-white transition-colors flex items-center gap-2 shadow-[0_0_20px_rgba(216,226,255,0.1)]"
           >
             Start Practice Session
@@ -76,40 +98,24 @@ export default function QuizDashboard() {
           </div>
         </section>
 
-        {/* Categories / Modes preview */}
-        <section className="mt-8">
-          <h3 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
-            <Target className="w-5 h-5 text-slate-400" />
-            Question Types
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-5 rounded-xl border border-slate-800 bg-[#11131a]/50 hover:bg-[#11131a] transition-colors">
-              <h4 className="font-semibold text-slate-200 mb-2">
-                Formula Identification
-              </h4>
-              <p className="text-sm text-slate-400">
-                Match the correct formula to a given scenario or set of
-                variables.
-              </p>
-            </div>
-            <div className="p-5 rounded-xl border border-slate-800 bg-[#11131a]/50 hover:bg-[#11131a] transition-colors">
-              <h4 className="font-semibold text-slate-200 mb-2">
-                Proportionality
-              </h4>
-              <p className="text-sm text-slate-400">
-                Understand how changing one variable affects the final outcome.
-              </p>
-            </div>
-            <div className="p-5 rounded-xl border border-slate-800 bg-[#11131a]/50 hover:bg-[#11131a] transition-colors">
-              <h4 className="font-semibold text-slate-200 mb-2">
-                Numerical Computation
-              </h4>
-              <p className="text-sm text-slate-400">
-                Calculate the answer given randomly generated inputs for simpler
-                formulas.
-              </p>
-            </div>
+        {/* Curriculum Selection */}
+        <section className="mt-8 bg-[#11131a] border border-slate-800 rounded-xl p-6">
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold text-white mb-2 flex items-center gap-2">
+              <Target className="w-5 h-5 text-[#61dcb0]" />
+              Target Curriculum
+            </h3>
+            <p className="text-slate-400 text-sm">
+              Select specific chapters across any subject to focus your
+              practice. Leave empty to test on all available formulas.
+            </p>
           </div>
+
+          <ChapterSelector
+            chapters={allChapters}
+            selectedIds={selectedChapters}
+            onSelect={setSelectedChapters}
+          />
         </section>
       </main>
     </div>

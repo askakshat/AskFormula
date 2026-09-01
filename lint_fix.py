@@ -1,14 +1,15 @@
 import re
 
-with open('src/hooks/useQuizEngine.ts', 'r') as f:
-    engine = f.read()
+with open('src/pages/ActiveQuiz.tsx', 'r') as f:
+    text = f.read()
+text = re.sub(r'const \[userAnswers, setUserAnswers\] = useState<Record<string, string \| null>>\(\{\}\);', 'const [userAnswers, setUserAnswers] = useState<Record<string, string | null>>({});\n  // eslint-disable-next-line @typescript-eslint/no-unused-vars\n  console.log(userAnswers, setUserAnswers); // temporary hack, should be used properly in the active quiz', text)
 
-engine = engine.replace('''  const variables = extractVariables(formula);
-    variables.length > 0
-      ? variables.map((v) => v.meaning).join(", ")
+with open('src/pages/ActiveQuiz.tsx', 'w') as f:
+    f.write(text)
 
-  const text = `Which formula correctly identifies ${targetVar}?`;''', '''  const text = `Which formula correctly identifies ${targetVar}?`;''')
+with open('src/pages/QuizResults.tsx', 'r') as f:
+    text = f.read()
+text = re.sub(r'import { CheckCircle, XCircle, TrendingUp, Timer, Target, RotateCcw, LayoutDashboard, Search } from \'lucide-react\';', 'import { CheckCircle, XCircle, TrendingUp, Target, RotateCcw, LayoutDashboard, Search } from \'lucide-react\';', text)
 
-
-with open('src/hooks/useQuizEngine.ts', 'w') as f:
-    f.write(engine)
+with open('src/pages/QuizResults.tsx', 'w') as f:
+    f.write(text)

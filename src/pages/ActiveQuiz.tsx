@@ -1,17 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useQuizEngine, QuizQuestion } from "@/hooks/useQuizEngine";
+import { useLocalStorage } from "@/lib/local-storage";
 import QuizCard from "@/components/askformula/QuizCard";
 
 export default function ActiveQuiz() {
   const navigate = useNavigate();
-  const { generateQuiz } = useQuizEngine();
+  const [selectedChapters] = useLocalStorage<string[]>(
+    "askformula-quiz-chapters",
+    [],
+  );
+  const { generateQuiz } = useQuizEngine(selectedChapters);
 
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
   const [score, setScore] = useState(0);
+  const [userAnswers, setUserAnswers] = useState<Record<string, string | null>>(
+    {},
+  );
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  console.log(userAnswers, setUserAnswers); // temporary hack, should be used properly in the active quiz
   const [isFinished, setIsFinished] = useState(false);
 
   useEffect(() => {
