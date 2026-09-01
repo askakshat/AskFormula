@@ -23,10 +23,9 @@ const exams: {
   },
   {
     type: "jee",
-    label: "JEE (Coming Soon)",
+    label: "JEE",
     subtitle: "Main & Advanced",
     icon: <Target className="w-7 h-7" strokeWidth={1.5} />,
-    disabled: true,
   },
   {
     type: "neet",
@@ -37,11 +36,16 @@ const exams: {
   },
 ];
 
-export default function ExamSelector({ onSelect, selected }: ExamSelectorProps) {
+export default function ExamSelector({
+  onSelect,
+  selected,
+}: ExamSelectorProps) {
   return (
     <div className="space-y-4">
       <h2 className="text-xl font-semibold text-[#e1e2ec] tracking-[-0.02em] flex items-center">
-        <span className="font-mono text-[13px] text-[#aec6ff] bg-[#00275d]/20 px-2 py-0.5 rounded mr-2">01</span>
+        <span className="font-mono text-[13px] text-[#aec6ff] bg-[#00275d]/20 px-2 py-0.5 rounded mr-2">
+          01
+        </span>
         Choose your exam
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -76,10 +80,14 @@ export default function ExamSelector({ onSelect, selected }: ExamSelectorProps) 
               >
                 {exam.icon}
               </div>
-              <h3 className={`text-[15px] font-semibold mb-0.5 ${exam.disabled ? 'text-white/50' : 'text-white'}`}>
+              <h3
+                className={`text-[15px] font-semibold mb-0.5 ${exam.disabled ? "text-white/50" : "text-white"}`}
+              >
                 {exam.label}
               </h3>
-              <p className={`text-xs ${exam.disabled ? 'text-slate-500/50' : 'text-slate-500'}`}>
+              <p
+                className={`text-xs ${exam.disabled ? "text-slate-500/50" : "text-slate-500"}`}
+              >
                 {exam.subtitle}
               </p>
             </div>

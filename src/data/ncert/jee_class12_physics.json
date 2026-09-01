@@ -1,0 +1,421 @@
+{
+  "subject": "Physics",
+  "audience": ["jee"],
+  "chapters": [
+    {
+      "id": "jee_c12_ch1",
+      "class": "12",
+      "name": "Electrostatics & Capacitance",
+      "formulas": [
+        {
+          "id": "jee_c12_1_1",
+          "name": "Coulomb's Law & Field",
+          "latex": "F = \\frac{1}{4\\pi\\varepsilon_0} \\frac{q_1q_2}{r^2}, \\qquad E = \\frac{1}{4\\pi\\varepsilon_0} \\frac{q}{r^2} \\hat{r}",
+          "description": "In medium: Fmed = Fvac / K.",
+          "tags": ["electrostatics", "coulombs law"]
+        },
+        {
+          "id": "jee_c12_1_2",
+          "name": "Electric Dipole Field (Axial)",
+          "latex": "E = \\frac{1}{4\\pi\\varepsilon_0} \\frac{2p}{r^3} \\quad (r \\gg a)",
+          "description": "p = 2qa",
+          "tags": ["electrostatics", "dipole"]
+        },
+        {
+          "id": "jee_c12_1_3",
+          "name": "Electric Dipole Field (Equatorial)",
+          "latex": "E = -\\frac{1}{4\\pi\\varepsilon_0} \\frac{p}{r^3} \\quad (r \\gg a)",
+          "tags": ["electrostatics", "dipole"]
+        },
+        {
+          "id": "jee_c12_1_4",
+          "name": "Dipole Torque & Potential Energy",
+          "latex": "\\tau = p \\times E, \\qquad U = -p \\cdot E",
+          "description": "Work to rotate from \u03b80 to \u03b81: W = pE(cos\u03b80 - cos\u03b81).",
+          "tags": ["electrostatics", "dipole", "torque"]
+        },
+        {
+          "id": "jee_c12_1_5",
+          "name": "Gauss's Law",
+          "latex": "\\Phi = \\oint E \\cdot dS = \\frac{q_{enc}}{\\varepsilon_0}",
+          "tags": ["electrostatics", "gauss"]
+        },
+        {
+          "id": "jee_c12_1_6",
+          "name": "Field due to Infinite Wire",
+          "latex": "E = \\frac{\\lambda}{2\\pi\\varepsilon_0 r}",
+          "tags": ["electrostatics", "gauss", "wire"]
+        },
+        {
+          "id": "jee_c12_1_7",
+          "name": "Field due to Infinite Sheet",
+          "latex": "E = \\frac{\\sigma}{2\\varepsilon_0}",
+          "tags": ["electrostatics", "gauss", "sheet"]
+        },
+        {
+          "id": "jee_c12_1_8",
+          "name": "Capacitance (Parallel Plate)",
+          "latex": "C_0 = \\frac{\\varepsilon_0 A}{d} \\text{ (Air)}, \\qquad C = \\frac{K \\varepsilon_0 A}{d} \\text{ (Dielectric)}",
+          "tags": ["capacitance"]
+        },
+        {
+          "id": "jee_c12_1_9",
+          "name": "Capacitance with Slab",
+          "latex": "C = \\frac{\\varepsilon_0 A}{d - t + t/K}",
+          "tags": ["capacitance", "slab"]
+        },
+        {
+          "id": "jee_c12_1_10",
+          "name": "Energy in Capacitor",
+          "latex": "U = \\frac{1}{2} C V^2 = \\frac{Q^2}{2C} = \\frac{1}{2} QV",
+          "tags": ["capacitance", "energy"]
+        },
+        {
+          "id": "jee_c12_1_11",
+          "name": "Energy Density of Electric Field",
+          "latex": "u = \\frac{1}{2} \\varepsilon_0 E^2",
+          "tags": ["electrostatics", "energy density"]
+        },
+        {
+          "id": "jee_c12_1_12",
+          "name": "Energy Loss on Sharing Charges",
+          "latex": "\\Delta U = \\frac{C_1 C_2}{2(C_1 + C_2)} (V_1 - V_2)^2",
+          "tags": ["capacitance", "energy loss"]
+        }
+      ],
+      "keyPoints": [
+        "\u03b50 = 8.854 \u00d7 10\u207b\u00b9\u00b2 C\u00b2 N\u207b\u00b9 m\u207b\u00b2.",
+        "Conducting surface: E = \u03c3 / \u03b50",
+        "Spherical Shell (R): E = q / (4\u03c0\u03b50 r\u00b2) [r \u2265 R], E = 0 [r < R]",
+        "Electric potential of shell: V = q / (4\u03c0\u03b50 r) [r \u2265 R], V = q / (4\u03c0\u03b50 R) [r \u2264 R].",
+        "Series: 1/Ceq = \u2211 1/Ci; Parallel: Ceq = \u2211 Ci."
+      ]
+    },
+    {
+      "id": "jee_c12_ch2",
+      "class": "12",
+      "name": "Current Electricity",
+      "formulas": [
+        {
+          "id": "jee_c12_2_1",
+          "name": "Drift Velocity",
+          "latex": "v_d = \\frac{e E \\tau}{m} = \\frac{e V \\tau}{m l}, \\qquad I = n e A v_d",
+          "tags": ["current", "drift velocity"]
+        },
+        {
+          "id": "jee_c12_2_2",
+          "name": "Ohm's Law (Microscopic)",
+          "latex": "j = \\frac{I}{A} = \\sigma E = \\frac{E}{\\rho}",
+          "description": "\u03c1 = m / (n e\u00b2 \u03c4), \u03c3 = n e\u00b2 \u03c4 / m",
+          "tags": ["current", "ohms law"]
+        },
+        {
+          "id": "jee_c12_2_3",
+          "name": "Resistance & Temperature",
+          "latex": "R = \\rho \\frac{l}{A}, \\qquad R_T = R_0(1 + \\alpha\\Delta T)",
+          "tags": ["current", "resistance"]
+        },
+        {
+          "id": "jee_c12_2_4",
+          "name": "Mobility",
+          "latex": "\\mu = \\frac{v_d}{E} = \\frac{e \\tau}{m}",
+          "tags": ["current", "mobility"]
+        },
+        {
+          "id": "jee_c12_2_5",
+          "name": "Cells in Series & Parallel",
+          "latex": "\\text{Series: } \\varepsilon_{eq} = \\sum \\varepsilon_i, \\quad \\text{Parallel: } \\frac{\\varepsilon_{eq}}{r_{eq}} = \\sum \\frac{\\varepsilon_i}{r_i}",
+          "tags": ["current", "cells"]
+        },
+        {
+          "id": "jee_c12_2_6",
+          "name": "Wheatstone Bridge",
+          "latex": "\\frac{R_1}{R_2} = \\frac{R_3}{R_4} \\implies I_g = 0",
+          "tags": ["current", "wheatstone"]
+        },
+        {
+          "id": "jee_c12_2_7",
+          "name": "Meter Bridge & Potentiometer",
+          "latex": "\\frac{R}{S} = \\frac{l}{100 - l}, \\qquad \\frac{\\varepsilon_1}{\\varepsilon_2} = \\frac{l_1}{l_2}, \\quad r = R\\left(\\frac{l_1}{l_2} - 1\\right)",
+          "tags": ["current", "meter bridge", "potentiometer"]
+        }
+      ],
+      "keyPoints": [
+        "Terminal voltage: V = \u03b5 - Ir (discharging), V = \u03b5 + Ir (charging).",
+        "Kirchhoff's Junction Rule: \u2211 Iin = \u2211 Iout (charge conservation).",
+        "Kirchhoff's Loop Rule: \u2211 \u0394V = 0 (energy conservation)."
+      ]
+    },
+    {
+      "id": "jee_c12_ch3",
+      "class": "12",
+      "name": "Magnetic Effects of Current & Magnetism",
+      "formulas": [
+        {
+          "id": "jee_c12_3_1",
+          "name": "Lorentz Force",
+          "latex": "F = q(E + v \\times B)",
+          "description": "Magnetic force does zero work on moving charge.",
+          "tags": ["magnetism", "lorentz force"]
+        },
+        {
+          "id": "jee_c12_3_2",
+          "name": "Circular & Helical Motion",
+          "latex": "r = \\frac{mv}{qB}, \\quad T = \\frac{2\\pi m}{qB}, \\quad \\text{Pitch } p = \\frac{2\\pi mv \\cos\\theta}{qB}",
+          "tags": ["magnetism", "motion"]
+        },
+        {
+          "id": "jee_c12_3_3",
+          "name": "Biot-Savart Law",
+          "latex": "dB = \\frac{\\mu_0}{4\\pi} \\frac{I dl \\sin\\theta}{r^2}",
+          "tags": ["magnetism", "biot-savart"]
+        },
+        {
+          "id": "jee_c12_3_4",
+          "name": "B due to Circular Loop",
+          "latex": "B = \\frac{\\mu_0 N I R^2}{2(x^2 + R^2)^{3/2}}, \\qquad B_{center} = \\frac{\\mu_0 N I}{2R}",
+          "tags": ["magnetism", "loop"]
+        },
+        {
+          "id": "jee_c12_3_5",
+          "name": "B due to Long Wire",
+          "latex": "B = \\frac{\\mu_0 I}{2\\pi r}",
+          "tags": ["magnetism", "wire"]
+        },
+        {
+          "id": "jee_c12_3_6",
+          "name": "B inside Solenoid",
+          "latex": "B = \\mu_0 n I \\qquad (n = N/L)",
+          "tags": ["magnetism", "solenoid"]
+        },
+        {
+          "id": "jee_c12_3_7",
+          "name": "Magnetic Force on Wire",
+          "latex": "F = I(L \\times B), \\qquad \\frac{F}{L} = \\frac{\\mu_0 I_1 I_2}{2\\pi d}",
+          "tags": ["magnetism", "force on wire"]
+        },
+        {
+          "id": "jee_c12_3_8",
+          "name": "Torque on Dipole",
+          "latex": "\\tau = m \\times B \\qquad (m = N I A)",
+          "tags": ["magnetism", "torque"]
+        },
+        {
+          "id": "jee_c12_3_9",
+          "name": "Galvanometer Conversion",
+          "latex": "S = \\frac{I_g R_G}{I - I_g} \\text{ (Ammeter)}, \\qquad R = \\frac{V}{I_g} - R_G \\text{ (Voltmeter)}",
+          "tags": ["magnetism", "galvanometer"]
+        },
+        {
+          "id": "jee_c12_3_10",
+          "name": "Magnetic Materials",
+          "latex": "B = \\mu_0(H + M) = \\mu H = \\mu_0 \\mu_r H, \\qquad M = \\chi H \\implies \\mu_r = 1 + \\chi",
+          "tags": ["magnetism", "materials"]
+        }
+      ],
+      "keyPoints": [
+        "\u03bc0/4\u03c0 = 10\u207b\u2077 T m A\u207b\u00b9; c = 1 / \u221a(\u03bc0\u03b50).",
+        "1 Ampere: force of 2 \u00d7 10\u207b\u2077 N/m at 1 m separation between parallel wires.",
+        "Curie's Law: \u03c7 = C / T.",
+        "Diamagnetic: -1 \u2264 \u03c7 < 0, \u03bcr < 1.",
+        "Paramagnetic: 0 < \u03c7 < \u03b5, \u03bcr > 1.",
+        "Ferromagnetic: \u03c7 \u226b 1, \u03bcr \u226b 1."
+      ]
+    },
+    {
+      "id": "jee_c12_ch4",
+      "class": "12",
+      "name": "Electromagnetic Induction & Alternating Current",
+      "formulas": [
+        {
+          "id": "jee_c12_4_1",
+          "name": "Faraday's Law",
+          "latex": "\\varepsilon = -\\frac{d\\Phi_B}{dt} = -N \\frac{d(BA \\cos\\theta)}{dt}",
+          "tags": ["emi", "faradays law"]
+        },
+        {
+          "id": "jee_c12_4_2",
+          "name": "Motional EMF",
+          "latex": "\\varepsilon = B l v \\text{ (Translational)}, \\qquad \\varepsilon = \\frac{1}{2}B\\omega R^2 = B\\pi R^2\\nu \\text{ (Rotational)}",
+          "tags": ["emi", "motional emf"]
+        },
+        {
+          "id": "jee_c12_4_3",
+          "name": "Self-Inductance",
+          "latex": "N\\Phi_B = L I \\implies \\varepsilon = -L\\frac{dI}{dt}, \\qquad L = \\mu_0 n^2 A l",
+          "tags": ["emi", "inductance"]
+        },
+        {
+          "id": "jee_c12_4_4",
+          "name": "Mutual Inductance",
+          "latex": "N_1\\Phi_1 = M I_2 \\implies \\varepsilon_1 = -M\\frac{dI_2}{dt}, \\qquad M = \\mu_0 n_1 n_2 \\pi r_1^2 l",
+          "tags": ["emi", "mutual inductance"]
+        },
+        {
+          "id": "jee_c12_4_5",
+          "name": "Energy in Inductor",
+          "latex": "U = \\frac{1}{2} L I^2, \\qquad u_B = \\frac{B^2}{2\\mu_0}",
+          "tags": ["emi", "energy"]
+        },
+        {
+          "id": "jee_c12_4_6",
+          "name": "Series LCR Impedance",
+          "latex": "Z = \\sqrt{R^2 + (X_C - X_L)^2}, \\qquad X_L = \\omega L, \\quad X_C = \\frac{1}{\\omega C}",
+          "tags": ["ac", "lcr", "impedance"]
+        },
+        {
+          "id": "jee_c12_4_7",
+          "name": "Phase Angle & Power",
+          "latex": "\\tan\\phi = \\frac{X_C - X_L}{R}, \\qquad P_{avg} = V_{rms} I_{rms} \\cos\\phi",
+          "tags": ["ac", "power factor"]
+        },
+        {
+          "id": "jee_c12_4_8",
+          "name": "Resonance & Quality Factor",
+          "latex": "\\omega_0 = \\frac{1}{\\sqrt{LC}}, \\qquad Q = \\frac{\\omega_0 L}{R} = \\frac{1}{R}\\sqrt{\\frac{L}{C}}",
+          "tags": ["ac", "resonance", "q factor"]
+        }
+      ],
+      "keyPoints": [
+        "Induced charge: \u0394q = \u0394\u03a6net / R (independent of time).",
+        "AC Generator peak EMF: \u03b50 = N B A \u03c9.",
+        "Power factor = cos\u03c6 = R/Z.",
+        "Wattless current: Iwattless = Irms sin\u03c6.",
+        "Transformer: Vs/Vp = Ns/Np = Ip/Is."
+      ]
+    },
+    {
+      "id": "jee_c12_ch5",
+      "class": "12",
+      "name": "Optics: Ray Optics & Wave Optics",
+      "formulas": [
+        {
+          "id": "jee_c12_5_1",
+          "name": "Mirror Formula & Magnification",
+          "latex": "\\frac{1}{v} + \\frac{1}{u} = \\frac{1}{f} = \\frac{2}{R}, \\qquad m = -\\frac{v}{u} = \\frac{f}{f - u}",
+          "tags": ["ray optics", "mirror"]
+        },
+        {
+          "id": "jee_c12_5_2",
+          "name": "Total Internal Reflection (TIR)",
+          "latex": "\\sin i_c = \\frac{1}{n_{21}} = \\frac{n_1}{n_2}",
+          "tags": ["ray optics", "tir"]
+        },
+        {
+          "id": "jee_c12_5_3",
+          "name": "Refraction at Spherical Surface",
+          "latex": "\\frac{n_2}{v} - \\frac{n_1}{u} = \\frac{n_2 - n_1}{R}",
+          "tags": ["ray optics", "refraction"]
+        },
+        {
+          "id": "jee_c12_5_4",
+          "name": "Lens Maker's & Thin Lens",
+          "latex": "\\frac{1}{f} = (n_{21} - 1)\\left[\\frac{1}{R_1} - \\frac{1}{R_2}\\right], \\qquad \\frac{1}{v} - \\frac{1}{u} = \\frac{1}{f}",
+          "tags": ["ray optics", "lens"]
+        },
+        {
+          "id": "jee_c12_5_5",
+          "name": "Prism Formula",
+          "latex": "n = \\frac{\\sin\\left(\\frac{A + D_m}{2}\\right)}{\\sin(A/2)}, \\qquad D_m = (n - 1)A \\text{ (Thin prism)}",
+          "tags": ["ray optics", "prism"]
+        },
+        {
+          "id": "jee_c12_5_6",
+          "name": "YDSE Interference",
+          "latex": "I = I_1 + I_2 + 2\\sqrt{I_1 I_2} \\cos\\phi = 4I_0 \\cos^2\\left(\\frac{\\phi}{2}\\right)",
+          "tags": ["wave optics", "interference", "ydse"]
+        },
+        {
+          "id": "jee_c12_5_7",
+          "name": "Fringe Width (YDSE)",
+          "latex": "\\beta = \\frac{\\lambda D}{d}, \\qquad \\theta = \\frac{\\lambda}{d}",
+          "tags": ["wave optics", "interference", "ydse"]
+        },
+        {
+          "id": "jee_c12_5_8",
+          "name": "Single Slit Diffraction",
+          "latex": "a \\sin\\theta = n\\lambda, \\qquad \\text{Central Max Width } = \\frac{2\\lambda D}{a} = 2\\beta",
+          "tags": ["wave optics", "diffraction"]
+        },
+        {
+          "id": "jee_c12_5_9",
+          "name": "Malus's Law & Brewster's Law",
+          "latex": "I = I_0 \\cos^2\\theta, \\qquad \\tan i_p = n \\implies i_p + r_p = 90^\\circ",
+          "tags": ["wave optics", "polarisation"]
+        }
+      ],
+      "keyPoints": [
+        "Concave mirror/lens: f < 0; Convex mirror/lens: f > 0.",
+        "Lenses in contact: 1/feq = \u2211 1/fi, Peq = \u2211 Pi, m = \u220f mi.",
+        "Prism min deviation: i = e, r1 = r2 = A/2. \u03b4 = i + e - A.",
+        "Simple Microscope: m = 1 + D/f (near point), m = D/f (\u221e).",
+        "Compound Microscope: m = (L/fo)(1 + D/fe) [near point].",
+        "Astronomical Telescope: m = fo/fe [\u221e], L = fo + fe.",
+        "Constructive interference: \u0394x = n\u03bb, Destructive: \u0394x = (n + \u00bd)\u03bb."
+      ]
+    },
+    {
+      "id": "jee_c12_ch6",
+      "class": "12",
+      "name": "Modern Physics & Error Analysis",
+      "formulas": [
+        {
+          "id": "jee_c12_6_1",
+          "name": "Photoelectric Effect",
+          "latex": "E = h\\nu = \\frac{hc}{\\lambda} = W_0 + K_{max}, \\qquad K_{max} = e V_0 = h(\\nu - \\nu_0)",
+          "tags": ["modern physics", "photoelectric"]
+        },
+        {
+          "id": "jee_c12_6_2",
+          "name": "de Broglie Wavelength",
+          "latex": "\\lambda = \\frac{h}{p} = \\frac{h}{\\sqrt{2mK}} = \\frac{h}{\\sqrt{2mqV}}",
+          "description": "For electron: \u03bbe = \u221a(150/V) \u00c5.",
+          "tags": ["modern physics", "de broglie"]
+        },
+        {
+          "id": "jee_c12_6_3",
+          "name": "Bohr's Atom Model",
+          "latex": "r_n = 0.529 \\frac{n^2}{Z} \\text{ \\AA}, \\quad v_n = 2.18 \\times 10^6 \\frac{Z}{n} \\text{ m/s}, \\quad E_n = -13.6 \\frac{Z^2}{n^2} \\text{ eV}",
+          "tags": ["modern physics", "bohr model"]
+        },
+        {
+          "id": "jee_c12_6_4",
+          "name": "Rydberg Formula",
+          "latex": "\\frac{1}{\\lambda} = R Z^2 \\left(\\frac{1}{n_1^2} - \\frac{1}{n_2^2}\\right)",
+          "description": "R = 1.097 \u00d7 10\u2077 m\u207b\u00b9.",
+          "tags": ["modern physics", "spectra"]
+        },
+        {
+          "id": "jee_c12_6_5",
+          "name": "Nuclear Radius & Density",
+          "latex": "R = R_0 A^{1/3}, \\qquad \\rho \\approx 2.3 \\times 10^{17} \\text{ kg m}^{-3}",
+          "description": "R0 \u2248 1.2 fm.",
+          "tags": ["modern physics", "nucleus"]
+        },
+        {
+          "id": "jee_c12_6_6",
+          "name": "Mass Defect & Binding Energy",
+          "latex": "\\Delta M = [Z m_p + (A - Z)m_n] - M_{nucleus}, \\qquad E_b = \\Delta M \\times 931.5 \\text{ MeV}",
+          "tags": ["modern physics", "binding energy"]
+        },
+        {
+          "id": "jee_c12_6_7",
+          "name": "Errors (Vernier & Screw Gauge)",
+          "latex": "LC = 1 \\text{ MSD} - 1 \\text{ VSD}, \\qquad LC = \\frac{\\text{Pitch}}{\\text{Number of Circular Divisions}}",
+          "tags": ["error analysis", "instruments"]
+        }
+      ],
+      "keyPoints": [
+        "Photon momentum: p = h/\u03bb = E/c.",
+        "Photon emission rate: N = P / (h\u03bd) = P\u03bb / (hc).",
+        "de Broglie relation in orbit: 2\u03c0rn = n\u03bb.",
+        "Thermal neutron: \u03bb = h / \u221a(3m kB T).",
+        "Q-Value: Q = (Mreactants - Mproducts) c\u00b2.",
+        "1 u = 931.5 MeV/c\u00b2 = 1.6605 \u00d7 10\u207b\u00b2\u2077 kg.",
+        "Fission of \u00b2\u00b3\u2075U releases \u223c200 MeV per event.",
+        "Total Reading = MSR + (VSR or CSR \u00d7 LC) - Zero Error.",
+        "Zero error is subtracted algebraically from observed reading."
+      ]
+    }
+  ]
+}

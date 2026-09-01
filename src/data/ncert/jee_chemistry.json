@@ -1,0 +1,583 @@
+{
+  "subject": "Chemistry",
+  "audience": [
+    "jee"
+  ],
+  "chapters": [
+    {
+      "id": "jee_c_ch1",
+      "class": "11",
+      "name": "Atomic Structure",
+      "formulas": [
+        {
+          "id": "jee_c_1_1",
+          "name": "Bohr's Angular Momentum",
+          "latex": "mvr = \\frac{nh}{2\\pi}",
+          "tags": [
+            "atomic structure",
+            "bohr model",
+            "angular momentum"
+          ]
+        },
+        {
+          "id": "jee_c_1_2",
+          "name": "Bohr's Radius",
+          "latex": "r_n = (0.529 \\text{ \\AA}) \\frac{n^2}{Z}",
+          "tags": [
+            "atomic structure",
+            "bohr model",
+            "radius"
+          ]
+        },
+        {
+          "id": "jee_c_1_3",
+          "name": "Bohr's Velocity",
+          "latex": "v_n = (2.18 \\times 10^6 \\text{ m/s}) \\frac{Z}{n}",
+          "tags": [
+            "atomic structure",
+            "bohr model",
+            "velocity"
+          ]
+        },
+        {
+          "id": "jee_c_1_4",
+          "name": "Bohr's Energy",
+          "latex": "E_n = -13.6 \\left(\\frac{Z^2}{n^2}\\right) \\text{ eV/atom} = -2.18 \\times 10^{-18} \\left(\\frac{Z^2}{n^2}\\right) \\text{ J/atom}",
+          "description": "Kn = -En, Un = 2En \u21d2 En = -Kn = \u00bdUn.",
+          "tags": [
+            "atomic structure",
+            "bohr model",
+            "energy"
+          ]
+        },
+        {
+          "id": "jee_c_1_5",
+          "name": "Rydberg Formula & Spectral Lines",
+          "latex": "\\frac{1}{\\lambda} = \\bar{\\nu} = R_H Z^2 \\left(\\frac{1}{n_1^2} - \\frac{1}{n_2^2}\\right)",
+          "description": "RH = 109,677 cm\u207b\u00b9 = 1.097 \u00d7 10\u2077 m\u207b\u00b9. Lyman: n1=1 (UV); Balmer: n1=2 (Visible); Paschen: n1=3 (IR); Brackett: n1=4 (IR); Pfund: n1=5 (IR).",
+          "tags": [
+            "atomic structure",
+            "rydberg",
+            "spectrum"
+          ]
+        },
+        {
+          "id": "jee_c_1_6",
+          "name": "Max spectral lines",
+          "latex": "N = \\frac{n(n - 1)}{2}",
+          "description": "Max spectral lines on de-excitation from level n",
+          "tags": [
+            "atomic structure",
+            "spectral lines"
+          ]
+        },
+        {
+          "id": "jee_c_1_7",
+          "name": "de Broglie Wavelength",
+          "latex": "\\lambda = \\frac{h}{p} = \\frac{h}{mv} = \\frac{h}{\\sqrt{2mE}} = \\sqrt{\\frac{150}{V}} \\text{ \\AA}",
+          "description": "for electron",
+          "tags": [
+            "atomic structure",
+            "de broglie",
+            "dual nature"
+          ]
+        },
+        {
+          "id": "jee_c_1_8",
+          "name": "Heisenberg Uncertainty Principle",
+          "latex": "\\Delta x \\cdot \\Delta p \\ge \\frac{h}{4\\pi} \\implies \\Delta x \\cdot \\Delta v \\ge \\frac{h}{4\\pi m}",
+          "tags": [
+            "atomic structure",
+            "heisenberg"
+          ]
+        },
+        {
+          "id": "jee_c_1_9",
+          "name": "Energy-Time Uncertainty",
+          "latex": "\\Delta E \\cdot \\Delta t \\ge \\frac{h}{4\\pi}",
+          "tags": [
+            "atomic structure",
+            "heisenberg"
+          ]
+        },
+        {
+          "id": "jee_c_1_10",
+          "name": "Orbital angular momentum",
+          "latex": "L = \\sqrt{l(l + 1)} \\left(\\frac{h}{2\\pi}\\right)",
+          "tags": [
+            "atomic structure",
+            "angular momentum",
+            "quantum numbers"
+          ]
+        },
+        {
+          "id": "jee_c_1_11",
+          "name": "Spin angular momentum",
+          "latex": "S = \\sqrt{s(s + 1)} \\left(\\frac{h}{2\\pi}\\right)",
+          "tags": [
+            "atomic structure",
+            "spin",
+            "quantum numbers"
+          ]
+        },
+        {
+          "id": "jee_c_1_12",
+          "name": "Magnetic moment",
+          "latex": "\\mu_s = \\sqrt{n(n + 2)} \\text{ BM}",
+          "tags": [
+            "atomic structure",
+            "magnetic moment"
+          ]
+        },
+        {
+          "id": "jee_c_1_13",
+          "name": "Nodes in Orbitals",
+          "latex": "\\text{Radial Nodes} = n - l - 1, \\qquad \\text{Angular Nodes} = l, \\qquad \\text{Total Nodes} = n - 1",
+          "description": "Probability density = |\u03c8|\u00b2. Radial probability = 4\u03c0r\u00b2 R\u00b2(r) dr.",
+          "tags": [
+            "atomic structure",
+            "nodes",
+            "orbitals"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "jee_c_ch2",
+      "class": "11",
+      "name": "Stoichiometry, Redox Reactions & Volumetric Analysis",
+      "formulas": [
+        {
+          "id": "jee_c_2_1",
+          "name": "Moles",
+          "latex": "n = \\frac{w}{M} = \\frac{N}{N_A} = \\frac{V_{STP} (L)}{22.7 \\text{ L}}",
+          "tags": [
+            "mole concept"
+          ]
+        },
+        {
+          "id": "jee_c_2_2",
+          "name": "Equivalent Weight & Number of Equivalents",
+          "latex": "E = \\frac{M}{n\\text{-factor}}, \\qquad Eq = \\frac{w}{E} = N \\times V(L) = n \\times n\\text{-factor}",
+          "description": "Law of Equivalence: N1V1 = N2V2 \u21d2 n1M1V1 = n2M2V2.",
+          "tags": [
+            "equivalent weight",
+            "normality"
+          ]
+        },
+        {
+          "id": "jee_c_2_3",
+          "name": "Molarity (M) & Molality (m)",
+          "latex": "M = \\frac{w_B \\times 1000}{M_B \\times V(mL)}, \\qquad m = \\frac{w_B \\times 1000}{M_B \\times w_A(g)}",
+          "description": "Relation between M and m: m = (1000 M) / (1000 d - M MB), where d = density in g/mL.",
+          "tags": [
+            "concentration",
+            "molarity",
+            "molality"
+          ]
+        },
+        {
+          "id": "jee_c_2_4",
+          "name": "Mole Fraction & ppm",
+          "latex": "x_A = \\frac{n_A}{n_A + n_B}, \\qquad \\text{ppm} = \\left(\\frac{w_B}{w_{solution}}\\right) \\times 10^6",
+          "tags": [
+            "concentration",
+            "mole fraction",
+            "ppm"
+          ]
+        },
+        {
+          "id": "jee_c_2_5",
+          "name": "Volume Strength of H2O2",
+          "latex": "\\text{Volume Strength} = 5.6 \\times N = 11.2 \\times M",
+          "description": "% Strength = (68 / 22400) \u00d7 Volume Strength. 10 volume H2O2 \u21d2 M = 10 / 11.2 = 0.89 M, N = 1.78 N.",
+          "tags": [
+            "hydrogen peroxide",
+            "volume strength"
+          ]
+        }
+      ],
+      "keyPoints": [
+        "n-Factor Calculations: Acids: Basicity; Bases: Acidity; Salts: Total +ve or -ve charge; Redox: Total change in oxidation number",
+        "KMnO4 n-factor: 5 (acidic \u21d2 Mn2+), 1 (strongly alkaline \u21d2 MnO42-), 3 (neutral/faintly alkaline \u21d2 MnO2).",
+        "K2Cr2O7 n-factor: 6 in acidic medium (Cr2O72- \u21d2 2Cr3+).",
+        "FeC2O4 n-factor in oxidation: 3 (Fe2+\u2192Fe3+ + 1e-; C2O42-\u21922CO2 + 2e-).",
+        "Double Titration Principles with Phenolphthalein (HPh): 100% NaOH + 50% Na2CO3 (neutralized to NaHCO3)",
+        "With Methyl Orange (MeOH): 100% NaOH + 100% Na2CO3 + 100% NaHCO3",
+        "If V1 = volume of acid with HPh, V2 = volume of acid with MeOH from beginning: For NaOH + Na2CO3: Vol for Na2CO3 = 2(V2 - V1), Vol for NaOH = 2V1 - V2."
+      ]
+    },
+    {
+      "id": "jee_c_ch3",
+      "class": "11",
+      "name": "Gaseous State & Real Gas Behavior",
+      "formulas": [
+        {
+          "id": "jee_c_3_1",
+          "name": "Ideal Gas Laws",
+          "latex": "pV = nRT = \\left(\\frac{\\rho}{M}\\right) RT",
+          "description": "R = 8.314 J K\u207b\u00b9 mol\u207b\u00b9 = 0.0821 L atm K\u207b\u00b9 mol\u207b\u00b9 = 2 cal K\u207b\u00b9 mol\u207b\u00b9.",
+          "tags": [
+            "ideal gas law"
+          ]
+        },
+        {
+          "id": "jee_c_3_2",
+          "name": "Dalton's Law",
+          "latex": "p_i = x_i p_{total}, \\qquad p_{\\text{dry gas}} = p_{moist} - \\text{Aqueous Tension}",
+          "tags": [
+            "daltons law",
+            "partial pressure"
+          ]
+        },
+        {
+          "id": "jee_c_3_3",
+          "name": "Graham's Law",
+          "latex": "\\frac{r_1}{r_2} = \\frac{V_1/t_1}{V_2/t_2} = \\sqrt{\\frac{M_2}{M_1}} = \\left(\\frac{p_1}{p_2}\\right)\\sqrt{\\frac{M_2}{M_1}}",
+          "tags": [
+            "grahams law",
+            "effusion",
+            "diffusion"
+          ]
+        },
+        {
+          "id": "jee_c_3_4",
+          "name": "Van der Waals Real Gas Equation",
+          "latex": "\\left[p + \\frac{an^2}{V^2}\\right] (V - nb) = nRT",
+          "description": "a = measure of attractive forces (atm L\u00b2 mol\u207b\u00b2). b = co-volume = 4 \u00d7 (4/3 \u03c0 r\u00b3 NA) (L mol\u207b\u00b9).",
+          "tags": [
+            "van der waals",
+            "real gas"
+          ]
+        },
+        {
+          "id": "jee_c_3_5",
+          "name": "Compressibility Factor",
+          "latex": "Z = \\frac{pV_m}{RT} = \\frac{V_{real}}{V_{ideal}}",
+          "description": "Low P: Z = 1 - a / (VmRT) < 1. High P: Z = 1 + pb / RT > 1. H2/He at room temp: a \u2248 0 \u21d2 Z = 1 + pb / RT > 1.",
+          "tags": [
+            "compressibility factor",
+            "real gas"
+          ]
+        },
+        {
+          "id": "jee_c_3_6",
+          "name": "Boyle and Inversion Temperature",
+          "latex": "T_b = \\frac{a}{Rb}, \\qquad T_i = \\frac{2a}{Rb} = 2T_b",
+          "tags": [
+            "boyle temperature",
+            "inversion temperature"
+          ]
+        },
+        {
+          "id": "jee_c_3_7",
+          "name": "Critical Constants",
+          "latex": "T_c = \\frac{8a}{27Rb}, \\qquad p_c = \\frac{a}{27b^2}, \\qquad V_c = 3b",
+          "description": "Critical Compressibility: Zc = pc Vc / (R Tc) = 3/8 = 0.375",
+          "tags": [
+            "critical constants",
+            "real gas"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "jee_c_ch4",
+      "class": "11",
+      "name": "Chemical Equilibrium",
+      "formulas": [
+        {
+          "id": "jee_c_4_1",
+          "name": "Equilibrium Constants Relation",
+          "latex": "K_p = K_c (RT)^{\\Delta n_g}",
+          "description": "\u0394ng = \u2211 ng(products) - \u2211 ng(reactants).",
+          "tags": [
+            "equilibrium constant",
+            "kp",
+            "kc"
+          ]
+        },
+        {
+          "id": "jee_c_4_2",
+          "name": "Degree of Dissociation (\u03b1) from Vapor Density",
+          "latex": "\\alpha = \\frac{D - d}{(n - 1)d} = \\frac{M_{th} - M_{obs}}{(n - 1)M_{obs}}",
+          "description": "D = theoretical vapor density, d = observed vapor density; n = moles of products per mole of reactant.",
+          "tags": [
+            "degree of dissociation",
+            "vapor density"
+          ]
+        },
+        {
+          "id": "jee_c_4_3",
+          "name": "van 't Hoff Equation",
+          "latex": "\\log\\left(\\frac{K_2}{K_1}\\right) = \\frac{\\Delta H^\\circ}{2.303R} \\left[\\frac{T_2 - T_1}{T_1 T_2}\\right]",
+          "description": "Endothermic (\u0394H\u00b0 > 0): T \u2191 \u21d2 K \u2191. Exothermic (\u0394H\u00b0 < 0): T \u2191 \u21d2 K \u2193.",
+          "tags": [
+            "van t hoff",
+            "temperature dependence"
+          ]
+        },
+        {
+          "id": "jee_c_4_4",
+          "name": "Standard Free Energy & Equilibrium",
+          "latex": "\\Delta G = \\Delta G^\\circ + RT \\ln Q, \\qquad \\Delta G^\\circ = -RT \\ln K_{eq} = -2.303 RT \\log K_{eq}",
+          "description": "Keq > 1 \u21d2 \u0394G\u00b0 < 0 (spontaneous in standard state).",
+          "tags": [
+            "gibbs free energy",
+            "equilibrium constant"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "jee_c_ch5",
+      "class": "11",
+      "name": "Ionic Equilibrium",
+      "formulas": [
+        {
+          "id": "jee_c_5_1",
+          "name": "Ostwald's Dilution Law (Weak Acid)",
+          "latex": "K_a = \\frac{C\\alpha^2}{1 - \\alpha} \\approx C\\alpha^2 \\implies \\alpha = \\sqrt{\\frac{K_a}{C}}",
+          "description": "Valid for \u03b1 \u2264 0.05 (5% dissociation).",
+          "tags": [
+            "ostwalds dilution law",
+            "weak acid"
+          ]
+        },
+        {
+          "id": "jee_c_5_2",
+          "name": "pH of Weak Acid",
+          "latex": "[H^+] = C\\alpha = \\sqrt{K_a C} \\implies pH = \\frac{1}{2} [pK_a - \\log C]",
+          "tags": [
+            "ph",
+            "weak acid"
+          ]
+        },
+        {
+          "id": "jee_c_5_3",
+          "name": "Water Self-Ionization & Conjugate Pair",
+          "latex": "K_w = [H^+][OH^-] = 10^{-14}, \\qquad K_a \\times K_b = K_w",
+          "description": "pH + pOH = 14. pKa + pKb = pKw = 14. Kw increases with temperature (endothermic).",
+          "tags": [
+            "kw",
+            "ionic product of water"
+          ]
+        },
+        {
+          "id": "jee_c_5_4",
+          "name": "Salt Hydrolysis (Weak Acid + Strong Base)",
+          "latex": "pH = 7 + \\frac{1}{2} [pK_a + \\log C], \\qquad h = \\sqrt{\\frac{K_w}{K_a C}}",
+          "tags": [
+            "salt hydrolysis",
+            "ph"
+          ]
+        },
+        {
+          "id": "jee_c_5_5",
+          "name": "Salt Hydrolysis (Strong Acid + Weak Base)",
+          "latex": "pH = 7 - \\frac{1}{2} [pK_b + \\log C], \\qquad h = \\sqrt{\\frac{K_w}{K_b C}}",
+          "tags": [
+            "salt hydrolysis",
+            "ph"
+          ]
+        },
+        {
+          "id": "jee_c_5_6",
+          "name": "Salt Hydrolysis (Weak Acid + Weak Base)",
+          "latex": "pH = 7 + \\frac{1}{2} [pK_a - pK_b], \\qquad h = \\sqrt{\\frac{K_w}{K_a K_b}}",
+          "description": "Hydrolysis of WA-WB salt is independent of concentration C.",
+          "tags": [
+            "salt hydrolysis",
+            "ph"
+          ]
+        },
+        {
+          "id": "jee_c_5_7",
+          "name": "Buffer Solutions (Henderson-Hasselbalch)",
+          "latex": "pH = pK_a + \\log\\left(\\frac{[\\text{Salt}]}{[\\text{Acid}]}\\right), \\qquad pOH = pK_b + \\log\\left(\\frac{[\\text{Salt}]}{[\\text{Base}]}\\right)",
+          "description": "Buffer Capacity = (Moles of acid/base added per L) / \u0394pH. Max buffer action when [Salt] = [Acid].",
+          "tags": [
+            "buffer",
+            "henderson hasselbalch"
+          ]
+        },
+        {
+          "id": "jee_c_5_8",
+          "name": "Solubility Product",
+          "latex": "K_{sp} = x^x y^y s^{x+y} \\implies s = \\left(\\frac{K_{sp}}{x^x y^y}\\right)^{\\frac{1}{x+y}}",
+          "description": "Precipitation occurs \u21d4 Ionic Product (IP) > Ksp. Common ion effect suppresses solubility.",
+          "tags": [
+            "solubility product",
+            "ksp"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "jee_c_ch6",
+      "class": "11",
+      "name": "Chemical Energetics & Thermodynamics",
+      "formulas": [
+        {
+          "id": "jee_c_6_1",
+          "name": "First Law & State Functions",
+          "latex": "\\Delta U = q + w",
+          "tags": [
+            "first law",
+            "thermodynamics"
+          ]
+        },
+        {
+          "id": "jee_c_6_2",
+          "name": "Reversible Isothermal Work",
+          "latex": "w = -nRT \\ln\\left(\\frac{V_2}{V_1}\\right) = -2.303 nRT \\log\\left(\\frac{p_1}{p_2}\\right)",
+          "tags": [
+            "isothermal work",
+            "reversible"
+          ]
+        },
+        {
+          "id": "jee_c_6_3",
+          "name": "Irreversible Work",
+          "latex": "w = -p_{ext}(V_2 - V_1)",
+          "tags": [
+            "irreversible work"
+          ]
+        },
+        {
+          "id": "jee_c_6_4",
+          "name": "Reversible Adiabatic Work",
+          "latex": "w = \\Delta U = n C_v(T_2 - T_1) = \\frac{p_2V_2 - p_1V_1}{\\gamma - 1}",
+          "tags": [
+            "adiabatic work",
+            "reversible"
+          ]
+        },
+        {
+          "id": "jee_c_6_5",
+          "name": "Enthalpy & Heat Capacity",
+          "latex": "H = U + pV \\implies \\Delta H = \\Delta U + \\Delta n_g RT",
+          "description": "Heat capacities: qv = \u0394U = n Cv \u0394T; qp = \u0394H = n Cp \u0394T.",
+          "tags": [
+            "enthalpy",
+            "heat capacity"
+          ]
+        },
+        {
+          "id": "jee_c_6_6",
+          "name": "Thermochemistry & Hess's Law",
+          "latex": "\\Delta_r H^\\circ = \\sum \\nu_p \\Delta_f H^\\circ(\\text{products}) - \\sum \\nu_r \\Delta_f H^\\circ(\\text{reactants})",
+          "tags": [
+            "thermochemistry",
+            "enthalpy of reaction"
+          ]
+        },
+        {
+          "id": "jee_c_6_7",
+          "name": "Bond Energy",
+          "latex": "\\Delta_r H^\\circ = \\sum BE(\\text{reactants}) - \\sum BE(\\text{products})",
+          "tags": [
+            "bond energy",
+            "enthalpy of reaction"
+          ]
+        },
+        {
+          "id": "jee_c_6_8",
+          "name": "Kirchhoff's Law & Born-Haber Cycle",
+          "latex": "\\Delta H_2 - \\Delta H_1 = \\Delta C_p(T_2 - T_1)",
+          "description": "Born-Haber: \u0394subH + \u00bd\u0394dissH + IE + \u0394egH + Ulattice = \u0394fH.",
+          "tags": [
+            "kirchhoffs law",
+            "born haber cycle"
+          ]
+        },
+        {
+          "id": "jee_c_6_9",
+          "name": "Entropy",
+          "latex": "\\Delta S = \\frac{q_{rev}}{T}, \\qquad \\Delta S_{total} = \\Delta S_{sys} + \\Delta S_{surr} \\ge 0",
+          "tags": [
+            "entropy"
+          ]
+        },
+        {
+          "id": "jee_c_6_10",
+          "name": "Gibbs Free Energy",
+          "latex": "\\Delta G = \\Delta H - T\\Delta S",
+          "description": "at constant T, p. Spontaneity Criteria: \u0394G < 0: Spontaneous, \u0394G = 0: Equilibrium, \u0394G > 0: Non-spontaneous.",
+          "tags": [
+            "gibbs free energy",
+            "spontaneity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "jee_c_ch7",
+      "class": "11",
+      "name": "Chemical Bonding & Molecular Structure",
+      "formulas": [
+        {
+          "id": "jee_c_7_1",
+          "name": "Formal Charge",
+          "latex": "FC = V - L - \\frac{1}{2}S",
+          "description": "FC determines lowest energy resonance structure.",
+          "tags": [
+            "formal charge"
+          ]
+        },
+        {
+          "id": "jee_c_7_2",
+          "name": "Dipole Moment",
+          "latex": "\\mu = q \\times d",
+          "description": "(Debye, 1 D = 3.336 \u00d7 10\u207b\u00b3\u2070 C m). \u03bcnet = \u221a(\u03bc\u2081\u00b2 + \u03bc\u2082\u00b2 + 2\u03bc\u2081\u03bc\u2082cos\u03b8). % Ionic Character = (\u03bcobserved / \u03bctheoretical) \u00d7 100",
+          "tags": [
+            "dipole moment",
+            "ionic character"
+          ]
+        },
+        {
+          "id": "jee_c_7_3",
+          "name": "Steric Number & Hybridization",
+          "latex": "SN = \\frac{1}{2} [V + M - C + A]",
+          "description": "SN = 2 (sp, linear); 3 (sp\u00b2, trigonal planar); 4 (sp\u00b3, tetrahedral); 5 (sp\u00b3d, TBP); 6 (sp\u00b3d\u00b2, octahedral); 7 (sp\u00b3d\u00b3, PBP).",
+          "tags": [
+            "steric number",
+            "hybridization",
+            "vsepr"
+          ]
+        },
+        {
+          "id": "jee_c_7_4",
+          "name": "Bond Order (MOT)",
+          "latex": "BO = \\frac{1}{2} (N_b - N_a)",
+          "tags": [
+            "bond order",
+            "mot"
+          ]
+        }
+      ],
+      "keyPoints": [
+        "MOT For \u2264 14 e\u207b: \u03c31s \u03c3*1s \u03c32s \u03c3*2s (\u03c02px=\u03c02py) \u03c32pz (\u03c0*2px=\u03c0*2py) \u03c3*2pz",
+        "MOT For > 14 e\u207b: \u03c31s \u03c3*1s \u03c32s \u03c3*2s \u03c32pz (\u03c02px=\u03c02py) (\u03c0*2px=\u03c0*2py) \u03c3*2pz",
+        "O2 (16 e\u207b): BO = 2, paramagnetic (2 unpaired e\u207b in \u03c0*2px, \u03c0*2py).",
+        "N2 (14 e\u207b): BO = 3, diamagnetic."
+      ]
+    },
+    {
+      "id": "jee_c_ch8",
+      "class": "11",
+      "name": "General Organic Chemistry (GOC) & Hydrocarbons",
+      "formulas": [],
+      "keyPoints": [
+        "Carbocation Stability: Tropylium > Triphenylmethyl > Benzyl \u2248 Allyl > 3\u00b0 > 2\u00b0 > 1\u00b0 > CH3+ > Vinyl > Phenyl. (Rearrangements via 1,2-hydride and 1,2-methyl shifts occur to maximize stability).",
+        "Carbanion Stability: Aromatic > sp-C (\u2261C-) > 1\u00b0 > 2\u00b0 > 3\u00b0. Stabilized by -I, -M groups.",
+        "Free Radical Stability: Benzyl > Allyl > 3\u00b0 > 2\u00b0 > 1\u00b0 > Methyl.",
+        "Aromaticity (H\u00fcckel's Rule): Planar, cyclic, fully conjugated system with (4n + 2)\u03c0 electrons is aromatic; 4n \u03c0 electrons is anti-aromatic (highly unstable).",
+        "Electrophilic Addition of HX: Markovnikov's rule (proton adds to carbon with more H's via carbocation).",
+        "HBr with Peroxides (Kharasch Effect): Free radical mechanism yields Anti-Markovnikov product (operates strictly for HBr, not HCl or HI).",
+        "Ozonolysis of Alkenes: Reductive cleavage with O3 followed by Zn/H2O breaks C=C into aldehydes and ketones without over-oxidation.",
+        "Acidity of Alkynes: Terminal alkynes (HC\u2261CH, RC\u2261CH) are acidic due to 50% s-character of sp-carbon; react with Na or NaNH2 to liberate H2."
+      ]
+    }
+  ]
+}

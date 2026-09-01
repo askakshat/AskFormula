@@ -63,15 +63,18 @@ export default function Build() {
 
   const chapters = useMemo(() => {
     if (!subject || !selectedClass) return [];
-    return getChaptersBySubject(subject).filter(
-      (ch) => ch.class === selectedClass,
-    );
-  }, [subject, selectedClass]);
+    return getChaptersBySubject(
+      exam === "jee" ? "JEE " + subject : subject,
+    ).filter((ch) => ch.class === selectedClass);
+  }, [subject, selectedClass, exam]);
 
   const formulas = useMemo(() => {
     if (!subject || selectedChapters.length === 0) return [];
-    return filterFormulas(subject, selectedChapters);
-  }, [subject, selectedChapters]);
+    return filterFormulas(
+      exam === "jee" ? "JEE " + subject : subject,
+      selectedChapters,
+    );
+  }, [subject, selectedChapters, exam]);
 
   const handleSubjectSelect = (s: string) => {
     setSubject(s);

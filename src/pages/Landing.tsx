@@ -195,8 +195,9 @@ export default function Landing() {
             </h3>
             <p className="text-[#e1e2ec]/80 text-sm leading-relaxed">
               Currently, we support comprehensive coverage for Class 11 and
-              Class 12 Physics, Chemistry, Mathematics, and Biology
-              (CBSE/NCERT).
+              Class 12 Physics, Chemistry, Mathematics, and Biology (CBSE/NCERT)
+              as well as the complete JEE Main & Advanced syllabus for Physics,
+              Chemistry, and Mathematics.
             </p>
           </div>
 
