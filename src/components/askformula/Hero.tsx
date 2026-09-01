@@ -36,7 +36,7 @@ export default function Hero() {
 
           <p className="text-base text-[#e1e2ec] max-w-xl">
             A high-density, distraction-free environment for scientific study.
-            Build custom PDF reference sheets tailored to your CBSE Class 11 and
+            Build custom PDF reference sheets tailored to your CBSE and JEE Class 11 and
             12 curriculum in seconds.
           </p>
 

@@ -1,0 +1,415 @@
+{
+  "subject": "Mathematics",
+  "audience": ["jee"],
+  "chapters": [
+    {
+      "id": "jee_c12_ch1",
+      "class": "12",
+      "name": "Inverse Trigonometric Functions",
+      "formulas": [
+        {
+          "id": "jee_c12_1_1",
+          "name": "Complementary Sums",
+          "latex": "\\sin^{-1}x + \\cos^{-1}x = \\frac{\\pi}{2} \\ (|x| \\le 1)",
+          "tags": ["itf", "complementary"]
+        },
+        {
+          "id": "jee_c12_1_2",
+          "name": "Complementary Sums (Tan/Cot)",
+          "latex": "\\tan^{-1}x + \\cot^{-1}x = \\frac{\\pi}{2} \\ (x \\in \\mathbb{R})",
+          "tags": ["itf", "complementary"]
+        },
+        {
+          "id": "jee_c12_1_3",
+          "name": "Complementary Sums (Sec/Csc)",
+          "latex": "\\sec^{-1}x + \\csc^{-1}x = \\frac{\\pi}{2} \\ (|x| \\ge 1)",
+          "tags": ["itf", "complementary"]
+        },
+        {
+          "id": "jee_c12_1_4",
+          "name": "2tan\u207b\u00b9x Transformations",
+          "latex": "2\\tan^{-1}x = \\sin^{-1}\\left(\\frac{2x}{1 + x^2}\\right) \\ (|x| \\le 1) = \\cos^{-1}\\left(\\frac{1 - x^2}{1 + x^2}\\right) \\ (x \\ge 0) = \\tan^{-1}\\left(\\frac{2x}{1 - x^2}\\right) \\ (|x| < 1)",
+          "tags": ["itf", "transformations"]
+        }
+      ],
+      "keyPoints": [
+        "y = sin\u207b\u00b9x: Domain [-1, 1], Range [-\u03c0/2, \u03c0/2], sin\u207b\u00b9(-x) = -sin\u207b\u00b9x",
+        "y = cos\u207b\u00b9x: Domain [-1, 1], Range [0, \u03c0], cos\u207b\u00b9(-x) = \u03c0 - cos\u207b\u00b9x",
+        "y = tan\u207b\u00b9x: Domain \u211d, Range (-\u03c0/2, \u03c0/2), tan\u207b\u00b9(-x) = -tan\u207b\u00b9x",
+        "y = cot\u207b\u00b9x: Domain \u211d, Range (0, \u03c0), cot\u207b\u00b9(-x) = \u03c0 - cot\u207b\u00b9x",
+        "y = sec\u207b\u00b9x: Domain \u211d - (-1, 1), Range [0, \u03c0] - {\u03c0/2}, sec\u207b\u00b9(-x) = \u03c0 - sec\u207b\u00b9x",
+        "y = csc\u207b\u00b9x: Domain \u211d - (-1, 1), Range [-\u03c0/2, \u03c0/2] - {0}, csc\u207b\u00b9(-x) = -csc\u207b\u00b9x"
+      ]
+    },
+    {
+      "id": "jee_c12_ch2",
+      "class": "12",
+      "name": "Matrices & Determinants",
+      "formulas": [
+        {
+          "id": "jee_c12_2_1",
+          "name": "Matrix Inverse",
+          "latex": "(AB)^{-1} = B^{-1} A^{-1}, \\qquad A^{-1} = \\frac{1}{|A|} \\text{adj } A",
+          "tags": ["matrices", "inverse"]
+        },
+        {
+          "id": "jee_c12_2_2",
+          "name": "Adjoint Properties",
+          "latex": "A (\\text{adj } A) = (\\text{adj } A) A = |A| I_n",
+          "tags": ["matrices", "adjoint"]
+        },
+        {
+          "id": "jee_c12_2_3",
+          "name": "Determinant of Adjoint",
+          "latex": "|\\text{adj } A| = |A|^{n - 1}, \\qquad |\\text{adj}(\\text{adj } A)| = |A|^{(n - 1)^2}",
+          "tags": ["matrices", "adjoint", "determinant"]
+        },
+        {
+          "id": "jee_c12_2_4",
+          "name": "Adjoint of Adjoint",
+          "latex": "\\text{adj}(\\text{adj } A) = |A|^{n - 2} A",
+          "tags": ["matrices", "adjoint"]
+        },
+        {
+          "id": "jee_c12_2_5",
+          "name": "Determinant Properties",
+          "latex": "|kA| = k^n |A|, \\qquad |AB| = |A| |B|",
+          "description": "For n \u00d7 n matrix",
+          "tags": ["matrices", "determinant"]
+        }
+      ],
+      "keyPoints": [
+        "Square matrix A symmetric \u21d4 A' = A; skew-symmetric \u21d4 A' = -A.",
+        "A = \u00bd(A + A') + \u00bd(A - A').",
+        "Area of triangle: \u0394 = \u00bd |x1(y2 - y3) + x2(y3 - y1) + x3(y1 - y2)|.",
+        "System of Linear Equations (AX = B): |A| \u2260 0 \u21d2 Unique consistent solution: X = A\u207b\u00b9B.",
+        "|A| = 0 and (adj A)B \u2260 O \u21d2 Inconsistent (no solution).",
+        "|A| = 0 and (adj A)B = O \u21d2 Infinitely many solutions or inconsistent."
+      ]
+    },
+    {
+      "id": "jee_c12_ch3",
+      "class": "12",
+      "name": "Calculus: Differential Calculus",
+      "formulas": [
+        {
+          "id": "jee_c12_3_1",
+          "name": "Differentiability & Chain Rule",
+          "latex": "f'(c) = \\lim_{h \\to 0} \\frac{f(c + h) - f(c)}{h}, \\qquad \\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx}",
+          "tags": ["calculus", "differentiation"]
+        },
+        {
+          "id": "jee_c12_3_2",
+          "name": "Parametric 2nd Derivative",
+          "latex": "\\frac{d^2y}{dx^2} = \\frac{\\frac{d}{dt}\\left(\\frac{dy}{dx}\\right)}{\\frac{dx}{dt}}",
+          "tags": ["calculus", "parametric derivative"]
+        },
+        {
+          "id": "jee_c12_3_3",
+          "name": "Logarithmic Differentiation",
+          "latex": "y = u^v \\implies \\ln y = v \\ln u",
+          "tags": ["calculus", "logarithmic differentiation"]
+        }
+      ],
+      "keyPoints": [
+        "Differentiability \u21d2 Continuity (converse not true).",
+        "d/dx(sin\u207b\u00b9x) = 1/\u221a(1 - x\u00b2), d/dx(cos\u207b\u00b9x) = -1/\u221a(1 - x\u00b2), d/dx(tan\u207b\u00b9x) = 1/(1 + x\u00b2)",
+        "Strictly Increasing on (a, b) \u21d4 f'(x) > 0; Strictly Decreasing on (a, b) \u21d4 f'(x) < 0.",
+        "Critical point \u21d4 f'(c) = 0 or f'(c) undefined.",
+        "1st Derivative Test: f'(x) changes + \u2192 - at c \u21d2 Local Maxima; - \u2192 + at c \u21d2 Local Minima.",
+        "2nd Derivative Test: f'(c) = 0, f''(c) < 0 \u21d2 Local Maxima; f'(c) = 0, f''(c) > 0 \u21d2 Local Minima.",
+        "Rolle's Theorem: f(a)=f(b) \u21d2 f'(c) = 0 for some c \u2208 (a, b).",
+        "LMVT: f'(c) = [f(b) - f(a)] / (b - a) for some c \u2208 (a, b)."
+      ]
+    },
+    {
+      "id": "jee_c12_ch4",
+      "class": "12",
+      "name": "Integral Calculus & Differential Equations",
+      "formulas": [
+        {
+          "id": "jee_c12_4_1",
+          "name": "Integration by Parts",
+          "latex": "\\int u v \\, dx = u \\int v \\, dx - \\int \\left(u' \\int v \\, dx\\right) dx",
+          "description": "ILATE preference: Inverse, Log, Algebraic, Trig, Exponential.",
+          "tags": ["calculus", "integration"]
+        },
+        {
+          "id": "jee_c12_4_2",
+          "name": "Special Form Integral",
+          "latex": "\\int e^x [f(x) + f'(x)] \\, dx = e^x f(x) + C",
+          "tags": ["calculus", "integration"]
+        },
+        {
+          "id": "jee_c12_4_3",
+          "name": "King's Rule (P4)",
+          "latex": "\\int_0^a f(x) \\, dx = \\int_0^a f(a - x) \\, dx",
+          "tags": ["calculus", "definite integration"]
+        },
+        {
+          "id": "jee_c12_4_4",
+          "name": "Definite Integral Property (P3)",
+          "latex": "\\int_a^b f(x) \\, dx = \\int_a^b f(a + b - x) \\, dx",
+          "tags": ["calculus", "definite integration"]
+        },
+        {
+          "id": "jee_c12_4_5",
+          "name": "Even/Odd Function Integral (P7)",
+          "latex": "\\int_{-a}^a f(x) \\, dx = 2\\int_0^a f(x) \\, dx \\text{ (even); } 0 \\text{ (odd)}",
+          "tags": ["calculus", "definite integration"]
+        },
+        {
+          "id": "jee_c12_4_6",
+          "name": "Leibnitz Rule",
+          "latex": "\\frac{d}{dx} \\left[\\int_{\\psi(x)}^{\\phi(x)} f(t) \\, dt\\right] = f(\\phi(x)) \\phi'(x) - f(\\psi(x)) \\psi'(x)",
+          "tags": ["calculus", "definite integration", "leibnitz rule"]
+        },
+        {
+          "id": "jee_c12_4_7",
+          "name": "Linear Differential Equation",
+          "latex": "\\frac{dy}{dx} + P(x)y = Q(x) \\implies I.F. = e^{\\int P \\, dx} \\implies y \\cdot (I.F.) = \\int [Q \\cdot (I.F.)] \\, dx + C",
+          "tags": ["calculus", "differential equations", "linear"]
+        },
+        {
+          "name": "Integration by Parts",
+          "latex": "\\int u\\cdot v dx = u\\int v dx - \\int\\left(u'\\int v dx\\right)dx",
+          "tags": ["integration by parts"],
+          "id": "jee_c12_ch4_add_8"
+        },
+        {
+          "name": "Substitution",
+          "latex": "\\int f(g(x))g'(x)dx = \\int f(t)dt",
+          "tags": ["substitution"],
+          "id": "jee_c12_ch4_add_9"
+        },
+        {
+          "name": "Definite Integral",
+          "latex": "\\int_a^b f(x)dx = F(b) - F(a)",
+          "tags": ["definite integral"],
+          "id": "jee_c12_ch4_add_10"
+        },
+        {
+          "name": "Area Under Curve",
+          "latex": "A = \\int_a^b |f(x)| dx",
+          "tags": ["area"],
+          "id": "jee_c12_ch4_add_11"
+        },
+        {
+          "name": "Area Between Curves",
+          "latex": "A = \\int_a^b |f(x) - g(x)| dx",
+          "tags": ["area"],
+          "id": "jee_c12_ch4_add_12"
+        },
+        {
+          "name": "King's Property",
+          "latex": "\\int_0^a f(x)dx = \\int_0^a f(a-x)dx",
+          "tags": ["kings property"],
+          "id": "jee_c12_ch4_add_13"
+        },
+        {
+          "name": "Walli's Formula",
+          "latex": "\\int_0^{\\pi/2} \\sin^n x dx = \\frac{(n-1)!!}{n!!} \\times (\\pi/2 \\text{ or } 1)",
+          "tags": ["wallis formula"],
+          "id": "jee_c12_ch4_add_14"
+        },
+        {
+          "name": "Linear DE",
+          "latex": "\\frac{dy}{dx} + P(x)y = Q(x); \\quad IF = e^{\\int P dx}",
+          "tags": ["linear de"],
+          "id": "jee_c12_ch4_add_15"
+        },
+        {
+          "name": "Variable Separable",
+          "latex": "f(y)dy = g(x)dx",
+          "tags": ["variable separable"],
+          "id": "jee_c12_ch4_add_16"
+        },
+        {
+          "name": "Leibniz Rule",
+          "latex": "\\frac{d}{dx} \\int_{a(x)}^{b(x)} f(t)dt = f(b(x))b'(x) - f(a(x))a'(x)",
+          "tags": ["leibniz rule"],
+          "id": "jee_c12_ch4_add_17"
+        }
+      ],
+      "keyPoints": [
+        "P6: \u222b(0 to 2a) f(x)dx = 2\u222b(0 to a) f(x)dx [if f(2a - x) = f(x)]; 0 [if f(2a - x) = -f(x)]",
+        "Area under curve: A = \u222b|f(x)|dx; Area between curves: A = \u222b|f(x) - g(x)|dx.",
+        "Variable Separable: \u222b h(y) dy = \u222b g(x) dx + C",
+        "Homogeneous (dy/dx = g(y/x)): Put y = vx \u21d2 dy/dx = v + x (dv/dx)",
+        "Order = highest derivative; Degree = highest exponent of highest derivative in polynomial form."
+      ]
+    },
+    {
+      "id": "jee_c12_ch5",
+      "class": "12",
+      "name": "Vectors, 3D Geometry, Linear Programming & Probability",
+      "formulas": [
+        {
+          "id": "jee_c12_5_1",
+          "name": "Vector Dot & Cross Products",
+          "latex": "a \\cdot b = |a||b| \\cos\\theta = a_1b_1 + a_2b_2 + a_3b_3",
+          "description": "Projection of a on b: (a \u00b7 b) / |b|",
+          "tags": ["vectors", "dot product"]
+        },
+        {
+          "id": "jee_c12_5_2",
+          "name": "Cross Product",
+          "latex": "a \\times b = |a||b| \\sin\\theta \\ \\hat{n} = \\det\\begin{pmatrix} \\hat{i} & \\hat{j} & \\hat{k} \\\\ a_1 & a_2 & a_3 \\\\ b_1 & b_2 & b_3 \\end{pmatrix}",
+          "tags": ["vectors", "cross product"]
+        },
+        {
+          "id": "jee_c12_5_3",
+          "name": "Area of Parallelogram",
+          "latex": "\\text{Area} = |a \\times b| \\text{ (sides); } \\frac{1}{2}|d_1 \\times d_2| \\text{ (diagonals)}",
+          "tags": ["vectors", "area"]
+        },
+        {
+          "id": "jee_c12_5_4",
+          "name": "3D Line Equation",
+          "latex": "r = a + \\lambda b \\implies \\frac{x - x_1}{a_1} = \\frac{y - y_1}{b_1} = \\frac{z - z_1}{c_1}",
+          "tags": ["3d geometry", "line"]
+        },
+        {
+          "id": "jee_c12_5_5",
+          "name": "Shortest Distance (Skew Lines)",
+          "latex": "d = \\frac{|(b_1 \\times b_2) \\cdot (a_2 - a_1)|}{|b_1 \\times b_2|}",
+          "tags": ["3d geometry", "shortest distance"]
+        },
+        {
+          "id": "jee_c12_5_6",
+          "name": "Distance Between Parallel Lines",
+          "latex": "d = \\frac{|b \\times (a_2 - a_1)|}{|b|}",
+          "tags": ["3d geometry", "distance"]
+        },
+        {
+          "id": "jee_c12_5_7",
+          "name": "Conditional Probability",
+          "latex": "P(A|B) = \\frac{P(A \\cap B)}{P(B)}",
+          "tags": ["probability", "conditional"]
+        },
+        {
+          "id": "jee_c12_5_8",
+          "name": "Independent Events",
+          "latex": "P(A \\cap B) = P(A) P(B) \\implies P(A \\cup B) = 1 - P(A') P(B')",
+          "tags": ["probability", "independent"]
+        },
+        {
+          "id": "jee_c12_5_9",
+          "name": "Bayes' Theorem",
+          "latex": "P(E_i|A) = \\frac{P(E_i) P(A|E_i)}{\\sum_{j=1}^n P(E_j) P(A|E_j)}",
+          "tags": ["probability", "bayes theorem"]
+        },
+        {
+          "name": "Dot Product",
+          "latex": "\\vec{a} \\cdot \\vec{b} = |a||b|\\cos\\theta = a_1b_1 + a_2b_2 + a_3b_3",
+          "tags": ["dot product"],
+          "id": "jee_c12_ch5_add_10"
+        },
+        {
+          "name": "Cross Product",
+          "latex": "|\\vec{a} \\times \\vec{b}| = |a||b|\\sin\\theta",
+          "tags": ["cross product"],
+          "id": "jee_c12_ch5_add_11"
+        },
+        {
+          "name": "Scalar Triple Product",
+          "latex": "[\\vec{a} \\vec{b} \\vec{c}] = \\vec{a} \\cdot (\\vec{b} \\times \\vec{c})",
+          "tags": ["scalar triple product"],
+          "id": "jee_c12_ch5_add_12"
+        },
+        {
+          "name": "Projection",
+          "latex": "\\text{proj} = \\frac{\\vec{a} \\cdot \\vec{b}}{|\\vec{b}|}",
+          "tags": ["projection"],
+          "id": "jee_c12_ch5_add_13"
+        },
+        {
+          "name": "Distance Between Skew Lines",
+          "latex": "d = \\frac{|[\\vec{a}_2-\\vec{a}_1, \\vec{b}_1, \\vec{b}_2]|}{|\\vec{b}_1 \\times \\vec{b}_2|}",
+          "tags": ["skew lines"],
+          "id": "jee_c12_ch5_add_14"
+        },
+        {
+          "name": "Plane Equation",
+          "latex": "ax + by + cz = d",
+          "tags": ["plane"],
+          "id": "jee_c12_ch5_add_15"
+        },
+        {
+          "name": "Distance Point to Plane",
+          "latex": "d = \\frac{|ax_1 + by_1 + cz_1 - d|}{\\sqrt{a^2+b^2+c^2}}",
+          "tags": ["distance to plane"],
+          "id": "jee_c12_ch5_add_16"
+        },
+        {
+          "name": "Line in 3D",
+          "latex": "\\frac{x-x_1}{a} = \\frac{y-y_1}{b} = \\frac{z-z_1}{c}",
+          "tags": ["line"],
+          "id": "jee_c12_ch5_add_17"
+        },
+        {
+          "name": "Angle Between Planes",
+          "latex": "\\cos\\theta = \\frac{|\\vec{n}_1 \\cdot \\vec{n}_2|}{|\\vec{n}_1||\\vec{n}_2|}",
+          "tags": ["angle"],
+          "id": "jee_c12_ch5_add_18"
+        },
+        {
+          "name": "Addition Rule",
+          "latex": "P(A\\cup B) = P(A) + P(B) - P(A\\cap B)",
+          "tags": ["addition rule"],
+          "id": "jee_c12_ch5_add_19"
+        },
+        {
+          "name": "Bayes' Theorem",
+          "latex": "P(A|B) = \\frac{P(B|A)P(A)}{P(B)}",
+          "tags": ["bayes theorem"],
+          "id": "jee_c12_ch5_add_20"
+        },
+        {
+          "name": "Binomial Distribution",
+          "latex": "P(X=r) = ^nC_r p^r q^{n-r}",
+          "tags": ["binomial distribution"],
+          "id": "jee_c12_ch5_add_21"
+        },
+        {
+          "name": "Binomial Mean & Variance",
+          "latex": "\\mu = np; \\quad \\sigma^2 = npq",
+          "tags": ["binomial mean"],
+          "id": "jee_c12_ch5_add_22"
+        },
+        {
+          "name": "Mean",
+          "latex": "\\bar{x} = \\frac{\\sum x_i}{n}",
+          "tags": ["mean"],
+          "id": "jee_c12_ch5_add_23"
+        },
+        {
+          "name": "Variance",
+          "latex": "\\sigma^2 = \\frac{\\sum(x_i - \\bar{x})^2}{n} = \\frac{\\sum x_i^2}{n} - \\bar{x}^2",
+          "tags": ["variance"],
+          "id": "jee_c12_ch5_add_24"
+        },
+        {
+          "name": "Standard Deviation",
+          "latex": "\\sigma = \\sqrt{\\text{variance}}",
+          "tags": ["standard deviation"],
+          "id": "jee_c12_ch5_add_25"
+        },
+        {
+          "name": "Total Probability",
+          "latex": "P(A) = \\sum P(A|B_i)P(B_i)",
+          "tags": ["total probability"],
+          "id": "jee_c12_ch5_add_26"
+        }
+      ],
+      "keyPoints": [
+        "a \u22a5 b \u21d4 a \u00b7 b = 0. a \u2225 b \u21d4 a \u00d7 b = 0.",
+        "Lines intersect \u21d4 (b1 \u00d7 b2) \u00b7 (a2 - a1) = 0.",
+        "Linear Programming: Z = ax + by subject to linear constraints.",
+        "Corner Point Theorem: Optimal value of Z always occurs at extreme vertices (corner points) of the convex feasible region.",
+        "If two vertices give same optimal Z, all points on line segment connecting them give same value.",
+        "Law of Total Probability: P(A) = \u03a3 P(Ej) P(A|Ej)."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,479 @@
+{
+  "subject": "Chemistry",
+  "audience": ["jee"],
+  "chapters": [
+    {
+      "id": "jee_c12_ch1",
+      "class": "12",
+      "name": "Solid State",
+      "formulas": [
+        {
+          "id": "jee_c12_1_1",
+          "name": "Density of Unit Cell Formula",
+          "latex": "\\rho = \\frac{z \\times M}{a^3 \\times N_A}",
+          "description": "[M in g/mol, a in cm, \u03c1 in g/cm\u00b3, NA = 6.022 \u00d7 10\u00b2\u00b3]",
+          "tags": ["solid state", "density"]
+        },
+        {
+          "id": "jee_c12_1_2",
+          "name": "Simple Cubic (SC)",
+          "latex": "z = 1, \\quad CN = 6, \\quad a = 2r, \\quad \\text{PF} = \\frac{\\pi}{6} \\approx 52.4\\%",
+          "tags": ["solid state", "sc"]
+        },
+        {
+          "id": "jee_c12_1_3",
+          "name": "Body-Centered Cubic (BCC)",
+          "latex": "z = 2, \\quad CN = 8, \\quad \\sqrt{3} a = 4r, \\quad \\text{PF} = \\frac{\\sqrt{3}\\pi}{8} \\approx 68\\%",
+          "tags": ["solid state", "bcc"]
+        },
+        {
+          "id": "jee_c12_1_4",
+          "name": "Face-Centered Cubic (FCC/CCP)",
+          "latex": "z = 4, \\quad CN = 12, \\quad \\sqrt{2} a = 4r, \\quad \\text{PF} = \\frac{\\pi}{3\\sqrt{2}} \\approx 74\\%",
+          "tags": ["solid state", "fcc"]
+        },
+        {
+          "id": "jee_c12_1_5",
+          "name": "Hexagonal Close Packed (HCP)",
+          "latex": "z = 6, \\quad CN = 12, \\quad c = 4r \\sqrt{2/3}, \\quad a = 2r, \\quad \\text{PF} = 74\\%",
+          "tags": ["solid state", "hcp"]
+        },
+        {
+          "name": "Freundlich Adsorption",
+          "latex": "\\frac{x}{m} = kP^{1/n}",
+          "tags": ["freundlich"],
+          "id": "jee_c12_ch1_add_6"
+        },
+        {
+          "name": "Langmuir Adsorption",
+          "latex": "\\frac{P}{x/m} = \\frac{1}{ab} + \\frac{P}{a}",
+          "tags": ["langmuir"],
+          "id": "jee_c12_ch1_add_7"
+        },
+        {
+          "name": "Density of Unit Cell",
+          "latex": "\\rho = \\frac{ZM}{a^3N_A}",
+          "tags": ["density"],
+          "id": "jee_c12_ch1_add_8"
+        },
+        {
+          "name": "Bragg's Law",
+          "latex": "n\\lambda = 2d \\sin \\theta",
+          "tags": ["bragg"],
+          "id": "jee_c12_ch1_add_9"
+        },
+        {
+          "name": "Void Radius (Octahedral)",
+          "latex": "\\frac{r_{void}}{r_{sphere}} = 0.414",
+          "tags": ["void", "octahedral"],
+          "id": "jee_c12_ch1_add_10"
+        },
+        {
+          "name": "Void Radius (Tetrahedral)",
+          "latex": "\\frac{r_{void}}{r_{sphere}} = 0.225",
+          "tags": ["void", "tetrahedral"],
+          "id": "jee_c12_ch1_add_11"
+        }
+      ],
+      "keyPoints": [
+        "Radius Ratio Rules (r+/r-): < 0.155: CN=2; 0.155\u20130.225: CN=3; 0.225\u20130.414: CN=4; 0.414\u20130.732: CN=6; 0.732\u20131.0: CN=8.",
+        "Schottky Defect: Equal number of cations and anions missing; lowers density; high CN and similar sizes (NaCl, KCl, CsCl, AgBr).",
+        "Frenkel Defect: Dislocation of smaller cation into interstitial site; density remains unchanged; large size difference (ZnS, AgCl, AgBr, AgI).",
+        "Note: AgBr exhibits both Schottky and Frenkel defects.",
+        "Metal Excess (F-Centres): Trapped electrons in anionic vacancies impart color and paramagnetism (yellow NaCl, pink LiCl, violet KCl)."
+      ]
+    },
+    {
+      "id": "jee_c12_ch2",
+      "class": "12",
+      "name": "Liquid Solutions",
+      "formulas": [
+        {
+          "id": "jee_c12_2_1",
+          "name": "Raoult's Law (Volatile Liquid Mixture)",
+          "latex": "p_{total} = p_A + p_B = p_A^\\circ x_A + p_B^\\circ x_B = p_B^\\circ + (p_A^\\circ - p_B^\\circ) x_A",
+          "tags": ["solutions", "raoults law"]
+        },
+        {
+          "id": "jee_c12_2_2",
+          "name": "Vapor Phase Mole Fraction",
+          "latex": "y_A = \\frac{p_A}{p_{total}} = \\frac{p_A^\\circ x_A}{p_{total}}",
+          "description": "Ideal Solution: \u0394Hmix = 0, \u0394Vmix = 0.",
+          "tags": ["solutions", "vapor phase"]
+        },
+        {
+          "id": "jee_c12_2_3",
+          "name": "Relative Lowering of Vapor Pressure",
+          "latex": "\\frac{p_1^\\circ - p}{p_1^\\circ} = i x_2 \\approx i \\left(\\frac{n_2}{n_1}\\right) = i \\left[\\frac{w_2 M_1}{M_2 w_1}\\right]",
+          "tags": ["solutions", "colligative properties", "rlvp"]
+        },
+        {
+          "id": "jee_c12_2_4",
+          "name": "Elevation of Boiling Point",
+          "latex": "\\Delta T_b = T_b - T_b^\\circ = i K_b m = i \\left[\\frac{1000 K_b w_2}{M_2 w_1}\\right]",
+          "description": "Kb = R M1 Tb\u00b0\u00b2 / (1000 \u0394vapH).",
+          "tags": ["solutions", "colligative properties", "boiling point"]
+        },
+        {
+          "id": "jee_c12_2_5",
+          "name": "Depression of Freezing Point",
+          "latex": "\\Delta T_f = T_f^\\circ - T_f = i K_f m = i \\left[\\frac{1000 K_f w_2}{M_2 w_1}\\right]",
+          "description": "Kf = R M1 Tf\u00b0\u00b2 / (1000 \u0394fusH).",
+          "tags": ["solutions", "colligative properties", "freezing point"]
+        },
+        {
+          "id": "jee_c12_2_6",
+          "name": "Osmotic Pressure",
+          "latex": "\\Pi = i C R T = i \\left(\\frac{w_2}{M_2 V}\\right) R T",
+          "description": "Best colligative property for determining molar mass of biomacromolecules.",
+          "tags": ["solutions", "colligative properties", "osmotic pressure"]
+        },
+        {
+          "id": "jee_c12_2_7",
+          "name": "Van 't Hoff Factor (Dissociation)",
+          "latex": "\\alpha = \\frac{i - 1}{n - 1}",
+          "tags": ["solutions", "van t hoff", "dissociation"]
+        },
+        {
+          "id": "jee_c12_2_8",
+          "name": "Van 't Hoff Factor (Association)",
+          "latex": "\\alpha = \\frac{1 - i}{1 - 1/n}",
+          "description": "K4[Fe(CN)6]: n = 5 \u21d2 i = 1 + 4\u03b1. Acetic acid dimerizes in benzene (n = 2) \u21d2 i = 1 - \u03b1/2.",
+          "tags": ["solutions", "van t hoff", "association"]
+        },
+        {
+          "name": "Raoult's Law",
+          "latex": "P = P^\\circ_A x_A + P^\\circ_B x_B",
+          "tags": ["raoult"],
+          "id": "jee_c12_ch2_add_9"
+        },
+        {
+          "name": "Relative Lowering of VP",
+          "latex": "\\frac{P^\\circ - P}{P^\\circ} = \\chi_{solute} = \\frac{n_2}{n_1 + n_2}",
+          "tags": ["rlvp"],
+          "id": "jee_c12_ch2_add_10"
+        },
+        {
+          "name": "Elevation in BP",
+          "latex": "\\Delta T_b = K_b \\times m \\times i",
+          "tags": ["boiling point"],
+          "id": "jee_c12_ch2_add_11"
+        },
+        {
+          "name": "Depression in FP",
+          "latex": "\\Delta T_f = K_f \\times m \\times i",
+          "tags": ["freezing point"],
+          "id": "jee_c12_ch2_add_12"
+        },
+        {
+          "name": "Osmotic Pressure",
+          "latex": "\\pi = iCRT = \\frac{inRT}{V}",
+          "tags": ["osmotic pressure"],
+          "id": "jee_c12_ch2_add_13"
+        },
+        {
+          "name": "Van't Hoff Factor",
+          "latex": "i = 1 + (n-1)\\alpha",
+          "tags": ["vant hoff"],
+          "id": "jee_c12_ch2_add_14"
+        },
+        {
+          "name": "Kb Formula",
+          "latex": "K_b = \\frac{RT_b^2 M_1}{1000 \\times \\Delta H_{vap}}",
+          "tags": ["kb"],
+          "id": "jee_c12_ch2_add_15"
+        },
+        {
+          "name": "Kf Formula",
+          "latex": "K_f = \\frac{RT_f^2 M_1}{1000 \\times \\Delta H_{fus}}",
+          "tags": ["kf"],
+          "id": "jee_c12_ch2_add_16"
+        },
+        {
+          "name": "Henry's Law",
+          "latex": "P = K_H \\times \\chi",
+          "tags": ["henrys law"],
+          "id": "jee_c12_ch2_add_17"
+        }
+      ],
+      "keyPoints": [
+        "Non-Ideal Positive Deviation: \u0394Hmix > 0, \u0394Vmix > 0, forms minimum boiling azeotropes.",
+        "Non-Ideal Negative Deviation: \u0394Hmix < 0, \u0394Vmix < 0, forms maximum boiling azeotropes."
+      ]
+    },
+    {
+      "id": "jee_c12_ch3",
+      "class": "12",
+      "name": "Electrochemistry",
+      "formulas": [
+        {
+          "id": "jee_c12_3_1",
+          "name": "Nernst Equation (at 298 K)",
+          "latex": "E_{cell} = E^\\circ_{cell} - \\frac{0.0591}{n} \\log Q",
+          "description": "E\u00b0cell = E\u00b0cathode - E\u00b0anode.",
+          "tags": ["electrochemistry", "nernst"]
+        },
+        {
+          "id": "jee_c12_3_2",
+          "name": "Equilibrium Constant & Free Energy",
+          "latex": "\\log K_c = \\frac{n E^\\circ_{cell}}{0.0591}, \\qquad \\Delta_r G^\\circ = -n F E^\\circ_{cell} = -2.303 RT \\log K_c",
+          "description": "F = 96487 C/mol \u2248 96500 C.",
+          "tags": ["electrochemistry", "equilibrium constant", "free energy"]
+        },
+        {
+          "id": "jee_c12_3_3",
+          "name": "Conductivity & Cell Constant",
+          "latex": "G = \\frac{1}{R} = \\kappa \\left(\\frac{A}{l}\\right), \\qquad G^* = \\frac{l}{A} = R \\kappa",
+          "tags": ["electrochemistry", "conductivity"]
+        },
+        {
+          "id": "jee_c12_3_4",
+          "name": "Molar Conductivity",
+          "latex": "\\Lambda_m = \\frac{1000 \\times \\kappa}{M}",
+          "description": "Kohlrausch's Law: \u039bm\u00b0 = \u03bd+ \u03bb+\u00b0 + \u03bd- \u03bb-\u00b0",
+          "tags": ["electrochemistry", "molar conductivity"]
+        },
+        {
+          "id": "jee_c12_3_5",
+          "name": "Weak Electrolyte Dissociation",
+          "latex": "\\alpha = \\frac{\\Lambda_m}{\\Lambda_m^\\circ}, \\qquad K_a = \\frac{c \\Lambda_m^2}{\\Lambda_m^\\circ(\\Lambda_m^\\circ - \\Lambda_m)}",
+          "tags": ["electrochemistry", "dissociation"]
+        },
+        {
+          "id": "jee_c12_3_6",
+          "name": "Faraday's Laws of Electrolysis",
+          "latex": "w = z Q = z I t = \\left[\\frac{M}{n F}\\right] I t, \\qquad \\frac{w_1}{w_2} = \\frac{E_1}{E_2}",
+          "description": "z = E / 96500 = electrochemical equivalent.",
+          "tags": ["electrochemistry", "faradays laws"]
+        },
+        {
+          "name": "Nernst Equation",
+          "latex": "E = E^\\circ - \\frac{0.0592}{n}\\log Q",
+          "tags": ["nernst"],
+          "id": "jee_c12_ch3_add_7"
+        },
+        {
+          "name": "Cell EMF",
+          "latex": "E^\\circ_{cell} = E^\\circ_{cathode} - E^\\circ_{anode}",
+          "tags": ["emf"],
+          "id": "jee_c12_ch3_add_8"
+        },
+        {
+          "name": "Faraday's 1st Law",
+          "latex": "w = ZIt = \\frac{M \\times I \\times t}{n \\times F}",
+          "tags": ["faraday"],
+          "id": "jee_c12_ch3_add_9"
+        },
+        {
+          "name": "Faraday's 2nd Law",
+          "latex": "\\frac{w_1}{w_2} = \\frac{E_1}{E_2}",
+          "tags": ["faraday"],
+          "id": "jee_c12_ch3_add_10"
+        },
+        {
+          "name": "Conductance",
+          "latex": "G = \\frac{1}{R} = \\kappa \\times \\frac{A}{l}",
+          "tags": ["conductance"],
+          "id": "jee_c12_ch3_add_11"
+        },
+        {
+          "name": "Molar Conductivity",
+          "latex": "\\Lambda_m = \\kappa \\times \\frac{1000}{M}",
+          "tags": ["molar conductivity"],
+          "id": "jee_c12_ch3_add_12"
+        },
+        {
+          "name": "Kohlrausch's Law",
+          "latex": "\\Lambda^\\circ_m = \\nu_+\\lambda^\\circ_+ + \\nu_-\\lambda^\\circ_-",
+          "tags": ["kohlrausch"],
+          "id": "jee_c12_ch3_add_13"
+        },
+        {
+          "name": "Debye-H\u00fcckel-Onsager",
+          "latex": "\\Lambda_m = \\Lambda^\\circ_m - b\\sqrt{c}",
+          "tags": ["debye huckel"],
+          "id": "jee_c12_ch3_add_14"
+        }
+      ],
+      "keyPoints": [
+        "Dry Cell: Anode: Zn \u2192 Zn2+ + 2e-; Cathode: MnO2 + NH4+ + e- \u2192 MnO(OH) + NH3; E \u2248 1.5 V.",
+        "Mercury Cell: Anode: Zn(Hg) + 2OH- \u2192 ZnO + H2O + 2e-; Cathode: HgO + H2O + 2e- \u2192 Hg + 2OH-; E = 1.35 V (constant voltage).",
+        "Lead Storage Battery (Discharge): Pb + PbO2 + 2H2SO4 \u2192 2PbSO4 + 2H2O; E \u2248 2 V per cell (12 V battery = 6 cells in series).",
+        "H2-O2 Fuel Cell: 2H2 + O2 \u2192 2H2O; Efficiency \u2248 70%."
+      ]
+    },
+    {
+      "id": "jee_c12_ch4",
+      "class": "12",
+      "name": "Chemical Kinetics",
+      "formulas": [
+        {
+          "id": "jee_c12_4_1",
+          "name": "Zero Order Kinetics",
+          "latex": "k = \\frac{[R]_0 - [R]}{t}, \\qquad t_{1/2} = \\frac{[R]_0}{2k}",
+          "description": "Units of k: mol L\u207b\u00b9 s\u207b\u00b9",
+          "tags": ["kinetics", "zero order"]
+        },
+        {
+          "id": "jee_c12_4_2",
+          "name": "First Order Kinetics",
+          "latex": "k = \\frac{2.303}{t} \\log\\left(\\frac{[R]_0}{[R]}\\right), \\qquad t_{1/2} = \\frac{0.693}{k}",
+          "description": "Units of k: s\u207b\u00b9",
+          "tags": ["kinetics", "first order"]
+        },
+        {
+          "id": "jee_c12_4_3",
+          "name": "Gas Phase (1st Order)",
+          "latex": "k = \\frac{2.303}{t} \\log\\left[\\frac{p_i}{2p_i - p_t}\\right]",
+          "description": "For A(g) \u2192 B(g) + C(g)",
+          "tags": ["kinetics", "first order", "gas phase"]
+        },
+        {
+          "id": "jee_c12_4_4",
+          "name": "Arrhenius Equation",
+          "latex": "k = A e^{-E_a/RT} \\implies \\log\\left(\\frac{k_2}{k_1}\\right) = \\frac{E_a}{2.303 R} \\left[\\frac{T_2 - T_1}{T_1 T_2}\\right]",
+          "description": "Plot of log k vs 1/T has Slope = -Ea / (2.303 R) and Intercept = log A.",
+          "tags": ["kinetics", "arrhenius"]
+        },
+        {
+          "name": "Rate Law",
+          "latex": "\\text{Rate} = k[A]^m[B]^n",
+          "tags": ["rate law"],
+          "id": "jee_c12_ch4_add_5"
+        },
+        {
+          "name": "Zero Order",
+          "latex": "[A] = [A]_0 - kt; \\quad t_{1/2} = \\frac{[A]_0}{2k}",
+          "tags": ["zero order"],
+          "id": "jee_c12_ch4_add_6"
+        },
+        {
+          "name": "First Order",
+          "latex": "k = \\frac{2.303}{t}\\log\\left(\\frac{[A]_0}{[A]}\\right); \\quad t_{1/2} = \\frac{0.693}{k}",
+          "tags": ["first order"],
+          "id": "jee_c12_ch4_add_7"
+        },
+        {
+          "name": "Second Order",
+          "latex": "\\frac{1}{[A]} = \\frac{1}{[A]_0} + kt; \\quad t_{1/2} = \\frac{1}{k[A]_0}",
+          "tags": ["second order"],
+          "id": "jee_c12_ch4_add_8"
+        },
+        {
+          "name": "Arrhenius Equation",
+          "latex": "k = Ae^{-E_a/RT}",
+          "tags": ["arrhenius"],
+          "id": "jee_c12_ch4_add_9"
+        },
+        {
+          "name": "Arrhenius (Two Temp)",
+          "latex": "\\log\\left(\\frac{k_2}{k_1}\\right) = \\frac{E_a}{2.303R}\\left(\\frac{1}{T_1} - \\frac{1}{T_2}\\right)",
+          "tags": ["arrhenius"],
+          "id": "jee_c12_ch4_add_10"
+        },
+        {
+          "name": "Temperature Coefficient",
+          "latex": "\\mu = \\frac{k(T+10)}{k(T)} \\approx 2-3",
+          "tags": ["temperature coefficient"],
+          "id": "jee_c12_ch4_add_11"
+        },
+        {
+          "name": "nth Order Half-Life",
+          "latex": "t_{1/2} \\propto [A]_0^{1-n}",
+          "tags": ["half life"],
+          "id": "jee_c12_ch4_add_12"
+        }
+      ]
+    },
+    {
+      "id": "jee_c12_ch5",
+      "class": "12",
+      "name": "Coordination Compounds & d/f-Block Elements",
+      "formulas": [
+        {
+          "id": "jee_c12_5_1",
+          "name": "Crystal Field Splitting",
+          "latex": "\\Delta_t = \\frac{4}{9} \\Delta_o",
+          "description": "Octahedral: t2g lowered by 0.4\u0394o, eg raised by 0.6\u0394o. Tetrahedral: e lowered by 0.6\u0394t, t2 raised by 0.4\u0394t.",
+          "tags": ["coordination compounds", "cft"]
+        },
+        {
+          "id": "jee_c12_5_2",
+          "name": "Crystal Field Stabilization Energy (CFSE)",
+          "latex": "CFSE = (-0.4 n_{t_{2g}} + 0.6 n_{e_g}) \\Delta_o + m P",
+          "description": "Strong field (\u0394o > P): Low spin. Weak field (\u0394o < P): High spin.",
+          "tags": ["coordination compounds", "cfse"]
+        },
+        {
+          "id": "jee_c12_5_3",
+          "name": "Spin-Only Magnetic Moment",
+          "latex": "\\mu = \\sqrt{n(n + 2)} \\text{ BM}",
+          "description": "n = number of unpaired d-electrons.",
+          "tags": ["coordination compounds", "magnetic moment"]
+        },
+        {
+          "name": "EAN Rule",
+          "latex": "EAN = Z - OS + 2(CN)",
+          "tags": ["ean"],
+          "id": "jee_c12_ch5_add_4"
+        },
+        {
+          "name": "Lattice Energy",
+          "latex": "U \\propto \\frac{Z^+ \\times Z^-}{r^+ + r^-}",
+          "tags": ["lattice energy"],
+          "id": "jee_c12_ch5_add_5"
+        },
+        {
+          "name": "Hybridization Formula",
+          "latex": "H = \\frac{1}{2}(V + M - C + A)",
+          "tags": ["hybridization"],
+          "id": "jee_c12_ch5_add_6"
+        },
+        {
+          "name": "Bond Order",
+          "latex": "BO = \\frac{N_b - N_a}{2}",
+          "tags": ["bond order"],
+          "id": "jee_c12_ch5_add_7"
+        },
+        {
+          "name": "Dipole Moment",
+          "latex": "\\mu = q \\times d",
+          "tags": ["dipole moment"],
+          "id": "jee_c12_ch5_add_8"
+        }
+      ],
+      "keyPoints": [
+        "Spectrochemical series: I- < Br- < SCN- < Cl- < S2- < F- < OH- < C2O42- < H2O < NCS- < edta4- < NH3 < en < CN- < CO.",
+        "Chromate & Dichromate Preparations: 2CrO42- (yellow) + 2H+ \u21cc Cr2O72- (orange) + H2O",
+        "Cr2O72- + 14H+ + 6e- \u2192 2Cr3+ + 7H2O (E\u00b0 = +1.33 V). Oxidizes Fe2+\u2192Fe3+, I-\u2192I2, H2S\u2192S, Sn2+\u2192Sn4+.",
+        "Permanganate Preparations: 2MnO4- + 5C2O42- + 16H+ \u2192 2Mn2+ + 10CO2 + 8H2O (Acidic)",
+        "2MnO4- + H2O + I- \u2192 2MnO2 + 2OH- + IO3- (Alkaline/Neutral)",
+        "In acidic medium, MnO4- \u2192 Mn2+ (n-factor = 5). In faintly alkaline/neutral medium, MnO4- \u2192 MnO2 (n-factor = 3)."
+      ]
+    },
+    {
+      "id": "jee_c12_ch6",
+      "class": "12",
+      "name": "Organic Chemistry Reactions",
+      "formulas": [],
+      "keyPoints": [
+        "SN1: 2 steps via carbocation intermediate; racemisation; reactivity: 3\u00b0 > 2\u00b0 > 1\u00b0 > CH3X (Benzylic \u2248 Allylic > 3\u00b0); polar protic solvents.",
+        "SN2: 1 step via transition state; 100% Walden inversion; reactivity: CH3X > 1\u00b0 > 2\u00b0 > 3\u00b0; polar aprotic solvents (acetone, DMSO, DMF).",
+        "Aldol Condensation: Aldehydes/ketones with \u2265 1 \u03b1-H in dil. NaOH \u21d2 \u03b2-hydroxyaldehyde/ketone \u2192 \u03b1,\u03b2-unsaturated carbonyl.",
+        "Cannizzaro Reaction: Aldehydes with NO \u03b1-H (HCHO, C6H5CHO) in 50% conc. KOH \u21d2 disproportionation into alcohol + carboxylate salt.",
+        "Rosenmund Reduction: RCOCl + H2 \u2192(Pd/BaSO4) RCHO.",
+        "Stephen Reaction: RCN + SnCl2/HCl \u2192 RCH=NH \u2192(H3O+) RCHO.",
+        "\u00c9tard Reaction: Toluene + CrO2Cl2/CS2 \u2192 Benzaldehyde.",
+        "Gattermann-Koch: Benzene + CO + HCl \u2192(anh. AlCl3/CuCl) Benzaldehyde.",
+        "Clemmensen Reduction: >C=O \u2192(Zn-Hg / conc. HCl) >CH2.",
+        "Wolff-Kishner Reduction: >C=O \u2192(NH2NH2, KOH/glycol, \u0394) >CH2.",
+        "Hell-Volhard-Zelinsky (HVZ): R-CH2-COOH + X2/red P \u2192 R-CH(X)-COOH.",
+        "Gabriel Phthalimide: Prepares pure 1\u00b0 aliphatic amines (aromatic amines cannot be prepared).",
+        "Hoffmann Bromamide Degradation: RCONH2 + Br2 + 4NaOH \u2192 RNH2 (1 less carbon) + Na2CO3 + 2NaBr + 2H2O.",
+        "Carbylamine Test (Isocyanide): RNH2 / ArNH2 + CHCl3 + 3KOH \u2192 RNC (foul odor) + 3KCl + 3H2O. (1\u00b0 amines only).",
+        "Hinsberg Test: C6H5SO2Cl (1\u00b0 amine \u21d2 soluble in alkali; 2\u00b0 amine \u21d2 insoluble in alkali; 3\u00b0 amine \u21d2 no reaction).",
+        "Phenol Reactions: Kolbe's synthesis (\u2192 Salicylic acid with CO2/NaOH); Reimer-Tiemann (\u2192 Salicylaldehyde with CHCl3/NaOH via :CCl2 carbene intermediate); Coupling with diazonium salt (\u2192 p-hydroxyazobenzene orange dye at pH 9\u201310)."
+      ]
+    }
+  ]
+}

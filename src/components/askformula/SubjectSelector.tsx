@@ -10,28 +10,50 @@ interface SubjectSelectorProps {
   exam: ExamType;
 }
 
-const examSubjects: Record<string, { name: string; icon: React.ReactNode }[]> = {
-  school: [
-    { name: "Physics", icon: <Atom className="w-6 h-6" strokeWidth={1.5} /> },
-    { name: "Chemistry", icon: <FlaskConical className="w-6 h-6" strokeWidth={1.5} /> },
-    { name: "Mathematics", icon: <Calculator className="w-6 h-6" strokeWidth={1.5} /> },
-    { name: "Biology", icon: <Leaf className="w-6 h-6" strokeWidth={1.5} /> },
-  ],
-  jee: [
-    { name: "Physics", icon: <Atom className="w-6 h-6" strokeWidth={1.5} /> },
-    { name: "Chemistry", icon: <FlaskConical className="w-6 h-6" strokeWidth={1.5} /> },
-    { name: "Mathematics", icon: <Calculator className="w-6 h-6" strokeWidth={1.5} /> },
-  ],
-  neet: [
-    { name: "Physics", icon: <Atom className="w-6 h-6" strokeWidth={1.5} /> },
-    { name: "Chemistry", icon: <FlaskConical className="w-6 h-6" strokeWidth={1.5} /> },
-    { name: "Biology", icon: <Leaf className="w-6 h-6" strokeWidth={1.5} /> },
-  ],
-};
+const examSubjects: Record<string, { name: string; icon: React.ReactNode }[]> =
+  {
+    school: [
+      { name: "Physics", icon: <Atom className="w-6 h-6" strokeWidth={1.5} /> },
+      {
+        name: "Chemistry",
+        icon: <FlaskConical className="w-6 h-6" strokeWidth={1.5} />,
+      },
+      {
+        name: "Mathematics",
+        icon: <Calculator className="w-6 h-6" strokeWidth={1.5} />,
+      },
+      { name: "Biology", icon: <Leaf className="w-6 h-6" strokeWidth={1.5} /> },
+    ],
+    jee: [
+      { name: "Physics", icon: <Atom className="w-6 h-6" strokeWidth={1.5} /> },
+      {
+        name: "Chemistry",
+        icon: <FlaskConical className="w-6 h-6" strokeWidth={1.5} />,
+      },
+      {
+        name: "Mathematics",
+        icon: <Calculator className="w-6 h-6" strokeWidth={1.5} />,
+      },
+    ],
+    neet: [
+      { name: "Physics", icon: <Atom className="w-6 h-6" strokeWidth={1.5} /> },
+      {
+        name: "Chemistry",
+        icon: <FlaskConical className="w-6 h-6" strokeWidth={1.5} />,
+      },
+      { name: "Biology", icon: <Leaf className="w-6 h-6" strokeWidth={1.5} /> },
+    ],
+  };
 
-export default function SubjectSelector({ onSelect, selected, exam }: SubjectSelectorProps) {
+export default function SubjectSelector({
+  onSelect,
+  selected,
+  exam,
+}: SubjectSelectorProps) {
   const subjects = examSubjects[exam] || examSubjects.school;
-  const availableSubjectNames = new Set(allSubjects.map(s => s.subject.toLowerCase()));
+  const availableSubjectNames = new Set(
+    allSubjects.map((s) => s.subject.toLowerCase()),
+  );
 
   return (
     <motion.div
@@ -41,12 +63,19 @@ export default function SubjectSelector({ onSelect, selected, exam }: SubjectSel
       className="space-y-4"
     >
       <h2 className="text-xl font-semibold text-[#e1e2ec] tracking-[-0.02em] flex items-center">
-        <span className="font-mono text-[13px] text-[#aec6ff] bg-[#00275d]/20 px-2 py-0.5 rounded mr-2">03</span>
+        <span className="font-mono text-[13px] text-[#aec6ff] bg-[#00275d]/20 px-2 py-0.5 rounded mr-2">
+          03
+        </span>
         Pick a subject
       </h2>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {subjects.map((subject) => {
-          const isAvailable = availableSubjectNames.has(subject.name.toLowerCase());
+          const isAvailable = availableSubjectNames.has(
+            (exam === "jee"
+              ? "JEE " + subject.name
+              : subject.name
+            ).toLowerCase(),
+          );
 
           return (
             <motion.button
@@ -62,8 +91,8 @@ export default function SubjectSelector({ onSelect, selected, exam }: SubjectSel
                   !isAvailable
                     ? "bg-slate-900/50 border-slate-800/50 cursor-not-allowed opacity-75"
                     : selected === subject.name
-                    ? "bg-blue-500/[0.12] border-blue-400/30 shadow-[0_0_30px_-8px_rgba(59,130,246,0.15)] cursor-pointer"
-                    : "bg-white/[0.03] border-white/[0.06] hover:bg-white/[0.06] hover:border-white/[0.12] cursor-pointer"
+                      ? "bg-blue-500/[0.12] border-blue-400/30 shadow-[0_0_30px_-8px_rgba(59,130,246,0.15)] cursor-pointer"
+                      : "bg-white/[0.03] border-white/[0.06] hover:bg-white/[0.06] hover:border-white/[0.12] cursor-pointer"
                 }
               `}
             >
@@ -73,25 +102,31 @@ export default function SubjectSelector({ onSelect, selected, exam }: SubjectSel
                     !isAvailable
                       ? "text-slate-600"
                       : selected === subject.name
-                      ? "text-blue-400"
-                      : "text-slate-500 group-hover:text-slate-400"
+                        ? "text-blue-400"
+                        : "text-slate-500 group-hover:text-slate-400"
                   } transition-colors duration-200 flex justify-center`}
                 >
                   {subject.icon}
                 </div>
-                <h3 className={`text-sm font-medium ${!isAvailable ? "text-slate-500" : "text-white"}`}>
+                <h3
+                  className={`text-sm font-medium ${!isAvailable ? "text-slate-500" : "text-white"}`}
+                >
                   {subject.name}
                 </h3>
 
                 {!isAvailable && (
                   <div className="absolute top-0 right-0 -mt-2 -mr-2 bg-slate-800 border border-slate-700 rounded-full px-2 py-0.5 flex items-center gap-1 shadow-lg">
                     <Lock className="w-3 h-3 text-slate-400" />
-                    <span className="text-[10px] font-medium text-slate-300 whitespace-nowrap">Coming soon</span>
+                    <span className="text-[10px] font-medium text-slate-300 whitespace-nowrap">
+                      Coming soon
+                    </span>
                   </div>
                 )}
                 {isAvailable && (
                   <div className="absolute top-0 right-0 -mt-2 -mr-2 bg-blue-500/20 border border-blue-400/30 rounded-full px-2 py-0.5 flex items-center shadow-lg">
-                    <span className="text-[10px] font-medium text-blue-300 whitespace-nowrap">Ready</span>
+                    <span className="text-[10px] font-medium text-blue-300 whitespace-nowrap">
+                      Ready
+                    </span>
                   </div>
                 )}
               </div>

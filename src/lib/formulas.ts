@@ -45,6 +45,13 @@ import class12MathematicsData from "@/data/ncert/class12_mathematics.json";
 import biologyData from "@/data/ncert/biology.json";
 import class12BiologyData from "@/data/ncert/class12_biology.json";
 
+import jeePhysicsData from "@/data/ncert/jee_physics.json";
+import jeeClass12PhysicsData from "@/data/ncert/jee_class12_physics.json";
+import jeeChemistryData from "@/data/ncert/jee_chemistry.json";
+import jeeClass12ChemistryData from "@/data/ncert/jee_class12_chemistry.json";
+import jeeMathematicsData from "@/data/ncert/jee_mathematics.json";
+import jeeClass12MathematicsData from "@/data/ncert/jee_class12_mathematics.json";
+
 const mergedPhysicsData = {
   ...physicsData,
   chapters: [...physicsData.chapters, ...class12PhysicsData.chapters],
@@ -78,6 +85,28 @@ export const allSubjects: SubjectData[] = [
     audience: [
       ...(biologyData.audience || []),
       ...(class12BiologyData.audience || []),
+    ],
+  } as SubjectData,
+
+  {
+    subject: "JEE Physics",
+    audience: ["jee"],
+    chapters: [...jeePhysicsData.chapters, ...jeeClass12PhysicsData.chapters],
+  } as SubjectData,
+  {
+    subject: "JEE Chemistry",
+    audience: ["jee"],
+    chapters: [
+      ...jeeChemistryData.chapters,
+      ...jeeClass12ChemistryData.chapters,
+    ],
+  } as SubjectData,
+  {
+    subject: "JEE Mathematics",
+    audience: ["jee"],
+    chapters: [
+      ...jeeMathematicsData.chapters,
+      ...jeeClass12MathematicsData.chapters,
     ],
   } as SubjectData,
 ];
