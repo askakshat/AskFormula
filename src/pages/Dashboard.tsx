@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Book, FileText, Bookmark, ArrowLeft } from "lucide-react";
+import { Book, FileText, Bookmark, ArrowLeft, PlayCircle } from "lucide-react";
 import { Link } from "react-router";
 import { useLocalStorage, type SavedPDF } from "@/lib/local-storage";
 
@@ -22,6 +22,23 @@ export default function Dashboard() {
             </h1>
           </div>
         </header>
+
+        <div className="bg-[#11131a] border border-[#272a31] rounded-xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div>
+                <h2 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                    <span className="text-[#61dcb0]">⚡</span> Zero-Compute Practice Engine
+                </h2>
+                <p className="text-sm text-slate-400 max-w-xl leading-relaxed">
+                    Test your knowledge with algorithmic multiple-choice questions generated instantly from your selected chapters. Works offline, no APIs required.
+                </p>
+            </div>
+            <Link
+                to="/quiz"
+                className="shrink-0 bg-[#61dcb0] text-[#003122] h-11 px-8 rounded-lg font-bold hover:bg-[#72edc1] transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(97,220,176,0.15)]"
+            >
+                Start Practice <PlayCircle className="w-5 h-5" />
+            </Link>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card className="border-slate-800 bg-slate-900 shadow-none">
