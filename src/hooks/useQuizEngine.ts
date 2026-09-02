@@ -27,11 +27,34 @@ const getRandomItem = <T>(arr: T[]): T =>
   arr[Math.floor(Math.random() * arr.length)];
 const shuffle = <T>(arr: T[]): T[] => [...arr].sort(() => Math.random() - 0.5);
 
-const getAllFormulas = (): Formula[] => {
-  const formulas: Formula[] = [];
+type EnrichedFormula = Formula & {
+  _meta?: {
+    board: string;
+    classLevel: string;
+    subject: string;
+    chapterName: string;
+  };
+};
+
+const getAllFormulas = (): EnrichedFormula[] => {
+  const formulas: EnrichedFormula[] = [];
   allSubjects.forEach((subject) => {
+    // Determine a display board/exam name from the audience array
+    let board = "CBSE/State Board";
+    if (subject.audience.includes("jee")) board = "JEE";
+    else if (subject.audience.includes("neet")) board = "NEET";
+
     subject.chapters.forEach((chapter) => {
-      formulas.push(...chapter.formulas);
+      const enrichedFormulas = chapter.formulas.map(f => ({
+        ...f,
+        _meta: {
+          board,
+          classLevel: `Class ${chapter.class || 'Unknown'}`,
+          subject: subject.subject,
+          chapterName: chapter.name || chapter.chapterName || "Unknown"
+        }
+      }));
+      formulas.push(...enrichedFormulas);
     });
   });
   return formulas;
@@ -101,7 +124,7 @@ const evaluateSimpleFormula = (
 };
 
 const generateNumericalComputation = (
-  formula: Formula
+  formula: EnrichedFormula
 ): QuizQuestion | null => {
   const variables = extractVariables(formula);
   if (variables.length === 0 || !formula.latex.includes("=")) return null;
@@ -155,13 +178,13 @@ const generateNumericalComputation = (
     options: shuffle(options),
     correctOptionId: "correct",
     explanation: `Using the formula $${formula.latex}$, substitute the given values to calculate the result.`,
-    category: formula.chapter || formula.topic || "General",
+    category: formula._meta ? `${formula._meta.board} • ${formula._meta.classLevel} • ${formula._meta.subject} • ${formula._meta.chapterName}` : (formula.chapter || formula.topic || "General"),
   };
 };
 
 const generateFormulaIdentification = (
-  formula: Formula,
-  allFormulas: Formula[]
+  formula: EnrichedFormula,
+  allFormulas: EnrichedFormula[]
 ): QuizQuestion => {
   const targetVar = formula.name;
   const text = `Which formula correctly identifies ${targetVar}?`;
@@ -188,11 +211,11 @@ const generateFormulaIdentification = (
     options: shuffle(options),
     correctOptionId: "correct",
     explanation: `The correct formula for ${targetVar} is $${formula.latex}$.`,
-    category: formula.chapter || formula.topic || "General",
+    category: formula._meta ? `${formula._meta.board} • ${formula._meta.classLevel} • ${formula._meta.subject} • ${formula._meta.chapterName}` : (formula.chapter || formula.topic || "General"),
   };
 };
 
-const generateProportionality = (formula: Formula): QuizQuestion | null => {
+const generateProportionality = (formula: EnrichedFormula): QuizQuestion | null => {
   const variables = extractVariables(formula);
   if (variables.length === 0) return null;
 
@@ -245,7 +268,7 @@ const generateProportionality = (formula: Formula): QuizQuestion | null => {
     options: shuffle(options),
     correctOptionId: "correct",
     explanation: `Looking at the formula $${formula.latex}$, observe the relationship between ${targetVar} and ${inputVar.symbol}.`,
-    category: formula.chapter || formula.topic || "General",
+    category: formula._meta ? `${formula._meta.board} • ${formula._meta.classLevel} • ${formula._meta.subject} • ${formula._meta.chapterName}` : (formula.chapter || formula.topic || "General"),
   };
 };
 
@@ -254,11 +277,23 @@ export function useQuizEngine(selectedChapterIds: string[] = []) {
     const formulas = getAllFormulas();
     if (selectedChapterIds.length === 0) return formulas;
 
-    const filtered: Formula[] = [];
+    const filtered: EnrichedFormula[] = [];
     allSubjects.forEach((subject) => {
       subject.chapters.forEach((chapter) => {
         if (selectedChapterIds.includes(chapter.id)) {
-          filtered.push(...chapter.formulas);
+          let board = "CBSE/State Board";
+          if (subject.audience.includes("jee")) board = "JEE";
+          else if (subject.audience.includes("neet")) board = "NEET";
+
+          filtered.push(...chapter.formulas.map(f => ({
+            ...f,
+            _meta: {
+              board,
+              classLevel: `Class ${chapter.class || 'Unknown'}`,
+              subject: subject.subject,
+              chapterName: chapter.name || chapter.chapterName || "Unknown"
+            }
+          })));
         }
       });
     });

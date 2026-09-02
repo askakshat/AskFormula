@@ -67,7 +67,12 @@ const ChapterSelector = ({ chapters, selectedIds, onSelect }: { chapters: {id: s
          <div className="flex justify-between items-end">
              <label className="text-sm font-semibold text-slate-300">4. Select Chapters to Practice</label>
              <button
-                 onClick={() => onSelect(chapters.map((c: {id: string, name?: string, chapterName?: string, formulas: unknown[]}) => c.id))}
+                 onClick={() => {
+                     const allIds = chapters.map((c: {id: string}) => c.id);
+                     // Add new ones without removing existing ones from other subjects
+                     const newSelection = Array.from(new Set([...selectedIds, ...allIds]));
+                     onSelect(newSelection);
+                 }}
                  className="text-xs text-[#61dcb0] hover:underline"
              >
                  Select All

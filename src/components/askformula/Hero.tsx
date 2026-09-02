@@ -21,7 +21,7 @@ export default function Hero() {
         <div className="relative z-10 flex flex-col items-center gap-6 mt-16 max-w-3xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#272a31] border border-[#32353c] rounded text-[13px] font-mono text-[#e1e2ec] mb-4">
             <Sparkles className="w-4 h-4" />
-            <span>v3.0 Academic Edition Released</span>
+            <span>v4.0 Quiz Engine Released</span>
           </div>
 
           <h1 className="text-4xl leading-[48px] md:text-[56px] md:leading-[64px] font-bold tracking-tight text-[#e1e2ec]">
@@ -50,6 +50,16 @@ export default function Hero() {
             >
               Build Your Sheet
               <ArrowRight className="w-4 h-4" />
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => {
+                window.location.href = "/quiz";
+              }}
+              className="bg-[#61dcb0] text-[#003122] h-10 px-6 rounded border border-[#61dcb0] hover:bg-[#72edc1] transition-all text-[12px] font-bold tracking-wide flex items-center justify-center gap-2"
+            >
+              Practice Quiz
+              <PlayCircle className="w-4 h-4" />
             </Button>
             <Button
               variant="outline"
