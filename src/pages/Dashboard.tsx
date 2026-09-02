@@ -4,10 +4,7 @@ import { Link } from "react-router";
 import { useLocalStorage, type SavedPDF } from "@/lib/local-storage";
 
 export default function Dashboard() {
-  const [selectedChapters] = useLocalStorage<string[]>(
-    "askformula-selected-chapters",
-    [],
-  );
+  const [selectedChapters] = useLocalStorage<string[]>("askformula-selected-chapters", []);
   const [savedPDFs] = useLocalStorage<SavedPDF[]>("askformula-saved-pdfs", []);
   const [favorites] = useLocalStorage<string[]>("askformula-favorites", []);
 
@@ -16,19 +13,9 @@ export default function Dashboard() {
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8">
         <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <Link
-              to="/"
-              className="inline-flex items-center text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors mb-2"
-            >
+            <Link to="/" className="inline-flex items-center text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors mb-2">
               <ArrowLeft className="w-4 h-4 mr-1" />
               Back to Home
-            </Link>
-            <Link
-              to="/quiz"
-              className="ml-4 inline-flex items-center text-sm font-medium text-[#61dcb0] hover:text-[#15a47c] transition-colors mb-2 bg-[#61dcb0]/10 px-3 py-1 rounded-md border border-[#61dcb0]/30"
-            >
-              Go to Practice Mode
-              <ArrowLeft className="w-4 h-4 ml-1 rotate-180" />
             </Link>
             <h1 className="mt-1 text-3xl font-bold tracking-tight text-white">
               Your Dashboard
@@ -48,21 +35,12 @@ export default function Dashboard() {
               {savedPDFs.length > 0 ? (
                 <ul className="space-y-3">
                   {savedPDFs.map((pdf) => (
-                    <li
-                      key={pdf.id}
-                      className="flex justify-between items-center border-b border-slate-800 pb-2 last:border-0 last:pb-0"
-                    >
+                    <li key={pdf.id} className="flex justify-between items-center border-b border-slate-800 pb-2 last:border-0 last:pb-0">
                       <div>
-                        <p className="font-medium text-slate-300">
-                          {pdf.subject}
-                        </p>
-                        <p className="text-xs text-slate-500">
-                          {new Date(pdf.date).toLocaleDateString()}
-                        </p>
+                        <p className="font-medium text-slate-300">{pdf.subject}</p>
+                        <p className="text-xs text-slate-500">{new Date(pdf.date).toLocaleDateString()}</p>
                       </div>
-                      <span className="text-xs bg-slate-800 px-2 py-1 rounded text-slate-400 capitalize">
-                        {pdf.layout}
-                      </span>
+                      <span className="text-xs bg-slate-800 px-2 py-1 rounded text-slate-400 capitalize">{pdf.layout}</span>
                     </li>
                   ))}
                 </ul>

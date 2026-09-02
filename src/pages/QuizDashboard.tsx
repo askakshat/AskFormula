@@ -1,230 +1,287 @@
-import React from 'react';
-import { useNavigate, Link } from 'react-router';
+import React, { useMemo, useState } from 'react';
+import { useNavigate } from 'react-router';
+import { motion, AnimatePresence } from 'framer-motion';
+import { LayoutDashboard, Target, PlayCircle, X, BookOpen, GraduationCap, TriangleAlert, TrendingUp } from 'lucide-react';
+import { getChaptersBySubject, allSubjects } from '@/lib/formulas';
+import { useLocalStorage } from '@/lib/local-storage';
 
+// --- Sub-components for selections ---
+const ExamSelector = ({ onSelect, selected }: { onSelect: (v: string) => void, selected: string | null }) => (
+  <div className="flex flex-col gap-3">
+     <label className="text-sm font-semibold text-slate-300">1. Select Target Exam</label>
+     <div className="flex gap-3">
+         {['school', 'jee', 'neet'].map(exam => (
+             <button
+                 key={exam}
+                 onClick={() => onSelect(exam)}
+                 className={`flex-1 py-3 px-4 rounded-lg border transition-all ${selected === exam ? 'bg-[#324565]/30 border-[#61dcb0] text-white shadow-[0_0_15px_rgba(97,220,176,0.15)]' : 'bg-[#15171e] border-[#272a31] text-slate-400 hover:border-slate-500'}`}
+             >
+                 <span className="capitalize font-medium">{exam === 'school' ? 'CBSE/State Board' : exam.toUpperCase()}</span>
+             </button>
+         ))}
+     </div>
+  </div>
+);
+
+const ClassSelector = ({ onSelect, selected }: { onSelect: (v: string) => void, selected: string | null }) => (
+  <div className="flex flex-col gap-3">
+     <label className="text-sm font-semibold text-slate-300">2. Select Class Level</label>
+     <div className="flex gap-3">
+         {['11', '12'].map(cls => (
+             <button
+                 key={cls}
+                 onClick={() => onSelect(cls)}
+                 className={`flex-1 py-3 px-4 rounded-lg border transition-all ${selected === cls ? 'bg-[#324565]/30 border-[#61dcb0] text-white shadow-[0_0_15px_rgba(97,220,176,0.15)]' : 'bg-[#15171e] border-[#272a31] text-slate-400 hover:border-slate-500'}`}
+             >
+                 <span className="font-medium">Class {cls}</span>
+             </button>
+         ))}
+     </div>
+  </div>
+);
+
+const SubjectSelector = ({ onSelect, selected, exam }: { onSelect: (v: string) => void, selected: string | null, exam: string }) => {
+  const subjects = allSubjects.filter(s => s.audience.includes(exam)).map(s => s.subject);
+  return (
+      <div className="flex flex-col gap-3">
+         <label className="text-sm font-semibold text-slate-300">3. Select Subject</label>
+         <div className="flex gap-3 overflow-x-auto pb-2 custom-scrollbar">
+             {subjects.map(sub => (
+                 <button
+                     key={sub}
+                     onClick={() => onSelect(sub)}
+                     className={`flex-none min-w-[120px] py-3 px-4 rounded-lg border transition-all ${selected === sub ? 'bg-[#324565]/30 border-[#61dcb0] text-white shadow-[0_0_15px_rgba(97,220,176,0.15)]' : 'bg-[#15171e] border-[#272a31] text-slate-400 hover:border-slate-500'}`}
+                 >
+                     <span className="font-medium truncate">{sub}</span>
+                 </button>
+             ))}
+             {subjects.length === 0 && <span className="text-slate-500 text-sm">Please select an exam/class first.</span>}
+         </div>
+      </div>
+  );
+};
+
+const ChapterSelector = ({ chapters, selectedIds, onSelect }: { chapters: {id: string, name?: string, chapterName?: string, formulas: unknown[]}[], selectedIds: string[], onSelect: (ids: string[]) => void }) => {
+  return (
+      <div className="flex flex-col gap-3">
+         <div className="flex justify-between items-end">
+             <label className="text-sm font-semibold text-slate-300">4. Select Chapters to Practice</label>
+             <button
+                 onClick={() => onSelect(chapters.map((c: {id: string, name?: string, chapterName?: string, formulas: unknown[]}) => c.id))}
+                 className="text-xs text-[#61dcb0] hover:underline"
+             >
+                 Select All
+             </button>
+         </div>
+         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
+             {chapters.map((ch: {id: string, name?: string, chapterName?: string, formulas: unknown[]}) => {
+                 const isSelected = selectedIds.includes(ch.id);
+                 return (
+                     <button
+                         key={ch.id}
+                         onClick={() => {
+                             if (isSelected) onSelect(selectedIds.filter((id: string) => id !== ch.id));
+                             else onSelect([...selectedIds, ch.id]);
+                         }}
+                         className={`text-left p-3 rounded-lg border transition-all flex items-start gap-3 ${isSelected ? 'bg-[#1c1e26] border-[#61dcb0] text-white' : 'bg-[#15171e] border-[#272a31] text-slate-400 hover:bg-[#1c1e26] hover:border-slate-500'}`}
+                     >
+                         <div className={`mt-0.5 shrink-0 w-4 h-4 rounded border flex items-center justify-center ${isSelected ? 'bg-[#61dcb0] border-[#61dcb0]' : 'border-slate-500'}`}>
+                             {isSelected && <X className="w-3 h-3 text-[#0a0a0a]" />}
+                         </div>
+                         <div className="flex flex-col">
+                             <span className="text-sm font-medium line-clamp-2 leading-tight">{ch.name || ch.chapterName}</span>
+                             <span className="text-[10px] text-slate-500 mt-1">{ch.formulas.length} formulas</span>
+                         </div>
+                     </button>
+                 );
+             })}
+         </div>
+      </div>
+  );
+};
+
+// --- Main Dashboard ---
 export default function QuizDashboard() {
   const navigate = useNavigate();
+  const [selectedChapters, setSelectedChapters] = useLocalStorage<string[]>("askformula-quiz-chapters", []);
 
-  // Actually we shouldn't fully scrap ChapterSelector, we should embed it within the "Start Practice" flow
-  // as per the user's instructions: "Let user select chapter when clicked start practice. Use filters like JEE, CBSE, NEET or Class 11 / 12."
+  // Filter State
+  const [exam, setExam] = useState<"school" | "jee" | "neet">("school");
+  const [cls, setCls] = useState<"11" | "12">("11");
+  const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
 
-  // But wait, the stitch UI for QuizDashboard has "Available Subjects" as cards.
-  // I will make the cards clickable. Clicking a card opens a modal/drawer to select chapters, then starts the quiz.
+  const availableChapters = useMemo(() => {
+     if (!selectedSubject) return [];
+     let chapters = getChaptersBySubject(selectedSubject);
+     if (exam === "school" || exam === "neet") {
+         chapters = chapters.filter(c => c.class === cls);
+     }
+     return chapters;
+  }, [selectedSubject, exam, cls]);
+
+  const selectedChaptersInfo = useMemo(() => {
+     const infos: {id: string, name: string, subject: string}[] = [];
+     allSubjects.forEach(subject => {
+         subject.chapters.forEach(chapter => {
+             if (selectedChapters.includes(chapter.id)) {
+                 if (!infos.find(i => i.id === chapter.id)) {
+                    infos.push({ id: chapter.id, name: chapter.name || chapter.chapterName || "Unknown", subject: subject.subject });
+                 }
+             }
+         });
+     });
+     return infos;
+  }, [selectedChapters]);
+
+  const removeChapter = (id: string) => {
+      setSelectedChapters(selectedChapters.filter(cid => cid !== id));
+  };
 
   return (
-    <div className="bg-[#11131a] text-[#e3e2e6] font-sans min-h-screen flex flex-col md:flex-row antialiased selection:bg-[#324565] selection:text-[#d8e2ff] overflow-x-hidden">
-      {/* Desktop Side Navigation */}
-      <nav className="hidden md:flex flex-col gap-2 p-4 h-screen w-64 fixed left-0 top-0 border-r border-[#272a31] bg-[#15171e] z-40">
-        <div className="mb-8 px-2 mt-4">
-          <Link to="/">
-              <h1 className="text-xl font-bold text-[#d8e2ff] tracking-tight">AskFormula</h1>
-          </Link>
-          <p className="text-xs text-slate-400 mt-1">Practice Environment</p>
-        </div>
-        <div className="flex-1 flex flex-col gap-2">
-          <Link className="flex items-center gap-3 px-4 py-2 text-slate-400 hover:bg-[#1c1e26] rounded-lg hover:bg-[#272a31] transition-all duration-150" to="/dashboard">
-            <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>dashboard</span>
-            <span>Dashboard</span>
-          </Link>
-          <Link className="flex items-center gap-3 px-4 py-2 bg-[#d8e2ff]/10 text-[#d8e2ff] font-bold rounded-lg transition-all scale-95 duration-150" to="/quiz">
-            <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>quiz</span>
-            <span>Practice</span>
-          </Link>
-          <Link className="flex items-center gap-3 px-4 py-2 text-slate-400 hover:bg-[#1c1e26] rounded-lg hover:bg-[#272a31] transition-all duration-150" to="/build">
-            <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>menu_book</span>
-            <span>Library</span>
-          </Link>
-        </div>
-        <div className="mt-auto pt-4 border-t border-[#272a31]">
-          <button
-             onClick={() => navigate('/quiz/setup')}
-             className="w-full flex justify-center items-center gap-2 bg-[#d8e2ff] text-[#003122] py-2 px-4 rounded-lg text-sm font-semibold hover:bg-white transition-colors"
-          >
-            <span className="material-symbols-outlined text-[18px]">play_arrow</span>
-            Start Quiz
-          </button>
-        </div>
-      </nav>
-
-      {/* Mobile Top Navigation */}
-      <header className="md:hidden w-full top-0 sticky flex justify-between items-center h-14 px-4 bg-[#11131a] z-40 border-b border-[#272a31]">
-        <Link to="/">
-            <h1 className="text-lg font-bold text-[#d8e2ff] tracking-tight">AskFormula</h1>
-        </Link>
+    <div className="min-h-screen bg-[#0a0a0a] text-slate-200 font-sans pb-24 selection:bg-[#324565] selection:text-[#d8e2ff]">
+      <header className="w-full border-b border-[#272a31] bg-[#0a0a0a]/80 backdrop-blur-md sticky top-0 z-40">
+         <div className="max-w-[1200px] mx-auto h-16 px-6 md:px-8 flex items-center justify-between">
+             <div className="flex items-center gap-4">
+                 <h1 className="text-xl font-bold text-[#d8e2ff] tracking-tight cursor-pointer" onClick={() => navigate('/')}>AskFormula</h1>
+                 <span className="hidden md:inline-flex bg-[#324565]/30 text-[#d8e2ff] text-xs px-2 py-0.5 rounded border border-[#324565]/50">Practice Setup</span>
+             </div>
+             <button
+                onClick={() => navigate('/dashboard')}
+                className="text-sm text-slate-400 hover:text-white transition-colors flex items-center gap-2"
+             >
+                 <LayoutDashboard className="w-4 h-4" />
+                 <span className="hidden sm:inline">My Dashboard</span>
+             </button>
+         </div>
       </header>
 
-      {/* Main Canvas */}
-      <main className="flex-1 md:ml-64 w-full max-w-[1200px] mx-auto px-4 md:px-8 py-8 md:py-12 pb-24 md:pb-12 flex flex-col gap-8">
-
-        {/* Header & Mode Selection */}
-        <section className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
-          <div>
-            <h2 className="text-2xl md:text-[28px] font-semibold text-white mb-1 tracking-tight">Quiz Dashboard</h2>
-            <p className="text-slate-400 text-sm">Select a subject to configure your session.</p>
-          </div>
-          <div className="flex gap-1 bg-[#15171e] p-1 rounded-lg border border-[#272a31]">
-            <button className="flex items-center gap-1 px-4 py-2 text-slate-400 hover:bg-[#1c1e26] hover:text-white rounded text-sm transition-colors">
-              <span className="material-symbols-outlined text-[16px]">psychology</span>
-              Recall Mode
-            </button>
-            <button className="flex items-center gap-1 px-4 py-2 bg-[#324565]/30 text-[#d8e2ff] rounded text-sm border border-[#324565]/50 transition-colors">
-              <span className="material-symbols-outlined text-[16px]">calculate</span>
-              Practice Mode
-            </button>
-          </div>
-        </section>
-
-        {/* Progress Overview Bento Grid */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-[#11131a] border border-[#272a31] rounded-xl p-5 flex flex-col justify-between">
+      <main className="w-full max-w-[1200px] mx-auto p-6 md:p-8 mt-4 flex flex-col md:flex-row gap-8 items-start">
+        <div className="flex-1 w-full flex flex-col gap-6">
             <div>
-              <div className="flex items-center gap-2 mb-3 text-slate-400">
-                <span className="material-symbols-outlined text-[18px]">monitoring</span>
-                <h3 className="text-xs uppercase tracking-wider font-medium">Overall Mastery</h3>
-              </div>
-              <div className="text-4xl font-semibold text-[#d8e2ff] tracking-tight">68%</div>
-            </div>
-            <div className="mt-8">
-              <div className="flex justify-between text-xs text-slate-400 mb-2">
-                <span>Syllabus Coverage</span>
-                <span>42/120 Topics</span>
-              </div>
-              <div className="h-1 bg-[#1c1e26] rounded-full overflow-hidden flex">
-                <div className="h-full bg-[#d8e2ff]" style={{ width: '35%' }}></div>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-[#11131a] border border-[#272a31] rounded-xl p-5 md:col-span-2 relative overflow-hidden flex flex-col md:flex-row items-center md:items-stretch gap-4">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#15171e] to-transparent opacity-50 z-0 pointer-events-none"></div>
-            <div className="relative z-10 flex-1">
-              <div className="flex items-center gap-2 mb-3 text-red-400">
-                <span className="material-symbols-outlined text-[18px]">warning</span>
-                <h3 className="text-xs uppercase tracking-wider font-medium">Critical Focus Required</h3>
-              </div>
-              <h4 className="text-xl font-semibold text-white mb-1">Thermodynamics</h4>
-              <p className="text-slate-400 text-sm line-clamp-2">Consistent errors in identifying relationships in Isothermal vs Adiabatic processes. Recommend recall session focusing on First Law applications.</p>
-              <button
-                 onClick={() => navigate('/quiz/setup')}
-                 className="mt-4 flex items-center gap-2 px-4 py-2 bg-[#1c1e26] hover:bg-[#272a31] text-white rounded border border-[#272a31] text-sm transition-colors"
-              >
-                Start Targeted Quiz
-                <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
-              </button>
-            </div>
-            <div className="relative z-10 w-full md:w-1/3 flex flex-col justify-center gap-2">
-              <div className="flex justify-between text-xs">
-                <span className="text-slate-400">Recall Accuracy</span>
-                <span className="text-red-400">32%</span>
-              </div>
-              <div className="h-1 bg-[#1c1e26] rounded-full overflow-hidden flex mb-3">
-                <div className="h-full bg-red-400" style={{ width: '32%' }}></div>
-              </div>
-              <div className="flex justify-between text-xs">
-                <span className="text-slate-400">Practice Success</span>
-                <span className="text-[#61dcb0]">45%</span>
-              </div>
-              <div className="h-1 bg-[#1c1e26] rounded-full overflow-hidden flex">
-                <div className="h-full bg-[#61dcb0]" style={{ width: '45%' }}></div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Subject Selection */}
-        <section className="mt-4">
-          <div className="flex items-center justify-between mb-4 border-b border-[#272a31] pb-2">
-            <h3 className="text-xs uppercase tracking-wider text-slate-400 font-medium">Available Subjects</h3>
-            <span className="text-xs text-slate-400 flex items-center gap-1 cursor-pointer hover:text-white transition-colors">
-              <span className="material-symbols-outlined text-[14px]">filter_list</span> Sort: Mastery (Low-High)
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-
-            {/* Physics Card */}
-            <div
-              onClick={() => navigate('/quiz/setup')}
-              className="bg-[#11131a] border border-[#272a31] rounded-xl p-5 hover:border-[#324565] transition-colors cursor-pointer group flex flex-col"
-            >
-              <div className="flex justify-between items-start mb-6">
-                <div className="p-2 bg-[#324565]/30 text-[#d8e2ff] rounded border border-[#324565]/50">
-                  <span className="material-symbols-outlined">rocket_launch</span>
-                </div>
-                <div className="text-right">
-                  <div className="text-xl font-semibold text-[#d8e2ff] group-hover:text-white transition-colors">72%</div>
-                  <div className="text-xs text-slate-400">Mastery</div>
-                </div>
-              </div>
-              <h4 className="text-base text-white mb-1 font-semibold">Physics</h4>
-              <p className="text-xs text-slate-400 mb-4 flex-1">Mechanics, Thermodynamics, Electromagnetism.</p>
-              <div>
-                <div className="flex justify-between text-xs text-slate-400 mb-1">
-                  <span>Progress</span>
-                  <span>28/40 Chapters</span>
-                </div>
-                <div className="h-1 bg-[#1c1e26] rounded-full overflow-hidden flex">
-                  <div className="h-full bg-[#d8e2ff]" style={{ width: '70%' }}></div>
-                </div>
-              </div>
+                <h2 className="text-3xl font-bold text-white mb-2 tracking-tight">Configure Session</h2>
+                <p className="text-slate-400 text-sm max-w-lg">
+                    Build your custom quiz by selecting multiple chapters across different subjects, classes, or exams. Add them to your practice pool to begin.
+                </p>
             </div>
 
-            {/* Chemistry Card */}
-            <div
-              onClick={() => navigate('/quiz/setup')}
-              className="bg-[#11131a] border border-[#272a31] rounded-xl p-5 hover:border-[#61dcb0]/30 transition-colors cursor-pointer group flex flex-col"
-            >
-              <div className="flex justify-between items-start mb-6">
-                <div className="p-2 bg-[#61dcb0]/10 text-[#61dcb0] rounded border border-[#61dcb0]/30">
-                  <span className="material-symbols-outlined">science</span>
-                </div>
-                <div className="text-right">
-                  <div className="text-xl font-semibold text-[#61dcb0] group-hover:text-[#15a47c] transition-colors">54%</div>
-                  <div className="text-xs text-slate-400">Mastery</div>
-                </div>
-              </div>
-              <h4 className="text-base text-white mb-1 font-semibold">Chemistry</h4>
-              <p className="text-xs text-slate-400 mb-4 flex-1">Physical, Organic, Inorganic properties.</p>
-              <div>
-                <div className="flex justify-between text-xs text-slate-400 mb-1">
-                  <span>Progress</span>
-                  <span>14/30 Chapters</span>
-                </div>
-                <div className="h-1 bg-[#1c1e26] rounded-full overflow-hidden flex">
-                  <div className="h-full bg-[#61dcb0]" style={{ width: '54%' }}></div>
-                </div>
-              </div>
+            <div className="flex flex-col gap-6 p-6 rounded-xl border border-[#272a31] bg-[#11131a] shadow-xl">
+                <ExamSelector onSelect={(v: string) => { setExam(v as "school" | "jee" | "neet"); setSelectedSubject(null); }} selected={exam} />
+                {(exam === "school" || exam === "neet") && (
+                    <ClassSelector onSelect={(v: string) => { setCls(v as "11" | "12"); setSelectedSubject(null); }} selected={cls} />
+                )}
+                <SubjectSelector
+                    onSelect={setSelectedSubject}
+                    selected={selectedSubject}
+                    exam={exam}
+                />
+
+                <AnimatePresence>
+                    {selectedSubject && availableChapters.length > 0 && (
+                        <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="pt-6 border-t border-[#272a31]"
+                        >
+                            <ChapterSelector
+                                chapters={availableChapters}
+                                selectedIds={selectedChapters}
+                                onSelect={setSelectedChapters}
+                            />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
 
-             {/* Math Card */}
-             <div
-              onClick={() => navigate('/quiz/setup')}
-              className="bg-[#11131a] border border-[#272a31] rounded-xl p-5 hover:border-[#facc15]/30 transition-colors cursor-pointer group flex flex-col"
-            >
-              <div className="flex justify-between items-start mb-6">
-                <div className="p-2 bg-[#facc15]/10 text-[#facc15] rounded border border-[#facc15]/30">
-                  <span className="material-symbols-outlined">calculate</span>
+             <div className="bg-[#11131a] border border-[#272a31] rounded-xl p-5 md:col-span-2 relative overflow-hidden flex flex-col gap-4">
+                <div className="absolute inset-0 bg-gradient-to-r from-[#15171e] to-transparent opacity-50 z-0 pointer-events-none"></div>
+                <div className="relative z-10 flex-1">
+                  <div className="flex items-center gap-2 mb-3 text-amber-400">
+                    <TrendingUp className="w-5 h-5" />
+                    <h3 className="text-xs uppercase tracking-wider font-medium">Practice Insights</h3>
+                  </div>
+                  {selectedChapters.length > 0 ? (
+                      <>
+                        <h4 className="text-xl font-semibold text-white mb-1">Ready to start</h4>
+                        <p className="text-slate-400 text-sm">
+                            You have selected {selectedChapters.length} chapter{selectedChapters.length === 1 ? '' : 's'}. Our zero-compute engine will generate identification, numerical, and proportionality questions directly from your selected syllabus.
+                        </p>
+                      </>
+                  ) : (
+                      <>
+                        <h4 className="text-xl font-semibold text-white mb-1">Select chapters above</h4>
+                        <p className="text-slate-400 text-sm">
+                           To view insights, build your formula sheets, or practice problems, please add chapters to your selection pool.
+                        </p>
+                      </>
+                  )}
                 </div>
-                <div className="text-right">
-                  <div className="text-xl font-semibold text-[#facc15] group-hover:text-[#ca8a04] transition-colors">81%</div>
-                  <div className="text-xs text-slate-400">Mastery</div>
+            </div>
+        </div>
+
+        <div className="w-full md:w-80 shrink-0 flex flex-col gap-4 sticky top-24">
+            <div className="bg-[#15171e] rounded-xl border border-[#272a31] overflow-hidden flex flex-col shadow-xl">
+                <div className="p-4 border-b border-[#272a31] bg-[#1c1e26] flex items-center justify-between">
+                    <h3 className="font-semibold text-white flex items-center gap-2">
+                        <Target className="w-4 h-4 text-[#61dcb0]" /> Selected Pool
+                    </h3>
+                    <span className="bg-[#324565]/30 text-[#d8e2ff] text-xs px-2 py-0.5 rounded-full font-mono">{selectedChapters.length}</span>
                 </div>
-              </div>
-              <h4 className="text-base text-white mb-1 font-semibold">Mathematics</h4>
-              <p className="text-xs text-slate-400 mb-4 flex-1">Calculus, Algebra, Coordinate Geometry.</p>
-              <div>
-                <div className="flex justify-between text-xs text-slate-400 mb-1">
-                  <span>Progress</span>
-                  <span>32/38 Chapters</span>
+
+                <div className="flex-1 max-h-[400px] overflow-y-auto p-4 custom-scrollbar">
+                    {selectedChaptersInfo.length === 0 ? (
+                        <div className="flex flex-col items-center justify-center py-8 text-center text-slate-500 gap-3">
+                            <BookOpen className="w-8 h-8 opacity-20" />
+                            <p className="text-sm">No chapters selected yet.</p>
+                        </div>
+                    ) : (
+                        <div className="flex flex-col gap-2">
+                            {selectedChaptersInfo.map(info => (
+                                <div key={info.id} className="bg-[#11131a] border border-[#272a31] rounded-lg p-3 flex justify-between items-start group">
+                                    <div className="flex flex-col">
+                                        <span className="text-[10px] font-semibold text-[#61dcb0] mb-0.5 uppercase tracking-wider">{info.subject}</span>
+                                        <span className="text-sm text-slate-300 leading-snug pr-4">{info.name}</span>
+                                    </div>
+                                    <button
+                                        onClick={() => removeChapter(info.id)}
+                                        className="text-slate-600 hover:text-red-400 transition-colors p-1 -mr-1 -mt-1 rounded hover:bg-red-400/10"
+                                    >
+                                        <X className="w-4 h-4" />
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
-                <div className="h-1 bg-[#1c1e26] rounded-full overflow-hidden flex">
-                  <div className="h-full bg-[#facc15]" style={{ width: '81%' }}></div>
+
+                <div className="p-4 border-t border-[#272a31] bg-[#11131a]">
+                    <button
+                        onClick={() => navigate('/quiz/active')}
+                        disabled={selectedChapters.length === 0}
+                        className="w-full bg-[#d8e2ff] text-[#003122] font-semibold py-3 px-4 rounded-lg hover:bg-white transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(216,226,255,0.1)]"
+                    >
+                        <PlayCircle className="w-5 h-5" />
+                        Start Practice
+                    </button>
+                    {selectedChapters.length === 0 && (
+                        <p className="text-center text-xs text-slate-500 mt-3">Select at least one chapter to begin.</p>
+                    )}
                 </div>
-              </div>
             </div>
 
-          </div>
-        </section>
+            <div className="bg-[#11131a] border border-[#272a31] rounded-xl p-4 text-sm text-slate-400 flex flex-col gap-2 shadow-lg">
+                <p className="flex items-start gap-2">
+                    <GraduationCap className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
+                    <span className="leading-relaxed">The engine dynamically generates identification, computation, and proportionality questions directly from your selected syllabus.</span>
+                </p>
+                <div className="h-px bg-[#272a31] w-full my-2"></div>
+                <p className="flex items-start gap-2">
+                    <TriangleAlert className="w-4 h-4 text-amber-500/70 shrink-0 mt-0.5" />
+                    <span className="leading-relaxed">All generated data relies strictly on the official static formulas configured in your sheets. No LLM APIs are used during the quiz.</span>
+                </p>
+            </div>
 
+        </div>
       </main>
     </div>
   );

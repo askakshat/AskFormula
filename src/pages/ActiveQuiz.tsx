@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { useQuizEngine, QuizQuestion } from '@/hooks/useQuizEngine';
 import { useLocalStorage } from '@/lib/local-storage';
 import QuizCard from '@/components/askformula/QuizCard';
+import { X, Timer } from 'lucide-react';
 
 export default function ActiveQuiz() {
   const navigate = useNavigate();
@@ -16,10 +17,24 @@ export default function ActiveQuiz() {
   const [score, setScore] = useState(0);
   const [userAnswers, setUserAnswers] = useState<Record<string, string | null>>({});
 
+  const [timeElapsed, setTimeElapsed] = useState(0);
+  const [isTimerRunning, setIsTimerRunning] = useState(false);
+
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setQuestions(generateQuiz(10));
+    setIsTimerRunning(true);
   }, [generateQuiz]);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (isTimerRunning) {
+      interval = setInterval(() => {
+        setTimeElapsed((prev) => prev + 1);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [isTimerRunning]);
 
   const currentQuestion = questions[currentIndex];
 
@@ -42,12 +57,14 @@ export default function ActiveQuiz() {
       setSelectedOptionId(null);
       setShowFeedback(false);
     } else {
+      setIsTimerRunning(false);
       navigate('/quiz/results', {
           state: {
               score,
               total: questions.length,
               questions,
-              userAnswers
+              userAnswers,
+              timeElapsed
           },
           replace: true
       });
@@ -62,31 +79,31 @@ export default function ActiveQuiz() {
       return <div className="min-h-screen bg-[#11131a] flex items-center justify-center text-[#e3e2e6]">Initializing Engine...</div>;
   }
 
-  // Format timer (dummy static for now as per stitch UI)
-  const timerDisplay = "12:45";
+  const formatTime = (seconds: number) => {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  };
 
   return (
     <div className="min-h-screen bg-[#11131a] text-[#e3e2e6] font-sans flex flex-col antialiased selection:bg-[#324565] selection:text-[#d8e2ff]">
-
       <main className="flex-1 flex flex-col items-center justify-center p-4 md:p-8 w-full max-w-[1200px] mx-auto mt-8">
 
-        {/* Header Actions */}
         <div className="w-full max-w-2xl flex justify-between items-center mb-8">
           <button
             onClick={exitQuiz}
             className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm px-3 py-1.5 rounded border border-[#272a31] hover:bg-[#1c1e26]"
           >
-            <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>close</span>
+            <X className="w-4 h-4" />
             Exit Practice
           </button>
 
           <div className="flex items-center gap-2 text-[#d8e2ff] font-mono text-sm bg-[#1c1e26] px-4 py-2 rounded border border-[#272a31]">
-            <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>timer</span>
-            <span>{timerDisplay}</span>
+            <Timer className="w-4 h-4" />
+            <span>{formatTime(timeElapsed)}</span>
           </div>
         </div>
 
-        {/* Question Container / Card */}
         <QuizCard
            question={currentQuestion}
            currentIndex={currentIndex}
@@ -96,7 +113,6 @@ export default function ActiveQuiz() {
            showFeedback={showFeedback}
            onNext={handleNext}
          />
-
       </main>
     </div>
   );

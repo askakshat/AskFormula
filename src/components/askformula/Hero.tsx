@@ -36,8 +36,8 @@ export default function Hero() {
 
           <p className="text-base text-[#e1e2ec] max-w-xl">
             A high-density, distraction-free environment for scientific study.
-            Build custom PDF reference sheets tailored to your CBSE and JEE
-            Class 11 and 12 curriculum in seconds.
+            Build custom PDF reference sheets tailored to your CBSE and JEE Class 11 and
+            12 curriculum in seconds.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mt-2">
@@ -50,16 +50,6 @@ export default function Hero() {
             >
               Build Your Sheet
               <ArrowRight className="w-4 h-4" />
-            </Button>
-            <Button
-              variant="outline"
-              onClick={() => {
-                window.location.href = "/quiz";
-              }}
-              className="bg-[#15a47c]/10 text-[#61dcb0] h-10 px-6 rounded border border-[#15a47c]/50 hover:border-[#61dcb0] hover:bg-[#15a47c]/20 transition-all text-[12px] font-medium tracking-wide flex items-center justify-center gap-2"
-            >
-              Practice Mode
-              <Sparkles className="w-4 h-4" />
             </Button>
             <Button
               variant="outline"

@@ -1,96 +1,111 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router';
-import { CheckCircle, XCircle, TrendingUp, Timer, Target, RotateCcw, LayoutDashboard, Lightbulb, Info } from 'lucide-react';
+import { LayoutDashboard, RotateCcw, Target, XCircle, CheckCircle, Lightbulb, TrendingDown, BookOpen } from 'lucide-react';
 import katex from 'katex';
-import { QuizQuestion } from '@/hooks/useQuizEngine';
+import 'katex/dist/katex.min.css';
+import { useLocalStorage } from '@/lib/local-storage';
 
 export default function QuizResults() {
   const location = useLocation();
   const navigate = useNavigate();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [, setSelectedChapters] = useLocalStorage<string[]>("askformula-selected-chapters", []);
 
-  // Retrieve state passed from ActiveQuiz
-  const { score = 0, total = 0, questions = [], userAnswers = {} } = (location.state || {}) as {
+  const state = location.state as {
       score: number,
       total: number,
-      questions: QuizQuestion[],
-      userAnswers: Record<string, string | null>
+      questions: import('@/hooks/useQuizEngine').QuizQuestion[],
+      userAnswers: Record<string, string>,
+      timeElapsed?: number
   };
 
-  if (total === 0) {
+  if (!state) {
       return (
-          <div className="min-h-screen bg-[#11131a] flex items-center justify-center">
-              <div className="text-center">
-                  <h2 className="text-2xl text-white mb-4">No Quiz Data Found</h2>
-                  <button onClick={() => navigate('/quiz')} className="bg-[#61dcb0] text-[#003122] px-6 py-2 rounded">
-                      Go to Dashboard
-                  </button>
-              </div>
+          <div className="min-h-screen bg-[#11131a] flex flex-col items-center justify-center text-[#e3e2e6] gap-4">
+              <p>No results found.</p>
+              <button onClick={() => navigate('/quiz')} className="bg-[#324565] px-4 py-2 rounded">Go to Dashboard</button>
           </div>
       );
   }
 
+  const { score, total, questions, userAnswers, timeElapsed = 0 } = state;
   const percentage = Math.round((score / total) * 100);
-  const dashOffset = 282.7 - (282.7 * (percentage / 100));
 
-  // Dummy data for visual matching
-  const timeSpent = "12:45";
-  const avgTime = "1m 16s / q";
+  const formatTime = (seconds: number) => {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  };
 
-  const renderMath = (latex: string) => {
-    try {
-      return katex.renderToString(latex, { throwOnError: false, displayMode: true });
-    } catch {
-      return `<code class="text-sm font-mono">${latex}</code>`;
-    }
+  const avgTimePerQuestion = total > 0 ? Math.round(timeElapsed / total) : 0;
+
+  // Analysis for weak chapters
+  const weakChaptersMap = new Map<string, number>();
+  questions.forEach(q => {
+      const isCorrect = userAnswers[q.id] === q.correctOptionId;
+      if (!isCorrect && q.category) {
+          weakChaptersMap.set(q.category, (weakChaptersMap.get(q.category) || 0) + 1);
+      }
+  });
+
+  const weakChaptersList = Array.from(weakChaptersMap.entries())
+      .sort((a, b) => b[1] - a[1])
+      .map(([name]) => name)
+      .slice(0, 3); // Top 3 weak chapters
+
+  const handleBuildReviewSheet = () => {
+       // Since the engine doesn't export chapter IDs easily in QuizQuestion yet,
+       // for this MVP integration we just redirect to the build tool.
+       // Ideally we would map category strings back to chapter IDs.
+       navigate('/build');
+  };
+
+  const renderMath = (tex: string) => {
+      try {
+          return katex.renderToString(tex, { throwOnError: false, displayMode: true });
+      } catch {
+          return tex;
+      }
   };
 
   return (
-    <div className="min-h-screen bg-[#11131a] text-[#e3e2e6] font-sans antialiased selection:bg-[#324565] selection:text-[#d8e2ff] flex flex-col">
-      <main className="flex-grow w-full max-w-[1200px] mx-auto px-4 md:px-8 py-10 flex flex-col md:flex-row gap-8">
+    <div className="min-h-screen bg-[#0a0a0a] text-slate-200 font-sans pb-24 selection:bg-[#324565] selection:text-[#d8e2ff]">
+      <header className="w-full border-b border-[#272a31] bg-[#0a0a0a]/80 backdrop-blur-md sticky top-0 z-40">
+         <div className="max-w-[1200px] mx-auto h-16 px-6 md:px-8 flex items-center justify-between">
+             <div className="flex items-center gap-4">
+                 <h1 className="text-xl font-bold text-[#d8e2ff] tracking-tight cursor-pointer" onClick={() => navigate('/')}>AskFormula</h1>
+                 <span className="hidden md:inline-flex bg-[#324565]/30 text-[#d8e2ff] text-xs px-2 py-0.5 rounded border border-[#324565]/50">Practice Results</span>
+             </div>
+             <button
+                onClick={() => navigate('/dashboard')}
+                className="text-sm text-slate-400 hover:text-white transition-colors flex items-center gap-2"
+             >
+                 <LayoutDashboard className="w-4 h-4" />
+                 <span className="hidden sm:inline">My Dashboard</span>
+             </button>
+         </div>
+      </header>
 
-        {/* Left Column: Summary & Stats */}
-        <div className="w-full md:w-1/3 flex flex-col gap-4">
+      <main className="w-full max-w-[1200px] mx-auto p-4 md:p-8 mt-4 flex flex-col md:flex-row gap-8 items-start">
 
-          {/* Final Score Card */}
-          <div className="bg-[#15171e] rounded-xl p-8 border border-[#272a31] flex flex-col items-center justify-center text-center relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#324565]/5 to-transparent pointer-events-none"></div>
-
-            <h1 className="text-xl font-semibold text-[#d8e2ff] mb-1 relative z-10">Quiz Results</h1>
-            <p className="text-sm text-slate-400 mb-8 relative z-10">Practice Session</p>
-
-            <div className="relative w-48 h-48 flex items-center justify-center mb-6 z-10">
-              <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-                <circle cx="50" cy="50" fill="none" r="45" stroke="#272a31" strokeWidth="8"></circle>
-                <circle
-                  className="transition-all duration-1000 ease-out"
-                  cx="50" cy="50" fill="none" r="45"
-                  stroke="#61dcb0"
-                  strokeDasharray="282.7"
-                  strokeDashoffset={dashOffset}
-                  strokeWidth="8"
-                ></circle>
-              </svg>
-              <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="text-4xl font-bold text-[#61dcb0]">{percentage}%</span>
-                <span className="text-[10px] text-slate-400 uppercase tracking-wider mt-1">Score</span>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2 text-sm text-[#61dcb0] relative z-10">
-              <TrendingUp className="w-4 h-4" />
-              <span>{score} / {total} Correct</span>
-            </div>
+        <div className="w-full md:w-1/3 shrink-0 flex flex-col gap-6 sticky top-24">
+          <div className="bg-[#11131a] rounded-xl border border-[#272a31] p-6 flex flex-col items-center justify-center shadow-xl relative overflow-hidden">
+             <div className="absolute top-0 right-0 p-4 opacity-10">
+                 <Target className="w-24 h-24 text-[#61dcb0]" />
+             </div>
+             <span className="text-slate-400 text-sm font-medium mb-2 relative z-10">Overall Score</span>
+             <div className="text-6xl font-bold text-[#d8e2ff] relative z-10 mb-1">{percentage}%</div>
+             <p className="text-[#61dcb0] text-sm relative z-10">{score} out of {total} correct</p>
           </div>
 
-          {/* Stats Grid */}
           <div className="grid grid-cols-2 gap-4">
              <div className="bg-[#15171e] rounded-xl p-4 border border-[#272a31] flex flex-col">
                 <div className="flex items-center gap-2 text-slate-400 mb-3">
-                   <Timer className="w-4 h-4" />
-                   <span className="text-xs font-medium">Time Spent</span>
+                   <RotateCcw className="w-4 h-4" />
+                   <span className="text-xs font-medium">Time Taken</span>
                 </div>
-                <span className="text-xl font-semibold text-white">{timeSpent}</span>
-                <span className="text-xs text-slate-400 mt-1">Avg {avgTime}</span>
+                <span className="text-xl font-semibold text-white">{formatTime(timeElapsed)}</span>
+                <span className="text-xs text-slate-400 mt-1">Avg {avgTimePerQuestion}s/q</span>
              </div>
              <div className="bg-[#15171e] rounded-xl p-4 border border-[#272a31] flex flex-col">
                 <div className="flex items-center gap-2 text-slate-400 mb-3">
@@ -102,46 +117,45 @@ export default function QuizResults() {
              </div>
           </div>
 
-          {/* Mastery Graph Simulation */}
-          <div className="bg-[#15171e] rounded-xl p-4 border border-[#272a31] flex flex-col">
-            <div className="flex items-center justify-between mb-4">
-               <h3 className="text-xs text-slate-400 uppercase tracking-wider font-medium">Mastery Over Time</h3>
-               <Info className="w-4 h-4 text-slate-400 cursor-help" />
+          <div className="bg-[#15171e] rounded-xl p-4 border border-[#272a31] flex flex-col gap-4">
+            <div className="flex items-center justify-between">
+               <h3 className="text-xs text-slate-400 uppercase tracking-wider font-medium flex items-center gap-2">
+                   <TrendingDown className="w-4 h-4 text-amber-500" />
+                   Areas to Review
+               </h3>
             </div>
 
-            {/* Simulated Chart */}
-            <div className="h-32 w-full relative flex items-end justify-between px-2 pb-2 border-b border-l border-[#272a31] pt-4">
-              <svg className="absolute inset-0 h-full w-full" preserveAspectRatio="none">
-                 <polyline fill="none" points="0,90 25,75 50,85 75,40 100,20" stroke="#aec6ff" strokeWidth="2"></polyline>
-                 <polygon fill="url(#chartGradient)" opacity="0.2" points="0,128 0,90 25,75 50,85 75,40 100,20 100,128"></polygon>
-                 <defs>
-                   <linearGradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
-                     <stop offset="0%" stopColor="#aec6ff" stopOpacity="0.8"></stop>
-                     <stop offset="100%" stopColor="#aec6ff" stopOpacity="0"></stop>
-                   </linearGradient>
-                 </defs>
-              </svg>
-            </div>
-            <div className="flex justify-between mt-2 text-xs text-slate-400 px-2">
-               <span>Q1</span>
-               <span>Q2</span>
-               <span>Q3</span>
-               <span>Q4</span>
-               <span className="text-[#61dcb0]">Now</span>
-            </div>
+            {weakChaptersList.length > 0 ? (
+                <div className="flex flex-col gap-2">
+                    {weakChaptersList.map((ch, idx) => (
+                        <div key={idx} className="text-sm text-slate-300 bg-[#1c1e26] p-2 rounded border border-[#272a31]">
+                            {ch}
+                        </div>
+                    ))}
+                    <button
+                        onClick={handleBuildReviewSheet}
+                        className="mt-2 w-full bg-[#324565]/30 border border-[#324565] text-[#d8e2ff] text-sm py-2 rounded flex items-center justify-center gap-2 hover:bg-[#324565]/50 transition-colors"
+                    >
+                        <BookOpen className="w-4 h-4" /> Build Custom Formula Sheet
+                    </button>
+                </div>
+            ) : (
+                <div className="text-sm text-slate-400 bg-[#1c1e26] p-3 rounded text-center">
+                    Excellent work! No major weak areas detected in this session.
+                </div>
+            )}
           </div>
 
-          {/* Action Buttons */}
           <div className="flex flex-col gap-3 mt-auto pt-4">
              <button
-                onClick={() => navigate('/quiz/setup')}
+                onClick={() => navigate('/quiz')}
                 className="w-full bg-[#d8e2ff] text-[#003122] font-semibold py-3 px-6 rounded-lg hover:bg-[#b5caff] transition-colors flex items-center justify-center gap-2 text-sm"
              >
                 <RotateCcw className="w-4 h-4" />
                 Practice Again
              </button>
              <button
-                onClick={() => navigate('/quiz')}
+                onClick={() => navigate('/dashboard')}
                 className="w-full bg-[#1c1e26] border border-[#272a31] text-[#e3e2e6] font-semibold py-3 px-6 rounded-lg hover:bg-[#272a31] transition-colors flex items-center justify-center gap-2 text-sm"
              >
                 <LayoutDashboard className="w-4 h-4" />
@@ -150,7 +164,6 @@ export default function QuizResults() {
           </div>
         </div>
 
-        {/* Right Column: Question Review */}
         <div className="w-full md:w-2/3 flex flex-col gap-4">
            <div className="flex items-center justify-between border-b border-[#272a31] pb-3 mb-3">
                <h2 className="text-xl font-semibold text-[#d8e2ff]">Review Answers</h2>
@@ -168,8 +181,8 @@ export default function QuizResults() {
               {questions.map((q, index) => {
                  const userAnswerId = userAnswers[q.id];
                  const isCorrect = userAnswerId === q.correctOptionId;
-                 const correctOption = q.options.find(o => o.id === q.correctOptionId);
-                 const userOption = q.options.find(o => o.id === userAnswerId);
+                 const correctOption = q.options.find((o: import('@/hooks/useQuizEngine').QuizOption) => o.id === q.correctOptionId);
+                 const userOption = q.options.find((o: import('@/hooks/useQuizEngine').QuizOption) => o.id === userAnswerId);
 
                  if (!isCorrect) {
                      return (
@@ -216,7 +229,7 @@ export default function QuizResults() {
                                  <Lightbulb className="w-4 h-4 text-[#d8e2ff] mt-0.5 shrink-0" />
                                  <div className="text-sm text-slate-400"
                                     dangerouslySetInnerHTML={{
-                                        __html: q.explanation.replace(/\$(.*?)\$/g, (m, tex) => {
+                                        __html: q.explanation.replace(/\$(.*?)\$/g, (m: string, tex: string) => {
                                         try {
                                             return katex.renderToString(tex, { throwOnError: false });
                                         } catch {

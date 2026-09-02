@@ -27,7 +27,6 @@ const getRandomItem = <T>(arr: T[]): T =>
   arr[Math.floor(Math.random() * arr.length)];
 const shuffle = <T>(arr: T[]): T[] => [...arr].sort(() => Math.random() - 0.5);
 
-// Get all formulas across all subjects
 const getAllFormulas = (): Formula[] => {
   const formulas: Formula[] = [];
   allSubjects.forEach((subject) => {
@@ -42,7 +41,6 @@ const extractVariables = (formula: Formula) => {
   if (formula.variables && formula.variables.length > 0)
     return formula.variables;
 
-  // basic regex fallback if variables are missing
   const matches = formula.latex.match(/[a-zA-Z]/g);
   if (!matches) return [];
 
@@ -65,7 +63,7 @@ const extractVariables = (formula: Formula) => {
         "l",
         "o",
         "g",
-      ].includes(v),
+      ].includes(v)
   );
 
   return uniqueVars.map((v) => ({ symbol: v, meaning: `Variable ${v}` }));
@@ -73,33 +71,29 @@ const extractVariables = (formula: Formula) => {
 
 const evaluateSimpleFormula = (
   latex: string,
-  values: Record<string, number>,
+  values: Record<string, number>
 ): number | null => {
   try {
-    let expression = latex.split("=")[1] || latex; // get right side of equation
-    // extremely basic text substitution - this is brittle but satisfies the zero-compute client constraint for simple formulas
+    let expression = latex.split("=")[1] || latex;
     expression = expression.replace(/\\frac{([^}]+)}{([^}]+)}/g, "($1)/($2)");
     expression = expression.replace(/\\cdot/g, "*");
     expression = expression.replace(/\\times/g, "*");
     expression = expression.replace(/([a-zA-Z])\^2/g, "($1*$1)");
 
-    // substitute values
     for (const [symbol, val] of Object.entries(values)) {
       const regex = new RegExp(`(?<![a-zA-Z])${symbol}(?![a-zA-Z])`, "g");
       expression = expression.replace(regex, val.toString());
     }
 
-    // clean up remaining spaces and implicit multiplication (e.g. 5(4) -> 5*4)
     expression = expression.replace(/(\d+)([a-zA-Z])/g, "$1*$2");
     expression = expression.replace(/\)(\()/g, ")*(");
     expression = expression.replace(/(\d+)\(/g, "$1*(");
 
-    // check if expression only contains valid math characters
     if (!/^[0-9+\-*/().\s]+$/.test(expression)) {
       return null;
     }
 
-    const result = eval(expression);
+    const result = new Function(`return ${expression}`)();
     return Number.isFinite(result) ? result : null;
   } catch {
     return null;
@@ -107,30 +101,26 @@ const evaluateSimpleFormula = (
 };
 
 const generateNumericalComputation = (
-  formula: Formula,
+  formula: Formula
 ): QuizQuestion | null => {
   const variables = extractVariables(formula);
   if (variables.length === 0 || !formula.latex.includes("=")) return null;
 
-  // Pick 1-3 variables to assign values to
   const targetVars = variables.slice(0, 3);
   const values: Record<string, number> = {};
   const promptParts = [];
 
   for (const v of targetVars) {
-    // Standard range 1-20
     const val = Math.floor(Math.random() * 20) + 1;
     values[v.symbol] = val;
     promptParts.push(`${v.meaning || v.symbol} = ${val}`);
   }
 
   const correctAns = evaluateSimpleFormula(formula.latex, values);
-
-  if (correctAns === null || isNaN(correctAns)) return null; // Parse failed, skip
+  if (correctAns === null || isNaN(correctAns)) return null;
 
   const text = `Calculate ${formula.name}, given ${promptParts.join(", ")}.`;
 
-  // Generate distractors
   const options: QuizOption[] = [
     { id: "correct", text: correctAns.toFixed(2).replace(/\.00$/, "") },
   ];
@@ -164,29 +154,25 @@ const generateNumericalComputation = (
     formulaId: formula.id,
     options: shuffle(options),
     correctOptionId: "correct",
-    explanation: `Using the formula $${formula.latex}$, we substitute the given values to get the result.`,
+    explanation: `Using the formula $${formula.latex}$, substitute the given values to calculate the result.`,
     category: formula.chapter || formula.topic || "General",
   };
 };
 
 const generateFormulaIdentification = (
   formula: Formula,
-  allFormulas: Formula[],
+  allFormulas: Formula[]
 ): QuizQuestion => {
   const targetVar = formula.name;
   const text = `Which formula correctly identifies ${targetVar}?`;
 
-  // Find distractors
   const similarFormulas = allFormulas.filter(
-    (f) => f.id !== formula.id && f.latex !== formula.latex,
+    (f) => f.id !== formula.id && f.latex !== formula.latex
   );
   let distractors = shuffle(similarFormulas).slice(0, 3);
 
   if (distractors.length < 3) {
-    distractors = shuffle(allFormulas.filter((f) => f.id !== formula.id)).slice(
-      0,
-      3,
-    );
+    distractors = shuffle(allFormulas.filter((f) => f.id !== formula.id)).slice(0, 3);
   }
 
   const options: QuizOption[] = [
@@ -223,7 +209,6 @@ const generateProportionality = (formula: Formula): QuizQuestion | null => {
     formula.latex.includes(`\\frac{1}{${inputVar.symbol}}`) ||
     formula.latex.includes(`\\frac{`)
   ) {
-    // extremely rough heuristic for inverse
     if (formula.latex.split("\\frac{")[1]?.includes(inputVar.symbol)) {
       effect = "halved";
     }
@@ -259,7 +244,7 @@ const generateProportionality = (formula: Formula): QuizQuestion | null => {
     formulaId: formula.id,
     options: shuffle(options),
     correctOptionId: "correct",
-    explanation: `Looking at the formula $${formula.latex}$, we can observe the relationship between ${targetVar} and ${inputVar.symbol}.`,
+    explanation: `Looking at the formula $${formula.latex}$, observe the relationship between ${targetVar} and ${inputVar.symbol}.`,
     category: formula.chapter || formula.topic || "General",
   };
 };
@@ -269,8 +254,6 @@ export function useQuizEngine(selectedChapterIds: string[] = []) {
     const formulas = getAllFormulas();
     if (selectedChapterIds.length === 0) return formulas;
 
-    // We need chapter info to filter by ID.
-    // getAllFormulas flattens them, let's just grab the formulas that match the chapter IDs.
     const filtered: Formula[] = [];
     allSubjects.forEach((subject) => {
       subject.chapters.forEach((chapter) => {
@@ -279,7 +262,7 @@ export function useQuizEngine(selectedChapterIds: string[] = []) {
         }
       });
     });
-    return filtered.length > 0 ? filtered : formulas; // Fallback if none found
+    return filtered.length > 0 ? filtered : formulas;
   }, [selectedChapterIds]);
 
   const generateQuestion = useCallback((): QuizQuestion => {
@@ -317,7 +300,7 @@ export function useQuizEngine(selectedChapterIds: string[] = []) {
     (count: number = 10): QuizQuestion[] => {
       return Array.from({ length: count }, () => generateQuestion());
     },
-    [generateQuestion],
+    [generateQuestion]
   );
 
   return {
