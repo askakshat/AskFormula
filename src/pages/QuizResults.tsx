@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router';
-import { LayoutDashboard, RotateCcw, Target, XCircle, CheckCircle, Lightbulb, TrendingDown, BookOpen } from 'lucide-react';
+import { Home, RotateCcw, Target, XCircle, CheckCircle, Lightbulb, TrendingDown, BookOpen } from 'lucide-react';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
 import { useLocalStorage } from '@/lib/local-storage';
@@ -77,11 +77,11 @@ export default function QuizResults() {
                  <span className="hidden md:inline-flex bg-[#324565]/30 text-[#d8e2ff] text-xs px-2 py-0.5 rounded border border-[#324565]/50">Practice Results</span>
              </div>
              <button
-                onClick={() => navigate('/dashboard')}
+                onClick={() => navigate('/')}
                 className="text-sm text-slate-400 hover:text-white transition-colors flex items-center gap-2"
              >
-                 <LayoutDashboard className="w-4 h-4" />
-                 <span className="hidden sm:inline">My Dashboard</span>
+                 <Home className="w-4 h-4" />
+                 <span className="hidden sm:inline">Home</span>
              </button>
          </div>
       </header>
@@ -155,11 +155,11 @@ export default function QuizResults() {
                 Practice Again
              </button>
              <button
-                onClick={() => navigate('/dashboard')}
+                onClick={() => navigate('/')}
                 className="w-full bg-[#1c1e26] border border-[#272a31] text-[#e3e2e6] font-semibold py-3 px-6 rounded-lg hover:bg-[#272a31] transition-colors flex items-center justify-center gap-2 text-sm"
              >
-                <LayoutDashboard className="w-4 h-4" />
-                Back to Dashboard
+                <Home className="w-4 h-4" />
+                Back to Home
              </button>
           </div>
         </div>

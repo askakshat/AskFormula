@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { motion, AnimatePresence } from 'framer-motion';
-import { LayoutDashboard, Target, PlayCircle, X, BookOpen, GraduationCap, TriangleAlert, TrendingUp } from 'lucide-react';
+import { Home, Target, PlayCircle, X, BookOpen, GraduationCap, TriangleAlert, TrendingUp } from 'lucide-react';
 import { getChaptersBySubject, allSubjects } from '@/lib/formulas';
 import { useLocalStorage } from '@/lib/local-storage';
 
@@ -151,11 +151,11 @@ export default function QuizDashboard() {
                  <span className="hidden md:inline-flex bg-[#324565]/30 text-[#d8e2ff] text-xs px-2 py-0.5 rounded border border-[#324565]/50">Practice Setup</span>
              </div>
              <button
-                onClick={() => navigate('/dashboard')}
+                onClick={() => navigate('/')}
                 className="text-sm text-slate-400 hover:text-white transition-colors flex items-center gap-2"
              >
-                 <LayoutDashboard className="w-4 h-4" />
-                 <span className="hidden sm:inline">My Dashboard</span>
+                 <Home className="w-4 h-4" />
+                 <span className="hidden sm:inline">Home</span>
              </button>
          </div>
       </header>
