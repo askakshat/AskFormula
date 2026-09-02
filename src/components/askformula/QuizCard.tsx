@@ -4,6 +4,8 @@ import { QuizQuestion } from "@/hooks/useQuizEngine";
 
 interface QuizCardProps {
   question: QuizQuestion;
+  currentIndex: number;
+  totalQuestions: number;
   selectedOptionId: string | null;
   onSelectOption: (id: string) => void;
   showFeedback: boolean;
@@ -12,6 +14,8 @@ interface QuizCardProps {
 
 export default function QuizCard({
   question,
+  currentIndex,
+  totalQuestions,
   selectedOptionId,
   onSelectOption,
   showFeedback,
@@ -31,23 +35,26 @@ export default function QuizCard({
   const isCorrect = selectedOptionId === question.correctOptionId;
 
   return (
-    <div className="w-full max-w-2xl bg-[#11131a] rounded-xl border border-slate-800 p-6 md:p-8 flex flex-col gap-6 relative overflow-hidden shadow-2xl backdrop-blur-xl">
-      {/* Category Tag */}
+    <div className="w-full max-w-2xl bg-[#15171e] rounded-xl border border-[#272a31] p-6 md:p-8 flex flex-col gap-6 relative overflow-hidden">
+      {/* Top Meta Info */}
       <div className="flex items-center gap-2">
         {question.category && (
-          <span className="px-2 py-1 bg-[#343538] rounded text-slate-300 text-xs border border-slate-700">
+          <span className="px-2 py-1 bg-[#1c1e26] rounded text-slate-400 text-xs border border-[#272a31]">
             {question.category}
           </span>
         )}
-        <span className="px-2 py-1 bg-[#343538] rounded text-slate-300 text-xs border border-slate-700 capitalize">
+        <span className="px-2 py-1 bg-[#1c1e26] rounded text-slate-400 text-xs border border-[#272a31] capitalize">
           {question.type.replace("_", " ")}
+        </span>
+        <span className="text-slate-400 text-xs font-medium ml-auto">
+           Question {currentIndex + 1} of {totalQuestions}
         </span>
       </div>
 
       {/* Question Text */}
-      <h2 className="text-2xl md:text-3xl text-white font-semibold tracking-tight">
+      <h1 className="text-[28px] leading-[36px] font-semibold text-white tracking-tight">
         {question.text}
-      </h2>
+      </h1>
 
       {/* Options */}
       <div className="flex flex-col gap-3 mt-4">
@@ -60,16 +67,15 @@ export default function QuizCard({
 
           if (!showFeedback) {
             btnClass += isSelected
-              ? "bg-[#2d4677]/20 border-[#61dcb0] text-white"
-              : "bg-[#1c1e26] border-slate-800 hover:border-slate-600 hover:bg-[#252833] text-slate-200";
+              ? "bg-[#324565]/30 border-[#d8e2ff]/50 text-white"
+              : "bg-[#11131a] border-[#272a31] hover:border-[#324565] text-[#e3e2e6]";
           } else {
             if (isActuallyCorrect) {
-              btnClass += "bg-[#15a47c]/20 border-[#15a47c] text-white"; // Green for correct
+              btnClass += "bg-[#15a47c]/10 border-[#15a47c]/50 text-white"; // Green for correct
             } else if (isSelected && !isActuallyCorrect) {
-              btnClass += "bg-red-500/10 border-red-500/50 text-white"; // Red for wrong selection
+              btnClass += "bg-[#ef4444]/10 border-[#ef4444]/50 text-white"; // Red for wrong selection
             } else {
-              btnClass +=
-                "bg-[#1c1e26] border-slate-800/50 text-slate-500 opacity-50"; // Dim others
+              btnClass += "bg-[#11131a] border-[#272a31] text-slate-500 opacity-50"; // Dim others
             }
           }
 
@@ -85,31 +91,31 @@ export default function QuizCard({
                   showFeedback && isActuallyCorrect
                     ? "border-[#15a47c] bg-[#15a47c]/20"
                     : showFeedback && isSelected && !isActuallyCorrect
-                      ? "border-red-500 bg-red-500/20"
+                      ? "border-[#ef4444] bg-[#ef4444]/20"
                       : isSelected
-                        ? "border-[#61dcb0] bg-[#61dcb0]/20"
-                        : "border-slate-600 group-hover:border-slate-400"
+                        ? "border-[#d8e2ff] bg-[#d8e2ff]/20"
+                        : "border-[#272a31] group-hover:border-[#324565]"
                 }`}
               >
                 {isSelected && !showFeedback && (
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#61dcb0]" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#d8e2ff]" />
                 )}
                 {showFeedback && isActuallyCorrect && (
                   <div className="w-2.5 h-2.5 rounded-full bg-[#15a47c]" />
                 )}
                 {showFeedback && isSelected && !isActuallyCorrect && (
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#ef4444]" />
                 )}
               </div>
 
               <div className="flex-1 overflow-x-auto py-1">
                 {opt.latex ? (
                   <div
-                    className="text-[16px] [&_.katex-display]:m-0"
+                    className="text-[18px] [&_.katex-display]:m-0"
                     dangerouslySetInnerHTML={{ __html: renderMath(opt.latex) }}
                   />
                 ) : (
-                  <span className="text-lg">{opt.text}</span>
+                  <span className="text-base">{opt.text}</span>
                 )}
               </div>
             </button>
@@ -120,59 +126,48 @@ export default function QuizCard({
       {/* Feedback Section */}
       {showFeedback && (
         <div
-          className={`mt-4 p-5 rounded-lg border ${isCorrect ? "bg-[#15a47c]/10 border-[#15a47c]/30" : "bg-red-500/10 border-red-500/30"}`}
+          className={`mt-4 p-4 rounded-lg border ${isCorrect ? "bg-[#15a47c]/10 border-[#15a47c]/30" : "bg-[#ef4444]/10 border-[#ef4444]/30"} flex items-start gap-3`}
         >
-          <h4
-            className={`font-semibold mb-2 ${isCorrect ? "text-[#61dcb0]" : "text-red-400"}`}
-          >
-            {isCorrect ? "Correct!" : "Incorrect"}
-          </h4>
-          <p className="text-slate-300 text-sm leading-relaxed">
-            <span
-              dangerouslySetInnerHTML={{
-                // Simple replacement for $...$ to katex, assuming explanation has inline math
-                __html: question.explanation.replace(/\$(.*?)\$/g, (m, tex) => {
-                  try {
-                    return katex.renderToString(tex, { throwOnError: false });
-                  } catch {
-                    return m;
-                  }
-                }),
-              }}
+          <span className={`material-symbols-outlined mt-0.5 ${isCorrect ? 'text-[#15a47c]' : 'text-[#ef4444]'}`}>
+             {isCorrect ? 'check_circle' : 'cancel'}
+          </span>
+          <div>
+            <h4 className={`text-sm font-semibold mb-1 ${isCorrect ? "text-[#15a47c]" : "text-[#ef4444]"}`}>
+                {isCorrect ? "Correct!" : "Incorrect"}
+            </h4>
+            <div className="text-[#e3e2e6] text-sm leading-relaxed"
+                dangerouslySetInnerHTML={{
+                    __html: question.explanation.replace(/\$(.*?)\$/g, (m, tex) => {
+                    try {
+                        return katex.renderToString(tex, { throwOnError: false });
+                    } catch {
+                        return m;
+                    }
+                    }),
+                }}
             />
-          </p>
+          </div>
         </div>
       )}
 
-      {/* Actions */}
-      <div className="mt-6 flex justify-end">
+      {/* Actions Area */}
+      <div className="mt-8 flex justify-end">
         {showFeedback ? (
           <button
             onClick={onNext}
-            className="bg-[#d8e2ff] text-[#003122] font-semibold px-6 py-3 rounded-lg hover:bg-white transition-colors flex items-center gap-2"
+            className="bg-[#d8e2ff] text-[#003122] text-sm font-semibold px-6 py-3 rounded-lg hover:bg-[#b5caff] transition-colors flex items-center gap-2"
           >
             Next Question
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
+            <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_forward</span>
           </button>
         ) : (
           <button
-            onClick={() => onSelectOption("submit")} // Or handle via parent state
+            onClick={() => onSelectOption("submit")}
             disabled={!selectedOptionId}
-            className="bg-[#d8e2ff] text-[#003122] font-semibold px-6 py-3 rounded-lg hover:bg-white transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-[#d8e2ff] text-[#003122] text-sm font-semibold px-6 py-3 rounded-lg hover:bg-[#b5caff] transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Submit Answer
+            <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>keyboard_return</span>
           </button>
         )}
       </div>
