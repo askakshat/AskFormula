@@ -16,6 +16,9 @@ const AuthPage = lazy(() => import("./pages/Auth.tsx"));
 const Dashboard = lazy(() => import("./pages/Dashboard.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 const PrintView = lazy(() => import("./pages/PrintView.tsx"));
+const QuizDashboard = lazy(() => import("./pages/QuizDashboard.tsx"));
+const ActiveQuiz = lazy(() => import("./pages/ActiveQuiz.tsx"));
+const QuizResults = lazy(() => import("./pages/QuizResults.tsx"));
 
 // Simple loading fallback for route transitions
 function RouteLoading() {
@@ -127,6 +130,9 @@ createRoot(document.getElementById("root")!).render(
                 element={<Dashboard />}
             />
             <Route path="/print" element={<PrintView />} />
+            <Route path="/quiz" element={<QuizDashboard />} />
+            <Route path="/quiz/active" element={<ActiveQuiz />} />
+            <Route path="/quiz/results" element={<QuizResults />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
