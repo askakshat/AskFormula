@@ -4,7 +4,8 @@ import { Formula, allSubjects } from "@/lib/formulas";
 export type QuestionType =
   | "numerical_computation"
   | "formula_identification"
-  | "proportionality";
+  | "proportionality"
+  | "theory_concept";
 
 export interface QuizOption {
   id: string;
@@ -27,6 +28,11 @@ const getRandomItem = <T>(arr: T[]): T =>
   arr[Math.floor(Math.random() * arr.length)];
 const shuffle = <T>(arr: T[]): T[] => [...arr].sort(() => Math.random() - 0.5);
 
+export interface TheoryPoint {
+  text: string;
+  category: string;
+}
+
 type EnrichedFormula = Formula & {
   _meta?: {
     board: string;
@@ -34,6 +40,25 @@ type EnrichedFormula = Formula & {
     subject: string;
     chapterName: string;
   };
+};
+
+const getAllTheoryPoints = (): TheoryPoint[] => {
+  const points: TheoryPoint[] = [];
+  allSubjects.forEach((subject) => {
+    let board = "CBSE/State Board";
+    if (subject.audience.includes("jee")) board = "JEE";
+    else if (subject.audience.includes("neet")) board = "NEET";
+
+    subject.chapters.forEach((chapter) => {
+      if (chapter.keyPoints) {
+        const category = `${board} • Class ${chapter.class || 'Unknown'} • ${subject.subject} • ${chapter.name || chapter.chapterName || "Unknown"}`;
+        chapter.keyPoints.forEach(kp => {
+          points.push({ text: kp, category });
+        });
+      }
+    });
+  });
+  return points;
 };
 
 const getAllFormulas = (): EnrichedFormula[] => {
@@ -61,6 +86,7 @@ const getAllFormulas = (): EnrichedFormula[] => {
 };
 
 const extractVariables = (formula: Formula) => {
+  // If variables are explicitly provided, use them
   if (formula.variables && formula.variables.length > 0)
     return formula.variables;
 
@@ -98,10 +124,19 @@ const evaluateSimpleFormula = (
 ): number | null => {
   try {
     let expression = latex.split("=")[1] || latex;
-    expression = expression.replace(/\\frac{([^}]+)}{([^}]+)}/g, "($1)/($2)");
+    // Handle nested fractions heuristically by doing a few passes
+    for (let i=0; i<3; i++) {
+        expression = expression.replace(/\\frac{([^{}]+)}{([^{}]+)}/g, "($1)/($2)");
+    }
     expression = expression.replace(/\\cdot/g, "*");
     expression = expression.replace(/\\times/g, "*");
     expression = expression.replace(/([a-zA-Z])\^2/g, "($1*$1)");
+    expression = expression.replace(/([a-zA-Z])\^3/g, "($1*$1*$1)");
+    expression = expression.replace(/\\sqrt{([^}]+)}/g, "Math.sqrt($1)");
+    expression = expression.replace(/\\pi/g, "Math.PI");
+    // basic sine/cosine (assuming radians for simplicity of raw eval)
+    expression = expression.replace(/\\sin\\theta/g, "0.5");
+    expression = expression.replace(/\\cos\\theta/g, "0.866");
 
     for (const [symbol, val] of Object.entries(values)) {
       const regex = new RegExp(`(?<![a-zA-Z])${symbol}(?![a-zA-Z])`, "g");
@@ -215,6 +250,34 @@ const generateFormulaIdentification = (
   };
 };
 
+const generateTheoryQuestion = (
+  point: TheoryPoint,
+  allPoints: TheoryPoint[]
+): QuizQuestion | null => {
+  if (!point || allPoints.length < 4) return null;
+
+  const text = `Which of the following is a key concept regarding ${point.category.split(' • ').pop()}?`;
+
+  const otherPoints = allPoints.filter(p => p.text !== point.text);
+  const distractors = shuffle(otherPoints).slice(0, 3);
+
+  const options: QuizOption[] = [
+    { id: "correct", text: point.text },
+    ...distractors.map((d, i) => ({ id: `distractor_${i}`, text: d.text })),
+  ];
+
+  return {
+    id: `theory_${Date.now()}_${Math.random().toString(36).substring(7)}`,
+    type: "theory_concept",
+    text,
+    formulaId: "theory", // Not tied to a specific formula
+    options: shuffle(options),
+    correctOptionId: "correct",
+    explanation: `This is a fundamental concept from ${point.category}.`,
+    category: point.category,
+  };
+};
+
 const generateProportionality = (formula: EnrichedFormula): QuizQuestion | null => {
   const variables = extractVariables(formula);
   if (variables.length === 0) return null;
@@ -273,6 +336,27 @@ const generateProportionality = (formula: EnrichedFormula): QuizQuestion | null 
 };
 
 export function useQuizEngine(selectedChapterIds: string[] = []) {
+  const allTheoryPoints = useMemo(() => {
+    const points = getAllTheoryPoints();
+    if (selectedChapterIds.length === 0) return points;
+
+    const filtered: TheoryPoint[] = [];
+    allSubjects.forEach((subject) => {
+      let board = "CBSE/State Board";
+      if (subject.audience.includes("jee")) board = "JEE";
+      else if (subject.audience.includes("neet")) board = "NEET";
+
+      subject.chapters.forEach((chapter) => {
+        if (selectedChapterIds.includes(chapter.id) && chapter.keyPoints) {
+          const category = `${board} • Class ${chapter.class || 'Unknown'} • ${subject.subject} • ${chapter.name || chapter.chapterName || "Unknown"}`;
+          chapter.keyPoints.forEach(kp => {
+            filtered.push({ text: kp, category });
+          });
+        }
+      });
+    });
+    return filtered.length > 0 ? filtered : points;
+  }, [selectedChapterIds]);
   const allFormulas = useMemo(() => {
     const formulas = getAllFormulas();
     if (selectedChapterIds.length === 0) return formulas;
@@ -310,16 +394,22 @@ export function useQuizEngine(selectedChapterIds: string[] = []) {
       if (!formula) continue;
 
       const typeNum = Math.random();
-      if (typeNum < 0.3) {
+      if (typeNum < 0.25) {
         question = generateNumericalComputation(formula);
-        if (!question)
-          question = generateFormulaIdentification(formula, allFormulas);
-      } else if (typeNum < 0.6) {
+      } else if (typeNum < 0.5) {
         question = generateProportionality(formula);
-        if (!question)
-          question = generateFormulaIdentification(formula, allFormulas);
+      } else if (typeNum < 0.75) {
+        const point = getRandomItem(allTheoryPoints);
+        if (point) {
+           question = generateTheoryQuestion(point, allTheoryPoints);
+        }
       } else {
         question = generateFormulaIdentification(formula, allFormulas);
+      }
+
+      // Fallback if the specific type generation failed
+      if (!question) {
+         question = generateFormulaIdentification(formula, allFormulas);
       }
     }
 

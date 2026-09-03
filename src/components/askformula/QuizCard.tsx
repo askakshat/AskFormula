@@ -15,6 +15,18 @@ interface QuizCardProps {
     onNext: () => void;
 }
 
+const renderTextWithMath = (text: string) => {
+    return {
+        __html: text.replace(/\$(.*?)\$/g, (m, tex) => {
+            try {
+                return katex.renderToString(tex, { throwOnError: false });
+            } catch {
+                return m;
+            }
+        })
+    };
+};
+
 const renderMath = (tex: string) => {
     try {
         return katex.renderToString(tex, { throwOnError: false, displayMode: true });
@@ -43,9 +55,7 @@ export default function QuizCard({
                     <span>QUESTION {currentIndex + 1} OF {totalQuestions}</span>
                 </div>
 
-                <h3 className="text-xl md:text-2xl font-semibold text-white mt-2 leading-relaxed">
-                    {question.text}
-                </h3>
+                <h3 className="text-xl md:text-2xl font-semibold text-white mt-2 leading-relaxed break-words [&_.katex-display]:overflow-x-auto [&_.katex]:whitespace-normal [&_.katex]:break-words" dangerouslySetInnerHTML={renderTextWithMath(question.text)} />
             </div>
 
             <div className="p-4 md:p-6 flex flex-col gap-3 flex-1 bg-[#0a0a0a]/50">
@@ -89,11 +99,11 @@ export default function QuizCard({
                                      showFeedback && isSelected ? <XCircle className="w-5 h-5" /> : letter}
                                 </div>
 
-                                <div className="flex-1 text-slate-200 font-medium">
+                                <div className="flex-1 text-slate-200 font-medium min-w-0">
                                     {option.latex ? (
-                                        <div className="[&_.katex-display]:m-0" dangerouslySetInnerHTML={{ __html: renderMath(option.latex) }} />
+                                        <div className="[&_.katex-display]:m-0 [&_.katex-display]:overflow-x-auto [&_.katex-display]:overflow-y-hidden [&_.katex-display]:py-1 scrollbar-thin overflow-x-auto" dangerouslySetInnerHTML={{ __html: renderMath(option.latex) }} />
                                     ) : (
-                                        <span>{option.text}</span>
+                                        <div className="break-words whitespace-pre-wrap" dangerouslySetInnerHTML={renderTextWithMath(option.text || '')} />
                                     )}
                                 </div>
                             </motion.button>
@@ -112,17 +122,7 @@ export default function QuizCard({
                             className={`p-4 rounded-xl border flex items-start gap-3 ${isCorrect ? 'bg-[#61dcb0]/10 border-[#61dcb0]/30' : 'bg-[#ef4444]/10 border-[#ef4444]/30'}`}
                         >
                             <Lightbulb className={`w-5 h-5 mt-0.5 shrink-0 ${isCorrect ? 'text-[#61dcb0]' : 'text-[#ef4444]'}`} />
-                            <div className="text-sm text-slate-300 leading-relaxed"
-                                dangerouslySetInnerHTML={{
-                                    __html: question.explanation.replace(/\$(.*?)\$/g, (m, tex) => {
-                                        try {
-                                            return katex.renderToString(tex, { throwOnError: false });
-                                        } catch {
-                                            return m;
-                                        }
-                                    }),
-                                }}
-                            />
+                            <div className="text-sm text-slate-300 leading-relaxed break-words [&_.katex-display]:overflow-x-auto [&_.katex]:whitespace-normal [&_.katex]:break-words overflow-x-auto w-full min-w-0" dangerouslySetInnerHTML={renderTextWithMath(question.explanation || '')} />
                         </motion.div>
                     )}
                 </AnimatePresence>
