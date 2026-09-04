@@ -319,38 +319,193 @@ const generateFormulaIdentification = (
 
 const stripTheoryPrefix = (text: string) => text.includes(': ') ? text.split(': ').slice(1).join(': ').trim() : text;
 
+
+const mutateStatementToFalse = (text: string): string => {
+  const antonyms: Array<[RegExp, string]> = [
+    [/\b(increases?)\b/gi, 'decreases'],
+    [/\b(decreases?)\b/gi, 'increases'],
+    [/\b(independent)\b/gi, 'dependent'],
+    [/\b(dependent)\b/gi, 'independent'],
+    [/\b(directly)\b/gi, 'inversely'],
+    [/\b(inversely)\b/gi, 'directly'],
+    [/\b(positive)\b/gi, 'negative'],
+    [/\b(negative)\b/gi, 'positive'],
+    [/\b(always)\b/gi, 'never'],
+    [/\b(never)\b/gi, 'always'],
+    [/\b(attractive)\b/gi, 'repulsive'],
+    [/\b(repulsive)\b/gi, 'attractive'],
+    [/\b(maximum)\b/gi, 'minimum'],
+    [/\b(minimum)\b/gi, 'maximum'],
+    [/\b(concave)\b/gi, 'convex'],
+    [/\b(convex)\b/gi, 'concave'],
+    [/\b(converge[s]?)\b/gi, 'diverges'],
+    [/\b(diverge[s]?)\b/gi, 'converges'],
+    [/\b(equal)\b/gi, 'unequal'],
+    [/\b(zero)\b/gi, 'non-zero'],
+    [/\b(greater)\b/gi, 'less'],
+    [/\b(less)\b/gi, 'greater'],
+    [/\b(inside)\b/gi, 'outside'],
+    [/\b(outside)\b/gi, 'inside'],
+    [/\b(parallel)\b/gi, 'perpendicular'],
+    [/\b(perpendicular)\b/gi, 'parallel'],
+    [/\b(is)\b/gi, 'is not'],
+    [/\b(is not)\b/gi, 'is'],
+    [/\b(can)\b/gi, 'cannot'],
+    [/\b(cannot)\b/gi, 'can'],
+  ];
+
+  // Try to find the first match and swap it to make it false
+  for (const [regex, replacement] of antonyms) {
+    if (regex.test(text)) {
+      // Just replace the first occurrence to avoid messing up the sentence structure too much
+      // wait, regex.test advances lastIndex if global, but we use match
+      const match = text.match(regex);
+      if (match) {
+         // Create a non-global regex to replace only the first occurrence
+         const nonGlobalRegex = new RegExp(regex.source, 'i');
+         return text.replace(nonGlobalRegex, replacement);
+      }
+    }
+  }
+
+  // Fallback: If no antonym is found, we just append a negation or modifying phrase
+  // But ideally we don't want it to sound too robotic.
+  if (text.includes(" = ")) {
+     return text.replace(" = ", " \\neq ");
+  }
+
+  return `It is incorrect that ${text.charAt(0).toLowerCase() + text.slice(1)}`;
+};
+
 const generateTheoryQuestion = (
   point: TheoryPoint,
   allPoints: TheoryPoint[]
 ): QuizQuestion | null => {
   if (!point || allPoints.length < 4) return null;
 
-  const text = `Which of the following is a key concept regarding ${point.category.split(' • ').pop()}?`;
-
-  // Filter distractors to be from the same subject if possible, or at least not totally random from all
-  const subjectCategory = point.category.split(' • ')[2]; // Board • Class • Subject • Chapter
+  const subjectCategory = point.category.split(' • ')[2];
   let similarPoints = allPoints.filter(p => p.text !== point.text && p.category.includes(subjectCategory || ""));
 
-  // fallback if not enough
   if (similarPoints.length < 3) {
       similarPoints = allPoints.filter(p => p.text !== point.text);
   }
 
-  const distractors = shuffle(similarPoints).slice(0, 3);
+  const mode = Math.random();
+  let text = "";
+  let options: QuizOption[] = [];
+  let explanation = "";
 
-  const options: QuizOption[] = [
-    { id: "correct", text: stripTheoryPrefix(point.text) },
-    ...distractors.map((d, i) => ({ id: `distractor_${i}`, text: stripTheoryPrefix(d.text) })),
-  ];
+  if (mode < 0.33) {
+    // Mode 1: Find the TRUE statement
+    text = `Which of the following statements is TRUE regarding ${point.category.split(' • ').pop()}?`;
+
+    // 1 true, 1 mutated true (same topic), 2 mutated randoms
+    const trueStmt = stripTheoryPrefix(point.text);
+    const falseSameTopic = mutateStatementToFalse(stripTheoryPrefix(point.text));
+
+    const distractors = shuffle(similarPoints).slice(0, 2);
+    const falseOther1 = mutateStatementToFalse(stripTheoryPrefix(distractors[0].text));
+    const falseOther2 = mutateStatementToFalse(stripTheoryPrefix(distractors[1].text));
+
+    // Fallback if mutation didn't change it (very rare, but possible), just use raw distractors (they are technically true for other topics, but false for THIS topic).
+    // Actually, asking "which is true regarding X" implies the others might be true for Y but false for X. Mutating them is safer.
+
+    options = [
+      { id: "correct", text: trueStmt },
+      { id: "distractor_0", text: falseSameTopic },
+      { id: "distractor_1", text: falseOther1 },
+      { id: "distractor_2", text: falseOther2 },
+    ];
+    explanation = `The correct statement is: ${trueStmt}`;
+
+  } else if (mode < 0.66) {
+    // Mode 2: Find the FALSE statement
+    text = `Which of the following statements is FALSE regarding ${point.category.split(' • ').pop()}?`;
+
+    const falseStmt = mutateStatementToFalse(stripTheoryPrefix(point.text));
+    const trueSameTopic = stripTheoryPrefix(point.text); // Wait, we need another true statement from the same topic ideally.
+
+    // Let's find other true statements from the same chapter
+    const sameChapterPoints = similarPoints.filter(p => p.category === point.category);
+    let trueDistractors = [];
+    if (sameChapterPoints.length >= 3) {
+        trueDistractors = shuffle(sameChapterPoints).slice(0, 3).map(p => stripTheoryPrefix(p.text));
+    } else {
+        // Fallback to general similar points
+        trueDistractors = shuffle(similarPoints).slice(0, 3).map(p => stripTheoryPrefix(p.text));
+    }
+
+    options = [
+      { id: "correct", text: falseStmt },
+      ...trueDistractors.map((t, i) => ({ id: `distractor_${i}`, text: t }))
+    ];
+    explanation = `The false statement is "${falseStmt}". The true concept is actually: ${stripTheoryPrefix(point.text)}`;
+
+  } else {
+    // Mode 3: Assertion and Reasoning
+    const distractorPoint = getRandomItem(similarPoints);
+    const isReasoningCorrect = Math.random() > 0.5;
+
+    const assertion = stripTheoryPrefix(point.text);
+    // If reasoning is correct, it should just be another true statement (doesn't have to perfectly explain it, but it's an "Assertion-Reasoning" format)
+    // Actually, generating a real causal reasoning is hard. Let's just evaluate if they are both true.
+    const isAssertionTrue = Math.random() > 0.3;
+    const isReasonTrue = Math.random() > 0.3;
+
+    const finalAssertion = isAssertionTrue ? assertion : mutateStatementToFalse(assertion);
+    const finalReason = isReasonTrue ? stripTheoryPrefix(distractorPoint.text) : mutateStatementToFalse(stripTheoryPrefix(distractorPoint.text));
+
+    text = `Given the following Assertion (A) and Reason (R):
+
+**Assertion (A):** ${finalAssertion}
+**Reason (R):** ${finalReason}`;
+
+    let correctAnswerText = "";
+    if (isAssertionTrue && isReasonTrue) {
+       // We can't guarantee R is the correct explanation for A, so we just say it's not.
+       correctAnswerText = "Both A and R are true, but R is NOT the correct explanation of A.";
+    } else if (isAssertionTrue && !isReasonTrue) {
+       correctAnswerText = "A is true, but R is false.";
+    } else if (!isAssertionTrue && isReasonTrue) {
+       correctAnswerText = "A is false, but R is true.";
+    } else {
+       correctAnswerText = "Both A and R are false.";
+    }
+
+    const possibleAnswers = [
+       "Both A and R are true, and R is the correct explanation of A.",
+       "Both A and R are true, but R is NOT the correct explanation of A.",
+       "A is true, but R is false.",
+       "A is false, but R is true.",
+       "Both A and R are false."
+    ];
+
+    const wrongAnswers = possibleAnswers.filter(a => a !== correctAnswerText);
+    const finalWrong = shuffle(wrongAnswers).slice(0, 3);
+
+    options = [
+       { id: "correct", text: correctAnswerText },
+       ...finalWrong.map((t, i) => ({ id: `distractor_${i}`, text: t }))
+    ];
+
+    explanation = `${isAssertionTrue ? "The assertion is a valid concept." : "The assertion is incorrect."} ${isReasonTrue ? "The reason states a valid concept." : "The reason is incorrect."}`;
+  }
+
+  // Double check uniqueness of options (in case mutations didn't change things)
+  const uniqueTexts = new Set(options.map(o => o.text));
+  if (uniqueTexts.size < 4) {
+      // Just fallback to a simple identification if we got duplicate texts
+      return null;
+  }
 
   return {
     id: `theory_${Date.now()}_${Math.random().toString(36).substring(7)}`,
     type: "theory_concept",
     text,
-    formulaId: "theory", // Not tied to a specific formula
+    formulaId: "theory",
     options: shuffle(options),
     correctOptionId: "correct",
-    explanation: `This is a fundamental concept from ${point.category}.`,
+    explanation: explanation,
     category: point.category,
   };
 };
