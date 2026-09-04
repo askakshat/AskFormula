@@ -217,25 +217,92 @@ const generateNumericalComputation = (
   };
 };
 
+// Helper to generate algorithmic distractors for LaTeX strings
+const generateLatexDistractors = (latex: string): string[] => {
+  const distractors = new Set<string>();
+
+  // Rule 1: Swap signs (+ to -, - to +) on the RHS if there's an equals sign
+  const parts = latex.split('=');
+  if (parts.length === 2) {
+    const lhs = parts[0];
+    const rhs = parts[1];
+
+    // Swap + and -
+    if (rhs.includes('+') || rhs.includes('-')) {
+        let swappedSign = rhs.replace(/\+/g, 'TEMP_PLUS').replace(/-/g, '+').replace(/TEMP_PLUS/g, '-');
+        distractors.add(lhs + '=' + swappedSign);
+    }
+
+    // Rule 2: Swap sin and cos
+    if (rhs.includes('sin') || rhs.includes('cos')) {
+        let swappedTrig = rhs.replace(/\\sin/g, 'TEMP_SIN').replace(/\\cos/g, '\\sin').replace(/TEMP_SIN/g, '\\cos');
+        // also try without backslash just in case
+        swappedTrig = swappedTrig.replace(/\bsin\b/g, 'TEMP_SIN').replace(/\bcos\b/g, 'sin').replace(/TEMP_SIN/g, 'cos');
+        distractors.add(lhs + '=' + swappedTrig);
+    }
+
+    // Rule 3: Swap multiplication and division coefficients if present like 3 \sin -> 1/3 \sin or 4 \cos^3 -> 3 \cos^3 (just swapping numbers)
+    // A quick hack for the cos 3x formula specifically: 4 cos^3 x - 3 cos x -> 3 cos^3 x - 4 cos x
+    if (rhs.match(/\d/)) {
+        let swappedNums = rhs.replace(/4/g, 'TEMP_4').replace(/3/g, '4').replace(/TEMP_4/g, '3');
+        if (swappedNums !== rhs) distractors.add(lhs + '=' + swappedNums);
+    }
+
+    // Rule 4: If fraction \frac{A}{B}, swap to \frac{B}{A}
+    if (rhs.includes('\\frac{')) {
+        const fracRegex = /\\frac\{([^}]+)\}\{([^}]+)\}/;
+        const match = rhs.match(fracRegex);
+        if (match) {
+            const swappedFrac = rhs.replace(fracRegex, `\\frac{${match[2]}}{${match[1]}}`);
+            distractors.add(lhs + '=' + swappedFrac);
+        }
+    }
+  }
+
+  return Array.from(distractors);
+};
+
 const generateFormulaIdentification = (
   formula: EnrichedFormula,
   allFormulas: EnrichedFormula[]
 ): QuizQuestion => {
   const targetVar = formula.name;
-  const text = `Which formula correctly identifies ${targetVar}?`;
+  const text = `Which formula correctly represents ${targetVar}?`;
 
+  const algorithmicDistractors = generateLatexDistractors(formula.latex);
+
+  // Try to find distractors from the SAME chapter first
+  const sameChapterFormulas = allFormulas.filter(
+    (f) => f.id !== formula.id && f.latex !== formula.latex &&
+           f._meta?.chapterName === formula._meta?.chapterName
+  );
+
+  // Also find other formulas in general as fallback
   const similarFormulas = allFormulas.filter(
     (f) => f.id !== formula.id && f.latex !== formula.latex
   );
-  let distractors = shuffle(similarFormulas).slice(0, 3);
 
-  if (distractors.length < 3) {
-    distractors = shuffle(allFormulas.filter((f) => f.id !== formula.id)).slice(0, 3);
+  let distractorLatex = new Set<string>(algorithmicDistractors);
+
+  // Fill up to 3 distractors using same chapter formulas
+  const shuffledSameChapter = shuffle(sameChapterFormulas);
+  for (const f of shuffledSameChapter) {
+      if (distractorLatex.size >= 3) break;
+      distractorLatex.add(f.latex);
   }
+
+  // Fill remaining with other formulas
+  const shuffledSimilar = shuffle(similarFormulas);
+  for (const f of shuffledSimilar) {
+      if (distractorLatex.size >= 3) break;
+      distractorLatex.add(f.latex);
+  }
+
+  const finalDistractors = shuffle(Array.from(distractorLatex)).slice(0, 3);
 
   const options: QuizOption[] = [
     { id: "correct", latex: formula.latex },
-    ...distractors.map((d, i) => ({ id: `distractor_${i}`, latex: d.latex })),
+    ...finalDistractors.map((latex, i) => ({ id: `distractor_${i}`, latex })),
   ];
 
   return {
@@ -250,30 +317,195 @@ const generateFormulaIdentification = (
   };
 };
 
+const stripTheoryPrefix = (text: string) => text.includes(': ') ? text.split(': ').slice(1).join(': ').trim() : text;
+
+
+const mutateStatementToFalse = (text: string): string => {
+  const antonyms: Array<[RegExp, string]> = [
+    [/\b(increases?)\b/gi, 'decreases'],
+    [/\b(decreases?)\b/gi, 'increases'],
+    [/\b(independent)\b/gi, 'dependent'],
+    [/\b(dependent)\b/gi, 'independent'],
+    [/\b(directly)\b/gi, 'inversely'],
+    [/\b(inversely)\b/gi, 'directly'],
+    [/\b(positive)\b/gi, 'negative'],
+    [/\b(negative)\b/gi, 'positive'],
+    [/\b(always)\b/gi, 'never'],
+    [/\b(never)\b/gi, 'always'],
+    [/\b(attractive)\b/gi, 'repulsive'],
+    [/\b(repulsive)\b/gi, 'attractive'],
+    [/\b(maximum)\b/gi, 'minimum'],
+    [/\b(minimum)\b/gi, 'maximum'],
+    [/\b(concave)\b/gi, 'convex'],
+    [/\b(convex)\b/gi, 'concave'],
+    [/\b(converge[s]?)\b/gi, 'diverges'],
+    [/\b(diverge[s]?)\b/gi, 'converges'],
+    [/\b(equal)\b/gi, 'unequal'],
+    [/\b(zero)\b/gi, 'non-zero'],
+    [/\b(greater)\b/gi, 'less'],
+    [/\b(less)\b/gi, 'greater'],
+    [/\b(inside)\b/gi, 'outside'],
+    [/\b(outside)\b/gi, 'inside'],
+    [/\b(parallel)\b/gi, 'perpendicular'],
+    [/\b(perpendicular)\b/gi, 'parallel'],
+    [/\b(is)\b/gi, 'is not'],
+    [/\b(is not)\b/gi, 'is'],
+    [/\b(can)\b/gi, 'cannot'],
+    [/\b(cannot)\b/gi, 'can'],
+  ];
+
+  // Try to find the first match and swap it to make it false
+  for (const [regex, replacement] of antonyms) {
+    if (regex.test(text)) {
+      // Just replace the first occurrence to avoid messing up the sentence structure too much
+      // wait, regex.test advances lastIndex if global, but we use match
+      const match = text.match(regex);
+      if (match) {
+         // Create a non-global regex to replace only the first occurrence
+         const nonGlobalRegex = new RegExp(regex.source, 'i');
+         return text.replace(nonGlobalRegex, replacement);
+      }
+    }
+  }
+
+  // Fallback: If no antonym is found, we just append a negation or modifying phrase
+  // But ideally we don't want it to sound too robotic.
+  if (text.includes(" = ")) {
+     return text.replace(" = ", " \\neq ");
+  }
+
+  return `It is incorrect that ${text.charAt(0).toLowerCase() + text.slice(1)}`;
+};
+
 const generateTheoryQuestion = (
   point: TheoryPoint,
   allPoints: TheoryPoint[]
 ): QuizQuestion | null => {
   if (!point || allPoints.length < 4) return null;
 
-  const text = `Which of the following is a key concept regarding ${point.category.split(' • ').pop()}?`;
+  const subjectCategory = point.category.split(' • ')[2];
+  let similarPoints = allPoints.filter(p => p.text !== point.text && p.category.includes(subjectCategory || ""));
 
-  const otherPoints = allPoints.filter(p => p.text !== point.text);
-  const distractors = shuffle(otherPoints).slice(0, 3);
+  if (similarPoints.length < 3) {
+      similarPoints = allPoints.filter(p => p.text !== point.text);
+  }
 
-  const options: QuizOption[] = [
-    { id: "correct", text: point.text },
-    ...distractors.map((d, i) => ({ id: `distractor_${i}`, text: d.text })),
-  ];
+  const mode = Math.random();
+  let text = "";
+  let options: QuizOption[] = [];
+  let explanation = "";
+
+  if (mode < 0.33) {
+    // Mode 1: Find the TRUE statement
+    text = `Which of the following statements is TRUE regarding ${point.category.split(' • ').pop()}?`;
+
+    // 1 true, 1 mutated true (same topic), 2 mutated randoms
+    const trueStmt = stripTheoryPrefix(point.text);
+    const falseSameTopic = mutateStatementToFalse(stripTheoryPrefix(point.text));
+
+    const distractors = shuffle(similarPoints).slice(0, 2);
+    const falseOther1 = mutateStatementToFalse(stripTheoryPrefix(distractors[0].text));
+    const falseOther2 = mutateStatementToFalse(stripTheoryPrefix(distractors[1].text));
+
+    // Fallback if mutation didn't change it (very rare, but possible), just use raw distractors (they are technically true for other topics, but false for THIS topic).
+    // Actually, asking "which is true regarding X" implies the others might be true for Y but false for X. Mutating them is safer.
+
+    options = [
+      { id: "correct", text: trueStmt },
+      { id: "distractor_0", text: falseSameTopic },
+      { id: "distractor_1", text: falseOther1 },
+      { id: "distractor_2", text: falseOther2 },
+    ];
+    explanation = `The correct statement is: ${trueStmt}`;
+
+  } else if (mode < 0.66) {
+    // Mode 2: Find the FALSE statement
+    text = `Which of the following statements is FALSE regarding ${point.category.split(' • ').pop()}?`;
+
+    const falseStmt = mutateStatementToFalse(stripTheoryPrefix(point.text));
+    const trueSameTopic = stripTheoryPrefix(point.text); // Wait, we need another true statement from the same topic ideally.
+
+    // Let's find other true statements from the same chapter
+    const sameChapterPoints = similarPoints.filter(p => p.category === point.category);
+    let trueDistractors = [];
+    if (sameChapterPoints.length >= 3) {
+        trueDistractors = shuffle(sameChapterPoints).slice(0, 3).map(p => stripTheoryPrefix(p.text));
+    } else {
+        // Fallback to general similar points
+        trueDistractors = shuffle(similarPoints).slice(0, 3).map(p => stripTheoryPrefix(p.text));
+    }
+
+    options = [
+      { id: "correct", text: falseStmt },
+      ...trueDistractors.map((t, i) => ({ id: `distractor_${i}`, text: t }))
+    ];
+    explanation = `The false statement is "${falseStmt}". The true concept is actually: ${stripTheoryPrefix(point.text)}`;
+
+  } else {
+    // Mode 3: Assertion and Reasoning
+    const distractorPoint = getRandomItem(similarPoints);
+    const isReasoningCorrect = Math.random() > 0.5;
+
+    const assertion = stripTheoryPrefix(point.text);
+    // If reasoning is correct, it should just be another true statement (doesn't have to perfectly explain it, but it's an "Assertion-Reasoning" format)
+    // Actually, generating a real causal reasoning is hard. Let's just evaluate if they are both true.
+    const isAssertionTrue = Math.random() > 0.3;
+    const isReasonTrue = Math.random() > 0.3;
+
+    const finalAssertion = isAssertionTrue ? assertion : mutateStatementToFalse(assertion);
+    const finalReason = isReasonTrue ? stripTheoryPrefix(distractorPoint.text) : mutateStatementToFalse(stripTheoryPrefix(distractorPoint.text));
+
+    text = `Given the following Assertion (A) and Reason (R):
+
+**Assertion (A):** ${finalAssertion}
+**Reason (R):** ${finalReason}`;
+
+    let correctAnswerText = "";
+    if (isAssertionTrue && isReasonTrue) {
+       // We can't guarantee R is the correct explanation for A, so we just say it's not.
+       correctAnswerText = "Both A and R are true, but R is NOT the correct explanation of A.";
+    } else if (isAssertionTrue && !isReasonTrue) {
+       correctAnswerText = "A is true, but R is false.";
+    } else if (!isAssertionTrue && isReasonTrue) {
+       correctAnswerText = "A is false, but R is true.";
+    } else {
+       correctAnswerText = "Both A and R are false.";
+    }
+
+    const possibleAnswers = [
+       "Both A and R are true, and R is the correct explanation of A.",
+       "Both A and R are true, but R is NOT the correct explanation of A.",
+       "A is true, but R is false.",
+       "A is false, but R is true.",
+       "Both A and R are false."
+    ];
+
+    const wrongAnswers = possibleAnswers.filter(a => a !== correctAnswerText);
+    const finalWrong = shuffle(wrongAnswers).slice(0, 3);
+
+    options = [
+       { id: "correct", text: correctAnswerText },
+       ...finalWrong.map((t, i) => ({ id: `distractor_${i}`, text: t }))
+    ];
+
+    explanation = `${isAssertionTrue ? "The assertion is a valid concept." : "The assertion is incorrect."} ${isReasonTrue ? "The reason states a valid concept." : "The reason is incorrect."}`;
+  }
+
+  // Double check uniqueness of options (in case mutations didn't change things)
+  const uniqueTexts = new Set(options.map(o => o.text));
+  if (uniqueTexts.size < 4) {
+      // Just fallback to a simple identification if we got duplicate texts
+      return null;
+  }
 
   return {
     id: `theory_${Date.now()}_${Math.random().toString(36).substring(7)}`,
     type: "theory_concept",
     text,
-    formulaId: "theory", // Not tied to a specific formula
+    formulaId: "theory",
     options: shuffle(options),
     correctOptionId: "correct",
-    explanation: `This is a fundamental concept from ${point.category}.`,
+    explanation: explanation,
     category: point.category,
   };
 };
@@ -283,23 +515,55 @@ const generateProportionality = (formula: EnrichedFormula): QuizQuestion | null 
   if (variables.length === 0) return null;
 
   const targetVar = formula.name;
-  const inputVar = getRandomItem(variables);
+  // Ensure the chosen variable is actually present in the latex string
+  const validVariables = variables.filter(v => formula.latex.includes(v.symbol));
+  if (validVariables.length === 0) return null;
+  const inputVar = getRandomItem(validVariables);
 
   let effect = "doubled";
 
-  if (formula.latex.includes(`${inputVar.symbol}^2`)) {
-    effect = "quadrupled";
-  } else if (formula.latex.includes(`${inputVar.symbol}^3`)) {
-    effect = "increased by a factor of 8";
-  } else if (
-    formula.latex.includes(`\\frac{1}{${inputVar.symbol}}`) ||
-    formula.latex.includes(`\\frac{`)
-  ) {
-    if (formula.latex.split("\\frac{")[1]?.includes(inputVar.symbol)) {
-      effect = "halved";
-    }
-  } else if (formula.latex.includes(`\\sqrt{${inputVar.symbol}}`)) {
-    effect = "increased by a factor of √2";
+  // A more robust check for whether a variable is in the denominator.
+  // E.g., \frac{a}{b} -> b is in denominator.
+  const fracMatches = [...formula.latex.matchAll(/\\frac\{([^}]*)\}/g)];
+  let inDenominator = false;
+  // This is a naive regex matching for rac{...}{...} but let's just do a simpler split approach carefully
+  // If the string contains rac, check the blocks.
+
+  const latex = formula.latex;
+
+  // Check if it's explicitly in a denominator (like after a division slash or in the second brace of a frac)
+  if (latex.includes('/' + inputVar.symbol) || latex.includes('/ ' + inputVar.symbol)) {
+     inDenominator = true;
+  }
+
+  const fracParts = latex.split("\\frac{");
+  for (let i = 1; i < fracParts.length; i++) {
+     const part = fracParts[i];
+     // Part looks like "num}{den}..."
+     const braceSplit = part.split("}{");
+     if (braceSplit.length > 1) {
+         const denAndRest = braceSplit[1];
+         // The denominator is everything up to the next closing brace
+         const den = denAndRest.split("}")[0];
+         if (den.includes(inputVar.symbol)) {
+             inDenominator = true;
+         }
+     }
+  }
+
+  const isSquared = latex.includes(inputVar.symbol + "^2");
+  const isCubed = latex.includes(inputVar.symbol + "^3");
+  const isSqrt = latex.includes("\\sqrt{" + inputVar.symbol + "}") || latex.includes("\\sqrt {") && latex.includes(inputVar.symbol);
+
+  if (inDenominator) {
+     if (isSquared) effect = "quartered";
+     else if (isCubed) effect = "decreased by a factor of 8";
+     else if (isSqrt) effect = "decreased by a factor of √2";
+     else effect = "halved";
+  } else {
+     if (isSquared) effect = "quadrupled";
+     else if (isCubed) effect = "increased by a factor of 8";
+     else if (isSqrt) effect = "increased by a factor of √2";
   }
 
   const text = `In the formula for ${targetVar}, if ${inputVar.meaning || inputVar.symbol} is doubled (assuming other variables are constant), what happens to the result?`;
@@ -311,6 +575,9 @@ const generateProportionality = (formula: EnrichedFormula): QuizQuestion | null 
     "quartered",
     "remains unchanged",
     "increased by a factor of 8",
+    "decreased by a factor of 8",
+    "increased by a factor of √2",
+    "decreased by a factor of √2",
   ];
   const wrongEffects = allEffects.filter((e) => e !== effect);
   const distractors = shuffle(wrongEffects).slice(0, 3);

@@ -52,9 +52,11 @@ import jeeClass12ChemistryData from "@/data/ncert/jee_class12_chemistry.json";
 import jeeMathematicsData from "@/data/ncert/jee_mathematics.json";
 import jeeClass12MathematicsData from "@/data/ncert/jee_class12_mathematics.json";
 
+const patchChapters = (chapters: Chapter[], prefix: string): Chapter[] => chapters.map(ch => ({ ...ch, id: prefix + '_' + ch.id }));
+
 const mergedPhysicsData = {
   ...physicsData,
-  chapters: [...physicsData.chapters, ...class12PhysicsData.chapters],
+  chapters: patchChapters([...physicsData.chapters, ...class12PhysicsData.chapters], 'physics'),
   audience: [
     ...(physicsData.audience || []),
     ...(class12PhysicsData.audience || []),
@@ -65,7 +67,7 @@ export const allSubjects: SubjectData[] = [
   mergedPhysicsData as SubjectData,
   {
     ...chemistryData,
-    chapters: [...chemistryData.chapters, ...class12ChemistryData.chapters],
+    chapters: patchChapters([...chemistryData.chapters, ...class12ChemistryData.chapters], 'chemistry'),
     audience: [
       ...(chemistryData.audience || []),
       ...(class12ChemistryData.audience || []),
@@ -73,7 +75,7 @@ export const allSubjects: SubjectData[] = [
   } as SubjectData,
   {
     ...mathematicsData,
-    chapters: [...mathematicsData.chapters, ...class12MathematicsData.chapters],
+    chapters: patchChapters([...mathematicsData.chapters, ...class12MathematicsData.chapters], 'mathematics'),
     audience: [
       ...(mathematicsData.audience || []),
       ...(class12MathematicsData.audience || []),
@@ -81,7 +83,7 @@ export const allSubjects: SubjectData[] = [
   } as SubjectData,
   {
     ...biologyData,
-    chapters: [...biologyData.chapters, ...class12BiologyData.chapters],
+    chapters: patchChapters([...biologyData.chapters, ...class12BiologyData.chapters], 'biology'),
     audience: [
       ...(biologyData.audience || []),
       ...(class12BiologyData.audience || []),
@@ -91,7 +93,7 @@ export const allSubjects: SubjectData[] = [
   {
     subject: "JEE Physics",
     audience: ["jee"],
-    chapters: [...jeePhysicsData.chapters, ...jeeClass12PhysicsData.chapters],
+    chapters: patchChapters([...jeePhysicsData.chapters, ...jeeClass12PhysicsData.chapters], 'jee_physics'),
   } as SubjectData,
   {
     subject: "JEE Chemistry",
