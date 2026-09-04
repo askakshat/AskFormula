@@ -3,7 +3,7 @@ import { filterFormulas } from "./formulas";
 
 describe("filterFormulas", () => {
   it("should return formulas for valid subject and single matching chapter ID", () => {
-    const result = filterFormulas("physics", ["ch1"]);
+    const result = filterFormulas("physics", ["physics_ch1"]);
 
     expect(result.length).toBeGreaterThan(0);
     // All formulas should belong to chapter 1
@@ -15,7 +15,7 @@ describe("filterFormulas", () => {
   });
 
   it("should return formulas for valid subject and multiple matching chapter IDs", () => {
-    const result = filterFormulas("physics", ["ch1", "ch2"]);
+    const result = filterFormulas("physics", ["physics_ch1", "physics_ch2"]);
 
     expect(result.length).toBeGreaterThan(0);
 
@@ -31,7 +31,7 @@ describe("filterFormulas", () => {
   });
 
   it("should return an empty array for an invalid subject", () => {
-    const result = filterFormulas("invalid-subject", ["ch1"]);
+    const result = filterFormulas("invalid-subject", ["physics_ch1"]);
     expect(result).toEqual([]);
   });
 
@@ -41,9 +41,9 @@ describe("filterFormulas", () => {
   });
 
   it("should be case-insensitive for the subject parameter", () => {
-    const resultLowercase = filterFormulas("physics", ["ch1"]);
-    const resultUppercase = filterFormulas("PHYSICS", ["ch1"]);
-    const resultMixedcase = filterFormulas("pHySiCs", ["ch1"]);
+    const resultLowercase = filterFormulas("physics", ["physics_ch1"]);
+    const resultUppercase = filterFormulas("PHYSICS", ["physics_ch1"]);
+    const resultMixedcase = filterFormulas("pHySiCs", ["physics_ch1"]);
 
     expect(resultLowercase.length).toBeGreaterThan(0);
     expect(resultUppercase).toEqual(resultLowercase);
@@ -51,7 +51,7 @@ describe("filterFormulas", () => {
   });
 
   it("should correctly map the chapter name onto each returned formula", () => {
-    const result = filterFormulas("chemistry", ["c_ch1"]);
+    const result = filterFormulas("chemistry", ["chemistry_c_ch1"]);
     expect(result.length).toBeGreaterThan(0);
 
     for (const formula of result) {

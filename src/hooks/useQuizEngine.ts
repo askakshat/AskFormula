@@ -222,7 +222,7 @@ const generateFormulaIdentification = (
   allFormulas: EnrichedFormula[]
 ): QuizQuestion => {
   const targetVar = formula.name;
-  const text = `Which formula correctly identifies ${targetVar}?`;
+  const text = `Which formula correctly represents ${targetVar}?`;
 
   const similarFormulas = allFormulas.filter(
     (f) => f.id !== formula.id && f.latex !== formula.latex
@@ -250,6 +250,8 @@ const generateFormulaIdentification = (
   };
 };
 
+const stripTheoryPrefix = (text: string) => text.includes(': ') ? text.split(': ').slice(1).join(': ').trim() : text;
+
 const generateTheoryQuestion = (
   point: TheoryPoint,
   allPoints: TheoryPoint[]
@@ -258,12 +260,20 @@ const generateTheoryQuestion = (
 
   const text = `Which of the following is a key concept regarding ${point.category.split(' • ').pop()}?`;
 
-  const otherPoints = allPoints.filter(p => p.text !== point.text);
-  const distractors = shuffle(otherPoints).slice(0, 3);
+  // Filter distractors to be from the same subject if possible, or at least not totally random from all
+  const subjectCategory = point.category.split(' • ')[2]; // Board • Class • Subject • Chapter
+  let similarPoints = allPoints.filter(p => p.text !== point.text && p.category.includes(subjectCategory || ""));
+
+  // fallback if not enough
+  if (similarPoints.length < 3) {
+      similarPoints = allPoints.filter(p => p.text !== point.text);
+  }
+
+  const distractors = shuffle(similarPoints).slice(0, 3);
 
   const options: QuizOption[] = [
-    { id: "correct", text: point.text },
-    ...distractors.map((d, i) => ({ id: `distractor_${i}`, text: d.text })),
+    { id: "correct", text: stripTheoryPrefix(point.text) },
+    ...distractors.map((d, i) => ({ id: `distractor_${i}`, text: stripTheoryPrefix(d.text) })),
   ];
 
   return {
@@ -283,23 +293,55 @@ const generateProportionality = (formula: EnrichedFormula): QuizQuestion | null 
   if (variables.length === 0) return null;
 
   const targetVar = formula.name;
-  const inputVar = getRandomItem(variables);
+  // Ensure the chosen variable is actually present in the latex string
+  const validVariables = variables.filter(v => formula.latex.includes(v.symbol));
+  if (validVariables.length === 0) return null;
+  const inputVar = getRandomItem(validVariables);
 
   let effect = "doubled";
 
-  if (formula.latex.includes(`${inputVar.symbol}^2`)) {
-    effect = "quadrupled";
-  } else if (formula.latex.includes(`${inputVar.symbol}^3`)) {
-    effect = "increased by a factor of 8";
-  } else if (
-    formula.latex.includes(`\\frac{1}{${inputVar.symbol}}`) ||
-    formula.latex.includes(`\\frac{`)
-  ) {
-    if (formula.latex.split("\\frac{")[1]?.includes(inputVar.symbol)) {
-      effect = "halved";
-    }
-  } else if (formula.latex.includes(`\\sqrt{${inputVar.symbol}}`)) {
-    effect = "increased by a factor of √2";
+  // A more robust check for whether a variable is in the denominator.
+  // E.g., \frac{a}{b} -> b is in denominator.
+  const fracMatches = [...formula.latex.matchAll(/\\frac\{([^}]*)\}/g)];
+  let inDenominator = false;
+  // This is a naive regex matching for rac{...}{...} but let's just do a simpler split approach carefully
+  // If the string contains rac, check the blocks.
+
+  const latex = formula.latex;
+
+  // Check if it's explicitly in a denominator (like after a division slash or in the second brace of a frac)
+  if (latex.includes('/' + inputVar.symbol) || latex.includes('/ ' + inputVar.symbol)) {
+     inDenominator = true;
+  }
+
+  const fracParts = latex.split("\\frac{");
+  for (let i = 1; i < fracParts.length; i++) {
+     const part = fracParts[i];
+     // Part looks like "num}{den}..."
+     const braceSplit = part.split("}{");
+     if (braceSplit.length > 1) {
+         const denAndRest = braceSplit[1];
+         // The denominator is everything up to the next closing brace
+         const den = denAndRest.split("}")[0];
+         if (den.includes(inputVar.symbol)) {
+             inDenominator = true;
+         }
+     }
+  }
+
+  const isSquared = latex.includes(inputVar.symbol + "^2");
+  const isCubed = latex.includes(inputVar.symbol + "^3");
+  const isSqrt = latex.includes("\\sqrt{" + inputVar.symbol + "}") || latex.includes("\\sqrt {") && latex.includes(inputVar.symbol);
+
+  if (inDenominator) {
+     if (isSquared) effect = "quartered";
+     else if (isCubed) effect = "decreased by a factor of 8";
+     else if (isSqrt) effect = "decreased by a factor of √2";
+     else effect = "halved";
+  } else {
+     if (isSquared) effect = "quadrupled";
+     else if (isCubed) effect = "increased by a factor of 8";
+     else if (isSqrt) effect = "increased by a factor of √2";
   }
 
   const text = `In the formula for ${targetVar}, if ${inputVar.meaning || inputVar.symbol} is doubled (assuming other variables are constant), what happens to the result?`;
@@ -311,6 +353,9 @@ const generateProportionality = (formula: EnrichedFormula): QuizQuestion | null 
     "quartered",
     "remains unchanged",
     "increased by a factor of 8",
+    "decreased by a factor of 8",
+    "increased by a factor of √2",
+    "decreased by a factor of √2",
   ];
   const wrongEffects = allEffects.filter((e) => e !== effect);
   const distractors = shuffle(wrongEffects).slice(0, 3);
