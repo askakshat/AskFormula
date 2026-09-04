@@ -209,7 +209,7 @@ export default function PrintView() {
           @page {
             margin: 15mm;
             @bottom-center {
-              content: "Generated for free at AskFormula - askformula.vercel.app";
+              content: "Generated for free at AskFormula - ask-formula.vercel.app";
               font-family: sans-serif;
               font-size: 10pt;
               color: #64748b;
