@@ -217,6 +217,51 @@ const generateNumericalComputation = (
   };
 };
 
+// Helper to generate algorithmic distractors for LaTeX strings
+const generateLatexDistractors = (latex: string): string[] => {
+  const distractors = new Set<string>();
+
+  // Rule 1: Swap signs (+ to -, - to +) on the RHS if there's an equals sign
+  const parts = latex.split('=');
+  if (parts.length === 2) {
+    const lhs = parts[0];
+    const rhs = parts[1];
+
+    // Swap + and -
+    if (rhs.includes('+') || rhs.includes('-')) {
+        let swappedSign = rhs.replace(/\+/g, 'TEMP_PLUS').replace(/-/g, '+').replace(/TEMP_PLUS/g, '-');
+        distractors.add(lhs + '=' + swappedSign);
+    }
+
+    // Rule 2: Swap sin and cos
+    if (rhs.includes('sin') || rhs.includes('cos')) {
+        let swappedTrig = rhs.replace(/\\sin/g, 'TEMP_SIN').replace(/\\cos/g, '\\sin').replace(/TEMP_SIN/g, '\\cos');
+        // also try without backslash just in case
+        swappedTrig = swappedTrig.replace(/\bsin\b/g, 'TEMP_SIN').replace(/\bcos\b/g, 'sin').replace(/TEMP_SIN/g, 'cos');
+        distractors.add(lhs + '=' + swappedTrig);
+    }
+
+    // Rule 3: Swap multiplication and division coefficients if present like 3 \sin -> 1/3 \sin or 4 \cos^3 -> 3 \cos^3 (just swapping numbers)
+    // A quick hack for the cos 3x formula specifically: 4 cos^3 x - 3 cos x -> 3 cos^3 x - 4 cos x
+    if (rhs.match(/\d/)) {
+        let swappedNums = rhs.replace(/4/g, 'TEMP_4').replace(/3/g, '4').replace(/TEMP_4/g, '3');
+        if (swappedNums !== rhs) distractors.add(lhs + '=' + swappedNums);
+    }
+
+    // Rule 4: If fraction \frac{A}{B}, swap to \frac{B}{A}
+    if (rhs.includes('\\frac{')) {
+        const fracRegex = /\\frac\{([^}]+)\}\{([^}]+)\}/;
+        const match = rhs.match(fracRegex);
+        if (match) {
+            const swappedFrac = rhs.replace(fracRegex, `\\frac{${match[2]}}{${match[1]}}`);
+            distractors.add(lhs + '=' + swappedFrac);
+        }
+    }
+  }
+
+  return Array.from(distractors);
+};
+
 const generateFormulaIdentification = (
   formula: EnrichedFormula,
   allFormulas: EnrichedFormula[]
@@ -224,18 +269,40 @@ const generateFormulaIdentification = (
   const targetVar = formula.name;
   const text = `Which formula correctly represents ${targetVar}?`;
 
+  const algorithmicDistractors = generateLatexDistractors(formula.latex);
+
+  // Try to find distractors from the SAME chapter first
+  const sameChapterFormulas = allFormulas.filter(
+    (f) => f.id !== formula.id && f.latex !== formula.latex &&
+           f._meta?.chapterName === formula._meta?.chapterName
+  );
+
+  // Also find other formulas in general as fallback
   const similarFormulas = allFormulas.filter(
     (f) => f.id !== formula.id && f.latex !== formula.latex
   );
-  let distractors = shuffle(similarFormulas).slice(0, 3);
 
-  if (distractors.length < 3) {
-    distractors = shuffle(allFormulas.filter((f) => f.id !== formula.id)).slice(0, 3);
+  let distractorLatex = new Set<string>(algorithmicDistractors);
+
+  // Fill up to 3 distractors using same chapter formulas
+  const shuffledSameChapter = shuffle(sameChapterFormulas);
+  for (const f of shuffledSameChapter) {
+      if (distractorLatex.size >= 3) break;
+      distractorLatex.add(f.latex);
   }
+
+  // Fill remaining with other formulas
+  const shuffledSimilar = shuffle(similarFormulas);
+  for (const f of shuffledSimilar) {
+      if (distractorLatex.size >= 3) break;
+      distractorLatex.add(f.latex);
+  }
+
+  const finalDistractors = shuffle(Array.from(distractorLatex)).slice(0, 3);
 
   const options: QuizOption[] = [
     { id: "correct", latex: formula.latex },
-    ...distractors.map((d, i) => ({ id: `distractor_${i}`, latex: d.latex })),
+    ...finalDistractors.map((latex, i) => ({ id: `distractor_${i}`, latex })),
   ];
 
   return {
