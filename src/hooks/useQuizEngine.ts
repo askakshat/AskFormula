@@ -317,7 +317,6 @@ const generateFormulaIdentification = (
   };
 };
 
-const stripTheoryPrefix = (text: string) => text.includes(': ') ? text.split(': ').slice(1).join(': ').trim() : text;
 
 
 const mutateStatementToFalse = (text: string): string => {
@@ -402,12 +401,12 @@ const generateTheoryQuestion = (
     text = `Which of the following statements is TRUE regarding ${point.category.split(' • ').pop()}?`;
 
     // 1 true, 1 mutated true (same topic), 2 mutated randoms
-    const trueStmt = stripTheoryPrefix(point.text);
-    const falseSameTopic = mutateStatementToFalse(stripTheoryPrefix(point.text));
+    const trueStmt = point.text;
+    const falseSameTopic = mutateStatementToFalse(point.text);
 
     const distractors = shuffle(similarPoints).slice(0, 2);
-    const falseOther1 = mutateStatementToFalse(stripTheoryPrefix(distractors[0].text));
-    const falseOther2 = mutateStatementToFalse(stripTheoryPrefix(distractors[1].text));
+    const falseOther1 = mutateStatementToFalse(distractors[0].text);
+    const falseOther2 = mutateStatementToFalse(distractors[1].text);
 
     // Fallback if mutation didn't change it (very rare, but possible), just use raw distractors (they are technically true for other topics, but false for THIS topic).
     // Actually, asking "which is true regarding X" implies the others might be true for Y but false for X. Mutating them is safer.
@@ -424,37 +423,37 @@ const generateTheoryQuestion = (
     // Mode 2: Find the FALSE statement
     text = `Which of the following statements is FALSE regarding ${point.category.split(' • ').pop()}?`;
 
-    const falseStmt = mutateStatementToFalse(stripTheoryPrefix(point.text));
+    const falseStmt = mutateStatementToFalse(point.text);
 
 
     // Let's find other true statements from the same chapter
     const sameChapterPoints = similarPoints.filter(p => p.category === point.category);
     let trueDistractors = [];
     if (sameChapterPoints.length >= 3) {
-        trueDistractors = shuffle(sameChapterPoints).slice(0, 3).map(p => stripTheoryPrefix(p.text));
+        trueDistractors = shuffle(sameChapterPoints).slice(0, 3).map(p => p.text);
     } else {
         // Fallback to general similar points
-        trueDistractors = shuffle(similarPoints).slice(0, 3).map(p => stripTheoryPrefix(p.text));
+        trueDistractors = shuffle(similarPoints).slice(0, 3).map(p => p.text);
     }
 
     options = [
       { id: "correct", text: falseStmt },
       ...trueDistractors.map((t, i) => ({ id: `distractor_${i}`, text: t }))
     ];
-    explanation = `The false statement is "${falseStmt}". The true concept is actually: ${stripTheoryPrefix(point.text)}`;
+    explanation = `The false statement is "${falseStmt}". The true concept is actually: ${point.text}`;
 
   } else {
     // Mode 3: Assertion and Reasoning
     const distractorPoint = getRandomItem(similarPoints);
 
-    const assertion = stripTheoryPrefix(point.text);
+    const assertion = point.text;
     // If reasoning is correct, it should just be another true statement (doesn't have to perfectly explain it, but it's an "Assertion-Reasoning" format)
     // Actually, generating a real causal reasoning is hard. Let's just evaluate if they are both true.
     const isAssertionTrue = Math.random() > 0.3;
     const isReasonTrue = Math.random() > 0.3;
 
     const finalAssertion = isAssertionTrue ? assertion : mutateStatementToFalse(assertion);
-    const finalReason = isReasonTrue ? stripTheoryPrefix(distractorPoint.text) : mutateStatementToFalse(stripTheoryPrefix(distractorPoint.text));
+    const finalReason = isReasonTrue ? distractorPoint.text : mutateStatementToFalse(distractorPoint.text);
 
     text = `Given the following Assertion (A) and Reason (R):
 
@@ -687,7 +686,7 @@ export function useQuizEngine(selectedChapterIds: string[] = []) {
     }
 
     return question;
-  }, [allFormulas]);
+  }, [allFormulas, allTheoryPoints]);
 
   const generateQuiz = useCallback(
     (count: number = 10): QuizQuestion[] => {
