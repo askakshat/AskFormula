@@ -47,7 +47,7 @@ export default function QuizCard({
     const isCorrect = selectedOptionId === question.correctOptionId;
 
     return (
-        <div className="w-full max-w-2xl bg-[#11131a] rounded-2xl border border-[#272a31] shadow-2xl overflow-hidden flex flex-col">
+        <div className="w-full max-w-2xl bg-[#11131a] rounded-2xl border border-[#272a31] shadow-2xl overflow-hidden flex flex-col mb-8">
 
             <div className="p-4 md:p-6 border-b border-[#272a31] flex flex-col gap-2 bg-[#15171e]">
                 <div className="flex items-center justify-between text-xs font-semibold tracking-wider text-slate-400">
