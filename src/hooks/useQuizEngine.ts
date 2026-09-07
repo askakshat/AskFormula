@@ -51,8 +51,8 @@ const getAllTheoryPoints = (): TheoryPoint[] => {
 
     subject.chapters.forEach((chapter) => {
       if (chapter.keyPoints) {
-        const category = `${board} • Class ${chapter.class || 'Unknown'} • ${subject.subject} • ${chapter.name || chapter.chapterName || "Unknown"}`;
-        chapter.keyPoints.forEach(kp => {
+        const category = `${board} • Class ${chapter.class || "Unknown"} • ${subject.subject} • ${chapter.name || chapter.chapterName || "Unknown"}`;
+        chapter.keyPoints.forEach((kp) => {
           points.push({ text: kp, category });
         });
       }
@@ -70,14 +70,14 @@ const getAllFormulas = (): EnrichedFormula[] => {
     else if (subject.audience.includes("neet")) board = "NEET";
 
     subject.chapters.forEach((chapter) => {
-      const enrichedFormulas = chapter.formulas.map(f => ({
+      const enrichedFormulas = chapter.formulas.map((f) => ({
         ...f,
         _meta: {
           board,
-          classLevel: `Class ${chapter.class || 'Unknown'}`,
+          classLevel: `Class ${chapter.class || "Unknown"}`,
           subject: subject.subject,
-          chapterName: chapter.name || chapter.chapterName || "Unknown"
-        }
+          chapterName: chapter.name || chapter.chapterName || "Unknown",
+        },
       }));
       formulas.push(...enrichedFormulas);
     });
@@ -112,7 +112,7 @@ const extractVariables = (formula: Formula) => {
         "l",
         "o",
         "g",
-      ].includes(v)
+      ].includes(v),
   );
 
   return uniqueVars.map((v) => ({ symbol: v, meaning: `Variable ${v}` }));
@@ -120,13 +120,16 @@ const extractVariables = (formula: Formula) => {
 
 const evaluateSimpleFormula = (
   latex: string,
-  values: Record<string, number>
+  values: Record<string, number>,
 ): number | null => {
   try {
     let expression = latex.split("=")[1] || latex;
     // Handle nested fractions heuristically by doing a few passes
-    for (let i=0; i<3; i++) {
-        expression = expression.replace(/\\frac{([^{}]+)}{([^{}]+)}/g, "($1)/($2)");
+    for (let i = 0; i < 3; i++) {
+      expression = expression.replace(
+        /\\frac{([^{}]+)}{([^{}]+)}/g,
+        "($1)/($2)",
+      );
     }
     expression = expression.replace(/\\cdot/g, "*");
     expression = expression.replace(/\\times/g, "*");
@@ -159,7 +162,7 @@ const evaluateSimpleFormula = (
 };
 
 const generateNumericalComputation = (
-  formula: EnrichedFormula
+  formula: EnrichedFormula,
 ): QuizQuestion | null => {
   const variables = extractVariables(formula);
   if (variables.length === 0 || !formula.latex.includes("=")) return null;
@@ -213,7 +216,9 @@ const generateNumericalComputation = (
     options: shuffle(options),
     correctOptionId: "correct",
     explanation: `Using the formula $${formula.latex}$, substitute the given values to calculate the result.`,
-    category: formula._meta ? `${formula._meta.board} • ${formula._meta.classLevel} • ${formula._meta.subject} • ${formula._meta.chapterName}` : (formula.chapter || formula.topic || "General"),
+    category: formula._meta
+      ? `${formula._meta.board} • ${formula._meta.classLevel} • ${formula._meta.subject} • ${formula._meta.chapterName}`
+      : formula.chapter || formula.topic || "General",
   };
 };
 
@@ -222,40 +227,55 @@ const generateLatexDistractors = (latex: string): string[] => {
   const distractors = new Set<string>();
 
   // Rule 1: Swap signs (+ to -, - to +) on the RHS if there's an equals sign
-  const parts = latex.split('=');
+  const parts = latex.split("=");
   if (parts.length === 2) {
     const lhs = parts[0];
     const rhs = parts[1];
 
     // Swap + and -
-    if (rhs.includes('+') || rhs.includes('-')) {
-        const swappedSign = rhs.replace(/\+/g, 'TEMP_PLUS').replace(/-/g, '+').replace(/TEMP_PLUS/g, '-');
-        distractors.add(lhs + '=' + swappedSign);
+    if (rhs.includes("+") || rhs.includes("-")) {
+      const swappedSign = rhs
+        .replace(/\+/g, "TEMP_PLUS")
+        .replace(/-/g, "+")
+        .replace(/TEMP_PLUS/g, "-");
+      distractors.add(lhs + "=" + swappedSign);
     }
 
     // Rule 2: Swap sin and cos
-    if (rhs.includes('sin') || rhs.includes('cos')) {
-        let swappedTrig = rhs.replace(/\\sin/g, 'TEMP_SIN').replace(/\\cos/g, '\\sin').replace(/TEMP_SIN/g, '\\cos');
-        // also try without backslash just in case
-        swappedTrig = swappedTrig.replace(/\bsin\b/g, 'TEMP_SIN').replace(/\bcos\b/g, 'sin').replace(/TEMP_SIN/g, 'cos');
-        distractors.add(lhs + '=' + swappedTrig);
+    if (rhs.includes("sin") || rhs.includes("cos")) {
+      let swappedTrig = rhs
+        .replace(/\\sin/g, "TEMP_SIN")
+        .replace(/\\cos/g, "\\sin")
+        .replace(/TEMP_SIN/g, "\\cos");
+      // also try without backslash just in case
+      swappedTrig = swappedTrig
+        .replace(/\bsin\b/g, "TEMP_SIN")
+        .replace(/\bcos\b/g, "sin")
+        .replace(/TEMP_SIN/g, "cos");
+      distractors.add(lhs + "=" + swappedTrig);
     }
 
     // Rule 3: Swap multiplication and division coefficients if present like 3 \sin -> 1/3 \sin or 4 \cos^3 -> 3 \cos^3 (just swapping numbers)
     // A quick hack for the cos 3x formula specifically: 4 cos^3 x - 3 cos x -> 3 cos^3 x - 4 cos x
     if (rhs.match(/\d/)) {
-        const swappedNums = rhs.replace(/4/g, 'TEMP_4').replace(/3/g, '4').replace(/TEMP_4/g, '3');
-        if (swappedNums !== rhs) distractors.add(lhs + '=' + swappedNums);
+      const swappedNums = rhs
+        .replace(/4/g, "TEMP_4")
+        .replace(/3/g, "4")
+        .replace(/TEMP_4/g, "3");
+      if (swappedNums !== rhs) distractors.add(lhs + "=" + swappedNums);
     }
 
     // Rule 4: If fraction \frac{A}{B}, swap to \frac{B}{A}
-    if (rhs.includes('\\frac{')) {
-        const fracRegex = /\\frac\{([^}]+)\}\{([^}]+)\}/;
-        const match = rhs.match(fracRegex);
-        if (match) {
-            const swappedFrac = rhs.replace(fracRegex, `\\frac{${match[2]}}{${match[1]}}`);
-            distractors.add(lhs + '=' + swappedFrac);
-        }
+    if (rhs.includes("\\frac{")) {
+      const fracRegex = /\\frac\{([^}]+)\}\{([^}]+)\}/;
+      const match = rhs.match(fracRegex);
+      if (match) {
+        const swappedFrac = rhs.replace(
+          fracRegex,
+          `\\frac{${match[2]}}{${match[1]}}`,
+        );
+        distractors.add(lhs + "=" + swappedFrac);
+      }
     }
   }
 
@@ -264,7 +284,7 @@ const generateLatexDistractors = (latex: string): string[] => {
 
 const generateFormulaIdentification = (
   formula: EnrichedFormula,
-  allFormulas: EnrichedFormula[]
+  allFormulas: EnrichedFormula[],
 ): QuizQuestion => {
   const targetVar = formula.name;
   const text = `Which formula correctly represents ${targetVar}?`;
@@ -273,13 +293,15 @@ const generateFormulaIdentification = (
 
   // Try to find distractors from the SAME chapter first
   const sameChapterFormulas = allFormulas.filter(
-    (f) => f.id !== formula.id && f.latex !== formula.latex &&
-           f._meta?.chapterName === formula._meta?.chapterName
+    (f) =>
+      f.id !== formula.id &&
+      f.latex !== formula.latex &&
+      f._meta?.chapterName === formula._meta?.chapterName,
   );
 
   // Also find other formulas in general as fallback
   const similarFormulas = allFormulas.filter(
-    (f) => f.id !== formula.id && f.latex !== formula.latex
+    (f) => f.id !== formula.id && f.latex !== formula.latex,
   );
 
   const distractorLatex = new Set<string>(algorithmicDistractors);
@@ -287,15 +309,15 @@ const generateFormulaIdentification = (
   // Fill up to 3 distractors using same chapter formulas
   const shuffledSameChapter = shuffle(sameChapterFormulas);
   for (const f of shuffledSameChapter) {
-      if (distractorLatex.size >= 3) break;
-      distractorLatex.add(f.latex);
+    if (distractorLatex.size >= 3) break;
+    distractorLatex.add(f.latex);
   }
 
   // Fill remaining with other formulas
   const shuffledSimilar = shuffle(similarFormulas);
   for (const f of shuffledSimilar) {
-      if (distractorLatex.size >= 3) break;
-      distractorLatex.add(f.latex);
+    if (distractorLatex.size >= 3) break;
+    distractorLatex.add(f.latex);
   }
 
   const finalDistractors = shuffle(Array.from(distractorLatex)).slice(0, 3);
@@ -313,43 +335,43 @@ const generateFormulaIdentification = (
     options: shuffle(options),
     correctOptionId: "correct",
     explanation: `The correct formula for ${targetVar} is $${formula.latex}$.`,
-    category: formula._meta ? `${formula._meta.board} • ${formula._meta.classLevel} • ${formula._meta.subject} • ${formula._meta.chapterName}` : (formula.chapter || formula.topic || "General"),
+    category: formula._meta
+      ? `${formula._meta.board} • ${formula._meta.classLevel} • ${formula._meta.subject} • ${formula._meta.chapterName}`
+      : formula.chapter || formula.topic || "General",
   };
 };
 
-
-
 const mutateStatementToFalse = (text: string): string => {
   const letterCount = (text.match(/[a-zA-Z]/g) || []).length;
-  const isEquationOnly = letterCount < 10 && text.includes('=');
+  const isEquationOnly = letterCount < 10 && text.includes("=");
 
   const antonyms: Array<[RegExp, string]> = [
-    [/\b(increases?)\b/gi, 'decreases'],
-    [/\b(decreases?)\b/gi, 'increases'],
-    [/\b(independent)\b/gi, 'dependent'],
-    [/\b(dependent)\b/gi, 'independent'],
-    [/\b(directly)\b/gi, 'inversely'],
-    [/\b(inversely)\b/gi, 'directly'],
-    [/\b(positive)\b/gi, 'negative'],
-    [/\b(negative)\b/gi, 'positive'],
-    [/\b(always)\b/gi, 'never'],
-    [/\b(never)\b/gi, 'always'],
-    [/\b(attractive)\b/gi, 'repulsive'],
-    [/\b(repulsive)\b/gi, 'attractive'],
-    [/\b(maximum)\b/gi, 'minimum'],
-    [/\b(minimum)\b/gi, 'maximum'],
-    [/\b(concave)\b/gi, 'convex'],
-    [/\b(convex)\b/gi, 'concave'],
-    [/\b(converge[s]?)\b/gi, 'diverges'],
-    [/\b(diverge[s]?)\b/gi, 'converges'],
-    [/\b(equal)\b/gi, 'unequal'],
-    [/\b(zero)\b/gi, 'non-zero'],
-    [/\b(greater)\b/gi, 'less'],
-    [/\b(less)\b/gi, 'greater'],
-    [/\b(inside)\b/gi, 'outside'],
-    [/\b(outside)\b/gi, 'inside'],
-    [/\b(parallel)\b/gi, 'perpendicular'],
-    [/\b(perpendicular)\b/gi, 'parallel'],
+    [/\b(increases?)\b/gi, "decreases"],
+    [/\b(decreases?)\b/gi, "increases"],
+    [/\b(independent)\b/gi, "dependent"],
+    [/\b(dependent)\b/gi, "independent"],
+    [/\b(directly)\b/gi, "inversely"],
+    [/\b(inversely)\b/gi, "directly"],
+    [/\b(positive)\b/gi, "negative"],
+    [/\b(negative)\b/gi, "positive"],
+    [/\b(always)\b/gi, "never"],
+    [/\b(never)\b/gi, "always"],
+    [/\b(attractive)\b/gi, "repulsive"],
+    [/\b(repulsive)\b/gi, "attractive"],
+    [/\b(maximum)\b/gi, "minimum"],
+    [/\b(minimum)\b/gi, "maximum"],
+    [/\b(concave)\b/gi, "convex"],
+    [/\b(convex)\b/gi, "concave"],
+    [/\b(converge[s]?)\b/gi, "diverges"],
+    [/\b(diverge[s]?)\b/gi, "converges"],
+    [/\b(equal)\b/gi, "unequal"],
+    [/\b(zero)\b/gi, "non-zero"],
+    [/\b(greater)\b/gi, "less"],
+    [/\b(less)\b/gi, "greater"],
+    [/\b(inside)\b/gi, "outside"],
+    [/\b(outside)\b/gi, "inside"],
+    [/\b(parallel)\b/gi, "perpendicular"],
+    [/\b(perpendicular)\b/gi, "parallel"],
   ];
 
   for (const [pattern, replacement] of antonyms) {
@@ -359,20 +381,20 @@ const mutateStatementToFalse = (text: string): string => {
   }
 
   if (isEquationOnly) {
-      if (text.includes(" = ")) {
-          if (text.includes("2")) return text.replace("2", "4");
-          if (text.includes("4")) return text.replace("4", "2");
-          if (text.includes("3")) return text.replace("3", "9");
-          if (text.includes("+")) return text.replace("+", "-");
-          if (text.includes("-")) return text.replace("-", "+");
-          return text.replace(" = ", " = 2 \\times ");
-      }
-      return text + " (False)";
+    if (text.includes(" = ")) {
+      if (text.includes("2")) return text.replace("2", "4");
+      if (text.includes("4")) return text.replace("4", "2");
+      if (text.includes("3")) return text.replace("3", "9");
+      if (text.includes("+")) return text.replace("+", "-");
+      if (text.includes("-")) return text.replace("-", "+");
+      return text.replace(" = ", " = 2 \\times ");
+    }
+    return text + " (False)";
   }
 
   // But ideally we don't want it to sound too robotic.
   if (text.includes(" = ") && !isEquationOnly) {
-     return text.replace(" = ", " \\neq ");
+    return text.replace(" = ", " \\neq ");
   }
 
   return `It is incorrect that ${text.charAt(0).toLowerCase() + text.slice(1)}`;
@@ -380,15 +402,17 @@ const mutateStatementToFalse = (text: string): string => {
 
 const generateTheoryQuestion = (
   point: TheoryPoint,
-  allPoints: TheoryPoint[]
+  allPoints: TheoryPoint[],
 ): QuizQuestion | null => {
   if (!point || allPoints.length < 4) return null;
 
-  const subjectCategory = point.category.split(' • ')[2];
-  let similarPoints = allPoints.filter(p => p.text !== point.text && p.category.includes(subjectCategory || ""));
+  const subjectCategory = point.category.split(" • ")[2];
+  let similarPoints = allPoints.filter(
+    (p) => p.text !== point.text && p.category.includes(subjectCategory || ""),
+  );
 
   if (similarPoints.length < 3) {
-      similarPoints = allPoints.filter(p => p.text !== point.text);
+    similarPoints = allPoints.filter((p) => p.text !== point.text);
   }
 
   const mode = Math.random();
@@ -398,7 +422,7 @@ const generateTheoryQuestion = (
 
   if (mode < 0.33) {
     // Mode 1: Find the TRUE statement
-    text = `Which of the following statements is TRUE regarding ${point.category.split(' • ').pop()}?`;
+    text = `Which of the following statements is TRUE regarding ${point.category.split(" • ").pop()}?`;
 
     // 1 true, 1 mutated true (same topic), 2 mutated randoms
     const trueStmt = point.text;
@@ -418,30 +442,33 @@ const generateTheoryQuestion = (
       { id: "distractor_2", text: falseOther2 },
     ];
     explanation = `The correct statement is: ${trueStmt}`;
-
   } else if (mode < 0.66) {
     // Mode 2: Find the FALSE statement
-    text = `Which of the following statements is FALSE regarding ${point.category.split(' • ').pop()}?`;
+    text = `Which of the following statements is FALSE regarding ${point.category.split(" • ").pop()}?`;
 
     const falseStmt = mutateStatementToFalse(point.text);
 
-
     // Let's find other true statements from the same chapter
-    const sameChapterPoints = similarPoints.filter(p => p.category === point.category);
+    const sameChapterPoints = similarPoints.filter(
+      (p) => p.category === point.category,
+    );
     let trueDistractors = [];
     if (sameChapterPoints.length >= 3) {
-        trueDistractors = shuffle(sameChapterPoints).slice(0, 3).map(p => p.text);
+      trueDistractors = shuffle(sameChapterPoints)
+        .slice(0, 3)
+        .map((p) => p.text);
     } else {
-        // Fallback to general similar points
-        trueDistractors = shuffle(similarPoints).slice(0, 3).map(p => p.text);
+      // Fallback to general similar points
+      trueDistractors = shuffle(similarPoints)
+        .slice(0, 3)
+        .map((p) => p.text);
     }
 
     options = [
       { id: "correct", text: falseStmt },
-      ...trueDistractors.map((t, i) => ({ id: `distractor_${i}`, text: t }))
+      ...trueDistractors.map((t, i) => ({ id: `distractor_${i}`, text: t })),
     ];
     explanation = `The false statement is "${falseStmt}". The true concept is actually: ${point.text}`;
-
   } else {
     // Mode 3: Assertion and Reasoning
     const distractorPoint = getRandomItem(similarPoints);
@@ -452,8 +479,12 @@ const generateTheoryQuestion = (
     const isAssertionTrue = Math.random() > 0.3;
     const isReasonTrue = Math.random() > 0.3;
 
-    const finalAssertion = isAssertionTrue ? assertion : mutateStatementToFalse(assertion);
-    const finalReason = isReasonTrue ? distractorPoint.text : mutateStatementToFalse(distractorPoint.text);
+    const finalAssertion = isAssertionTrue
+      ? assertion
+      : mutateStatementToFalse(assertion);
+    const finalReason = isReasonTrue
+      ? distractorPoint.text
+      : mutateStatementToFalse(distractorPoint.text);
 
     text = `Given the following Assertion (A) and Reason (R):
 
@@ -462,40 +493,41 @@ const generateTheoryQuestion = (
 
     let correctAnswerText = "";
     if (isAssertionTrue && isReasonTrue) {
-       // We can't guarantee R is the correct explanation for A, so we just say it's not.
-       correctAnswerText = "Both A and R are true, but R is NOT the correct explanation of A.";
+      // We can't guarantee R is the correct explanation for A, so we just say it's not.
+      correctAnswerText =
+        "Both A and R are true, but R is NOT the correct explanation of A.";
     } else if (isAssertionTrue && !isReasonTrue) {
-       correctAnswerText = "A is true, but R is false.";
+      correctAnswerText = "A is true, but R is false.";
     } else if (!isAssertionTrue && isReasonTrue) {
-       correctAnswerText = "A is false, but R is true.";
+      correctAnswerText = "A is false, but R is true.";
     } else {
-       correctAnswerText = "Both A and R are false.";
+      correctAnswerText = "Both A and R are false.";
     }
 
     const possibleAnswers = [
-       "Both A and R are true, and R is the correct explanation of A.",
-       "Both A and R are true, but R is NOT the correct explanation of A.",
-       "A is true, but R is false.",
-       "A is false, but R is true.",
-       "Both A and R are false."
+      "Both A and R are true, and R is the correct explanation of A.",
+      "Both A and R are true, but R is NOT the correct explanation of A.",
+      "A is true, but R is false.",
+      "A is false, but R is true.",
+      "Both A and R are false.",
     ];
 
-    const wrongAnswers = possibleAnswers.filter(a => a !== correctAnswerText);
+    const wrongAnswers = possibleAnswers.filter((a) => a !== correctAnswerText);
     const finalWrong = shuffle(wrongAnswers).slice(0, 3);
 
     options = [
-       { id: "correct", text: correctAnswerText },
-       ...finalWrong.map((t, i) => ({ id: `distractor_${i}`, text: t }))
+      { id: "correct", text: correctAnswerText },
+      ...finalWrong.map((t, i) => ({ id: `distractor_${i}`, text: t })),
     ];
 
     explanation = `${isAssertionTrue ? "The assertion is a valid concept." : "The assertion is incorrect."} ${isReasonTrue ? "The reason states a valid concept." : "The reason is incorrect."}`;
   }
 
   // Double check uniqueness of options (in case mutations didn't change things)
-  const uniqueTexts = new Set(options.map(o => o.text));
+  const uniqueTexts = new Set(options.map((o) => o.text));
   if (uniqueTexts.size < 4) {
-      // Just fallback to a simple identification if we got duplicate texts
-      return null;
+    // Just fallback to a simple identification if we got duplicate texts
+    return null;
   }
 
   return {
@@ -510,13 +542,17 @@ const generateTheoryQuestion = (
   };
 };
 
-const generateProportionality = (formula: EnrichedFormula): QuizQuestion | null => {
+const generateProportionality = (
+  formula: EnrichedFormula,
+): QuizQuestion | null => {
   const variables = extractVariables(formula);
   if (variables.length === 0) return null;
 
   const targetVar = formula.name;
   // Ensure the chosen variable is actually present in the latex string
-  const validVariables = variables.filter(v => formula.latex.includes(v.symbol));
+  const validVariables = variables.filter((v) =>
+    formula.latex.includes(v.symbol),
+  );
   if (validVariables.length === 0) return null;
   const inputVar = getRandomItem(validVariables);
 
@@ -532,38 +568,43 @@ const generateProportionality = (formula: EnrichedFormula): QuizQuestion | null 
   const latex = formula.latex;
 
   // Check if it's explicitly in a denominator (like after a division slash or in the second brace of a frac)
-  if (latex.includes('/' + inputVar.symbol) || latex.includes('/ ' + inputVar.symbol)) {
-     inDenominator = true;
+  if (
+    latex.includes("/" + inputVar.symbol) ||
+    latex.includes("/ " + inputVar.symbol)
+  ) {
+    inDenominator = true;
   }
 
   const fracParts = latex.split("\\frac{");
   for (let i = 1; i < fracParts.length; i++) {
-     const part = fracParts[i];
-     // Part looks like "num}{den}..."
-     const braceSplit = part.split("}{");
-     if (braceSplit.length > 1) {
-         const denAndRest = braceSplit[1];
-         // The denominator is everything up to the next closing brace
-         const den = denAndRest.split("}")[0];
-         if (den.includes(inputVar.symbol)) {
-             inDenominator = true;
-         }
-     }
+    const part = fracParts[i];
+    // Part looks like "num}{den}..."
+    const braceSplit = part.split("}{");
+    if (braceSplit.length > 1) {
+      const denAndRest = braceSplit[1];
+      // The denominator is everything up to the next closing brace
+      const den = denAndRest.split("}")[0];
+      if (den.includes(inputVar.symbol)) {
+        inDenominator = true;
+      }
+    }
   }
 
   const isSquared = latex.includes(inputVar.symbol + "^2");
   const isCubed = latex.includes(inputVar.symbol + "^3");
-  const isSqrt = latex.includes("\\sqrt{" + inputVar.symbol + "}") || latex.includes("\\sqrt {") && latex.includes(inputVar.symbol);
+  const isSqrt =
+    latex.includes("\\sqrt{" + inputVar.symbol + "}") ||
+    (latex.includes("\\sqrt {") && latex.includes(inputVar.symbol));
 
   if (inDenominator) {
-     if (isSquared) effect = "quartered";
-     else if (isCubed) effect = "decreased by a factor of 8";
-     else if (isSqrt) effect = "decreased by a factor of √2";
-     else effect = "halved";
+    if (isSquared) effect = "quartered";
+    else if (isCubed) effect = "decreased by a factor of 8";
+    else if (isSqrt) effect = "decreased by a factor of √2";
+    else effect = "halved";
   } else {
-     if (isSquared) effect = "quadrupled";
-     else if (isCubed) effect = "increased by a factor of 8";
-     else if (isSqrt) effect = "increased by a factor of √2";
+    if (isSquared) effect = "quadrupled";
+    else if (isCubed) effect = "increased by a factor of 8";
+    else if (isSqrt) effect = "increased by a factor of √2";
   }
 
   const text = `In the formula for ${targetVar}, if ${inputVar.meaning || inputVar.symbol} is doubled (assuming other variables are constant), what happens to the result?`;
@@ -598,7 +639,9 @@ const generateProportionality = (formula: EnrichedFormula): QuizQuestion | null 
     options: shuffle(options),
     correctOptionId: "correct",
     explanation: `Looking at the formula $${formula.latex}$, observe the relationship between ${targetVar} and ${inputVar.symbol}.`,
-    category: formula._meta ? `${formula._meta.board} • ${formula._meta.classLevel} • ${formula._meta.subject} • ${formula._meta.chapterName}` : (formula.chapter || formula.topic || "General"),
+    category: formula._meta
+      ? `${formula._meta.board} • ${formula._meta.classLevel} • ${formula._meta.subject} • ${formula._meta.chapterName}`
+      : formula.chapter || formula.topic || "General",
   };
 };
 
@@ -615,8 +658,8 @@ export function useQuizEngine(selectedChapterIds: string[] = []) {
 
       subject.chapters.forEach((chapter) => {
         if (selectedChapterIds.includes(chapter.id) && chapter.keyPoints) {
-          const category = `${board} • Class ${chapter.class || 'Unknown'} • ${subject.subject} • ${chapter.name || chapter.chapterName || "Unknown"}`;
-          chapter.keyPoints.forEach(kp => {
+          const category = `${board} • Class ${chapter.class || "Unknown"} • ${subject.subject} • ${chapter.name || chapter.chapterName || "Unknown"}`;
+          chapter.keyPoints.forEach((kp) => {
             filtered.push({ text: kp, category });
           });
         }
@@ -636,15 +679,17 @@ export function useQuizEngine(selectedChapterIds: string[] = []) {
           if (subject.audience.includes("jee")) board = "JEE";
           else if (subject.audience.includes("neet")) board = "NEET";
 
-          filtered.push(...chapter.formulas.map(f => ({
-            ...f,
-            _meta: {
-              board,
-              classLevel: `Class ${chapter.class || 'Unknown'}`,
-              subject: subject.subject,
-              chapterName: chapter.name || chapter.chapterName || "Unknown"
-            }
-          })));
+          filtered.push(
+            ...chapter.formulas.map((f) => ({
+              ...f,
+              _meta: {
+                board,
+                classLevel: `Class ${chapter.class || "Unknown"}`,
+                subject: subject.subject,
+                chapterName: chapter.name || chapter.chapterName || "Unknown",
+              },
+            })),
+          );
         }
       });
     });
@@ -668,7 +713,7 @@ export function useQuizEngine(selectedChapterIds: string[] = []) {
       } else if (typeNum < 0.75) {
         const point = getRandomItem(allTheoryPoints);
         if (point) {
-           question = generateTheoryQuestion(point, allTheoryPoints);
+          question = generateTheoryQuestion(point, allTheoryPoints);
         }
       } else {
         question = generateFormulaIdentification(formula, allFormulas);
@@ -676,7 +721,7 @@ export function useQuizEngine(selectedChapterIds: string[] = []) {
 
       // Fallback if the specific type generation failed
       if (!question) {
-         question = generateFormulaIdentification(formula, allFormulas);
+        question = generateFormulaIdentification(formula, allFormulas);
       }
     }
 
@@ -692,7 +737,7 @@ export function useQuizEngine(selectedChapterIds: string[] = []) {
     (count: number = 10): QuizQuestion[] => {
       return Array.from({ length: count }, () => generateQuestion());
     },
-    [generateQuestion]
+    [generateQuestion],
   );
 
   return {
