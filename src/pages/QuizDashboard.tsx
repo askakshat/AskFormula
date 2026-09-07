@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Home, Target, PlayCircle, X, BookOpen, GraduationCap, TriangleAlert, TrendingUp } from 'lucide-react';
@@ -141,6 +141,17 @@ export default function QuizDashboard() {
   const [exam, setExam] = useState<"school" | "jee" | "neet">("school");
   const [cls, setCls] = useState<"11" | "12">("11");
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
+
+  // Cleanup stale chapter IDs on mount
+  useEffect(() => {
+     const validIds = new Set(allSubjects.flatMap(s => s.chapters.map(c => c.id)));
+     const filtered = selectedChapters.filter(id => validIds.has(id));
+     if (filtered.length !== selectedChapters.length) {
+         setSelectedChapters(filtered);
+     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
 
   const availableChapters = useMemo(() => {
      if (!selectedSubject) return [];

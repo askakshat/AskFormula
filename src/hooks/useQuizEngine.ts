@@ -229,7 +229,7 @@ const generateLatexDistractors = (latex: string): string[] => {
 
     // Swap + and -
     if (rhs.includes('+') || rhs.includes('-')) {
-        let swappedSign = rhs.replace(/\+/g, 'TEMP_PLUS').replace(/-/g, '+').replace(/TEMP_PLUS/g, '-');
+        const swappedSign = rhs.replace(/\+/g, 'TEMP_PLUS').replace(/-/g, '+').replace(/TEMP_PLUS/g, '-');
         distractors.add(lhs + '=' + swappedSign);
     }
 
@@ -244,7 +244,7 @@ const generateLatexDistractors = (latex: string): string[] => {
     // Rule 3: Swap multiplication and division coefficients if present like 3 \sin -> 1/3 \sin or 4 \cos^3 -> 3 \cos^3 (just swapping numbers)
     // A quick hack for the cos 3x formula specifically: 4 cos^3 x - 3 cos x -> 3 cos^3 x - 4 cos x
     if (rhs.match(/\d/)) {
-        let swappedNums = rhs.replace(/4/g, 'TEMP_4').replace(/3/g, '4').replace(/TEMP_4/g, '3');
+        const swappedNums = rhs.replace(/4/g, 'TEMP_4').replace(/3/g, '4').replace(/TEMP_4/g, '3');
         if (swappedNums !== rhs) distractors.add(lhs + '=' + swappedNums);
     }
 
@@ -282,7 +282,7 @@ const generateFormulaIdentification = (
     (f) => f.id !== formula.id && f.latex !== formula.latex
   );
 
-  let distractorLatex = new Set<string>(algorithmicDistractors);
+  const distractorLatex = new Set<string>(algorithmicDistractors);
 
   // Fill up to 3 distractors using same chapter formulas
   const shuffledSameChapter = shuffle(sameChapterFormulas);
@@ -425,7 +425,7 @@ const generateTheoryQuestion = (
     text = `Which of the following statements is FALSE regarding ${point.category.split(' • ').pop()}?`;
 
     const falseStmt = mutateStatementToFalse(stripTheoryPrefix(point.text));
-    const trueSameTopic = stripTheoryPrefix(point.text); // Wait, we need another true statement from the same topic ideally.
+
 
     // Let's find other true statements from the same chapter
     const sameChapterPoints = similarPoints.filter(p => p.category === point.category);
@@ -446,7 +446,6 @@ const generateTheoryQuestion = (
   } else {
     // Mode 3: Assertion and Reasoning
     const distractorPoint = getRandomItem(similarPoints);
-    const isReasoningCorrect = Math.random() > 0.5;
 
     const assertion = stripTheoryPrefix(point.text);
     // If reasoning is correct, it should just be another true statement (doesn't have to perfectly explain it, but it's an "Assertion-Reasoning" format)
@@ -526,10 +525,10 @@ const generateProportionality = (formula: EnrichedFormula): QuizQuestion | null 
 
   // A more robust check for whether a variable is in the denominator.
   // E.g., \frac{a}{b} -> b is in denominator.
-  const fracMatches = [...formula.latex.matchAll(/\\frac\{([^}]*)\}/g)];
+  // const fracMatches = [...formula.latex.matchAll(/\\frac\{([^}]*)\}/g)];
   let inDenominator = false;
-  // This is a naive regex matching for rac{...}{...} but let's just do a simpler split approach carefully
-  // If the string contains rac, check the blocks.
+  // This is a naive regex matching for  rac{...}{...} but let's just do a simpler split approach carefully
+  // If the string contains  rac, check the blocks.
 
   const latex = formula.latex;
 
