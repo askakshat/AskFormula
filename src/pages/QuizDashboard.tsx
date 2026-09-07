@@ -10,15 +10,22 @@ const ExamSelector = ({ onSelect, selected }: { onSelect: (v: string) => void, s
   <div className="flex flex-col gap-3">
      <label className="text-sm font-semibold text-slate-300">1. Select Target Exam</label>
      <div className="flex gap-3">
-         {['school', 'jee', 'neet'].map(exam => (
-             <button
-                 key={exam}
-                 onClick={() => onSelect(exam)}
-                 className={`flex-1 py-3 px-4 rounded-lg border transition-all ${selected === exam ? 'bg-[#324565]/30 border-[#61dcb0] text-white shadow-[0_0_15px_rgba(97,220,176,0.15)]' : 'bg-[#15171e] border-[#272a31] text-slate-400 hover:border-slate-500'}`}
-             >
-                 <span className="capitalize font-medium">{exam === 'school' ? 'CBSE/State Board' : exam.toUpperCase()}</span>
-             </button>
-         ))}
+         {['school', 'jee', 'neet'].map(exam => {
+             const isNeet = exam === 'neet';
+             return (
+                 <button
+                     key={exam}
+                     onClick={() => !isNeet && onSelect(exam)}
+                     disabled={isNeet}
+                     className={`flex-1 py-3 px-4 rounded-lg border transition-all ${isNeet ? 'bg-[#15171e]/50 border-[#272a31]/50 text-slate-600 cursor-not-allowed' : selected === exam ? 'bg-[#324565]/30 border-[#61dcb0] text-white shadow-[0_0_15px_rgba(97,220,176,0.15)]' : 'bg-[#15171e] border-[#272a31] text-slate-400 hover:border-slate-500'}`}
+                 >
+                     <div className="flex items-center justify-center gap-2">
+                         <span className="capitalize font-medium">{exam === 'school' ? 'CBSE/State Board' : exam.toUpperCase()}</span>
+                         {isNeet && <span className="text-[10px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded ml-1">Soon</span>}
+                     </div>
+                 </button>
+             );
+         })}
      </div>
   </div>
 );
@@ -41,7 +48,27 @@ const ClassSelector = ({ onSelect, selected }: { onSelect: (v: string) => void, 
 );
 
 const SubjectSelector = ({ onSelect, selected, exam }: { onSelect: (v: string) => void, selected: string | null, exam: string }) => {
-  const subjects = allSubjects.filter(s => s.audience.includes(exam)).map(s => s.subject);
+  let subjects = allSubjects.filter(s => s.audience.includes(exam)).map(s => s.subject);
+  // Deduplicate for JEE (if we have "JEE Physics" we don't want "Physics" as well, though theoretically they are different sets,
+  // we typically want to only show the specific ones if they exist for the exam).
+  if (exam === 'jee') {
+      const jeeSpecific = subjects.filter(s => s.startsWith('JEE'));
+      if (jeeSpecific.length > 0) {
+          subjects = jeeSpecific;
+      }
+  } else if (exam === 'neet') {
+      const neetSpecific = subjects.filter(s => s.startsWith('NEET'));
+      if (neetSpecific.length > 0) {
+          subjects = neetSpecific;
+      } else {
+          // If no NEET specific, filter out JEE specific just in case
+          subjects = subjects.filter(s => !s.startsWith('JEE'));
+      }
+  } else {
+      // For school, filter out JEE/NEET specific subjects
+      subjects = subjects.filter(s => !s.startsWith('JEE') && !s.startsWith('NEET'));
+  }
+
   return (
       <div className="flex flex-col gap-3">
          <label className="text-sm font-semibold text-slate-300">3. Select Subject</label>

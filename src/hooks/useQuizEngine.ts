@@ -321,6 +321,9 @@ const stripTheoryPrefix = (text: string) => text.includes(': ') ? text.split(': 
 
 
 const mutateStatementToFalse = (text: string): string => {
+  const letterCount = (text.match(/[a-zA-Z]/g) || []).length;
+  const isEquationOnly = letterCount < 10 && text.includes('=');
+
   const antonyms: Array<[RegExp, string]> = [
     [/\b(increases?)\b/gi, 'decreases'],
     [/\b(decreases?)\b/gi, 'increases'],
@@ -348,29 +351,28 @@ const mutateStatementToFalse = (text: string): string => {
     [/\b(outside)\b/gi, 'inside'],
     [/\b(parallel)\b/gi, 'perpendicular'],
     [/\b(perpendicular)\b/gi, 'parallel'],
-    [/\b(is)\b/gi, 'is not'],
-    [/\b(is not)\b/gi, 'is'],
-    [/\b(can)\b/gi, 'cannot'],
-    [/\b(cannot)\b/gi, 'can'],
   ];
 
-  // Try to find the first match and swap it to make it false
-  for (const [regex, replacement] of antonyms) {
-    if (regex.test(text)) {
-      // Just replace the first occurrence to avoid messing up the sentence structure too much
-      // wait, regex.test advances lastIndex if global, but we use match
-      const match = text.match(regex);
-      if (match) {
-         // Create a non-global regex to replace only the first occurrence
-         const nonGlobalRegex = new RegExp(regex.source, 'i');
-         return text.replace(nonGlobalRegex, replacement);
-      }
+  for (const [pattern, replacement] of antonyms) {
+    if (pattern.test(text)) {
+      return text.replace(pattern, replacement);
     }
   }
 
-  // Fallback: If no antonym is found, we just append a negation or modifying phrase
+  if (isEquationOnly) {
+      if (text.includes(" = ")) {
+          if (text.includes("2")) return text.replace("2", "4");
+          if (text.includes("4")) return text.replace("4", "2");
+          if (text.includes("3")) return text.replace("3", "9");
+          if (text.includes("+")) return text.replace("+", "-");
+          if (text.includes("-")) return text.replace("-", "+");
+          return text.replace(" = ", " = 2 \\times ");
+      }
+      return text + " (False)";
+  }
+
   // But ideally we don't want it to sound too robotic.
-  if (text.includes(" = ")) {
+  if (text.includes(" = ") && !isEquationOnly) {
      return text.replace(" = ", " \\neq ");
   }
 
