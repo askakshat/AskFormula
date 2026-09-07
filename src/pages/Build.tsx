@@ -27,12 +27,12 @@ export default function Build() {
         setSelectedClass("12");
         setSubject("Physics");
       } else if (template === "neet-bio") {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
+
         setExam("neet");
         setSelectedClass("11");
         setSubject("Biology");
       } else if (template === "cbse-math") {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
+
         setExam("school");
         setSelectedClass("12");
         setSubject("Mathematics");
