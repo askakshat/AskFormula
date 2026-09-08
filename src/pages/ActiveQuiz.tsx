@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router';
-import { useQuizEngine, QuizQuestion } from '@/hooks/useQuizEngine';
-import { useLocalStorage } from '@/lib/local-storage';
-import QuizCard from '@/components/askformula/QuizCard';
-import { X, Timer } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
+import { useQuizEngine, QuizQuestion } from "@/hooks/useQuizEngine";
+import { useLocalStorage } from "@/lib/local-storage";
+import QuizCard from "@/components/askformula/QuizCard";
+import { X, Timer } from "lucide-react";
 
 export default function ActiveQuiz() {
   const navigate = useNavigate();
-  const [selectedChapters] = useLocalStorage<string[]>("askformula-quiz-chapters", []);
+  const [selectedChapters] = useLocalStorage<string[]>(
+    "askformula-quiz-chapters",
+    [],
+  );
   const { generateQuiz } = useQuizEngine(selectedChapters);
 
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
@@ -15,7 +18,9 @@ export default function ActiveQuiz() {
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
   const [score, setScore] = useState(0);
-  const [userAnswers, setUserAnswers] = useState<Record<string, string | null>>({});
+  const [userAnswers, setUserAnswers] = useState<Record<string, string | null>>(
+    {},
+  );
 
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
@@ -40,55 +45,61 @@ export default function ActiveQuiz() {
 
   const handleSelect = (id: string) => {
     if (showFeedback) return;
-    if (id === 'submit' && selectedOptionId) {
-       setShowFeedback(true);
-       setUserAnswers(prev => ({ ...prev, [currentQuestion.id]: selectedOptionId }));
-       if (selectedOptionId === currentQuestion.correctOptionId) {
-           setScore(prev => prev + 1);
-       }
+    if (id === "submit" && selectedOptionId) {
+      setShowFeedback(true);
+      setUserAnswers((prev) => ({
+        ...prev,
+        [currentQuestion.id]: selectedOptionId,
+      }));
+      if (selectedOptionId === currentQuestion.correctOptionId) {
+        setScore((prev) => prev + 1);
+      }
     } else {
-       setSelectedOptionId(id);
+      setSelectedOptionId(id);
     }
   };
 
   const handleNext = () => {
     if (currentIndex < questions.length - 1) {
-      setCurrentIndex(prev => prev + 1);
+      setCurrentIndex((prev) => prev + 1);
       setSelectedOptionId(null);
       setShowFeedback(false);
     } else {
       setIsTimerRunning(false);
-      navigate('/quiz/results', {
-          state: {
-              score,
-              total: questions.length,
-              questions,
-              userAnswers,
-              timeElapsed
-          },
-          replace: true
+      navigate("/quiz/results", {
+        state: {
+          score,
+          total: questions.length,
+          questions,
+          userAnswers,
+          timeElapsed,
+        },
+        replace: true,
       });
     }
   };
 
   const exitQuiz = () => {
-    navigate('/quiz');
+    navigate("/quiz");
   };
 
   if (!currentQuestion) {
-      return <div className="min-h-screen bg-[#11131a] flex items-center justify-center text-[#e3e2e6]">Initializing Engine...</div>;
+    return (
+      <div className="min-h-screen bg-[#11131a] flex items-center justify-center text-[#e3e2e6]">
+        Initializing Engine...
+      </div>
+    );
   }
 
   const formatTime = (seconds: number) => {
     const m = Math.floor(seconds / 60);
     const s = seconds % 60;
-    return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+    return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
   };
 
   return (
     <div className="min-h-screen bg-[#11131a] text-[#e3e2e6] font-sans flex flex-col antialiased selection:bg-[#324565] selection:text-[#d8e2ff]">
       <main className="flex-1 flex flex-col items-center p-4 md:p-8 w-full max-w-[1200px] mx-auto pt-8">
-
         <div className="w-full max-w-2xl flex justify-between items-center mb-8">
           <button
             onClick={exitQuiz}
@@ -105,14 +116,14 @@ export default function ActiveQuiz() {
         </div>
 
         <QuizCard
-           question={currentQuestion}
-           currentIndex={currentIndex}
-           totalQuestions={questions.length}
-           selectedOptionId={selectedOptionId}
-           onSelectOption={handleSelect}
-           showFeedback={showFeedback}
-           onNext={handleNext}
-         />
+          question={currentQuestion}
+          currentIndex={currentIndex}
+          totalQuestions={questions.length}
+          selectedOptionId={selectedOptionId}
+          onSelectOption={handleSelect}
+          showFeedback={showFeedback}
+          onNext={handleNext}
+        />
       </main>
     </div>
   );
