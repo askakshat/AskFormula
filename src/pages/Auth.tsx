@@ -280,12 +280,12 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
           <div className="py-4 px-6 text-xs text-center text-muted-foreground bg-muted border-t rounded-b-lg">
             Secured by{" "}
             <a
-              href="https://freebuff.com"
+              href="https://askformula.vercel.app"
               target="_blank"
               rel="noopener noreferrer"
               className="underline hover:text-primary transition-colors"
             >
-              freebuff.com
+              askformula.vercel.app
             </a>
           </div>
         </Card>
