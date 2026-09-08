@@ -1,7 +1,7 @@
 {
-  "name": "freebuff.com application",
-  "short_name": "freebuff.com",
-  "description": "freebuff.com application",
+  "name": "askformula.vercel.app application",
+  "short_name": "askformula.vercel.app",
+  "description": "askformula.vercel.app application",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
