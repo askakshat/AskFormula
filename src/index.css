@@ -301,3 +301,14 @@ body { background:var(--ink); color:var(--paper); font-family:Inter,ui-sans-seri
   .story-visual { height:275px; }
   .story-preview-stack { height:275px; }
 }
+/* Layering fix: keep decorative transition behind product and story content */
+.hero-wave { display:none; }
+.hero-reference-shell { overflow:visible; }
+.hero-product-wrap { position:relative; z-index:5; }
+.app-shell-product { position:relative; z-index:6; }
+.scroll-story { position:relative; z-index:8; isolation:isolate; }
+.story-sticky { position:sticky; z-index:9; }
+.story-visual, .story-copy { position:relative; z-index:10; }
+.story-preview-stack { position:absolute; z-index:11; }
+.story-preview { z-index:12; }
+@media (max-width:720px) { .hero-product-wrap { z-index:5; } .scroll-story { z-index:8; } }
