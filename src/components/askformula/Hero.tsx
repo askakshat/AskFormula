@@ -50,6 +50,23 @@ function ScrollStory() {
   const storyRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);
   const activeRef = useRef(0);
+  const wheelCooldown = useRef(false);
+
+  function handleWheel(event: React.WheelEvent<HTMLElement>) {
+    if (Math.abs(event.deltaY) < 2 || wheelCooldown.current) return;
+    const direction = event.deltaY > 0 ? 1 : -1;
+    const current = activeRef.current;
+    const next = Math.min(storyItems.length - 1, Math.max(0, current + direction));
+    const canAdvanceCarousel = next !== current;
+    if (!canAdvanceCarousel) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    activeRef.current = next;
+    setActive(next);
+    wheelCooldown.current = true;
+    window.setTimeout(() => { wheelCooldown.current = false; }, 420);
+  }
 
   useEffect(() => {
     let frame = 0;
@@ -78,7 +95,7 @@ function ScrollStory() {
     };
   }, []);
 
-  return <section ref={storyRef} className="scroll-story">
+  return <section ref={storyRef} className="scroll-story" onWheel={handleWheel}>
     <div className="story-sticky">
       <div className="story-copy">
         <p className="section-label">ONE SPACE / THREE MOMENTS</p>
