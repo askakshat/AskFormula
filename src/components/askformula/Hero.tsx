@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router";
 import { useEffect, useRef, useState } from "react";
+import { useScroll, useTransform, motion } from "framer-motion";
 
 const workflow = [
   { number: "01", title: "Select board", body: "CBSE, ICSE, state boards", icon: BookOpen },
@@ -35,6 +36,7 @@ const storyItems = [
   { label: "03 / REVISE", title: "Open it when\nit matters.", body: "A clean reference sheet for the last ten minutes, the long train ride, or the night before the exam.", accent: "violet" },
 ];
 
+
 function WorkspacePreview({ active, progress }: { active: number; progress: number }) {
   return <div className="story-preview-stack">
     {[0, 1, 2].map((index) => {
@@ -53,59 +55,50 @@ function WorkspacePreview({ active, progress }: { active: number; progress: numb
     })}
   </div>;
 }
+
 function ScrollStory() {
-  const storyRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
   const [active, setActive] = useState(0);
   const [progress, setProgress] = useState(0);
-  const activeRef = useRef(0);
 
   useEffect(() => {
-    let raf = 0;
-    let lastFrame = 0;
-    let camera = 0;
-    let target = 0;
-    let runway = 1.15 * window.innerHeight;
-    const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
-    const readTarget = () => {
-      if (!storyRef.current) return;
-      const storyStart = storyRef.current.offsetTop;
-      target = clamp((window.scrollY - storyStart) / runway, 0, 2.35);
-      if (!raf) raf = requestAnimationFrame(smoothCamera);
-    };
-    const smoothCamera = (time: number) => {
-      const deltaTime = lastFrame ? Math.min(100, time - lastFrame) : 16.67;
-      lastFrame = time;
-      const delta = target - camera;
-      const eased = 1 - Math.pow(0.845, deltaTime / 16.67);
-      camera = Math.abs(delta) < 0.00045 ? target : camera + delta * eased;
-      const normalized = camera / 2.35;
-      setProgress(normalized);
-      const next = Math.min(storyItems.length - 1, Math.max(0, Math.round(camera)));
-      if (next !== activeRef.current) { activeRef.current = next; setActive(next); }
-      raf = Math.abs(target - camera) >= 0.00045 ? requestAnimationFrame(smoothCamera) : 0;
-    };
-    const onResize = () => { runway = 1.15 * window.innerHeight; readTarget(); };
-    readTarget();
-    window.addEventListener("scroll", readTarget, { passive: true });
-    window.addEventListener("resize", onResize, { passive: true });
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", readTarget);
-      window.removeEventListener("resize", onResize);
-    };
-  }, []);
+    return scrollYProgress.onChange((latest) => {
+      setProgress(latest);
+      // Determine active slide based on scroll progress (0 to 1) mapped to 3 items
+      const newActive = Math.min(
+        storyItems.length - 1,
+        Math.max(0, Math.round(latest * (storyItems.length - 1)))
+      );
+      setActive(newActive);
+    });
+  }, [scrollYProgress]);
 
-  return <section ref={storyRef} className="scroll-story">
-    <div className="story-sticky">
-      <div className="story-copy">
-        <p className="section-label">ONE SPACE / THREE MOMENTS</p>
-        {storyItems.map((item, index) => <div className={`story-copy-item story-copy-${item.accent} ${active === index ? "is-active" : ""}`} key={item.label}><span>{item.label}</span><h2>{item.title.split("\n").map((line) => <span key={line}>{line}<br /></span>)}</h2><p>{item.body}</p><div className="story-progress"><span style={{ transform: `scaleX(${active === index ? 1 : 0})` }} /></div></div>)}
-        <div className="story-counter"><span>0{active + 1}</span><i /> <span>0{storyItems.length}</span></div>
+  return <section ref={containerRef} className="scroll-story" style={{ height: "300vh", position: "relative" }}>
+    <div className="story-sticky" style={{ position: "sticky", top: 0, height: "100vh", display: "flex", alignItems: "center", overflow: "hidden" }}>
+      <div className="story-content" style={{ display: "grid", gridTemplateColumns: ".8fr 1.2fr", gap: "7vw", maxWidth: "1160px", width: "100%", margin: "0 auto", padding: "40px" }}>
+        <div className="story-copy">
+          <p className="section-label">ONE SPACE / THREE MOMENTS</p>
+          {storyItems.map((item, index) => (
+            <div className={`story-copy-item story-copy-${item.accent} ${active === index ? "is-active" : ""}`} key={item.label}>
+              <span>{item.label}</span>
+              <h2>{item.title.split("\n").map((line) => <span key={line}>{line}<br /></span>)}</h2>
+              <p>{item.body}</p>
+              <div className="story-progress"><span style={{ transform: `scaleX(${active === index ? 1 : 0})` }} /></div>
+            </div>
+          ))}
+          <div className="story-counter"><span>0{active + 1}</span><i /> <span>0{storyItems.length}</span></div>
+        </div>
+        <div className="story-visual"><WorkspacePreview active={active} progress={progress} /><div className="story-visual-glow" /></div>
       </div>
-      <div className="story-visual"><WorkspacePreview active={active} progress={progress} /><div className="story-visual-glow" /></div>
     </div>
   </section>;
 }
+
 export default function Hero() {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   function handlePointerMove(event: React.PointerEvent<HTMLDivElement>) {

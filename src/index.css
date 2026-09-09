@@ -344,3 +344,34 @@ body { background:var(--ink); color:var(--paper); font-family:Inter,ui-sans-seri
 @media (max-width:900px) { .scroll-story { height:1420px; } .story-sticky { top:64px; height:calc(100vh - 88px); } }
 @media (max-width:720px) { .scroll-story { height:1160px; } .story-sticky { top:58px; height:calc(100vh - 78px); } }
 @media (prefers-reduced-motion:reduce) { .story-preview.is-active { animation:none; } }
+
+/* Replaced legacy scroll story with cleaner motion constraints */
+.scroll-story {
+  height: 300vh !important;
+  min-height: 0 !important;
+  background: linear-gradient(180deg,#0c1015 0%,#0b0e12 100%) !important;
+}
+
+.story-sticky {
+  position: sticky !important;
+  top: 0 !important;
+  height: 100vh !important;
+  max-height: none !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 !important;
+}
+
+@media (max-width:900px) {
+  .story-sticky {
+    align-items: flex-start !important;
+    padding-top: 100px !important;
+  }
+}
+
+@media (max-width:720px) {
+  .story-sticky {
+    align-items: flex-start !important;
+    padding-top: 80px !important;
+  }
+}
