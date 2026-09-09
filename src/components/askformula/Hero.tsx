@@ -50,32 +50,30 @@ function ScrollStory() {
   const storyRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);
   const activeRef = useRef(0);
-  const wheelCooldown = useRef(false);
 
   useEffect(() => {
-    let engaged = false;
-    const observer = new IntersectionObserver(([entry]) => {
-      engaged = entry.isIntersecting && entry.intersectionRatio > 0.35;
-    }, { threshold: [0, 0.35, 0.8] });
-    if (storyRef.current) observer.observe(storyRef.current);
-
-    const onWheel = (event: WheelEvent) => {
-      if (!engaged || Math.abs(event.deltaY) < 2 || wheelCooldown.current) return;
-      const direction = event.deltaY > 0 ? 1 : -1;
-      const current = activeRef.current;
-      const next = Math.min(storyItems.length - 1, Math.max(0, current + direction));
-      if (next === current) return;
-      event.preventDefault();
-      event.stopPropagation();
-      activeRef.current = next;
-      setActive(next);
-      wheelCooldown.current = true;
-      window.setTimeout(() => { wheelCooldown.current = false; }, 520);
+    let frame = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        if (!storyRef.current) return;
+        const rect = storyRef.current.getBoundingClientRect();
+        const travel = Math.max(1, storyRef.current.offsetHeight - window.innerHeight);
+        const progress = Math.min(0.999, Math.max(0, -rect.top / travel));
+        const next = Math.min(storyItems.length - 1, Math.floor(progress * storyItems.length));
+        if (next !== activeRef.current) {
+          activeRef.current = next;
+          setActive(next);
+        }
+      });
     };
-    window.addEventListener("wheel", onWheel, { passive: false, capture: true });
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
     return () => {
-      observer.disconnect();
-      window.removeEventListener("wheel", onWheel, true);
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
     };
   }, []);
 

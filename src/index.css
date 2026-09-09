@@ -334,3 +334,13 @@ body { background:var(--ink); color:var(--paper); font-family:Inter,ui-sans-seri
   .story-copy { height:154px; }
   .story-visual { height:275px; min-height:0; }
 }
+/* Native-scrolling scenes: reference-inspired sticky composition without wheel hijacking */
+.scroll-story { height:1680px; background:linear-gradient(180deg,#0c1015 0%,#0b0e12 100%); }
+.story-sticky { top:72px; height:calc(100vh - 104px); max-height:760px; align-items:center; }
+.story-copy { transform:translateX(0); transition:transform 700ms var(--ease-out); }
+.story-visual { transform:translateX(0) scale(1); transition:transform 700ms var(--ease-out); }
+.story-preview.is-active { animation:scene-card-in 700ms var(--ease-out) both; }
+@keyframes scene-card-in { from { opacity:0; transform:translate3d(12%,22px,0) rotateX(3deg) scale(.94); } to { opacity:1; transform:translate3d(0,0,0) rotateX(0) scale(1); } }
+@media (max-width:900px) { .scroll-story { height:1420px; } .story-sticky { top:64px; height:calc(100vh - 88px); } }
+@media (max-width:720px) { .scroll-story { height:1160px; } .story-sticky { top:58px; height:calc(100vh - 78px); } }
+@media (prefers-reduced-motion:reduce) { .story-preview.is-active { animation:none; } }
