@@ -282,3 +282,22 @@ body { background:var(--ink); color:var(--paper); font-family:Inter,ui-sans-seri
   .story-copy { height:168px; }
   .story-visual { height:276px; }
 }
+/* Compact story: two-screen choreography, no blank holding pattern */
+.scroll-story { height:1280px; }
+.story-sticky { top:72px; height:620px; max-height:620px; padding-top:56px; }
+.story-copy { margin-top:18px; }
+.story-visual { height:400px; }
+.story-preview-stack { height:400px; }
+@media (max-width:900px) {
+  .scroll-story { height:1120px; }
+  .story-sticky { top:64px; height:570px; max-height:570px; padding-top:48px; }
+  .story-visual { height:340px; }
+  .story-preview-stack { height:340px; }
+}
+@media (max-width:720px) {
+  .scroll-story { height:900px; }
+  .story-sticky { top:58px; height:520px; max-height:520px; padding-top:34px; }
+  .story-copy { height:154px; }
+  .story-visual { height:275px; }
+  .story-preview-stack { height:275px; }
+}
