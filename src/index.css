@@ -250,3 +250,9 @@ body { background:var(--ink); color:var(--paper); font-family:Inter,ui-sans-seri
 .story-visual { margin-top:18px; }
 @media (max-width:900px) { .hero-reference-shell { min-height:690px; }.story-sticky { padding-top:105px; }.story-copy { margin-top:0; }.story-visual { margin-top:0; } }
 @media (max-width:720px) { .hero-reference-shell { min-height:620px; }.story-sticky { padding-top:78px; } }
+/* Supplied landscape atmosphere */
+.hero-reference-shell { background-image:linear-gradient(180deg,rgba(10,15,20,.55) 0%,rgba(10,15,20,.3) 34%,#0c1015 86%),linear-gradient(90deg,rgba(8,12,16,.45),rgba(8,12,16,.12) 50%,rgba(8,12,16,.4)),url('/askformula-hero-landscape.png'); background-size:cover,cover,cover; background-position:center top,center top,center top; background-repeat:no-repeat; }
+.hero-reference-shell .hero-grid { opacity:.08; }
+.hero-reference-shell .hero-orb-one { opacity:.12; }
+.hero-reference-shell .hero-orb-two { opacity:.08; }
+@media (max-width:720px) { .hero-reference-shell { background-position:center top,center top,center top; } }
