@@ -1,206 +1,102 @@
 import {
-  Copy,
-  ArrowRight,
-  PlayCircle,
-  Sparkles,
-  BookOpen,
-  Layers,
+  ArrowUpRight,
   Atom,
+  BookOpen,
+  Check,
+  ChevronRight,
+  Copy,
   FileText,
+  Layers3,
+  Play,
+  Sparkles,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Link } from "react-router";
+import { useState } from "react";
+
+const workflow = [
+  { number: "01", title: "Select board", body: "CBSE, ICSE, state boards", icon: BookOpen },
+  { number: "02", title: "Choose class", body: "Class 11 or Class 12", icon: Layers3 },
+  { number: "03", title: "Pick subjects", body: "Physics, Chem, Maths, Bio", icon: Atom },
+  { number: "04", title: "Export PDF", body: "A clean sheet, ready to revise", icon: FileText },
+];
 
 export default function Hero() {
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+
+  function handlePointerMove(event: React.PointerEvent<HTMLDivElement>) {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 5;
+    const y = ((event.clientY - rect.top) / rect.height - 0.5) * -5;
+    setTilt({ x, y });
+  }
+
   return (
-    <div className="flex-grow pt-12 flex flex-col items-center w-full">
-      {/* Hero Section */}
-      <section className="relative w-full max-w-[1200px] px-6 md:px-12 py-16 md:py-[120px] flex flex-col items-center text-center overflow-hidden">
-        {/* Background Grid - mimicking the Stitch mask-fade-out with tailwind bg */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#32353c_1px,transparent_1px),linear-gradient(to_bottom,#32353c_1px,transparent_1px)] bg-[size:40px_40px] opacity-20 [mask-image:linear-gradient(to_bottom,black_40%,transparent_100%)] z-0 pointer-events-none" />
-
-        <div className="relative z-10 flex flex-col items-center gap-6 mt-16 max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#272a31] border border-[#32353c] rounded text-[13px] font-mono text-[#e1e2ec] mb-4">
-            <Sparkles className="w-4 h-4" />
-            <span>v4.0 Quiz Engine Released</span>
-          </div>
-
-          <h1 className="text-4xl leading-[48px] md:text-[56px] md:leading-[64px] font-bold tracking-tight text-[#e1e2ec]">
-            <span className="sr-only">
-              AskFormula by AskAkshat - Free Formula Sheets for JEE, NEET &
-              NCERT
-            </span>
-            Every formula.
-            <br />
-            <span className="text-[#aec6ff]">Exactly where you need it.</span>
-          </h1>
-
-          <p className="text-base text-[#e1e2ec] max-w-xl">
-            A high-density, distraction-free environment for scientific study.
-            Build custom PDF reference sheets tailored to your CBSE and JEE Class 11 and
-            12 curriculum in seconds.
+    <main className="flex-grow pt-20">
+      <section className="hero-shell">
+        <div className="hero-grid" aria-hidden="true" />
+        <div className="hero-orb hero-orb-one" aria-hidden="true" />
+        <div className="hero-orb hero-orb-two" aria-hidden="true" />
+        <div className="hero-copy">
+          <div className="eyebrow-pill"><Sparkles size={14} /> v4.0 Quiz Engine is live</div>
+          <p className="hero-kicker">A calmer way to revise</p>
+          <h1>Your syllabus,<br /><em>made useful.</em></h1>
+          <p className="hero-description">
+            Build focused formula sheets for JEE, NEET and NCERT. Keep the signal, lose the noise, and walk into revision with a system that feels like yours.
           </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 mt-2">
-            <Button
-              variant="outline"
-              onClick={() => {
-                window.location.href = "/build";
-              }}
-              className="bg-[#00275d] text-[#aec6ff] h-10 px-6 rounded border border-[#32353c] hover:border-[#aec6ff] hover:bg-[#00275d] transition-all text-[12px] font-medium tracking-wide flex items-center justify-center gap-2"
-            >
-              Build Your Sheet
-              <ArrowRight className="w-4 h-4" />
-            </Button>
-            <Button
-              variant="outline"
-              onClick={() => {
-                window.location.href = "/quiz";
-              }}
-              className="bg-[#61dcb0] text-[#003122] h-10 px-6 rounded border border-[#61dcb0] hover:bg-[#72edc1] transition-all text-[12px] font-bold tracking-wide flex items-center justify-center gap-2"
-            >
-              Practice Quiz
-              <PlayCircle className="w-4 h-4" />
-            </Button>
-            <Button
-              variant="outline"
-              onClick={() => {
-                document
-                  .getElementById("how-it-works")
-                  ?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="bg-transparent text-[#e1e2ec] h-10 px-6 rounded border border-[#32353c] hover:border-[#aec6ff] hover:text-[#aec6ff] hover:bg-transparent transition-all text-[12px] font-medium tracking-wide flex items-center justify-center gap-2"
-            >
-              View Demo
-              <PlayCircle className="w-4 h-4" />
-            </Button>
+          <div className="hero-actions">
+            <Link to="/build" className="button button-primary">Build your sheet <ArrowUpRight size={17} /></Link>
+            <Link to="/quiz" className="button button-quiet"><Play size={15} fill="currentColor" /> Practice quiz</Link>
           </div>
+          <div className="hero-proof"><span className="proof-dot" /> No sign-up required to start <span className="proof-separator" /> Export to PDF in seconds</div>
         </div>
 
-        {/* Formula Preview Card (Decorative) */}
-        <div className="relative z-10 w-full max-w-2xl mt-16 bg-[#0b0e15] border border-[#32353c] rounded-lg p-6 shadow-2xl overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1 bg-[#aec6ff]" />
-
-          <div className="flex justify-between items-center mb-4 border-b border-[#32353c] pb-2">
-            <span className="text-[13px] font-mono text-[#e1e2ec]">
-              physics/kinematics.tex
-            </span>
-            <Copy className="w-4 h-4 text-[#aec6ff]" />
-          </div>
-
-          <div className="flex justify-center py-6 text-[22px] leading-8 font-serif text-[#aec6ff]">
-            v² = u² + 2as
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-2 border-t border-[#32353c] pt-2">
-            <div className="flex flex-col">
-              <span className="text-[12px] font-bold text-[#aec6ff]">v</span>
-              <span className="text-[11px] font-mono text-[#e1e2ec]">
-                Final Vel.
-              </span>
+        <div className="hero-product-wrap">
+          <div className="hero-product-shadow" aria-hidden="true" />
+          <div
+            className="formula-product"
+            onPointerMove={handlePointerMove}
+            onPointerLeave={() => setTilt({ x: 0, y: 0 })}
+            style={{ transform: `perspective(1200px) rotateX(${tilt.y}deg) rotateY(${tilt.x}deg)` }}
+          >
+            <div className="product-window-bar">
+              <div className="window-dots"><span /><span /><span /></div>
+              <span className="product-path">askformula / physics / kinematics</span>
+              <Copy size={15} />
             </div>
-            <div className="flex flex-col">
-              <span className="text-[12px] font-bold text-[#aec6ff]">u</span>
-              <span className="text-[11px] font-mono text-[#e1e2ec]">
-                Init Vel.
-              </span>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-[12px] font-bold text-[#aec6ff]">a</span>
-              <span className="text-[11px] font-mono text-[#e1e2ec]">
-                Accel.
-              </span>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-[12px] font-bold text-[#aec6ff]">s</span>
-              <span className="text-[11px] font-mono text-[#e1e2ec]">
-                Displace.
-              </span>
+            <div className="product-body">
+              <div className="product-side-label">CHAPTER 01 <span>MECHANICS</span></div>
+              <div className="formula-heading"><span>Kinematics</span><small>JEE · CLASS 11</small></div>
+              <div className="equation-card">
+                <span className="equation-label">01 / EQUATIONS OF MOTION</span>
+                <div className="equation">v² = u² + 2as</div>
+                <div className="equation-rule" />
+                <div className="variable-grid">
+                  <div><b>v</b><span>final velocity</span></div>
+                  <div><b>u</b><span>initial velocity</span></div>
+                  <div><b>a</b><span>acceleration</span></div>
+                  <div><b>s</b><span>displacement</span></div>
+                </div>
+              </div>
+              <div className="product-footer-row"><span><Check size={13} /> 12 formulas organized</span><span>PDF READY <ChevronRight size={14} /></span></div>
             </div>
           </div>
+          <div className="floating-chip chip-top">physics / kinematics.tex</div>
+          <div className="floating-chip chip-bottom"><span className="chip-spark" /> Focus mode on</div>
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section
-        id="how-it-works"
-        className="w-full max-w-[1200px] px-6 md:px-12 py-16 md:py-24 border-t border-[#32353c] bg-[#11131a]"
-      >
-        <div className="flex flex-col items-center mb-16">
-          <h2 className="text-xl font-semibold text-[#e1e2ec] mb-2">
-            Technical Workflow
-          </h2>
-          <p className="text-center max-w-lg text-[#e1e2ec]">
-            Generate precise academic reference materials in four deterministic
-            steps.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 lg:gap-6 w-full">
-          {/* Step 1 */}
-          <div className="bg-[#11131a] border border-[#32353c] rounded p-4 hover:border-[#aec6ff] transition-colors flex flex-col group">
-            <div className="flex justify-between items-start mb-4">
-              <span className="font-mono text-[13px] text-[#aec6ff] bg-[#00275d]/20 px-2 py-0.5 rounded">
-                01
-              </span>
-              <BookOpen className="w-5 h-5 text-slate-400 group-hover:text-[#aec6ff] transition-colors" />
+      <section id="how-it-works" className="workflow-section page-section">
+        <div className="section-intro"><p className="section-label">THE SIMPLE PART</p><h2>From blank page to<br /><em>ready-to-revise.</em></h2><p>Four deliberate steps. One sheet that makes sense when you need it.</p></div>
+        <div className="workflow-grid">
+          {workflow.map(({ number, title, body, icon: Icon }, index) => (
+            <div className={`workflow-step ${index === 3 ? "workflow-step-last" : ""}`} key={number}>
+              <div className="step-top"><span>{number}</span><Icon size={18} /></div>
+              <div><h3>{title}</h3><p>{body}</p></div>
+              {index < workflow.length - 1 && <div className="step-connector" aria-hidden="true" />}
             </div>
-            <h3 className="text-[12px] font-medium text-[#e1e2ec] mb-2 uppercase tracking-wide">
-              Select Board
-            </h3>
-            <p className="font-mono text-[13px] text-[#e1e2ec]">
-              Initialize curriculum parameters (e.g., CBSE, ICSE, State).
-            </p>
-          </div>
-
-          {/* Step 2 */}
-          <div className="bg-[#11131a] border border-[#32353c] rounded p-4 hover:border-[#aec6ff] transition-colors flex flex-col group">
-            <div className="flex justify-between items-start mb-4">
-              <span className="font-mono text-[13px] text-[#aec6ff] bg-[#00275d]/20 px-2 py-0.5 rounded">
-                02
-              </span>
-              <Layers className="w-5 h-5 text-slate-400 group-hover:text-[#aec6ff] transition-colors" />
-            </div>
-            <h3 className="text-[12px] font-medium text-[#e1e2ec] mb-2 uppercase tracking-wide">
-              Choose Class
-            </h3>
-            <p className="font-mono text-[13px] text-[#e1e2ec]">
-              Define academic level requirements (Class 11, Class 12).
-            </p>
-          </div>
-
-          {/* Step 3 */}
-          <div className="bg-[#11131a] border border-[#32353c] rounded p-4 hover:border-[#aec6ff] transition-colors flex flex-col group">
-            <div className="flex justify-between items-start mb-4">
-              <span className="font-mono text-[13px] text-[#aec6ff] bg-[#00275d]/20 px-2 py-0.5 rounded">
-                03
-              </span>
-              <Atom className="w-5 h-5 text-slate-400 group-hover:text-[#aec6ff] transition-colors" />
-            </div>
-            <h3 className="text-[12px] font-medium text-[#e1e2ec] mb-2 uppercase tracking-wide">
-              Pick Subject
-            </h3>
-            <p className="font-mono text-[13px] text-[#e1e2ec]">
-              Filter knowledge base (Physics, Chemistry, Mathematics).
-            </p>
-          </div>
-
-          {/* Step 4 */}
-          <div className="bg-[#11131a] border border-[#32353c] rounded p-4 hover:border-[#aec6ff] transition-colors flex flex-col group">
-            <div className="flex justify-between items-start mb-4">
-              <span className="font-mono text-[13px] text-[#aec6ff] bg-[#00275d]/20 px-2 py-0.5 rounded">
-                04
-              </span>
-              <FileText className="w-5 h-5 text-slate-400 group-hover:text-[#aec6ff] transition-colors" />
-            </div>
-            <h3 className="text-[12px] font-medium text-[#e1e2ec] mb-2 uppercase tracking-wide">
-              Export PDF
-            </h3>
-            <p className="font-mono text-[13px] text-[#e1e2ec]">
-              Compile and download formatted LaTeX-style document.
-            </p>
-          </div>
+          ))}
         </div>
       </section>
-    </div>
+    </main>
   );
 }
