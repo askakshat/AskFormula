@@ -239,10 +239,10 @@ export default function PrintView() {
           /* Native KaTeX Print Fixes */
           /* We use container queries in inline-size to shrink formulas to fit. */
           .scale-math-full .katex-display {
-             font-size: min(1.125rem, 4.5cqi) !important;
+             font-size: min(1.25rem, 6.5cqi) !important;
           }
           .scale-math-compact .katex-display {
-             font-size: min(0.875rem, 4.5cqi) !important;
+             font-size: min(1.125rem, 8cqi) !important;
           }
 
           .katex-display {
@@ -310,7 +310,7 @@ export default function PrintView() {
           const chapterColor = titleColors[idx % titleColors.length];
           const gapSize = layout === "compact" ? "gap-3" : "gap-6";
           const cardPadding = layout === "compact" ? "p-3" : "p-4";
-          const mathSize = layout === "compact" ? "text-[14px]" : "text-[18px]";
+          const mathSize = layout === "compact" ? "text-[16px]" : "text-[18px]";
 
           return (
             <div
