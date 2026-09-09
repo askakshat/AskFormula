@@ -35,37 +35,47 @@ const storyItems = [
   { label: "03 / REVISE", title: "Open it when\nit matters.", body: "A clean reference sheet for the last ten minutes, the long train ride, or the night before the exam.", accent: "violet" },
 ];
 
-function WorkspacePreview({ active }: { active: number }) {
+function WorkspacePreview({ active, progress }: { active: number; progress: number }) {
   return <div className="story-preview-stack">
-    {[0, 1, 2].map((index) => <div key={index} className={`story-preview story-preview-${index} ${active === index ? "is-active" : ""} ${index < active ? "is-past" : ""}`}>
-      <div className="story-preview-chrome"><div className="window-dots"><span /><span /><span /></div><span>askformula / {index === 0 ? "library" : index === 1 ? "builder" : "my-sheet"}</span><Copy size={13} /></div>
-      {index === 0 && <div className="library-preview"><div className="library-heading"><span>Formula library</span><small>312 results</small></div><div className="library-search">Search across Physics, Chemistry, Maths, and Biology <span>⌘ K</span></div><div className="library-list"><div><b>01</b><span>Equations of Motion</span><i>Physics</i></div><div><b>02</b><span>Work, Energy & Power</span><i>Physics</i></div><div><b>03</b><span>Quadratic Equations</span><i>Mathematics</i></div><div><b>04</b><span>Current Electricity</span><i>Physics</i></div></div></div>}
-      {index === 1 && <div className="builder-preview"><div className="builder-title"><span>Build your reference sheet</span><small>STEP 02 OF 04</small></div><div className="builder-columns"><div className="builder-options"><span className="selected-option">JEE Main</span><span>CBSE / NCERT</span><span>NEET</span></div><div className="builder-formula"><small>SELECTED CHAPTER</small><strong>Kinematics</strong><div className="builder-progress"><span /></div><p>12 formulas will be added to your sheet.</p></div></div></div>}
-      {index === 2 && <div className="sheet-preview"><div className="sheet-meta">JEE MAIN · CLASS 11 <span>EXPORT PDF</span></div><div className="sheet-title">Kinematics</div><div className="sheet-equation">v² = u² + 2as</div><div className="sheet-rule" /><div className="sheet-vars"><span><b>v</b> final velocity</span><span><b>u</b> initial velocity</span><span><b>a</b> acceleration</span><span><b>s</b> displacement</span></div><div className="sheet-check"><Check size={13} /> 12 formulas organized</div></div>}
-    </div>)}
+    {[0, 1, 2].map((index) => {
+      const distance = progress * (storyItems.length - 1) - index;
+      const proximity = Math.min(1, Math.abs(distance));
+      const opacity = Math.max(0, 1 - Math.max(0, proximity - 0.08) * 1.45);
+      const translateX = distance > 0 ? -distance * 11 : -distance * 15;
+      const translateY = Math.abs(distance) * 12;
+      const scale = 1 - Math.min(0.08, Math.abs(distance) * 0.08);
+      return <div key={index} className={`story-preview story-preview-${index} ${active === index ? "is-active" : ""} ${index < active ? "is-past" : ""}`} style={{ opacity, transform: `perspective(1100px) translate3d(${translateX}%, ${translateY}px, ${-Math.abs(distance) * 90}px) scale(${scale})`, zIndex: active === index ? 3 : 2 - Math.round(Math.abs(distance)) }}>
+        <div className="story-preview-chrome"><div className="window-dots"><span /><span /><span /></div><span>askformula / {index === 0 ? "library" : index === 1 ? "builder" : "my-sheet"}</span><Copy size={13} /></div>
+        {index === 0 && <div className="library-preview"><div className="library-heading"><span>Formula library</span><small>312 results</small></div><div className="library-search">Search across Physics, Chemistry, Maths, and Biology <span>⌘ K</span></div><div className="library-list"><div><b>01</b><span>Equations of Motion</span><i>Physics</i></div><div><b>02</b><span>Work, Energy & Power</span><i>Physics</i></div><div><b>03</b><span>Quadratic Equations</span><i>Mathematics</i></div><div><b>04</b><span>Current Electricity</span><i>Physics</i></div></div></div>}
+        {index === 1 && <div className="builder-preview"><div className="builder-title"><span>Build your reference sheet</span><small>STEP 02 OF 04</small></div><div className="builder-columns"><div className="builder-options"><span className="selected-option">JEE Main</span><span>CBSE / NCERT</span><span>NEET</span></div><div className="builder-formula"><small>SELECTED CHAPTER</small><strong>Kinematics</strong><div className="builder-progress"><span /></div><p>12 formulas will be added to your sheet.</p></div></div></div>}
+        {index === 2 && <div className="sheet-preview"><div className="sheet-meta">JEE MAIN · CLASS 11 <span>EXPORT PDF</span></div><div className="sheet-title">Kinematics</div><div className="sheet-equation">v² = u² + 2as</div><div className="sheet-rule" /><div className="sheet-vars"><span><b>v</b> final velocity</span><span><b>u</b> initial velocity</span><span><b>a</b> acceleration</span><span><b>s</b> displacement</span></div><div className="sheet-check"><Check size={13} /> 12 formulas organized</div></div>}
+      </div>;
+    })}
   </div>;
 }
-
 function ScrollStory() {
   const storyRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);
+  const [progress, setProgress] = useState(0);
   const activeRef = useRef(0);
-
   useEffect(() => {
     let frame = 0;
+    let smooth = 0;
+    let target = 0;
+    const tick = () => {
+      smooth += (target - smooth) * 0.12;
+      if (Math.abs(target - smooth) < 0.0005) smooth = target;
+      setProgress(smooth);
+      const next = Math.min(storyItems.length - 1, Math.floor(smooth * storyItems.length));
+      if (next !== activeRef.current) { activeRef.current = next; setActive(next); }
+      frame = Math.abs(target - smooth) > 0.0005 ? requestAnimationFrame(tick) : 0;
+    };
     const onScroll = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        if (!storyRef.current) return;
-        const rect = storyRef.current.getBoundingClientRect();
-        const travel = Math.max(1, storyRef.current.offsetHeight - window.innerHeight);
-        const progress = Math.min(0.999, Math.max(0, -rect.top / travel));
-        const next = Math.min(storyItems.length - 1, Math.floor(progress * storyItems.length));
-        if (next !== activeRef.current) {
-          activeRef.current = next;
-          setActive(next);
-        }
-      });
+      if (!storyRef.current) return;
+      const rect = storyRef.current.getBoundingClientRect();
+      const travel = Math.max(1, storyRef.current.offsetHeight - window.innerHeight);
+      target = Math.min(1, Math.max(0, -rect.top / travel));
+      if (!frame) frame = requestAnimationFrame(tick);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -76,7 +86,6 @@ function ScrollStory() {
       window.removeEventListener("resize", onScroll);
     };
   }, []);
-
   return <section ref={storyRef} className="scroll-story">
     <div className="story-sticky">
       <div className="story-copy">
@@ -84,11 +93,10 @@ function ScrollStory() {
         {storyItems.map((item, index) => <div className={`story-copy-item story-copy-${item.accent} ${active === index ? "is-active" : ""}`} key={item.label}><span>{item.label}</span><h2>{item.title.split("\n").map((line) => <span key={line}>{line}<br /></span>)}</h2><p>{item.body}</p><div className="story-progress"><span style={{ transform: `scaleX(${active === index ? 1 : 0})` }} /></div></div>)}
         <div className="story-counter"><span>0{active + 1}</span><i /> <span>0{storyItems.length}</span></div>
       </div>
-      <div className="story-visual"><WorkspacePreview active={active} /><div className="story-visual-glow" /></div>
+      <div className="story-visual"><WorkspacePreview active={active} progress={progress} /><div className="story-visual-glow" /></div>
     </div>
   </section>;
 }
-
 export default function Hero() {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   function handlePointerMove(event: React.PointerEvent<HTMLDivElement>) {
