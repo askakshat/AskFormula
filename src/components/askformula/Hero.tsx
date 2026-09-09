@@ -61,37 +61,37 @@ function ScrollStory() {
 
   useEffect(() => {
     let raf = 0;
-    let lastTime = 0;
-    let targetCamera = 0;
+    let lastFrame = 0;
     let camera = 0;
+    let target = 0;
+    let runway = 1.15 * window.innerHeight;
     const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
-    const readScroll = () => {
+    const readTarget = () => {
       if (!storyRef.current) return;
-      const rect = storyRef.current.getBoundingClientRect();
-      const localScroll = Math.max(0, -rect.top);
-      const cameraLength = Math.max(1, window.innerHeight * 1.15);
-      targetCamera = clamp(localScroll / cameraLength, 0, storyItems.length - 1);
+      const storyStart = storyRef.current.offsetTop;
+      target = clamp((window.scrollY - storyStart) / runway, 0, 2.35);
       if (!raf) raf = requestAnimationFrame(smoothCamera);
     };
     const smoothCamera = (time: number) => {
-      const elapsed = lastTime ? Math.min(100, time - lastTime) : 16.67;
-      lastTime = time;
-      const delta = targetCamera - camera;
-      const ease = 1 - Math.pow(0.845, elapsed / 16.67);
-      camera = Math.abs(delta) < 0.00045 ? targetCamera : camera + delta * ease;
-      const normalized = camera / Math.max(1, storyItems.length - 1);
+      const deltaTime = lastFrame ? Math.min(100, time - lastFrame) : 16.67;
+      lastFrame = time;
+      const delta = target - camera;
+      const eased = 1 - Math.pow(0.845, deltaTime / 16.67);
+      camera = Math.abs(delta) < 0.00045 ? target : camera + delta * eased;
+      const normalized = camera / 2.35;
       setProgress(normalized);
-      const next = Math.min(storyItems.length - 1, Math.round(camera));
+      const next = Math.min(storyItems.length - 1, Math.max(0, Math.round(camera)));
       if (next !== activeRef.current) { activeRef.current = next; setActive(next); }
-      raf = Math.abs(targetCamera - camera) >= 0.00045 ? requestAnimationFrame(smoothCamera) : 0;
+      raf = Math.abs(target - camera) >= 0.00045 ? requestAnimationFrame(smoothCamera) : 0;
     };
-    readScroll();
-    window.addEventListener("scroll", readScroll, { passive: true });
-    window.addEventListener("resize", readScroll, { passive: true });
+    const onResize = () => { runway = 1.15 * window.innerHeight; readTarget(); };
+    readTarget();
+    window.addEventListener("scroll", readTarget, { passive: true });
+    window.addEventListener("resize", onResize, { passive: true });
     return () => {
       cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", readScroll);
-      window.removeEventListener("resize", readScroll);
+      window.removeEventListener("scroll", readTarget);
+      window.removeEventListener("resize", onResize);
     };
   }, []);
 
