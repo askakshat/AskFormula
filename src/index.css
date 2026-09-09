@@ -173,7 +173,7 @@
 :root { --ink:#0c1015; --ink-soft:#131a20; --paper:#f2f0e9; --muted-paper:#a7aaa5; --line:rgba(242,240,233,.14); --blue:#b6cbff; --green:#92e7c0; --violet:#c7b5ff; --ease-out:cubic-bezier(.23,1,.32,1); }
 html { scroll-behavior:smooth; }
 body { background:var(--ink); color:var(--paper); font-family:Inter,ui-sans-serif,system-ui,sans-serif; }
-.landing-page { min-height:100vh; overflow:hidden; background:radial-gradient(circle at 50% 0%,#26323b 0,var(--ink) 40rem); color:var(--paper); }
+.landing-page { min-height:100vh; overflow-x:hidden; background:radial-gradient(circle at 50% 0%,#26323b 0,var(--ink) 40rem); color:var(--paper); }
 .site-header { position:fixed; top:0; z-index:50; width:100%; padding:16px 24px; }
 .header-inner { display:flex; align-items:center; justify-content:space-between; gap:24px; max-width:1240px; margin:0 auto; padding:9px 10px 9px 14px; border:1px solid rgba(242,240,233,.11); border-radius:18px; background:rgba(12,16,21,.62); backdrop-filter:blur(18px); box-shadow:0 14px 45px rgba(0,0,0,.18); }
 .brand-lockup { display:inline-flex; align-items:center; gap:9px; color:var(--paper); font-size:14px; font-weight:650; letter-spacing:-.02em; text-decoration:none; }
@@ -360,6 +360,37 @@ body { background:var(--ink); color:var(--paper); font-family:Inter,ui-sans-seri
   display: flex !important;
   align-items: center !important;
   padding: 0 !important;
+}
+
+@media (max-width:900px) {
+  .story-sticky {
+    align-items: flex-start !important;
+    padding-top: 100px !important;
+  }
+}
+
+@media (max-width:720px) {
+  .story-sticky {
+    align-items: flex-start !important;
+    padding-top: 80px !important;
+  }
+}
+
+/* Rebuild Scroll Story with Framer Motion */
+.scroll-story {
+  position: relative;
+  height: 300vh !important;
+  background: linear-gradient(180deg,#0c1015 0%,#0b0e12 100%) !important;
+  z-index: 8;
+}
+
+.story-sticky {
+  position: sticky !important;
+  top: 0 !important;
+  height: 100vh !important;
+  display: flex !important;
+  align-items: center !important;
+  overflow: hidden !important;
 }
 
 @media (max-width:900px) {

@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router";
 import { useEffect, useRef, useState } from "react";
-import { useScroll, useTransform, motion } from "framer-motion";
+import { useScroll } from "framer-motion";
 
 const workflow = [
   { number: "01", title: "Select board", body: "CBSE, ICSE, state boards", icon: BookOpen },
@@ -37,16 +37,22 @@ const storyItems = [
 ];
 
 
+
 function WorkspacePreview({ active, progress }: { active: number; progress: number }) {
   return <div className="story-preview-stack">
     {[0, 1, 2].map((index) => {
+      // Calculate dynamic positions based on progress (0 to 1) for the 3 steps
       const distance = progress * (storyItems.length - 1) - index;
       const proximity = Math.min(1, Math.abs(distance));
       const opacity = Math.max(0, 1 - Math.max(0, proximity - 0.08) * 1.45);
       const translateX = distance > 0 ? -distance * 11 : -distance * 15;
       const translateY = Math.abs(distance) * 12;
       const scale = 1 - Math.min(0.08, Math.abs(distance) * 0.08);
-      return <div key={index} className={`story-preview story-preview-${index} ${active === index ? "is-active" : ""} ${index < active ? "is-past" : ""}`} style={{ opacity, transform: `perspective(1100px) translate3d(${translateX}%, ${translateY}px, ${-Math.abs(distance) * 90}px) scale(${scale})`, zIndex: active === index ? 3 : 2 - Math.round(Math.abs(distance)) }}>
+
+      const isActive = active === index;
+      const isPast = index < active;
+
+      return <div key={index} className={`story-preview story-preview-${index} ${isActive ? "is-active" : ""} ${isPast ? "is-past" : ""}`} style={{ opacity, transform: `perspective(1100px) translate3d(${translateX}%, ${translateY}px, ${-Math.abs(distance) * 90}px) scale(${scale})`, zIndex: isActive ? 3 : 2 - Math.round(Math.abs(distance)) }}>
         <div className="story-preview-chrome"><div className="window-dots"><span /><span /><span /></div><span>askformula / {index === 0 ? "library" : index === 1 ? "builder" : "my-sheet"}</span><Copy size={13} /></div>
         {index === 0 && <div className="library-preview"><div className="library-heading"><span>Formula library</span><small>312 results</small></div><div className="library-search">Search across Physics, Chemistry, Maths, and Biology <span>⌘ K</span></div><div className="library-list"><div><b>01</b><span>Equations of Motion</span><i>Physics</i></div><div><b>02</b><span>Work, Energy & Power</span><i>Physics</i></div><div><b>03</b><span>Quadratic Equations</span><i>Mathematics</i></div><div><b>04</b><span>Current Electricity</span><i>Physics</i></div></div></div>}
         {index === 1 && <div className="builder-preview"><div className="builder-title"><span>Build your reference sheet</span><small>STEP 02 OF 04</small></div><div className="builder-columns"><div className="builder-options"><span className="selected-option">JEE Main</span><span>CBSE / NCERT</span><span>NEET</span></div><div className="builder-formula"><small>SELECTED CHAPTER</small><strong>Kinematics</strong><div className="builder-progress"><span /></div><p>12 formulas will be added to your sheet.</p></div></div></div>}
@@ -67,33 +73,61 @@ function ScrollStory() {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    return scrollYProgress.onChange((latest) => {
+    const unsubscribe = scrollYProgress.onChange((latest) => {
       setProgress(latest);
-      // Determine active slide based on scroll progress (0 to 1) mapped to 3 items
       const newActive = Math.min(
         storyItems.length - 1,
         Math.max(0, Math.round(latest * (storyItems.length - 1)))
       );
       setActive(newActive);
     });
+    return () => unsubscribe();
   }, [scrollYProgress]);
 
   return <section ref={containerRef} className="scroll-story" style={{ height: "300vh", position: "relative" }}>
     <div className="story-sticky" style={{ position: "sticky", top: 0, height: "100vh", display: "flex", alignItems: "center", overflow: "hidden" }}>
       <div className="story-content" style={{ display: "grid", gridTemplateColumns: ".8fr 1.2fr", gap: "7vw", maxWidth: "1160px", width: "100%", margin: "0 auto", padding: "40px" }}>
-        <div className="story-copy">
-          <p className="section-label">ONE SPACE / THREE MOMENTS</p>
-          {storyItems.map((item, index) => (
-            <div className={`story-copy-item story-copy-${item.accent} ${active === index ? "is-active" : ""}`} key={item.label}>
-              <span>{item.label}</span>
-              <h2>{item.title.split("\n").map((line) => <span key={line}>{line}<br /></span>)}</h2>
-              <p>{item.body}</p>
-              <div className="story-progress"><span style={{ transform: `scaleX(${active === index ? 1 : 0})` }} /></div>
-            </div>
-          ))}
-          <div className="story-counter"><span>0{active + 1}</span><i /> <span>0{storyItems.length}</span></div>
+        <div className="story-copy" style={{ position: "relative", zIndex: 3, height: "100%" }}>
+          <p className="section-label" style={{ marginBottom: "20px" }}>ONE SPACE / THREE MOMENTS</p>
+          <div style={{ position: "relative", height: "300px" }}>
+            {storyItems.map((item, index) => {
+              const isActive = active === index;
+              return (
+                <div
+                  className={`story-copy-item story-copy-${item.accent} ${isActive ? "is-active" : ""}`}
+                  key={item.label}
+                  style={{
+                    position: "absolute",
+                    top: 0, left: 0, width: "100%",
+                    opacity: isActive ? 1 : 0,
+                    transform: `translateY(${isActive ? 0 : 24}px)`,
+                    transition: "opacity 500ms ease, transform 700ms cubic-bezier(.23,1,.32,1)",
+                    pointerEvents: isActive ? "auto" : "none"
+                  }}
+                >
+                  <span style={{ color: "rgba(242,240,233,.42)", fontSize: "10px", letterSpacing: ".16em", fontFamily: "ui-monospace,monospace" }}>{item.label}</span>
+                  <h2 style={{ margin: "18px 0", color: "var(--paper)", fontSize: "clamp(38px,4vw,62px)", fontWeight: 420, letterSpacing: "-.07em", lineHeight: .98 }}>
+                    {item.title.split("\n").map((line) => <span key={line}>{line}<br /></span>)}
+                  </h2>
+                  <p style={{ maxWidth: "300px", color: "rgba(242,240,233,.52)", fontSize: "13px", lineHeight: 1.7 }}>{item.body}</p>
+
+                  <div className="story-progress" style={{ width: "150px", height: "2px", marginTop: "34px", overflow: "hidden", background: "rgba(242,240,233,.12)" }}>
+                    <span style={{ display: "block", width: "100%", height: "100%", transformOrigin: "left", background: "var(--blue)", transition: "transform 700ms cubic-bezier(.23,1,.32,1)", transform: `scaleX(${isActive ? 1 : 0})` }} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="story-counter" style={{ display: "flex", alignItems: "center", gap: "10px", marginTop: "54px", color: "rgba(242,240,233,.45)", fontSize: "10px", fontFamily: "ui-monospace,monospace" }}>
+            <span>0{active + 1}</span>
+            <i style={{ display: "block", width: "48px", height: "1px", background: "rgba(242,240,233,.2)" }} />
+            <span>0{storyItems.length}</span>
+          </div>
         </div>
-        <div className="story-visual"><WorkspacePreview active={active} progress={progress} /><div className="story-visual-glow" /></div>
+        <div className="story-visual" style={{ position: "relative", height: "500px", perspective: "1000px" }}>
+          <WorkspacePreview active={active} progress={progress} />
+          <div className="story-visual-glow" style={{ position: "absolute", inset: "16% 5%", zIndex: -1, borderRadius: "50%", background: "#61758a", filter: "blur(70px)", opacity: .14 }} />
+        </div>
       </div>
     </div>
   </section>;
