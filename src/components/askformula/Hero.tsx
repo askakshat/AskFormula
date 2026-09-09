@@ -49,18 +49,33 @@ function WorkspacePreview({ active }: { active: number }) {
 function ScrollStory() {
   const storyRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);
+  const activeRef = useRef(0);
 
   useEffect(() => {
+    let frame = 0;
     const onScroll = () => {
-      if (!storyRef.current) return;
-      const rect = storyRef.current.getBoundingClientRect();
-      const travel = Math.max(1, rect.height - window.innerHeight);
-      const progress = Math.min(0.999, Math.max(0, -rect.top / travel));
-      setActive(Math.min(storyItems.length - 1, Math.floor(progress * storyItems.length)));
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        if (!storyRef.current) return;
+        const rect = storyRef.current.getBoundingClientRect();
+        const storyStart = rect.top + window.scrollY;
+        const travel = Math.max(1, storyRef.current.offsetHeight - window.innerHeight);
+        const progress = Math.min(1, Math.max(0, (window.scrollY - storyStart) / travel));
+        const next = Math.min(storyItems.length - 1, Math.round(progress * (storyItems.length - 1)));
+        if (next !== activeRef.current) {
+          activeRef.current = next;
+          setActive(next);
+        }
+      });
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   return <section ref={storyRef} className="scroll-story">

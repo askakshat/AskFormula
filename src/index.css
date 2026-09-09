@@ -312,3 +312,25 @@ body { background:var(--ink); color:var(--paper); font-family:Inter,ui-sans-seri
 .story-preview-stack { position:absolute; z-index:11; }
 .story-preview { z-index:12; }
 @media (max-width:720px) { .hero-product-wrap { z-index:5; } .scroll-story { z-index:8; } }
+/* Working carousel geometry: hero is natural, story owns the pin */
+.hero-reference-shell { height:auto; min-height:760px; overflow:visible; }
+.hero-shell-wrap { height:auto; min-height:470px; overflow:visible; }
+.app-shell-product { height:auto; min-height:455px; }
+.scroll-story { height:1500px; overflow:visible; }
+.story-sticky { top:72px; height:calc(100vh - 104px); min-height:520px; max-height:760px; overflow:visible; }
+.story-visual { height:min(430px, 48vw); min-height:330px; overflow:visible; }
+.story-preview-stack { position:absolute; inset:0; overflow:visible; }
+.story-preview { overflow:hidden; }
+@media (max-width:900px) {
+  .scroll-story { height:1240px; }
+  .story-sticky { top:64px; height:calc(100vh - 88px); min-height:500px; max-height:680px; }
+  .story-visual { height:360px; min-height:0; }
+}
+@media (max-width:720px) {
+  .hero-reference-shell { min-height:590px; }
+  .hero-shell-wrap { min-height:300px; }
+  .scroll-story { height:1040px; }
+  .story-sticky { top:58px; height:calc(100vh - 78px); min-height:470px; max-height:600px; padding-top:34px; }
+  .story-copy { height:154px; }
+  .story-visual { height:275px; min-height:0; }
+}
