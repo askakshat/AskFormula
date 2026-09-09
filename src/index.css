@@ -256,3 +256,29 @@ body { background:var(--ink); color:var(--paper); font-family:Inter,ui-sans-seri
 .hero-reference-shell .hero-orb-one { opacity:.12; }
 .hero-reference-shell .hero-orb-two { opacity:.08; }
 @media (max-width:720px) { .hero-reference-shell { background-position:center top,center top,center top; } }
+/* Bounded scroll geometry: prevents vh expansion in full-page/mobile captures */
+.hero-reference-shell { min-height:760px; height:760px; }
+.hero-shell-wrap { min-height:470px; height:470px; }
+.scroll-story { height:2140px; min-height:0; }
+.story-sticky { height:720px; min-height:0; max-height:720px; padding-top:105px; }
+.story-copy { margin-top:26px; }
+.story-visual { height:430px; margin-top:0; }
+.story-preview-stack { width:100%; height:100%; }
+.story-preview { width:100%; height:100%; }
+.templates-section:before { top:-42px; height:90px; }
+@media (max-width:900px) {
+  .hero-reference-shell { min-height:650px; height:650px; }
+  .hero-shell-wrap { min-height:370px; height:370px; }
+  .scroll-story { height:1740px; }
+  .story-sticky { height:650px; max-height:650px; padding-top:82px; }
+  .story-copy { margin-top:0; }
+  .story-visual { height:360px; }
+}
+@media (max-width:720px) {
+  .hero-reference-shell { min-height:590px; height:590px; }
+  .hero-shell-wrap { min-height:300px; height:300px; }
+  .scroll-story { height:1450px; }
+  .story-sticky { height:580px; max-height:580px; padding-top:62px; }
+  .story-copy { height:168px; }
+  .story-visual { height:276px; }
+}
