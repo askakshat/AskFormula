@@ -52,50 +52,34 @@ function ScrollStory() {
   const activeRef = useRef(0);
   const wheelCooldown = useRef(false);
 
-  function handleWheel(event: React.WheelEvent<HTMLElement>) {
-    if (Math.abs(event.deltaY) < 2 || wheelCooldown.current) return;
-    const direction = event.deltaY > 0 ? 1 : -1;
-    const current = activeRef.current;
-    const next = Math.min(storyItems.length - 1, Math.max(0, current + direction));
-    const canAdvanceCarousel = next !== current;
-    if (!canAdvanceCarousel) return;
-
-    event.preventDefault();
-    event.stopPropagation();
-    activeRef.current = next;
-    setActive(next);
-    wheelCooldown.current = true;
-    window.setTimeout(() => { wheelCooldown.current = false; }, 420);
-  }
-
   useEffect(() => {
-    let frame = 0;
-    const onScroll = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        if (!storyRef.current) return;
-        const rect = storyRef.current.getBoundingClientRect();
-        const storyStart = rect.top + window.scrollY;
-        const travel = Math.max(1, storyRef.current.offsetHeight - window.innerHeight);
-        const progress = Math.min(1, Math.max(0, (window.scrollY - storyStart) / travel));
-        const next = Math.min(storyItems.length - 1, Math.round(progress * (storyItems.length - 1)));
-        if (next !== activeRef.current) {
-          activeRef.current = next;
-          setActive(next);
-        }
-      });
+    let engaged = false;
+    const observer = new IntersectionObserver(([entry]) => {
+      engaged = entry.isIntersecting && entry.intersectionRatio > 0.35;
+    }, { threshold: [0, 0.35, 0.8] });
+    if (storyRef.current) observer.observe(storyRef.current);
+
+    const onWheel = (event: WheelEvent) => {
+      if (!engaged || Math.abs(event.deltaY) < 2 || wheelCooldown.current) return;
+      const direction = event.deltaY > 0 ? 1 : -1;
+      const current = activeRef.current;
+      const next = Math.min(storyItems.length - 1, Math.max(0, current + direction));
+      if (next === current) return;
+      event.preventDefault();
+      event.stopPropagation();
+      activeRef.current = next;
+      setActive(next);
+      wheelCooldown.current = true;
+      window.setTimeout(() => { wheelCooldown.current = false; }, 520);
     };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    window.addEventListener("wheel", onWheel, { passive: false, capture: true });
     return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      observer.disconnect();
+      window.removeEventListener("wheel", onWheel, true);
     };
   }, []);
 
-  return <section ref={storyRef} className="scroll-story" onWheel={handleWheel}>
+  return <section ref={storyRef} className="scroll-story">
     <div className="story-sticky">
       <div className="story-copy">
         <p className="section-label">ONE SPACE / THREE MOMENTS</p>
