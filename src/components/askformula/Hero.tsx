@@ -58,34 +58,43 @@ function ScrollStory() {
   const [active, setActive] = useState(0);
   const [progress, setProgress] = useState(0);
   const activeRef = useRef(0);
+
   useEffect(() => {
-    let frame = 0;
-    let smooth = 0;
-    let target = 0;
-    const tick = () => {
-      smooth += (target - smooth) * 0.12;
-      if (Math.abs(target - smooth) < 0.0005) smooth = target;
-      setProgress(smooth);
-      const next = Math.min(storyItems.length - 1, Math.floor(smooth * storyItems.length));
-      if (next !== activeRef.current) { activeRef.current = next; setActive(next); }
-      frame = Math.abs(target - smooth) > 0.0005 ? requestAnimationFrame(tick) : 0;
-    };
-    const onScroll = () => {
+    let raf = 0;
+    let lastTime = 0;
+    let targetCamera = 0;
+    let camera = 0;
+    const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
+    const readScroll = () => {
       if (!storyRef.current) return;
       const rect = storyRef.current.getBoundingClientRect();
-      const travel = Math.max(1, storyRef.current.offsetHeight - window.innerHeight);
-      target = Math.min(1, Math.max(0, -rect.top / travel));
-      if (!frame) frame = requestAnimationFrame(tick);
+      const localScroll = Math.max(0, -rect.top);
+      const cameraLength = Math.max(1, window.innerHeight * 1.15);
+      targetCamera = clamp(localScroll / cameraLength, 0, storyItems.length - 1);
+      if (!raf) raf = requestAnimationFrame(smoothCamera);
     };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    const smoothCamera = (time: number) => {
+      const elapsed = lastTime ? Math.min(100, time - lastTime) : 16.67;
+      lastTime = time;
+      const delta = targetCamera - camera;
+      const ease = 1 - Math.pow(0.845, elapsed / 16.67);
+      camera = Math.abs(delta) < 0.00045 ? targetCamera : camera + delta * ease;
+      const normalized = camera / Math.max(1, storyItems.length - 1);
+      setProgress(normalized);
+      const next = Math.min(storyItems.length - 1, Math.round(camera));
+      if (next !== activeRef.current) { activeRef.current = next; setActive(next); }
+      raf = Math.abs(targetCamera - camera) >= 0.00045 ? requestAnimationFrame(smoothCamera) : 0;
+    };
+    readScroll();
+    window.addEventListener("scroll", readScroll, { passive: true });
+    window.addEventListener("resize", readScroll, { passive: true });
     return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", readScroll);
+      window.removeEventListener("resize", readScroll);
     };
   }, []);
+
   return <section ref={storyRef} className="scroll-story">
     <div className="story-sticky">
       <div className="story-copy">
