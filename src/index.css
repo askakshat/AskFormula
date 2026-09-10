@@ -533,3 +533,22 @@ body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSyst
 /* The fixed toolbar inherits the same atmosphere so its band is not a separate black strip. */
 .site-header { background:linear-gradient(180deg,rgba(8,13,18,.5),rgba(8,13,18,.18) 76%,transparent),url('/askformula-hero-landscape.png') center 18% / cover no-repeat !important; }
 @media (max-width:720px) { .site-header { background-position:center 22% !important; } }
+
+/* Shared high-end app system: Liquid DOM-inspired optical glass fallback. */
+.premium-app-page { position:relative; isolation:isolate; min-height:100vh; overflow-x:hidden; background:radial-gradient(ellipse at 52% -8%,#2b3b46 0,#121b23 30rem,#0a0f14 68rem) !important; color:var(--paper); font-family:Inter,ui-sans-serif,system-ui,sans-serif; }
+.premium-app-page:before { content:""; position:fixed; z-index:-1; inset:0; pointer-events:none; opacity:.055; background-image:radial-gradient(circle at 18% 12%,rgba(182,203,255,.7),transparent 28%),radial-gradient(circle at 80% 22%,rgba(146,231,192,.38),transparent 24%); }
+.liquid-nav, .premium-page-header { position:relative; isolation:isolate; background:rgba(11,17,22,.62) !important; border-color:rgba(242,240,233,.14) !important; backdrop-filter:blur(24px) saturate(145%); -webkit-backdrop-filter:blur(24px) saturate(145%); box-shadow:0 18px 55px rgba(0,0,0,.25),inset 0 1px rgba(255,255,255,.1); }
+.liquid-nav:before, .premium-page-header:before, .liquid-card:before, .premium-app-page [class*="bg-[#11131a]"], .premium-app-page [class*="bg-[#15171e]"] { background-image:linear-gradient(135deg,rgba(255,255,255,.08),transparent 28%,rgba(169,198,255,.045) 72%,transparent) !important; }
+.liquid-card, .premium-app-page [class*="bg-[#11131a]"], .premium-app-page [class*="bg-[#15171e]"], .premium-app-page [class*="bg-[#1c1e26]"], .premium-app-page [class*="bg-[#0b0e15]"] .border { position:relative; isolation:isolate; border-color:rgba(242,240,233,.14) !important; background-color:rgba(18,27,34,.68) !important; backdrop-filter:blur(20px) saturate(135%); -webkit-backdrop-filter:blur(20px) saturate(135%); box-shadow:0 22px 60px rgba(0,0,0,.2),inset 0 1px rgba(255,255,255,.08); }
+.liquid-card:after, .liquid-nav:after, .premium-page-header:after { content:""; position:absolute; z-index:-1; pointer-events:none; inset:1px; border-radius:inherit; background:radial-gradient(circle at 15% 0%,rgba(255,255,255,.14),transparent 30%),radial-gradient(circle at 90% 100%,rgba(146,231,192,.08),transparent 28%); opacity:.75; }
+.premium-app-page button:not([disabled]), .premium-app-page a[class*="bg-"] { transition:transform 180ms var(--ease-out),box-shadow 180ms ease,background 180ms ease,border-color 180ms ease; }
+.premium-app-page button:not([disabled]):hover, .premium-app-page a[class*="bg-"]:hover { transform:translateY(-2px); box-shadow:0 12px 30px rgba(0,0,0,.2),0 0 24px rgba(169,198,255,.08); }
+.premium-app-page input, .premium-app-page select, .premium-app-page textarea { border-color:rgba(242,240,233,.16) !important; background:rgba(7,12,16,.42) !important; color:var(--paper) !important; box-shadow:inset 0 1px rgba(255,255,255,.06); }
+.premium-app-page h1, .premium-app-page h2, .premium-app-page h3 { letter-spacing:-.045em; }
+.premium-app-page .text-[#61dcb0], .premium-app-page .text-[#aec6ff], .premium-app-page .text-blue-400 { text-shadow:0 0 20px rgba(169,198,255,.12); }
+.liquid-nav > *, .premium-page-header > *, .liquid-card > * { position:relative; z-index:1; }
+@media (max-width:720px) { .premium-app-page { background:radial-gradient(ellipse at 50% -8%,#263640 0,#0a0f14 34rem); } .liquid-nav,.premium-page-header { backdrop-filter:blur(18px) saturate(140%); } }
+
+/* The landing backdrop already paints the toolbar region; only the glass capsule should remain visible. */
+.landing-page .site-header { background:transparent !important; }
+.landing-page .header-inner { background:rgba(9,13,18,.48); }

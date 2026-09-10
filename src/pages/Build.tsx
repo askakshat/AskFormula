@@ -106,8 +106,8 @@ export default function Build() {
   };
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#0b0e15] text-[#e1e2ec] font-sans flex flex-col">
-      <header className="bg-surface-container-lowest dark:bg-[#0b0e15] fixed top-0 w-full z-50 border-b border-[#32353c] transition-colors duration-200">
+    <div className="premium-app-page min-h-screen overflow-x-hidden bg-[#0b0e15] text-[#e1e2ec] font-sans flex flex-col">
+      <header className="liquid-nav bg-surface-container-lowest dark:bg-[#0b0e15] fixed top-0 w-full z-50 border-b border-[#32353c] transition-colors duration-200">
         <div className="flex justify-between items-center px-6 md:px-12 py-3 max-w-[1200px] mx-auto h-16">
           <div
             className="flex items-center gap-3 cursor-pointer active:opacity-80"

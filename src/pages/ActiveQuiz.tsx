@@ -98,7 +98,7 @@ export default function ActiveQuiz() {
   };
 
   return (
-    <div className="min-h-screen bg-[#11131a] text-[#e3e2e6] font-sans flex flex-col antialiased selection:bg-[#324565] selection:text-[#d8e2ff]">
+    <div className="premium-app-page min-h-screen bg-[#11131a] text-[#e3e2e6] font-sans flex flex-col antialiased selection:bg-[#324565] selection:text-[#d8e2ff]">
       <main className="flex-1 flex flex-col items-center p-4 md:p-8 w-full max-w-[1200px] mx-auto pt-8">
         <div className="w-full max-w-2xl flex justify-between items-center mb-8">
           <button

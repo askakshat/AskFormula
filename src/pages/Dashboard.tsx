@@ -9,9 +9,9 @@ export default function Dashboard() {
   const [favorites] = useLocalStorage<string[]>("askformula-favorites", []);
 
   return (
-    <main className="min-h-screen bg-slate-950 px-6 py-10 text-slate-200">
+    <main className="premium-app-page min-h-screen bg-slate-950 px-6 py-10 text-slate-200">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8">
-        <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <header className="premium-page-header flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <Link to="/" className="inline-flex items-center text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors mb-2">
               <ArrowLeft className="w-4 h-4 mr-1" />
