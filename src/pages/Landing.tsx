@@ -21,6 +21,7 @@ import {
   X,
 } from "lucide-react";
 import GlobalSearch from "@/components/askformula/GlobalSearch";
+import { LiquidGlassSurface } from "@/components/LiquidGlassSurface";
 
 const navItems = ["About", "Features", "Pricing", "FAQ"];
 
@@ -74,7 +75,7 @@ export default function Landing() {
   const faqs = ["What is AskFormula?", "Which syllabuses are covered?", "Can I export my formula sheet?", "Is AskFormula free to use?"];
   return (
     <div className="fresh-site">
-      <header className="fresh-header"><Brand /><nav className="fresh-nav">{navItems.map((item) => <a key={item} href={`#${item.toLowerCase()}`}>{item}</a>)}</nav><div className="fresh-header-actions"><Link to="/auth" className="login-link">Login</Link><Link to="/build" className="fresh-button small">Get started <ArrowRight /></Link></div><button className="fresh-menu-button" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</button></header>
+      <LiquidGlassSurface className="fresh-header-shell"><header className="fresh-header"><Brand /><nav className="fresh-nav">{navItems.map((item) => <a key={item} href={`#${item.toLowerCase()}`}>{item}</a>)}</nav><div className="fresh-header-actions"><Link to="/auth" className="login-link">Login</Link><Link to="/build" className="fresh-button small">Get started <ArrowRight /></Link></div><button className="fresh-menu-button" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</button></header></LiquidGlassSurface>
       {menuOpen && <div className="fresh-mobile-menu">{navItems.map((item) => <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setMenuOpen(false)}>{item}</a>)}<Link to="/auth">Login</Link><Link to="/build" className="fresh-button">Get started <ArrowRight /></Link></div>}
 
       <main>
