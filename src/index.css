@@ -492,3 +492,21 @@ body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSyst
 .footer-inner { padding-top:68px !important; }
 @media (max-width:900px) { .story-box { grid-template-columns:1fr !important; gap:22px !important; min-height:0; }.story-box > div:nth-child(2) { height:340px !important; }.story-box:nth-of-type(odd),.story-box:nth-of-type(even) { transform:none; }.story-box:hover { transform:translateY(-5px) !important; } }
 @media (max-width:720px) { .page-section { padding-top:88px; padding-bottom:88px; }.story-boxes { padding:88px 22px 0 !important; }.story-box { padding:22px !important; border-radius:20px !important; }.story-box > div:nth-child(2) { height:300px !important; }.workflow-grid { border-radius:16px; }.faq-list { padding:0 18px; border-radius:16px; }.final-cta { border-radius:20px; margin-left:22px; margin-right:22px; padding:45px 22px; } }
+
+/* Template showcase ideas: each card previews the study mode before the label */
+.template-mini-preview { position:absolute; top:78px; right:22px; left:22px; height:96px; overflow:hidden; border:1px solid rgba(247,245,239,.12); border-radius:14px; background:rgba(7,12,16,.36); box-shadow:inset 0 1px rgba(255,255,255,.06); }
+.template-mini-preview b { position:absolute; right:12px; bottom:10px; color:rgba(247,245,239,.4); font:8px ui-monospace,monospace; letter-spacing:.12em; }
+.mini-equation { position:absolute; left:17px; top:27px; color:var(--blue); font:24px Georgia,serif; letter-spacing:-.08em; }
+.mini-equation + i { position:absolute; left:18px; right:18px; bottom:29px; height:1px; background:rgba(169,198,255,.3); }
+.mini-orbit { position:absolute; left:29px; top:16px; width:60px; height:60px; border:1px solid rgba(157,231,199,.7); border-radius:50%; transform:rotate(28deg) scaleX(.46); box-shadow:0 0 26px rgba(157,231,199,.2); }
+.mini-orbit:after { content:""; position:absolute; inset:-1px; border:1px solid rgba(157,231,199,.35); border-radius:50%; transform:rotate(62deg); }
+.mini-cell { position:absolute; left:51px; top:36px; color:var(--green); font:13px ui-monospace,monospace; }
+.mini-bars { position:absolute; left:21px; bottom:19px; display:flex; align-items:end; gap:6px; height:55px; }
+.mini-bars i { display:block; width:11px; border-radius:3px 3px 0 0; background:linear-gradient(var(--violet),rgba(203,188,255,.16)); }
+.mini-bars i:nth-child(1){height:22px}.mini-bars i:nth-child(2){height:38px}.mini-bars i:nth-child(3){height:29px}.mini-bars i:nth-child(4){height:50px}
+.mini-sigma { position:absolute; right:28px; top:17px; color:var(--violet); font:48px Georgia,serif; opacity:.65; }
+.template-card .template-eyebrow { margin-top:137px; }
+.template-card:hover .template-mini-preview { border-color:rgba(247,245,239,.28); box-shadow:0 0 30px rgba(169,198,255,.08),inset 0 1px rgba(255,255,255,.09); }
+.template-card:nth-child(2) { background:linear-gradient(145deg,rgba(29,58,52,.9),#11191c 75%); }
+.template-card:nth-child(3) { background:linear-gradient(145deg,rgba(48,40,73,.9),#12171c 75%); }
+@media (max-width:720px) { .template-card .template-eyebrow { margin-top:137px; } }
