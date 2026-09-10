@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AskFormula — Your formulas deserve their own home.</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              charcoal: '#17191d',
+              slate: '#1f242c',
+              dusk: '#33272c',
+              mauve: '#48353d',
+              roseHaze: '#2e2025',
+              panel: '#151619',
+              pill: '#dce0e5',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom Styles -->
+<style data-purpose="atmospheric-gradients">
+    /* Subtle Silk Metallic Gradient Art Canvas */
+    .silk-gradient-canvas {
+      background: radial-gradient(circle at 20% 25%, rgba(210, 224, 245, 0.95) 0%, rgba(160, 180, 210, 0.82) 28%, rgba(55, 75, 115, 0.85) 55%, rgba(10, 20, 50, 0.98) 85%, #050b18 100%),
+                  linear-gradient(135deg, #162035 0%, #29384d 35%, #8fa9c9 52%, #1b2435 80%, #090e1c 100%);
+      background-blend-mode: normal, overlay;
+    }
+
+    .glass-border-subtle {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-border-nav {
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+    .scrollbar-thin::-webkit-scrollbar {
+      width: 4px;
+    }
+    .scrollbar-thin::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .scrollbar-thin::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-[#0e1014] text-white font-sans antialiased overflow-x-hidden selection:bg-rose-500/30 selection:text-white">
+<!-- BEGIN: Cinematic Hero & Interactive Scroll Canvas -->
+<div class="relative w-full bg-[#0e1014] overflow-hidden" data-purpose="hero-container">
+<!-- Atmospheric Dusk Background with IMAGE_13 & Fallback Horizon Lighting -->
+<div class="absolute inset-0 z-0 pointer-events-none select-none">
+<img alt="Photorealistic cinematic dusk landscape with rolling dark autumn hills, rich copper foliage silhouette, and warm twilight sky" class="w-full h-full object-cover object-center scale-105 filter brightness-[0.78] contrast-[1.08] transform transition-transform duration-1000 ease-out" id="bg-hero-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOuTEa7pmU8sTSdfuBGU4zL4gLBuYEnAmLC9xvezOSurOi7M6njcHdIwkaMwYmnRdwJuIeBUz19_ZKVGUg-q-wRiT81xK19Yk1-LFWUV6Si5vi781iYqW8gG9Q6hSnCcclpOpMr7Nj5Hm0Da-OUjdbb_gZivsY9NgeBy2-IEoUL0lnhMZ3MpHafmglMVvqjBYF9U76I-i6NnsCHnDDzgS3toXi-CxTSNQYJwiTj90ySNi3psUixfk"/>
+<!-- Soft vignette & dark top/bottom blend gradient -->
+<div class="absolute inset-0 bg-gradient-to-b from-[#11141a]/85 via-transparent to-[#0e1014]"></div>
+<!-- Twilight rose-warmth subtle atmospheric glow -->
+<div class="absolute inset-0 bg-gradient-to-t from-[#201014]/60 via-transparent to-transparent"></div>
+</div>
+<!-- BEGIN: Navigation Bar -->
+<header class="relative z-40 px-6 pt-6 sm:px-10 lg:px-16" data-purpose="main-header">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<!-- Logo -->
+<a class="flex items-center gap-2.5 group" data-purpose="brand-logo" href="#">
+<div class="w-8 h-8 rounded-lg bg-white flex items-center justify-center shadow-md transition-transform duration-200 group-hover:scale-105">
+<svg class="w-5 h-5 text-zinc-950" fill="currentColor" viewbox="0 0 24 24">
+<path d="M7 4h10a1 1 0 0 1 1 1v2.5a1 1 0 0 1-1 1H11v3h5a1 1 0 0 1 1 1v2.5a1 1 0 0 1-1 1H11V20H7V4z"></path>
+</svg>
+</div>
+<span class="text-xl font-semibold tracking-tight text-white">AskFormula<span class="text-rose-400/90">.</span></span>
+</a>
+<!-- Desktop Navigation Center Links -->
+<nav class="hidden md:flex items-center space-x-9 text-[14px] font-medium text-zinc-300" data-purpose="desktop-nav">
+<a class="hover:text-white transition-colors" href="#about">About</a>
+<a class="hover:text-white transition-colors" href="#features">Features</a>
+<a class="hover:text-white transition-colors" href="#curriculum">Curriculum</a>
+<a class="hover:text-white transition-colors" href="#sheets">Sheets</a>
+<a class="hover:text-white transition-colors" href="#pricing">Pricing</a>
+<a class="hover:text-white transition-colors" href="#contact">Contact</a>
+</nav>
+<!-- Right Side Auth & CTA -->
+<div class="flex items-center gap-6" data-purpose="nav-actions">
+<a class="text-[14px] font-medium text-zinc-300 hover:text-white transition-colors hidden sm:block" href="#login">Login</a>
+<a class="px-5 py-2 rounded-full text-[14px] font-medium text-zinc-200 bg-white/10 hover:bg-white/15 glass-border-nav transition-all duration-200 shadow-sm" href="#get-started">
+            Get started
+          </a>
+</div>
+</div>
+</header>
+<!-- END: Navigation Bar -->
+<!-- BEGIN: Hero Copy -->
+<div class="relative z-20 max-w-4xl mx-auto px-6 text-center pt-14 lg:pt-16 pb-10 flex flex-col items-center" data-purpose="hero-copy">
+<!-- Top Pill Tag -->
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.08] backdrop-blur-md glass-border-subtle mb-8 hover:bg-white/[0.12] transition-colors">
+<span class="text-[13px] font-medium tracking-wide text-zinc-200">Community platform for scholars &amp; creators</span>
+</div>
+<!-- Main Headline -->
+<h1 class="text-4xl sm:text-6xl lg:text-[72px] font-semibold text-white tracking-[-0.03em] leading-[1.08] max-w-3xl drop-shadow-sm">
+        Your formulas<br/>deserve their own home.
+      </h1>
+<!-- Subtitle -->
+<p class="mt-6 max-w-xl text-base sm:text-lg text-zinc-300/90 font-normal leading-relaxed">
+        AskFormula gives students, educators, and researchers a fully branded space with verified derivations, courses, discussions, and members.
+      </p>
+<!-- Primary Action CTA -->
+<div class="mt-8 flex items-center gap-4">
+<a class="inline-flex items-center justify-center px-8 py-3.5 rounded-full text-[15px] font-medium bg-[#e4e7ea] hover:bg-white text-zinc-950 transition-all duration-200 shadow-xl shadow-black/40 hover:scale-[1.03] active:scale-[0.98]" href="#get-started">
+          Get started free
+        </a>
+</div>
+</div>
+<!-- END: Hero Copy -->
+<!-- BEGIN: Floating Interactive Mock Frame Nestled into Autumn Forest Silhouette -->
+<div class="relative w-full max-w-6xl mx-auto px-4 sm:px-6 pt-2 z-20 transition-all duration-500 ease-out" data-purpose="hero-preview-frame" id="dashboard-container">
+<!-- Interactive Frame Card -->
+<div class="relative w-full rounded-2xl sm:rounded-t-[34px] sm:rounded-b-none bg-[#14161a]/95 backdrop-blur-xl border border-white/15 shadow-[0_-25px_60px_rgba(0,0,0,0.6)] overflow-hidden flex flex-col md:flex-row h-[520px] sm:h-[540px]">
+<!-- Sidebar Navigation (Tab Switching Component) -->
+<aside class="w-full md:w-64 bg-[#16181d] flex flex-col p-5 border-b md:border-b-0 md:border-r border-white/10 shrink-0 select-none">
+<!-- Search Capsule -->
+<div class="flex items-center justify-between px-3.5 py-2 rounded-xl bg-white/[0.04] border border-white/10 text-zinc-400 mb-5 focus-within:border-white/20 transition-colors">
+<span class="text-xs text-zinc-400 font-normal">Search formulas...</span>
+<svg class="w-3.5 h-3.5 text-zinc-400" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<!-- Sidebar Tabs list -->
+<nav class="flex md:flex-col gap-1 overflow-x-auto md:overflow-visible text-sm scrollbar-thin pb-2 md:pb-0" id="mock-tabs">
+<button class="tab-btn flex items-center gap-3 px-3 py-2 rounded-lg text-white font-medium bg-white/10 transition-all text-left whitespace-nowrap" data-tab="overview" onclick="switchMockTab('overview')">
+<svg class="w-4 h-4 text-zinc-200" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<rect height="7" width="7" x="3" y="3"></rect>
+<rect height="7" width="7" x="14" y="3"></rect>
+<rect height="7" width="7" x="14" y="14"></rect>
+<rect height="7" width="7" x="3" y="14"></rect>
+</svg>
+<span>Overview</span>
+</button>
+<button class="tab-btn flex items-center gap-3 px-3 py-2 rounded-lg text-zinc-400 hover:text-zinc-100 hover:bg-white/[0.05] transition-all text-left whitespace-nowrap" data-tab="derivations" onclick="switchMockTab('derivations')">
+<svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M3 3v18h18"></path>
+<path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"></path>
+</svg>
+<span>Derivations</span>
+<span class="ml-auto text-[10px] bg-rose-500/20 text-rose-300 font-mono px-1.5 py-0.5 rounded">NEW</span>
+</button>
+<button class="tab-btn flex items-center gap-3 px-3 py-2 rounded-lg text-zinc-400 hover:text-zinc-100 hover:bg-white/[0.05] transition-all text-left whitespace-nowrap" data-tab="discussions" onclick="switchMockTab('discussions')">
+<svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+</svg>
+<span>Discussions</span>
+<span class="ml-auto text-[11px] text-zinc-500 font-mono">14</span>
+</button>
+<button class="tab-btn flex items-center gap-3 px-3 py-2 rounded-lg text-zinc-400 hover:text-zinc-100 hover:bg-white/[0.05] transition-all text-left whitespace-nowrap" data-tab="problemsets" onclick="switchMockTab('problemsets')">
+<svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<rect height="18" rx="2" ry="2" width="18" x="3" y="4"></rect>
+<line x1="16" x2="16" y1="2" y2="6"></line>
+<line x1="8" x2="8" y1="2" y2="6"></line>
+<line x1="3" x2="21" y1="10" y2="10"></line>
+</svg>
+<span>Problem Sets</span>
+</button>
+<button class="tab-btn flex items-center gap-3 px-3 py-2 rounded-lg text-zinc-400 hover:text-zinc-100 hover:bg-white/[0.05] transition-all text-left whitespace-nowrap" data-tab="courses" onclick="switchMockTab('courses')">
+<svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+<path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+</svg>
+<span>Courses</span>
+</button>
+<button class="tab-btn flex items-center gap-3 px-3 py-2 rounded-lg text-zinc-400 hover:text-zinc-100 hover:bg-white/[0.05] transition-all text-left whitespace-nowrap" data-tab="members" onclick="switchMockTab('members')">
+<svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+<circle cx="9" cy="7" r="4"></circle>
+<path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+<path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+</svg>
+<span>Members</span>
+</button>
+<button class="tab-btn flex items-center gap-3 px-3 py-2 rounded-lg text-zinc-400 hover:text-zinc-100 hover:bg-white/[0.05] transition-all text-left whitespace-nowrap" data-tab="leaderboard" onclick="switchMockTab('leaderboard')">
+<svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<circle cx="12" cy="8" r="7"></circle>
+<polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+</svg>
+<span>Leaderboard</span>
+</button>
+</nav>
+<!-- Status indicator in sidebar footer -->
+<div class="mt-auto hidden md:flex items-center gap-2 px-3 py-2 text-xs text-zinc-400 border-t border-white/5 pt-3">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+<span>Live Sync Engine Active</span>
+</div>
+</aside>
+<!-- Main Content Dynamic Live Canvas -->
+<main class="flex-1 silk-gradient-canvas relative flex flex-col justify-center items-center p-6 sm:p-10 overflow-y-auto scrollbar-thin">
+<!-- Background luminous blur highlights -->
+<div class="absolute -inset-10 opacity-70 pointer-events-none mix-blend-screen bg-gradient-to-tr from-transparent via-white/20 to-transparent transform -rotate-12 translate-x-12 translate-y-6 blur-2xl"></div>
+<div class="absolute -top-32 -left-32 w-96 h-96 bg-blue-500/25 rounded-full blur-3xl pointer-events-none"></div>
+<!-- TAB CONTENT 1: Overview (Active by Default) -->
+<div class="tab-content w-full max-w-xl transition-all duration-300 transform" id="content-overview">
+<div class="relative backdrop-blur-xl bg-black/35 px-8 py-8 rounded-2xl border border-white/20 shadow-2xl flex flex-col items-center text-center">
+<div class="w-13 h-13 p-3 rounded-2xl bg-white/10 flex items-center justify-center mb-4 text-white font-mono text-xl tracking-widest border border-white/20 shadow-inner">
+                ∫
+              </div>
+<div class="text-zinc-300 text-xs font-mono tracking-wider uppercase mb-1">Lagrangian Mechanics • Classical &amp; Field Theory</div>
+<div class="text-3xl sm:text-4xl font-mono font-bold tracking-tight text-white drop-shadow-md my-2 select-all">
+                \mathcal{L} = T - V
+              </div>
+<p class="text-xs text-zinc-300/80 max-w-md mt-1 mb-5">
+                Principle of stationary action yielding the Euler-Lagrange equations of motion for generalized coordinates.
+              </p>
+<div class="flex flex-wrap items-center justify-center gap-2.5 pt-3 border-t border-white/15 w-full">
+<span class="px-3 py-1 rounded-full text-[11px] font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Verified 100%</span>
+<span class="px-3 py-1 rounded-full text-[11px] font-medium bg-white/10 text-zinc-200 border border-white/10">3,420 solved today</span>
+<button class="px-3 py-1 rounded-full text-[11px] font-medium bg-white/20 hover:bg-white/30 text-white transition-colors cursor-pointer flex items-center gap-1" onclick="copyLatex(this)">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+<span>Copy LaTeX</span>
+</button>
+</div>
+</div>
+</div>
+<!-- TAB CONTENT 2: Derivations (Step-by-step calculus) -->
+<div class="tab-content hidden w-full max-w-xl transition-all duration-300 transform" id="content-derivations">
+<div class="backdrop-blur-xl bg-black/40 p-6 rounded-2xl border border-white/20 shadow-2xl text-left">
+<div class="flex items-center justify-between mb-4 pb-3 border-b border-white/10">
+<div>
+<span class="text-[11px] font-mono uppercase tracking-wider text-rose-300">Analytical Mechanics Proof</span>
+<h4 class="text-base font-semibold text-white">Derivation: Euler-Lagrange Equation</h4>
+</div>
+<span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-emerald-950/60 text-emerald-300 border border-emerald-800">Q.E.D.</span>
+</div>
+<div class="space-y-3 font-mono text-xs">
+<div class="p-2.5 rounded-lg bg-white/[0.06] border border-white/10">
+<span class="text-zinc-400 block text-[10px]">Step 1: Action integral variation</span>
+<span class="text-white font-medium text-sm sm:text-base">$\delta S = \delta \int_{t_1}^{t_2} \mathcal{L}(q, \dot{q}, t) \, dt = 0$</span>
+</div>
+<div class="p-2.5 rounded-lg bg-white/[0.06] border border-white/10">
+<span class="text-zinc-400 block text-[10px]">Step 2: Taylor expansion and integration by parts</span>
+<span class="text-white font-medium text-sm sm:text-base">$\int_{t_1}^{t_2} \left( \frac{\partial \mathcal{L}}{\partial q} - \frac{d}{dt}\frac{\partial \mathcal{L}}{\partial \dot{q}} \right) \delta q \, dt = 0$</span>
+</div>
+<div class="p-2.5 rounded-lg bg-emerald-900/30 border border-emerald-500/40 text-emerald-200">
+<span class="text-emerald-400 block text-[10px]">Conclusion: Fundamental Lemma of Calculus of Variations</span>
+<span class="text-white font-bold text-sm sm:text-base">$\frac{d}{dt}\left(\frac{\partial \mathcal{L}}{\partial \dot{q}}\right) - \frac{\partial \mathcal{L}}{\partial q} = 0$</span>
+</div>
+</div>
+</div>
+</div>
+<!-- TAB CONTENT 3: Discussions -->
+<div class="tab-content hidden w-full max-w-xl transition-all duration-300 transform" id="content-discussions">
+<div class="backdrop-blur-xl bg-black/40 p-6 rounded-2xl border border-white/20 shadow-2xl">
+<div class="flex items-center justify-between mb-4">
+<h4 class="text-sm font-semibold text-white">Active Peer Questions &amp; Olympiad Insights</h4>
+<span class="text-xs text-zinc-400 font-mono">Live updates</span>
+</div>
+<div class="space-y-2.5">
+<div class="p-3 rounded-xl bg-white/[0.06] border border-white/10 hover:border-white/20 transition-all flex items-start gap-3">
+<div class="w-7 h-7 rounded-full bg-rose-500/30 text-rose-300 flex items-center justify-center font-mono text-xs font-bold shrink-0">Ψ</div>
+<div class="flex-1 min-w-0">
+<p class="text-xs text-white font-medium truncate">Noether's Theorem: Symmetries in Gauge Transformations?</p>
+<p class="text-[11px] text-zinc-400 mt-0.5">Asked by @elena_physics • 8 verified answers</p>
+</div>
+<span class="text-[10px] text-emerald-400 font-mono">+42</span>
+</div>
+<div class="p-3 rounded-xl bg-white/[0.06] border border-white/10 hover:border-white/20 transition-all flex items-start gap-3">
+<div class="w-7 h-7 rounded-full bg-blue-500/30 text-blue-300 flex items-center justify-center font-mono text-xs font-bold shrink-0">Σ</div>
+<div class="flex-1 min-w-0">
+<p class="text-xs text-white font-medium truncate">IPhO 2024 Problem 2: Relativistic doppler in curved geodesics</p>
+<p class="text-[11px] text-zinc-400 mt-0.5">Asked by @olympiad_gold • 14 responses</p>
+</div>
+<span class="text-[10px] text-emerald-400 font-mono">+128</span>
+</div>
+<div class="p-3 rounded-xl bg-white/[0.06] border border-white/10 hover:border-white/20 transition-all flex items-start gap-3">
+<div class="w-7 h-7 rounded-full bg-purple-500/30 text-purple-300 flex items-center justify-center font-mono text-xs font-bold shrink-0">∇</div>
+<div class="flex-1 min-w-0">
+<p class="text-xs text-white font-medium truncate">Intuitive proof of Stokes' Theorem using differential forms</p>
+<p class="text-[11px] text-zinc-400 mt-0.5">Asked by @calculus_pro • 19 responses</p>
+</div>
+<span class="text-[10px] text-emerald-400 font-mono">+95</span>
+</div>
+</div>
+</div>
+</div>
+<!-- TAB CONTENT 4: Problem Sets -->
+<div class="tab-content hidden w-full max-w-xl transition-all duration-300 transform" id="content-problemsets">
+<div class="backdrop-blur-xl bg-black/40 p-6 rounded-2xl border border-white/20 shadow-2xl">
+<div class="flex items-center justify-between mb-4">
+<h4 class="text-sm font-semibold text-white">Curated Competitive &amp; University Packs</h4>
+<span class="text-xs text-rose-300 font-medium">Autumn Term 2025</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<div class="p-3.5 rounded-xl bg-white/[0.06] border border-white/10">
+<div class="text-[11px] font-mono text-zinc-400 uppercase">MIT OCW 8.01</div>
+<div class="text-sm font-medium text-white mt-1">Classical Mechanics Core</div>
+<div class="text-xs text-zinc-400 mt-2 flex justify-between">
+<span>42 Problems</span>
+<span class="text-emerald-400">98% Verified</span>
+</div>
+</div>
+<div class="p-3.5 rounded-xl bg-white/[0.06] border border-white/10">
+<div class="text-[11px] font-mono text-zinc-400 uppercase">JEE Advanced</div>
+<div class="text-sm font-medium text-white mt-1">Rotational Dynamics &amp; Flux</div>
+<div class="text-xs text-zinc-400 mt-2 flex justify-between">
+<span>120 Problems</span>
+<span class="text-emerald-400">100% Solved</span>
+</div>
+</div>
+<div class="p-3.5 rounded-xl bg-white/[0.06] border border-white/10">
+<div class="text-[11px] font-mono text-zinc-400 uppercase">International Olympiad</div>
+<div class="text-sm font-medium text-white mt-1">IPhO &amp; Putnam Masterpack</div>
+<div class="text-xs text-zinc-400 mt-2 flex justify-between">
+<span>65 Hard Problems</span>
+<span class="text-emerald-400">Step Hints</span>
+</div>
+</div>
+<div class="p-3.5 rounded-xl bg-white/[0.06] border border-white/10">
+<div class="text-[11px] font-mono text-zinc-400 uppercase">Quantum Mechanics</div>
+<div class="text-sm font-medium text-white mt-1">Griffiths Chapter 1-5</div>
+<div class="text-xs text-zinc-400 mt-2 flex justify-between">
+<span>38 Problems</span>
+<span class="text-emerald-400">Detailed LaTeX</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- TAB CONTENT 5: Courses -->
+<div class="tab-content hidden w-full max-w-xl transition-all duration-300 transform" id="content-courses">
+<div class="backdrop-blur-xl bg-black/40 p-6 rounded-2xl border border-white/20 shadow-2xl text-center">
+<div class="w-12 h-12 mx-auto rounded-xl bg-white/10 flex items-center justify-center mb-3">
+<svg class="w-6 h-6 text-zinc-200" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+</div>
+<h4 class="text-base font-semibold text-white mb-1">Interactive Derivation Cohorts</h4>
+<p class="text-xs text-zinc-300 max-w-md mx-auto mb-4">Structured semester pathways covering linear algebra, tensor calculus, and quantum electrodynamics.</p>
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 text-xs font-mono text-zinc-300">
+<span>12 Courses in session • 3,840 Students enrolled</span>
+</div>
+</div>
+</div>
+<!-- TAB CONTENT 6: Members -->
+<div class="tab-content hidden w-full max-w-xl transition-all duration-300 transform" id="content-members">
+<div class="backdrop-blur-xl bg-black/40 p-6 rounded-2xl border border-white/20 shadow-2xl text-center">
+<div class="flex justify-center -space-x-2 overflow-hidden mb-4">
+<div class="inline-block h-10 w-10 rounded-full ring-2 ring-black bg-blue-500 flex items-center justify-center font-bold text-xs">AK</div>
+<div class="inline-block h-10 w-10 rounded-full ring-2 ring-black bg-purple-500 flex items-center justify-center font-bold text-xs">ML</div>
+<div class="inline-block h-10 w-10 rounded-full ring-2 ring-black bg-emerald-500 flex items-center justify-center font-bold text-xs">SR</div>
+<div class="inline-block h-10 w-10 rounded-full ring-2 ring-black bg-rose-500 flex items-center justify-center font-bold text-xs">+99</div>
+</div>
+<h4 class="text-base font-semibold text-white mb-1">Collaborative Academic Cohorts</h4>
+<p class="text-xs text-zinc-300 max-w-md mx-auto">Verified university researchers, Olympiad committee members, and passionate students collaborating worldwide.</p>
+</div>
+</div>
+<!-- TAB CONTENT 7: Leaderboard -->
+<div class="tab-content hidden w-full max-w-xl transition-all duration-300 transform" id="content-leaderboard">
+<div class="backdrop-blur-xl bg-black/40 p-6 rounded-2xl border border-white/20 shadow-2xl">
+<div class="flex items-center justify-between mb-4">
+<h4 class="text-sm font-semibold text-white">Global Derivation Solver Rank</h4>
+<span class="text-xs text-zinc-400 font-mono">Weekly Series</span>
+</div>
+<div class="space-y-2 text-xs">
+<div class="flex items-center justify-between p-2 rounded-lg bg-white/[0.08]">
+<span class="font-mono text-zinc-400">#1 @k_lagrange</span>
+<span class="font-mono text-emerald-400">14,280 pts • 99.8% accurate</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-white/[0.04]">
+<span class="font-mono text-zinc-400">#2 @maxwell_j</span>
+<span class="font-mono text-emerald-400">12,190 pts • 99.4% accurate</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-white/[0.04]">
+<span class="font-mono text-zinc-400">#3 @noether_sym</span>
+<span class="font-mono text-emerald-400">11,840 pts • 99.1% accurate</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+<!-- END: Floating Dashboard Container -->
+<!-- BEGIN: Misty Copper Autumn Treeline Foreground Silhouette -->
+<div class="relative w-full h-28 sm:h-36 -mt-16 sm:-mt-24 z-30 pointer-events-none overflow-hidden" data-purpose="autumn-treeline-frame">
+<svg class="w-full h-full object-cover object-bottom" fill="none" preserveaspectratio="none" viewbox="0 0 1440 220" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 220V120C28 114 55 102 85 106C120 110 148 135 182 128C215 120 238 98 270 94C305 89 332 105 365 99C400 92 432 72 468 76C505 80 535 102 570 98C604 94 635 78 668 79C702 80 735 96 770 94C805 92 838 75 872 78C905 82 935 101 970 98C1005 95 1038 79 1072 82C1108 86 1139 105 1175 101C1210 97 1242 81 1278 84C1315 88 1345 104 1380 100C1402 97 1422 92 1440 85V220H0Z" fill="#2b1418" opacity="0.95"></path>
+<path d="M0 220V140C34 136 68 126 102 130C140 134 172 152 210 146C248 140 278 122 318 120C358 118 390 132 430 128C470 123 505 108 545 112C585 116 618 132 658 128C698 124 732 110 772 113C812 116 846 130 886 128C926 126 958 112 998 116C1038 120 1070 134 1110 130C1150 126 1182 112 1222 115C1262 118 1296 132 1336 129C1372 126 1408 120 1440 114V220H0Z" fill="#1e0e12"></path>
+<path d="M0 220V165C45 160 90 152 135 156C185 160 228 174 278 169C328 164 368 150 418 152C468 154 508 166 558 164C608 162 650 150 700 153C750 156 790 168 840 165C890 162 932 150 982 154C1032 158 1072 170 1122 166C1172 162 1215 150 1265 153C1315 156 1358 168 1408 164C1419 163 1430 162 1440 160V220H0Z" fill="#0e1014"></path>
+</svg>
+</div>
+<!-- END: Misty Copper Autumn Treeline -->
+</div>
+<!-- END: Cinematic Hero Section -->
+<!-- BEGIN: Core Features Matrix Section -->
+<section class="py-24 px-6 sm:px-10 lg:px-16 bg-[#0e1014] border-t border-white/5 relative z-20" data-purpose="features-section" id="features">
+<div class="max-w-7xl mx-auto">
+<!-- Section Header -->
+<div class="max-w-2xl mb-16">
+<span class="text-xs uppercase tracking-widest text-zinc-500 font-semibold font-mono">Everything in one space</span>
+<h2 class="text-3xl sm:text-4xl font-semibold tracking-tight text-white mt-2">
+          One platform to master your entire mathematical universe.
+        </h2>
+<p class="mt-4 text-base text-zinc-400 leading-relaxed">
+          From competitive high school Olympiads to university-level tensor calculus, empower your academic journey with high precision.
+        </p>
+</div>
+<!-- Feature Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1: LaTeX Cheat Sheets -->
+<div class="group cursor-pointer rounded-2xl p-7 bg-[#14161a] border border-white/5 hover:border-white/20 transition-all duration-300 flex flex-col justify-between hover:-translate-y-1" onclick="switchMockTab('overview')">
+<div>
+<div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-zinc-300 mb-5 border border-white/5 group-hover:bg-white/10 group-hover:text-white transition-colors">
+<span class="font-mono text-sm font-bold">\sqrt{x}</span>
+</div>
+<h3 class="text-lg font-medium text-white mb-2 group-hover:text-rose-200 transition-colors">Pristine LaTeX Typography</h3>
+<p class="text-sm text-zinc-400 leading-relaxed">
+              Every formula is rendered with micro-typographical precision, instantaneous copy-to-clipboard LaTeX, and vector PDF exports.
+            </p>
+</div>
+<div class="mt-6 pt-5 border-t border-white/5 flex items-center justify-between text-xs text-zinc-400">
+<span>Over 12,000 equations</span>
+<span class="text-white group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">Preview LaTeX →</span>
+</div>
+</div>
+<!-- Card 2: Interactive Derivations -->
+<div class="group cursor-pointer rounded-2xl p-7 bg-[#14161a] border border-white/5 hover:border-white/20 transition-all duration-300 flex flex-col justify-between hover:-translate-y-1" onclick="switchMockTab('derivations')">
+<div>
+<div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-zinc-300 mb-5 border border-white/5 group-hover:bg-white/10 group-hover:text-white transition-colors">
+<svg class="w-5 h-5 text-zinc-300 group-hover:text-white transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<h3 class="text-lg font-medium text-white mb-2 group-hover:text-rose-200 transition-colors">Step-by-Step Derivations</h3>
+<p class="text-sm text-zinc-400 leading-relaxed">
+              Never memorize blindly again. Unfold every intermediate step with geometric visualizations and physical intuition guides.
+            </p>
+</div>
+<div class="mt-6 pt-5 border-t border-white/5 flex items-center justify-between text-xs text-zinc-400">
+<span>Physics &amp; Calculus</span>
+<span class="text-white group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">View proof sheet →</span>
+</div>
+</div>
+<!-- Card 3: Peer-Reviewed Circles -->
+<div class="group cursor-pointer rounded-2xl p-7 bg-[#14161a] border border-white/5 hover:border-white/20 transition-all duration-300 flex flex-col justify-between hover:-translate-y-1" onclick="switchMockTab('discussions')">
+<div>
+<div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-zinc-300 mb-5 border border-white/5 group-hover:bg-white/10 group-hover:text-white transition-colors">
+<svg class="w-5 h-5 text-zinc-300 group-hover:text-white transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<h3 class="text-lg font-medium text-white mb-2 group-hover:text-rose-200 transition-colors">Scholarly Circles</h3>
+<p class="text-sm text-zinc-400 leading-relaxed">
+              Join tight-knit cohorts moderated by university professors and Olympiad medalists. Share custom formula sets with your classmates.
+            </p>
+</div>
+<div class="mt-6 pt-5 border-t border-white/5 flex items-center justify-between text-xs text-zinc-400">
+<span>Top 1% Rankers</span>
+<span class="text-white group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">Explore circles →</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Core Features Matrix Section -->
+<!-- BEGIN: Floating Action Chat Bubble -->
+<div class="fixed bottom-6 right-6 z-50" data-purpose="floating-support-bubble">
+<button aria-label="Support &amp; Community Chat" class="w-12 h-12 rounded-full bg-[#20232a] hover:bg-[#2c303a] text-white shadow-2xl border border-white/15 transition-all duration-200 hover:scale-110 active:scale-95 flex items-center justify-center focus:outline-none">
+<svg class="w-5 h-5 text-white fill-current" viewbox="0 0 24 24">
+<path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"></path>
+</svg>
+</button>
+</div>
+<!-- END: Floating Action Chat Bubble -->
+<!-- BEGIN: Global Footer -->
+<footer class="bg-[#0b0c0f] border-t border-white/5 py-12 px-6 sm:px-10 lg:px-16" data-purpose="main-footer">
+<div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-md bg-white flex items-center justify-center text-zinc-950 font-bold text-xs">
+          A
+        </div>
+<span class="text-sm text-zinc-400 font-medium">AskFormula Inc. © 2025. All formulas verified.</span>
+</div>
+<div class="flex items-center space-x-6 text-xs text-zinc-500">
+<a class="hover:text-zinc-300 transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-zinc-300 transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-zinc-300 transition-colors" href="#">Documentation</a>
+<a class="hover:text-zinc-300 transition-colors" href="#">Status</a>
+</div>
+</div>
+</footer>
+<!-- END: Global Footer -->
+<!-- Interactive Mock Navigation & Scroll Logic -->
+<script>
+    // Tab Switcher for the in-hero Mock Dashboard
+    function switchMockTab(tabId) {
+      // 1. Hide all tab contents
+      const contents = document.querySelectorAll('.tab-content');
+      contents.forEach(c => {
+        c.classList.add('hidden');
+        c.classList.remove('opacity-100', 'translate-y-0');
+        c.classList.add('opacity-0', 'translate-y-2');
+      });
+
+      // 2. Show targeted tab content with fade-in transition
+      const activeContent = document.getElementById('content-' + tabId);
+      if (activeContent) {
+        activeContent.classList.remove('hidden');
+        // Force reflow
+        void activeContent.offsetWidth;
+        activeContent.classList.remove('opacity-0', 'translate-y-2');
+        activeContent.classList.add('opacity-100', 'translate-y-0');
+      }
+
+      // 3. Update tab button active states
+      const buttons = document.querySelectorAll('#mock-tabs .tab-btn');
+      buttons.forEach(btn => {
+        if (btn.getAttribute('data-tab') === tabId) {
+          btn.classList.add('bg-white/10', 'text-white');
+          btn.classList.remove('text-zinc-400', 'hover:bg-white/[0.05]');
+          // Highlight icon
+          const icon = btn.querySelector('svg');
+          if (icon) icon.classList.replace('text-zinc-400', 'text-zinc-100');
+        } else {
+          btn.classList.remove('bg-white/10', 'text-white');
+          btn.classList.add('text-zinc-400', 'hover:bg-white/[0.05]');
+          const icon = btn.querySelector('svg');
+          if (icon) icon.classList.replace('text-zinc-100', 'text-zinc-400');
+        }
+      });
+    }
+
+    // Interactive copy LaTeX helper
+    function copyLatex(btn) {
+      const text = "\\mathcal{L} = T - V";
+      navigator.clipboard.writeText(text).then(() => {
+        const span = btn.querySelector('span');
+        if (span) {
+          const original = span.innerText;
+          span.innerText = "Copied!";
+          setTimeout(() => {
+            span.innerText = original;
+          }, 1800);
+        }
+      }).catch(err => {
+        console.error('Could not copy text: ', err);
+      });
+    }
+
+    // Scroll interaction: expands dashboard frame into view as user scrolls down
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const dashboard = document.getElementById('dashboard-container');
+      const bgHero = document.getElementById('bg-hero-image');
+
+      // Subtle parallax on the background image
+      if (bgHero && scrollY < 1200) {
+        bgHero.style.transform = `scale(1.05) translateY(${scrollY * 0.15}px)`;
+      }
+
+      // Smooth subtle zoom & elevational reaction on frame
+      if (dashboard) {
+        if (scrollY > 120 && scrollY < 800) {
+          dashboard.style.transform = `scale(1.01) translateY(-${Math.min(scrollY * 0.04, 16)}px)`;
+        } else {
+          dashboard.style.transform = `scale(1) translateY(0px)`;
+        }
+      }
+    }, { passive: true });
+  </script>
+</body></html>
