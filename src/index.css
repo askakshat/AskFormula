@@ -510,3 +510,16 @@ body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSyst
 .template-card:nth-child(2) { background:linear-gradient(145deg,rgba(29,58,52,.9),#11191c 75%); }
 .template-card:nth-child(3) { background:linear-gradient(145deg,rgba(48,40,73,.9),#12171c 75%); }
 @media (max-width:720px) { .template-card .template-eyebrow { margin-top:137px; } }
+
+/* Liquid DOM-inspired glass fallback: layered refraction that works without WebGPU/Canvas Draw Element */
+.liquid-glass { position:relative; isolation:isolate; backdrop-filter:blur(22px) saturate(135%); -webkit-backdrop-filter:blur(22px) saturate(135%); background-color:rgba(29,42,49,.64) !important; box-shadow:0 28px 80px rgba(0,0,0,.35), inset 0 1px rgba(255,255,255,.18), inset 0 -1px rgba(0,0,0,.28); }
+.liquid-glass:before { content:""; position:absolute; z-index:-1; inset:0; pointer-events:none; border-radius:inherit; background:radial-gradient(circle at 18% 0%,rgba(255,255,255,.22),transparent 28%),radial-gradient(circle at 92% 88%,rgba(169,198,255,.14),transparent 32%),linear-gradient(120deg,rgba(255,255,255,.09),transparent 32%,rgba(157,231,199,.07) 76%,transparent); mix-blend-mode:screen; opacity:.8; }
+.liquid-glass:after { content:""; position:absolute; z-index:5; inset:1px; pointer-events:none; border:1px solid rgba(255,255,255,.08); border-radius:inherit; mask-image:linear-gradient(145deg,#000 0 32%,transparent 58%); }
+.app-shell-product.liquid-glass { overflow:hidden; }
+.app-shell-product.liquid-glass:before { z-index:0; }
+.app-shell-product.liquid-glass > * { position:relative; z-index:1; }
+/* Remove the pre-hero spacer and let the supplied landscape own the complete hero field. */
+.landing-page > main { padding-top:0 !important; }
+.hero-reference-shell { margin-top:0; min-height:900px; padding-top:168px; background-image:linear-gradient(180deg,rgba(8,13,18,.35) 0%,rgba(8,13,18,.16) 38%,#0c1015 100%),linear-gradient(90deg,rgba(8,12,16,.52),rgba(8,12,16,.08) 50%,rgba(8,12,16,.46)),url('/askformula-hero-landscape.png'); background-size:cover,cover,auto 125%; background-position:center,center,center 18%; }
+.hero-reference-shell:after { height:220px; opacity:.32; background:linear-gradient(180deg,transparent,#0c1015 92%); }
+@media (max-width:720px) { .hero-reference-shell { min-height:730px; padding-top:125px; background-size:cover,cover,auto 112%; background-position:center,center,center 22%; } }
