@@ -613,3 +613,36 @@ body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSyst
 .reference-outline-link { padding:10px 14px; border:1px solid rgba(244,243,239,.22); border-radius:999px; font-size:10px; }
 .reference-landing footer { border-top:1px solid rgba(255,255,255,.14); background:#050505; }
 @media (max-width:760px) { .reference-landing .desktop-nav { display:none; }.reference-landing .header-inner { padding:0 18px; }.reference-hero { min-height:690px; }.reference-hero h1 { font-size:clamp(52px,15vw,82px); }.reference-search { height:50px; }.reference-search button { padding:0 11px; }.reference-search input { font-size:10px; }.reference-proof { gap:9px; font-size:8px; }.reference-hero-footer { right:20px; left:20px; }.reference-section { width:calc(100% - 40px); padding:82px 0; }.reference-section-head { grid-template-columns:1fr; gap:24px; margin-bottom:32px; }.subject-grid, .workflow-reference-grid { grid-template-columns:1fr; }.subject-card, .reference-step { min-height:200px; border-left:1px solid rgba(255,255,255,.14); border-bottom:1px solid rgba(255,255,255,.14); border-right:1px solid rgba(255,255,255,.14); }.subject-card:last-child, .reference-step:last-child { border-bottom:0; }.reference-step h3 { margin-top:38px; } }
+
+/* Spark refinement: floating chrome, richer grid field, ambient gradients, and responsive polish */
+.reference-landing .reference-header { position:fixed; top:18px; right:0; left:0; padding:0; pointer-events:none; }
+.reference-landing .header-inner { width:min(1180px,calc(100% - 56px)); min-height:42px; padding:5px 7px 5px 11px; border:1px solid rgba(255,255,255,.16); border-radius:999px; background:rgba(10,10,10,.62) !important; box-shadow:0 14px 45px rgba(0,0,0,.35),inset 0 1px rgba(255,255,255,.09); backdrop-filter:blur(20px) saturate(135%); pointer-events:auto; }
+.reference-landing .header-inner:before { content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; background:linear-gradient(105deg,rgba(255,255,255,.1),transparent 26%,rgba(165,240,201,.05) 75%,transparent); }
+.reference-landing .desktop-nav { position:relative; z-index:1; }
+.reference-landing .brand-lockup, .reference-landing .desktop-nav, .reference-landing .header-cta { position:relative; z-index:1; }
+.reference-landing .header-cta { height:32px; padding:0 13px; }
+.reference-hero { min-height:760px; background:radial-gradient(ellipse at 50% 46%,rgba(47,57,64,.16),transparent 42%),radial-gradient(ellipse at 18% 20%,rgba(104,143,190,.08),transparent 29%),#050505; }
+.reference-hero:before { content:""; position:absolute; z-index:1; inset:0; pointer-events:none; background:radial-gradient(circle at 50% 47%,rgba(164,240,201,.06),transparent 22%),linear-gradient(180deg,rgba(255,255,255,.025),transparent 30%,rgba(0,0,0,.2)); }
+.reference-grid-bg { inset:70px 6% 54px; opacity:.43; background-size:44px 44px; mask-image:radial-gradient(ellipse at 50% 48%,black 4%,rgba(0,0,0,.85) 38%,transparent 80%); }
+.reference-grid-bg:after { background:radial-gradient(ellipse at 50% 48%,rgba(188,215,255,.13),transparent 25%),linear-gradient(90deg,transparent 49.8%,rgba(255,255,255,.08) 50%,transparent 50.2%); }
+.reference-spark { position:absolute; z-index:2; width:3px; height:3px; border-radius:50%; background:#c8ffe0; box-shadow:0 0 0 3px rgba(200,255,224,.08),0 0 18px 5px rgba(146,231,192,.4); animation:reference-spark-pulse 3.8s ease-in-out infinite; }
+.reference-spark-one { top:31%; left:25%; }
+.reference-spark-two { top:58%; right:21%; width:2px; height:2px; animation-delay:1.4s; }
+@keyframes reference-spark-pulse { 0%,100% { opacity:.2; transform:scale(.75); } 50% { opacity:1; transform:scale(1.35); } }
+.reference-hero-content { margin-top:24px; }
+.reference-hero h1 { text-shadow:0 16px 48px rgba(0,0,0,.35); }
+.reference-hero h1 em { color:#a7a6a4; text-shadow:0 0 28px rgba(202,213,232,.12); }
+.reference-search { border-radius:13px; background:rgba(15,16,17,.82); box-shadow:0 0 0 1px rgba(255,255,255,.035),0 20px 65px rgba(0,0,0,.48),0 0 42px rgba(127,160,210,.08),inset 0 1px rgba(255,255,255,.12); }
+.reference-search:focus-within { border-color:rgba(200,255,224,.42); box-shadow:0 0 0 3px rgba(165,240,201,.06),0 20px 65px rgba(0,0,0,.48),0 0 42px rgba(127,160,210,.12); }
+.reference-search button { border-radius:9px; box-shadow:0 0 0 1px rgba(255,255,255,.3),0 7px 18px rgba(0,0,0,.3); }
+.reference-search button svg { transition:transform 180ms var(--ease-out); }
+.reference-search button:hover svg { transform:translateX(3px); }
+.subject-card, .reference-step { background:linear-gradient(145deg,rgba(255,255,255,.025),transparent 36%); }
+.subject-card:hover { background:linear-gradient(145deg,rgba(165,240,201,.07),rgba(255,255,255,.025)); }
+.subject-card:after { content:""; position:absolute; inset:0; pointer-events:none; border-radius:inherit; opacity:0; background:radial-gradient(circle at 50% 0,rgba(165,240,201,.1),transparent 44%); transition:opacity 220ms ease; }
+.subject-card:hover:after { opacity:1; }
+.reference-outline-link { transition:background 180ms ease,border-color 180ms ease,color 180ms ease,transform 180ms var(--ease-out); }
+.reference-outline-link:hover { background:rgba(165,240,201,.08); border-color:rgba(165,240,201,.42); transform:translateY(-2px); }
+@media (max-width:760px) { .reference-landing .reference-header { top:12px; }.reference-landing .header-inner { width:calc(100% - 24px); min-height:40px; }.reference-landing .brand-lockup { font-size:12px; }.reference-landing .header-cta { height:29px; padding:0 10px; font-size:9px; }.reference-hero { min-height:700px; }.reference-grid-bg { inset:75px -8% 40px; background-size:32px 32px; }.reference-spark-one { left:16%; }.reference-spark-two { right:13%; }.reference-hero-content { margin-top:20px; }.reference-hero-footer { bottom:18px; font-size:7px; } }
+
+.subject-card { position:relative; overflow:hidden; }

@@ -12,6 +12,8 @@ export default function Hero() {
     <main className="reference-main">
       <section className="reference-hero">
         <div className="reference-grid-bg" aria-hidden="true" />
+        <div className="reference-spark reference-spark-one" aria-hidden="true" />
+        <div className="reference-spark reference-spark-two" aria-hidden="true" />
         <div className="reference-hero-content">
           <p className="reference-kicker"><span /> NCERT STEM ENGINE <b>V4.0</b></p>
           <h1>Stop searching.<br /><em>Start solving.</em></h1>
