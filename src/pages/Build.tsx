@@ -106,8 +106,8 @@ export default function Build() {
   };
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#0b0e15] text-[#e1e2ec] font-sans flex flex-col">
-      <header className="bg-surface-container-lowest dark:bg-[#0b0e15] fixed top-0 w-full z-50 border-b border-[#32353c] transition-colors duration-200">
+    <div className="builder-page">
+      <header className="reference-header builder-nav">
         <div className="flex justify-between items-center px-6 md:px-12 py-3 max-w-[1200px] mx-auto h-16">
           <div
             className="flex items-center gap-3 cursor-pointer active:opacity-80"
@@ -125,16 +125,18 @@ export default function Build() {
         </div>
       </header>
 
-      <section
-        id="app-section"
-        className="relative flex-grow flex justify-center w-full bg-[#0b0e15] pt-20"
-      >
-        <div className="w-full max-w-[1200px] px-6 md:px-12 py-8 flex flex-col md:flex-row gap-12 relative">
+      <section id="app-section" className="builder-page-body">
+        <div className="builder-layout">
           {/* Left Sidebar: Progress Indicator */}
 
           {/* Sidebar / Top Progress Indicator */}
-          <aside className="w-full md:w-64 flex-shrink-0">
+          <aside className="builder-intro-rail">
             <div className="md:sticky md:top-32">
+              <div className="build-page-intro">
+                <p className="reference-label">BUILD / FORMULA ENGINE</p>
+                <h1>Make a sheet<br /><em>worth revising.</em></h1>
+                <p>Select only what you need. AskFormula keeps the path from syllabus to revision short.</p>
+              </div>
               <div className="hidden md:block mb-6">
                 <h2 className="text-xl font-semibold text-[#aec6ff]">
                   Configuration
@@ -232,7 +234,7 @@ export default function Build() {
           </aside>
 
           {/* Right Content */}
-          <div className="flex-1 flex flex-col w-full max-w-full">
+          <div className="builder-panel build-content">
             {/* Breadcrumb / Step indicator */}
             {exam && (
               <motion.div

@@ -269,8 +269,8 @@ export default function QuizDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-slate-200 font-sans pb-24 selection:bg-[#324565] selection:text-[#d8e2ff]">
-      <header className="w-full border-b border-[#272a31] bg-[#0a0a0a]/80 backdrop-blur-md sticky top-0 z-40">
+    <div className="premium-app-page min-h-screen bg-[#0a0a0a] text-slate-200 font-sans pb-24 selection:bg-[#324565] selection:text-[#d8e2ff]">
+      <header className="premium-page-header liquid-nav w-full border-b border-[#272a31] bg-[#0a0a0a]/80 backdrop-blur-md sticky top-0 z-40">
         <div className="max-w-[1200px] mx-auto h-16 px-6 md:px-8 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <h1
