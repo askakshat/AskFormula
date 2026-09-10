@@ -1,7 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 @custom-variant dark (&:is(.dark *));
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap');
 
 :root{--ink:#f2f1ed;--muted:#a2a7aa;--subtle:#70777b;--bg:#232a2d;--bg-deep:#1b2124;--panel:#2b3337;--panel-2:#303a3e;--line:rgba(242,241,237,.13);--lime:#d9f67a;--blue:#a4d8de;--lav:#c9c2ed;--sand:#e2c39a;--radius:.75rem;--background:var(--bg);--foreground:var(--ink);--card:var(--panel);--card-foreground:var(--ink);--popover:var(--panel);--popover-foreground:var(--ink);--primary:var(--lime);--primary-foreground:#1b2124;--secondary:var(--panel-2);--secondary-foreground:var(--ink);--muted-foreground:var(--muted);--border:var(--line);--ring:var(--lime)}
 @theme inline{--radius-sm:calc(var(--radius) - 4px);--radius-md:calc(var(--radius) - 2px);--radius-lg:var(--radius);--radius-xl:calc(var(--radius) + 4px);--color-background:var(--background);--color-foreground:var(--foreground);--color-card:var(--card);--color-card-foreground:var(--card-foreground);--color-popover:var(--popover);--color-popover-foreground:var(--popover-foreground);--color-primary:var(--primary);--color-primary-foreground:var(--primary-foreground);--color-secondary:var(--secondary);--color-secondary-foreground:var(--secondary-foreground);--color-muted:var(--muted);--color-muted-foreground:var(--muted-foreground);--color-border:var(--border);--color-ring:var(--ring)}
