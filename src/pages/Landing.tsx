@@ -19,6 +19,15 @@ const faqs = [
 export default function Landing() {
   return (
     <div className="landing-page">
+      <aside className="landing-rail" aria-label="Landing page sections">
+        <Link to="/" className="rail-brand" aria-label="AskFormula home"><span>A</span><small>AskFormula</small></Link>
+        <nav className="rail-nav">
+          <a href="#how-it-works"><b>01</b><span>Workflow</span></a>
+          <a href="#templates"><b>02</b><span>Templates</span></a>
+          <a href="#faq"><b>03</b><span>FAQ</span></a>
+        </nav>
+        <span className="rail-status"><i /> Built for revision</span>
+      </aside>
       <header className="site-header">
         <div className="header-inner">
           <Link to="/" className="brand-lockup"><span className="brand-mark">A</span><span>AskFormula</span></Link>
