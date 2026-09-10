@@ -232,7 +232,12 @@ export default function Build() {
           </aside>
 
           {/* Right Content */}
-          <div className="flex-1 flex flex-col w-full max-w-full">
+          <div className="flex-1 flex flex-col w-full max-w-full build-content">
+            <div className="build-page-intro">
+              <p className="reference-label">BUILD / FORMULA ENGINE</p>
+              <h1>Make a sheet<br /><em>worth revising.</em></h1>
+              <p>Select only what you need. AskFormula keeps the path from syllabus to revision short.</p>
+            </div>
             {/* Breadcrumb / Step indicator */}
             {exam && (
               <motion.div
