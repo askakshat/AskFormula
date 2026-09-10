@@ -91,7 +91,7 @@ export default function Hero() {
     setTilt({ x: ((event.clientX - rect.left) / rect.width - 0.5) * 4, y: ((event.clientY - rect.top) / rect.height - 0.5) * -4 });
   }
 
-  return <main className="flex-grow pt-20">
+  return <main className="flex-grow">
     <section className="hero-shell hero-reference-shell">
       <div className="hero-grid" aria-hidden="true" /><div className="hero-orb hero-orb-one" aria-hidden="true" /><div className="hero-orb hero-orb-two" aria-hidden="true" />
       <div className="hero-copy hero-centered-copy"><div className="eyebrow-pill"><Sparkles size={14} /> Your personal formula workspace</div><h1>Your formulas<br /><em>deserve their own home.</em></h1><p className="hero-description">AskFormula gives students a calm, focused space to collect, shape, and revisit the formulas that matter for JEE, NEET, and NCERT.</p><div className="hero-actions hero-centered-actions"><Link to="/build" className="button button-primary">Make my sheet <ArrowUpRight size={17} /></Link><Link to="/quiz" className="button button-quiet"><Play size={15} fill="currentColor" /> See what you can do</Link></div></div>
