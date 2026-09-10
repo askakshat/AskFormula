@@ -699,3 +699,35 @@ body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSyst
 .premium-app-page:has(.build-panel) .build-panel .rounded-lg { border-radius:0; }
 @media (max-width:900px) { .premium-app-page:has(.build-panel) > section > div { gap:45px; } }
 @media (max-width:760px) { .premium-app-page:has(.build-panel) > section { padding:110px 18px 70px !important; }.premium-app-page:has(.build-panel) > section > div { display:block; }.premium-app-page:has(.build-panel) aside > div { position:static; }.premium-app-page:has(.build-panel) .build-page-intro { padding:0; margin-bottom:42px; }.premium-app-page:has(.build-panel) .build-page-intro h1 { font-size:58px; }.premium-app-page:has(.build-panel) .build-panel { padding:18px; }.premium-app-page:has(.build-panel) .build-panel button { min-height:72px; } }
+
+/* Clean reference builder: intentionally independent from the old landing overrides. */
+.builder-page { min-height:100vh; background:#050505; color:#f3f3f1; font-family:Inter,ui-sans-serif,system-ui,sans-serif; }
+.builder-page:before { content:""; position:fixed; z-index:0; inset:0; pointer-events:none; opacity:.28; background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px); background-size:64px 64px; mask-image:radial-gradient(ellipse at 50% 25%,black,transparent 72%); }
+.builder-nav { position:fixed !important; z-index:30; top:20px; right:0; left:0; padding:0 !important; background:transparent !important; pointer-events:none; }
+.builder-nav .header-inner { width:min(1180px,calc(100% - 48px)); min-height:44px; padding:5px 10px 5px 15px; border:1px solid #303034; border-radius:999px; background:rgba(11,11,13,.78) !important; box-shadow:0 16px 48px #0009,inset 0 1px #fff1; backdrop-filter:blur(20px); pointer-events:auto; }
+.builder-nav .header-inner:after { content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; background:linear-gradient(105deg,#fff0,rgba(255,255,255,.07) 48%,#a5f0c90b); }
+.builder-nav .header-inner > * { position:relative; z-index:1; }
+.builder-nav .brand-lockup { color:#f3f3f1; font-size:13px; }
+.builder-nav .brand-mark { width:24px; height:24px; border-radius:6px; font-size:14px; }
+.builder-nav > .header-inner > div { color:#89898f; font-size:11px; }
+.builder-page-body { position:relative; z-index:1; min-height:100vh; padding:140px max(24px,calc((100vw - 1120px)/2)) 100px; }
+.builder-layout { display:grid; grid-template-columns:.75fr 1.25fr; gap:100px; align-items:start; }
+.builder-intro-rail { min-width:0; }
+.builder-intro-rail > div { position:sticky; top:120px; }
+.builder-page .build-page-intro { padding-top:35px; margin-bottom:42px; }
+.builder-page .build-page-intro h1 { margin:20px 0 0; color:#f3f3f1; font-size:clamp(48px,5vw,78px); font-weight:500; letter-spacing:-.075em; line-height:.91; }
+.builder-page .build-page-intro h1 em { color:#a1a1a8; font-family:Georgia,serif; font-weight:400; letter-spacing:-.06em; }
+.builder-page .build-page-intro > p:last-child { max-width:330px; margin-top:26px; color:#87878e; font-size:14px; line-height:1.7; }
+.builder-page .builder-intro-rail h2 { color:#f3f3f1; font-size:16px; letter-spacing:-.04em; }
+.builder-page .builder-intro-rail .hidden.md\:block { margin-top:0; }
+.builder-page .builder-intro-rail .md\:sticky { position:sticky; top:120px; }
+.builder-panel { min-width:0; padding:30px; background:#0b0b0d; border:1px solid #2b2b2e; }
+.builder-panel > div { margin-bottom:30px; }
+.builder-panel h2 { color:#eee; font-size:20px; letter-spacing:-.04em; font-weight:500; margin:9px 0 18px; }
+.builder-panel h2 span { color:#67676e !important; background:transparent !important; font:10px ui-monospace,monospace; letter-spacing:.1em; padding:0 !important; }
+.builder-panel button { border:1px solid #303034 !important; border-radius:0 !important; background:#121214 !important; color:#ddd !important; transition:border-color .2s,background .2s,transform .2s; }
+.builder-panel button:hover, .builder-panel button:focus-visible { border-color:#aaaab0 !important; background:#1a1a1c !important; transform:translateY(-2px); }
+.builder-panel input { border:1px solid #303034 !important; border-radius:0 !important; background:#121214 !important; color:#ddd !important; }
+.builder-panel .rounded-xl, .builder-panel .rounded-lg { border-radius:0 !important; }
+@media (max-width:900px) { .builder-layout { gap:45px; } }
+@media (max-width:760px) { .builder-nav { top:12px; }.builder-nav .header-inner { width:calc(100% - 24px); }.builder-page-body { padding:110px 18px 70px; }.builder-layout { display:block; }.builder-intro-rail > div { position:static; }.builder-page .build-page-intro { padding:0; margin-bottom:42px; }.builder-page .build-page-intro h1 { font-size:58px; }.builder-panel { padding:18px; }.builder-panel button { padding:13px; } }
