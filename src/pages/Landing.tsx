@@ -25,7 +25,7 @@ export default function Landing() {
           <nav className="desktop-nav"><a href="#how-it-works">How it works</a><a href="#templates">Templates</a><a href="#faq">FAQ</a></nav>
           <div className="header-actions">
             <button className="search-trigger" onClick={() => window.dispatchEvent(new Event("open-global-search"))}><Command size={13} /><span>K</span><span className="search-trigger-label">Search formulas</span></button>
-            <Link to="/build" className="header-cta">Open builder <ArrowUpRight size={15} /></Link>
+            <Link to="/build" className="header-cta">Start building <ArrowUpRight size={15} /></Link>
             <button className="mobile-search" onClick={() => window.dispatchEvent(new Event("open-global-search"))} aria-label="Search formulas"><Search size={18} /></button>
           </div>
         </div>
@@ -45,7 +45,7 @@ export default function Landing() {
         <div className="faq-list">{faqs.map(([question, answer], index) => <details key={question} open={index === 0} className="faq-item"><summary><span>{question}</span><span className="faq-plus">+</span></summary><p>{answer}</p></details>)}</div>
       </section>
 
-      <section className="final-cta page-section"><div><p className="section-label">YOUR NEXT REVISION SESSION</p><h2>Make the next hour<br /><em>count for more.</em></h2></div><Link to="/build" className="button button-primary">Build your sheet <ArrowUpRight size={17} /></Link></section>
+      <section className="final-cta page-section"><div><p className="section-label">YOUR NEXT REVISION SESSION</p><h2>Make the next hour<br /><em>count for more.</em></h2></div><Link to="/build" className="button button-primary">Make my sheet <ArrowUpRight size={17} /></Link></section>
       <GlobalSearch />
       <Footer />
     </div>
