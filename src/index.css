@@ -679,3 +679,23 @@ body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSyst
 .premium-app-page:has(.build-content) .build-content input { height:44px; border-radius:12px; }
 @media (max-width:900px) { .premium-app-page:has(.build-content) > section > div { gap:35px; }.premium-app-page:has(.build-content) aside { width:100%; }.build-page-intro { margin-bottom:25px; } }
 @media (max-width:720px) { .premium-app-page:has(.build-content) > section { padding-top:75px !important; }.premium-app-page:has(.build-content) > section > div { padding:22px 20px; }.build-page-intro h1 { font-size:48px; } }
+
+/* Exact shared-preview builder proportions and surface rhythm */
+.premium-app-page:has(.build-panel) > section { min-height:100vh; padding:110px 24px 100px !important; }
+.premium-app-page:has(.build-panel) > section > div { display:grid; grid-template-columns:.75fr 1.25fr; gap:100px; align-items:start; max-width:1120px; padding:0; }
+.premium-app-page:has(.build-panel) aside { width:auto; }
+.premium-app-page:has(.build-panel) aside > div { position:sticky; top:120px; }
+.premium-app-page:has(.build-panel) .build-page-intro { padding-top:35px; margin-bottom:42px; }
+.premium-app-page:has(.build-panel) .build-page-intro h1 { margin-top:20px; font-size:clamp(48px,5vw,78px); line-height:.91; }
+.premium-app-page:has(.build-panel) .build-page-intro > p:last-child { max-width:330px; margin-top:26px; font-size:14px; line-height:1.7; }
+.premium-app-page:has(.build-panel) .build-panel { padding:30px; border:1px solid #2b2b2e; background:#0b0b0d; }
+.premium-app-page:has(.build-panel) .build-panel > div { margin-bottom:30px; }
+.premium-app-page:has(.build-panel) .build-panel button { min-height:112px; padding:15px; border:1px solid #303034 !important; border-radius:0; background:#121214 !important; color:#ddd; }
+.premium-app-page:has(.build-panel) .build-panel button:hover, .premium-app-page:has(.build-panel) .build-panel button:focus-visible { border-color:#aaaab0 !important; background:#1a1a1c !important; }
+.premium-app-page:has(.build-panel) .build-panel button:disabled { opacity:.38; }
+.premium-app-page:has(.build-panel) .build-panel input { border-radius:0; background:#121214 !important; }
+.premium-app-page:has(.build-panel) .build-panel .mb-10 { margin-bottom:32px; }
+.premium-app-page:has(.build-panel) .build-panel .rounded-xl { border-radius:0; }
+.premium-app-page:has(.build-panel) .build-panel .rounded-lg { border-radius:0; }
+@media (max-width:900px) { .premium-app-page:has(.build-panel) > section > div { gap:45px; } }
+@media (max-width:760px) { .premium-app-page:has(.build-panel) > section { padding:110px 18px 70px !important; }.premium-app-page:has(.build-panel) > section > div { display:block; }.premium-app-page:has(.build-panel) aside > div { position:static; }.premium-app-page:has(.build-panel) .build-page-intro { padding:0; margin-bottom:42px; }.premium-app-page:has(.build-panel) .build-page-intro h1 { font-size:58px; }.premium-app-page:has(.build-panel) .build-panel { padding:18px; }.premium-app-page:has(.build-panel) .build-panel button { min-height:72px; } }

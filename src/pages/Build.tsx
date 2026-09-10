@@ -135,6 +135,11 @@ export default function Build() {
           {/* Sidebar / Top Progress Indicator */}
           <aside className="w-full md:w-64 flex-shrink-0">
             <div className="md:sticky md:top-32">
+              <div className="build-page-intro">
+                <p className="reference-label">BUILD / FORMULA ENGINE</p>
+                <h1>Make a sheet<br /><em>worth revising.</em></h1>
+                <p>Select only what you need. AskFormula keeps the path from syllabus to revision short.</p>
+              </div>
               <div className="hidden md:block mb-6">
                 <h2 className="text-xl font-semibold text-[#aec6ff]">
                   Configuration
@@ -232,12 +237,7 @@ export default function Build() {
           </aside>
 
           {/* Right Content */}
-          <div className="flex-1 flex flex-col w-full max-w-full build-content">
-            <div className="build-page-intro">
-              <p className="reference-label">BUILD / FORMULA ENGINE</p>
-              <h1>Make a sheet<br /><em>worth revising.</em></h1>
-              <p>Select only what you need. AskFormula keeps the path from syllabus to revision short.</p>
-            </div>
+          <div className="flex-1 flex flex-col w-full max-w-full build-content build-panel">
             {/* Breadcrumb / Step indicator */}
             {exam && (
               <motion.div
