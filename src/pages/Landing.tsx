@@ -1,51 +1,49 @@
 import GlobalSearch from "@/components/askformula/GlobalSearch";
 import Hero from "@/components/askformula/Hero";
 import Footer from "@/components/askformula/Footer";
+import { ArrowUpRight, Atom, FlaskConical, FunctionSquare } from "lucide-react";
 import { Link } from "react-router";
-import { ArrowUpRight, Command, FileText, FlaskConical, FunctionSquare, Search } from "lucide-react";
 
-const templates = [
-  { href: "/build?template=jee-physics", eyebrow: "JEE / PHYSICS", title: "Mechanics &\nElectromagnetism", meta: "18 chapters · 240 formulas", icon: FileText, tone: "blue" },
-  { href: "/build?template=neet-bio", eyebrow: "NEET / BIOLOGY", title: "Human Physiology\n& Genetics", meta: "14 systems · 190 concepts", icon: FlaskConical, tone: "green" },
-  { href: "/build?template=cbse-math", eyebrow: "CBSE / CLASS 12", title: "Calculus & Algebra\nCheat Sheet", meta: "12 units · 160 formulas", icon: FunctionSquare, tone: "violet" },
+const subjects = [
+  { href: "/build?subject=physics", code: "PH", title: "Physics", body: "Mechanics, fields, waves, and the laws that move everything.", meta: "12 chapters · 238 formulas", icon: Atom },
+  { href: "/build?subject=chemistry", code: "CH", title: "Chemistry", body: "Reactions, constants, and the patterns behind matter.", meta: "11 chapters · 196 formulas", icon: FlaskConical },
+  { href: "/build?subject=mathematics", code: "MA", title: "Mathematics", body: "Calculus, algebra, and identities — ready when you are.", meta: "13 chapters · 264 formulas", icon: FunctionSquare },
 ];
 
-const faqs = [
-  ["What is AskFormula?", "A focused reference builder for students who want concise, customizable formula sheets instead of another noisy study dashboard."],
-  ["Are all chapters covered?", "We support Class 11 and 12 Physics, Chemistry, Mathematics and Biology for CBSE/NCERT, plus the complete JEE Main and Advanced syllabus for PCM."],
-  ["Can I export to PDF?", "Yes. Choose your chapters, shape your sheet, and export a clean, browser-generated PDF whenever you are ready to revise."],
+const workflow = [
+  ["01", "Choose your exam", "CBSE, ICSE, State Boards, JEE or NEET."],
+  ["02", "Set your level", "Class 11 or Class 12 — keep it relevant."],
+  ["03", "Pick a subject", "Physics, Chemistry, or Mathematics."],
+  ["04", "Revise smarter", "Export a clean sheet and get back to solving."],
 ];
 
 export default function Landing() {
   return (
-    <div className="landing-page">
-      <header className="site-header">
+    <div className="landing-page reference-landing">
+      <header className="site-header reference-header">
         <div className="header-inner">
           <Link to="/" className="brand-lockup"><span className="brand-mark">A</span><span>AskFormula</span></Link>
-          <nav className="desktop-nav"><a href="#how-it-works">How it works</a><a href="#templates">Templates</a><a href="#faq">FAQ</a></nav>
-          <div className="header-actions">
-            <button className="search-trigger" onClick={() => window.dispatchEvent(new Event("open-global-search"))}><Command size={13} /><span>K</span><span className="search-trigger-label">Search formulas</span></button>
-            <Link to="/build" className="header-cta">Start building <ArrowUpRight size={15} /></Link>
-            <button className="mobile-search" onClick={() => window.dispatchEvent(new Event("open-global-search"))} aria-label="Search formulas"><Search size={18} /></button>
-          </div>
+          <nav className="desktop-nav"><a href="#subjects">Subjects</a><a href="#workflow">How it works</a><a href="/quiz">Practice quiz</a></nav>
+          <Link to="/build" className="header-cta">Launch app <ArrowUpRight size={15} /></Link>
         </div>
       </header>
 
       <Hero />
 
-      <section id="templates" className="templates-section page-section">
-        <div className="section-intro templates-intro"><div><p className="section-label">START WITH A SHORTCUT</p><h2>Built for the way<br /><em>you actually study.</em></h2></div><p>Pick a starting point, then make it yours. Every template is structured for speed, clarity, and a little less last-minute panic.</p></div>
-        <div className="template-grid">
-          {templates.map(({ href, eyebrow, title, meta, icon: Icon, tone }, index) => <Link to={href} key={href} className={`template-card template-${tone}`}><div className="template-card-top"><span className="template-icon"><Icon size={19} /></span><ArrowUpRight className="template-arrow" size={19} /></div><div className={`template-mini-preview template-mini-${index}`} aria-hidden="true">{index === 0 && <><span className="mini-equation">v² = u² + 2as</span><i /><b>18 CHAPTERS</b></>}{index === 1 && <><span className="mini-orbit" /><span className="mini-cell">DNA</span><b>14 SYSTEMS</b></>}{index === 2 && <><span className="mini-bars"><i /><i /><i /><i /></span><span className="mini-sigma">∑</span><b>12 UNITS</b></>}</div><p className="template-eyebrow">{eyebrow}</p><h3>{title.split("\n").map((line) => <span key={line}>{line}<br /></span>)}</h3><p className="template-meta">{meta}</p></Link>)}
+      <section id="subjects" className="reference-section subjects-section">
+        <div className="reference-section-head"><div><p className="reference-label">01 / The library</p><h2>Your syllabus,<br /><em>finally organised.</em></h2></div><p>High-signal reference material for the moments when you need an answer, not another tab.</p></div>
+        <div className="subject-grid">
+          {subjects.map(({ href, code, title, body, meta, icon: Icon }) => <Link to={href} key={code} className="subject-card"><div className="subject-card-top"><span className="subject-code">{code}</span><Icon size={17} /></div><div><h3>{title}</h3><p>{body}</p></div><div className="subject-card-bottom"><span>{meta}</span><ArrowUpRight size={15} /></div></Link>)}
         </div>
       </section>
 
-      <section id="faq" className="faq-section page-section">
-        <div className="section-intro"><p className="section-label">A FEW GOOD QUESTIONS</p><h2>Nothing hidden.<br /><em>Nothing complicated.</em></h2></div>
-        <div className="faq-list">{faqs.map(([question, answer], index) => <details key={question} open={index === 0} className="faq-item"><summary><span>{question}</span><span className="faq-plus">+</span></summary><p>{answer}</p></details>)}</div>
+      <section id="workflow" className="reference-section workflow-reference">
+        <div className="reference-section-head"><div><p className="reference-label">02 / The workflow</p><h2>Less friction.<br /><em>More recall.</em></h2></div><div><p>Turn a blank page into a focused revision sheet in four calm, predictable steps.</p><Link to="/build" className="reference-text-link">Build a sheet <ArrowUpRight size={14} /></Link></div></div>
+        <div className="workflow-reference-grid">{workflow.map(([number, title, body]) => <div className="reference-step" key={number}><span>{number}</span><h3>{title}</h3><p>{body}</p></div>)}</div>
+        <p className="reference-note">Made for the 15 minutes before a test, the 2 hours before an exam, and every study session in between.</p>
+        <Link to="/build" className="reference-outline-link">Open the formula engine <ArrowUpRight size={15} /></Link>
       </section>
 
-      <section className="final-cta page-section"><div><p className="section-label">YOUR NEXT REVISION SESSION</p><h2>Make the next hour<br /><em>count for more.</em></h2></div><Link to="/build" className="button button-primary">Make my sheet <ArrowUpRight size={17} /></Link></section>
       <GlobalSearch />
       <Footer />
     </div>
