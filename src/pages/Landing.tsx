@@ -1,3 +1,5 @@
+import "katex/dist/katex.min.css";
+import { BlockMath } from "react-katex";
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import { ArrowRight, FileText, Search, MessageCircle } from "lucide-react";
@@ -71,10 +73,10 @@ export default function Landing() {
           id="bg-hero-image"
           className="absolute inset-0 z-0 pointer-events-none transform-gpu transition-transform duration-700 ease-out"
           style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&q=80&w=3506&ixlib=rb-4.0.3')",
+            backgroundImage: "url('/assets/hero-bg.png')",
             backgroundSize: 'cover',
             backgroundPosition: 'center 30%',
-            filter: 'brightness(0.3) contrast(1.2) saturate(1.5) blur(4px)',
+            filter: 'brightness(0.8) contrast(1.1)',
           }}
         ></div>
 
@@ -103,7 +105,7 @@ export default function Landing() {
         <div
           id="dashboard-container"
           className="relative z-20 w-[90%] max-w-[1000px] mt-20 sm:mt-24 rounded-2xl sm:rounded-[2rem] border border-white/10 shadow-2xl bg-[#1a1d24]/80 backdrop-blur-xl overflow-hidden flex flex-col sm:flex-row transform-gpu transition-transform duration-700 ease-out will-change-transform"
-          style={{ height: '500px' }}
+          style={{ height: '600px' }}
         >
           {/* Mock Sidebar */}
           <div className="w-full sm:w-64 bg-[#14161a] border-r border-white/5 p-4 flex flex-col gap-6 hidden sm:flex shrink-0">
@@ -201,8 +203,8 @@ export default function Landing() {
                   <div className="text-[10px] uppercase tracking-widest text-zinc-400 font-semibold mb-3">Lagrangian Mechanics • Classical Field Theory</div>
 
                   {/* Large Fake Math Display */}
-                  <div className="font-mono text-3xl sm:text-4xl text-white font-bold tracking-tight mb-6">
-                    \mathcal{"{L}"} = T - V
+                  <div className="text-3xl sm:text-4xl text-white font-bold tracking-tight mb-6">
+                    <BlockMath math="\mathcal{L} = T - V" />
                   </div>
 
                   <p className="text-xs text-zinc-400 leading-relaxed max-w-xs mx-auto mb-8">
