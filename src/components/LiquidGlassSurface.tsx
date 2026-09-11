@@ -16,7 +16,7 @@ export function LiquidGlassSurface({ children, className = "" }: LiquidGlassSurf
   const [webGpuReady, setWebGpuReady] = useState(false);
 
   useEffect(() => {
-    setWebGpuReady(typeof navigator !== "undefined" && "gpu" in navigator);
+    setWebGpuReady(false); // Forced off temporarily due to webgpu canvas scaling crashes
   }, []);
 
   return (

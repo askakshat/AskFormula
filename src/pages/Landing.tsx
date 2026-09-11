@@ -44,9 +44,9 @@ export default function Landing() {
   return (
     <div className="bg-[#0b0c0f] min-h-screen font-sans text-white overflow-x-hidden selection:bg-rose-500/30 selection:text-white">
       {/* Global Navigation - Minimal & Translucent */}
-      <div className="fixed top-4 inset-x-0 z-50 flex justify-center pointer-events-none">
+      <div className="fixed top-4 inset-x-0 z-50 flex justify-center pointer-events-none w-full max-w-4xl mx-auto">
         <LiquidGlassSurface className="pointer-events-auto rounded-[30px]">
-          <nav className="px-6 lg:px-8 py-3 flex items-center justify-between gap-8 md:gap-16">
+          <nav className="px-6 lg:px-8 py-3 flex items-center justify-between gap-8 md:gap-16 bg-[#0b0c0f]/70 backdrop-blur-md rounded-[30px] border border-white/10 w-full max-w-4xl mx-auto">
             <div className="flex items-center gap-3">
               <img src="/assets/logo-new.png" alt="AskFormula" className="h-7 object-contain" />
               <span className="font-semibold text-lg tracking-tight text-white/90">AskFormula</span>
