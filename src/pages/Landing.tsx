@@ -1,3 +1,4 @@
+import { LiquidGlassSurface } from "../components/LiquidGlassSurface";
 import "katex/dist/katex.min.css";
 import { BlockMath } from "react-katex";
 import { useState, useEffect } from "react";
@@ -43,27 +44,30 @@ export default function Landing() {
   return (
     <div className="bg-[#0b0c0f] min-h-screen font-sans text-white overflow-x-hidden selection:bg-rose-500/30 selection:text-white">
       {/* Global Navigation - Minimal & Translucent */}
-      <nav className="fixed top-0 inset-x-0 z-50 px-6 lg:px-12 py-4 flex items-center justify-between border-b border-white/5 bg-[#0b0c0f]/70 backdrop-blur-md">
-        <div className="flex items-center gap-3">
-          <img src="/assets/logo-new.png" alt="AskFormula" className="h-8 object-contain" />
-        </div>
+      <div className="fixed top-4 inset-x-0 z-50 flex justify-center pointer-events-none">
+        <LiquidGlassSurface className="pointer-events-auto rounded-[30px]">
+          <nav className="px-6 lg:px-8 py-3 flex items-center justify-between gap-8 md:gap-16">
+            <div className="flex items-center gap-3">
+              <img src="/assets/logo-new.png" alt="AskFormula" className="h-7 object-contain" />
+              <span className="font-semibold text-lg tracking-tight text-white/90">AskFormula</span>
+            </div>
 
-        <div className="hidden md:flex items-center space-x-8 text-sm font-medium text-zinc-400">
-          <a href="#" className="hover:text-white transition-colors">About</a>
-          <a href="#features" className="hover:text-white transition-colors">Features</a>
-          <a href="#" className="hover:text-white transition-colors">Curriculum</a>
-          <a href="#" className="hover:text-white transition-colors">Sheets</a>
-          <a href="#" className="hover:text-white transition-colors">Pricing</a>
-          <a href="#" className="hover:text-white transition-colors">Contact</a>
-        </div>
+            <div className="hidden md:flex items-center space-x-6 text-sm font-medium text-zinc-300">
+              <a href="#" className="hover:text-white transition-colors">About</a>
+              <a href="#features" className="hover:text-white transition-colors">Features</a>
+              <a href="#" className="hover:text-white transition-colors">Curriculum</a>
+              <a href="#" className="hover:text-white transition-colors">Pricing</a>
+            </div>
 
-        <div className="flex items-center gap-4">
-          <Link to="/auth" className="text-sm font-medium text-zinc-300 hover:text-white hidden sm:block transition-colors">Login</Link>
-          <Button asChild className="h-9 px-5 rounded-full bg-white text-zinc-950 hover:bg-zinc-200 text-sm font-semibold transition-transform active:scale-95 border-0">
-            <Link to="/build">Get started</Link>
-          </Button>
-        </div>
-      </nav>
+            <div className="flex items-center gap-4">
+              <Link to="/auth" className="text-sm font-medium text-zinc-300 hover:text-white hidden sm:block transition-colors">Login</Link>
+              <Button asChild className="h-8 px-4 rounded-full bg-white/10 text-white hover:bg-white/20 border border-white/10 text-sm font-medium transition-colors active:scale-95 shadow-none">
+                <Link to="/build">Get started</Link>
+              </Button>
+            </div>
+          </nav>
+        </LiquidGlassSurface>
+      </div>
 
       {/* Cinematic Hero Section */}
       <div className="relative w-full h-[120vh] min-h-[900px] flex flex-col items-center justify-start pt-32 sm:pt-40 lg:pt-48 overflow-hidden" data-purpose="cinematic-hero">
@@ -343,12 +347,6 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Floating Action Chat Bubble */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <button aria-label="Support & Community Chat" className="w-12 h-12 rounded-full bg-[#20232a] hover:bg-[#2c303a] text-white shadow-2xl border border-white/15 transition-all duration-200 hover:scale-110 active:scale-95 flex items-center justify-center focus:outline-none">
-          <MessageCircle className="w-5 h-5 text-white" />
-        </button>
-      </div>
 
       {/* Global Footer */}
       <footer className="bg-[#0b0c0f] border-t border-white/5 py-12 px-6 sm:px-10 lg:px-16" data-purpose="main-footer">

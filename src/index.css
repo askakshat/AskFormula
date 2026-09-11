@@ -96,19 +96,8 @@
   }
 }
 
-/* Base custom styles to support the new cinematic landing page and smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
 /* LaTeX Typography utilities */
 .katex-display {
   margin: 0 !important;
 }
 
-/* Disable generic Liquid DOM surface styles since we're replacing them */
-.liquid-surface,
-.fresh-header-shell,
-.liquid-canvas {
-  display: none !important;
-}
