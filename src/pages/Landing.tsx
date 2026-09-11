@@ -43,10 +43,7 @@ export default function Landing() {
       {/* Global Navigation - Minimal & Translucent */}
       <nav className="fixed top-0 inset-x-0 z-50 px-6 lg:px-12 py-4 flex items-center justify-between border-b border-white/5 bg-[#0b0c0f]/70 backdrop-blur-md">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center">
-            <span className="text-zinc-950 font-bold text-lg leading-none mt-[-2px]">F</span>
-          </div>
-          <span className="text-lg font-semibold tracking-tight text-white">AskFormula.</span>
+          <img src="/assets/logo-new.png" alt="AskFormula" className="h-8 object-contain" />
         </div>
 
         <div className="hidden md:flex items-center space-x-8 text-sm font-medium text-zinc-400">
@@ -355,10 +352,8 @@ export default function Landing() {
       <footer className="bg-[#0b0c0f] border-t border-white/5 py-12 px-6 sm:px-10 lg:px-16" data-purpose="main-footer">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-md bg-white flex items-center justify-center text-zinc-950 font-bold text-xs">
-              A
-            </div>
-            <span className="text-sm text-zinc-400 font-medium">AskFormula by AskAkshat. All formulas verified.</span>
+            <img src="/assets/logo-new.png" alt="AskFormula" className="h-5 object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all" />
+            <span className="text-sm text-zinc-400 font-medium ml-2">AskFormula by AskAkshat. All formulas verified.</span>
           </div>
           <div className="flex items-center space-x-6 text-xs text-zinc-500">
             <a href="#" className="hover:text-zinc-300 transition-colors">Privacy Policy</a>
