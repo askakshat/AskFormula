@@ -101,3 +101,11 @@
   margin: 0 !important;
 }
 
+
+
+/* Hide liquid-canvas on mobile */
+@media (max-width: 800px) {
+  .liquid-canvas {
+    display: none !important;
+  }
+}

@@ -25,7 +25,7 @@ export function LiquidGlassSurface({ children, className = "" }: LiquidGlassSurf
         <LiquidCanvas
           className="liquid-canvas"
           canvasClassName="liquid-canvas-layer"
-          proposal={{ width: 1280, height: 72 }}
+          proposal={{ width: window.innerWidth > 800 ? 800 : window.innerWidth - 32, height: 72 }}
           maxDpr={1.5}
           frameloop="always"
           onError={() => setWebGpuReady(false)}
@@ -35,9 +35,9 @@ export function LiquidGlassSurface({ children, className = "" }: LiquidGlassSurf
             spacing={20}
             tint={{ r: 0.16, g: 0.2, b: 0.21, a: 0.58 }}
             specularStrength={0.35}
-            shadowBlur={18}
+            shadowBlur={10}
           >
-            <Frame width={1280} height={72}>
+            <Frame width={typeof window !== "undefined" && window.innerWidth > 800 ? 800 : typeof window !== "undefined" ? window.innerWidth - 32 : 800} height={72}>
               <Glass cornerRadius={30} cornerSmoothing={0.7} />
             </Frame>
           </GlassContainer>

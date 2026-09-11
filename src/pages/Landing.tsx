@@ -198,7 +198,7 @@ export default function Landing() {
           <div className="flex-1 bg-gradient-to-br from-[#1c2130] to-[#12151e] relative p-8 flex items-center justify-center overflow-hidden">
 
              {/* Content 1: Overview (LaTeX Card) */}
-             <div id="content-overview" className={`tab-content w-full max-w-lg transition-all duration-500 ease-out ${activeMockTab === 'overview' ? 'opacity-100 translate-y-0' : 'hidden opacity-0 translate-y-2'}`}>
+             <div id="content-overview" className={`absolute inset-0 p-8 flex items-center justify-center transition-all duration-500 ease-out ${activeMockTab === 'overview' ? 'opacity-100 translate-y-0 z-10' : 'opacity-0 translate-y-2 pointer-events-none z-0'}`}>
                 <div className="p-8 rounded-2xl bg-[#242936]/80 backdrop-blur-md border border-white/10 shadow-2xl flex flex-col items-center text-center group hover:bg-[#282d3b]/90 transition-colors">
                   <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-6 border border-white/10 group-hover:scale-110 transition-transform">
                     <span className="font-serif italic text-xl text-zinc-300">f</span>
@@ -231,7 +231,7 @@ export default function Landing() {
              </div>
 
              {/* Content 2: Derivations */}
-             <div id="content-derivations" className={`tab-content w-full transition-all duration-500 ease-out ${activeMockTab === 'derivations' ? 'opacity-100 translate-y-0' : 'hidden opacity-0 translate-y-2'}`}>
+             <div id="content-derivations" className={`absolute inset-0 p-8 transition-all duration-500 ease-out overflow-y-auto ${activeMockTab === 'derivations' ? 'opacity-100 translate-y-0 z-10' : 'opacity-0 translate-y-2 pointer-events-none z-0'}`}>
                <div className="space-y-4">
                  <h3 className="text-xl font-medium text-white mb-6">Recent Derivations</h3>
 
@@ -253,7 +253,7 @@ export default function Landing() {
              </div>
 
              {/* Content 3: Discussions */}
-             <div id="content-discussions" className={`tab-content w-full transition-all duration-500 ease-out ${activeMockTab === 'discussions' ? 'opacity-100 translate-y-0' : 'hidden opacity-0 translate-y-2'}`}>
+             <div id="content-discussions" className={`absolute inset-0 p-8 transition-all duration-500 ease-out ${activeMockTab === 'discussions' ? 'opacity-100 translate-y-0 z-10' : 'opacity-0 translate-y-2 pointer-events-none z-0'}`}>
                 <div className="flex flex-col items-center justify-center text-center h-full text-zinc-400">
                   <MessageCircle className="w-12 h-12 text-zinc-600 mb-4 opacity-50" />
                   <p className="text-sm font-medium text-white mb-1">Community Discussions</p>
