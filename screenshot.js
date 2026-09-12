@@ -5,9 +5,9 @@ import puppeteer from 'puppeteer';
   const page = await browser.newPage();
 
   await page.goto('http://localhost:4173');
-  await new Promise(r => setTimeout(r, 5000));
+  await new Promise(r => setTimeout(r, 3000));
 
-  await page.screenshot({ path: 'landing-preview.png', fullPage: true });
+  await page.screenshot({ path: 'landing-preview-stars.png', fullPage: true });
   await browser.close();
   console.log("Screenshot saved.");
 })();

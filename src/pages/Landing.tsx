@@ -5,7 +5,54 @@ import { Link } from "react-router";
 
 import { Button } from "@/components/ui/button";
 
+import React from 'react';
+
 export default function Landing() {
+
+
+  // Generate random stars once on mount to avoid hydration mismatch and pure render issues
+  const twinklingStars = React.useMemo(() => {
+    return [...Array(40)].map((_, i) => ({
+      id: i,
+
+      top: `${Math.random() * 80}%`,
+
+      left: `${Math.random() * 100}%`,
+
+      width: `${Math.random() * 3 + 1}px`,
+
+      height: `${Math.random() * 3 + 1}px`,
+
+      duration: `${Math.random() * 4 + 2}s`,
+
+      opacity: Math.random() * 0.5 + 0.1
+    }));
+  }, []);
+
+  const shootingStars = React.useMemo(() => {
+    return [...Array(6)].map((_, i) => ({
+      id: i,
+
+      top: `${Math.random() * 50 - 10}%`,
+
+      left: `${Math.random() * 80}%`,
+
+      duration: `${Math.random() * 6 + 4}s`,
+
+      delay: `${Math.random() * 10}s`
+    }));
+  }, []);
+
+  const shootingStars = React.useMemo(() => {
+    return [...Array(6)].map((_, i) => ({
+      id: i,
+      top: `${Math.random() * 50 - 10}%`,
+      left: `${Math.random() * 80}%`,
+      duration: `${Math.random() * 6 + 4}s`,
+      delay: `${Math.random() * 10}s`
+    }));
+  }, []);
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,9 +102,48 @@ export default function Landing() {
             backgroundImage: "url('/assets/hero-bg.png')",
             backgroundSize: 'cover',
             backgroundPosition: 'center 30%',
-            filter: 'brightness(0.8) contrast(1.1)',
+            filter: 'brightness(1.1) contrast(1.05) saturate(1.2)',
           }}
         ></div>
+
+
+
+        {/* Magical Stars Layer */}
+        <div className="stars-container">
+          {/* Twinkling stars */}
+          {twinklingStars.map((star) => (
+            <div
+              key={`star-${star.id}`}
+              className="star"
+              style={{
+                top: star.top,
+                left: star.left,
+                width: star.width,
+                height: star.height,
+                '--duration': star.duration,
+                '--base-opacity': star.opacity
+              } as React.CSSProperties}
+            />
+          ))}
+
+          {/* Shooting stars */}
+          {shootingStars.map((star) => (
+            <div
+              key={`shooting-${star.id}`}
+              className="shooting-star"
+              style={{
+                top: star.top,
+                left: star.left,
+                '--duration': star.duration,
+                animationDelay: star.delay
+              } as React.CSSProperties}
+            />
+          ))}
+        </div>
+
+        {/* Soft magical glow behind hero text */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-emerald-500/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
 
         {/* Ambient Top Gradient Overlay */}
         <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#0b0c0f] via-[#0b0c0f]/60 to-transparent"></div>
@@ -76,7 +162,7 @@ export default function Landing() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] drop-shadow-2xl mb-6"
+            className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] drop-shadow-[0_4px_24px_rgba(255,255,255,0.4)] mb-6"
           >
             Your formulas<br/>deserve their own<br/>home.
           </motion.h1>
@@ -115,7 +201,7 @@ export default function Landing() {
       {/* Intro Section */}
       <section className="py-24 px-6 sm:px-10 lg:px-16 bg-[#0b0c0f] relative z-20">
         <div className="max-w-4xl mx-auto text-center">
-          <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-xs uppercase tracking-widest text-zinc-500 font-semibold font-mono mb-4 block">Intro</motion.span>
+          <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-xs uppercase tracking-widest text-zinc-400 font-semibold font-mono mb-4 block">Intro</motion.span>
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white mb-6">
             The right formula at the right moment can change everything.
           </motion.h2>
@@ -134,7 +220,7 @@ export default function Landing() {
       <section className="py-24 px-6 sm:px-10 lg:px-16 bg-[#0e1014] border-t border-white/5 relative z-20" id="features">
         <div className="max-w-7xl mx-auto">
           <div className="mb-20">
-            <span className="text-xs uppercase tracking-widest text-zinc-500 font-semibold font-mono block mb-2">A better way to revise</span>
+            <span className="text-xs uppercase tracking-widest text-zinc-400 font-semibold font-mono block mb-2">A better way to revise</span>
             <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-4">One calm place for<br/>everything that matters.</h2>
           </div>
 
@@ -156,22 +242,22 @@ export default function Landing() {
                  {/* Search UI Mockup */}
                  <div className="w-full max-w-md bg-[#1a1d24] border border-white/10 rounded-xl shadow-2xl overflow-hidden z-10">
                    <div className="p-4 border-b border-white/5 flex items-center gap-3">
-                     <svg className="w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                     <svg className="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                      <span className="text-sm text-zinc-300">Try &quot;kinematics&quot;</span>
-                     <span className="ml-auto px-1.5 py-0.5 rounded text-[10px] font-mono bg-white/5 text-zinc-500 border border-white/10">⌘ K</span>
+                     <span className="ml-auto px-1.5 py-0.5 rounded text-[10px] font-mono bg-white/5 text-zinc-400 border border-white/10">⌘ K</span>
                    </div>
                    <div className="p-2 space-y-1">
                      <div className="p-3 bg-white/5 rounded-lg border border-white/5">
                        <div className="text-sm text-white font-medium">Equations of motion</div>
-                       <div className="text-xs text-zinc-500 mt-1">Physics · Kinematics</div>
+                       <div className="text-xs text-zinc-400 mt-1">Physics · Kinematics</div>
                      </div>
                      <div className="p-3 hover:bg-white/[0.02] rounded-lg transition-colors">
                        <div className="text-sm text-zinc-400 font-medium">Motion in a straight line</div>
-                       <div className="text-xs text-zinc-600 mt-1">Physics · Class 11</div>
+                       <div className="text-xs text-zinc-500 mt-1">Physics · Class 11</div>
                      </div>
                      <div className="p-3 hover:bg-white/[0.02] rounded-lg transition-colors">
                        <div className="text-sm text-zinc-400 font-medium">Projectile motion</div>
-                       <div className="text-xs text-zinc-600 mt-1">Physics · JEE Main</div>
+                       <div className="text-xs text-zinc-500 mt-1">Physics · JEE Main</div>
                      </div>
                    </div>
                  </div>
@@ -184,7 +270,7 @@ export default function Landing() {
                  <div className="absolute inset-0 bg-gradient-to-tr from-rose-500/5 to-orange-500/5" />
                  {/* Card UI Mockup */}
                  <div className="w-full max-w-sm bg-[#1a1d24] border border-white/10 rounded-xl shadow-2xl overflow-hidden z-10 p-6">
-                   <div className="text-[10px] font-mono text-zinc-500 mb-4 tracking-wider uppercase">Thermodynamics</div>
+                   <div className="text-[10px] font-mono text-zinc-400 mb-4 tracking-wider uppercase">Thermodynamics</div>
                    <div className="text-sm font-medium text-white mb-2">First law of thermodynamics</div>
                    <div className="text-2xl font-serif text-white mb-4 italic">ΔQ = ΔU + ΔW</div>
                    <p className="text-xs text-zinc-400 leading-relaxed mb-4 pb-4 border-b border-white/5">
@@ -248,7 +334,7 @@ export default function Landing() {
       <section className="py-24 px-6 sm:px-10 lg:px-16 bg-[#0b0c0f] border-t border-white/5 relative z-20">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
-            <span className="text-xs uppercase tracking-widest text-zinc-500 font-semibold font-mono block mb-2">Pricing</span>
+            <span className="text-xs uppercase tracking-widest text-zinc-400 font-semibold font-mono block mb-2">Pricing</span>
             <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-4">Start simple.<br/>Grow from there.</h2>
             <p className="text-lg text-zinc-400 leading-relaxed max-w-2xl mx-auto">
               Everything you need to build a better revision habit, without adding another complicated tool to your life.
@@ -276,7 +362,7 @@ export default function Landing() {
               <Button asChild className="w-full h-12 rounded-xl bg-white text-zinc-950 hover:bg-zinc-200 text-sm font-semibold transition-all">
                 <Link to="/build">Get started free</Link>
               </Button>
-              <p className="text-center text-xs text-zinc-500 mt-4">No credit card required.</p>
+              <p className="text-center text-xs text-zinc-400 mt-4">No credit card required.</p>
             </div>
           </motion.div>
         </div>
@@ -286,7 +372,7 @@ export default function Landing() {
       <section className="py-24 px-6 sm:px-10 lg:px-16 bg-[#0e1014] border-t border-white/5 relative z-20">
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row gap-16">
           <div className="md:w-1/3 shrink-0">
-             <span className="text-xs uppercase tracking-widest text-zinc-500 font-semibold font-mono block mb-2">FAQ</span>
+             <span className="text-xs uppercase tracking-widest text-zinc-400 font-semibold font-mono block mb-2">FAQ</span>
              <h2 className="text-3xl font-bold text-white mb-4">Questions,<br/>answered.</h2>
              <p className="text-sm text-zinc-400 mb-6">Can't find what you're looking for?</p>
              <a href="#" className="text-sm font-medium text-white hover:text-zinc-300 underline decoration-white/20 underline-offset-4">Reach out</a>
@@ -317,7 +403,7 @@ export default function Landing() {
       <section className="py-32 px-6 sm:px-10 lg:px-16 bg-[#0b0c0f] border-t border-white/5 relative z-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
         <div className="max-w-3xl mx-auto text-center relative z-10">
-          <span className="text-xs uppercase tracking-widest text-zinc-500 font-semibold font-mono block mb-4">Your next session is one click away</span>
+          <span className="text-xs uppercase tracking-widest text-zinc-400 font-semibold font-mono block mb-4">Your next session is one click away</span>
           <h2 className="text-5xl sm:text-7xl font-bold tracking-tight text-white mb-8">Make revision<br/>feel lighter.</h2>
           <Button asChild className="h-14 px-10 rounded-full bg-white text-zinc-950 hover:bg-zinc-200 text-base font-semibold transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(255,255,255,0.15)] border-0">
              <Link to="/build">Start for free</Link>
@@ -332,7 +418,7 @@ export default function Landing() {
             <img src="/assets/logo-new.png" alt="AskFormula" className="h-5 object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all" />
             <span className="text-sm text-zinc-400 font-medium ml-2">AskFormula by AskAkshat. All formulas verified.</span>
           </div>
-          <div className="flex items-center space-x-6 text-xs text-zinc-500">
+          <div className="flex items-center space-x-6 text-xs text-zinc-400">
             <a href="#" className="hover:text-zinc-300 transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-zinc-300 transition-colors">Terms of Service</a>
             <a href="#" className="hover:text-zinc-300 transition-colors">Documentation</a>
