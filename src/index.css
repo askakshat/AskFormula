@@ -101,15 +101,12 @@
   margin: 0 !important;
 }
 
-
-
 /* Hide liquid-canvas on mobile */
 @media (max-width: 800px) {
   .liquid-canvas {
     display: none !important;
   }
 }
-
 
 /* Magical Stars & Shooting Stars */
 .stars-container {
@@ -134,26 +131,52 @@
 .shooting-star {
   position: absolute;
   height: 2px;
-  background: linear-gradient(-45deg, rgba(255,255,255,1), rgba(255,255,255,0));
+  background: linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 1),
+    rgba(255, 255, 255, 0)
+  );
   border-radius: 999px;
-  filter: drop-shadow(0 0 6px rgba(255,255,255,1));
-  animation: tail var(--duration) ease-in-out infinite, shooting var(--duration) ease-in-out infinite;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 1));
+  animation:
+    tail var(--duration) ease-in-out infinite,
+    shooting var(--duration) ease-in-out infinite;
 }
 
 @keyframes twinkle {
-  0%, 100% { opacity: var(--base-opacity); transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.5); box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); }
+  0%,
+  100% {
+    opacity: var(--base-opacity);
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  }
 }
 
 @keyframes tail {
-  0% { width: 0; }
-  30% { width: 100px; }
-  100% { width: 0; }
+  0% {
+    width: 0;
+  }
+  30% {
+    width: 100px;
+  }
+  100% {
+    width: 0;
+  }
 }
 
 @keyframes shooting {
-  0% { transform: translateX(0) translateY(0) rotate(135deg); opacity: 1; }
-  100% { transform: translateX(-800px) translateY(800px) rotate(135deg); opacity: 0; }
+  0% {
+    transform: translateX(0) translateY(0) rotate(135deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-800px) translateY(800px) rotate(135deg);
+    opacity: 0;
+  }
 }
 
 /* Zen Gradient Theme for Quiz Pages */
@@ -161,9 +184,10 @@
   position: fixed;
   inset: 0;
   z-index: -10;
-  background:
-    radial-gradient(ellipse 90% 60% at 50% -10%, #b8d0e2 0%, #9bb8cf 35%, #7b9bb6 65%, #537594 95%),
-    linear-gradient(180deg, #9bb8cf 0%, #6f8fae 45%, #466380 75%, #243547 100%);
+  background-image: url("/assets/quiz-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   background-attachment: fixed;
 }
 
@@ -171,7 +195,11 @@
   position: fixed;
   inset: 0;
   z-index: -5;
-  background: radial-gradient(circle at 50% 100%, rgba(16, 24, 38, 0.78) 0%, transparent 70%);
+  background: radial-gradient(
+    circle at 50% 100%,
+    rgba(16, 24, 38, 0.78) 0%,
+    transparent 70%
+  );
   pointer-events: none;
 }
 
