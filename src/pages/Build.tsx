@@ -63,18 +63,18 @@ export default function Build() {
 
 
   const selectAllChapters = () => {
-    setSelectedChapters(chapters.map(c => c.name));
+    setSelectedChapters(chapters.map(c => c.id));
   };
 
   const clearSelection = () => {
     setSelectedChapters([]);
   };
 
-  const toggleChapter = (chapterName: string) => {
+  const toggleChapter = (chapterId: string) => {
     setSelectedChapters(prev =>
-      prev.includes(chapterName)
-        ? prev.filter(c => c !== chapterName)
-        : [...prev, chapterName]
+      prev.includes(chapterId)
+        ? prev.filter(c => c !== chapterId)
+        : [...prev, chapterId]
     );
   };
 
@@ -89,16 +89,6 @@ export default function Build() {
     }, 150);
   };
 
-  const handleClassSelect = (cls: string) => {
-    setSelectedClass(cls);
-    setSubject(null);
-    setSelectedChapters([]);
-    setTimeout(() => {
-      document
-        .getElementById("app-section")
-        ?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 50);
-  };
 
   return (
     <div className="bg-[#0b0e13] text-[#ded9d2] font-sans antialiased min-h-screen flex flex-col selection:bg-rose-500/30 selection:text-white relative overflow-x-hidden">
@@ -164,20 +154,23 @@ export default function Build() {
               {[
                 { id: "school", label: "School & Boards", desc: "CBSE, ICSE & State Boards with core standard derivations and formulas" },
                 { id: "jee", label: "JEE (Main & Adv.)", desc: "Calculus-based physics, multi-concept mechanics & advanced optics" },
-                { id: "neet", label: "NEET UG", desc: "Medical entrance track with high-speed formula recall and core bio-physics" }
+                { id: "neet", label: "NEET UG", desc: "Medical entrance track with high-speed formula recall and core bio-physics", disabled: true }
               ].map(track => (
                 <div
                   key={track.id}
-                  onClick={() => { setExam(track.id as "school" | "jee" | "neet"); setSelectedClass(null); setSubject(null); setSelectedChapters([]); }}
-                  className={`relative p-7 rounded-2xl cursor-pointer transition-all duration-200 flex flex-col justify-between min-h-[170px] backdrop-blur-sm ${
-                    exam === track.id
+                  onClick={() => { if (track.disabled) return; setExam(track.id as "school" | "jee" | "neet"); setSelectedClass(null); setSubject(null); setSelectedChapters([]); }}
+                  className={`relative p-7 rounded-2xl transition-all duration-200 flex flex-col justify-between min-h-[170px] backdrop-blur-sm ${
+                    track.disabled ? 'opacity-50 cursor-not-allowed bg-black/20 border-white/5' : 'cursor-pointer ' + (exam === track.id
                     ? 'bg-[#1d232c]/90 border border-[#e39f82]/50 shadow-[0_0_32px_-4px_rgba(227,159,130,0.22)] ring-1 ring-[#e39f82]/35'
-                    : 'bg-white/[0.03] border border-white/[0.07] hover:border-white/20 hover:bg-white/[0.06]'
+                    : 'bg-white/[0.03] border border-white/[0.07] hover:border-white/20 hover:bg-white/[0.06]')
                   }`}
                 >
                   <div>
                     <div className={`flex items-center justify-between gap-3 mb-3 ${exam !== track.id ? 'group-hover:text-white' : ''}`}>
-                      <div className={`text-[15px] ${exam === track.id ? 'font-semibold text-white' : 'font-medium text-white/95'}`}>{track.label}</div>
+                      <div className={`text-[15px] flex items-center gap-2 ${exam === track.id ? 'font-semibold text-white' : 'font-medium text-white/95'}`}>
+                        {track.label}
+                        {track.disabled && <svg className="w-3.5 h-3.5 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>}
+                      </div>
                       {exam === track.id && <span className="w-2.5 h-2.5 rounded-full bg-[#e39f82] shadow-[0_0_10px_rgba(227,159,130,0.7)]"></span>}
                     </div>
                     <p className={`text-[13px] leading-relaxed ${exam === track.id ? 'text-[#edd4c8]/90' : 'text-white/50'}`}>{track.desc}</p>
@@ -228,7 +221,7 @@ export default function Build() {
                     </div>
                   </div>
 
-                  <div className="space-y-6">
+                  <div className={`space-y-6 transition-opacity duration-300 ${!selectedClass ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}>
                     <h3 className="text-sm font-medium text-white/70 uppercase tracking-widest">Select Subject</h3>
                     <div className="flex flex-wrap gap-4">
                       {["Physics", "Chemistry", "Mathematics", "Biology"].map(sub => (
@@ -277,11 +270,11 @@ export default function Build() {
                     <div className="col-span-full py-12 text-center text-white/40">No chapters found for this selection.</div>
                   ) : (
                     chapters.map((chap) => {
-                      const isSelected = selectedChapters.includes(chap.name);
+                      const isSelected = selectedChapters.includes(chap.id);
                       return (
                         <div
                           key={chap.name}
-                          onClick={() => toggleChapter(chap.name)}
+                          onClick={() => toggleChapter(chap.id)}
                           className={`relative p-5 rounded-xl cursor-pointer transition-all duration-200 border ${
                             isSelected
                             ? 'bg-white/10 border-white/20 shadow-md'
@@ -328,7 +321,7 @@ export default function Build() {
 
                 <PDFButton
                   formulas={formulas}
-                  chapters={chapters.filter(c => selectedChapters.includes(c.name))}
+                  chapters={chapters.filter(c => selectedChapters.includes(c.id))}
                   subject={subject || ""}
                 />
               </div>

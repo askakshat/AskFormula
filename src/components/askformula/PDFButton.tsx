@@ -41,6 +41,7 @@ export default function PDFButton({ formulas, chapters = [], subject }: PDFButto
 
     try {
       // Save data to session storage so the print view can read it
+      console.log("PDFButton storing printData, formulas count:", formulas.length, "chapters count:", chapters.length);
       const printData = {
         formulas,
         chapters,

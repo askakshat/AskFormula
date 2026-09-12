@@ -46,8 +46,10 @@ export default function PrintView() {
     const storedData = sessionStorage.getItem("askformula-print-data");
     if (storedData) {
       try {
+        const parsed = JSON.parse(storedData);
+        console.log("PrintView loaded print data", { formulasCount: parsed.formulas?.length, chaptersCount: parsed.chapters?.length });
         // eslint-disable-next-line react-hooks/set-state-in-effect
-        setData(JSON.parse(storedData));
+        setData(parsed);
       } catch (e) {
         console.error("Failed to parse print data", e);
       }
