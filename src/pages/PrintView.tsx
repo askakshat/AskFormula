@@ -298,12 +298,11 @@ export default function PrintView() {
           const keyDerivations = chapterMeta?.keyDerivations || [];
 
           const hasFormulas =
-            includeContent.includes("formulas") && items.length > 0;
+            (!includeContent || includeContent.length === 0 || includeContent.includes("formulas")) && items.length > 0;
           const hasKeyPoints =
-            includeContent.includes("keyPoints") && keyPoints.length > 0;
+            (!includeContent || includeContent.length === 0 || includeContent.includes("keyPoints")) && keyPoints.length > 0;
           const hasDerivations =
-            includeContent.includes("keyDerivations") &&
-            keyDerivations.length > 0;
+            (!includeContent || includeContent.length === 0 || includeContent.includes("keyDerivations")) && keyDerivations.length > 0;
 
           if (!hasFormulas && !hasKeyPoints && !hasDerivations) return null;
 

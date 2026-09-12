@@ -1,106 +1,9 @@
-import { useState, useMemo, useRef, useEffect } from "react";
-import { useSearchParams } from "react-router";
-import { motion, AnimatePresence } from "framer-motion";
-import PDFButton from "@/components/askformula/PDFButton";
-import { getChaptersBySubject, filterFormulas } from "@/lib/formulas";
-import { useLocalStorage } from "@/lib/local-storage";
+import re
 
-export default function Build() {
-  const [exam, setExam] = useState<"school" | "jee" | "neet" | null>(null);
-  const [selectedClass, setSelectedClass] = useState<string | null>(null);
-  const [subject, setSubject] = useState<string | null>(null);
-  const [searchParams, setSearchParams] = useSearchParams();
+with open('src/pages/Build.tsx', 'r') as f:
+    content = f.read()
 
-  // Template pre-fill logic
-  useEffect(() => {
-    const template = searchParams.get("template");
-    if (template) {
-      if (template === "jee-physics") {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setExam("jee");
-        setSelectedClass("12");
-        setSubject("Physics");
-      } else if (template === "neet-bio") {
-
-        setExam("neet");
-        setSelectedClass("11");
-        setSubject("Biology");
-      } else if (template === "cbse-math") {
-
-        setExam("school");
-        setSelectedClass("12");
-        setSubject("Mathematics");
-      }
-
-      // Clear param so it doesn't persist awkwardly
-      searchParams.delete("template");
-      setSearchParams(searchParams, { replace: true });
-    }
-  }, [searchParams, setSearchParams, setExam, setSelectedClass, setSubject]);
-
-  const [selectedChapters, setSelectedChapters] = useLocalStorage<string[]>(
-    "askformula-selected-chapters",
-    [],
-  );
-
-
-  const chapterRef = useRef<HTMLDivElement>(null);
-
-  const chapters = useMemo(() => {
-    if (!subject || !selectedClass) return [];
-    return getChaptersBySubject(
-      exam === "jee" ? "JEE " + subject : subject,
-    ).filter((ch) => ch.class === selectedClass);
-  }, [subject, selectedClass, exam]);
-
-  const formulas = useMemo(() => {
-    if (!subject || selectedChapters.length === 0) return [];
-    return filterFormulas(
-      exam === "jee" ? "JEE " + subject : subject,
-      selectedChapters,
-    );
-  }, [subject, selectedChapters, exam]);
-
-
-  const selectAllChapters = () => {
-    setSelectedChapters(chapters.map(c => c.name));
-  };
-
-  const clearSelection = () => {
-    setSelectedChapters([]);
-  };
-
-  const toggleChapter = (chapterName: string) => {
-    setSelectedChapters(prev =>
-      prev.includes(chapterName)
-        ? prev.filter(c => c !== chapterName)
-        : [...prev, chapterName]
-    );
-  };
-
-  const handleSubjectSelect = (s: string) => {
-    setSubject(s);
-    setSelectedChapters([]);
-    setTimeout(() => {
-      chapterRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }, 150);
-  };
-
-  const handleClassSelect = (cls: string) => {
-    setSelectedClass(cls);
-    setSubject(null);
-    setSelectedChapters([]);
-    setTimeout(() => {
-      document
-        .getElementById("app-section")
-        ?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 50);
-  };
-
-  return (
+new_layout = """  return (
     <div className="bg-[#0b0e13] text-[#ded9d2] font-sans antialiased min-h-screen flex flex-col selection:bg-rose-500/30 selection:text-white relative overflow-x-hidden">
       {/* Photographic Dusk Landscape Atmosphere Background */}
       <div aria-hidden="true" className="fixed inset-0 pointer-events-none z-0">
@@ -338,5 +241,42 @@ export default function Build() {
 
       </main>
     </div>
-  );
-}
+  );"""
+
+handlers = """
+  const selectAllChapters = () => {
+    setSelectedChapters(chapters.map(c => c.name));
+  };
+
+  const clearSelection = () => {
+    setSelectedChapters([]);
+  };
+
+  const toggleChapter = (chapterName: string) => {
+    setSelectedChapters(prev =>
+      prev.includes(chapterName)
+        ? prev.filter(c => c !== chapterName)
+        : [...prev, chapterName]
+    );
+  };
+"""
+
+content = content.replace('  const handleSubjectSelect = (s: string) => {', handlers + '\n  const handleSubjectSelect = (s: string) => {')
+
+content = content[:content.find('  return (')] + new_layout + '\n}\n'
+
+# Remove unused imports and variables to fix linting
+content = re.sub(r'import { RotateCcw } from "lucide-react";\n', '', content)
+content = re.sub(r'import ExamSelector from "@/components/askformula/ExamSelector";\n', '', content)
+content = re.sub(r'import ClassSelector from "@/components/askformula/ClassSelector";\n', '', content)
+content = re.sub(r'import SubjectSelector from "@/components/askformula/SubjectSelector";\n', '', content)
+content = re.sub(r'import ChapterSelector from "@/components/askformula/ChapterSelector";\n', '', content)
+content = re.sub(r'import GlobalSearch from "@/components/askformula/GlobalSearch";\n', '', content)
+content = re.sub(r'  const classRef = useRef<HTMLDivElement>\(null\);\n', '', content)
+content = re.sub(r'  const subjectRef = useRef<HTMLDivElement>\(null\);\n', '', content)
+content = re.sub(r'  const handleReset = \(\) => \{\n[\s\S]*?  \};\n\n', '', content)
+content = re.sub(r'  const handleExamSelect = \(e: "school" \| "jee" \| "neet"\) => \{\n[\s\S]*?  \};\n\n', '', content)
+content = re.sub(r'  const handleClassSelect = \(c: string\) => \{\n[\s\S]*?  \};\n\n', '', content)
+
+with open('src/pages/Build.tsx', 'w') as f:
+    f.write(content)

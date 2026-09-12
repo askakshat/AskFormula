@@ -1,106 +1,9 @@
-import { useState, useMemo, useRef, useEffect } from "react";
-import { useSearchParams } from "react-router";
-import { motion, AnimatePresence } from "framer-motion";
-import PDFButton from "@/components/askformula/PDFButton";
-import { getChaptersBySubject, filterFormulas } from "@/lib/formulas";
-import { useLocalStorage } from "@/lib/local-storage";
+import re
 
-export default function Build() {
-  const [exam, setExam] = useState<"school" | "jee" | "neet" | null>(null);
-  const [selectedClass, setSelectedClass] = useState<string | null>(null);
-  const [subject, setSubject] = useState<string | null>(null);
-  const [searchParams, setSearchParams] = useSearchParams();
+with open('src/pages/Build.tsx', 'r') as f:
+    content = f.read()
 
-  // Template pre-fill logic
-  useEffect(() => {
-    const template = searchParams.get("template");
-    if (template) {
-      if (template === "jee-physics") {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setExam("jee");
-        setSelectedClass("12");
-        setSubject("Physics");
-      } else if (template === "neet-bio") {
-
-        setExam("neet");
-        setSelectedClass("11");
-        setSubject("Biology");
-      } else if (template === "cbse-math") {
-
-        setExam("school");
-        setSelectedClass("12");
-        setSubject("Mathematics");
-      }
-
-      // Clear param so it doesn't persist awkwardly
-      searchParams.delete("template");
-      setSearchParams(searchParams, { replace: true });
-    }
-  }, [searchParams, setSearchParams, setExam, setSelectedClass, setSubject]);
-
-  const [selectedChapters, setSelectedChapters] = useLocalStorage<string[]>(
-    "askformula-selected-chapters",
-    [],
-  );
-
-
-  const chapterRef = useRef<HTMLDivElement>(null);
-
-  const chapters = useMemo(() => {
-    if (!subject || !selectedClass) return [];
-    return getChaptersBySubject(
-      exam === "jee" ? "JEE " + subject : subject,
-    ).filter((ch) => ch.class === selectedClass);
-  }, [subject, selectedClass, exam]);
-
-  const formulas = useMemo(() => {
-    if (!subject || selectedChapters.length === 0) return [];
-    return filterFormulas(
-      exam === "jee" ? "JEE " + subject : subject,
-      selectedChapters,
-    );
-  }, [subject, selectedChapters, exam]);
-
-
-  const selectAllChapters = () => {
-    setSelectedChapters(chapters.map(c => c.name));
-  };
-
-  const clearSelection = () => {
-    setSelectedChapters([]);
-  };
-
-  const toggleChapter = (chapterName: string) => {
-    setSelectedChapters(prev =>
-      prev.includes(chapterName)
-        ? prev.filter(c => c !== chapterName)
-        : [...prev, chapterName]
-    );
-  };
-
-  const handleSubjectSelect = (s: string) => {
-    setSubject(s);
-    setSelectedChapters([]);
-    setTimeout(() => {
-      chapterRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }, 150);
-  };
-
-  const handleClassSelect = (cls: string) => {
-    setSelectedClass(cls);
-    setSubject(null);
-    setSelectedChapters([]);
-    setTimeout(() => {
-      document
-        .getElementById("app-section")
-        ?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 50);
-  };
-
-  return (
+new_layout = """  return (
     <div className="bg-[#0b0e13] text-[#ded9d2] font-sans antialiased min-h-screen flex flex-col selection:bg-rose-500/30 selection:text-white relative overflow-x-hidden">
       {/* Photographic Dusk Landscape Atmosphere Background */}
       <div aria-hidden="true" className="fixed inset-0 pointer-events-none z-0">
@@ -168,7 +71,7 @@ export default function Build() {
               ].map(track => (
                 <div
                   key={track.id}
-                  onClick={() => { setExam(track.id as "school" | "jee" | "neet"); setSelectedClass(null); setSubject(null); setSelectedChapters([]); }}
+                  onClick={() => { setExam(track.id as any); setSelectedClass(null); setSubject(null); setSelectedChapters([]); }}
                   className={`relative p-7 rounded-2xl cursor-pointer transition-all duration-200 flex flex-col justify-between min-h-[170px] backdrop-blur-sm ${
                     exam === track.id
                     ? 'bg-[#1d232c]/90 border border-[#e39f82]/50 shadow-[0_0_32px_-4px_rgba(227,159,130,0.22)] ring-1 ring-[#e39f82]/35'
@@ -176,7 +79,7 @@ export default function Build() {
                   }`}
                 >
                   <div>
-                    <div className={`flex items-center justify-between gap-3 mb-3 ${exam !== track.id ? 'group-hover:text-white' : ''}`}>
+                    <div className={`flex items-center justify-between gap-3 mb-3 ${exam !== track.id && 'group-hover:text-white'}`}>
                       <div className={`text-[15px] ${exam === track.id ? 'font-semibold text-white' : 'font-medium text-white/95'}`}>{track.label}</div>
                       {exam === track.id && <span className="w-2.5 h-2.5 rounded-full bg-[#e39f82] shadow-[0_0_10px_rgba(227,159,130,0.7)]"></span>}
                     </div>
@@ -327,9 +230,11 @@ export default function Build() {
                 </div>
 
                 <PDFButton
+                  disabled={selectedChapters.length === 0}
                   formulas={formulas}
-                  chapters={chapters.filter(c => selectedChapters.includes(c.name))}
+                  chapters={selectedChapters}
                   subject={subject || ""}
+                  exam={exam || ""}
                 />
               </div>
             </motion.div>
@@ -340,3 +245,9 @@ export default function Build() {
     </div>
   );
 }
+"""
+
+content = content[:content.find('  return (')] + new_layout
+
+with open('src/pages/Build.tsx', 'w') as f:
+    f.write(content)
