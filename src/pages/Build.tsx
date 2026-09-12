@@ -101,26 +101,21 @@ export default function Build() {
       </div>
 
       {/* Minimalist Editorial Header */}
-      <header className="relative z-30 border-b border-white/[0.07] backdrop-blur-2xl bg-[#0e1217]/70 sticky top-0 transition-all">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 h-20 flex items-center justify-between">
+      {/* Floating Liquid Glass Toolbar */}
+      <div className="fixed top-4 inset-x-0 z-50 flex justify-center w-full max-w-4xl mx-auto px-4 sm:px-0">
+        <nav className="px-6 lg:px-8 py-3 flex items-center justify-between gap-8 md:gap-16 bg-[#0b0c0f]/70 backdrop-blur-[32px] rounded-[30px] border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_20px_40px_rgba(0,0,0,0.4)] w-full">
           <div className="flex items-center gap-3 cursor-pointer group" onClick={() => (window.location.href = "/")}>
-            <div className="w-8 h-8 rounded-xl bg-white/10 text-white flex items-center justify-center font-serif font-semibold text-base tracking-tight shadow-md transition-transform group-hover:scale-105">
-              F
-            </div>
-            <span className="font-medium text-[17px] tracking-tight text-white flex items-baseline">
-              AskFormula<span className="text-[#e39f82] font-serif ml-0.5 font-normal text-lg">.</span>
-            </span>
+            <img src="/assets/logo-new.png" alt="AskFormula" className="h-7 object-contain transition-transform group-hover:scale-105" />
+            <span className="font-semibold text-lg tracking-tight text-white/90">AskFormula</span>
           </div>
 
-          <nav className="hidden md:flex items-center gap-9 text-[14px] font-normal text-white/60">
-            <a className="hover:text-white transition-colors duration-150" href="/">Home</a>
-            <a className="text-white font-medium relative py-1.5" href="/build">
-              Sheet Builder
-              <span className="absolute bottom-0 inset-x-0 h-[2px] bg-[#e39f82] rounded-full"></span>
-            </a>
+          <nav className="hidden md:flex items-center space-x-6 text-sm font-medium text-zinc-300">
+            <a href="/" className="hover:text-white transition-colors">Home</a>
+            <a href="/quiz" className="flex items-center gap-1.5 hover:text-white transition-colors">Quiz</a>
+            <a href="/build" className="text-white font-medium">Builder</a>
           </nav>
-        </div>
-      </header>
+        </nav>
+      </div>
 
       {/* Main Content (Expansive & Airy Layout) */}
       <main className="relative z-10 flex-1 max-w-7xl mx-auto w-full px-6 sm:px-10 lg:px-12 pt-16 sm:pt-24 pb-56">
@@ -209,13 +204,16 @@ export default function Build() {
                         <button
                           key={cls}
                           onClick={() => { setSelectedClass(cls); setSelectedChapters([]); }}
-                          className={`flex-1 py-4 rounded-xl text-sm font-medium transition-all ${
+                          className={`flex-1 py-4 rounded-xl text-sm font-medium transition-all duration-300 relative overflow-hidden ${
                             selectedClass === cls
-                            ? 'bg-white/10 text-white border border-white/20'
+                            ? 'bg-[#1d232c]/90 text-white border border-sky-400/50 shadow-[0_0_20px_rgba(56,189,248,0.15)] ring-1 ring-sky-400/30'
                             : 'bg-white/[0.03] text-white/60 border border-white/[0.05] hover:bg-white/[0.06] hover:text-white'
                           }`}
                         >
-                          Class {cls}
+                          <div className="flex items-center justify-center gap-2">
+                              {selectedClass === cls && <span className="w-2 h-2 rounded-full bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.8)]"></span>}
+                              <span>Class {cls}</span>
+                            </div>
                         </button>
                       ))}
                     </div>
@@ -228,13 +226,16 @@ export default function Build() {
                         <button
                           key={sub}
                           onClick={() => handleSubjectSelect(sub)}
-                          className={`px-6 py-4 rounded-xl text-sm font-medium transition-all ${
+                          className={`px-6 py-4 rounded-xl text-sm font-medium transition-all duration-300 relative overflow-hidden ${
                             subject === sub
-                            ? 'bg-white/10 text-white border border-white/20'
+                            ? 'bg-[#1d232c]/90 text-white border border-sky-400/50 shadow-[0_0_20px_rgba(56,189,248,0.15)] ring-1 ring-sky-400/30'
                             : 'bg-white/[0.03] text-white/60 border border-white/[0.05] hover:bg-white/[0.06] hover:text-white'
                           }`}
                         >
-                          {sub}
+                          <div className="flex items-center justify-center gap-2">
+                              {subject === sub && <span className="w-2 h-2 rounded-full bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.8)]"></span>}
+                              <span>{sub}</span>
+                            </div>
                         </button>
                       ))}
                     </div>
@@ -275,15 +276,15 @@ export default function Build() {
                         <div
                           key={chap.name}
                           onClick={() => toggleChapter(chap.id)}
-                          className={`relative p-5 rounded-xl cursor-pointer transition-all duration-200 border ${
+                          className={`relative p-5 rounded-xl cursor-pointer transition-all duration-300 border ${
                             isSelected
-                            ? 'bg-white/10 border-white/20 shadow-md'
+                            ? 'bg-[#1d232c]/90 border-sky-400/50 shadow-[0_0_20px_rgba(56,189,248,0.15)] ring-1 ring-sky-400/30'
                             : 'bg-white/[0.02] border-white/[0.05] hover:bg-white/[0.06] hover:border-white/10'
                           }`}
                         >
                           <div className="flex justify-between items-start mb-2">
                             <h4 className={`text-sm font-medium pr-6 ${isSelected ? 'text-white' : 'text-white/80'}`}>{chap.name}</h4>
-                            <div className={`w-5 h-5 rounded-md border flex items-center justify-center shrink-0 ${isSelected ? 'bg-[#e39f82] border-[#e39f82] text-black' : 'border-white/20'}`}>
+                            <div className={`w-5 h-5 rounded-md border flex items-center justify-center shrink-0 transition-colors ${isSelected ? 'bg-sky-400 border-sky-400 text-sky-950 shadow-[0_0_10px_rgba(56,189,248,0.4)]' : 'border-white/20 hover:border-white/40'}`}>
                               {isSelected && <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg>}
                             </div>
                           </div>

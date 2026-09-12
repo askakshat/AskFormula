@@ -1,370 +1,131 @@
-import React from "react";
-import { useLocation, useNavigate } from "react-router";
-import {
-  Home,
-  RotateCcw,
-  Target,
-  XCircle,
-  CheckCircle,
-  Lightbulb,
-  TrendingDown,
-  BookOpen,
-} from "lucide-react";
-import katex from "katex";
-import "katex/dist/katex.min.css";
-import { useLocalStorage } from "@/lib/local-storage";
+
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 
 export default function QuizResults() {
-  const location = useLocation();
   const navigate = useNavigate();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [, setSelectedChapters] = useLocalStorage<string[]>(
-    "askformula-selected-chapters",
-    [],
-  );
+  const [score, setScore] = useState(0);
+  const [totalQuestions, setTotalQuestions] = useState(0);
+  const [sessionName, setSessionName] = useState("");
 
-  const state = location.state as {
-    score: number;
-    total: number;
-    questions: import("@/hooks/useQuizEngine").QuizQuestion[];
-    userAnswers: Record<string, string>;
-    timeElapsed?: number;
-  };
+  useEffect(() => {
+    const s = parseInt(sessionStorage.getItem("quiz-score") || "0", 10);
+    const t = parseInt(sessionStorage.getItem("quiz-total") || "0", 10);
+    const sub = sessionStorage.getItem("quiz-subject") || "Mixed Drill";
+    setScore(s);
+    setTotalQuestions(t);
+    setSessionName(sub);
+  }, []);
 
-  if (!state) {
-    return (
-      <div className="min-h-screen bg-[#11131a] flex flex-col items-center justify-center text-[#e3e2e6] gap-4">
-        <p>No results found.</p>
-        <button
-          onClick={() => navigate("/quiz")}
-          className="bg-[#324565] px-4 py-2 rounded"
-        >
-          Go to Dashboard
-        </button>
-      </div>
-    );
+  const accuracy = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
+
+  let message = "Your retention accuracy is tranquil and resolute.";
+  if (accuracy < 60) {
+    message = "Your fundamentals need strengthening. Focus on the core principles.";
+  } else if (accuracy < 80) {
+    message = "Solid grasp of concepts. Refine your understanding of the nuances.";
   }
 
-  const { score, total, questions, userAnswers, timeElapsed = 0 } = state;
-  const percentage = Math.round((score / total) * 100);
-
-  const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60);
-    const s = seconds % 60;
-    return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
+  const handleRetake = () => {
+    navigate("/quiz");
   };
 
-  const avgTimePerQuestion = total > 0 ? Math.round(timeElapsed / total) : 0;
-
-  // Analysis for weak chapters
-  const weakChaptersMap = new Map<string, number>();
-  questions.forEach((q) => {
-    const isCorrect = userAnswers[q.id] === q.correctOptionId;
-    if (!isCorrect && q.category) {
-      weakChaptersMap.set(
-        q.category,
-        (weakChaptersMap.get(q.category) || 0) + 1,
-      );
-    }
-  });
-
-  const weakChaptersList = Array.from(weakChaptersMap.entries())
-    .sort((a, b) => b[1] - a[1])
-    .map(([name]) => name)
-    .slice(0, 3); // Top 3 weak chapters
-
-  const handleBuildReviewSheet = () => {
-    // Since the engine doesn't export chapter IDs easily in QuizQuestion yet,
-    // for this MVP integration we just redirect to the build tool.
-    // Ideally we would map category strings back to chapter IDs.
+  const handleCreateSheet = () => {
     navigate("/build");
   };
 
-  const renderMath = (tex: string) => {
-    try {
-      return katex.renderToString(tex, {
-        throwOnError: false,
-        displayMode: true,
-      });
-    } catch {
-      return tex;
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-slate-200 font-sans pb-24 selection:bg-[#324565] selection:text-[#d8e2ff]">
-      <header className="w-full border-b border-[#272a31] bg-[#0a0a0a]/80 backdrop-blur-md sticky top-0 z-40">
-        <div className="max-w-[1200px] mx-auto h-16 px-6 md:px-8 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <h1
-              className="text-xl font-bold text-[#d8e2ff] tracking-tight cursor-pointer"
-              onClick={() => navigate("/")}
-            >
-              AskFormula
-            </h1>
-            <span className="hidden md:inline-flex bg-[#324565]/30 text-[#d8e2ff] text-xs px-2 py-0.5 rounded border border-[#324565]/50">
-              Practice Results
-            </span>
-          </div>
-          <button
-            onClick={() => navigate("/")}
-            className="text-sm text-slate-400 hover:text-white transition-colors flex items-center gap-2"
-          >
-            <Home className="w-4 h-4" />
-            <span className="hidden sm:inline">Home</span>
-          </button>
+    <div className="min-h-screen flex flex-col relative bg-[#537594]">
+      {/* Backgrounds */}
+      <div aria-hidden="true" className="zen-gradient-bg"></div>
+      <div aria-hidden="true" className="zen-overlay-fog"></div>
+
+      {/* Top Navigation */}
+      <header className="w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-between" data-purpose="global-header">
+        <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => navigate("/")}>
+          <img src="/assets/logo-new.png" alt="AskFormula" className="h-6 sm:h-7 opacity-80 mix-blend-overlay hover:opacity-100 hover:mix-blend-normal transition-all" />
         </div>
       </header>
 
-      <main className="w-full max-w-[1200px] mx-auto p-4 md:p-8 mt-4 flex flex-col md:flex-row gap-8 items-start">
-        <div className="w-full md:w-1/3 shrink-0 flex flex-col gap-6 md:sticky md:top-24">
-          <div className="bg-[#11131a] rounded-xl border border-[#272a31] p-6 flex flex-col items-center justify-center shadow-xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-4 opacity-10">
-              <Target className="w-24 h-24 text-[#61dcb0]" />
+      {/* Main Content */}
+      <main className="w-full max-w-4xl mx-auto px-4 py-4 md:py-8 flex-grow flex items-center justify-center">
+        <div className="w-full rounded-[28px] p-7 md:p-10 relative overflow-hidden transition-all bg-[rgba(12,18,30,0.85)] backdrop-blur-xl border border-white/10 shadow-[0_30px_80px_rgba(0,0,0,0.48),0_10px_30px_rgba(10,16,26,0.35)]">
+
+          {/* Top Meta Bar */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-6 border-b border-white/5">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-xs font-medium">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>Zen Drill Complete · Mindful Retention</span>
             </div>
-            <span className="text-slate-400 text-sm font-medium mb-2 relative z-10">
-              Overall Score
-            </span>
-            <div className="text-6xl font-bold text-[#d8e2ff] relative z-10 mb-1">
-              {percentage}%
+            <div className="text-xs text-slate-400 font-light flex items-center gap-2">
+              <span>Session: {sessionName}</span>
+              <span className="text-slate-600">•</span>
+              <span>{totalQuestions} Questions Analyzed</span>
             </div>
-            <p className="text-[#61dcb0] text-sm relative z-10">
-              {score} out of {total} correct
+          </div>
+
+          {/* Headline Section */}
+          <div className="mt-7 mb-8">
+            <h1 className="font-serif text-3xl md:text-4xl text-white tracking-wide font-normal">Recall clarity achieved.</h1>
+            <p className="mt-2 text-sm text-slate-400 max-w-2xl font-light leading-relaxed">
+              {message} Review the conceptual focus points below, or reinforce boundary cases with tailored formula sheets.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-[#15171e] rounded-xl p-4 border border-[#272a31] flex flex-col">
-              <div className="flex items-center gap-2 text-slate-400 mb-3">
-                <RotateCcw className="w-4 h-4" />
-                <span className="text-xs font-medium">Time Taken</span>
+          {/* Metrics Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            {/* Accuracy */}
+            <div className="bg-white/[0.03] border border-white/5 hover:border-white/10 hover:bg-white/[0.05] transition-all rounded-2xl p-4 flex flex-col justify-between">
+              <div className="flex items-center justify-between">
+                <span className="text-xs uppercase tracking-wider text-slate-400 font-medium">Retention Score</span>
+                <span className="text-xs px-2 py-0.5 rounded-full bg-sky-950/70 border border-sky-500/30 text-sky-300">{accuracy}% Accuracy</span>
               </div>
-              <span className="text-xl font-semibold text-white">
-                {formatTime(timeElapsed)}
-              </span>
-              <span className="text-xs text-slate-400 mt-1">
-                Avg {avgTimePerQuestion}s/q
-              </span>
+              <div className="mt-4 flex items-baseline gap-2">
+                <span className="text-3xl font-light text-white">{score}</span>
+                <span className="text-slate-400 text-sm">/ {totalQuestions} correct</span>
+              </div>
             </div>
-            <div className="bg-[#15171e] rounded-xl p-4 border border-[#272a31] flex flex-col">
-              <div className="flex items-center gap-2 text-slate-400 mb-3">
-                <Target className="w-4 h-4" />
-                <span className="text-xs font-medium">Accuracy</span>
+
+            {/* Time / Pace Placeholder */}
+            <div className="bg-white/[0.03] border border-white/5 hover:border-white/10 hover:bg-white/[0.05] transition-all rounded-2xl p-4 flex flex-col justify-between">
+              <div className="flex items-center justify-between">
+                <span className="text-xs uppercase tracking-wider text-slate-400 font-medium">Session Pace</span>
               </div>
-              <span className="text-xl font-semibold text-white">
-                {score}/{total}
-              </span>
-              <span className="text-xs text-slate-400 mt-1">Questions</span>
+              <div className="mt-4 flex items-baseline gap-2">
+                <span className="text-3xl font-light text-white">Focus</span>
+                <span className="text-slate-400 text-sm">mode completed</span>
+              </div>
+            </div>
+
+            {/* Streak / Motivation Placeholder */}
+            <div className="bg-white/[0.03] border border-white/5 hover:border-white/10 hover:bg-white/[0.05] transition-all rounded-2xl p-4 flex flex-col justify-between">
+              <div className="flex items-center justify-between">
+                <span className="text-xs uppercase tracking-wider text-slate-400 font-medium">Current Status</span>
+              </div>
+              <div className="mt-4 flex items-baseline gap-2">
+                <span className="text-3xl font-light text-emerald-300">Clear</span>
+                <span className="text-slate-400 text-sm">understanding</span>
+              </div>
             </div>
           </div>
 
-          <div className="bg-[#15171e] rounded-xl p-4 border border-[#272a31] flex flex-col gap-4">
-            <div className="flex items-center justify-between">
-              <h3 className="text-xs text-slate-400 uppercase tracking-wider font-medium flex items-center gap-2">
-                <TrendingDown className="w-4 h-4 text-amber-500" />
-                Areas to Review
-              </h3>
-            </div>
-
-            {weakChaptersList.length > 0 ? (
-              <div className="flex flex-col gap-2">
-                {weakChaptersList.map((ch, idx) => (
-                  <div
-                    key={idx}
-                    className="text-sm text-slate-300 bg-[#1c1e26] p-2 rounded border border-[#272a31]"
-                  >
-                    {ch}
-                  </div>
-                ))}
-                <button
-                  onClick={handleBuildReviewSheet}
-                  className="mt-2 w-full bg-[#324565]/30 border border-[#324565] text-[#d8e2ff] text-sm py-2 rounded flex items-center justify-center gap-2 hover:bg-[#324565]/50 transition-colors"
-                >
-                  <BookOpen className="w-4 h-4" /> Build Custom Formula Sheet
-                </button>
-              </div>
-            ) : (
-              <div className="text-sm text-slate-400 bg-[#1c1e26] p-3 rounded text-center">
-                Excellent work! No major weak areas detected in this session.
-              </div>
-            )}
-          </div>
-
-          <div className="flex flex-col gap-3 mt-auto pt-4">
+          {/* Action Row */}
+          <div className="pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
             <button
-              onClick={() => navigate("/quiz")}
-              className="w-full bg-[#d8e2ff] text-[#003122] font-semibold py-3 px-6 rounded-lg hover:bg-[#b5caff] transition-colors flex items-center justify-center gap-2 text-sm"
+              onClick={handleRetake}
+              className="w-full sm:w-auto px-5 py-2.5 rounded-full border border-white/10 text-slate-300 hover:text-white hover:bg-white/5 text-sm font-medium transition-all"
             >
-              <RotateCcw className="w-4 h-4" />
-              Practice Again
+              Start New Drill
             </button>
             <button
-              onClick={() => navigate("/")}
-              className="w-full bg-[#1c1e26] border border-[#272a31] text-[#e3e2e6] font-semibold py-3 px-6 rounded-lg hover:bg-[#272a31] transition-colors flex items-center justify-center gap-2 text-sm"
+              onClick={handleCreateSheet}
+              className="w-full sm:w-auto px-5 py-2.5 rounded-full bg-sky-500 hover:bg-sky-400 text-sky-950 text-sm font-semibold shadow-[0_0_15px_rgba(14,165,233,0.3)] transition-all flex items-center justify-center gap-2"
             >
-              <Home className="w-4 h-4" />
-              Back to Home
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+              <span>Build Review Sheet</span>
             </button>
           </div>
-        </div>
 
-        <div className="w-full md:w-2/3 flex flex-col gap-4">
-          <div className="flex items-center justify-between border-b border-[#272a31] pb-3 mb-3">
-            <h2 className="text-xl font-semibold text-[#d8e2ff]">
-              Review Answers
-            </h2>
-            <div className="flex gap-4 text-sm font-medium">
-              <span className="flex items-center gap-2 text-[#61dcb0]">
-                <span className="w-2 h-2 rounded-full bg-[#61dcb0]"></span>{" "}
-                {score} Correct
-              </span>
-              <span className="flex items-center gap-2 text-[#ef4444]">
-                <span className="w-2 h-2 rounded-full bg-[#ef4444]"></span>{" "}
-                {total - score} Incorrect
-              </span>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-4 md:max-h-[calc(100vh-200px)] md:overflow-y-auto pr-2">
-            {questions.map((q, index) => {
-              const userAnswerId = userAnswers[q.id];
-              const isCorrect = userAnswerId === q.correctOptionId;
-              const correctOption = q.options.find(
-                (o: import("@/hooks/useQuizEngine").QuizOption) =>
-                  o.id === q.correctOptionId,
-              );
-              const userOption = q.options.find(
-                (o: import("@/hooks/useQuizEngine").QuizOption) =>
-                  o.id === userAnswerId,
-              );
-
-              if (!isCorrect) {
-                return (
-                  <div
-                    key={q.id}
-                    className="bg-[#15171e] rounded-xl p-5 border border-[#ef4444]/50 flex flex-col gap-3 relative overflow-hidden"
-                  >
-                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#ef4444]"></div>
-
-                    <div className="flex items-start justify-between">
-                      <div className="flex gap-3">
-                        <span className="bg-[#1c1e26] text-slate-400 font-mono text-xs px-2 py-1 rounded h-fit">
-                          Q{index + 1}
-                        </span>
-                        <p className="text-sm md:text-base text-white">
-                          {q.text}
-                        </p>
-                      </div>
-                      <XCircle className="w-5 h-5 text-[#ef4444] shrink-0" />
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
-                      <div className="flex flex-col gap-2">
-                        <span className="text-xs text-slate-400 font-medium">
-                          Your Answer
-                        </span>
-                        <div className="bg-[#11131a] border border-[#ef4444] rounded-lg p-3">
-                          {userOption ? (
-                            userOption.latex ? (
-                              <div
-                                className="text-center text-[#ef4444] [&_.katex-display]:m-0"
-                                dangerouslySetInnerHTML={{
-                                  __html: renderMath(userOption.latex),
-                                }}
-                              />
-                            ) : (
-                              <div className="text-center text-[#ef4444]">
-                                {userOption.text}
-                              </div>
-                            )
-                          ) : (
-                            <div className="text-center text-slate-500 italic">
-                              Not answered
-                            </div>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col gap-2">
-                        <span className="text-xs text-slate-400 font-medium">
-                          Correct Answer
-                        </span>
-                        <div className="bg-[#1c1e26] border border-[#272a31] rounded-lg p-3">
-                          {correctOption?.latex ? (
-                            <div
-                              className="text-center text-[#d8e2ff] [&_.katex-display]:m-0"
-                              dangerouslySetInnerHTML={{
-                                __html: renderMath(correctOption.latex),
-                              }}
-                            />
-                          ) : (
-                            <div className="text-center text-[#d8e2ff]">
-                              {correctOption?.text}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="bg-[#11131a] p-3 rounded-lg mt-2 border border-[#272a31]/50 flex items-start gap-3">
-                      <Lightbulb className="w-4 h-4 text-[#d8e2ff] mt-0.5 shrink-0" />
-                      <div
-                        className="text-sm text-slate-400"
-                        dangerouslySetInnerHTML={{
-                          __html: q.explanation.replace(
-                            /\$(.*?)\$/g,
-                            (m: string, tex: string) => {
-                              try {
-                                return katex.renderToString(tex, {
-                                  throwOnError: false,
-                                });
-                              } catch {
-                                return m;
-                              }
-                            },
-                          ),
-                        }}
-                      />
-                    </div>
-                  </div>
-                );
-              }
-
-              return (
-                <div
-                  key={q.id}
-                  className="bg-[#15171e] rounded-xl p-5 border border-[#61dcb0]/30 flex flex-col gap-3 relative overflow-hidden transition-colors hover:bg-[#1c1e26] cursor-pointer group"
-                >
-                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#61dcb0] opacity-50 group-hover:opacity-100 transition-opacity"></div>
-                  <div className="flex items-start justify-between">
-                    <div className="flex gap-3">
-                      <span className="bg-[#1c1e26] text-slate-400 font-mono text-xs px-2 py-1 rounded h-fit">
-                        Q{index + 1}
-                      </span>
-                      <p className="text-sm md:text-base text-white">
-                        {q.text}
-                      </p>
-                    </div>
-                    <CheckCircle className="w-5 h-5 text-[#61dcb0] shrink-0" />
-                  </div>
-                  <div className="bg-[#11131a] border border-[#61dcb0]/20 rounded-lg p-3 mt-1">
-                    {correctOption?.latex ? (
-                      <div
-                        className="text-center text-white [&_.katex-display]:m-0"
-                        dangerouslySetInnerHTML={{
-                          __html: renderMath(correctOption.latex),
-                        }}
-                      />
-                    ) : (
-                      <div className="text-center text-white">
-                        {correctOption?.text}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
         </div>
       </main>
     </div>
