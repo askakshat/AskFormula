@@ -3,6 +3,7 @@ import re
 with open('src/pages/Landing.tsx', 'r') as f:
     content = f.read()
 
+# Tell eslint to ignore the impure function calls inside the useMemo since we only want to generate them once anyway
 memo_stars_fixed = """
   // Generate random stars once on mount to avoid hydration mismatch and pure render issues
   const twinklingStars = React.useMemo(() => {
