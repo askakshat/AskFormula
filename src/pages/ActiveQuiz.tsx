@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useQuizEngine, QuizQuestion } from "@/hooks/useQuizEngine";
 import katex from "katex";
@@ -13,9 +13,13 @@ export default function ActiveQuiz() {
   useEffect(() => {
     try {
       const chaps = JSON.parse(sessionStorage.getItem("quiz-chapters") || "[]");
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedChapters(chaps);
+
       setCount(parseInt(sessionStorage.getItem("quiz-count") || "5", 10));
-    } catch {}
+    } catch (e) {
+      console.error(e);
+    }
   }, []);
 
   const { generateQuiz } = useQuizEngine(selectedChapters);
@@ -52,7 +56,6 @@ export default function ActiveQuiz() {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setSelectedOptionId(userAnswers[currentQuestionIndex] || null);
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setShowExplanation(!!userAnswers[currentQuestionIndex]);
   }, [currentQuestionIndex, userAnswers]);
 

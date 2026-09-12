@@ -12,8 +12,11 @@ export default function QuizResults() {
     const s = parseInt(sessionStorage.getItem("quiz-score") || "0", 10);
     const t = parseInt(sessionStorage.getItem("quiz-total") || "0", 10);
     const sub = sessionStorage.getItem("quiz-subject") || "Mixed Drill";
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setScore(s);
+
     setTotalQuestions(t);
+
     setSessionName(sub);
   }, []);
 

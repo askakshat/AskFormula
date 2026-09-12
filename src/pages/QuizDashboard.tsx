@@ -2,13 +2,10 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router";
 import { getChaptersBySubject } from "@/lib/formulas";
-import { useQuizEngine } from "@/hooks/useQuizEngine";
 
 export default function QuizDashboard() {
   const navigate = useNavigate();
-  const { generateQuiz } = useQuizEngine();
-
-  const [selectedClass, setSelectedClass] = useState<"11" | "12" | null>(null);
+    const [selectedClass, setSelectedClass] = useState<"11" | "12" | null>(null);
   const [subject, setSubject] = useState<string | null>(null);
   const [selectedChapters, setSelectedChapters] = useState<string[]>([]);
   const [numQuestions, setNumQuestions] = useState<number>(5);
