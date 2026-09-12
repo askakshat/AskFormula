@@ -166,7 +166,7 @@ export default function PrintView() {
       {/* Print Controls (Hidden on print) */}
       <div className="print:hidden sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm p-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Button variant="outline" onClick={handleBack} className="gap-2">
+          <Button onClick={handleBack} className="gap-2 bg-white text-slate-900 border border-slate-200 hover:bg-slate-100 shadow-sm">
             <ArrowLeft className="w-4 h-4" /> Close
           </Button>
           <h1 className="font-semibold text-lg text-slate-800">
