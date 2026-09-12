@@ -10,6 +10,7 @@ import React from 'react';
 export default function Landing() {
 
 
+
   // Generate random stars once on mount to avoid hydration mismatch and pure render issues
   const twinklingStars = React.useMemo(() => {
     return [...Array(40)].map((_, i) => ({
@@ -35,7 +36,21 @@ export default function Landing() {
 
       top: `${Math.random() * 50 - 10}%`,
 
-      left: `${Math.random() * 80}%`,
+      left: `${Math.random() * 80 + 20}%`,
+
+      duration: `${Math.random() * 6 + 4}s`,
+
+      delay: `${Math.random() * 10}s`
+    }));
+  }, []);
+
+  const shootingStars = React.useMemo(() => {
+    return [...Array(6)].map((_, i) => ({
+      id: i,
+
+      top: `${Math.random() * 50 - 10}%`,
+
+      left: `${Math.random() * 80 + 20}%`,
 
       duration: `${Math.random() * 6 + 4}s`,
 
@@ -207,8 +222,10 @@ export default function Landing() {
       </section>
 
       {/* Feature Narrative Section */}
-      <section className="py-24 px-6 sm:px-10 lg:px-16 bg-[#0e1014] border-t border-white/5 relative z-20" id="features">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-24 px-6 sm:px-10 lg:px-16 bg-[#0b0d11] border-t border-white/5 relative z-20 overflow-hidden" id="features">
+        <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[120px] pointer-events-none z-0"></div>
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-500/5 rounded-full blur-[100px] pointer-events-none z-0"></div>
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="mb-20">
             <span className="text-xs uppercase tracking-widest text-zinc-400 font-semibold font-mono block mb-2">A better way to revise</span>
             <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-4">One calm place for<br/>everything that matters.</h2>
@@ -218,7 +235,7 @@ export default function Landing() {
             {/* Feature 1 */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-                <span className="text-5xl font-mono font-bold text-white/5 block mb-6">01</span>
+                <span className="text-5xl font-mono font-bold text-white/40 block mb-6">01</span>
                 <h3 className="text-3xl font-semibold text-white mb-4">Find the formula<br/>you're looking for.</h3>
                 <p className="text-lg text-zinc-400 leading-relaxed mb-8">
                   Search across your entire syllabus in seconds. Filter by subject, class, chapter, or exam — and get straight to the useful part.
@@ -253,6 +270,42 @@ export default function Landing() {
                  </div>
               </motion.div>
             </div>
+            {/* Feature 4: Quizzes */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }} className="bg-[#14161a] border border-white/5 rounded-2xl p-8 relative overflow-hidden h-[400px] flex items-center justify-center order-2 lg:order-1">
+                 <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/5 to-blue-500/5" />
+                 {/* Quiz UI Mockup */}
+                 <div className="w-full max-w-sm bg-[#1a1d24] border border-white/10 rounded-xl shadow-2xl overflow-hidden z-10 p-6">
+                   <div className="flex justify-between items-center mb-6">
+                     <span className="px-2 py-1 rounded bg-white/5 text-[10px] font-mono text-zinc-400 border border-white/10">Question 3 of 10</span>
+                     <span className="text-[10px] font-medium text-emerald-400">Streak: 4 🔥</span>
+                   </div>
+                   <p className="text-sm text-white leading-relaxed mb-6 font-medium">Which principle explains why an airplane wing produces lift?</p>
+                   <div className="space-y-2">
+                     <div className="p-3 bg-white/5 hover:bg-white/10 border border-white/5 rounded-lg text-sm text-zinc-300 transition-colors cursor-pointer flex items-center gap-3">
+                       <div className="w-4 h-4 rounded-full border border-white/20"></div> Archimedes' principle
+                     </div>
+                     <div className="p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-sm text-emerald-400 transition-colors flex items-center gap-3">
+                       <div className="w-4 h-4 rounded-full bg-emerald-500 flex items-center justify-center text-[10px] text-white">✓</div> Bernoulli's principle
+                     </div>
+                     <div className="p-3 bg-white/5 hover:bg-white/10 border border-white/5 rounded-lg text-sm text-zinc-300 transition-colors cursor-pointer flex items-center gap-3">
+                       <div className="w-4 h-4 rounded-full border border-white/20"></div> Pascal's law
+                     </div>
+                   </div>
+                 </div>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="order-1 lg:order-2 lg:pl-12">
+                <span className="text-5xl font-mono font-bold text-white/40 block mb-6">04</span>
+                <h3 className="text-3xl font-semibold text-white mb-4">Test your memory<br/>instantly.</h3>
+                <p className="text-lg text-zinc-400 leading-relaxed mb-8">
+                  Convert your saved formula sheets into interactive quizzes. Reinforce your learning and track your mastery over time without leaving the platform.
+                </p>
+                <a href="#" className="inline-flex items-center gap-2 text-sm font-medium text-white hover:text-zinc-300 transition-colors">
+                  Try a quick quiz &rarr;
+                </a>
+              </motion.div>
+            </div>
+
 
             {/* Feature 2 */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -273,7 +326,7 @@ export default function Landing() {
                  </div>
               </motion.div>
               <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="order-1 lg:order-2 lg:pl-12">
-                <span className="text-5xl font-mono font-bold text-white/5 block mb-6">02</span>
+                <span className="text-5xl font-mono font-bold text-white/40 block mb-6">02</span>
                 <h3 className="text-3xl font-semibold text-white mb-4">Understand it<br/>in context.</h3>
                 <p className="text-lg text-zinc-400 leading-relaxed mb-8">
                   A formula is more than a line of symbols. Learn what each variable means, when to use it, and how it connects to the bigger idea.
@@ -287,7 +340,7 @@ export default function Landing() {
             {/* Feature 3 */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-                <span className="text-5xl font-mono font-bold text-white/5 block mb-6">03</span>
+                <span className="text-5xl font-mono font-bold text-white/40 block mb-6">03</span>
                 <h3 className="text-3xl font-semibold text-white mb-4">Build a sheet<br/>that fits you.</h3>
                 <p className="text-lg text-zinc-400 leading-relaxed mb-8">
                   Pick the chapters you need, remove the noise, and create a clean revision document ready for your next study session.
@@ -359,8 +412,9 @@ export default function Landing() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-24 px-6 sm:px-10 lg:px-16 bg-[#0e1014] border-t border-white/5 relative z-20">
-        <div className="max-w-4xl mx-auto flex flex-col md:flex-row gap-16">
+      <section id="faq" className="py-24 px-6 sm:px-10 lg:px-16 bg-[#0b0d11] border-t border-white/5 relative z-20 overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-emerald-500/5 rounded-full blur-[100px] pointer-events-none z-0"></div>
+        <div className="max-w-4xl mx-auto flex flex-col md:flex-row gap-16 relative z-10">
           <div className="md:w-1/3 shrink-0">
              <span className="text-xs uppercase tracking-widest text-zinc-400 font-semibold font-mono block mb-2">FAQ</span>
              <h2 className="text-3xl font-bold text-white mb-4">Questions,<br/>answered.</h2>

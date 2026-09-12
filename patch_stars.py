@@ -3,7 +3,6 @@ import re
 with open('src/pages/Landing.tsx', 'r') as f:
     content = f.read()
 
-# Tell eslint to ignore the impure function calls inside the useMemo since we only want to generate them once anyway
 memo_stars_fixed = """
   // Generate random stars once on mount to avoid hydration mismatch and pure render issues
   const twinklingStars = React.useMemo(() => {
@@ -30,7 +29,7 @@ memo_stars_fixed = """
       // eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/rules-of-hooks, no-restricted-globals, react-hooks/purity
       top: `${Math.random() * 50 - 10}%`,
       // eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/rules-of-hooks, no-restricted-globals, react-hooks/purity
-      left: `${Math.random() * 80}%`,
+      left: `${Math.random() * 80 + 20}%`,
       // eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/rules-of-hooks, no-restricted-globals, react-hooks/purity
       duration: `${Math.random() * 6 + 4}s`,
       // eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/rules-of-hooks, no-restricted-globals, react-hooks/purity
