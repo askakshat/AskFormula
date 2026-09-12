@@ -44,20 +44,6 @@ export default function Landing() {
     }));
   }, []);
 
-  const shootingStars = React.useMemo(() => {
-    return [...Array(6)].map((_, i) => ({
-      id: i,
-
-      top: `${Math.random() * 50 - 10}%`,
-
-      left: `${Math.random() * 80 + 20}%`,
-
-      duration: `${Math.random() * 6 + 4}s`,
-
-      delay: `${Math.random() * 10}s`
-    }));
-  }, []);
-
 
   useEffect(() => {
     const handleScroll = () => {
