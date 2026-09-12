@@ -16,6 +16,7 @@ export function LiquidGlassSurface({ children, className = "" }: LiquidGlassSurf
   const [webGpuReady, setWebGpuReady] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setWebGpuReady(false); // Forced off temporarily due to webgpu canvas scaling crashes
   }, []);
 
