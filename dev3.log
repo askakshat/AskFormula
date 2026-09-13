@@ -7,3 +7,5 @@
 
   ➜  Local:   http://localhost:5173/
   ➜  Network: http://192.168.0.2:5173/
+7:05:38 AM [vite] (client) hmr update /src/pages/ActiveQuiz.tsx, /src/index.css
+7:07:38 AM [vite] (client) hmr update /src/pages/ActiveQuiz.tsx, /src/index.css
