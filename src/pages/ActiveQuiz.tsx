@@ -90,6 +90,7 @@ export default function ActiveQuiz() {
     try {
       return (
         <span
+          className="inline-block"
           dangerouslySetInnerHTML={{
             __html: katex.renderToString(latex, {
               displayMode: false,
@@ -122,7 +123,7 @@ export default function ActiveQuiz() {
   const alphabet = ["A", "B", "C", "D"];
 
   return (
-    <div className="min-h-screen flex flex-col relative bg-[#537594]">
+    <div className="min-h-screen flex flex-col relative">
       {/* Backgrounds */}
       <div aria-hidden="true" className="zen-gradient-bg"></div>
       <div aria-hidden="true" className="zen-overlay-fog"></div>

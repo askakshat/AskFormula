@@ -181,14 +181,14 @@
 
 /* Zen Gradient Theme for Quiz Pages */
 .zen-gradient-bg {
-  position: fixed;
-  inset: 0;
-  z-index: -10;
-  background-image: url("/assets/quiz-bg.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: -10 !important;
+  background-image: url('/assets/quiz-bg.png') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
 }
 
 .zen-overlay-fog {
@@ -228,4 +228,9 @@
   border-left: 2px solid #0b131c;
   border-bottom: 2px solid #0b131c;
   transform: rotate(-45deg) translate(0.5px, -1px);
+}
+
+/* Fix for KaTeX visibility inside Dark/Zen mode */
+.katex {
+  color: inherit !important;
 }

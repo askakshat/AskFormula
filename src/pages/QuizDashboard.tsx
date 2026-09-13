@@ -35,7 +35,7 @@ export default function QuizDashboard() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col relative bg-[#537594]">
+    <div className="min-h-screen flex flex-col relative">
       {/* Backgrounds */}
       <div aria-hidden="true" className="zen-gradient-bg"></div>
       <div aria-hidden="true" className="zen-overlay-fog"></div>
