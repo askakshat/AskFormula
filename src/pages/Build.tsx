@@ -91,13 +91,12 @@ export default function Build() {
 
 
   return (
-    <div className="bg-[#0b0e13] text-[#ded9d2] font-sans antialiased min-h-screen flex flex-col selection:bg-rose-500/30 selection:text-white relative overflow-x-hidden">
-      {/* Photographic Dusk Landscape Atmosphere Background */}
+    <div className="bg-[#0b0e13] text-[#ded9d2] font-sans antialiased min-h-screen flex flex-col selection:bg-sky-500/30 selection:text-white relative overflow-x-hidden">
+      {/* New Atmospheric Background */}
       <div aria-hidden="true" className="fixed inset-0 pointer-events-none z-0">
-        <img alt="Atmospheric dusk landscape" className="w-full h-full object-cover object-center opacity-70 scale-105 filter brightness-[0.85] contrast-[1.05]" src="/assets/hero-bg.png" />
-        {/* Layered dusk color gradients */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0b0e13]/70 via-[#101419]/50 to-[#0b0e13]/85"></div>
-        <div className="absolute bottom-0 right-1/4 w-[1000px] h-[550px] bg-gradient-to-t from-[#2a1c22]/30 via-[#141a24]/40 to-transparent blur-[150px]"></div>
+        <img alt="Atmospheric background" className="w-full h-full object-cover object-center opacity-60 mix-blend-screen" src="/new-bg.png" />
+        {/* Layered color gradients */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0b0e13]/80 via-[#101419]/50 to-[#0b0e13]/90"></div>
       </div>
 
       {/* Minimalist Editorial Header */}
@@ -123,7 +122,7 @@ export default function Build() {
         {/* Hero Header */}
         <section className="text-center max-w-3xl mx-auto mb-16 sm:mb-24">
           <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-white/[0.05] border border-white/[0.08] text-[12.5px] font-medium text-white/60 mb-7 backdrop-blur-md shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-[#e39f82] shadow-[0_0_8px_rgba(227,159,130,0.6)]"></span>
+            <span className="w-2 h-2 rounded-full bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.6)]"></span>
             Formula Sheet Builder
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-[52px] font-serif font-normal text-white tracking-tight leading-[1.18] mb-6">
@@ -156,7 +155,7 @@ export default function Build() {
                   onClick={() => { if (track.disabled) return; setExam(track.id as "school" | "jee" | "neet"); setSelectedClass(null); setSubject(null); setSelectedChapters([]); }}
                   className={`relative p-7 rounded-2xl transition-all duration-200 flex flex-col justify-between min-h-[170px] backdrop-blur-sm ${
                     track.disabled ? 'opacity-50 cursor-not-allowed bg-black/20 border-white/5' : 'cursor-pointer ' + (exam === track.id
-                    ? 'bg-[#1d232c]/90 border border-[#e39f82]/50 shadow-[0_0_32px_-4px_rgba(227,159,130,0.22)] ring-1 ring-[#e39f82]/35'
+                    ? 'bg-[#1d232c]/90 border border-sky-400/50 shadow-[0_0_32px_-4px_rgba(56,189,248,0.22)] ring-1 ring-sky-400/35'
                     : 'bg-white/[0.03] border border-white/[0.07] hover:border-white/20 hover:bg-white/[0.06]')
                   }`}
                 >
@@ -166,7 +165,7 @@ export default function Build() {
                         {track.label}
                         {track.disabled && <svg className="w-3.5 h-3.5 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>}
                       </div>
-                      {exam === track.id && <span className="w-2.5 h-2.5 rounded-full bg-[#e39f82] shadow-[0_0_10px_rgba(227,159,130,0.7)]"></span>}
+                      {exam === track.id && <span className="w-2.5 h-2.5 rounded-full bg-sky-400 shadow-[0_0_10px_rgba(56,189,248,0.7)]"></span>}
                     </div>
                     <p className={`text-[13px] leading-relaxed ${exam === track.id ? 'text-[#edd4c8]/90' : 'text-white/50'}`}>{track.desc}</p>
                   </div>

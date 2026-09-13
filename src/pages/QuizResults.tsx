@@ -2,22 +2,40 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 
+interface DetailedResult {
+  questionId: string;
+  chapterId: string;
+  isCorrect: boolean;
+  timeSpent: number;
+}
+
 export default function QuizResults() {
   const navigate = useNavigate();
   const [score, setScore] = useState(0);
   const [totalQuestions, setTotalQuestions] = useState(0);
   const [sessionName, setSessionName] = useState("");
+  const [totalTime, setTotalTime] = useState(0);
+  const [detailedResults, setDetailedResults] = useState<DetailedResult[]>([]);
 
   useEffect(() => {
     const s = parseInt(sessionStorage.getItem("quiz-score") || "0", 10);
     const t = parseInt(sessionStorage.getItem("quiz-total") || "0", 10);
     const sub = sessionStorage.getItem("quiz-subject") || "Mixed Drill";
+    const tt = parseInt(sessionStorage.getItem("quiz-total-time") || "0", 10);
+
+    let dr = [];
+    try {
+      dr = JSON.parse(sessionStorage.getItem("quiz-detailed-results") || "[]");
+    } catch (e) {
+      console.error(e);
+    }
+
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setScore(s);
-
     setTotalQuestions(t);
-
     setSessionName(sub);
+    setTotalTime(tt);
+    setDetailedResults(dr);
   }, []);
 
   const accuracy = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
@@ -34,8 +52,26 @@ export default function QuizResults() {
   };
 
   const handleCreateSheet = () => {
+    // Collect chapter IDs from missed questions
+    const missedChapterIds = [...new Set(detailedResults.filter(r => !r.isCorrect && r.chapterId).map(r => r.chapterId))];
+    if (missedChapterIds.length > 0) {
+      // Store in localStorage for the builder page to pick up automatically
+      localStorage.setItem('askformula-selected-chapters', JSON.stringify(missedChapterIds));
+    }
     navigate("/build");
   };
+
+  const formatTime = (ms: number) => {
+    const seconds = Math.floor(ms / 1000);
+    if (seconds < 60) return `${seconds}s`;
+    const mins = Math.floor(seconds / 60);
+    const remSecs = seconds % 60;
+    return `${mins}m ${remSecs}s`;
+  };
+
+  const avgTimePerQuestion = totalQuestions > 0 ? formatTime(totalTime / totalQuestions) : "0s";
+  const wrongAnswersCount = totalQuestions - score;
+
 
   return (
     <div className="min-h-screen flex flex-col relative">
@@ -83,9 +119,39 @@ export default function QuizResults() {
                 <span className="text-xs uppercase tracking-wider text-slate-400 font-medium">Retention Score</span>
                 <span className="text-xs px-2 py-0.5 rounded-full bg-sky-950/70 border border-sky-500/30 text-sky-300">{accuracy}% Accuracy</span>
               </div>
+              <div className="mt-4 flex flex-col gap-1">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-3xl font-light text-white">{score}</span>
+                  <span className="text-emerald-400 text-sm">correct</span>
+                </div>
+                {wrongAnswersCount > 0 && (
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-xl font-light text-white/70">{wrongAnswersCount}</span>
+                    <span className="text-rose-400 text-sm">incorrect</span>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Total Time */}
+            <div className="bg-white/[0.03] border border-white/5 hover:border-white/10 hover:bg-white/[0.05] transition-all rounded-2xl p-4 flex flex-col justify-between">
+              <div className="flex items-center justify-between">
+                <span className="text-xs uppercase tracking-wider text-slate-400 font-medium">Time Elapsed</span>
+              </div>
               <div className="mt-4 flex items-baseline gap-2">
-                <span className="text-3xl font-light text-white">{score}</span>
-                <span className="text-slate-400 text-sm">/ {totalQuestions} correct</span>
+                <span className="text-3xl font-light text-white">{formatTime(totalTime)}</span>
+                <span className="text-slate-400 text-sm">total</span>
+              </div>
+            </div>
+
+            {/* Average Time */}
+            <div className="bg-white/[0.03] border border-white/5 hover:border-white/10 hover:bg-white/[0.05] transition-all rounded-2xl p-4 flex flex-col justify-between">
+              <div className="flex items-center justify-between">
+                <span className="text-xs uppercase tracking-wider text-slate-400 font-medium">Speed</span>
+              </div>
+              <div className="mt-4 flex items-baseline gap-2">
+                <span className="text-3xl font-light text-white">{avgTimePerQuestion}</span>
+                <span className="text-slate-400 text-sm">/ question</span>
               </div>
             </div>
 

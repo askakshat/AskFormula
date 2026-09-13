@@ -56,7 +56,19 @@ export default function Landing() {
   }, []);
 
   return (
-    <div className="bg-[#0b0c0f] min-h-screen font-sans text-white overflow-x-hidden selection:bg-rose-500/30 selection:text-white">
+    <div className="bg-[#0b0c0f] min-h-screen font-sans text-white overflow-x-hidden selection:bg-sky-500/30 selection:text-white">
+      {/* Background Image Layer */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <img
+          src="/new-bg.png"
+          alt=""
+          className="w-full h-full object-cover opacity-60 mix-blend-screen"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0b0c0f]/80 via-[#0b0c0f]/50 to-[#0b0c0f]/90"></div>
+      </div>
+
+      {/* Ensure main content stays above background */}
+      <div className="relative z-10">
       {/* Global Navigation - Minimal & Translucent */}
       <div className="fixed top-4 inset-x-0 z-50 flex justify-center w-full max-w-4xl mx-auto px-4 sm:px-0">
         <nav className="px-6 lg:px-8 py-3 flex items-center justify-between gap-8 md:gap-16 bg-[#0b0c0f]/70 backdrop-blur-xl rounded-[30px] border border-white/10 w-full shadow-2xl">
@@ -454,6 +466,7 @@ export default function Landing() {
           </div>
         </div>
       </footer>
+    </div>
     </div>
   );
 }

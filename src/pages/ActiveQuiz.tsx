@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router";
 import { useQuizEngine, QuizQuestion } from "@/hooks/useQuizEngine";
 import katex from "katex";
@@ -31,26 +31,45 @@ export default function ActiveQuiz() {
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
   const [showExplanation, setShowExplanation] = useState(false);
 
+  // Metrics Tracking States
+  const [questionStartTime, setQuestionStartTime] = useState<number>(() => Date.now());
+  const [timeSpent, setTimeSpent] = useState<Record<number, number>>({});
+  const [streak, setStreak] = useState(0);
+  const [showStreakPopup, setShowStreakPopup] = useState<number | null>(null);
+  const streakTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
     if (questions.length === 0 && selectedChapters.length > 0) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setQuestions(generateQuiz(count));
+
+      setQuestionStartTime(Date.now());
     }
   }, [selectedChapters, count, generateQuiz, questions.length]);
 
   useEffect(() => {
     if (quizState === "completed") {
       let correctCount = 0;
-      for (let i = 0; i < questions.length; i++) {
-        if (userAnswers[i] === questions[i].correctOptionId) {
-          correctCount++;
-        }
-      }
+      const detailedResults = questions.map((q, idx) => {
+        const isCorrect = userAnswers[idx] === q.correctOptionId;
+        if (isCorrect) correctCount++;
+        return {
+          questionId: q.id,
+          chapterId: q.chapterId,
+          isCorrect,
+          timeSpent: timeSpent[idx] || 0
+        };
+      });
+
+      const totalTime = Object.values(timeSpent).reduce((a, b) => a + b, 0);
+
       sessionStorage.setItem("quiz-score", correctCount.toString());
       sessionStorage.setItem("quiz-total", questions.length.toString());
+      sessionStorage.setItem("quiz-detailed-results", JSON.stringify(detailedResults));
+      sessionStorage.setItem("quiz-total-time", totalTime.toString());
       navigate("/quiz/results");
     }
-  }, [quizState, navigate, questions, userAnswers]);
+  }, [quizState, navigate, questions, userAnswers, timeSpent]);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -67,6 +86,24 @@ export default function ActiveQuiz() {
   const handleOptionSelect = (optionId: string) => {
     if (showExplanation) return;
     setSelectedOptionId(optionId);
+
+    // eslint-disable-next-line react-hooks/purity
+    const timeTaken = Date.now() - questionStartTime;
+    setTimeSpent(prev => ({ ...prev, [currentQuestionIndex]: timeTaken }));
+
+    const isCorrect = optionId === questions[currentQuestionIndex].correctOptionId;
+    if (isCorrect) {
+      const newStreak = streak + 1;
+      setStreak(newStreak);
+      if (newStreak >= 3) {
+        setShowStreakPopup(newStreak);
+        if (streakTimeoutRef.current) clearTimeout(streakTimeoutRef.current);
+        streakTimeoutRef.current = setTimeout(() => setShowStreakPopup(null), 3000);
+      }
+    } else {
+      setStreak(0);
+    }
+
     setShowExplanation(true);
     setUserAnswers((prev) => ({ ...prev, [currentQuestionIndex]: optionId }));
   };
@@ -74,6 +111,7 @@ export default function ActiveQuiz() {
   const handleNext = () => {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
+      setQuestionStartTime(Date.now());
     } else {
       setQuizState("completed");
     }
@@ -363,6 +401,15 @@ export default function ActiveQuiz() {
             </footer>
           </div>
         </section>
+        {/* Streak Popup */}
+        {showStreakPopup && (
+          <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 animate-in slide-in-from-bottom-5 fade-in duration-300">
+            <div className="bg-[#1d232c] border border-sky-400/50 shadow-[0_0_20px_rgba(56,189,248,0.2)] rounded-full px-6 py-3 flex items-center gap-3">
+              <span className="text-xl">🔥</span>
+              <span className="text-sky-400 font-bold text-sm">{showStreakPopup} in a row!</span>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );
