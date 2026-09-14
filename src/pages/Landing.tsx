@@ -217,14 +217,8 @@ export default function Landing() {
         </div>
       </section>
 
-      <div className="relative">
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <img src="/blue-bg.png" alt="Background" className="w-full h-full object-cover object-top opacity-50 mix-blend-screen" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#06080a] via-transparent to-[#0b0c0f]"></div>
-      </div>
-      <div className="relative z-10">
       {/* Feature Narrative Section */}
-      <section className="py-24 px-6 sm:px-10 lg:px-16 border-t border-white/5 relative z-20 overflow-hidden" id="features">
+      <section className="py-24 px-6 sm:px-10 lg:px-16 bg-[#0b0d11] border-t border-white/5 relative z-20 overflow-hidden" id="features">
         <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[120px] pointer-events-none z-0"></div>
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-500/5 rounded-full blur-[100px] pointer-events-none z-0"></div>
         <div className="max-w-7xl mx-auto relative z-10">
@@ -376,7 +370,7 @@ export default function Landing() {
       </section>
 
       {/* Pricing/CTA Section */}
-      <section className="py-24 px-6 sm:px-10 lg:px-16 border-t border-white/5 relative z-20">
+      <section className="py-24 px-6 sm:px-10 lg:px-16 bg-[#0b0c0f] border-t border-white/5 relative z-20">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <span className="text-xs uppercase tracking-widest text-zinc-400 font-semibold font-mono block mb-2">Pricing</span>
@@ -414,7 +408,7 @@ export default function Landing() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-24 px-6 sm:px-10 lg:px-16 border-t border-white/5 relative z-20 overflow-hidden">
+      <section id="faq" className="py-24 px-6 sm:px-10 lg:px-16 bg-[#0b0d11] border-t border-white/5 relative z-20 overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-emerald-500/5 rounded-full blur-[100px] pointer-events-none z-0"></div>
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row gap-16 relative z-10">
           <div className="md:w-1/3 shrink-0">
@@ -446,7 +440,7 @@ export default function Landing() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-32 px-6 sm:px-10 lg:px-16 border-t border-white/5 relative z-20 overflow-hidden">
+      <section className="py-32 px-6 sm:px-10 lg:px-16 bg-[#0b0c0f] border-t border-white/5 relative z-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
         <div className="max-w-3xl mx-auto text-center relative z-10">
           <span className="text-xs uppercase tracking-widest text-zinc-400 font-semibold font-mono block mb-4">Your next session is one click away</span>
@@ -457,10 +451,7 @@ export default function Landing() {
         </div>
       </section>
 
-
-      </div>
-    </div>
-{/* Global Footer */}
+      {/* Global Footer */}
       <footer className="bg-[#0b0c0f] border-t border-white/5 py-12 px-6 sm:px-10 lg:px-16" data-purpose="main-footer">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
