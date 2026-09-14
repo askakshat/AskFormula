@@ -221,7 +221,9 @@ export default function Build() {
                   <div className={`space-y-6 transition-opacity duration-300 ${!selectedClass ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}>
                     <h3 className="text-sm font-medium text-white/70 uppercase tracking-widest">Select Subject</h3>
                     <div className="flex flex-wrap gap-4">
-                      {["Physics", "Chemistry", "Mathematics", "Biology"].map(sub => (
+                      {["Physics", "Chemistry", "Mathematics", "Biology"]
+                      .filter(sub => !(exam === "jee" && sub === "Biology"))
+                      .map(sub => (
                         <button
                           key={sub}
                           onClick={() => handleSubjectSelect(sub)}

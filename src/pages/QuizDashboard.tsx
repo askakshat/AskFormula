@@ -31,7 +31,7 @@ export default function QuizDashboard() {
     // We pass chapters via query param or local storage, or simple sessionStorage for now
     sessionStorage.setItem("quiz-chapters", JSON.stringify(selectedChapters));
     sessionStorage.setItem("quiz-count", numQuestions.toString());
-    sessionStorage.setItem("quiz-subject", subject);
+    sessionStorage.setItem("quiz-subject", exam === "jee" ? "JEE " + subject : subject);
     navigate("/quiz/active");
   };
 
@@ -70,12 +70,13 @@ export default function QuizDashboard() {
                 {[
                   { id: "school", label: "School & Boards", desc: "Core standard derivations" },
                   { id: "jee", label: "JEE (Main & Adv.)", desc: "Calculus-based & multi-concept" },
-                  { id: "neet", label: "NEET UG", desc: "High-speed formula recall" }
+                  { id: "neet", label: "NEET UG", desc: "High-speed formula recall (Coming Soon)", disabled: true }
                 ].map((track) => (
                   <button
                     key={track.id}
-                    onClick={() => { setExam(track.id as "school" | "jee" | "neet"); setSelectedClass(null); setSubject(null); setSelectedChapters([]); }}
+                    onClick={() => { if (track.disabled) return; setExam(track.id as "school" | "jee" | "neet"); setSelectedClass(null); setSubject(null); setSelectedChapters([]); }}
                     className={`relative p-5 rounded-2xl border text-left transition-all duration-300 ${
+                      track.disabled ? 'opacity-50 cursor-not-allowed bg-black/20 border-white/5' :
                       exam === track.id
                         ? "bg-[rgba(162,212,248,0.06)] border-[#a2d4f8]/50 shadow-[0_0_25px_rgba(162,212,248,0.12)]"
                         : "bg-white/[0.02] border-white/[0.08] hover:bg-white/[0.04] hover:border-white/[0.15]"
@@ -129,7 +130,9 @@ export default function QuizDashboard() {
                 <h2 className="text-lg font-medium text-white/95">Subject Area</h2>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                {["Physics", "Chemistry", "Mathematics", "Biology"].map((sub) => (
+                {["Physics", "Chemistry", "Mathematics", "Biology"]
+                  .filter(sub => !(exam === "jee" && sub === "Biology"))
+                  .map((sub) => (
                   <button
                     key={sub}
                     onClick={() => { setSubject(sub); setSelectedChapters([]); }}
