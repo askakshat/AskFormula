@@ -15,6 +15,11 @@ const Build = lazy(() => import("./pages/Build.tsx"));
 const AuthPage = lazy(() => import("./pages/Auth.tsx"));
 const Dashboard = lazy(() => import("./pages/Dashboard.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
+const Privacy = lazy(() => import("./pages/Privacy.tsx"));
+const Terms = lazy(() => import("./pages/Terms.tsx"));
+const Docs = lazy(() => import("./pages/Docs.tsx"));
+const Status = lazy(() => import("./pages/Status.tsx"));
+
 const PrintView = lazy(() => import("./pages/PrintView.tsx"));
 const QuizDashboard = lazy(() => import("./pages/QuizDashboard.tsx"));
 const ActiveQuiz = lazy(() => import("./pages/ActiveQuiz.tsx"));
@@ -133,7 +138,11 @@ createRoot(document.getElementById("root")!).render(
             <Route path="/quiz" element={<QuizDashboard />} />
             <Route path="/quiz/active" element={<ActiveQuiz />} />
             <Route path="/quiz/results" element={<QuizResults />} />
-            <Route path="*" element={<NotFound />} />
+            <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/docs" element={<Docs />} />
+        <Route path="/status" element={<Status />} />
+        <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </BrowserRouter>

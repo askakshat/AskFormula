@@ -1,81 +1,13 @@
+import re
 
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router";
+with open('src/pages/QuizResults.tsx', 'r') as f:
+    content = f.read()
 
-interface DetailedResult {
-  questionId: string;
-  chapterId: string;
-  isCorrect: boolean;
-  timeSpent: number;
-  questionText: string;
-  userAnswerText: string;
-  correctAnswerText: string;
-}
+# Let's completely rewrite the render method in QuizResults to be clean.
+start_idx = content.find('return (')
+top_part = content[:start_idx]
 
-export default function QuizResults() {
-  const navigate = useNavigate();
-  const [score, setScore] = useState(0);
-  const [totalQuestions, setTotalQuestions] = useState(0);
-  const [sessionName, setSessionName] = useState("");
-  const [totalTime, setTotalTime] = useState(0);
-  const [detailedResults, setDetailedResults] = useState<DetailedResult[]>([]);
-
-  useEffect(() => {
-    const s = parseInt(sessionStorage.getItem("quiz-score") || "0", 10);
-    const t = parseInt(sessionStorage.getItem("quiz-total") || "0", 10);
-    const sub = sessionStorage.getItem("quiz-subject") || "Mixed Drill";
-    const tt = parseInt(sessionStorage.getItem("quiz-total-time") || "0", 10);
-
-    let dr = [];
-    try {
-      dr = JSON.parse(sessionStorage.getItem("quiz-detailed-results") || "[]");
-    } catch (e) {
-      console.error(e);
-    }
-
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setScore(s);
-    setTotalQuestions(t);
-    setSessionName(sub);
-    setTotalTime(tt);
-    setDetailedResults(dr);
-  }, []);
-
-  const accuracy = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
-
-  let message = "Your retention accuracy is tranquil and resolute.";
-  if (accuracy < 60) {
-    message = "Your fundamentals need strengthening. Focus on the core principles.";
-  } else if (accuracy < 80) {
-    message = "Solid grasp of concepts. Refine your understanding of the nuances.";
-  }
-
-  const handleRetake = () => {
-    navigate("/quiz");
-  };
-
-  const handleCreateSheet = () => {
-    // Collect chapter IDs from missed questions
-    const missedChapterIds = [...new Set(detailedResults.filter(r => !r.isCorrect && r.chapterId).map(r => r.chapterId))];
-    if (missedChapterIds.length > 0) {
-      // Store in localStorage for the builder page to pick up automatically
-      localStorage.setItem('askformula-selected-chapters', JSON.stringify(missedChapterIds));
-    }
-    navigate("/build");
-  };
-
-  const formatTime = (ms: number) => {
-    const seconds = Math.floor(ms / 1000);
-    if (seconds < 60) return `${seconds}s`;
-    const mins = Math.floor(seconds / 60);
-    const remSecs = seconds % 60;
-    return `${mins}m ${remSecs}s`;
-  };
-
-  const avgTimePerQuestion = totalQuestions > 0 ? formatTime(totalTime / totalQuestions) : "0s";
-  const wrongAnswersCount = totalQuestions - score;
-
-
+render_method = """
   return (
     <div className="min-h-screen flex flex-col relative">
       {/* Backgrounds */}
@@ -83,7 +15,7 @@ export default function QuizResults() {
       <div aria-hidden="true" className="zen-overlay-fog"></div>
 
       {/* Top Navigation */}
-      <header className="w-full max-w-7xl mx-auto px-6 py-4 mt-4 flex items-center justify-between bg-white/[0.02] backdrop-blur-[40px] rounded-[30px] border border-white/[0.08] shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]" data-purpose="global-header">
+      <header className="w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-between" data-purpose="global-header">
         <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => navigate("/")}>
           <img src="/assets/logo-new.png" alt="AskFormula" className="h-6 sm:h-7 opacity-80 mix-blend-overlay hover:opacity-100 hover:mix-blend-normal transition-all" />
         </div>
@@ -216,3 +148,7 @@ export default function QuizResults() {
     </div>
   );
 }
+"""
+
+with open('src/pages/QuizResults.tsx', 'w') as f:
+    f.write(top_part + render_method.strip() + "\n")

@@ -71,7 +71,7 @@ export default function Landing() {
       <div className="relative z-10">
       {/* Global Navigation - Minimal & Translucent */}
       <div className="fixed top-4 inset-x-0 z-50 flex justify-center w-full max-w-4xl mx-auto px-4 sm:px-0">
-        <nav className="px-6 lg:px-8 py-3 flex items-center justify-between gap-8 md:gap-16 bg-[#0b0c0f]/70 backdrop-blur-xl rounded-[30px] border border-white/10 w-full shadow-2xl">
+        <nav className="px-6 lg:px-8 py-3 flex items-center justify-between gap-8 md:gap-16 bg-white/[0.02] backdrop-blur-[40px] rounded-[30px] border border-white/[0.08] shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] w-full">
           <div className="flex items-center gap-3">
             <img src="/assets/logo-new.png" alt="AskFormula" className="h-7 object-contain" />
             <span className="font-semibold text-lg tracking-tight text-white/90">AskFormula</span>
@@ -459,10 +459,10 @@ export default function Landing() {
             <span className="text-sm text-zinc-400 font-medium ml-2">AskFormula by AskAkshat. All formulas verified.</span>
           </div>
           <div className="flex items-center space-x-6 text-xs text-zinc-400">
-            <a href="#" className="hover:text-zinc-300 transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-zinc-300 transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-zinc-300 transition-colors">Documentation</a>
-            <a href="#" className="hover:text-zinc-300 transition-colors">Status</a>
+            <Link to="/privacy" className="hover:text-zinc-300 transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-zinc-300 transition-colors">Terms of Service</Link>
+            <Link to="/docs" className="hover:text-zinc-300 transition-colors">Documentation</Link>
+            <Link to="/status" className="hover:text-zinc-300 transition-colors">Status</Link>
           </div>
         </div>
       </footer>
