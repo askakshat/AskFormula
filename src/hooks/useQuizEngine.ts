@@ -18,6 +18,7 @@ export interface QuizQuestion {
   type: QuestionType;
   text: string;
   formulaId: string;
+  chapterId: string;
   options: QuizOption[];
   correctOptionId: string;
   explanation: string;
@@ -31,6 +32,7 @@ const shuffle = <T>(arr: T[]): T[] => [...arr].sort(() => Math.random() - 0.5);
 export interface TheoryPoint {
   text: string;
   category: string;
+  chapterId?: string;
 }
 
 type EnrichedFormula = Formula & {
@@ -39,6 +41,7 @@ type EnrichedFormula = Formula & {
     classLevel: string;
     subject: string;
     chapterName: string;
+    chapterId: string;
   };
 };
 
@@ -77,6 +80,7 @@ const getAllFormulas = (): EnrichedFormula[] => {
           classLevel: `Class ${chapter.class || "Unknown"}`,
           subject: subject.subject,
           chapterName: chapter.name || chapter.chapterName || "Unknown",
+          chapterId: chapter.id,
         },
       }));
       formulas.push(...enrichedFormulas);
@@ -213,6 +217,7 @@ const generateNumericalComputation = (
     type: "numerical_computation",
     text,
     formulaId: formula.id,
+    chapterId: formula._meta?.chapterId || "",
     options: shuffle(options),
     correctOptionId: "correct",
     explanation: `Using the formula $${formula.latex}$, substitute the given values to calculate the result.`,
@@ -332,6 +337,7 @@ const generateFormulaIdentification = (
     type: "formula_identification",
     text,
     formulaId: formula.id,
+    chapterId: formula._meta?.chapterId || "",
     options: shuffle(options),
     correctOptionId: "correct",
     explanation: `The correct formula for ${targetVar} is $${formula.latex}$.`,
@@ -535,6 +541,7 @@ const generateTheoryQuestion = (
     type: "theory_concept",
     text,
     formulaId: "theory",
+    chapterId: point.chapterId || "",
     options: shuffle(options),
     correctOptionId: "correct",
     explanation: explanation,
@@ -636,6 +643,7 @@ const generateProportionality = (
     type: "proportionality",
     text,
     formulaId: formula.id,
+    chapterId: formula._meta?.chapterId || "",
     options: shuffle(options),
     correctOptionId: "correct",
     explanation: `Looking at the formula $${formula.latex}$, observe the relationship between ${targetVar} and ${inputVar.symbol}.`,
@@ -687,6 +695,7 @@ export function useQuizEngine(selectedChapterIds: string[] = []) {
                 classLevel: `Class ${chapter.class || "Unknown"}`,
                 subject: subject.subject,
                 chapterName: chapter.name || chapter.chapterName || "Unknown",
+                chapterId: chapter.id,
               },
             })),
           );
