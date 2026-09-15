@@ -13,10 +13,10 @@ export default function QuizDashboard() {
 
   const chapters = useMemo(() => {
     if (!subject) return [];
-    return getChaptersBySubject(subject).filter(
+    return getChaptersBySubject(exam === "jee" ? "JEE " + subject : subject).filter(
       (ch) => !selectedClass || ch.class === selectedClass,
     );
-  }, [subject, selectedClass]);
+  }, [subject, selectedClass, exam]);
 
   const toggleChapter = (chapterId: string) => {
     setSelectedChapters((prev) =>
