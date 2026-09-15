@@ -1,3 +1,4 @@
+import { GlobalNav } from "@/components/askformula/GlobalNav";
 import { useState, useMemo, useRef, useEffect } from "react";
 import { useSearchParams } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
@@ -100,24 +101,10 @@ export default function Build() {
       </div>
 
       {/* Minimalist Editorial Header */}
-      {/* Floating Liquid Glass Toolbar */}
-      <div className="fixed top-4 inset-x-0 z-50 flex justify-center w-full max-w-4xl mx-auto px-4 sm:px-0">
-        <nav className="px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4 sm:gap-8 md:gap-16 bg-white/[0.02] backdrop-blur-[40px] rounded-[30px] border border-white/[0.08] shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] w-full">
-          <div className="flex items-center gap-3 cursor-pointer group" onClick={() => (window.location.href = "/")}>
-            <img src="/assets/logo-new.png" alt="AskFormula" className="h-7 object-contain transition-transform group-hover:scale-105" />
-            <span className="font-semibold text-lg tracking-tight text-white/90">AskFormula</span>
-          </div>
-
-          <nav className="hidden md:flex items-center space-x-6 text-sm font-medium text-zinc-300">
-            <a href="/" className="hover:text-white transition-colors">Home</a>
-            <a href="/quiz" className="flex items-center gap-1.5 hover:text-white transition-colors">Quiz</a>
-            <a href="/build" className="text-white font-medium">Builder</a>
-          </nav>
-        </nav>
-      </div>
+      <GlobalNav />
 
       {/* Main Content (Expansive & Airy Layout) */}
-      <main className="relative z-10 flex-1 max-w-7xl mx-auto w-full px-6 sm:px-10 lg:px-12 pt-16 sm:pt-24 pb-64 lg:pb-56">
+      <main className="relative z-10 flex-1 max-w-7xl mx-auto w-full px-4 sm:px-10 lg:px-12 pt-24 sm:pt-24 pb-64">
 
         {/* Hero Header */}
         <section className="text-center max-w-3xl mx-auto mb-16 sm:mb-24">
@@ -125,20 +112,20 @@ export default function Build() {
             <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]"></span>
             Formula Sheet Builder
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-[52px] font-serif font-normal text-white tracking-tight leading-[1.18] mb-6">
+          <h1 className="text-3xl sm:text-5xl md:text-[52px] font-serif font-normal text-white tracking-tight leading-[1.18] mb-4 sm:mb-6">
             Build your personalized formula sheet.
           </h1>
-          <p className="text-[16.5px] sm:text-[18px] text-white/60 font-normal leading-relaxed max-w-2xl mx-auto">
+          <p className="text-[15px] sm:text-[18px] text-white/60 font-normal leading-relaxed max-w-2xl mx-auto">
             Choose your curriculum, grade, and focus topics to compile a serene, verified revision companion ready for print.
           </p>
         </section>
 
         {/* Unified Bound-Notebook Frame */}
-        <div className="bg-[#0f131a]/45 backdrop-blur-2xl rounded-3xl border border-white/[0.1] shadow-[0_24px_64px_rgba(0,0,0,0.45)] p-8 sm:p-12 lg:p-16 space-y-16 sm:space-y-20">
+        <div className="bg-[#0f131a]/45 backdrop-blur-2xl rounded-2xl sm:rounded-3xl border border-white/[0.1] shadow-[0_24px_64px_rgba(0,0,0,0.45)] p-5 sm:p-12 lg:p-16 space-y-12 sm:space-y-20">
 
           {/* STEP 1: Target Track & Curriculum */}
           <section aria-labelledby="step-stream-title">
-            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 mb-9 pb-4 border-b border-white/[0.06]">
+            <div className="flex items-baseline justify-between mb-9 pb-4 border-b border-white/[0.06]">
               <div className="flex items-center gap-4">
                 <span className="text-[12px] font-mono tracking-widest text-[#e39f82] uppercase font-semibold">01</span>
                 <h2 className="text-lg sm:text-xl font-medium text-white tracking-tight" id="step-stream-title">Target Track & Curriculum</h2>
@@ -188,7 +175,7 @@ export default function Build() {
                 exit={{ opacity: 0, height: 0 }}
                 className="overflow-hidden"
               >
-                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 mb-9 pb-4 border-b border-white/[0.06]">
+                <div className="flex items-baseline justify-between mb-9 pb-4 border-b border-white/[0.06]">
                   <div className="flex items-center gap-4">
                     <span className="text-[12px] font-mono tracking-widest text-[#e39f82] uppercase font-semibold">02</span>
                     <h2 className="text-lg sm:text-xl font-medium text-white tracking-tight">Academic Scope</h2>
@@ -198,7 +185,7 @@ export default function Build() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                   <div className="space-y-6">
                     <h3 className="text-sm font-medium text-white/70 uppercase tracking-widest">Select Class</h3>
-                    <div className="flex flex-col lg:flex-row gap-4 w-full lg:w-auto">
+                    <div className="flex gap-4">
                       {["11", "12"].map(cls => (
                         <button
                           key={cls}
@@ -256,12 +243,12 @@ export default function Build() {
                 exit={{ opacity: 0, height: 0 }}
                 className="overflow-hidden"
               >
-                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 mb-9 pb-4 border-b border-white/[0.06]">
+                <div className="flex items-baseline justify-between mb-9 pb-4 border-b border-white/[0.06]">
                   <div className="flex items-center gap-4">
                     <span className="text-[12px] font-mono tracking-widest text-[#e39f82] uppercase font-semibold">03</span>
                     <h2 className="text-lg sm:text-xl font-medium text-white tracking-tight">Curate Chapters</h2>
                   </div>
-                  <div className="flex flex-col lg:flex-row gap-4 w-full lg:w-auto">
+                  <div className="flex gap-4">
                     <button onClick={selectAllChapters} className="text-sm text-white/60 hover:text-white transition-colors">Select All</button>
                     <button onClick={clearSelection} className="text-sm text-white/60 hover:text-white transition-colors">Clear</button>
                   </div>
@@ -310,13 +297,13 @@ export default function Build() {
               exit={{ y: 100, opacity: 0 }}
               className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-2xl"
             >
-              <div className="bg-[#101419]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-4 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-4 w-full">
+              <div className="bg-[#101419]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-4 shadow-2xl flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white font-mono font-bold">
                     {selectedChapters.length}
                   </div>
                   <div>
-                    <div className="text-sm font-medium text-white">Chapters Selected</div>
+                    <div className="text-xs sm:text-sm font-medium text-white">Chapters Selected</div>
                     <div className="text-xs text-white/50">{formulas.length} total formulas compiled</div>
                   </div>
                 </div>

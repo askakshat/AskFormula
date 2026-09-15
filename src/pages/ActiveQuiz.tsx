@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router";
 import { useQuizEngine, QuizQuestion } from "@/hooks/useQuizEngine";
@@ -173,16 +174,22 @@ export default function ActiveQuiz() {
       <div aria-hidden="true" className="zen-overlay-fog"></div>
 
       {/* Top Navigation */}
-      <header className="w-full max-w-7xl mx-auto px-6 pt-5 pb-3 flex items-center justify-between z-10 relative">
-        <div
-          className="flex items-center gap-2.5 cursor-pointer"
-          onClick={() => navigate("/")}
-        >
-          <img
+      <header className="w-full max-w-7xl mx-auto px-4 sm:px-6 pt-4 sm:pt-5 pb-3 flex items-center justify-between z-10 relative">
+        <div className="flex items-center gap-2 sm:gap-4">
+          <Button variant="ghost" size="sm" onClick={() => navigate("/quiz")} className="text-white/60 hover:text-white hover:bg-white/10 rounded-full h-8 px-3">
+            <svg className="w-4 h-4 sm:mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+            <span className="hidden sm:inline">Exit Drill</span>
+          </Button>
+        </div>
+        <div className="flex items-center gap-2">
+           <img
             src="/assets/logo-new.png"
             alt="AskFormula"
-            className="h-6 sm:h-7 opacity-80 mix-blend-overlay hover:opacity-100 hover:mix-blend-normal transition-all"
+            className="h-5 sm:h-6 object-contain opacity-50 hidden sm:block"
           />
+          <div className="px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/10 text-sm font-medium text-white/80">
+            {currentQuestionIndex + 1} / {questions.length}
+          </div>
         </div>
       </header>
 

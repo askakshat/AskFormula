@@ -1,4 +1,5 @@
 
+import { GlobalNav } from "@/components/askformula/GlobalNav";
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router";
 import { getChaptersBySubject } from "@/lib/formulas";
@@ -37,24 +38,23 @@ export default function QuizDashboard() {
 
   return (
     <div className="min-h-screen flex flex-col relative">
+      <GlobalNav />
       {/* Backgrounds */}
       <div aria-hidden="true" className="zen-gradient-bg"></div>
       <div aria-hidden="true" className="zen-overlay-fog"></div>
 
       {/* Main content container */}
-      <main className="flex-1 w-full flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8 z-10">
-        <div className="w-full flex justify-center mb-8">
-          <img src="/assets/logo-new.png" alt="AskFormula" className="h-6 sm:h-8 opacity-80 mix-blend-overlay hover:opacity-100 hover:mix-blend-normal transition-all duration-300" />
-        </div>
+      <main className="flex-1 w-full flex flex-col items-center justify-center pt-24 p-4 sm:p-6 lg:p-8 z-10">
 
-        <div className="max-w-4xl w-full rounded-[28px] border border-white/10 p-6 sm:p-10 md:p-12 shadow-[0_30px_80px_rgba(0,0,0,0.48),0_10px_30px_rgba(10,16,26,0.35)] text-white transition-all backdrop-blur-[24px]" style={{ background: "rgba(12, 18, 30, 0.85)" }}>
+
+        <div className="max-w-4xl w-full rounded-2xl sm:rounded-[28px] border border-white/10 p-5 sm:p-10 md:p-12 shadow-[0_30px_80px_rgba(0,0,0,0.48),0_10px_30px_rgba(10,16,26,0.35)] text-white transition-all backdrop-blur-[24px]" style={{ background: "rgba(12, 18, 30, 0.85)" }}>
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-white/[0.08]">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.05] border border-white/[0.1] backdrop-blur-md w-fit">
               <svg className="w-3.5 h-3.5 text-[#a2d4f8]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>
               <span className="text-xs font-semibold tracking-wide text-white/90 uppercase">Formula Recall Drill</span>
             </div>
             <div>
-              <h1 className="text-3xl font-serif tracking-tight text-white m-0">Setup Session</h1>
+              <h1 className="text-2xl sm:text-3xl font-serif tracking-tight text-white m-0">Setup Session</h1>
               <p className="text-sm text-[#9bb8cf] mt-1 font-sans">Configure your next training drill.</p>
             </div>
           </div>
@@ -66,7 +66,7 @@ export default function QuizDashboard() {
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white/10 text-xs font-medium text-white/80 border border-white/[0.15]">1</span>
                 <h2 className="text-lg font-medium text-white/95">Curriculum</h2>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                 {[
                   { id: "school", label: "School & Boards", desc: "Core standard derivations" },
                   { id: "jee", label: "JEE (Main & Adv.)", desc: "Calculus-based & multi-concept" },
@@ -151,7 +151,7 @@ export default function QuizDashboard() {
             {/* Step 4: Target Chapters */}
             <div className={`transition-opacity duration-300 ${!subject ? 'opacity-40 pointer-events-none' : 'opacity-100'}`}>
               <div className="flex items-center justify-between mb-5">
-                <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3">
+                <div className="flex items-center gap-3">
                   <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white/10 text-xs font-medium text-white/80 border border-white/[0.15]">4</span>
                   <h2 className="text-lg font-medium text-white/95">Target Chapters</h2>
                 </div>
@@ -190,8 +190,8 @@ export default function QuizDashboard() {
             </div>
 
             {/* Drill Configuration & Action */}
-            <div className={`pt-6 border-t border-white/[0.08] flex flex-col md:flex-row md:items-center justify-between gap-6 transition-opacity duration-300 ${selectedChapters.length === 0 ? 'opacity-40 pointer-events-none' : 'opacity-100'}`}>
-              <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 w-full sm:w-auto">
+            <div className={`pt-6 border-t border-white/[0.08] flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6 transition-opacity duration-300 ${selectedChapters.length === 0 ? 'opacity-40 pointer-events-none' : 'opacity-100'}`}>
+              <div className="flex items-center gap-6">
                 <div>
                   <label className="block text-xs font-medium text-[#9bb8cf] mb-2 uppercase tracking-wider">Session Length</label>
                   <div className="flex bg-[rgba(18,25,40,0.65)] border border-white/[0.08] rounded-xl p-1 w-fit">
