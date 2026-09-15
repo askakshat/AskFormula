@@ -56,7 +56,7 @@ export default function Landing() {
   }, []);
 
   return (
-    <div className="bg-[#0b0c0f] min-h-screen font-sans text-white overflow-x-hidden selection:bg-sky-500/30 selection:text-white">
+    <div className="bg-[#0b0c0f] min-h-screen font-sans text-white overflow-x-hidden w-full max-w-full selection:bg-sky-500/30 selection:text-white">
       {/* Background Image Layer */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <img
@@ -71,20 +71,20 @@ export default function Landing() {
       <div className="relative z-10">
       {/* Global Navigation - Minimal & Translucent */}
       <div className="fixed top-4 inset-x-0 z-50 flex justify-center w-full max-w-4xl mx-auto px-4 sm:px-0">
-        <nav className="px-6 lg:px-8 py-3 flex items-center justify-between gap-8 md:gap-16 bg-white/[0.02] backdrop-blur-[40px] rounded-[30px] border border-white/[0.08] shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] w-full">
+        <nav className="px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-3 sm:gap-8 md:gap-16 bg-white/[0.02] backdrop-blur-[40px] rounded-[30px] border border-white/[0.08] shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] w-full">
           <div className="flex items-center gap-3">
             <img src="/assets/logo-new.png" alt="AskFormula" className="h-7 object-contain" />
             <span className="font-semibold text-lg tracking-tight text-white/90">AskFormula</span>
           </div>
 
-          <div className="hidden md:flex items-center space-x-6 text-sm font-medium text-zinc-300">
+          <div className="hidden md:flex flex-wrap items-center justify-center gap-x-6 gap-y-4 text-sm font-medium text-zinc-300">
             <a href="#features" className="hover:text-white transition-colors">Features</a>
             <Link to="/quiz" className="flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 transition-colors font-semibold"><svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg> Quiz</Link>
             <Link to="/build" className="hover:text-white transition-colors">Builder</Link>
             <a href="#faq" className="hover:text-white transition-colors">FAQ</a>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <Button asChild className="h-8 px-4 rounded-full bg-white/10 text-white hover:bg-white/20 border border-white/10 text-sm font-medium transition-colors active:scale-95 shadow-none">
               <Link to="/build">Get started</Link>
             </Button>
@@ -93,7 +93,7 @@ export default function Landing() {
       </div>
 
       {/* Cinematic Hero Section */}
-      <div className="relative w-full h-[120vh] min-h-[900px] flex flex-col items-center justify-start pt-32 sm:pt-40 lg:pt-48 overflow-hidden" data-purpose="cinematic-hero">
+      <div className="relative w-full h-[120vh] min-h-[900px] flex flex-col items-center justify-start pt-24 sm:pt-32 lg:pt-48 overflow-hidden" data-purpose="cinematic-hero">
 
         {/* Background Layer: Mountain/Sunset Abstract (Darkened & Blurred) */}
         <div
@@ -268,7 +268,7 @@ export default function Landing() {
             </div>
             {/* Feature 4: Quizzes */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }} className="bg-[#14161a] border border-white/5 rounded-2xl p-8 relative overflow-hidden h-[400px] flex items-center justify-center order-2 lg:order-1">
+              <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }} className="bg-[#14161a] border border-white/5 rounded-2xl p-8 relative overflow-hidden h-[400px] flex items-center justify-center order-2 lg:order-1 mt-8 lg:mt-0">
                  <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/5 to-blue-500/5" />
                  {/* Quiz UI Mockup */}
                  <div className="w-full max-w-sm bg-[#1a1d24] border border-white/10 rounded-xl shadow-2xl overflow-hidden z-10 p-6">
@@ -290,7 +290,7 @@ export default function Landing() {
                    </div>
                  </div>
               </motion.div>
-              <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="order-1 lg:order-2 lg:pl-12">
+              <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="order-1 lg:order-2 lg:pl-12 mt-8 sm:mt-0">
                 <span className="text-5xl font-mono font-bold text-white/40 block mb-6">04</span>
                 <h3 className="text-3xl font-semibold text-white mb-4">Test your memory<br/>instantly.</h3>
                 <p className="text-lg text-zinc-400 leading-relaxed mb-8">
@@ -305,7 +305,7 @@ export default function Landing() {
 
             {/* Feature 2 */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }} className="bg-[#14161a] border border-white/5 rounded-2xl p-8 relative overflow-hidden h-[400px] flex items-center justify-center order-2 lg:order-1">
+              <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }} className="bg-[#14161a] border border-white/5 rounded-2xl p-8 relative overflow-hidden h-[400px] flex items-center justify-center order-2 lg:order-1 mt-8 lg:mt-0">
                  <div className="absolute inset-0 bg-gradient-to-tr from-rose-500/5 to-orange-500/5" />
                  {/* Card UI Mockup */}
                  <div className="w-full max-w-sm bg-[#1a1d24] border border-white/10 rounded-xl shadow-2xl overflow-hidden z-10 p-6">
@@ -321,7 +321,7 @@ export default function Landing() {
                    </div>
                  </div>
               </motion.div>
-              <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="order-1 lg:order-2 lg:pl-12">
+              <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="order-1 lg:order-2 lg:pl-12 mt-8 sm:mt-0">
                 <span className="text-5xl font-mono font-bold text-white/40 block mb-6">02</span>
                 <h3 className="text-3xl font-semibold text-white mb-4">Understand it<br/>in context.</h3>
                 <p className="text-lg text-zinc-400 leading-relaxed mb-8">
@@ -348,7 +348,7 @@ export default function Landing() {
               <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }} className="bg-[#14161a] border border-white/5 rounded-2xl p-8 relative overflow-hidden h-[400px] flex items-center justify-center">
                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-teal-500/5" />
                  {/* PDF Mockup */}
-                 <div className="w-[280px] bg-white rounded shadow-2xl overflow-hidden z-10 flex flex-col p-6 rotate-2 transform-gpu">
+                 <div className="w-full max-w-[280px] bg-white rounded shadow-2xl overflow-hidden z-10 flex flex-col p-6 rotate-2 transform-gpu">
                     <div className="border-b border-black/10 pb-4 mb-4 text-center">
                       <div className="text-[10px] font-bold tracking-widest text-black/40 mb-1">ASKFORMULA</div>
                       <div className="text-sm font-serif font-bold text-black/80">JEE Physics</div>
@@ -453,12 +453,12 @@ export default function Landing() {
 
       {/* Global Footer */}
       <footer className="bg-[#0b0c0f] border-t border-white/5 py-12 px-6 sm:px-10 lg:px-16" data-purpose="main-footer">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-6">
           <div className="flex items-center gap-2">
             <img src="/assets/logo-new.png" alt="AskFormula" className="h-5 object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all" />
             <span className="text-sm text-zinc-400 font-medium ml-2">AskFormula by AskAkshat. All formulas verified.</span>
           </div>
-          <div className="flex items-center space-x-6 text-xs text-zinc-400">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-4 text-xs text-zinc-400">
             <Link to="/privacy" className="hover:text-zinc-300 transition-colors">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-zinc-300 transition-colors">Terms of Service</Link>
             <Link to="/docs" className="hover:text-zinc-300 transition-colors">Documentation</Link>

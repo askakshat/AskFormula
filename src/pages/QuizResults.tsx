@@ -83,7 +83,7 @@ export default function QuizResults() {
       <div aria-hidden="true" className="zen-overlay-fog"></div>
 
       {/* Top Navigation */}
-      <header className="w-full max-w-7xl mx-auto px-6 py-4 mt-4 flex items-center justify-between bg-white/[0.02] backdrop-blur-[40px] rounded-[30px] border border-white/[0.08] shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]" data-purpose="global-header">
+      <header className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-4 mt-4 flex items-center justify-between gap-4 bg-white/[0.02] backdrop-blur-[40px] rounded-[30px] border border-white/[0.08] shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]" data-purpose="global-header">
         <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => navigate("/")}>
           <img src="/assets/logo-new.png" alt="AskFormula" className="h-6 sm:h-7 opacity-80 mix-blend-overlay hover:opacity-100 hover:mix-blend-normal transition-all" />
         </div>
@@ -122,7 +122,7 @@ export default function QuizResults() {
                 <span className="text-xs uppercase tracking-wider text-slate-400 font-medium">Retention Score</span>
                 <span className="text-xs px-2 py-0.5 rounded-full bg-sky-950/70 border border-sky-500/30 text-sky-300">{accuracy}% Accuracy</span>
               </div>
-              <div className="mt-4 flex flex-col gap-1">
+              <div className="mt-4 flex flex-col sm:flex-row gap-1 sm:gap-4">
                 <div className="flex items-baseline gap-2">
                   <span className="text-3xl font-light text-white">{score}</span>
                   <span className="text-emerald-400 text-sm">correct</span>

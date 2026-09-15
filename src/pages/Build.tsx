@@ -102,7 +102,7 @@ export default function Build() {
       {/* Minimalist Editorial Header */}
       {/* Floating Liquid Glass Toolbar */}
       <div className="fixed top-4 inset-x-0 z-50 flex justify-center w-full max-w-4xl mx-auto px-4 sm:px-0">
-        <nav className="px-6 lg:px-8 py-3 flex items-center justify-between gap-8 md:gap-16 bg-white/[0.02] backdrop-blur-[40px] rounded-[30px] border border-white/[0.08] shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] w-full">
+        <nav className="px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4 sm:gap-8 md:gap-16 bg-white/[0.02] backdrop-blur-[40px] rounded-[30px] border border-white/[0.08] shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] w-full">
           <div className="flex items-center gap-3 cursor-pointer group" onClick={() => (window.location.href = "/")}>
             <img src="/assets/logo-new.png" alt="AskFormula" className="h-7 object-contain transition-transform group-hover:scale-105" />
             <span className="font-semibold text-lg tracking-tight text-white/90">AskFormula</span>
@@ -117,7 +117,7 @@ export default function Build() {
       </div>
 
       {/* Main Content (Expansive & Airy Layout) */}
-      <main className="relative z-10 flex-1 max-w-7xl mx-auto w-full px-6 sm:px-10 lg:px-12 pt-16 sm:pt-24 pb-56">
+      <main className="relative z-10 flex-1 max-w-7xl mx-auto w-full px-6 sm:px-10 lg:px-12 pt-16 sm:pt-24 pb-64 lg:pb-56">
 
         {/* Hero Header */}
         <section className="text-center max-w-3xl mx-auto mb-16 sm:mb-24">
@@ -138,7 +138,7 @@ export default function Build() {
 
           {/* STEP 1: Target Track & Curriculum */}
           <section aria-labelledby="step-stream-title">
-            <div className="flex items-baseline justify-between mb-9 pb-4 border-b border-white/[0.06]">
+            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 mb-9 pb-4 border-b border-white/[0.06]">
               <div className="flex items-center gap-4">
                 <span className="text-[12px] font-mono tracking-widest text-[#e39f82] uppercase font-semibold">01</span>
                 <h2 className="text-lg sm:text-xl font-medium text-white tracking-tight" id="step-stream-title">Target Track & Curriculum</h2>
@@ -188,7 +188,7 @@ export default function Build() {
                 exit={{ opacity: 0, height: 0 }}
                 className="overflow-hidden"
               >
-                <div className="flex items-baseline justify-between mb-9 pb-4 border-b border-white/[0.06]">
+                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 mb-9 pb-4 border-b border-white/[0.06]">
                   <div className="flex items-center gap-4">
                     <span className="text-[12px] font-mono tracking-widest text-[#e39f82] uppercase font-semibold">02</span>
                     <h2 className="text-lg sm:text-xl font-medium text-white tracking-tight">Academic Scope</h2>
@@ -198,7 +198,7 @@ export default function Build() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                   <div className="space-y-6">
                     <h3 className="text-sm font-medium text-white/70 uppercase tracking-widest">Select Class</h3>
-                    <div className="flex gap-4">
+                    <div className="flex flex-col lg:flex-row gap-4 w-full lg:w-auto">
                       {["11", "12"].map(cls => (
                         <button
                           key={cls}
@@ -256,12 +256,12 @@ export default function Build() {
                 exit={{ opacity: 0, height: 0 }}
                 className="overflow-hidden"
               >
-                <div className="flex items-baseline justify-between mb-9 pb-4 border-b border-white/[0.06]">
+                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 mb-9 pb-4 border-b border-white/[0.06]">
                   <div className="flex items-center gap-4">
                     <span className="text-[12px] font-mono tracking-widest text-[#e39f82] uppercase font-semibold">03</span>
                     <h2 className="text-lg sm:text-xl font-medium text-white tracking-tight">Curate Chapters</h2>
                   </div>
-                  <div className="flex gap-4">
+                  <div className="flex flex-col lg:flex-row gap-4 w-full lg:w-auto">
                     <button onClick={selectAllChapters} className="text-sm text-white/60 hover:text-white transition-colors">Select All</button>
                     <button onClick={clearSelection} className="text-sm text-white/60 hover:text-white transition-colors">Clear</button>
                   </div>
@@ -310,7 +310,7 @@ export default function Build() {
               exit={{ y: 100, opacity: 0 }}
               className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-2xl"
             >
-              <div className="bg-[#101419]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-4 shadow-2xl flex items-center justify-between">
+              <div className="bg-[#101419]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-4 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-4 w-full">
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white font-mono font-bold">
                     {selectedChapters.length}

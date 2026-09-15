@@ -151,7 +151,7 @@ export default function QuizDashboard() {
             {/* Step 4: Target Chapters */}
             <div className={`transition-opacity duration-300 ${!subject ? 'opacity-40 pointer-events-none' : 'opacity-100'}`}>
               <div className="flex items-center justify-between mb-5">
-                <div className="flex items-center gap-3">
+                <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3">
                   <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white/10 text-xs font-medium text-white/80 border border-white/[0.15]">4</span>
                   <h2 className="text-lg font-medium text-white/95">Target Chapters</h2>
                 </div>
@@ -191,7 +191,7 @@ export default function QuizDashboard() {
 
             {/* Drill Configuration & Action */}
             <div className={`pt-6 border-t border-white/[0.08] flex flex-col md:flex-row md:items-center justify-between gap-6 transition-opacity duration-300 ${selectedChapters.length === 0 ? 'opacity-40 pointer-events-none' : 'opacity-100'}`}>
-              <div className="flex items-center gap-6">
+              <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 w-full sm:w-auto">
                 <div>
                   <label className="block text-xs font-medium text-[#9bb8cf] mb-2 uppercase tracking-wider">Session Length</label>
                   <div className="flex bg-[rgba(18,25,40,0.65)] border border-white/[0.08] rounded-xl p-1 w-fit">
