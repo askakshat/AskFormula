@@ -271,7 +271,7 @@ export default function Landing() {
                  </div>
               </motion.div>
               <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="order-1 lg:order-2 lg:pl-12">
-                <span className="text-5xl font-mono font-bold text-white/40 block mb-6">04</span>
+                <span className="text-5xl font-mono font-bold text-white/40 block mb-6">02</span>
                 <h3 className="text-3xl font-semibold text-white mb-4">Test your memory<br/>instantly.</h3>
                 <p className="text-lg text-zinc-400 leading-relaxed mb-8">
                   Convert your saved formula sheets into interactive quizzes. Reinforce your learning and track your mastery over time without leaving the platform.
@@ -302,7 +302,7 @@ export default function Landing() {
                  </div>
               </motion.div>
               <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="order-1 lg:order-2 lg:pl-12">
-                <span className="text-5xl font-mono font-bold text-white/40 block mb-6">02</span>
+                <span className="text-5xl font-mono font-bold text-white/40 block mb-6">03</span>
                 <h3 className="text-3xl font-semibold text-white mb-4">Understand it<br/>in context.</h3>
                 <p className="text-lg text-zinc-400 leading-relaxed mb-8">
                   A formula is more than a line of symbols. Learn what each variable means, when to use it, and how it connects to the bigger idea.
@@ -316,7 +316,7 @@ export default function Landing() {
             {/* Feature 3 */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-                <span className="text-5xl font-mono font-bold text-white/40 block mb-6">03</span>
+                <span className="text-5xl font-mono font-bold text-white/40 block mb-6">04</span>
                 <h3 className="text-3xl font-semibold text-white mb-4">Build a sheet<br/>that fits you.</h3>
                 <p className="text-lg text-zinc-400 leading-relaxed mb-8">
                   Pick the chapters you need, remove the noise, and create a clean revision document ready for your next study session.
