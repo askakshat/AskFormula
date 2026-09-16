@@ -44,7 +44,7 @@ export default function QuizDashboard() {
       <div aria-hidden="true" className="zen-overlay-fog"></div>
 
       {/* Main content container */}
-      <main className="flex-1 w-full flex flex-col items-center justify-center pt-24 p-4 sm:p-6 lg:p-8 z-10">
+      <main className="flex-1 w-full flex flex-col items-center justify-center pt-80 p-4 sm:p-6 lg:p-8 z-10">
 
 
         <div className="max-w-4xl w-full rounded-2xl sm:rounded-[28px] border border-white/10 p-5 sm:p-10 md:p-12 shadow-[0_30px_80px_rgba(0,0,0,0.48),0_10px_30px_rgba(10,16,26,0.35)] text-white transition-all backdrop-blur-[24px]" style={{ background: "rgba(12, 18, 30, 0.85)" }}>
