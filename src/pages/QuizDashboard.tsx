@@ -44,7 +44,7 @@ export default function QuizDashboard() {
       <div aria-hidden="true" className="zen-overlay-fog"></div>
 
       {/* Main content container */}
-      <main className="flex-1 w-full flex flex-col items-center justify-center pt-80 p-4 sm:p-6 lg:p-8 z-10">
+      <main className="flex-1 w-full flex flex-col items-center justify-center mt-[80px] p-4 sm:p-6 lg:p-8 z-10">
 
       <div className="min-h-screen flex flex-col">
   <GlobalNav />
