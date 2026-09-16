@@ -46,8 +46,10 @@ export default function PrintView() {
     const storedData = sessionStorage.getItem("askformula-print-data");
     if (storedData) {
       try {
+        const parsed = JSON.parse(storedData);
+        console.log("PrintView loaded print data", { formulasCount: parsed.formulas?.length, chaptersCount: parsed.chapters?.length });
         // eslint-disable-next-line react-hooks/set-state-in-effect
-        setData(JSON.parse(storedData));
+        setData(parsed);
       } catch (e) {
         console.error("Failed to parse print data", e);
       }
@@ -164,7 +166,7 @@ export default function PrintView() {
       {/* Print Controls (Hidden on print) */}
       <div className="print:hidden sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm p-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Button variant="outline" onClick={handleBack} className="gap-2">
+          <Button onClick={handleBack} className="gap-2 bg-white text-slate-900 border border-slate-200 hover:bg-slate-100 shadow-sm">
             <ArrowLeft className="w-4 h-4" /> Close
           </Button>
           <h1 className="font-semibold text-lg text-slate-800">
@@ -298,12 +300,11 @@ export default function PrintView() {
           const keyDerivations = chapterMeta?.keyDerivations || [];
 
           const hasFormulas =
-            includeContent.includes("formulas") && items.length > 0;
+            (!includeContent || includeContent.length === 0 || includeContent.includes("formulas")) && items.length > 0;
           const hasKeyPoints =
-            includeContent.includes("keyPoints") && keyPoints.length > 0;
+            (!includeContent || includeContent.length === 0 || includeContent.includes("keyPoints")) && keyPoints.length > 0;
           const hasDerivations =
-            includeContent.includes("keyDerivations") &&
-            keyDerivations.length > 0;
+            (!includeContent || includeContent.length === 0 || includeContent.includes("keyDerivations")) && keyDerivations.length > 0;
 
           if (!hasFormulas && !hasKeyPoints && !hasDerivations) return null;
 

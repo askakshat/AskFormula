@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="icon" type="image/png" href="logo2.png" />
   <link rel="manifest" href="/manifest.webmanifest" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
   <meta name="description" content="AskFormula by AskAkshat - Generate and export beautiful, comprehensive formula sheets for JEE, NEET, and School exams in seconds." />
@@ -30,18 +30,39 @@
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "AskFormula by AskAkshat",
-    "url": "https://askformula.vercel.app/",
-    "author": {
-      "@type": "Person",
-      "name": "Akshat Agarwal"
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "AskFormula",
+  "url": "https://ask-formula.vercel.app",
+  "logo": "https://ask-formula.vercel.app/logo.png",
+  "description": "AskFormula is a formula sheet builder for school, JEE, and NEET students. It provides a minimalist interface to generate, export, and quiz yourself on mathematical and scientific formulas.",
+  "keywords": ["formula sheet builder", "JEE formulas", "NEET formulas", "school formulas", "quiz engine", "PDF export"],
+  "educationalLevel": ["Secondary School", "JEE", "NEET"],
+  "offers": [
+    {
+      "@type": "Service",
+      "name": "Formula Builder",
+      "description": "Generate personalized formula sheets by selecting class, subject, and chapters."
     },
-    "description": "Generate and export beautiful, comprehensive formula sheets for JEE, NEET, and School exams in seconds."
-  }
-  </script>
+    {
+      "@type": "Service",
+      "name": "PDF Export",
+      "description": "Export formula sheets as PDFs using native browser printing with background graphics enabled."
+    },
+    {
+      "@type": "Service",
+      "name": "Quiz Engine",
+      "description": "Dynamic quizzes to test formula recall, with progress stored locally in the browser."
+    }
+  ],
+  "sameAs": [
+    "https://twitter.com/askformula",
+    "https://github.com/askformula"
+  ]
+}
+</script>
+
 
   <title>AskFormula | Free Formula Sheets for JEE, NEET & NCERT</title>
 </head>

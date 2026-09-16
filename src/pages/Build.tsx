@@ -1,13 +1,8 @@
+import { GlobalNav } from "@/components/askformula/GlobalNav";
 import { useState, useMemo, useRef, useEffect } from "react";
 import { useSearchParams } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
-import { RotateCcw } from "lucide-react";
-import ExamSelector from "@/components/askformula/ExamSelector";
-import ClassSelector from "@/components/askformula/ClassSelector";
-import SubjectSelector from "@/components/askformula/SubjectSelector";
-import ChapterSelector from "@/components/askformula/ChapterSelector";
 import PDFButton from "@/components/askformula/PDFButton";
-import GlobalSearch from "@/components/askformula/GlobalSearch";
 import { getChaptersBySubject, filterFormulas } from "@/lib/formulas";
 import { useLocalStorage } from "@/lib/local-storage";
 
@@ -49,17 +44,8 @@ export default function Build() {
     [],
   );
 
-  const classRef = useRef<HTMLDivElement>(null);
 
-  const subjectRef = useRef<HTMLDivElement>(null);
   const chapterRef = useRef<HTMLDivElement>(null);
-
-  const handleReset = () => {
-    setExam(null);
-    setSelectedClass(null);
-    setSubject(null);
-    setSelectedChapters([]);
-  };
 
   const chapters = useMemo(() => {
     if (!subject || !selectedClass) return [];
@@ -76,6 +62,23 @@ export default function Build() {
     );
   }, [subject, selectedChapters, exam]);
 
+
+  const selectAllChapters = () => {
+    setSelectedChapters(chapters.map(c => c.id));
+  };
+
+  const clearSelection = () => {
+    setSelectedChapters([]);
+  };
+
+  const toggleChapter = (chapterId: string) => {
+    setSelectedChapters(prev =>
+      prev.includes(chapterId)
+        ? prev.filter(c => c !== chapterId)
+        : [...prev, chapterId]
+    );
+  };
+
   const handleSubjectSelect = (s: string) => {
     setSubject(s);
     setSelectedChapters([]);
@@ -87,295 +90,235 @@ export default function Build() {
     }, 150);
   };
 
-  const handleExamSelect = (e: "school" | "jee" | "neet") => {
-    setExam(e);
-    setSelectedClass(null);
-    setSubject(null);
-    setSelectedChapters([]);
-  };
-
-  const handleClassSelect = (cls: string) => {
-    setSelectedClass(cls);
-    setSubject(null);
-    setSelectedChapters([]);
-    setTimeout(() => {
-      document
-        .getElementById("app-section")
-        ?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 50);
-  };
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#0b0e15] text-[#e1e2ec] font-sans flex flex-col">
-      <header className="bg-surface-container-lowest dark:bg-[#0b0e15] fixed top-0 w-full z-50 border-b border-[#32353c] transition-colors duration-200">
-        <div className="flex justify-between items-center px-6 md:px-12 py-3 max-w-[1200px] mx-auto h-16">
-          <div
-            className="flex items-center gap-3 cursor-pointer active:opacity-80"
-            onClick={() => (window.location.href = "/")}
-          >
-            <span className="font-headline-md text-xl font-bold text-[#aec6ff]">
-              AskFormula
-            </span>
+    <div className="bg-[#0b0e13] text-[#ded9d2] font-sans antialiased min-h-screen flex flex-col selection:bg-sky-500/30 selection:text-white relative overflow-x-hidden">
+      {/* New Atmospheric Background */}
+      <div aria-hidden="true" className="fixed inset-0 pointer-events-none z-0">
+        <img alt="Atmospheric background" className="w-full h-full object-cover object-center opacity-60 mix-blend-screen" src="/new-bg.png" />
+        {/* Layered color gradients */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0b0e13]/80 via-[#101419]/50 to-[#0b0e13]/90"></div>
+      </div>
+
+      {/* Minimalist Editorial Header */}
+      <GlobalNav />
+
+      {/* Main Content (Expansive & Airy Layout) */}
+      <main className="relative z-10 flex-1 max-w-7xl mx-auto w-full px-4 sm:px-10 lg:px-12 pt-24 sm:pt-24 pb-64">
+
+        {/* Hero Header */}
+        <section className="text-center max-w-3xl mx-auto mb-16 sm:mb-24">
+          <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-white/[0.05] border border-white/[0.08] text-[12.5px] font-medium text-white/60 mb-7 backdrop-blur-md shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-[#a2d4f8] shadow-[0_0_8px_rgba(162,212,248,0.6)]"></span>
+            Formula Sheet Builder
           </div>
-          <div className="flex items-center">
-            <span className="font-body-md text-[14px] text-[#e1e2ec]/70">
-              Build Flow
-            </span>
-          </div>
-        </div>
-      </header>
+          <h1 className="text-3xl sm:text-5xl md:text-[52px] font-serif font-normal text-white tracking-tight leading-[1.18] mb-4 sm:mb-6">
+            Build your personalized formula sheet.
+          </h1>
+          <p className="text-[15px] sm:text-[18px] text-white/60 font-normal leading-relaxed max-w-2xl mx-auto">
+            Choose your curriculum, grade, and focus topics to compile a serene, verified revision companion ready for print.
+          </p>
+        </section>
 
-      <section
-        id="app-section"
-        className="relative flex-grow flex justify-center w-full bg-[#0b0e15] pt-20"
-      >
-        <div className="w-full max-w-[1200px] px-6 md:px-12 py-8 flex flex-col md:flex-row gap-12 relative">
-          {/* Left Sidebar: Progress Indicator */}
+        {/* Unified Bound-Notebook Frame */}
+        <div className="bg-[#0f131a]/45 backdrop-blur-2xl rounded-2xl sm:rounded-3xl border border-white/[0.1] shadow-[0_24px_64px_rgba(0,0,0,0.45)] p-5 sm:p-12 lg:p-16 space-y-12 sm:space-y-20">
 
-          {/* Sidebar / Top Progress Indicator */}
-          <aside className="w-full md:w-64 flex-shrink-0">
-            <div className="md:sticky md:top-32">
-              <div className="hidden md:block mb-6">
-                <h2 className="text-xl font-semibold text-[#aec6ff]">
-                  Configuration
-                </h2>
-                <p className="text-[14px] text-[#e1e2ec]/70 mt-1">
-                  Select your parameters
-                </p>
+          {/* STEP 1: Target Track & Curriculum */}
+          <section aria-labelledby="step-stream-title">
+            <div className="flex items-baseline justify-between mb-9 pb-4 border-b border-white/[0.06]">
+              <div className="flex items-center gap-4">
+                <span className="text-[12px] font-mono tracking-widest text-white uppercase font-semibold">01</span>
+                <h2 className="text-lg sm:text-xl font-medium text-white tracking-tight" id="step-stream-title">Target Track & Curriculum</h2>
               </div>
-
-              {/* Horizontal steps on mobile, vertical on desktop */}
-              <div className="flex flex-row overflow-x-auto pb-4 md:pb-0 md:flex-col gap-4 md:gap-4 relative scrollbar-hide snap-x">
-                <div className="hidden md:block absolute left-[11px] top-4 bottom-4 w-px bg-[#32353c] -z-10" />
-
-                {/* Steps */}
-                <div className="flex items-center gap-2 md:gap-3 flex-shrink-0 snap-start">
-                  <div
-                    className={`w-6 h-6 rounded-full flex items-center justify-center text-[12px] z-10 ${exam ? "bg-[#00275d] text-[#aec6ff]" : "bg-[#272a31] border border-[#32353c] text-[#e1e2ec]/50"}`}
-                  >
-                    1
-                  </div>
-                  <span
-                    className={`text-[13px] whitespace-nowrap ${exam ? "text-[#aec6ff]" : "text-[#e1e2ec]/50"}`}
-                  >
-                    Board
-                  </span>
-                </div>
-
-                <div className="md:hidden w-8 h-px bg-[#32353c] my-auto flex-shrink-0" />
-
-                <div className="flex items-center gap-2 md:gap-3 flex-shrink-0 snap-start">
-                  <div
-                    className={`w-6 h-6 rounded-full flex items-center justify-center text-[12px] z-10 ${selectedClass ? "bg-[#00275d] text-[#aec6ff]" : "bg-[#272a31] border border-[#32353c] text-[#e1e2ec]/50"}`}
-                  >
-                    2
-                  </div>
-                  <span
-                    className={`text-[13px] whitespace-nowrap ${selectedClass ? "text-[#aec6ff]" : "text-[#e1e2ec]/50"}`}
-                  >
-                    Class
-                  </span>
-                </div>
-
-                <div className="md:hidden w-8 h-px bg-[#32353c] my-auto flex-shrink-0" />
-
-                <div className="flex items-center gap-2 md:gap-3 flex-shrink-0 snap-start">
-                  <div
-                    className={`w-6 h-6 rounded-full flex items-center justify-center text-[12px] z-10 ${subject ? "bg-[#00275d] text-[#aec6ff]" : "bg-[#272a31] border border-[#32353c] text-[#e1e2ec]/50"}`}
-                  >
-                    3
-                  </div>
-                  <span
-                    className={`text-[13px] whitespace-nowrap ${subject ? "text-[#aec6ff]" : "text-[#e1e2ec]/50"}`}
-                  >
-                    Subject
-                  </span>
-                </div>
-
-                <div className="md:hidden w-8 h-px bg-[#32353c] my-auto flex-shrink-0" />
-
-                <div className="flex items-center gap-2 md:gap-3 flex-shrink-0 snap-start">
-                  <div
-                    className={`w-6 h-6 rounded-full flex items-center justify-center text-[12px] z-10 ${selectedChapters.length > 0 ? "bg-[#00275d] text-[#aec6ff]" : "bg-[#272a31] border border-[#32353c] text-[#e1e2ec]/50"}`}
-                  >
-                    4
-                  </div>
-                  <span
-                    className={`text-[13px] whitespace-nowrap ${selectedChapters.length > 0 ? "text-[#aec6ff]" : "text-[#e1e2ec]/50"}`}
-                  >
-                    Chapters
-                  </span>
-                </div>
-              </div>
-
-              {exam && selectedClass && subject && (
-                <div className="hidden md:flex mt-8 bg-[#272a31]/50 border border-[#aec6ff]/20 rounded-lg p-4 flex-col gap-2">
-                  <span className="text-[12px] text-[#aec6ff] font-medium uppercase tracking-wider">
-                    Current Context
-                  </span>
-                  <div className="flex flex-col gap-1 mt-2">
-                    <p className="text-[14px] text-[#e1e2ec] font-medium">
-                      {exam === "school"
-                        ? "CBSE Board"
-                        : exam === "jee"
-                          ? "JEE Mains"
-                          : "NEET"}
-                    </p>
-                    <p className="text-[13px] text-[#e1e2ec]/70">
-                      Class {selectedClass}
-                    </p>
-                    <p className="text-[13px] text-[#e1e2ec]/70">{subject}</p>
-                  </div>
-                </div>
-              )}
             </div>
-          </aside>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                { id: "school", label: "School & Boards", desc: "CBSE, ICSE & State Boards with core standard derivations and formulas" },
+                { id: "jee", label: "JEE (Main & Adv.)", desc: "Calculus-based physics, multi-concept mechanics & advanced optics" },
+                { id: "neet", label: "NEET UG", desc: "Medical entrance track with high-speed formula recall and core bio-physics", disabled: true }
+              ].map(track => (
+                <div
+                  key={track.id}
+                  onClick={() => { if (track.disabled) return; setExam(track.id as "school" | "jee" | "neet"); setSelectedClass(null); setSubject(null); setSelectedChapters([]); }}
+                  className={`relative p-7 rounded-2xl transition-all duration-200 flex flex-col justify-between min-h-[170px] backdrop-blur-sm ${
+                    track.disabled ? 'opacity-50 cursor-not-allowed bg-black/20 border-white/5' : 'cursor-pointer ' + (exam === track.id
+                    ? 'bg-[#1d232c]/90 border border-[#a2d4f8]/50 shadow-[0_0_32px_-4px_rgba(162,212,248,0.22)] ring-1 ring-[#a2d4f8]/35'
+                    : 'bg-white/[0.03] border border-white/[0.07] hover:border-white/20 hover:bg-white/[0.06]')
+                  }`}
+                >
+                  <div>
+                    <div className={`flex items-center justify-between gap-3 mb-3 ${exam !== track.id ? 'group-hover:text-white' : ''}`}>
+                      <div className={`text-[15px] flex items-center gap-2 ${exam === track.id ? 'font-semibold text-white' : 'font-medium text-white/95'}`}>
+                        {track.label}
+                        {track.disabled && <svg className="w-3.5 h-3.5 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>}
+                      </div>
+                      {exam === track.id && <span className="w-2.5 h-2.5 rounded-full bg-[#a2d4f8] shadow-[0_0_10px_rgba(162,212,248,0.7)]"></span>}
+                    </div>
+                    <p className={`text-[13px] leading-relaxed ${exam === track.id ? 'text-[#edd4c8]/90' : 'text-white/50'}`}>{track.desc}</p>
+                  </div>
+                  {exam === track.id && (
+                    <div className="mt-5 text-[12px] text-white font-medium tracking-wide flex items-center gap-2">
+                      <span>Active Selection</span>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
 
-          {/* Right Content */}
-          <div className="flex-1 flex flex-col w-full max-w-full">
-            {/* Breadcrumb / Step indicator */}
+          {/* STEP 2: Academic Year & Subject */}
+          <AnimatePresence>
             {exam && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="flex items-center gap-2 text-[12px] font-medium text-slate-400 mb-8"
+              <motion.section
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="overflow-hidden"
               >
-                <span
-                  className="hover:text-[#aec6ff] cursor-pointer transition-colors"
-                  onClick={() => {
-                    setSubject(null);
-                    setSelectedClass(null);
-                  }}
-                >
-                  {exam === "school"
-                    ? "School"
-                    : exam === "jee"
-                      ? "JEE"
-                      : "NEET"}
-                </span>
-                {selectedClass && (
-                  <>
-                    <span>/</span>
-                    <span
-                      className="hover:text-[#aec6ff] cursor-pointer transition-colors"
-                      onClick={() => setSubject(null)}
-                    >
-                      Class {selectedClass}
-                    </span>
-                  </>
-                )}
-                {subject && (
-                  <>
-                    <span>/</span>
-                    <span className="text-[#aec6ff]">{subject}</span>
-                  </>
-                )}
+                <div className="flex items-baseline justify-between mb-9 pb-4 border-b border-white/[0.06]">
+                  <div className="flex items-center gap-4">
+                    <span className="text-[12px] font-mono tracking-widest text-white uppercase font-semibold">02</span>
+                    <h2 className="text-lg sm:text-xl font-medium text-white tracking-tight">Academic Scope</h2>
+                  </div>
+                </div>
 
-                <AnimatePresence>
-                  <motion.button
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    onClick={handleReset}
-                    className="ml-auto flex items-center gap-2 text-xs font-medium text-slate-400 hover:text-white px-3 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.06] transition-all cursor-pointer"
-                  >
-                    <RotateCcw className="w-3.5 h-3.5" />
-                    Start Over
-                  </motion.button>
-                </AnimatePresence>
-              </motion.div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                  <div className="space-y-6">
+                    <h3 className="text-sm font-medium text-white/70 uppercase tracking-widest">Select Class</h3>
+                    <div className="flex gap-4">
+                      {["11", "12"].map(cls => (
+                        <button
+                          key={cls}
+                          onClick={() => { setSelectedClass(cls); setSelectedChapters([]); }}
+                          className={`flex-1 py-4 rounded-xl text-sm font-medium transition-all duration-300 relative overflow-hidden ${
+                            selectedClass === cls
+                            ? 'bg-[#1d232c]/90 text-white border border-[#a2d4f8]/50 shadow-[0_0_20px_rgba(162,212,248,0.15)] ring-1 ring-[#a2d4f8]/30'
+                            : 'bg-white/[0.03] text-white/60 border border-white/[0.05] hover:bg-white/[0.06] hover:text-white'
+                          }`}
+                        >
+                          <div className="flex items-center justify-center gap-2">
+                              {selectedClass === cls && <span className="w-2 h-2 rounded-full bg-[#a2d4f8] shadow-[0_0_8px_rgba(162,212,248,0.8)]"></span>}
+                              <span>Class {cls}</span>
+                            </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className={`space-y-6 transition-opacity duration-300 ${!selectedClass ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}>
+                    <h3 className="text-sm font-medium text-white/70 uppercase tracking-widest">Select Subject</h3>
+                    <div className="flex flex-wrap gap-4">
+                      {["Physics", "Chemistry", "Mathematics", "Biology"]
+                      .filter(sub => !(exam === "jee" && sub === "Biology"))
+                      .map(sub => (
+                        <button
+                          key={sub}
+                          onClick={() => handleSubjectSelect(sub)}
+                          className={`px-6 py-4 rounded-xl text-sm font-medium transition-all duration-300 relative overflow-hidden ${
+                            subject === sub
+                            ? 'bg-[#1d232c]/90 text-white border border-[#a2d4f8]/50 shadow-[0_0_20px_rgba(162,212,248,0.15)] ring-1 ring-[#a2d4f8]/30'
+                            : 'bg-white/[0.03] text-white/60 border border-white/[0.05] hover:bg-white/[0.06] hover:text-white'
+                          }`}
+                        >
+                          <div className="flex items-center justify-center gap-2">
+                              {subject === sub && <span className="w-2 h-2 rounded-full bg-[#a2d4f8] shadow-[0_0_8px_rgba(162,212,248,0.8)]"></span>}
+                              <span>{sub}</span>
+                            </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.section>
             )}
+          </AnimatePresence>
 
-            {/* Step 1: Exam Selector */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.05, duration: 0.4 }}
-              className="mb-10"
-            >
-              <ExamSelector onSelect={handleExamSelect} selected={exam} />
-            </motion.div>
+          {/* STEP 3: Curate Chapters */}
+          <AnimatePresence>
+            {subject && selectedClass && (
+              <motion.section
+                ref={chapterRef}
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="overflow-hidden"
+              >
+                <div className="flex items-baseline justify-between mb-9 pb-4 border-b border-white/[0.06]">
+                  <div className="flex items-center gap-4">
+                    <span className="text-[12px] font-mono tracking-widest text-white uppercase font-semibold">03</span>
+                    <h2 className="text-lg sm:text-xl font-medium text-white tracking-tight">Curate Chapters</h2>
+                  </div>
+                  <div className="flex gap-4">
+                    <button onClick={selectAllChapters} className="text-sm text-white/60 hover:text-white transition-colors">Select All</button>
+                    <button onClick={clearSelection} className="text-sm text-white/60 hover:text-white transition-colors">Clear</button>
+                  </div>
+                </div>
 
-            {/* Step 2: Class Selector */}
-            <AnimatePresence>
-              {exam && (
-                <motion.div
-                  ref={classRef}
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="mb-10 overflow-hidden"
-                >
-                  <ClassSelector
-                    onSelect={handleClassSelect}
-                    selected={selectedClass}
-                  />
-                </motion.div>
-              )}
-            </AnimatePresence>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                  {chapters.length === 0 ? (
+                    <div className="col-span-full py-12 text-center text-white/40">No chapters found for this selection.</div>
+                  ) : (
+                    chapters.map((chap) => {
+                      const isSelected = selectedChapters.includes(chap.id);
+                      return (
+                        <div
+                          key={chap.name}
+                          onClick={() => toggleChapter(chap.id)}
+                          className={`relative p-5 rounded-xl cursor-pointer transition-all duration-300 border ${
+                            isSelected
+                            ? 'bg-[#1d232c]/90 border-[#a2d4f8]/50 shadow-[0_0_20px_rgba(162,212,248,0.15)] ring-1 ring-[#a2d4f8]/30'
+                            : 'bg-white/[0.02] border-white/[0.05] hover:bg-white/[0.06] hover:border-white/10'
+                          }`}
+                        >
+                          <div className="flex justify-between items-start mb-2">
+                            <h4 className={`text-sm font-medium pr-6 ${isSelected ? 'text-white' : 'text-white/80'}`}>{chap.name}</h4>
+                            <div className={`w-5 h-5 rounded-md border flex items-center justify-center shrink-0 transition-colors ${isSelected ? 'bg-[#a2d4f8] border-[#a2d4f8] text-sky-950 shadow-[0_0_10px_rgba(162,212,248,0.4)]' : 'border-white/20 hover:border-white/40'}`}>
+                              {isSelected && <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg>}
+                            </div>
+                          </div>
+                          <p className="text-xs text-white/40">{chap.formulas.length} formulas</p>
+                        </div>
+                      );
+                    })
+                  )}
+                </div>
+              </motion.section>
+            )}
+          </AnimatePresence>
 
-            {/* Step 3: Subject Selector */}
-            <AnimatePresence>
-              {selectedClass && (
-                <motion.div
-                  ref={subjectRef}
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="mb-10 overflow-hidden"
-                >
-                  <SubjectSelector
-                    onSelect={handleSubjectSelect}
-                    selected={subject}
-                    exam={exam!}
-                  />
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Step 4: Chapter Selector */}
-            <AnimatePresence>
-              {subject && chapters.length > 0 && selectedClass && (
-                <motion.div
-                  ref={chapterRef}
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="mb-10 overflow-hidden"
-                >
-                  <ChapterSelector
-                    chapters={chapters}
-                    onSelect={setSelectedChapters}
-                    selectedIds={selectedChapters}
-                  />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
         </div>
-      </section>
 
-      <GlobalSearch />
+        {/* Floating Action Bar */}
+        <AnimatePresence>
+          {selectedChapters.length > 0 && (
+            <motion.div
+              initial={{ y: 100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: 100, opacity: 0 }}
+              className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-2xl"
+            >
+              <div className="bg-[#101419]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-4 shadow-2xl flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white font-mono font-bold">
+                    {selectedChapters.length}
+                  </div>
+                  <div>
+                    <div className="text-xs sm:text-sm font-medium text-white">Chapters Selected</div>
+                    <div className="text-xs text-white/50">{formulas.length} total formulas compiled</div>
+                  </div>
+                </div>
 
-      {/* Floating PDF Button */}
-      {selectedChapters.length > 0 && (
-        <PDFButton
-          formulas={formulas.map((f) => ({
-            id: f.id,
-            name: f.name,
-            latex: f.latex,
-            tags: f.tags,
-            chapter:
-              "chapter" in f ? (f as { chapter?: string }).chapter : undefined,
-          }))}
-          chapters={chapters.filter((ch) => selectedChapters.includes(ch.id))}
-          subject={subject ?? "Physics"}
-        />
-      )}
+                <PDFButton
+                  formulas={formulas}
+                  chapters={chapters.filter(c => selectedChapters.includes(c.id))}
+                  subject={subject || ""}
+                />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+      </main>
     </div>
   );
 }
