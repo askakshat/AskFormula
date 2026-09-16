@@ -92,7 +92,7 @@ export default function Build() {
 
 
   return (
-    <div className="bg-[#0b0e13] text-[#ded9d2] font-sans antialiased min-h-screen flex flex-col selection:bg-emerald-500/30 selection:text-white relative overflow-x-hidden">
+    <div className="bg-[#0b0e13] text-[#ded9d2] font-sans antialiased min-h-screen flex flex-col selection:bg-sky-500/30 selection:text-white relative overflow-x-hidden">
       {/* New Atmospheric Background */}
       <div aria-hidden="true" className="fixed inset-0 pointer-events-none z-0">
         <img alt="Atmospheric background" className="w-full h-full object-cover object-center opacity-60 mix-blend-screen" src="/new-bg.png" />
@@ -109,7 +109,7 @@ export default function Build() {
         {/* Hero Header */}
         <section className="text-center max-w-3xl mx-auto mb-16 sm:mb-24">
           <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-white/[0.05] border border-white/[0.08] text-[12.5px] font-medium text-white/60 mb-7 backdrop-blur-md shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]"></span>
+            <span className="w-2 h-2 rounded-full bg-[#a2d4f8] shadow-[0_0_8px_rgba(162,212,248,0.6)]"></span>
             Formula Sheet Builder
           </div>
           <h1 className="text-3xl sm:text-5xl md:text-[52px] font-serif font-normal text-white tracking-tight leading-[1.18] mb-4 sm:mb-6">
@@ -142,7 +142,7 @@ export default function Build() {
                   onClick={() => { if (track.disabled) return; setExam(track.id as "school" | "jee" | "neet"); setSelectedClass(null); setSubject(null); setSelectedChapters([]); }}
                   className={`relative p-7 rounded-2xl transition-all duration-200 flex flex-col justify-between min-h-[170px] backdrop-blur-sm ${
                     track.disabled ? 'opacity-50 cursor-not-allowed bg-black/20 border-white/5' : 'cursor-pointer ' + (exam === track.id
-                    ? 'bg-[#1d232c]/90 border border-emerald-400/50 shadow-[0_0_32px_-4px_rgba(52,211,153,0.22)] ring-1 ring-emerald-400/35'
+                    ? 'bg-[#1d232c]/90 border border-[#a2d4f8]/50 shadow-[0_0_32px_-4px_rgba(162,212,248,0.22)] ring-1 ring-[#a2d4f8]/35'
                     : 'bg-white/[0.03] border border-white/[0.07] hover:border-white/20 hover:bg-white/[0.06]')
                   }`}
                 >
@@ -152,7 +152,7 @@ export default function Build() {
                         {track.label}
                         {track.disabled && <svg className="w-3.5 h-3.5 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>}
                       </div>
-                      {exam === track.id && <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.7)]"></span>}
+                      {exam === track.id && <span className="w-2.5 h-2.5 rounded-full bg-[#a2d4f8] shadow-[0_0_10px_rgba(162,212,248,0.7)]"></span>}
                     </div>
                     <p className={`text-[13px] leading-relaxed ${exam === track.id ? 'text-[#edd4c8]/90' : 'text-white/50'}`}>{track.desc}</p>
                   </div>
@@ -192,12 +192,12 @@ export default function Build() {
                           onClick={() => { setSelectedClass(cls); setSelectedChapters([]); }}
                           className={`flex-1 py-4 rounded-xl text-sm font-medium transition-all duration-300 relative overflow-hidden ${
                             selectedClass === cls
-                            ? 'bg-[#1d232c]/90 text-white border border-emerald-400/50 shadow-[0_0_20px_rgba(52,211,153,0.15)] ring-1 ring-emerald-400/30'
+                            ? 'bg-[#1d232c]/90 text-white border border-[#a2d4f8]/50 shadow-[0_0_20px_rgba(162,212,248,0.15)] ring-1 ring-[#a2d4f8]/30'
                             : 'bg-white/[0.03] text-white/60 border border-white/[0.05] hover:bg-white/[0.06] hover:text-white'
                           }`}
                         >
                           <div className="flex items-center justify-center gap-2">
-                              {selectedClass === cls && <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>}
+                              {selectedClass === cls && <span className="w-2 h-2 rounded-full bg-[#a2d4f8] shadow-[0_0_8px_rgba(162,212,248,0.8)]"></span>}
                               <span>Class {cls}</span>
                             </div>
                         </button>
@@ -216,12 +216,12 @@ export default function Build() {
                           onClick={() => handleSubjectSelect(sub)}
                           className={`px-6 py-4 rounded-xl text-sm font-medium transition-all duration-300 relative overflow-hidden ${
                             subject === sub
-                            ? 'bg-[#1d232c]/90 text-white border border-emerald-400/50 shadow-[0_0_20px_rgba(52,211,153,0.15)] ring-1 ring-emerald-400/30'
+                            ? 'bg-[#1d232c]/90 text-white border border-[#a2d4f8]/50 shadow-[0_0_20px_rgba(162,212,248,0.15)] ring-1 ring-[#a2d4f8]/30'
                             : 'bg-white/[0.03] text-white/60 border border-white/[0.05] hover:bg-white/[0.06] hover:text-white'
                           }`}
                         >
                           <div className="flex items-center justify-center gap-2">
-                              {subject === sub && <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>}
+                              {subject === sub && <span className="w-2 h-2 rounded-full bg-[#a2d4f8] shadow-[0_0_8px_rgba(162,212,248,0.8)]"></span>}
                               <span>{sub}</span>
                             </div>
                         </button>
@@ -266,13 +266,13 @@ export default function Build() {
                           onClick={() => toggleChapter(chap.id)}
                           className={`relative p-5 rounded-xl cursor-pointer transition-all duration-300 border ${
                             isSelected
-                            ? 'bg-[#1d232c]/90 border-emerald-400/50 shadow-[0_0_20px_rgba(52,211,153,0.15)] ring-1 ring-emerald-400/30'
+                            ? 'bg-[#1d232c]/90 border-[#a2d4f8]/50 shadow-[0_0_20px_rgba(162,212,248,0.15)] ring-1 ring-[#a2d4f8]/30'
                             : 'bg-white/[0.02] border-white/[0.05] hover:bg-white/[0.06] hover:border-white/10'
                           }`}
                         >
                           <div className="flex justify-between items-start mb-2">
                             <h4 className={`text-sm font-medium pr-6 ${isSelected ? 'text-white' : 'text-white/80'}`}>{chap.name}</h4>
-                            <div className={`w-5 h-5 rounded-md border flex items-center justify-center shrink-0 transition-colors ${isSelected ? 'bg-emerald-400 border-emerald-400 text-emerald-950 shadow-[0_0_10px_rgba(52,211,153,0.4)]' : 'border-white/20 hover:border-white/40'}`}>
+                            <div className={`w-5 h-5 rounded-md border flex items-center justify-center shrink-0 transition-colors ${isSelected ? 'bg-[#a2d4f8] border-[#a2d4f8] text-sky-950 shadow-[0_0_10px_rgba(162,212,248,0.4)]' : 'border-white/20 hover:border-white/40'}`}>
                               {isSelected && <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg>}
                             </div>
                           </div>

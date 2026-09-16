@@ -93,8 +93,8 @@ export default function QuizResults() {
 
           {/* Top Meta Bar */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-6 border-b border-white/5">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-xs font-medium">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sky-950/40 border border-sky-500/30 text-[#a2d4f8] text-xs font-medium">
+              <span className="w-2 h-2 rounded-full bg-[#a2d4f8] animate-pulse"></span>
               <span>Zen Drill Complete · Mindful Retention</span>
             </div>
             <div className="text-xs text-slate-400 font-light flex items-center gap-2">
@@ -123,12 +123,12 @@ export default function QuizResults() {
               <div className="mt-4 flex flex-col gap-1">
                 <div className="flex items-baseline gap-2">
                   <span className="text-3xl font-light text-white">{score}</span>
-                  <span className="text-emerald-400 text-sm">correct</span>
+                  <span className="text-[#a2d4f8] text-sm">correct</span>
                 </div>
                 {wrongAnswersCount > 0 && (
                   <div className="flex items-baseline gap-2">
                     <span className="text-xl font-light text-white/70">{wrongAnswersCount}</span>
-                    <span className="text-rose-400 text-sm">incorrect</span>
+                    <span className="text-blue-400 text-sm">incorrect</span>
                   </div>
                 )}
               </div>
@@ -162,13 +162,13 @@ export default function QuizResults() {
             <h3 className="text-xl font-serif text-white mb-4">Question Breakdown</h3>
             <div className="space-y-4">
               {detailedResults.map((result, idx) => (
-                <div key={idx} className={`p-4 rounded-xl border ${result.isCorrect ? 'bg-emerald-500/5 border-emerald-500/20' : 'bg-rose-500/5 border-rose-500/20'}`}>
+                <div key={idx} className={`p-4 rounded-xl border ${result.isCorrect ? 'bg-sky-500/5 border-sky-500/20' : 'bg-rose-500/5 border-rose-500/20'}`}>
                   <div className="flex gap-3">
                     <div className="shrink-0 mt-0.5">
                       {result.isCorrect ? (
-                        <svg className="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg>
+                        <svg className="w-5 h-5 text-[#a2d4f8]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg>
                       ) : (
-                        <svg className="w-5 h-5 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                        <svg className="w-5 h-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
                       )}
                     </div>
                     <div className="flex-1">
@@ -176,12 +176,12 @@ export default function QuizResults() {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                         <div className="bg-white/5 p-2 rounded-lg border border-white/5">
                           <span className="text-white/40 block mb-1">Your Answer:</span>
-                          <span className={result.isCorrect ? "text-emerald-300" : "text-rose-300"}>{result.userAnswerText}</span>
+                          <span className={result.isCorrect ? "text-[#a2d4f8]" : "text-blue-300"}>{result.userAnswerText}</span>
                         </div>
                         {!result.isCorrect && (
-                          <div className="bg-white/5 p-2 rounded-lg border border-emerald-500/10">
+                          <div className="bg-white/5 p-2 rounded-lg border border-sky-500/10">
                             <span className="text-white/40 block mb-1">Correct Answer:</span>
-                            <span className="text-emerald-300">{result.correctAnswerText}</span>
+                            <span className="text-[#a2d4f8]">{result.correctAnswerText}</span>
                           </div>
                         )}
                       </div>
