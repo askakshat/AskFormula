@@ -127,7 +127,7 @@ export default function Build() {
           <section aria-labelledby="step-stream-title">
             <div className="flex items-baseline justify-between mb-9 pb-4 border-b border-white/[0.06]">
               <div className="flex items-center gap-4">
-                <span className="text-[12px] font-mono tracking-widest text-[#e39f82] uppercase font-semibold">01</span>
+                <span className="text-[12px] font-mono tracking-widest text-white uppercase font-semibold">01</span>
                 <h2 className="text-lg sm:text-xl font-medium text-white tracking-tight" id="step-stream-title">Target Track & Curriculum</h2>
               </div>
             </div>
@@ -157,7 +157,7 @@ export default function Build() {
                     <p className={`text-[13px] leading-relaxed ${exam === track.id ? 'text-[#edd4c8]/90' : 'text-white/50'}`}>{track.desc}</p>
                   </div>
                   {exam === track.id && (
-                    <div className="mt-5 text-[12px] text-[#e39f82] font-medium tracking-wide flex items-center gap-2">
+                    <div className="mt-5 text-[12px] text-white font-medium tracking-wide flex items-center gap-2">
                       <span>Active Selection</span>
                     </div>
                   )}
@@ -177,7 +177,7 @@ export default function Build() {
               >
                 <div className="flex items-baseline justify-between mb-9 pb-4 border-b border-white/[0.06]">
                   <div className="flex items-center gap-4">
-                    <span className="text-[12px] font-mono tracking-widest text-[#e39f82] uppercase font-semibold">02</span>
+                    <span className="text-[12px] font-mono tracking-widest text-white uppercase font-semibold">02</span>
                     <h2 className="text-lg sm:text-xl font-medium text-white tracking-tight">Academic Scope</h2>
                   </div>
                 </div>
@@ -245,7 +245,7 @@ export default function Build() {
               >
                 <div className="flex items-baseline justify-between mb-9 pb-4 border-b border-white/[0.06]">
                   <div className="flex items-center gap-4">
-                    <span className="text-[12px] font-mono tracking-widest text-[#e39f82] uppercase font-semibold">03</span>
+                    <span className="text-[12px] font-mono tracking-widest text-white uppercase font-semibold">03</span>
                     <h2 className="text-lg sm:text-xl font-medium text-white tracking-tight">Curate Chapters</h2>
                   </div>
                   <div className="flex gap-4">
