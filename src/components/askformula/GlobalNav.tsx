@@ -73,11 +73,11 @@ export function GlobalNav() {
                      Quiz
                    </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem asChild className="rounded-xl focus:bg-white/10 focus:text-white cursor-pointer py-2.5">
+                <DropdownMenuItem asChild className="rounded-xl focus:bg-white focus:text-white cursor-pointer py-2.5">
                    <Link to="/build">Builder</Link>
                 </DropdownMenuItem>
                 {isHome && (
-                  <DropdownMenuItem asChild className="rounded-xl focus:bg-white/10 focus:text-white cursor-pointer py-2.5">
+                  <DropdownMenuItem asChild className="rounded-xl focus:bg-white focus:text-white cursor-pointer py-2.5">
                     <a href="#faq">FAQ</a>
                   </DropdownMenuItem>
                 )}
