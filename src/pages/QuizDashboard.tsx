@@ -225,5 +225,6 @@ export default function QuizDashboard() {
         </div>
       </main>
     </div>
+    </div>
   );
 }
