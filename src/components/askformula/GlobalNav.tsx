@@ -33,10 +33,7 @@ export function GlobalNav() {
         {/* Desktop Links */}
         <div className="hidden md:flex items-center space-x-6 text-sm font-medium text-zinc-300">
           <Link to="/" className={`transition-colors ${isHome ? 'text-white' : 'hover:text-white'}`}>Home</Link>
-          <Link to="/quiz" className={`flex items-center gap-1.5 transition-colors font-semibold ${location.pathname.startsWith('/quiz') ? 'text-emerald-300' : 'text-emerald-400 hover:text-emerald-300'}`}>
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
+          <Link to="/quiz" className={`transition-colors font-semibold ${location.pathname.startsWith('/quiz') ? 'text-white' : 'text-white hover:text-white'}`}>
             Quiz
           </Link>
           <Link to="/build" className={`transition-colors ${location.pathname === '/build' ? 'text-white' : 'hover:text-white'}`}>Builder</Link>
@@ -68,8 +65,8 @@ export function GlobalNav() {
                 <DropdownMenuItem asChild className="rounded-xl focus:bg-white/10 focus:text-white cursor-pointer py-2.5">
                    <Link to="/">Home</Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem asChild className="rounded-xl focus:bg-white/10 focus:text-emerald-300 cursor-pointer py-2.5">
-                   <Link to="/quiz" className="flex items-center gap-2 text-emerald-400">
+                <DropdownMenuItem asChild className="rounded-xl focus:bg-white/10 focus:text-white cursor-pointer py-2.5">
+                   <Link to="/quiz" className="text-white">
                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                      </svg>
