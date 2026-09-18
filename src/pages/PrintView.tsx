@@ -47,7 +47,10 @@ export default function PrintView() {
     if (storedData) {
       try {
         const parsed = JSON.parse(storedData);
-        console.log("PrintView loaded print data", { formulasCount: parsed.formulas?.length, chaptersCount: parsed.chapters?.length });
+        console.log("PrintView loaded print data", {
+          formulasCount: parsed.formulas?.length,
+          chaptersCount: parsed.chapters?.length,
+        });
         // eslint-disable-next-line react-hooks/set-state-in-effect
         setData(parsed);
       } catch (e) {
@@ -166,7 +169,10 @@ export default function PrintView() {
       {/* Print Controls (Hidden on print) */}
       <div className="print:hidden sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm p-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Button onClick={handleBack} className="gap-2 bg-white text-slate-900 border border-slate-200 hover:bg-slate-100 shadow-sm">
+          <Button
+            onClick={handleBack}
+            className="gap-2 bg-white text-slate-900 border border-slate-200 hover:bg-slate-100 shadow-sm"
+          >
             <ArrowLeft className="w-4 h-4" /> Close
           </Button>
           <h1 className="font-semibold text-lg text-slate-800">
@@ -300,11 +306,20 @@ export default function PrintView() {
           const keyDerivations = chapterMeta?.keyDerivations || [];
 
           const hasFormulas =
-            (!includeContent || includeContent.length === 0 || includeContent.includes("formulas")) && items.length > 0;
+            (!includeContent ||
+              includeContent.length === 0 ||
+              includeContent.includes("formulas")) &&
+            items.length > 0;
           const hasKeyPoints =
-            (!includeContent || includeContent.length === 0 || includeContent.includes("keyPoints")) && keyPoints.length > 0;
+            (!includeContent ||
+              includeContent.length === 0 ||
+              includeContent.includes("keyPoints")) &&
+            keyPoints.length > 0;
           const hasDerivations =
-            (!includeContent || includeContent.length === 0 || includeContent.includes("keyDerivations")) && keyDerivations.length > 0;
+            (!includeContent ||
+              includeContent.length === 0 ||
+              includeContent.includes("keyDerivations")) &&
+            keyDerivations.length > 0;
 
           if (!hasFormulas && !hasKeyPoints && !hasDerivations) return null;
 
@@ -365,7 +380,7 @@ export default function PrintView() {
 
               {hasFormulas && (
                 <div
-                  className={`grid ${layout === "compact" ? "grid-cols-4" : "grid-cols-2"} ${gapSize} items-start w-full`}
+                  className={`grid ${layout === "compact" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-4 print:grid-cols-4" : "grid-cols-1 md:grid-cols-2 print:grid-cols-2"} ${gapSize} items-start w-full`}
                 >
                   {items.map((formula) => {
                     const isMissingFormula =
